@@ -1,0 +1,34 @@
+import axios from "axios";
+
+const ISSERVER = typeof window === "undefined";
+const token = { current: null };
+
+if (!ISSERVER) token.current = localStorage.getItem("dc-token");
+
+const axiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    accept: "application/json",
+    authorization: token.current ? `Bearer ${token.current}` : "Bearer ",
+  },
+});
+
+axiosInstance.CancelToken = axios.CancelToken;
+axiosInstance.isCancel = axios.isCancel;
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const {
+      response: { status },
+    } = error;
+
+    if (status === 401) {
+      // window.location.reload();
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;

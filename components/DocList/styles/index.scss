@@ -1,0 +1,53 @@
+.doclist {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 0px 12px;
+  &.error {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  li {
+    list-style: none;
+  }
+}
+
+.select-doc-list {
+  .dc-input {
+    max-width: unset;
+  }
+  .search-bar {
+    margin-bottom: 12px;
+  }
+  .select-doc-search {
+    padding: 0 4px;
+    margin-bottom: 12px;
+  }
+}
+
+.doc-tag {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  cursor: pointer;
+  &.guard {
+    background-color: var(--bs-primary);
+    color: #fff;
+  }
+  &.progress {
+    color: #fff;
+    background-color: var(--bs-warning);
+  }
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -1,3 +1,27 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "warn",
+    "no-unused-vars": "warn",
+    "react/jsx-uses-vars": "error",
+    "react/no-unknown-property": "warn",
+    "react/self-closing-comp": "error",
+    "import/order": "warn",
+    "no-console": "warn",
+    "import/no-anonymous-default-export": "off"
+  }
 }

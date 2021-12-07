@@ -1,0 +1,79 @@
+.chatlist {
+  list-style: none;
+  padding: 0 8px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  li {
+    margin: 0;
+  }
+  h4,
+  p {
+    margin-bottom: 0;
+  }
+  & > a .dialog-item {
+    margin-bottom: 2px;
+  }
+}
+
+.chatlist-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.chatlist-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 60px 0 0;
+  &.enter-active {
+    animation: error-in 0.2s;
+  }
+  &.exit-active {
+    display: none;
+  }
+  .chatlist-error-icon svg {
+    width: 56px;
+    height: 56px;
+    color: var(--bs-danger);
+    .warn-duo_svg__fa-secondary {
+      opacity: 0.4;
+    }
+  }
+  .chatlist-error-title {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  .chatlist-error-descrp {
+    .mr-1 {
+      margin-right: 6px;
+    }
+  }
+  .chatlist-error-action {
+    margin-top: 20px;
+    max-width: 180px;
+  }
+}
+
+@keyframes error-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

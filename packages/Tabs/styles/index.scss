@@ -1,0 +1,76 @@
+.tabs-slider {
+  min-width: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+}
+
+.tabs-pane {
+  display: flex;
+  flex-direction: column;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  background-color: #fff;
+  overflow: hidden;
+  z-index: 1;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+// _S_ :: Sidebar animations
+// _T_ :: Tabs Animations
+
+.tabs-pane {
+  .tab-exit-animated {
+    display: none !important;
+  }
+  &.tab-pane-in {
+    animation-name: _S_tabPaneIn;
+  }
+  &.tab-pane-in-prev {
+    animation-name: _S_tabPaneInPrev;
+  }
+  &.tab-pane-out {
+    animation-name: _S_tabPaneOut;
+  }
+  &.tab-pane-out-prev {
+    animation-name: _S_tabPaneOutPrev;
+  }
+}
+
+@keyframes _S_tabPaneIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes _S_tabPaneInPrev {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes _S_tabPaneOut {
+  100% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+}
+
+@keyframes _S_tabPaneOutPrev {
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
