@@ -2,10 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getDocList as getList } from "../actions";
 
 const initialState = {
-  data: [],
+  data: [
+    {
+      id: 1,
+      isOnline: true,
+      fullName: "Pavel Durov",
+      category: "Programatolog",
+      meta: {
+        likes: 34,
+        responseTime: "~5 min",
+      },
+      tags: ["guard"],
+      avatar: "string",
+    },
+  ],
   isLoading: false,
   isError: false,
-  isOpen: true,
+  isOpen: false,
 };
 
 export const docSelectListSlice = createSlice({

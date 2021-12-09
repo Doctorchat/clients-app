@@ -3,7 +3,7 @@ import axios from "axios";
 const ISSERVER = typeof window === "undefined";
 const token = { current: null };
 
-if (!ISSERVER) token.current = localStorage.getItem("dc-token");
+if (!ISSERVER) token.current = localStorage.getItem("dc_token");
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,

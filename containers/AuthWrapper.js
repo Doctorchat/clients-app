@@ -30,7 +30,7 @@ export default function AuthWrapper(props) {
   }, [dispatch, redirectToLogin]);
 
   useEffect(() => {
-    if (localStorage.getItem("dc-token")) {
+    if (localStorage.getItem("dc_token")) {
       if (!user?.id) {
         fetchUser();
       }

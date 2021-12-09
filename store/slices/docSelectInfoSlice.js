@@ -4,6 +4,7 @@ import { getDocInfo as getInfo } from "../actions";
 const initialState = {
   cachedData: [],
   data: {},
+  selectedDocId: null,
   isLoading: false,
   isError: false,
 };
@@ -26,6 +27,9 @@ export const docSelectInfoSlice = createSlice({
     },
     setDefaultDocData(state, action) {
       state.data = action.payload;
+    },
+    updateSelectedDocId(state, action) {
+      state.selectedDocId = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -50,5 +54,5 @@ export const docSelectInfoSlice = createSlice({
   },
 });
 
-export const { docInfoCleanData, setDefaultDocData } = docSelectInfoSlice.actions;
+export const { docInfoCleanData, setDefaultDocData, updateSelectedDocId } = docSelectInfoSlice.actions;
 export default docSelectInfoSlice.reducer;

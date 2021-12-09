@@ -9,13 +9,24 @@ const sizeClassName = {
 };
 
 const Input = forwardRef((props, ref) => {
-  const { className, prefix, placeholder, disabled, size, label, name, value, onBlur, ...rest } =
-    props;
+  const {
+    className,
+    prefix,
+    disabled,
+    size,
+    label,
+    name,
+    value,
+    onBlur,
+    placeholder,
+    animateLabel,
+    ...rest
+  } = props;
   const [isActive, setIsActive] = useState(false);
   const inputSizeClassName = useRef(sizeClassName[size]);
 
   const activeStatusHandler = () => {
-    if (value) setIsActive(true);
+    if (value || placeholder) setIsActive(true);
     else setIsActive(false);
   };
 
@@ -35,7 +46,14 @@ const Input = forwardRef((props, ref) => {
   return (
     <>
       {label && (
-        <label className={cs("form-control-label", isActive && "is-active")} htmlFor={name}>
+        <label
+          className={cs(
+            "form-control-label",
+            isActive && "is-active",
+            !animateLabel && "no-animation"
+          )}
+          htmlFor={name}
+        >
           {label}
         </label>
       )}
@@ -46,11 +64,12 @@ const Input = forwardRef((props, ref) => {
           name={name}
           value={value}
           ref={ref}
+          placeholder={placeholder}
           className={cs(className, "dc-input", prefix && "with-prefix", inputSizeClassName.current)}
           disabled={disabled}
-          placeholder={placeholder}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
+          onInput={onFocusHandler}
           {...rest}
         />
       </div>
@@ -58,11 +77,12 @@ const Input = forwardRef((props, ref) => {
   );
 });
 
+Input.displayName = "Input";
+
 Input.propTypes = {
   size: PropTypes.oneOf(["sm", "md", "lg"]),
   className: PropTypes.string,
   prefix: PropTypes.element,
-  placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   label: PropTypes.string,
   type: PropTypes.string,
@@ -70,6 +90,8 @@ Input.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
+  animateLabel: PropTypes.bool,
+  placeholder: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -78,7 +100,5 @@ Input.defaultProps = {
   type: "text",
   value: "",
 };
-
-Input.displayName = "Input";
 
 export default Input;

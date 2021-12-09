@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { memo, useEffect, useState } from "react";
 import ChatListError from "../ChatListError";
 import ListLoading from "../ListLoading";
+import EmptyBox from "../EmptyBox";
 import DocItem from "../DocItem";
 import cs from "@/utils/classNames";
 
@@ -9,6 +10,7 @@ const SECTIONS = {
   LOADING: "loading",
   LIST: "list",
   ERROR: "error",
+  EMPTY: "empty",
 };
 
 function DocList(props) {
@@ -24,15 +26,18 @@ function DocList(props) {
       setActiveSection(SECTIONS.ERROR);
     } else if (listSlice.isLoading) {
       setActiveSection(SECTIONS.LOADING);
+    } else if (!listSlice.data.length) {
+      setActiveSection(SECTIONS.EMPTY);
     } else {
       setActiveSection(SECTIONS.LIST);
     }
   }, [listSlice]);
 
   return (
-    <ul className={cs("doclist", listSlice.isError && "error")}>
+    <ul className={cs("doclist", listSlice.isError || !listSlice.data.length  && "error")}>
       {activeSection === SECTIONS.ERROR && <ChatListError />}
       {activeSection === SECTIONS.LOADING && <ListLoading skeletonName="docItem" />}
+      {activeSection === SECTIONS.EMPTY && <EmptyBox content="Aici va apărea lista de docotri" />}
       {activeSection === SECTIONS.LIST && DocListData}
     </ul>
   );

@@ -9,7 +9,18 @@ const sizeClassName = {
 };
 
 const Textarea = forwardRef((props, ref) => {
-  const { className, placeholder, disabled, size, label, name, value, onBlur, ...rest } = props;
+  const {
+    className,
+    placeholder,
+    disabled,
+    size,
+    label,
+    name,
+    value,
+    onBlur,
+    animateLabel,
+    ...rest
+  } = props;
   const [isActive, setIsActive] = useState(false);
   const textareaSizeClassName = useRef(sizeClassName[size]);
   const textareaRef = useRef();
@@ -51,7 +62,7 @@ const Textarea = forwardRef((props, ref) => {
   return (
     <>
       {label && (
-        <label className={cs("form-control-label", isActive && "is-active")} htmlFor={name}>
+        <label className={cs("form-control-label", isActive && "is-active", !animateLabel && "no-animation")} htmlFor={name}>
           {label}
         </label>
       )}
@@ -83,6 +94,7 @@ Textarea.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
+  animateLabel: PropTypes.bool,
 };
 
 Textarea.defaultProps = {

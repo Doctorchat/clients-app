@@ -1,18 +1,26 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { useRef } from "react";
+import { CSSTransition } from "react-transition-group";
 
 export default function Error(props) {
-  const { error, isFormSubmitted } = props;
+  const { error } = props;
+  const errorRef = useRef();
 
-  if (!isFormSubmitted) return null;
-
-  return 'error';
+  return (
+    <CSSTransition in={!!error?.message} nodeRef={errorRef} timeout={200} unmountOnExit>
+      <span className="form-item-error" ref={errorRef}>
+        {error.message}
+      </span>
+    </CSSTransition>
+  );
 }
 
 Error.propTypes = {
   error: PropTypes.object,
-  isFormSubmitted: PropTypes.bool,
 };
 
 Error.defaultProps = {
-  error: {},
+  error: {
+    message: null,
+  },
 };

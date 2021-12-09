@@ -72,4 +72,9 @@
     top: calc(100% + 4px);
     transform-origin: top left;
   }
+  &.topLeft {
+    right: 0;
+    bottom: calc(100% + 4px);
+    transform-origin: bottom right;
+  }
 }

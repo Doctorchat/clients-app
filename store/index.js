@@ -7,5 +7,6 @@ export const store = configureStore({
     user: slices.userSlice,
     docSelectInfo: slices.docSelectInfoSlice,
     docSelectList: slices.docSelectListSlice,
+    messageForm: slices.messageFormSlice,
   },
 });

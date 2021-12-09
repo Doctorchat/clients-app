@@ -35,7 +35,7 @@
   pointer-events: none;
   user-select: none;
   transition-property: opacity, visibility;
-  transition-duration: .2s;
+  transition-duration: 0.2s;
 }
 
 .popup-body {
@@ -79,6 +79,7 @@
 
 .popup-content-inner {
   padding: 0 8px;
+  height: 100%;
 }
 
 .popup-body {
@@ -89,6 +90,12 @@
   }
   &.exit-active {
     animation-name: popupBodyOut;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .popup-body {
+    border-radius: 0px;
   }
 }
 

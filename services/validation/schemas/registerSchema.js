@@ -5,12 +5,9 @@ const registerSchema = object().shape({
   phone: string().min(6),
   firstName: string().min(2).required(),
   lastName: string().min(2).required(),
-  password: string()
-    .min(6)
-    .matches(/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$/, { message: "Message" })
-    .required(),
+  password: string().min(6).required(),
   passwordConfirmation: string()
-    .oneOf([ref("password")], "Passwords must match")
+    .oneOf([ref("password")], "Parolele nu sunt identice")
     .required(),
 });
 

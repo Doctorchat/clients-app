@@ -15,7 +15,10 @@ export default function Popup(props) {
 
   const closePopup = useCallback(
     (e) => {
-      if (e) e.stopPropagation();
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       setState(false);
       onVisibleChange(false);
     },

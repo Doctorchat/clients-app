@@ -2,9 +2,9 @@
 @import "bootstrap/dist/css/bootstrap-reboot.min.css";
 @import "bootstrap/dist/css/bootstrap-utilities.min.css";
 @import "./mixins.scss";
-@import "./layouts/";
-@import "./components/";
 @import "./packages/";
+@import "./components/";
+@import "./layouts/";
 
 :root {
   --bs-primary: #06f;
@@ -191,6 +191,10 @@ div {
       right: 0;
     }
   }
+}
+
+.no-animation {
+  transition: unset !important;
 }
 
 @keyframes spin {

@@ -1,0 +1,263 @@
+.upload-container {
+  position: relative;
+
+  input[type="file"] {
+    display: none !important;
+  }
+}
+
+.upload-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bs-gray-300);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.upload-drop-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 18px;
+  border-radius: 10px;
+  border: 2px dashed var(--bs-gray-400);
+  font-size: 18px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  position: relative;
+  &.drag-in,
+  &:hover {
+    border-color: var(--bs-primary);
+  }
+  &.drag-in {
+    background-color: rgba(#06f, 0.1);
+  }
+  svg {
+    color: rgba(#06f, 0.8);
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+  }
+  .upload-label {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+  .upload-descrp {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--bs-gray-600);
+  }
+  .upload-handler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+}
+
+.upload-file {
+  border-radius: 10px;
+  padding: 8px 12px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bs-gray-100);
+  overflow: hidden;
+  &:hover {
+    background-color: var(--bs-gray-200);
+  }
+}
+
+.upload-list {
+  margin-top: 10px;
+}
+
+.upload-file-main {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  overflow: hidden;
+}
+
+.upload-file-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-right: 10px;
+  cursor: pointer;
+  min-width: 50px;
+  min-height: 50px;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background-color: rgba(#fff, 0.35);
+    display: none;
+  }
+}
+
+.upload-list-item {
+  position: relative;
+  animation-duration: 0.2s;
+
+  &.has-error {
+    .file-name {
+      color: var(--bs-gray-600);
+    }
+    .upload-file-preview {
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 4px;
+  }
+  &.enter-active {
+    animation-name: uploadItemIn;
+  }
+}
+
+.upload-file-meta {
+  width: 100%;
+  overflow: hidden;
+  .file-name {
+    font-size: 15px;
+    margin-bottom: 3px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 280px;
+    .ellipsis {
+      flex-grow: 1;
+    }
+  }
+  .file-caption-info {
+    color: var(--bs-gray-600);
+    font-size: 13px;
+    text-transform: uppercase;
+    span {
+      padding-right: 3px;
+      &:not(:last-of-type)::after {
+        padding-left: 3px;
+        content: "•";
+      }
+    }
+  }
+  .file-caption-error {
+    color: var(--bs-red);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    .error-icon {
+      transform: translateY(-1px);
+    }
+    svg {
+      width: 13px;
+      height: 13px;
+      margin-right: 4px;
+    }
+  }
+}
+
+.file-remove-btn {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  background-color: rgba(#dc3545, 0.1);
+  &:hover {
+    background-color: rgba(#dc3545, 0.2);
+  }
+  svg {
+    color: var(--bs-red);
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.upload-list-item-animation-placeholder {
+  height: 0px;
+  transition: height 0.2s;
+  &.enter-active {
+    height: 66px;
+  }
+  &.enter-done {
+    display: none;
+  }
+  &.exit {
+    height: 66px;
+  }
+  &.exit-active {
+    height: 0px;
+  }
+  &.exit-done {
+    display: none;
+  }
+}
+
+.file-progress {
+  transition-property: height, width;
+  transition: 0.2s;
+  position: relative;
+  background-color: var(--bs-gray-300);
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  margin-top: 2px;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: 0.2s;
+    width: var(--progress);
+    height: 100%;
+    background-color: var(--bs-primary);
+    border-radius: inherit;
+  }
+  &.enter {
+    height: 0px;
+  }
+  &.enter-active {
+    height: 4px;
+  }
+  &.exit {
+    height: 4px;
+  }
+  &.exit-active {
+    height: 0px;
+  }
+  &.exit-done {
+    display: none;
+  }
+}
+
+@keyframes uploadItemIn {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

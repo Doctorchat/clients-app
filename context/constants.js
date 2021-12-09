@@ -1,5 +1,5 @@
 export const userRoles = new Map([
   ["admin", 1],
-  ["client", 2],
-  ["doctor", 3],
+  ["doctor", 2],
+  ["client", 3],
 ]);

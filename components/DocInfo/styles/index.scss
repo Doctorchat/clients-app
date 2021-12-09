@@ -1,0 +1,135 @@
+.doc-info-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.doc-info-caption {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  .title {
+    display: flex;
+    align-items: center;
+  }
+  .name {
+    color: var(--bs-gray-800);
+    margin-right: 6px;
+  }
+  .doc-tag {
+    margin-left: 6px;
+    width: 24px;
+    height: 24px;
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  .category {
+    color: var(--bs-gray-800);
+  }
+  .start-conversation {
+    padding-right: 6px;
+  }
+}
+
+.doc-info-tabs {
+  margin-top: 5px;
+  padding: 0 8px;
+}
+
+.doc-info-tab-content {
+  margin-top: 10px;
+  padding: 5px 0;
+}
+
+.doc-info-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:not(:last-of-type) {
+    margin-bottom: 2px;
+  }
+  svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+  }
+}
+
+.doc-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.doc-info-list-item {
+  padding: 6px 0;
+  margin: 0;
+  &.content {
+    display: flex;
+    align-items: center;
+  }
+  &:not(:last-of-type) {
+    border-bottom: 1px solid var(--bs-gray-200);
+  }
+  b {
+    font-weight: 500;
+  }
+  span {
+    display: inline-block;
+  }
+  .descrp {
+    color: var(--bs-gray-700);
+    padding-left: 28px;
+    display: block;
+    font-size: 14px;
+    margin-top: 2px;
+    max-width: 430px;
+  }
+  .icon {
+    padding-right: 12px;
+    line-height: 1;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+    &.like {
+      transform: translateY(-3px);
+    }
+    &.heart {
+      transform: translateY(-1px);
+    }
+    &.star {
+      transform: translateY(-2px);
+      svg {
+        width: 17px;
+        height: 17px;
+      }
+    }
+  }
+}
+
+.doc-info-list-item {
+  svg {
+    color: var(--bs-primary);
+  }
+}
+
+.doc-info-section {
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+  .info-section-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: var(--bs-gray-800);
+  }
+  .info-section-descrp {
+    margin: 0;
+    font-size: 15px;
+    color: var(--bs-gray-700);
+  }
+}

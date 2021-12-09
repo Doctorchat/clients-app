@@ -1,0 +1,53 @@
+.dc-description-row {
+  &:not(:last-of-type) {
+    border-bottom: 1px solid var(--bs-gray-200);
+  }
+  &-label {
+    padding: 8px 16px;
+    border-right: 1px solid var(--bs-gray-200);
+    font-size: 14px;
+    background-color: var(--bs-gray-100);
+    font-weight: 500;
+    color: var(--bs-gray-800);
+  }
+  &-content {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+.dc-description-title th {
+  padding: 8px 16px;
+  font-weight: 500;
+  background-color: var(--bs-gray-100);
+  border-bottom: 1px solid var(--bs-gray-200);
+  border-radius: 10px 10px 0 0;
+  color: var(--bs-gray-800);
+}
+
+.dc-description-title-trunc {
+  display: flex;
+  justify-content: space-between;
+  span {
+    flex-grow: 1;
+    padding-right: 12px;
+  }
+}
+
+.dc-description-row:first-of-type {
+  .dc-description-row-label {
+    border-radius: 10px 0;
+  }
+  .dc-description-row-content {
+    border-radius: 0 0 0 10px;
+  }
+}
+
+.dc-description-row:last-of-type {
+  .dc-description-row-label {
+    border-radius: 0 0 0 10px;
+  }
+  .dc-description-row-content {
+    border-radius: 0 10px 0 0;
+  }
+}

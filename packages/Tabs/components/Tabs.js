@@ -6,7 +6,7 @@ import cs from "@/utils/classNames";
 import usePrevious from "@/hooks/usePrevious";
 
 export default function Tabs(props) {
-  const { config, className, updateTabsConfig, children } = props;
+  const { config, className, updateTabsConfig, children, dataAnimation } = props;
   const prevActiveIndex = usePrevious(config.key);
   const tabsMouted = useRef(false); // Prevent animation on mount
 
@@ -27,7 +27,9 @@ export default function Tabs(props) {
         tabsMouted: tabsMouted.current,
       }}
     >
-      <div className={cs("tabs-slider", className)}>{children}</div>
+      <div className={cs("tabs-slider", className)} data-animation={dataAnimation}>
+        {children}
+      </div>
     </TabsContext.Provider>
   );
 }
@@ -40,12 +42,14 @@ Tabs.propTypes = {
   }),
   children: PropTypes.arrayOf(PropTypes.element),
   updateTabsConfig: PropTypes.func,
+  dataAnimation: PropTypes.oneOf(["sidebar", "tabs"]),
 };
 
 Tabs.defaultProps = {
   config: {
     direction: "next",
   },
+  dataAnimation: "sidebar",
 };
 
 Tabs.Pane = Pane;

@@ -4,11 +4,13 @@ import { memo, useEffect, useState } from "react";
 import ChatItem from "../ChatItem";
 import ChatListError from "../ChatListError";
 import ListLoading from "../ListLoading";
+import EmptyBox from "../EmptyBox";
 
 const SECTIONS = {
   LOADING: "loading",
   LIST: "list",
   ERROR: "error",
+  EMPTY: "empty",
 };
 
 function ChatList(props) {
@@ -30,6 +32,8 @@ function ChatList(props) {
       setActiveSection(SECTIONS.ERROR);
     } else if (listSlice.isLoading) {
       setActiveSection(SECTIONS.LOADING);
+    } else if (!listSlice.data.length) {
+      setActiveSection(SECTIONS.EMPTY);
     } else {
       setActiveSection(SECTIONS.LIST);
     }
@@ -39,6 +43,7 @@ function ChatList(props) {
     <ul className="chatlist">
       {activeSection === SECTIONS.ERROR && <ChatListError />}
       {activeSection === SECTIONS.LOADING && <ListLoading skeletonName="chatItem" />}
+      {activeSection === SECTIONS.EMPTY && <EmptyBox className="p-3 pt-5" />}
       {activeSection === SECTIONS.LIST && ChatData}
     </ul>
   );

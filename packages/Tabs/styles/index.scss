@@ -18,6 +18,43 @@
   animation-fill-mode: forwards;
 }
 
+.tabs-line {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  border-bottom: 2px solid var(--bs-gray-200);
+}
+
+.tabs-line .tabs-line-item:not(:last-of-type) {
+  margin-right: 24px;
+}
+
+.tabs-line-item {
+  padding: 10px 0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+  color: var(--bs-gray-700);
+  &:hover {
+    color: lighten(#06f, 15%);
+  }
+  &.is-active {
+    color: var(--bs-primary);
+  }
+}
+
+.tabs-line-bar {
+  position: absolute;
+  left: 0;
+  top: calc(100% - 2px);
+  border-radius: 2px;
+  height: 4px;
+  width: 68px;
+  background-color: var(--bs-primary);
+  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1), left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 // _S_ :: Sidebar animations
 // _T_ :: Tabs Animations
 
@@ -25,17 +62,43 @@
   .tab-exit-animated {
     display: none !important;
   }
-  &.tab-pane-in {
-    animation-name: _S_tabPaneIn;
+}
+
+.tabs-slider[data-animation="sidebar"] {
+  .tabs-pane {
+    &.tab-pane-in {
+      animation-name: _S_tabPaneIn;
+    }
+    &.tab-pane-in-prev {
+      animation-name: _S_tabPaneInPrev;
+    }
+    &.tab-pane-out {
+      animation-name: _S_tabPaneInPrev;
+      animation-direction: reverse;
+    }
+    &.tab-pane-out-prev {
+      animation-name: _S_tabPaneIn;
+      animation-direction: reverse;
+    }
   }
-  &.tab-pane-in-prev {
-    animation-name: _S_tabPaneInPrev;
-  }
-  &.tab-pane-out {
-    animation-name: _S_tabPaneOut;
-  }
-  &.tab-pane-out-prev {
-    animation-name: _S_tabPaneOutPrev;
+}
+
+.tabs-slider[data-animation="tabs"] {
+  .tabs-pane {
+    &.tab-pane-in {
+      animation-name: _T_tabPaneIn;
+    }
+    &.tab-pane-in-prev {
+      animation-name: _T_tabPaneInPrev;
+    }
+    &.tab-pane-out {
+      animation-name: _T_tabPaneInPrev;
+      animation-direction: reverse;
+    }
+    &.tab-pane-out-prev {
+      animation-name: _T_tabPaneIn;
+      animation-direction: reverse;
+    }
   }
 }
 
@@ -61,16 +124,24 @@
   }
 }
 
-@keyframes _S_tabPaneOut {
-  100% {
-    transform: translateX(-20%);
+@keyframes _T_tabPaneIn {
+  0% {
+    transform: translateX(100%);
     opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
   }
 }
 
-@keyframes _S_tabPaneOutPrev {
-  100% {
-    transform: translateX(100%);
+@keyframes _T_tabPaneInPrev {
+  0% {
+    transform: translateX(-100%);
     opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }

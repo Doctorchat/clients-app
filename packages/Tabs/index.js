@@ -1,5 +1,5 @@
 import Tabs from "./components/Tabs";
-import { TABS_ANIMATION_DIRECTIONS } from "./components/Tabs";
+import Line from "./components/Line";
 
-export { TABS_ANIMATION_DIRECTIONS };
+export { Line };
 export default Tabs;

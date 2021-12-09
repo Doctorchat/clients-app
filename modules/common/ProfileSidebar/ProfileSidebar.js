@@ -4,7 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import BackTitle from "@/components/BackTitle";
 import av2 from "@/imgs/2.jpg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { leftSideTab } from "@/context/TabsKeys";
+import { leftSideTabs } from "@/context/TabsKeys";
 
 export default function ProfileSidebar() {
   const { updateTabsConfig } = useTabsContext();
@@ -12,7 +12,7 @@ export default function ProfileSidebar() {
   return (
     <Sidebar>
       <Sidebar.Header>
-        <BackTitle title="Profilul meu" onBack={updateTabsConfig(leftSideTab.chatList, "prev")} />
+        <BackTitle title="Profilul meu" onBack={updateTabsConfig(leftSideTabs.chatList, "prev")} />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-content-wrapper">
