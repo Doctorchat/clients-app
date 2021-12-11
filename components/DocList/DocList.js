@@ -1,61 +1,24 @@
 import PropTypes from "prop-types";
-import { memo, useEffect, useState } from "react";
-import ChatListError from "../ChatListError";
-import ListLoading from "../ListLoading";
-import EmptyBox from "../EmptyBox";
+import { memo } from "react";
 import DocItem from "../DocItem";
-import cs from "@/utils/classNames";
-
-const SECTIONS = {
-  LOADING: "loading",
-  LIST: "list",
-  ERROR: "error",
-  EMPTY: "empty",
-};
 
 function DocList(props) {
-  const { listSlice, onDocClick } = props;
-  const [activeSection, setActiveSection] = useState(SECTIONS.LOADING);
+  const { data, onDocClick } = props;
 
-  const DocListData = [...listSlice.data]
+  const DocListData = [...data]
     .sort((a, b) => new Date(b.updated) - new Date(a.updated))
     .map((doc) => <DocItem key={doc.id} data={doc} onClick={onDocClick(doc)} />);
 
-  useEffect(() => {
-    if (listSlice.isError && !listSlice.isLoading) {
-      setActiveSection(SECTIONS.ERROR);
-    } else if (listSlice.isLoading) {
-      setActiveSection(SECTIONS.LOADING);
-    } else if (!listSlice.data.length) {
-      setActiveSection(SECTIONS.EMPTY);
-    } else {
-      setActiveSection(SECTIONS.LIST);
-    }
-  }, [listSlice]);
-
-  return (
-    <ul className={cs("doclist", listSlice.isError || !listSlice.data.length  && "error")}>
-      {activeSection === SECTIONS.ERROR && <ChatListError />}
-      {activeSection === SECTIONS.LOADING && <ListLoading skeletonName="docItem" />}
-      {activeSection === SECTIONS.EMPTY && <EmptyBox content="Aici va apărea lista de docotri" />}
-      {activeSection === SECTIONS.LIST && DocListData}
-    </ul>
-  );
+  return <ul className="doclist">{DocListData}</ul>;
 }
 
 DocList.propTypes = {
-  listSlice: PropTypes.shape({
-    isError: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    data: PropTypes.array,
-  }),
+  data: PropTypes.array,
   onDocClick: PropTypes.func,
 };
 
 DocList.defaultProps = {
-  listSlice: {
-    data: [],
-  },
+  data: [],
 };
 
 export default memo(DocList);

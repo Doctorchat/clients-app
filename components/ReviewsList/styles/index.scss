@@ -7,23 +7,55 @@
 }
 
 .review-item {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    font-size: 14px;
+  }
 }
 
-.review {
-  &-caption {
+.review-avatar {
+  position: relative;
+  margin-right: 10px;
+  min-width: 58px;
+  min-height: 58px;
+  .status {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: -5px;
+    top: 8px;
+    transform: translateY(-50%);
+    background-color: #fff;
+    padding: 6px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 4px;
+    justify-content: center;
+    border: 1px solid var(--bs-gray-300);
+    color: var(--bs-primary);
+    &.negative {
+      color: var(--bs-danger);
+    }
+    svg {
+      width: 15px;
+      height: 15px;
+    }
   }
-  &-name {
-    font-size: 18px;
-    margin-bottom: 0px
+}
+
+.review-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  .name {
+    font-size: 17px;
+    font-weight: 500;
+    margin-right: 8px;
   }
-  &-date {
-    margin-left: 12px;
-    font-size: 14px;
+  .date {
     color: var(--bs-gray-700);
+    font-size: 14px;
   }
 }

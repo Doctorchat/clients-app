@@ -5,6 +5,7 @@ const initialState = {
   data: [],
   isLoading: false,
   isError: false,
+  isLoaded: false,
 };
 
 export const chatListSlice = createSlice({
@@ -21,11 +22,13 @@ export const chatListSlice = createSlice({
       .addCase(getList.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
+        state.isLoaded = true;
         state.data.push(...action.payload);
       })
       .addCase(getList.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
+        state.isLoaded = true;
         state.data = [];
       });
   },

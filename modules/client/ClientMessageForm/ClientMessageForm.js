@@ -8,11 +8,11 @@ import { messageFormTogglePopupVisibility } from "@/store/slices/messageFormSlic
 import { messageFormTabs } from "@/context/TabsKeys";
 
 export default function ClientMessageForm() {
-  const { user, isOpen } = useSelector((store) => ({
-    user: store.user,
+  const { isOpen } = useSelector((store) => ({
     isOpen: store.messageForm.isOpen,
   }));
   const [tabsConfig, setTabsConfig] = useState({ key: messageFormTabs.main, dir: "next" });
+  const dispatch = useDispatch();
 
   const updateTabsConfig = useCallback(
     (key, dir = "next") =>
@@ -21,13 +21,8 @@ export default function ClientMessageForm() {
       },
     []
   );
-  const dispatch = useDispatch();
 
   const popupVisibilityHandler = (v) => dispatch(messageFormTogglePopupVisibility(v));
-
-  if (user.data.role !== 3) {
-    return null;
-  }
 
   return (
     <Popup id="message-form" visible={isOpen} onVisibleChange={popupVisibilityHandler}>

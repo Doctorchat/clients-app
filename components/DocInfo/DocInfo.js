@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
+import Tooltip from "../Tooltip";
 import DocInfoSummary from "./DocInfoSummary";
 import DocInfoReviews from "./DocInfoReviews";
 import Tabs, { Line } from "@/packages/Tabs";
@@ -58,9 +59,11 @@ export default function DocInfo(props) {
         <div className="doc-info-caption">
           <h4 className="title">
             <span className="name">Denis Novac</span>
-            <span className="doc-tag guard">
-              <ShieldIcon />
-            </span>
+            <Tooltip title="Medic de gardă" placement="rightCenter">
+              <span className="doc-tag guard">
+                <ShieldIcon />
+              </span>
+            </Tooltip>
           </h4>
           <h6 className="category">Programatolog</h6>
           <p className="description mb-0">

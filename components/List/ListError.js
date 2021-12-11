@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import { memo, forwardRef } from "react";
 import Spinner from "@/components/Spinner";
-import Button from "@/components/Button";
 import WarnIcon from "@/icons/warn-duo.svg";
 
-const ChatListError = forwardRef((props, ref) => (
+const ListError = forwardRef(({ extra }, ref) => (
   <div className="chatlist-error" ref={ref}>
     <div className="chatlist-error-icon">
       <WarnIcon />
@@ -13,16 +12,14 @@ const ChatListError = forwardRef((props, ref) => (
     <p className="chatlist-error-descrp d-flex align-items-center">
       <Spinner className="mr-1" /> <span>Lucrăm...</span>
     </p>
-    <Button className="chatlist-error-action" type="outline">
-      Reload page
-    </Button>
+    {extra}
   </div>
 ));
 
-ChatListError.propTypes = {
-  ref: PropTypes.object,
+ListError.propTypes = {
+  extra: PropTypes.element,
 };
 
-ChatListError.displayName = "ChatListError";
+ListError.displayName = "ListError";
 
-export default memo(ChatListError);
+export default memo(ListError);
