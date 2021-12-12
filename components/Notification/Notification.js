@@ -16,7 +16,7 @@ export const defaultNotificationData = {
 
 const calculateNotificationTop = (nodeKey) => {
   const notificationsList = document.querySelectorAll("#notifications-wrapper .notification");
-  let top = 10;
+  let top = 20;
 
   for (let i = 0; i < notificationsList.length; i++) {
     if (nodeKey === notificationsList[i].dataset?.key) {

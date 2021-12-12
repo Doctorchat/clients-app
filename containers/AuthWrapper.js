@@ -7,7 +7,7 @@ import FullPageLoading from "@/components/FullPageLoading";
 
 export default function AuthWrapper(props) {
   const { children } = props;
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const user = useSelector((store) => store.user);
   const router = useRouter();
   const dispatch = useDispatch();
