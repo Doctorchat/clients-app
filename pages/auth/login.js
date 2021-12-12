@@ -10,6 +10,7 @@ import Form from "@/components/Form";
 import Input from "@/components/Inputs";
 import Button from "@/components/Button";
 import { loginUser } from "@/store/actions";
+import { notification } from "@/store/slices/notificationsSlice";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);
@@ -20,6 +21,7 @@ export default function Login() {
 
   const onLoginSubmit = useCallback(
     async (values) => {
+      dispatch(notification({ title: "Success", descrp: "Ceva success message" }));
       try {
         setLoading(true);
         await dispatch(loginUser(values));

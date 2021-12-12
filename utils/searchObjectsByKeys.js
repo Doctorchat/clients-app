@@ -6,8 +6,20 @@ export default function searchObjectsByKeys(searchKeys, list) {
   const listStrings = list.map((item) => {
     let itemStr = "";
 
+    const propertyToString = (value) => {
+      let result = "";
+
+      if (Array.isArray(value)) {
+        result = value.join("");
+      } else {
+        result = value;
+      }
+
+      return result.trim().toLowerCase();
+    };
+
     Object.keys(item).forEach(
-      (key) => searchKeys.includes(key) && (itemStr += item[key].trim().toLowerCase())
+      (key) => searchKeys.includes(key) && (itemStr += propertyToString(item[key]))
     );
 
     return { id: item.id, str: itemStr };

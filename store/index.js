@@ -8,5 +8,6 @@ export const store = configureStore({
     docSelectInfo: slices.docSelectInfoSlice,
     docSelectList: slices.docSelectListSlice,
     messageForm: slices.messageFormSlice,
+    notifications: slices.notificationsSlice,
   },
 });
