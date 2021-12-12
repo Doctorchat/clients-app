@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
-import Image from "next/image";
+import Image from "../Image/Image";
 import cs from "@/utils/classNames";
 import av2 from "@/imgs/2.jpg";
 import LikeIcon from "@/icons/like.svg";
@@ -31,13 +31,7 @@ function DocItem(props) {
     <li className="doc-item" role="button" onClick={onClick}>
       <div className="doc-item-info">
         <div className={cs("dialog-avatar", isOnline && "is-online")}>
-          <Image
-            blurDataURL={av2.blurDataURL}
-            src={av2.src}
-            alt={fullName}
-            width="76"
-            height="76"
-          />
+          <Image w="76" h="76" alt={fullName} src={av2.src} />
         </div>
         <div className="doc-caption">
           <h4 className="doc-title">{fullName}</h4>

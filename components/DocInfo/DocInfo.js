@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import Image from "next/image";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import Image from "../Image/Image";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
 import Tooltip from "../Tooltip";
@@ -48,13 +48,7 @@ export default function DocInfo(props) {
     <div className="doc-info">
       <div className="doc-info-top">
         <div className="dialog-avatar">
-          <Image
-            blurDataURL={av2.blurDataURL}
-            src={av2.src}
-            alt={"Novac Denis"}
-            width="128"
-            height="128"
-          />
+          <Image w="128" h="128" alt="Novac" src={av2.src} />
         </div>
         <div className="doc-info-caption">
           <h4 className="title">

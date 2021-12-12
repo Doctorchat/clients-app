@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Image from "next/image";
+import Image from "../Image/Image";
 import emptyIcon from "@/imgs/empty-folder.png";
 import cs from "@/utils/classNames";
 
@@ -9,13 +9,7 @@ export default function EmptyBox(props) {
   return (
     <div className={cs("empty-box", className)}>
       <div className="empty-box-image">
-        <Image
-          alt="Nu-s date"
-          width="64"
-          height="64"
-          src={emptyIcon.src}
-          blurDataURL={emptyIcon.blurDataURL}
-        />
+        <Image alt="Nu-s date" w="64" h="64" src={emptyIcon.src} />
       </div>
       <div className="empty-box-content">
         <h4 className="empty-box-title">{title}</h4>

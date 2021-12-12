@@ -1,15 +1,14 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
-import Image from "next/image";
+import Image from "../Image/Image";
 import cs from "@/utils/classNames";
 import dates from "@/utils/dates";
-import av2 from "@/imgs/2.jpg";
 import ClipIcon from "@/icons/clip.svg";
 import WarnIcon from "@/icons/warning.svg";
 
 function ChatItem(props) {
   const {
-    data: { description, isOnline, fullName, updated, newMessages },
+    data: { description, isOnline, fullName, updated, newMessages, avatar },
     isSelected,
     onClick,
   } = props;
@@ -35,13 +34,9 @@ function ChatItem(props) {
   };
 
   return (
-    <li
-      className={cs("dialog-item", isSelected && "active")}
-      role="link"
-      onClick={onClick}
-    >
+    <li className={cs("dialog-item", isSelected && "active")} role="link" onClick={onClick}>
       <div className={cs("dialog-avatar", isOnline && "is-online")}>
-        <Image blurDataURL={av2.blurDataURL} src={av2.src} alt={fullName} width="54" height="54" />
+        <Image w="54" h="54" alt={fullName} src={avatar} />
       </div>
       <div className="user-caption">
         <h4 className="dialog-title">

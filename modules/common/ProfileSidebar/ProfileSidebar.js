@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Image/Image";
 import cs from "@/utils/classNames";
 import Sidebar from "@/components/Sidebar";
 import BackTitle from "@/components/BackTitle";
@@ -17,13 +17,7 @@ export default function ProfileSidebar() {
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-content-wrapper">
           <div className={cs("dialog-avatar")}>
-            <Image
-              blurDataURL={av2.blurDataURL}
-              src={av2.src}
-              alt={"Novac Denis"}
-              width="54"
-              height="54"
-            />
+            <Image src={av2.src} alt={"Novac Denis"} w="54" h="54" />
           </div>
         </div>
       </Sidebar.Body>

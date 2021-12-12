@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import Image from "next/image";
+import Image from "../Image/Image";
 import dates from "@/utils/dates";
-import av2 from "@/imgs/2.jpg";
 import LikeIcon from "@/icons/like.svg";
 import DislikeIcon from "@/icons/dislike.svg";
 import cs from "@/utils/classNames";
@@ -15,7 +14,7 @@ export default function ReviewItem(props) {
     <div className="review-item">
       <div className="review-avatar">
         <div className="dialog-avatar">
-          <Image blurDataURL={av2.blurDataURL} src={av2.src} alt={name} width="58" height="58" />
+          <Image src={avatar} alt={name} w="58" h="58" />
         </div>
         <span className={cs("status", !status && "negative")}>{status ? <LikeIcon /> : <DislikeIcon />}</span>
       </div>
