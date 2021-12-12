@@ -4,7 +4,7 @@ import emptyIcon from "@/imgs/empty-folder.png";
 import cs from "@/utils/classNames";
 
 export default function EmptyBox(props) {
-  const { className, title, content } = props;
+  const { className, title, content, extra } = props;
 
   return (
     <div className={cs("empty-box", className)}>
@@ -15,6 +15,7 @@ export default function EmptyBox(props) {
         <h4 className="empty-box-title">{title}</h4>
         <p className="empty-box-descrp">{content}</p>
       </div>
+      {extra}
     </div>
   );
 }
@@ -23,6 +24,7 @@ EmptyBox.propTypes = {
   title: PropTypes.string,
   content: PropTypes.string,
   className: PropTypes.string,
+  extra: PropTypes.element,
 };
 
 EmptyBox.defaultProps = {

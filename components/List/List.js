@@ -5,7 +5,17 @@ import ListLoading from "../ListLoading";
 import ListError from "./ListError";
 
 function List(props) {
-  const { empty, error, loading, loaded, skeleton, errorExtra, children } = props;
+  const {
+    empty,
+    error,
+    loading,
+    loaded,
+    skeleton,
+    errorExtra,
+    emptyExtra,
+    emptyClassName,
+    children,
+  } = props;
 
   if (error && loaded) {
     return <ListError extra={errorExtra} />;
@@ -16,7 +26,7 @@ function List(props) {
   }
 
   if (empty && loaded) {
-    return <EmptyBox />;
+    return <EmptyBox extra={emptyExtra} className={emptyClassName} />;
   }
 
   return children;
@@ -31,6 +41,8 @@ List.propTypes = {
   children: PropTypes.element,
   errorExtra: PropTypes.element,
   loaded: PropTypes.bool,
+  emptyClassName: PropTypes.string,
+  emptyExtra: PropTypes.element,
 };
 
 export default memo(List);
