@@ -7,7 +7,7 @@ import cs from "@/utils/classNames";
 
 export default function ReviewItem(props) {
   const {
-    data: { created, name, content, avatar, status },
+    data: { created, name, content, avatar, like },
   } = props;
 
   return (
@@ -16,7 +16,7 @@ export default function ReviewItem(props) {
         <div className="dialog-avatar">
           <Image src={avatar} alt={name} w="58" h="58" />
         </div>
-        <span className={cs("status", !status && "negative")}>{status ? <LikeIcon /> : <DislikeIcon />}</span>
+        <span className={cs("status", !like && "negative")}>{like ? <LikeIcon /> : <DislikeIcon />}</span>
       </div>
       <div className="review-content">
         <div className="review-top">
@@ -37,6 +37,6 @@ ReviewItem.propTypes = {
     name: PropTypes.string,
     content: PropTypes.string,
     avatar: PropTypes.string,
-    status: PropTypes.bool,
+    like: PropTypes.bool,
   }),
 };

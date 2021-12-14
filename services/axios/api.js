@@ -10,6 +10,11 @@ const api = {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),
   },
   chatList: { get: () => axiosInstance.get("/chat/list") },
+  docList: {
+    get: () => axiosInstance.get("/chat/medics"),
+    info: (id) => axiosInstance.get(`/user/card/${id}`),
+    getReviews: (id) => axiosInstance.get(`/reviews/${id}`),
+  },
 };
 
 export default api;

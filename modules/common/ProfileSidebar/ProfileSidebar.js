@@ -2,7 +2,6 @@ import Image from "@/components/Image/Image";
 import cs from "@/utils/classNames";
 import Sidebar from "@/components/Sidebar";
 import BackTitle from "@/components/BackTitle";
-import av2 from "@/imgs/2.jpg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { leftSideTabs } from "@/context/TabsKeys";
 
@@ -17,7 +16,7 @@ export default function ProfileSidebar() {
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-content-wrapper">
           <div className={cs("dialog-avatar")}>
-            <Image src={av2.src} alt={"Novac Denis"} w="54" h="54" />
+            <Image src={"ceva"} alt={"Novac Denis"} w="54" h="54" />
           </div>
         </div>
       </Sidebar.Body>

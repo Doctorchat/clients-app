@@ -5,9 +5,9 @@ import DocItem from "../DocItem";
 function DocList(props) {
   const { data, onDocClick } = props;
 
-  const DocListData = [...data]
-    .sort((a, b) => new Date(b.updated) - new Date(a.updated))
-    .map((doc) => <DocItem key={doc.id} data={doc} onClick={onDocClick(doc)} />);
+  const DocListData = [...data].map((doc) => (
+    <DocItem key={doc.id} data={doc} onClick={onDocClick(doc)} />
+  ));
 
   return <ul className="doclist">{DocListData}</ul>;
 }

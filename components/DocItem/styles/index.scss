@@ -36,6 +36,7 @@
 
 .doc-item-info {
   display: flex;
+  overflow: hidden;
 }
 
 .doc-caption {
@@ -47,9 +48,19 @@
   }
   .doc-title {
     margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
   .doc-category {
-    margin-bottom: 10px;
+    max-height: 32px;
+    margin-bottom: 0;
+    line-height: 1.1;
+    font-size: 14px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 }
 
@@ -64,6 +75,7 @@
 
 .doc-item-meta {
   display: flex;
+  margin-bottom: 5px;
 }
 
 .doc-meta-item {
@@ -71,7 +83,6 @@
   align-content: center;
   justify-content: center;
   color: var(--bs-gray-700);
-
   &:not(:last-of-type) {
     margin-right: 10px;
   }
@@ -82,9 +93,26 @@
   span {
     line-height: 1;
   }
-  svg {
+  svg:not(.line-icon) {
+    color: var(--bs-primary);
     width: 16px;
     height: 16px;
+  }
+  .line-icon {
+    width: 18px;
+    height: 16px;
+  }
+}
+
+.doc-title-tag {
+  padding: 2px 4px;
+  border-radius: 30px;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  margin: 0 5px;
+  &.new {
+    background-color: var(--bs-green);
   }
 }
 
@@ -114,7 +142,7 @@
     width: 80%;
   }
 
-  .doc-title{
+  .doc-title {
     width: 60%;
   }
 

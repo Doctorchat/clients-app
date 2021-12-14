@@ -6,16 +6,8 @@ import useDebounce from "@/hooks/useDebounce";
 import searchObjectsByKeys from "@/utils/searchObjectsByKeys";
 
 export default function Search(props) {
-  const {
-    searchKeys,
-    placeholder,
-    request,
-    localList,
-    updateList,
-    onFocus,
-    onBlur,
-    minSearchedLocalList,
-  } = props;
+  const { searchKeys, placeholder, request, localList, onFocus, onBlur, updateSearchConfig } =
+    props;
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const search = useRef(null);
@@ -28,35 +20,38 @@ export default function Search(props) {
     try {
       setLoading(true);
       const searchResult = await request(input);
-      updateList(searchResult);
+      updateSearchConfig("list", searchResult);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
-  }, [input, request, updateList]);
+  }, [input, request, updateSearchConfig]);
 
   const localSearch = useCallback(() => {
     const searchResult = search.current(input);
 
-    if (searchResult.length <= minSearchedLocalList) {
-      apiSearch();
-    }
+    // if (searchResult.length <= minSearchedLocalList) {
+    //   apiSearch();
+    // }
 
-    updateList(searchResult);
-  }, [apiSearch, input, minSearchedLocalList, updateList]);
+    updateSearchConfig("list", searchResult);
+  }, [input, updateSearchConfig]);
 
   const searchHanlder = useCallback(() => {
-    if (input.length > 1) {
-      if (search.current && localList.length >= minSearchedLocalList) {
+    if (!input || !input.length) onBlur();
+
+    if (input.length > 0) {
+      updateSearchConfig("active", true);
+      if (search.current) {
         localSearch();
-      } else {
+      } else if (request) {
         apiSearch();
       }
-    }
-  }, [apiSearch, input.length, localList.length, localSearch, minSearchedLocalList]);
+    } else updateSearchConfig("active", false);
+  }, [apiSearch, input, localSearch, onBlur, request, updateSearchConfig]);
 
-  const debouncedSearch = useDebounce(searchHanlder, 200, {
+  const debouncedSearch = useDebounce(searchHanlder, 300, {
     maxWait: 600,
   });
 
@@ -75,7 +70,7 @@ export default function Search(props) {
       value={input}
       onChange={onInputChange}
       placeholder={placeholder}
-      loading={loading}
+      // loading={loading}
       prefix={<SearchIcon />}
       onFocus={onFocus}
       onBlur={onBlur}
@@ -88,13 +83,15 @@ Search.propTypes = {
   placeholder: PropTypes.string,
   request: PropTypes.func,
   localList: PropTypes.array,
-  updateList: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  minSearchedLocalList: PropTypes.number,
+  updateSearchConfig: PropTypes.func,
 };
 
 Search.defaultProps = {
   placeholder: "Caută...",
   minSearchedLocalList: 3,
+  onBlur: () => null,
+  onFocus: () => null,
+  updateSearchConfig: () => null,
 };

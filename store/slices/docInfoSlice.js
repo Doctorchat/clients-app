@@ -2,34 +2,36 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getDocInfo as getInfo } from "../actions";
 
 const initialState = {
-  cachedData: [],
   data: {},
-  selectedDocId: null,
+  cache: [],
+  temp: {},
+  selectedId: null,
   isLoading: false,
   isError: false,
 };
 
 const cacheHanlder = (state, payload) => {
   if (!payload.isCached) {
-    if (state.cachedData.length >= 10) state.cachedData.shift();
-    state.cachedData.push(payload);
+    if (state.cache.length >= 15) state.cache.shift();
+    state.cache.push(payload);
   }
 
   return state;
 };
 
-export const docSelectInfoSlice = createSlice({
-  name: "docSelectInfoSlice",
+export const docInfoSlice = createSlice({
+  name: "docInfo",
   initialState,
   reducers: {
-    docInfoCleanData(state) {
+    cleanDocInfo(state) {
       state.data = {};
+      state.temp = {};
     },
-    setDefaultDocData(state, action) {
-      state.data = action.payload;
+    setDocSelectedId(state, action) {
+      state.selectedId = action.payload;
     },
-    updateSelectedDocId(state, action) {
-      state.selectedDocId = action.payload;
+    setTempDocInfo(state, action) {
+      state.temp = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -42,6 +44,7 @@ export const docSelectInfoSlice = createSlice({
         state.isError = false;
         state.isLoading = false;
         state.data = action.payload;
+        state.temp = {};
 
         // Update cache
         cacheHanlder(state, action.payload);
@@ -50,9 +53,10 @@ export const docSelectInfoSlice = createSlice({
         state.isError = true;
         state.isLoading = false;
         state.data = {};
+        state.temp = {};
       });
   },
 });
 
-export const { docInfoCleanData, setDefaultDocData, updateSelectedDocId } = docSelectInfoSlice.actions;
-export default docSelectInfoSlice.reducer;
+export const { cleanDocInfo, setTempDocInfo, setDocSelectedId } = docInfoSlice.actions;
+export default docInfoSlice.reducer;

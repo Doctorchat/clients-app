@@ -13,20 +13,22 @@ function List(props) {
     skeleton,
     errorExtra,
     emptyExtra,
+    loadingClassName,
     emptyClassName,
+    emptyDescription,
     children,
   } = props;
 
-  if (error && loaded) {
+  if (error && (loaded === undefined || loaded)) {
     return <ListError extra={errorExtra} />;
   }
 
   if (loading) {
-    return <ListLoading>{skeleton()}</ListLoading>;
+    return <ListLoading className={loadingClassName}>{skeleton()}</ListLoading>;
   }
 
-  if (empty && loaded) {
-    return <EmptyBox extra={emptyExtra} className={emptyClassName} />;
+  if (empty && (loaded === undefined || loaded)) {
+    return <EmptyBox extra={emptyExtra} className={emptyClassName} content={emptyDescription} />;
   }
 
   return children;
@@ -38,11 +40,14 @@ List.propTypes = {
   loading: PropTypes.bool,
   loadingRender: PropTypes.func,
   skeleton: PropTypes.func,
-  children: PropTypes.element,
   errorExtra: PropTypes.element,
   loaded: PropTypes.bool,
   emptyClassName: PropTypes.string,
   emptyExtra: PropTypes.element,
+  loadingClassName: PropTypes.string,
+  emptyDescription: PropTypes.string,
+  showSpinnerLoading: PropTypes.bool,
+  children: PropTypes.element,
 };
 
 export default memo(List);

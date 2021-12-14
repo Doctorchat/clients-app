@@ -5,6 +5,7 @@
 @import "./packages/";
 @import "./components/";
 @import "./layouts/";
+@import "./main.scss";
 
 :root {
   --bs-primary: #06f;
@@ -69,6 +70,7 @@ a {
 body {
   font-family: "Roboto", sans-serif;
   overflow: hidden;
+  min-height: -webkit-fill-available;
 }
 
 h1,
@@ -167,8 +169,6 @@ div {
 
 .dialog-avatar {
   border-radius: 50%;
-  min-width: 54px;
-  min-height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,6 +195,15 @@ div {
 
 .no-animation {
   transition: unset !important;
+}
+
+img[data-src] {
+  filter: blur(0.1em);
+}
+
+img {
+  filter: blur(0em);
+  transition: filter 0.2s;
 }
 
 @keyframes spin {

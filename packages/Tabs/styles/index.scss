@@ -13,6 +13,7 @@
   grid-column-start: 1;
   background-color: #fff;
   overflow: hidden;
+  position: relative;
   z-index: 1;
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
@@ -66,6 +67,7 @@
 
 .tabs-slider[data-animation="sidebar"] {
   .tabs-pane {
+    z-index: 1;
     &.tab-pane-in {
       animation-name: _S_tabPaneIn;
     }
@@ -104,29 +106,29 @@
 
 @keyframes _S_tabPaneIn {
   0% {
-    transform: translateX(100%);
+    transform: translate3d(100%, 0, 0);
     opacity: 0;
   }
   100% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 @keyframes _S_tabPaneInPrev {
   0% {
-    transform: translateX(-20%);
+    transform: translate3d(-20%, 0, 0);
     opacity: 0;
   }
   100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 @keyframes _T_tabPaneIn {
   0% {
-    transform: translateX(100%);
+    transform: translate3d(100%, 0, 0);
     opacity: 0;
   }
   100% {
@@ -137,7 +139,7 @@
 
 @keyframes _T_tabPaneInPrev {
   0% {
-    transform: translateX(-100%);
+    transform: translate3d(-100%, 0, 0);
     opacity: 0;
   }
   100% {

@@ -5,9 +5,10 @@ export const store = configureStore({
   reducer: {
     chatList: slices.chatListSlice,
     user: slices.userSlice,
-    docSelectInfo: slices.docSelectInfoSlice,
+    docInfo: slices.docInfoSlice,
     docSelectList: slices.docSelectListSlice,
     messageForm: slices.messageFormSlice,
     notifications: slices.notificationsSlice,
+    docReviews: slices.docReviewsSlice,
   },
 });

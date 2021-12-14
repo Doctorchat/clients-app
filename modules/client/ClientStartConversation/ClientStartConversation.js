@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ClientFindDoc from "./ClientFindDoc";
-import StartConversationDocInfo from "./StartConversationDocInfo";
+import ClientDocInfo from "./ClientDocInfo";
 import Popup from "@/components/Popup";
 import Tabs from "@/packages/Tabs";
 import { docListTogglePopupVisibility } from "@/store/slices/docSelectListSlice";
@@ -27,11 +27,11 @@ export default function ClientStartConversation() {
   return (
     <Popup id="select-doc" visible={isOpen} onVisibleChange={popupVisibilityHandler}>
       <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig}>
-        <Tabs.Pane dataKey={startConversationTabs.findDoc}>
+        <Tabs.Pane dataKey={startConversationTabs.findDoc} unmountOnExit={false}>
           <ClientFindDoc />
         </Tabs.Pane>
         <Tabs.Pane dataKey={startConversationTabs.docInfo}>
-          <StartConversationDocInfo />
+          <ClientDocInfo />
         </Tabs.Pane>
       </Tabs>
     </Popup>

@@ -9,7 +9,7 @@ export const startConversationTabs = {
 };
 
 export const docInfoTabs = {
-  summary: "doc-info-summary",
+  activity: "doc-info-activity",
   about: "doc-info-about",
   reviews: "doc-info-reviews",
 };

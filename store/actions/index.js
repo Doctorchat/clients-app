@@ -1,5 +1,6 @@
 export * from "./chatListActions";
 export * from "./userActions";
-export * from "./docSelectInfoActions";
+export * from "./docInfoActions";
 export * from "./docSelectListActions";
 export * from "./messageFormActions";
+export * from "./docReviewsActions";
