@@ -3,10 +3,10 @@ import { Provider } from "react-redux";
 import Head from "next/head";
 import { store } from "../store";
 import MainLayout from "@/layouts/MainLayout";
+import NotificationsWrapper from "@/containers/NotificationsWrapper";
 
 // Styles
 import "../styles/global.scss";
-import NotificationsWrapper from "@/containers/NotificationsWrapper";
 
 export default function App({ Component, pageProps }) {
   const getLayout =

@@ -1,8 +1,9 @@
 #message-form {
   .popup-body {
     width: 600px;
-    max-height: 800px;
-    min-height: 733px;
+    height: 733px;
+    max-height: 100%;
+    max-height: -webkit-fill-available;
   }
 }
 
@@ -27,7 +28,8 @@
   }
 }
 
-.message-form, .message-from-confirm {
+.message-form,
+.message-from-confirm {
   padding: 0px 3px 12px;
 }
 

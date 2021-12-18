@@ -1,0 +1,60 @@
+.signup-progress {
+  display: grid;
+  grid-template-columns: repeat(var(--step-count), minmax(100px, 1fr));
+  grid-template-rows: 1fr;
+  max-width: 1440px;
+  margin: 30px auto 20px;
+  padding: 0 20px;
+}
+
+.signup-progress-step_caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.signup-progress-step_caption .name {
+  font-weight: 400;
+  font-size: 16px;
+  color: #242f42;
+  margin: 0 0 12px;
+  flex-grow: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.signup-progress-step_line {
+  height: 9px;
+  border: 1px solid transparent;
+  background-color: #fff;
+  position: relative;
+  border: 1px solid transparent;
+  path {
+    stroke: #f0f0f0;
+  }
+  &.completed {
+    border-top-color: #10b897;
+    border-bottom-color: #10b897;
+    background-color: #e6f2f0;
+    path {
+      stroke: #10b897;
+    }
+  }
+}
+
+.signup-progress-step_arrow {
+  position: absolute;
+  top: -1px;
+  right: -4px;
+  z-index: 1;
+}
+
+.signup-progress-step:first-of-type {
+  .signup-progress-step_line {
+    border-radius: 2px 0 0 2px;
+    border-left-color: #10b897;
+  }
+}

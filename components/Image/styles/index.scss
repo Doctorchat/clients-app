@@ -1,0 +1,12 @@
+.dc-image {
+  inset: 0px;
+  box-sizing: border-box;
+  padding: 0px;
+  border: none;
+  margin: 0;
+  display: block;
+  min-width: var(--img-w);
+  max-width: var(--img-w);
+  min-height: var(--img-h);
+  max-height: var(--img-h);
+}

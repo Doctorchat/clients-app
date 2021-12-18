@@ -4,9 +4,11 @@
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  gap: 15px;
 }
 
 .review-item {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,4 +60,8 @@
     color: var(--bs-gray-700);
     font-size: 14px;
   }
+}
+
+.review-content {
+  flex-grow: 1;
 }

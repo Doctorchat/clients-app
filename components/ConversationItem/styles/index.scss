@@ -1,0 +1,145 @@
+.dialog-item {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 8px;
+  &:hover {
+    background-color: var(--bs-gray-200);
+  }
+  &.active {
+    background-color: var(--bs-primary);
+    .dialog-avatar.is-online::after {
+      background-color: #fff;
+      border-color: var(--bs-primary);
+    }
+    .dialog-title {
+      color: var(--bs-gray-100);
+    }
+    .dialog-subtitle,
+    .dialog-status,
+    .dialog-title-details .message-time {
+      color: var(--bs-gray-300);
+    }
+  }
+  &.closed {
+    font-style: italic;
+    background-color: #f4f4f4;
+    filter: grayscale(80%);
+    opacity: 0.8;
+  }
+}
+
+.dialog-title,
+.dialog-subtitle {
+  height: 28px;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dialog-title {
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.user-last-message,
+.user-title {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dialog-bubble {
+  height: 24px;
+  width: 24px;
+  min-width: 24px;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: var(--bs-primary);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-caption {
+  padding: 0 8px;
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+  span {
+    line-height: 28px;
+  }
+}
+
+.dialog-subtitle {
+  color: var(--bs-gray-700);
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.dialog-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  &.responded {
+    color: var(--bs-success);
+  }
+  &.pending {
+    color: var(--bs-warning);
+  }
+  &.declined {
+    color: var(--bs-danger);
+  }
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+  span {
+    line-height: 1;
+  }
+  .status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    transform: translateY(-1px);
+  }
+}
+
+.dialog-title-details {
+  .message-time {
+    font-size: 12px;
+    font-weight: normal;
+    color: var(--bs-gray-700);
+  }
+}
+
+.dialog-item.skeleton {
+  pointer-events: none;
+
+  .dialog-avatar,
+  .dialog-title,
+  .dialog-subtitle {
+    @include skeleton-loading;
+  }
+
+  .dialog-title,
+  .dialog-subtitle {
+    height: 20px;
+    border-radius: 6px;
+  }
+
+  .dialog-title {
+    width: 60%;
+    margin-bottom: 12px;
+  }
+}

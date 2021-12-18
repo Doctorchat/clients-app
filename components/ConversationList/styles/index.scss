@@ -1,0 +1,25 @@
+.conversation-list {
+  list-style: none;
+  padding: 0 8px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  li {
+    margin: 0;
+  }
+  h4,
+  p {
+    margin-bottom: 0;
+  }
+  & > a .dialog-item {
+    margin-bottom: 2px;
+  }
+}

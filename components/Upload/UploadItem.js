@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import Image from "../Image";
 import { IconBtn } from "../Button";
 import formatBytes from "@/utils/formatBytes";
 import { messageUploadFile } from "@/store/actions";
@@ -81,12 +81,7 @@ export default function UploadItem(props) {
           <div className="upload-file">
             <div className="upload-file-main">
               <div className="upload-file-preview">
-                <Image
-                  alt={file.fileName}
-                  src={docFileURL?.src || file.fileURL}
-                  width="50"
-                  height="50"
-                />
+                <Image alt={file.fileName} src={docFileURL?.src || file.fileURL} w="50" h="50" />
               </div>
               <div className="upload-file-meta">
                 <h5 className="file-name">

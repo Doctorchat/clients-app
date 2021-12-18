@@ -1,7 +1,8 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import ChatListSidebar from "../ChatListSidebar";
+import ConversationsSidebar from "../ConversationsSidebar";
 import ProfileSidebar from "../ProfileSidebar";
+import EditProflie from "../EditProfile";
 import Tabs from "@/packages/Tabs";
 import { leftSideTabs } from "@/context/TabsKeys";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
@@ -11,7 +12,7 @@ import PlusIcon from "@/icons/plus.svg";
 import { docListTogglePopupVisibility } from "@/store/slices/docSelectListSlice";
 
 export default function LeftSide() {
-  const [tabsConfig, setTabsConfig] = useState({ key: leftSideTabs.chatList, dir: "next" });
+  const [tabsConfig, setTabsConfig] = useState({ key: leftSideTabs.conversationList, dir: "next" });
   const dispatch = useDispatch();
 
   const updateTabsConfig = useCallback(
@@ -27,11 +28,14 @@ export default function LeftSide() {
   return (
     <section id="column-left" className="sidebar-left">
       <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig}>
-        <Tabs.Pane dataKey={leftSideTabs.chatList} unmountOnExit={false}>
-          <ChatListSidebar />
+        <Tabs.Pane dataKey={leftSideTabs.conversationList} unmountOnExit={false}>
+          <ConversationsSidebar />
         </Tabs.Pane>
         <Tabs.Pane dataKey={leftSideTabs.profile}>
           <ProfileSidebar />
+        </Tabs.Pane>
+        <Tabs.Pane dataKey={leftSideTabs.editProfile}>
+          <EditProflie />
         </Tabs.Pane>
       </Tabs>
       <AuthRoleWrapper roles={[userRoles.get("client")]}>

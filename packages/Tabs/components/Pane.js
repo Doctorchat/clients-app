@@ -5,7 +5,7 @@ import useTabsContext from "../hooks/useTabsContext";
 import cs from "@/utils/classNames";
 
 export default function Pane(props) {
-  const { className, dataKey, unmountOnExit, children } = props;
+  const { className, dataKey, unmountOnExit, withAnimation, children } = props;
   const { key, dir, tabsMouted } = useTabsContext();
   const [isActive, setIsActive] = useState(false);
   const paneRef = useRef();
@@ -19,7 +19,7 @@ export default function Pane(props) {
     <CSSTransition
       in={isActive}
       nodeRef={paneRef}
-      timeout={tabsMouted ? 200 : 0}
+      timeout={tabsMouted && withAnimation ? 200 : 0}
       unmountOnExit={unmountOnExit}
       classNames={{
         enterActive: dir === "next" ? "tab-pane-in" : "tab-pane-in-prev",
@@ -39,8 +39,10 @@ Pane.propTypes = {
   dataKey: PropTypes.string,
   unmountOnExit: PropTypes.bool,
   children: PropTypes.element,
+  withAnimation: PropTypes.bool,
 };
 
 Pane.defaultProps = {
   unmountOnExit: true,
+  withAnimation: true,
 };

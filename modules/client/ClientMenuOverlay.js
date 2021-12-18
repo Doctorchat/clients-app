@@ -1,29 +1,40 @@
 import PropTypes from "prop-types";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { leftSideTabs } from "@/context/TabsKeys";
-import { Overlay } from "@/components/Dropdown";
 import UserIcon from "@/icons/user.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import SupportIcon from "@/icons/support.svg";
 import FAQIcon from "@/icons/question.svg";
 import { logoutUser } from "@/store/actions";
+import Menu from "@/components/Menu";
+import { useDropdownContext } from "@/components/Dropdown";
 
 export default function ClientMenuOverlay({ updateTabsConfig }) {
+  const { closeDropdown } = useDropdownContext();
   const dispatch = useDispatch();
 
   const logoutHanlder = () => dispatch(logoutUser());
 
+  const onTabsConfigChange = useCallback(
+    (key) => () => {
+      updateTabsConfig(key);
+      closeDropdown();
+    },
+    [closeDropdown, updateTabsConfig]
+  );
+
   return (
-    <Overlay>
-      <Overlay.Item icon={<UserIcon />} onClick={updateTabsConfig(leftSideTabs.profile)}>
+    <Menu>
+      <Menu.Item icon={<UserIcon />} notify onClick={onTabsConfigChange(leftSideTabs.profile)}>
         Profilul meu
-      </Overlay.Item>
-      <Overlay.Item icon={<SupportIcon />}>Suport</Overlay.Item>
-      <Overlay.Item icon={<FAQIcon />}>FAQ</Overlay.Item>
-      <Overlay.Item icon={<LogoutIcon />} className="logout-item" onClick={logoutHanlder}>
+      </Menu.Item>
+      <Menu.Item icon={<SupportIcon />}>Suport</Menu.Item>
+      <Menu.Item icon={<FAQIcon />}>FAQ</Menu.Item>
+      <Menu.Item icon={<LogoutIcon />} className="logout-item" onClick={logoutHanlder}>
         Deconectare
-      </Overlay.Item>
-    </Overlay>
+      </Menu.Item>
+    </Menu>
   );
 }
 

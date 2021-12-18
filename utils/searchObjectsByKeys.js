@@ -36,11 +36,16 @@ export default function searchObjectsByKeys(searchKeys, list) {
     const searchTermRegex = new RegExp(tokens.join("|"), "gim");
 
     const filteredList = listStrings
-      .filter(({ str }) => str.match(searchTermRegex))
+      .filter(({ str }) => {
+        console.log(str.match(searchTermRegex));
+        return str.match(searchTermRegex);
+      })
       .map(({ id }) => id);
+
+    console.log();
 
     return [...list].filter(({ id }) => filteredList.includes(id));
   };
 
-  return { search };
+  return search;
 }

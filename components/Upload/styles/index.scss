@@ -51,6 +51,11 @@
     font-size: 13px;
     font-weight: 400;
     color: var(--bs-gray-600);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
   }
   .upload-handler {
     position: absolute;
@@ -259,5 +264,11 @@
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .upload-drop-btn {
+    padding: 16px 12px;
   }
 }

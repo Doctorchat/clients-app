@@ -1,6 +1,8 @@
 export const leftSideTabs = {
-  chatList: "user-chat-list",
+  conversationList: "user-conversation-list",
   profile: "user-profile",
+  editProfile: "user-edit-profile",
+  appointments: "doc-appointments",
 };
 
 export const startConversationTabs = {
@@ -9,7 +11,7 @@ export const startConversationTabs = {
 };
 
 export const docInfoTabs = {
-  summary: "doc-info-summary",
+  activity: "doc-info-activity",
   about: "doc-info-about",
   reviews: "doc-info-reviews",
 };

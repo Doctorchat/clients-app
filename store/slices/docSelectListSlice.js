@@ -2,27 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getDocList as getList } from "../actions";
 
 const initialState = {
-  data: [
-    {
-      id: 1,
-      isOnline: true,
-      fullName: "Pavel Durov",
-      category: "Programatolog",
-      meta: {
-        likes: 34,
-        responseTime: "~5 min",
-      },
-      tags: ["guard"],
-      avatar: "string",
-    },
-  ],
+  data: [],
   isLoading: false,
   isError: false,
   isOpen: false,
+  isLoaded: false,
 };
 
 export const docSelectListSlice = createSlice({
-  name: "docSelectListSlice",
+  name: "selectDocList",
   initialState,
   reducers: {
     docListTogglePopupVisibility(state, action) {
@@ -39,11 +27,13 @@ export const docSelectListSlice = createSlice({
       .addCase(getList.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
+        state.isLoaded = true;
         state.data.push(...action.payload);
       })
       .addCase(getList.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
+        state.isLoaded = true;
         state.data = [];
       });
   },

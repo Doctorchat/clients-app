@@ -4,7 +4,9 @@
 @import "./mixins.scss";
 @import "./packages/";
 @import "./components/";
+@import "./modules/";
 @import "./layouts/";
+@import "./main.scss";
 
 :root {
   --bs-primary: #06f;
@@ -20,6 +22,18 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 button,
@@ -69,6 +83,7 @@ a {
 body {
   font-family: "Roboto", sans-serif;
   overflow: hidden;
+  min-height: -webkit-fill-available;
 }
 
 h1,
@@ -167,8 +182,6 @@ div {
 
 .dialog-avatar {
   border-radius: 50%;
-  min-width: 54px;
-  min-height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,6 +208,15 @@ div {
 
 .no-animation {
   transition: unset !important;
+}
+
+img[data-src] {
+  filter: blur(0.1em);
+}
+
+img {
+  filter: blur(0em);
+  transition: filter 0.2s;
 }
 
 @keyframes spin {

@@ -43,7 +43,7 @@ export default function useComponentByRole(components, fallback) {
 
   useEffect(() => {
     if (!loaded && user.data?.role) {
-      const activeComponent = components.find((component) => (component.role = user.data.role));
+      const activeComponent = components.find((component) => component.role === user.data.role);
 
       if (activeComponent) {
         loadAllowedComponent(activeComponent);

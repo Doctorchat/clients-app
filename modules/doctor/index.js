@@ -1,3 +1,5 @@
 import DocMenuOverlay from "./DocMenuOverlay";
+import DocEditProfile from "./DocEditProfile";
+import DocProfileActions from "./DocProfileActions";
 
-export { DocMenuOverlay };
+export { DocMenuOverlay, DocEditProfile, DocProfileActions };
