@@ -10,7 +10,7 @@ export default function Menu(props) {
 
 Menu.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
 };
 
 Menu.Item = MenuItem;

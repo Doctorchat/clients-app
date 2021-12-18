@@ -39,7 +39,7 @@ export default function ClientFindDoc() {
   }, []);
 
   return (
-    <div className="popup-body star-coversation-doc-info">
+    <div className="popup-body star-conversation-doc-info">
       <PopupHeader
         title={
           <BackTitle
@@ -51,7 +51,7 @@ export default function ClientFindDoc() {
       <PopupContent>
         <DocInfo
           loading={isLoading}
-          scrollableContainer=".star-coversation-doc-info .popup-scroll-container"
+          scrollableContainer=".star-conversation-doc-info .popup-scroll-container"
           doctor={docCurrentInfo}
         />
       </PopupContent>

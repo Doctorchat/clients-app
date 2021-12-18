@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import Image from "../Image/Image";
+import Image from "../Image";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
 import Tooltip from "../Tooltip";

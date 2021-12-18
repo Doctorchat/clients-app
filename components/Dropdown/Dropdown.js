@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Children, cloneElement, useCallback, useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import DropdownContext from "./DropdrowContext";
+import DropdownContext from "./DropdownContext";
 import cs from "@/utils/classNames";
 
 export default function Dropdown(props) {

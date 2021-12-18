@@ -2,8 +2,8 @@
 @import "../../components/Inputs/styles/";
 @import "../../components/Button/styles/";
 @import "../../components/Sidebar/styles/";
-@import "../../components/ChatList/styles/";
-@import "../../components/ChatItem/styles/";
+@import "../../components/ConversationList/styles/";
+@import "../../components/ConversationItem/styles/";
 @import "../../components/Dropdown/styles/";
 @import "../../components/Popup/styles/";
 @import "../../components/DocList/styles/";
@@ -18,9 +18,8 @@
 @import "../../components/Skeleton/styles/";
 @import "../../components/Switch/styles/";
 @import "../../components/Select/styles/";
-@import "../../modules/client/ClientMessageForm/styles/";
-@import "../../modules/client/ClientDocsSearch/styles/";
-@import "./chat-list-search.scss";
+@import "../../components/Menu/styles/";
+@import "./conversation-list-search.scss";
 @import "./back-title.scss";
 @import "./select-doc.scss";
 @import "./description-table.scss";

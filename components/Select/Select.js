@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { forwardRef, useCallback, useEffect, useState } from "react";
 import RcSelect, { components } from "react-select";
 import TimesIcon from "@/icons/times.svg";
 import AngleIcon from "@/icons/angle-down.svg";
@@ -24,12 +24,10 @@ const MultiValueRemove = (props) => (
 );
 
 const NoOptionsMessage = (props) => (
-  <components.NoOptionsMessage {...props}>
-    Nu-s date
-  </components.NoOptionsMessage>
-)
+  <components.NoOptionsMessage {...props}>Nu-s date</components.NoOptionsMessage>
+);
 
-export default function Select(props) {
+const Select = forwardRef((props, ref) => {
   const {
     onChange,
     options,
@@ -64,6 +62,17 @@ export default function Select(props) {
     activeStatusHandler();
   };
 
+  const onSelectHanlder = useCallback(
+    (selected) => {
+      if (multiple) {
+        onChange(selected.value);
+      } else {
+        onChange(selected.map((val) => val.value));
+      }
+    },
+    [multiple, onChange]
+  );
+
   return (
     <>
       {label && (
@@ -82,7 +91,7 @@ export default function Select(props) {
         className={cs("react-select-container", size)}
         classNamePrefix="react-select"
         value={value}
-        onChange={onChange}
+        onChange={onSelectHanlder}
         name={name}
         placeholder={placeholder}
         options={options}
@@ -91,6 +100,7 @@ export default function Select(props) {
         isDisabled={disabled}
         onFocus={onFocusHandler}
         onBlur={onBlurHandler}
+        ref={ref}
         components={{
           ClearIndicator: ClearIndicator,
           DropdownIndicator: DropdownIndicator,
@@ -100,7 +110,7 @@ export default function Select(props) {
       />
     </>
   );
-}
+});
 
 Select.propTypes = {
   options: PropTypes.arrayOf(
@@ -118,7 +128,7 @@ Select.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   onBlur: PropTypes.func,
-  animateLabel: PropTypes.func,
+  animateLabel: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -126,3 +136,7 @@ Select.defaultProps = {
   size: "md",
   onBlur: () => null,
 };
+
+Select.displayName = "Select";
+
+export default Select;

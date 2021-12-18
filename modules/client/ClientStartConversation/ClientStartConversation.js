@@ -27,7 +27,7 @@ export default function ClientStartConversation() {
   return (
     <Popup id="select-doc" visible={isOpen} onVisibleChange={popupVisibilityHandler}>
       <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig}>
-        <Tabs.Pane dataKey={startConversationTabs.findDoc} unmountOnExit={false}>
+        <Tabs.Pane withAnimation={isOpen} dataKey={startConversationTabs.findDoc} unmountOnExit={false}>
           <ClientFindDoc />
         </Tabs.Pane>
         <Tabs.Pane dataKey={startConversationTabs.docInfo}>

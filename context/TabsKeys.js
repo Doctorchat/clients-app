@@ -1,6 +1,8 @@
 export const leftSideTabs = {
-  chatList: "user-chat-list",
+  conversationList: "user-conversation-list",
   profile: "user-profile",
+  editProfile: "user-edit-profile",
+  appointments: "doc-appointments",
 };
 
 export const startConversationTabs = {

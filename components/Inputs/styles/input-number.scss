@@ -1,0 +1,26 @@
+.dc-input-number {
+  &.with-prefix {
+    border-radius: 0 10px 10px 0;
+    margin-left: 50px;
+    padding-left: 12px;
+  }
+  &_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__prefix {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 50px;
+    background-color: var(--bs-gray-200);
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 14px;
+  }
+}

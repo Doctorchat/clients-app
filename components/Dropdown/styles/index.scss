@@ -33,38 +33,6 @@
   }
 }
 
-.dropdown-overlay-item {
-  display: flex;
-  position: relative;
-  padding: 0 40px 0 1rem;
-  height: 48px;
-  cursor: pointer;
-  color: #000;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  align-items: center;
-  text-align: left;
-  line-height: 1.3125;
-  &:hover {
-    background-color: var(--bs-gray-200);
-  }
-  .overlay-item-content {
-    flex: 1 1 0;
-  }
-  .overlay-item-prefix {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 24px;
-    svg {
-      width: 20px;
-      height: 20px;
-      color: var(--bs-gray-600);
-    }
-  }
-}
-
 .dropdown-overlay {
   &.bottomRight {
     left: 0;

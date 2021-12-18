@@ -1,21 +1,35 @@
 import PropTypes from "prop-types";
+import { useCallback } from "react";
 import { leftSideTabs } from "@/context/TabsKeys";
-import { Overlay } from "@/components/Dropdown";
+import Menu from "@/components/Menu";
+import { useDropdownContext } from "@/components/Dropdown";
 import UserIcon from "@/icons/user.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import FAQIcon from "@/icons/question.svg";
+import VideoIcon from "@/icons/video.svg";
 
 export default function DocMenuOverlay({ updateTabsConfig }) {
+  const { closeDropdown } = useDropdownContext();
+
+  const onTabsConfigChange = useCallback(
+    (key) => () => {
+      updateTabsConfig(key)();
+      closeDropdown();
+    },
+    [closeDropdown, updateTabsConfig]
+  );
+
   return (
-    <Overlay>
-      <Overlay.Item icon={<UserIcon />} onClick={updateTabsConfig(leftSideTabs.profile)}>
+    <Menu>
+      <Menu.Item icon={<UserIcon />} onClick={onTabsConfigChange(leftSideTabs.profile)}>
         Profilul meu
-      </Overlay.Item>
-      <Overlay.Item icon={<FAQIcon />}>FAQ</Overlay.Item>
-      <Overlay.Item icon={<LogoutIcon />} className="logout-item">
+      </Menu.Item>
+      <Menu.Item icon={<VideoIcon />}>Programări Video</Menu.Item>
+      <Menu.Item icon={<FAQIcon />}>FAQ</Menu.Item>
+      <Menu.Item icon={<LogoutIcon />} className="logout-item">
         Deconectare
-      </Overlay.Item>
-    </Overlay>
+      </Menu.Item>
+    </Menu>
   );
 }
 

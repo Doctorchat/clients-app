@@ -1,3 +1,3 @@
-import Image from "next/image";
+import Image from "./Image";
 
 export default Image;

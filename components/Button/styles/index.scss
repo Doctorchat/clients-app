@@ -197,6 +197,24 @@
   }
 }
 
+.dc-btn-icon {
+  .dc-btn-content.notify {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      transform: translate(-50%, -40%);
+      border: 1px solid #fff;
+      border-radius: 50%;
+      background-color: var(--bs-danger);
+    }
+  }
+}
+
 @keyframes spinner-in-back {
   0% {
     opacity: 0;

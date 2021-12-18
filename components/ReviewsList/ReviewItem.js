@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import Image from "../Image/Image";
-import dates from "@/utils/dates";
+import Image from "../Image";
+import date from "@/utils/date";
 import LikeIcon from "@/icons/like.svg";
 import DislikeIcon from "@/icons/dislike.svg";
 import cs from "@/utils/classNames";
@@ -21,7 +21,7 @@ export default function ReviewItem(props) {
       <div className="review-content">
         <div className="review-top">
           <span className="name">{name}</span>
-          <span className="date">{dates(created).chatItem()}</span>
+          <span className="date">{date(created).dynamic()}</span>
         </div>
         <div className="review-bottom">
           <p className="mb-0">{content}</p>

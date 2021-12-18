@@ -39,6 +39,9 @@
     transform: translate(12px, -50%) scale(0.85);
     color: var(--bs-primary);
   }
+  &.input-number-prefix {
+    left: 50px;
+  }
 }
 
 .form-control.disabled {

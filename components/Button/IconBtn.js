@@ -16,7 +16,8 @@ const sizeClassName = {
 };
 
 export default function IconBtn(props) {
-  const { className, htmlType, size, onClick, disabled, loading, icon, type, ...rest } = props;
+  const { className, htmlType, size, onClick, disabled, loading, icon, type, notify, ...rest } =
+    props;
   const btnTypeClassName = useRef(typeClassNames[type]);
   const btnSizeClassName = useRef(sizeClassName[size]);
   const btnSpinner = useRef();
@@ -35,7 +36,7 @@ export default function IconBtn(props) {
       onClick={onClick}
       {...rest}
     >
-      <span className="dc-btn-content">{icon}</span>
+      <span className={cs("dc-btn-content", notify && "notify")}>{icon}</span>
       <CSSTransition in={loading} timeout={200} nodeRef={btnSpinner} unmountOnExit>
         <span className="dc-btn-spinner" ref={btnSpinner}>
           <span className="dc-btn-spinner-icon d-flex align-items-center justify-content-center">
@@ -56,6 +57,7 @@ IconBtn.propTypes = {
   loading: PropTypes.bool,
   onClick: PropTypes.func,
   icon: PropTypes.element,
+  notify: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,

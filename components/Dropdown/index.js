@@ -1,5 +1,5 @@
 import Dropdown from "./Dropdown";
-import Overlay from "./Overlay";
+import useDropdownContext from "./useDropdownContext";
 
-export { Overlay };
+export { useDropdownContext };
 export default Dropdown;

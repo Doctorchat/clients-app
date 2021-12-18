@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 // import Image from "next/image";
-import Image from "../Image/Image";
+import Image from "../Image";
 import emptyIcon from "@/imgs/empty-folder.png";
 import cs from "@/utils/classNames";
 

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import Image from "../Image/Image";
+import Image from "../Image";
 import { IconBtn } from "../Button";
 import formatBytes from "@/utils/formatBytes";
 import { messageUploadFile } from "@/store/actions";

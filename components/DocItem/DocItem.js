@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
-import Image from "../Image/Image";
+import Image from "../Image";
 import cs from "@/utils/classNames";
 import HeartIcon from "@/icons/heart.svg";
 import ClockIcon from "@/icons/clock.svg";
