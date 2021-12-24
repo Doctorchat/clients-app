@@ -5,7 +5,7 @@ import ReviewsList, { ReviewItemSkeleton } from "../ReviewsList";
 import List from "../List";
 import { getDocReviews } from "@/store/actions";
 
-export default function DocInfoReviews(props) {
+export default function DocReviews(props) {
   const { docId } = props;
   const { docReviews } = useSelector((store) => ({ docReviews: store.docReviews }));
   const dispatch = useDispatch();
@@ -19,13 +19,17 @@ export default function DocInfoReviews(props) {
   return (
     <div className="doc-info-tab-content doc-info-reviews">
       <List
-        loading={docReviews.isLoading}
-        error={docReviews.isError}
-        empty={!docReviews.data?.list?.length}
-        loadingClassName="reviews-list"
-        skeleton={ReviewItemSkeleton}
-        emptyDescription="Aici va apărea lista de recenzii"
-        emptyClassName="pt-4"
+        loadingConfig={{
+          status: docReviews.isLoading,
+          className: "reviews-list",
+          skeleton: ReviewItemSkeleton,
+        }}
+        errorConfig={{ status: docReviews.isError }}
+        emptyConfig={{
+          status: !docReviews.data?.list?.length,
+          className: "pt-4",
+          content: "Aici va apărea lista de recenzii",
+        }}
       >
         <ReviewsList data={docReviews.data?.list} />
       </List>
@@ -33,8 +37,6 @@ export default function DocInfoReviews(props) {
   );
 }
 
-DocInfoReviews.propTypes = {
+DocReviews.propTypes = {
   docId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-DocInfoReviews.defaultProps = {};

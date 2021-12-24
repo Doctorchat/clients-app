@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { forwardRef, useCallback, useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import RcSelect, { components } from "react-select";
 import TimesIcon from "@/icons/times.svg";
 import AngleIcon from "@/icons/angle-down.svg";
@@ -62,17 +62,6 @@ const Select = forwardRef((props, ref) => {
     activeStatusHandler();
   };
 
-  const onSelectHanlder = useCallback(
-    (selected) => {
-      if (multiple) {
-        onChange(selected.value);
-      } else {
-        onChange(selected.map((val) => val.value));
-      }
-    },
-    [multiple, onChange]
-  );
-
   return (
     <>
       {label && (
@@ -91,7 +80,7 @@ const Select = forwardRef((props, ref) => {
         className={cs("react-select-container", size)}
         classNamePrefix="react-select"
         value={value}
-        onChange={onSelectHanlder}
+        onChange={onChange}
         name={name}
         placeholder={placeholder}
         options={options}
@@ -115,7 +104,7 @@ const Select = forwardRef((props, ref) => {
 Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      value: PropTypes.oneOfType([PropTypes.string]),
       label: PropTypes.string,
     })
   ),
@@ -123,7 +112,10 @@ Select.propTypes = {
   placeholder: PropTypes.string,
   multiple: PropTypes.bool,
   size: PropTypes.oneOf(["sm", "md"]),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.shape({ value: PropTypes.string, label: PropTypes.string }),
+    PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })),
+  ]),
   disabled: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string,

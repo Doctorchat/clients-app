@@ -1,3 +1,4 @@
+@import 'antd/dist/antd.css';
 @import "normalize.css/normalize.css";
 @import "bootstrap/dist/css/bootstrap-reboot.min.css";
 @import "bootstrap/dist/css/bootstrap-utilities.min.css";
@@ -8,6 +9,7 @@
 @import "./layouts/";
 @import "./main.scss";
 
+
 :root {
   --bs-primary: #06f;
   --bs-primary-hover: #005ce6;
@@ -15,6 +17,10 @@
   --bs-warning: #ffa800;
   --dc-border-color: #dfe1e5;
   --dc-meet-color: #34a853;
+}
+
+input, textarea, select {
+  font-size: 16px !important;
 }
 
 input:-webkit-autofill,

@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useEffect, useState, useRef, forwardRef } from "react";
-import InputNumber from "./InputNumber";
 import cs from "@/utils/classNames";
 
 const sizeClassName = {

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { forwardRef, useCallback, useRef, useState } from "react";
-import UploadItem from "./UploadItem";
+import UploadContext from "./UploadContext";
+import UploadFile from "./UploadFile";
 import uniqId from "@/utils/uniqId";
 import cs from "@/utils/classNames";
 import validateFile from "@/utils/validateFile";
@@ -9,43 +10,57 @@ const REMOVE_FILE = Symbol("remove_file");
 const ADD_FILE = Symbol("add_file");
 
 const Upload = forwardRef((props, ref) => {
-  const { name, description, label, icon, accept, onChange, onFileListUpdate, fileItemClassName } =
-    props;
+  const {
+    name,
+    description,
+    label,
+    icon,
+    accept,
+    onChange,
+    onFileListUpdate,
+    fileItemClassName,
+    displayList,
+    action,
+  } = props;
   const [fileList, setFileList] = useState([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef();
 
-  const uploadHandler = (files) => {
+  const uploadPreparation = (files) => {
     const newFileList = [...fileList];
 
     for (let i = 0; i < files.length; i++) {
       const fileError = validateFile(files[i]);
-
       newFileList.push({
-        fileId: uniqId(),
-        fileURL: URL.createObjectURL(files[i]),
-        fileName: files[i].name,
-        fileSize: files[i].size,
-        fileExt: files[i].name.split(".").at(-1),
-        fileType: files[i].type,
+        id: uniqId(),
+        url: URL.createObjectURL(files[i]),
+        name: files[i].name,
+        size: files[i].size,
+        ext: files[i].name.split(".").at(-1),
+        type: files[i].type,
         originaFileObj: files[i],
-        fileIsUploaded: false,
-        fileError,
+        uploading: false,
+        error: fileError,
+        config: {
+          error: fileError,
+          progress: "0.00",
+          uploading: false,
+          uploaded: false,
+        },
       });
     }
 
-    fileInputRef.current.value = ""; // Clear input
+    fileInputRef.current.value = "";
     setFileList(newFileList);
     onChange(newFileList);
-    onFileListUpdate(ADD_FILE, newFileList);
   };
 
   const initUploadMethod = () => fileInputRef.current && fileInputRef.current.click();
-  const onUploadInputChange = () => uploadHandler(fileInputRef.current.files);
+  const onUploadInputChange = () => uploadPreparation(fileInputRef.current.files);
 
   const removeFileHandler = useCallback(
     (fileId) => () => {
-      const newFileList = fileList.filter((file) => file.fileId !== fileId);
+      const newFileList = fileList.filter((file) => file.id !== fileId);
       setFileList(newFileList);
       onFileListUpdate(REMOVE_FILE, newFileList);
     },
@@ -57,7 +72,7 @@ const Upload = forwardRef((props, ref) => {
       const newFileList = [...fileList];
 
       for (let i = 0; i < newFileList.length; i++) {
-        if (fileId === newFileList[i].fileId) {
+        if (fileId === newFileList[i].id) {
           newFileList[i] = { ...newFileList[i], ...data };
         }
       }
@@ -68,24 +83,24 @@ const Upload = forwardRef((props, ref) => {
   );
 
   // Drag & Drop
-  function dragleave(e) {
+  const dragleave = (e) => {
     e.stopPropagation();
     e.preventDefault();
     setIsDragOver(false);
-  }
+  };
 
-  function dragenter(e) {
+  const dragenter = (e) => {
     e.stopPropagation();
     e.preventDefault();
     setIsDragOver(true);
-  }
+  };
 
-  function dragover(e) {
+  const dragover = (e) => {
     e.stopPropagation();
     e.preventDefault();
-  }
+  };
 
-  function drop(e) {
+  const drop = (e) => {
     e.stopPropagation();
     e.preventDefault();
     setIsDragOver(false);
@@ -93,8 +108,8 @@ const Upload = forwardRef((props, ref) => {
     const dt = e.dataTransfer;
     const files = dt.files;
 
-    uploadHandler(files);
-  }
+    uploadPreparation(files);
+  };
 
   return (
     <div className="upload-container" ref={ref}>
@@ -111,17 +126,21 @@ const Upload = forwardRef((props, ref) => {
         {label && <label className="upload-label">{label}</label>}
         {description && <span className="upload-descrp">{description}</span>}
       </div>
-      <div className="upload-list">
-        {fileList.map((file) => (
-          <UploadItem
-            key={file.fileId}
-            className={fileItemClassName}
-            file={file}
-            removeFile={removeFileHandler(file.fileId)}
-            updateFile={updateFileHandler(file.fileId)}
-          />
-        ))}
-      </div>
+      {displayList && (
+        <div className="upload-list">
+          <UploadContext.Provider value={{ action, displayList }}>
+            {fileList.map((file) => (
+              <UploadFile
+                key={file.id}
+                className={fileItemClassName}
+                file={file}
+                removeFile={removeFileHandler(file.id)}
+                updateFile={updateFileHandler(file.id)}
+              />
+            ))}
+          </UploadContext.Provider>
+        </div>
+      )}
       <input
         type="file"
         id={name}
@@ -142,6 +161,8 @@ Upload.propTypes = {
   onChange: PropTypes.func,
   onFileListUpdate: PropTypes.func,
   fileItemClassName: PropTypes.string,
+  displayList: PropTypes.bool,
+  action: PropTypes.func,
 };
 
 Upload.defaultProps = {

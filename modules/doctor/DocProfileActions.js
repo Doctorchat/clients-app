@@ -12,9 +12,11 @@ export default function DocProfileActions() {
   return (
     <Menu>
       <Menu.Item icon={<EditIcon />} onClick={updateTabsConfig(leftSideTabs.editProfile)}>
-        Editeză Profilul
+        Editează Profilul
       </Menu.Item>
-      <Menu.Item icon={<CommentIcon />}>Recenzii</Menu.Item>
+      <Menu.Item icon={<CommentIcon />} onClick={updateTabsConfig(leftSideTabs.reviews)}>
+        Recenzii
+      </Menu.Item>
       <Menu.Item icon={<HistoryIcon />}>Istoricul</Menu.Item>
       <Menu.Item icon={<LangIcon />}>Limba</Menu.Item>
     </Menu>

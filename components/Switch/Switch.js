@@ -17,20 +17,25 @@ const Switch = forwardRef((props, ref) => {
   };
 
   return (
-    <div className={cs("dc-checkbox_wrapper", inputSizeClassName.current, labelAlign, className)}>
-      <button
-        id={name}
-        type="button"
-        className={cs("dc-checkbox", value && "checked")}
-        aria-checked={!!value}
-        role="switch"
-        onClick={switchHandler}
-        disabled={disabled}
+    <div className={cs("dc-checkbox_wrapper", inputSizeClassName.current, className)}>
+      <div
+        className={cs("dc-checkbox-toggler", labelAlign)}
         ref={ref}
+        role="button"
+        onClick={switchHandler}
       >
-        <span className="dc-switch-handle" />
-      </button>
-      {!!label && <span className="dc-checkbox-label">{label}</span>}
+        <button
+          id={name}
+          type="button"
+          className={cs("dc-checkbox", value && "checked")}
+          aria-checked={!!value}
+          role="switch"
+          disabled={disabled}
+        >
+          <span className="dc-switch-handle" />
+        </button>
+        {!!label && <span className="dc-checkbox-label">{label}</span>}
+      </div>
     </div>
   );
 });

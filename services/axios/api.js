@@ -5,6 +5,7 @@ const api = {
     get: () => axiosInstance.get("/user"),
     login: (data) => axiosInstance.post("/auth/login", data),
     logout: () => axiosInstance.post("/auth/logout"),
+    updateAvatar: (file) => axiosInstance.put("/user/update-avatar/", file),
   },
   chat: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

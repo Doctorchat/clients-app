@@ -22,7 +22,7 @@ export default function ClientFindDoc() {
     loading: false,
   });
   const { updateTabsConfig } = useTabsContext();
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (searchConfig.active) setCurrentList(searchConfig.list);
@@ -52,16 +52,20 @@ export default function ClientFindDoc() {
       <PopupContent>
         <ClientDocsSearch updateSearchConfig={updateSearchConfig} localList={docSelectList.data} />
         <List
-          loading={docSelectList.isLoading}
           loaded={docSelectList.isLoaded}
-          error={docSelectList.isError}
-          empty={!currentList.length}
-          loadingClassName="doclist"
-          skeleton={DocItemSkeleton}
-          emptyDescription={
-            searchConfig.active ? "Nu am găsit nici un doctor" : "Aici va apărea lista de doctori"
-          }
-          emptyClassName="pt-4"
+          loadingConfig={{
+            status: docSelectList.isLoading,
+            skeleton: DocItemSkeleton,
+            className: "doclist",
+          }}
+          errorConfig={{ status: docSelectList.isError }}
+          emptyConfig={{
+            status: !currentList.length,
+            className: "pt-4",
+            content: searchConfig.active
+              ? "Nu am găsit nici un doctor"
+              : "Aici va apărea lista de doctori",
+          }}
         >
           <DocList onDocClick={onDocClick} data={currentList} />
         </List>

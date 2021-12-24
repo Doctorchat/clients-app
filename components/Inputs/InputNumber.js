@@ -52,9 +52,9 @@ const InputNumber = forwardRef((props, ref) => {
   };
 
   const onInputChange = (event) => {
-    onChange(event);
-
     const value = event.target.value;
+
+    onChange(value || undefined);
 
     if (value) {
       switch (format) {

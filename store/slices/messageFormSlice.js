@@ -10,7 +10,7 @@ export const messageFormSlice = createSlice({
   name: "messageForm",
   initialState,
   reducers: {
-    messageFormTogglePopupVisibility(state, action) {
+    messageFormToggleVisibility(state, action) {
       state.isOpen = action.payload;
     },
   },
@@ -21,5 +21,5 @@ export const messageFormSlice = createSlice({
   },
 });
 
-export const { messageFormTogglePopupVisibility } = messageFormSlice.actions;
+export const { messageFormToggleVisibility } = messageFormSlice.actions;
 export default messageFormSlice.reducer;

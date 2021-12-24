@@ -11,5 +11,6 @@ export const store = configureStore({
     notifications: slices.notificationsSlice,
     docReviews: slices.docReviewsSlice,
     bootstrap: slices.bootstrapSlice,
+    inquiryForm: slices.inquiryFormSlice,
   },
 });

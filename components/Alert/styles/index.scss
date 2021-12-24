@@ -1,0 +1,36 @@
+.dc-alert {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 14px;
+}
+
+.dc-alert-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+.dc-alert-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 12px;
+  padding-top: 2px;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.dc-alert {
+  &.info {
+    border-color: rgba(#06f, 0.7);
+    background-color: #e1f0ff;
+    color: var(--bs-primary);
+  }
+  &.error {
+    border-color: rgba(#dc3545, 0.7);
+    background-color: rgba(#dc3545, 0.1);
+    color: var(--bs-danger);
+  }
+}

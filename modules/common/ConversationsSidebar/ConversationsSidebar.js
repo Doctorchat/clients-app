@@ -6,8 +6,10 @@ import ConversationList from "@/components/ConversationList";
 import List from "@/components/List";
 import { getConversationList } from "@/store/actions";
 import Button from "@/components/Button";
-import { docListTogglePopupVisibility } from "@/store/slices/docSelectListSlice";
+import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 import { ConversationItemSkeleton } from "@/components/ConversationItem";
+import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
+import { userRoles } from "@/context/constants";
 
 export default function ConversationsSidebar() {
   const { conversationList } = useSelector((store) => ({
@@ -18,7 +20,7 @@ export default function ConversationsSidebar() {
   useEffect(() => dispatch(getConversationList()), [dispatch]);
 
   const openStartConversation = useCallback(
-    () => dispatch(docListTogglePopupVisibility(true)),
+    () => dispatch(docListToggleVisibility(true)),
     [dispatch]
   );
 
@@ -30,18 +32,26 @@ export default function ConversationsSidebar() {
       <Sidebar.Body>
         <div className="scrollable scrollable-y conversation-list-parts">
           <List
-            loading={conversationList.isLoading}
-            error={conversationList.isError}
-            empty={!conversationList.data.length}
             loaded={conversationList.isLoaded}
-            skeleton={ConversationItemSkeleton}
-            emptyClassName="pt-4"
-            errorExtra={<Button type="outline">Reâncarcă pargina</Button>}
-            emptyExtra={
-              <Button className="mt-3" onClick={openStartConversation}>
-                Selecteză doctor
-              </Button>
-            }
+            loadingConfig={{
+              status: conversationList.isLoading,
+              skeleton: ConversationItemSkeleton,
+            }}
+            errorConfig={{
+              status: conversationList.isError,
+              extra: <Button type="outline">Reâncarcă pagina</Button>,
+            }}
+            emptyConfig={{
+              status: !conversationList.data.length,
+              className: "pt-4",
+              extra: (
+                <AuthRoleWrapper roles={[userRoles.get("client")]}>
+                  <Button className="mt-3" onClick={openStartConversation}>
+                    Selecteză doctor
+                  </Button>
+                </AuthRoleWrapper>
+              ),
+            }}
           >
             <ConversationList conversations={conversationList.data} />
           </List>

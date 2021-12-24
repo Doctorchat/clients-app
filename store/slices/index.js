@@ -6,3 +6,4 @@ export { default as messageFormSlice } from "./messageFormSlice";
 export { default as notificationsSlice } from "./notificationsSlice";
 export { default as docReviewsSlice } from "./docReviewsSlice";
 export { default as bootstrapSlice } from "./bootstrapSlice";
+export { default as inquiryFormSlice } from "./inquiryFormSlice";

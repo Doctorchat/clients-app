@@ -8,13 +8,13 @@ import Tooltip from "../Tooltip";
 import Skeleton from "../Skeleton";
 import Truncate from "../Truncate";
 import DocInfoActivity from "./DocInfoActivity";
-import DocInfoReviews from "./DocInfoReviews";
+import DocReviews from "./DocReviews";
 import DocInfoAbout from "./DocInfoAbout";
 import Tabs, { Line } from "@/packages/Tabs";
 import ShieldIcon from "@/icons/shield.svg";
 import { docInfoTabs } from "@/context/TabsKeys";
 import { ClientSelectMode } from "@/modules/client";
-import { messageFormTogglePopupVisibility } from "@/store/slices/messageFormSlice";
+import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 
 export default function DocInfo(props) {
   const { doctor, scrollableContainer, loading } = props;
@@ -40,7 +40,7 @@ export default function DocInfo(props) {
   const selectModeHandler = useCallback(
     (type) => () => {
       if (type === "message") {
-        dispatch(messageFormTogglePopupVisibility(true));
+        dispatch(messageFormToggleVisibility(true));
       }
     },
     [dispatch]
@@ -104,7 +104,7 @@ export default function DocInfo(props) {
             <DocInfoAbout about={doctor?.about} loading={loading} />
           </Tabs.Pane>
           <Tabs.Pane dataKey={docInfoTabs.reviews}>
-            <DocInfoReviews docId={doctor?.id} />
+            <DocReviews docId={doctor?.id} />
           </Tabs.Pane>
         </Tabs>
       </div>

@@ -4,7 +4,7 @@ import ClientFindDoc from "./ClientFindDoc";
 import ClientDocInfo from "./ClientDocInfo";
 import Popup from "@/components/Popup";
 import Tabs from "@/packages/Tabs";
-import { docListTogglePopupVisibility } from "@/store/slices/docSelectListSlice";
+import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 import { startConversationTabs } from "@/context/TabsKeys";
 
 export default function ClientStartConversation() {
@@ -22,10 +22,10 @@ export default function ClientStartConversation() {
     []
   );
 
-  const popupVisibilityHandler = (v) => dispatch(docListTogglePopupVisibility(v));
+  const VisibilityHandler = (v) => dispatch(docListToggleVisibility(v));
 
   return (
-    <Popup id="select-doc" visible={isOpen} onVisibleChange={popupVisibilityHandler}>
+    <Popup id="select-doc" visible={isOpen} onVisibleChange={VisibilityHandler}>
       <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig}>
         <Tabs.Pane withAnimation={isOpen} dataKey={startConversationTabs.findDoc} unmountOnExit={false}>
           <ClientFindDoc />

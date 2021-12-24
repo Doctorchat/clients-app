@@ -5,49 +5,50 @@ import ListLoading from "../ListLoading";
 import ListError from "./ListError";
 
 function List(props) {
-  const {
-    empty,
-    error,
-    loading,
-    loaded,
-    skeleton,
-    errorExtra,
-    emptyExtra,
-    loadingClassName,
-    emptyClassName,
-    emptyDescription,
-    children,
-  } = props;
+  const { loaded, loadingConfig, errorConfig, emptyConfig, children } = props;
 
-  if (error && (loaded === undefined || loaded)) {
-    return <ListError extra={errorExtra} />;
+  if (!errorConfig.disabled) {
+    if (errorConfig.status && (loaded === undefined || loaded)) {
+      return <ListError {...errorConfig} />;
+    }
   }
 
-  if (loading) {
-    return <ListLoading className={loadingClassName}>{skeleton()}</ListLoading>;
+  if (!loadingConfig.disabled) {
+    if (loadingConfig.status) {
+      return <ListLoading {...loadingConfig} />;
+    }
   }
 
-  if (empty && (loaded === undefined || loaded)) {
-    return <EmptyBox extra={emptyExtra} className={emptyClassName} content={emptyDescription} />;
+  if (!emptyConfig.disabled) {
+    if (emptyConfig.status && (loaded === undefined || loaded)) {
+      return <EmptyBox {...emptyConfig} />;
+    }
   }
 
   return children;
 }
 
 List.propTypes = {
-  empty: PropTypes.bool,
-  error: PropTypes.bool,
-  loading: PropTypes.bool,
-  loadingRender: PropTypes.func,
-  skeleton: PropTypes.func,
-  errorExtra: PropTypes.element,
   loaded: PropTypes.bool,
-  emptyClassName: PropTypes.string,
-  emptyExtra: PropTypes.element,
-  loadingClassName: PropTypes.string,
-  emptyDescription: PropTypes.string,
-  showSpinnerLoading: PropTypes.bool,
   children: PropTypes.element,
+  loadingConfig: PropTypes.shape({
+    disabled: PropTypes.bool,
+    status: PropTypes.bool,
+    skeleton: PropTypes.func,
+    className: PropTypes.string,
+  }),
+  errorConfig: PropTypes.shape({
+    disabled: PropTypes.bool,
+    status: PropTypes.bool,
+    extra: PropTypes.element,
+  }),
+  emptyConfig: PropTypes.shape({
+    disabled: PropTypes.bool,
+    status: PropTypes.bool,
+    extra: PropTypes.element,
+    className: PropTypes.string,
+    content: PropTypes.string,
+  }),
 };
 
 export default memo(List);

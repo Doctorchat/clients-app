@@ -1,0 +1,23 @@
+#inquiry-form {
+  .popup-body {
+    width: 600px;
+    height: 733px;
+    max-height: 100%;
+    max-height: -webkit-fill-available;
+  }
+  .dc-input, .react-select-container {
+    max-width: unset;
+  }
+}
+
+#add-inquiry {
+  padding: 8px 4px 8px 0;
+}
+
+@media only screen and (max-width: 576px) {
+  #add-inquiry {
+    .flex-group {
+      gap: 0 !important;
+    }
+  }
+}

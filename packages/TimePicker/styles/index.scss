@@ -1,0 +1,76 @@
+@import "antd/lib/date-picker/style";
+
+.ant-picker {
+  width: 100%;
+  &.dc-picker {
+    border-radius: 10px;
+    border: 2px solid var(--bs-gray-300);
+    transition: 0.2s;
+    &:hover {
+      border-color: var(--bs-primary);
+      border-right-width: 2px !important;
+      box-shadow: unset;
+    }
+    &.ant-picker-focused {
+      border-width: 2px !important;
+      border-color: var(--bs-primary);
+      box-shadow: 0 0 0 0.2rem rgba(#06f, 0.2);
+    }
+    &.ant-picker-disabled {
+      border-color: var(--bs-gray-300);
+      box-shadow: unset;
+      background-color: var(--bs-gray-200);
+      cursor: auto;
+      input {
+        cursor: auto;
+      }
+    }
+    .dc-picker-icon {
+      min-width: 18px;
+      height: 18px;
+      background-color: #fff;
+      margin-left: 4px;
+      background-color: var(--bs-gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    .ant-picker-clear {
+      margin-right: 4px;
+      right: 8px;
+    }
+    .dc-picker-suffix {
+      background-color: #fff;
+    }
+  }
+  &.ant-picker-md {
+    min-height: 47px;
+    padding: 8px 12px;
+  }
+}
+
+.dc-picker-popup {
+  .ant-picker-panel-container {
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px 1px rgb(0 0 0 / 24%);
+    min-width: 180px;
+  }
+  .ant-picker-footer {
+    display: none;
+  }
+  .ant-picker-time-panel-column {
+    width: 100%;
+  }
+  .ant-picker-content {
+    min-width: 90px;
+  }
+}
+
+.ant-picker-range .ant-picker-active-bar {
+  background-color: var(--bs-primary);
+}

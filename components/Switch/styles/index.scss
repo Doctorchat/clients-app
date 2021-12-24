@@ -1,15 +1,32 @@
 .dc-checkbox_wrapper {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   white-space: nowrap;
+  height: 100%;
+  &.button {
+    &:hover {
+      background-color: var(--bs-gray-200);
+    }
+  }
+}
+
+.dc-checkbox-toggler {
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  width: inherit;
+  height: inherit;
   .dc-checkbox-label {
-    margin-left: 6px;
+    margin-left: 10px;
   }
   &.left {
     flex-direction: row-reverse;
     .dc-checkbox-label {
-      margin-right: 6px;
+      margin-right: 10px;
+      margin-left: 0;
     }
   }
 }
@@ -63,6 +80,9 @@
           var(--checkbox-width) - var(--checkbox-circle-size) - var(--checkbox-circle-padding) - 3px
         );
       }
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(#06f, 0.2);
     }
     &.checked {
       .dc-switch-handle {

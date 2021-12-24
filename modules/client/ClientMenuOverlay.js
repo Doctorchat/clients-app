@@ -2,13 +2,14 @@ import PropTypes from "prop-types";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { leftSideTabs } from "@/context/TabsKeys";
+import { useDropdownContext } from "@/components/Dropdown";
+import Menu from "@/components/Menu";
+import { logoutUser } from "@/store/actions";
 import UserIcon from "@/icons/user.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import SupportIcon from "@/icons/support.svg";
 import FAQIcon from "@/icons/question.svg";
-import { logoutUser } from "@/store/actions";
-import Menu from "@/components/Menu";
-import { useDropdownContext } from "@/components/Dropdown";
+import InquiryIcon from "@/icons/inquiry.svg";
 
 export default function ClientMenuOverlay({ updateTabsConfig }) {
   const { closeDropdown } = useDropdownContext();
@@ -18,7 +19,7 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
 
   const onTabsConfigChange = useCallback(
     (key) => () => {
-      updateTabsConfig(key);
+      updateTabsConfig(key)();
       closeDropdown();
     },
     [closeDropdown, updateTabsConfig]
@@ -26,8 +27,11 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
 
   return (
     <Menu>
-      <Menu.Item icon={<UserIcon />} notify onClick={onTabsConfigChange(leftSideTabs.profile)}>
+      <Menu.Item icon={<UserIcon />} onClick={onTabsConfigChange(leftSideTabs.profile)}>
         Profilul meu
+      </Menu.Item>
+      <Menu.Item icon={<InquiryIcon />} notify onClick={onTabsConfigChange(leftSideTabs.inquiry)}>
+        Anchete
       </Menu.Item>
       <Menu.Item icon={<SupportIcon />}>Suport</Menu.Item>
       <Menu.Item icon={<FAQIcon />}>FAQ</Menu.Item>

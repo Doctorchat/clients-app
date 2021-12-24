@@ -12,7 +12,7 @@ export default function ClientProfileActions() {
   return (
     <Menu>
       <Menu.Item icon={<EditIcon />} onClick={updateTabsConfig(leftSideTabs.editProfile)}>
-        Editeză Profilul
+        Editează Profilul
       </Menu.Item>
       <Menu.Item icon={<TicketIcon />}>Bonusuri</Menu.Item>
       <Menu.Item icon={<HistoryIcon />}>Istoricul</Menu.Item>

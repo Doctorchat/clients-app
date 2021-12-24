@@ -77,6 +77,7 @@ export default function MessageFormMain(props) {
                     icon={<ImageIcon />}
                     accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
                     onFileListUpdate={onFilesListUpdate}
+                    displayList
                   />
                 </Form.Item>
               </div>

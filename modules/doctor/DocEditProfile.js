@@ -8,6 +8,7 @@ import Input, { InputNumber, Textarea } from "@/components/Inputs";
 import Button from "@/components/Button";
 import Select from "@/components/Select";
 import { categoriesOptionsSelector } from "@/store/selectors";
+import Switch from "@/components/Switch";
 
 export default function DocEditProfile() {
   const { user, categories } = useSelector((store) => ({
@@ -61,7 +62,7 @@ export default function DocEditProfile() {
           </Form.Item>
           <div className="d-flex justify-content-between gap-3">
             <Form.Item name="price" label="Prețul">
-              <InputNumber format="decimal" addonBefore="MDL" />
+              <InputNumber readOnly format="decimal" addonBefore="MDL" />
             </Form.Item>
             <Form.Item name="experience" label="Experientă">
               <InputNumber addonBefore="ANI" />

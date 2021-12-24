@@ -13,7 +13,7 @@ export const docSelectListSlice = createSlice({
   name: "selectDocList",
   initialState,
   reducers: {
-    docListTogglePopupVisibility(state, action) {
+    docListToggleVisibility(state, action) {
       state.isOpen = action.payload;
     },
   },
@@ -39,5 +39,5 @@ export const docSelectListSlice = createSlice({
   },
 });
 
-export const { docListTogglePopupVisibility } = docSelectListSlice.actions;
+export const { docListToggleVisibility } = docSelectListSlice.actions;
 export default docSelectListSlice.reducer;

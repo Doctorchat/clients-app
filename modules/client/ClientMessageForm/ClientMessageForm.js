@@ -4,7 +4,7 @@ import MessageFormMain from "./MessageFormMain";
 import MessageFormConfirm from "./MessageFormConfirm";
 import Popup from "@/components/Popup";
 import Tabs from "@/packages/Tabs";
-import { messageFormTogglePopupVisibility } from "@/store/slices/messageFormSlice";
+import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { messageFormTabs } from "@/context/TabsKeys";
 
 export default function ClientMessageForm() {
@@ -22,10 +22,10 @@ export default function ClientMessageForm() {
     []
   );
 
-  const popupVisibilityHandler = (v) => dispatch(messageFormTogglePopupVisibility(v));
+  const VisibilityHandler = (v) => dispatch(messageFormToggleVisibility(v));
 
   return (
-    <Popup id="message-form" visible={isOpen} onVisibleChange={popupVisibilityHandler}>
+    <Popup id="message-form" visible={isOpen} onVisibleChange={VisibilityHandler}>
       <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig}>
         <Tabs.Pane dataKey={messageFormTabs.main} unmountOnExit={false}>
           <MessageFormMain />

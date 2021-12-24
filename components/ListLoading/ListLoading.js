@@ -1,18 +1,20 @@
 import PropTypes from "prop-types";
-import { Children, cloneElement, memo } from "react";
+import { memo } from "react";
 
-const ListLoading = ({ children, itemsCount, className }) => {
+const ListLoading = (props) => {
+  const { itemsCount, className } = props;
+
   return (
     <div className={className}>
-      {Array.from(Array(itemsCount)).map((_, i) =>
-        cloneElement(Children.only(children), { key: `${i}-sklt` })
-      )}
+      {Array.from(Array(itemsCount)).map((_, i) => (
+        <props.skeleton key={`${i}-sklt`} />
+      ))}
     </div>
   );
 };
 
 ListLoading.propTypes = {
-  children: PropTypes.element,
+  skeleton: PropTypes.func,
   itemsCount: PropTypes.number,
   className: PropTypes.string,
 };
