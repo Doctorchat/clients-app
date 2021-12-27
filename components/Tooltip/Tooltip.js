@@ -13,15 +13,15 @@ export default function Tooltip(props) {
   const closeTooltip = () => setIsOpen(false);
 
   return (
-    <div className="tooltip-wrapper" onMouseOver={openTooltip} onMouseLeave={closeTooltip}>
+    <span className="tooltip-wrapper" onMouseOver={openTooltip} onMouseLeave={closeTooltip}>
       {Children.only(children)}
       <CSSTransition in={isOpen} timeout={200} nodeRef={tooltipRef}>
-        <div className={cs("tooltip-overlay", className, placement)} ref={tooltipRef}>
+        <span className={cs("tooltip-overlay d-block", className, placement)} ref={tooltipRef}>
           <AngleIcon />
           {title}
-        </div>
+        </span>
       </CSSTransition>
-    </div>
+    </span>
   );
 }
 
@@ -35,6 +35,7 @@ Tooltip.propTypes = {
     "topCenter",
     "topRight",
     "rightCenter",
+    "leftCenter",
   ]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   children: PropTypes.element,

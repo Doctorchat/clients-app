@@ -5,6 +5,7 @@ import Image from "../Image";
 import { IconBtn } from "../Button";
 import uploadHandler from "./uploadHandler";
 import UploadContext from "./UploadContext";
+import { ADD_FILE } from ".";
 import formatBytes from "@/utils/formatBytes";
 import cs from "@/utils/classNames";
 import documnetPlaceholder from "@/imgs/doc.png";
@@ -19,7 +20,7 @@ export default function UploadFile(props) {
     updateFile,
     className,
   } = props;
-  const { action, displayList } = useContext(UploadContext);
+  const { action, displayList, onFileListUpdate } = useContext(UploadContext);
   const [animationStates, setAnimationStates] = useState({
     placeholder: false,
     file: false,
@@ -54,6 +55,7 @@ export default function UploadFile(props) {
       progress: "100.00",
     };
 
+    onFileListUpdate(ADD_FILE, file);
     updateFile({ config });
   };
 

@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import Sidebar from "@/components/Sidebar";
 import ConversationListHeader from "@/components/ConversationListHeader";
 import ConversationList from "@/components/ConversationList";
@@ -15,7 +16,9 @@ export default function ConversationsSidebar() {
   const { conversationList } = useSelector((store) => ({
     conversationList: store.conversationList,
   }));
+  const router = useRouter();
   const dispatch = useDispatch();
+  const { id } = router.query;
 
   useEffect(() => dispatch(getConversationList()), [dispatch]);
 
@@ -53,7 +56,7 @@ export default function ConversationsSidebar() {
               ),
             }}
           >
-            <ConversationList conversations={conversationList.data} />
+            <ConversationList conversations={conversationList.data} activeConversation={id} />
           </List>
         </div>
       </Sidebar.Body>

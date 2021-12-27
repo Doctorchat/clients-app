@@ -38,7 +38,7 @@ export default function DocInfo(props) {
   );
 
   const selectModeHandler = useCallback(
-    (type) => () => {
+    (type) => {
       if (type === "message") {
         dispatch(messageFormToggleVisibility(true));
       }
@@ -77,11 +77,11 @@ export default function DocInfo(props) {
             </p>
           )}
 
-          <div className="start-conversation d-flex justify-content-end">
+          <div className="start-conversation mt-1 d-flex justify-content-end">
             <Dropdown
-              overlay={<ClientSelectMode onItemClick={selectModeHandler} />}
+              overlay={<ClientSelectMode docId={doctor.id} onSelectMode={selectModeHandler} />}
               overlayClassName="choose-mode-overlay"
-              placement="topLeft"
+              placement="bottomLeft"
             >
               <Button size="sm" className="w-auto">
                 Descrie Problema

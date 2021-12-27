@@ -9,7 +9,7 @@ const initialState = {
   isError: false,
 };
 
-const cacheHanlder = (state, payload) => {
+const cacheHandler = (state, payload) => {
   if (!payload.isCached) {
     if (state.cache.length >= 10) state.cache.shift();
     state.cache.push(payload);
@@ -39,7 +39,7 @@ export const docReviewSlice = createSlice({
         state.data = action.payload;
 
         // Update cache
-        cacheHanlder(state, action.payload);
+        cacheHandler(state, action.payload);
       })
       .addCase(getDocReviews.rejected, (state) => {
         state.isError = true;

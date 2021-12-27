@@ -11,7 +11,20 @@ const initialState = {
 export const conversationListSlice = createSlice({
   name: "conversationList",
   initialState,
-  reducers: {},
+  reducers: {
+    addConversation(state, action) {
+      state.data.push(action.payload);
+    },
+    updateConversation(state, action) {
+      state.data = state.data.map((conversation) => {
+        if (conversation.id === action.payload.id) {
+          return { ...conversation, ...action.payload };
+        }
+
+        return conversation;
+      });
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getConversationList.pending, (state) => {
@@ -34,4 +47,5 @@ export const conversationListSlice = createSlice({
   },
 });
 
+export const { addConversation, updateConversation } = conversationListSlice.actions;
 export default conversationListSlice.reducer;

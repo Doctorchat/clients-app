@@ -96,7 +96,8 @@
   &.pending {
     color: var(--bs-warning);
   }
-  &.declined {
+  &.declined,
+  &.unpaid {
     color: var(--bs-danger);
   }
   svg {

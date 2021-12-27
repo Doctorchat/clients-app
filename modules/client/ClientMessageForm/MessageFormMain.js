@@ -1,20 +1,24 @@
-import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { messageFormSchema } from "@/services/validation";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import { Textarea } from "@/components/Inputs";
-import Upload from "@/components/Upload";
+import Upload, { ADD_FILE, REMOVE_FILE } from "@/components/Upload";
 import { PopupHeader, PopupContent } from "@/components/Popup";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { messageFormTabs } from "@/context/TabsKeys";
 import ImageIcon from "@/icons/file-img.svg";
-import { messageFormSubmit } from "@/store/actions";
+import { messageUploadFile } from "@/store/actions";
+import { notification } from "@/store/slices/notificationsSlice";
+import { messageFormSetConfirmation } from "@/store/slices/messageFormSlice";
 
-export default function MessageFormMain(props) {
+export default function MessageFormMain() {
+  const {
+    messageForm: { values, chatId },
+  } = useSelector((store) => ({ messageForm: store.messageForm }));
   const [loading, setLoading] = useState(false);
   const resolver = useYupValidationResolver(messageFormSchema);
   const form = useForm({ resolver });
@@ -25,10 +29,12 @@ export default function MessageFormMain(props) {
     async (values) => {
       try {
         setLoading(true);
-        await dispatch(messageFormSubmit(values));
+        dispatch(messageFormSetConfirmation(values));
         updateTabsConfig(messageFormTabs.confirm)();
       } catch (error) {
-        console.log(error);
+        dispatch(
+          notification({ type: "error", title: "Eroare", description: "A apărut o eroare" })
+        );
       } finally {
         setLoading(false);
       }
@@ -37,9 +43,9 @@ export default function MessageFormMain(props) {
   );
 
   const onFilesListUpdate = useCallback((actionType) => {
-    if (actionType === 0) {
+    if (actionType === REMOVE_FILE) {
       console.log("doc removed");
-    } else {
+    } else if (actionType === ADD_FILE) {
       console.log("doc added");
     }
   }, []);
@@ -73,6 +79,7 @@ export default function MessageFormMain(props) {
               <div className="message-form-uploads">
                 <Form.Item name="images" label="Adaugă document / imagine">
                   <Upload
+                    action={messageUploadFile(chatId)}
                     description="+15  lei / imagine, investigație de laborator, imagistică, etc"
                     icon={<ImageIcon />}
                     accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
@@ -97,7 +104,3 @@ export default function MessageFormMain(props) {
     </div>
   );
 }
-
-MessageFormMain.propTypes = {};
-
-MessageFormMain.defaultProps = {};

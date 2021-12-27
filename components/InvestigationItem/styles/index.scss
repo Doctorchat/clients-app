@@ -1,0 +1,54 @@
+.investigation-item {
+  padding: 2px;
+  overflow: hidden;
+  border: 1px solid var(--dc-border-color);
+  background-color: var(--bs-gray-100);
+  border-radius: 8px;
+  padding: 2px 8px 10px;
+  &.no-actions {
+    padding-top: 10px;
+    .investigation-item-caption {
+      margin-bottom: 12px;
+    }
+  }
+}
+
+.investigation-item-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  .title {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+}
+
+.investigation-actions {
+  .remove-action {
+    svg {
+      color: var(--bs-danger);
+    }
+  }
+}
+
+.investigation-item-descrp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.descrp-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .value {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .label {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+}

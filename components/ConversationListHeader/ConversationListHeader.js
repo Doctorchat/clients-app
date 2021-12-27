@@ -28,7 +28,7 @@ export default function ConversationListHeader(props) {
     <div className={cs("conversation-list__search", className)}>
       <div className="search-bar_menu-btn">
         <Dropdown overlay={menuOverlay} placement="bottomRight">
-          <IconBtn size="sm" icon={<BarsIcon />} notify />
+          <IconBtn size="sm" icon={<BarsIcon />} />
         </Dropdown>
       </div>
       <div className="search-bar">

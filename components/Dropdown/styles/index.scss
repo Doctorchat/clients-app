@@ -39,6 +39,11 @@
     top: calc(100% + 4px);
     transform-origin: top left;
   }
+  &.bottomLeft {
+    right: 0;
+    top: calc(100% + 4px);
+    transform-origin: top right;
+  }
   &.topLeft {
     right: 0;
     bottom: calc(100% + 4px);

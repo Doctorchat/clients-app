@@ -1,5 +1,5 @@
-import { memo } from "react";
-import { useSelector } from "react-redux";
+import { memo, useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import Button from "@/components/Button";
@@ -8,13 +8,43 @@ import { messageFormTabs } from "@/context/TabsKeys";
 import BackTitle from "@/components/BackTitle";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import Form from "@/components/Form";
+import { notification } from "@/store/slices/notificationsSlice";
+import api from "@/services/axios/api";
+import { updateConversation } from "@/store/slices/conversationListSlice";
 
 function MessageFormConfirmation() {
   const { updateTabsConfig } = useTabsContext();
   const {
-    messageForm: { confirmation },
+    messageForm: { values, chatId },
   } = useSelector((store) => ({ messageForm: store.messageForm }));
+  const [loading, setLoading] = useState(false);
   const form = useForm();
+  const dispatch = useDispatch();
+
+  const onConfirmHandler = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const payload = { ...values, chat_id: chatId };
+      const response = await api.conversation.addMessage(payload);
+      const updatedChatItem = {
+        id: +response.data.chat_id,
+        description: response.data.description,
+        status: response.data.status,
+        updated: response.data.updated,
+      };
+
+      dispatch(updateConversation(updatedChatItem));
+
+      if (response.data.redirect) {
+        window.location.replace(response.data.redirect);
+      }
+    } catch (error) {
+      dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
+    } finally {
+      setLoading(false);
+    }
+  }, [chatId, values, dispatch]);
 
   return (
     <div className="popup-body message-from-confirm">
@@ -32,7 +62,7 @@ function MessageFormConfirmation() {
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">Descriere</th>
-                <td className="dc-description-row-content">{confirmation.content}</td>
+                <td className="dc-description-row-content">{values.content}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">Termeni și condiții</th>
@@ -129,7 +159,9 @@ function MessageFormConfirmation() {
           <Button type="outline" onClick={updateTabsConfig(messageFormTabs.main, "prev")}>
             Înapoi
           </Button>
-          <Button>Confirmă și Achită</Button>
+          <Button onClick={onConfirmHandler} loading={loading}>
+            Confirmă și Achită
+          </Button>
         </div>
       </PopupContent>
     </div>

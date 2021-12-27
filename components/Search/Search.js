@@ -38,7 +38,7 @@ export default function Search(props) {
     updateSearchConfig("list", searchResult);
   }, [input, updateSearchConfig]);
 
-  const searchHanlder = useCallback(() => {
+  const searchHandler = useCallback(() => {
     if (!input || !input.length) onBlur();
 
     if (input.length > 0) {
@@ -51,7 +51,7 @@ export default function Search(props) {
     } else updateSearchConfig("active", false);
   }, [apiSearch, input, localSearch, onBlur, request, updateSearchConfig]);
 
-  const debouncedSearch = useDebounce(searchHanlder, 300, {
+  const debouncedSearch = useDebounce(searchHandler, 300, {
     maxWait: 600,
   });
 

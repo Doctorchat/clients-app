@@ -3,7 +3,7 @@ export const epidemiologicalOptions = [
   { value: "2", label: "Tuberculoză" },
   { value: "3", label: "Boli sexual-transmisibile" },
   { value: "4", label: "Infecțiile virale sezoniere(SARS COV-2, Gripa)" },
-  { value: "-1", label: "Nu am suportat" },
+  { value: "5", label: "Nu am suportat" },
 ];
 
 export const diseasesOptions = [

@@ -11,7 +11,7 @@ import { IconBtn } from "@/components/Button";
 import PlusIcon from "@/icons/plus.svg";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 import { DocAppointmentsSettings, DocReviewsSidebar } from "@/modules/doctor";
-import { ClientInquiryList } from "@/modules/client";
+import { ClientInvestigationsList } from "@/modules/client";
 
 export default function LeftSide() {
   const [tabsConfig, setTabsConfig] = useState({ key: leftSideTabs.conversationList, dir: "next" });
@@ -41,8 +41,8 @@ export default function LeftSide() {
         </Tabs.Pane>
         <AuthRoleWrapper roles={[userRoles.get("client")]}>
           <>
-            <Tabs.Pane dataKey={leftSideTabs.inquiry}>
-              <ClientInquiryList />
+            <Tabs.Pane dataKey={leftSideTabs.investigations}>
+              <ClientInvestigationsList />
             </Tabs.Pane>
           </>
         </AuthRoleWrapper>

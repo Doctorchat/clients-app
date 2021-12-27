@@ -3,3 +3,5 @@ export const userRoles = new Map([
   ["doctor", 2],
   ["client", 3],
 ]);
+
+export const CHAT_TYPES = { standard: "standard", auto: "auto", consilium: "consilium" };

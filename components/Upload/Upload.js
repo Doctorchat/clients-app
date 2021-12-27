@@ -39,8 +39,6 @@ const Upload = forwardRef((props, ref) => {
         ext: files[i].name.split(".").at(-1),
         type: files[i].type,
         originaFileObj: files[i],
-        uploading: false,
-        error: fileError,
         config: {
           error: fileError,
           progress: "0.00",
@@ -126,21 +124,19 @@ const Upload = forwardRef((props, ref) => {
         {label && <label className="upload-label">{label}</label>}
         {description && <span className="upload-descrp">{description}</span>}
       </div>
-      {displayList && (
-        <div className="upload-list">
-          <UploadContext.Provider value={{ action, displayList }}>
-            {fileList.map((file) => (
-              <UploadFile
-                key={file.id}
-                className={fileItemClassName}
-                file={file}
-                removeFile={removeFileHandler(file.id)}
-                updateFile={updateFileHandler(file.id)}
-              />
-            ))}
-          </UploadContext.Provider>
-        </div>
-      )}
+      <div className="upload-list">
+        <UploadContext.Provider value={{ action, displayList, onFileListUpdate }}>
+          {fileList.map((file) => (
+            <UploadFile
+              key={file.id}
+              className={fileItemClassName}
+              file={file}
+              removeFile={removeFileHandler(file.id)}
+              updateFile={updateFileHandler(file.id)}
+            />
+          ))}
+        </UploadContext.Provider>
+      </div>
       <input
         type="file"
         id={name}

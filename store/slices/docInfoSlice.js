@@ -10,7 +10,7 @@ const initialState = {
   isError: false,
 };
 
-const cacheHanlder = (state, payload) => {
+const cacheHandler = (state, payload) => {
   if (!payload.isCached) {
     if (state.cache.length >= 15) state.cache.shift();
     state.cache.push(payload);
@@ -47,7 +47,7 @@ export const docInfoSlice = createSlice({
         state.temp = {};
 
         // Update cache
-        cacheHanlder(state, action.payload);
+        cacheHandler(state, action.payload);
       })
       .addCase(getInfo.rejected, (state) => {
         state.isError = true;

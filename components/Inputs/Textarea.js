@@ -43,6 +43,7 @@ const Textarea = forwardRef((props, ref) => {
       };
 
       node.style.minHeight = `${node.scrollHeight}px`;
+      node.style.height = `${node.scrollHeight}px`;
       node.addEventListener("input", adjustHeight);
       ref(textareaRef.current);
     }

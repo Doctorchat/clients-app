@@ -1,7 +1,7 @@
 import { number } from "yup";
 import { string, object } from "yup";
 
-const inquiryFormSchema = object().shape({
+const investigationFormSchema = object().shape({
   age: number().min(0).required(),
   weight: number().min(0).required(),
   height: number().min(0).required(),
@@ -14,4 +14,4 @@ const inquiryFormSchema = object().shape({
   allergies_spec: string().required(),
 });
 
-export default inquiryFormSchema;
+export default investigationFormSchema;

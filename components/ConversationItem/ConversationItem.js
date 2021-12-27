@@ -7,6 +7,7 @@ import ClockIcon from "@/icons/clock.svg";
 import HistoryIcon from "@/icons/history.svg";
 import BanIcon from "@/icons/ban.svg";
 import CheckIcon from "@/icons/check.svg";
+import WarnIcon from "@/icons/warning.svg";
 
 const ticketStatuses = {
   pending: {
@@ -24,6 +25,10 @@ const ticketStatuses = {
   responded: {
     icon: <CheckIcon />,
     report: "Răspuns primit",
+  },
+  unpaid: {
+    icon: <WarnIcon />,
+    report: "Achitare",
   },
 };
 
@@ -63,10 +68,10 @@ ConversationItem.propTypes = {
   conversation: PropTypes.shape({
     isOnline: PropTypes.bool,
     fullName: PropTypes.string,
-    description: PropTypes.object,
+    description: PropTypes.string,
     updated: PropTypes.string,
     avatar: PropTypes.string,
-    status: PropTypes.oneOf(["pending", "declined", "responded", "closed"]),
+    status: PropTypes.oneOf(["pending", "declined", "responded", "closed", "unpaid"]),
     unread: PropTypes.number,
   }),
   isSelected: PropTypes.bool,

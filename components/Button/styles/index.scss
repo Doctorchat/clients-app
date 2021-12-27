@@ -92,6 +92,18 @@
   }
 }
 
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  transform: translateY(-1px);
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
 // Sizes
 .dc-btn-md {
   padding: 8px 12px;
@@ -102,6 +114,7 @@
   padding: 4px 10px;
   min-height: 32px;
   min-width: 92px;
+  border-radius: 8px;
 }
 
 // Types
@@ -152,6 +165,17 @@
   }
   &:focus {
     background-color: var(--bs-gray-300);
+  }
+}
+
+.dc-btn-danger {
+  color: #fff;
+  background-color: var(--bs-danger);
+  &:hover {
+    background-color: darken(#dc3545, 7)
+  }
+  svg {
+    color: #fff;
   }
 }
 

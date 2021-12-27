@@ -15,8 +15,8 @@ const ClientStartConversation = dynamic(() =>
 const ClientMessageForm = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientMessageForm)
 );
-const ClientInquiryForm = dynamic(() =>
-  import("@/modules/client").then((response) => response.ClientInquiryForm)
+const ClientInvestigationForm = dynamic(() =>
+  import("@/modules/client").then((response) => response.ClientInvestigationForm)
 );
 
 export default function MainLayout({ children }) {
@@ -30,7 +30,7 @@ export default function MainLayout({ children }) {
         <Portal portalName="modalRoot">
           <ClientStartConversation />
           <ClientMessageForm />
-          <ClientInquiryForm />
+          <ClientInvestigationForm />
         </Portal>
       </AuthRoleWrapper>
       <div id="chat-columns">

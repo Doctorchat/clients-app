@@ -22,10 +22,10 @@ export default function ClientMessageForm() {
     []
   );
 
-  const VisibilityHandler = (v) => dispatch(messageFormToggleVisibility(v));
+  const visibilityHandler = (v) => dispatch(messageFormToggleVisibility(v));
 
   return (
-    <Popup id="message-form" visible={isOpen} onVisibleChange={VisibilityHandler}>
+    <Popup id="message-form" visible={isOpen} onVisibleChange={visibilityHandler}>
       <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig}>
         <Tabs.Pane dataKey={messageFormTabs.main} unmountOnExit={false}>
           <MessageFormMain />

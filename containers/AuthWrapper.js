@@ -8,6 +8,7 @@ import FullPageLoading from "@/components/FullPageLoading";
 export default function AuthWrapper(props) {
   const { children } = props;
   const [isLoading, setLoading] = useState(true);
+  const [fetching, setFetching] = useState(false);
   const user = useSelector((store) => store.user);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -31,11 +32,12 @@ export default function AuthWrapper(props) {
 
   useEffect(() => {
     if (localStorage.getItem("dc_token")) {
-      if (!user?.id) {
+      if (!user.data?.id && !fetching) {
+        setFetching(true);
         fetchUser();
       }
     } else redirectToLogin();
-  }, [dispatch, fetchUser, redirectToLogin, user?.id]);
+  }, [dispatch, fetchUser, fetching, redirectToLogin, user.data?.id]);
 
   if (isLoading) {
     return <FullPageLoading />;

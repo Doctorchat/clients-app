@@ -6,3 +6,11 @@
     max-height: -webkit-fill-available;
   }
 }
+
+@media only screen and (max-height: 800px) {
+  #select-doc {
+    .popup-body {
+      height: 100vh;
+    }
+  }
+}

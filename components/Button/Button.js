@@ -7,6 +7,7 @@ import cs from "@/utils/classNames";
 const typeClassNames = {
   primary: "dc-btn-primary",
   outline: "dc-btn-outline",
+  danger: "dc-btn-danger",
 };
 
 const sizeClassName = {
@@ -37,7 +38,7 @@ export default function Button(props) {
       {...rest}
     >
       <span className="dc-btn-content">
-        {icon && <span className="co-btn-icon">{icon}</span>}
+        {icon && <span className="btn-icon">{icon}</span>}
         <span>{children}</span>
       </span>
       <CSSTransition in={loading} timeout={200} nodeRef={btnSpinner} unmountOnExit>
@@ -55,7 +56,7 @@ Button.propTypes = {
   className: PropTypes.string,
   htmlType: PropTypes.oneOf(["submit", "reset", "button"]),
   size: PropTypes.oneOf(["sm", "md", "lg"]),
-  type: PropTypes.oneOf(["primary", "outline"]),
+  type: PropTypes.oneOf(["primary", "outline", "danger"]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   onClick: PropTypes.func,

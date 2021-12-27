@@ -17,7 +17,7 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
   const { closeDropdown } = useDropdownContext();
   const dispatch = useDispatch();
 
-  const logoutHanlder = () => dispatch(logoutUser());
+  const logoutHandler = () => dispatch(logoutUser());
   const updateUserGuardStatus = useCallback(() => {
     setIsGuard(!isGuard);
   }, [isGuard]);
@@ -48,7 +48,7 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
         />
       </Menu.Item>
       <Menu.Item icon={<FAQIcon />}>FAQ</Menu.Item>
-      <Menu.Item icon={<LogoutIcon />} className="logout-item" onClick={logoutHanlder}>
+      <Menu.Item icon={<LogoutIcon />} className="logout-item" onClick={logoutHandler}>
         Deconectare
       </Menu.Item>
     </Menu>

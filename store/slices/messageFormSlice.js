@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { messageFormSubmit } from "../actions";
 
 const initialState = {
   isOpen: false,
-  confirmation: {},
+  values: {},
+  chatId: null,
+  prevChatId: null,
 };
 
 export const messageFormSlice = createSlice({
@@ -13,13 +14,34 @@ export const messageFormSlice = createSlice({
     messageFormToggleVisibility(state, action) {
       state.isOpen = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(messageFormSubmit.fulfilled, (state, action) => {
-      state.confirmation = action.payload;
-    });
+    messageFormUpdateChatId(state, action) {
+      if (action.payload !== state.prevChatId) {
+        state.values = {};
+      }
+
+      state.chatId = action.payload;
+      state.prevChatId = action.payload;
+    },
+    messageFormSetConfirmation(state, action) {
+      state.values = action.payload;
+    },
+    messageFormUpdateProperty(state, action) {
+      const properties = action.payload;
+      properties.forEach((prop) => (state.values[prop.name] = prop.value));
+    },
+    messageFormReset(state) {
+      state.isOpen = false;
+      state.values = {};
+      state.prevChatId = null;
+      state.chatId = null;
+    },
   },
 });
 
-export const { messageFormToggleVisibility } = messageFormSlice.actions;
+export const {
+  messageFormToggleVisibility,
+  messageFormSetConfirmation,
+  messageFormUpdateProperty,
+  messageFormUpdateChatId,
+} = messageFormSlice.actions;
 export default messageFormSlice.reducer;

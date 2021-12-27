@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import Popup from "@/components/Popup";
-import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
+import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
 import Form from "@/components/Form";
 import Input, { InputNumber, Textarea } from "@/components/Inputs";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { inquiryFormSchema } from "@/services/validation";
+import { investigationFormSchema } from "@/services/validation";
 import Select from "@/components/Select";
 import {
   allergiesOptions,
@@ -13,23 +14,32 @@ import {
   epidemiologicalOptions,
 } from "@/context/staticSelectOpts";
 import Button from "@/components/Button";
-import { inquiryFormToggleVisibility } from "@/store/slices/inquiryFormSlice";
 
-export default function ClientInquiryForm() {
+export default function ClientInvestigationForm() {
   const { isOpen } = useSelector((store) => ({
-    isOpen: store.inquiryForm.isOpen,
+    isOpen: store.investigationForm.isOpen,
   }));
-  const resolver = useYupValidationResolver(inquiryFormSchema);
+  const resolver = useYupValidationResolver(investigationFormSchema);
   const form = useForm({ resolver });
   const dispatch = useDispatch();
 
-  const visibilityHandler = (v) => dispatch(inquiryFormToggleVisibility(v));
+  const visibilityHandler = (v) => dispatch(investigationFormToggleVisibility(v));
+
+  const onSubmitHandler = useCallback((values) => {
+    const data = { ...values };
+
+    data.allergies = data.allergies.value;
+    data.diseases = data.diseases.value;
+    data.epidemiological = data.epidemiological.value;
+
+    console.log(data);
+  }, []);
 
   return (
-    <Popup id="inquiry-form" visible={isOpen} onVisibleChange={visibilityHandler}>
+    <Popup id="investigation-form" visible={isOpen} onVisibleChange={visibilityHandler}>
       <Popup.Header title="Adaugă o anchetă" />
       <Popup.Content>
-        <Form methods={form} name="add-inquiry" onFinish={(values) => console.log(values)}>
+        <Form methods={form} name="add-investigation" onFinish={onSubmitHandler}>
           <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
             <Form.Item className="w-100" label="Vârsta" name="age">
               <InputNumber />

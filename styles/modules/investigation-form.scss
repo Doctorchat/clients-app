@@ -1,4 +1,4 @@
-#inquiry-form {
+#investigation-form {
   .popup-body {
     width: 600px;
     height: 733px;
@@ -10,12 +10,12 @@
   }
 }
 
-#add-inquiry {
+#add-investigation {
   padding: 8px 4px 8px 0;
 }
 
 @media only screen and (max-width: 576px) {
-  #add-inquiry {
+  #add-investigation {
     .flex-group {
       gap: 0 !important;
     }

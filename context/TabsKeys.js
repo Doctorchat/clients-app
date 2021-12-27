@@ -4,7 +4,7 @@ export const leftSideTabs = {
   editProfile: "user-edit-profile",
   appointments: "doc-appointments-settings",
   reviews: "doc-reviews-list",
-  inquiry: "user-inquiry-list",
+  investigations: "user-investigations-list",
 };
 
 export const startConversationTabs = {
@@ -21,4 +21,10 @@ export const docInfoTabs = {
 export const messageFormTabs = {
   main: "message-from-main",
   confirm: "message-form-confirm",
+};
+
+export const selectModeTabs = {
+  choose: "choose-mode-tab",
+  configureMeet: "configure-meet-tab",
+  configureMessage: "configure-message-tab",
 };
