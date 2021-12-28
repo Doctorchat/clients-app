@@ -15,6 +15,7 @@ import ShieldIcon from "@/icons/shield.svg";
 import { docInfoTabs } from "@/context/TabsKeys";
 import { ClientSelectMode } from "@/modules/client";
 import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
+import { meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 
 export default function DocInfo(props) {
   const { doctor, scrollableContainer, loading } = props;
@@ -41,6 +42,8 @@ export default function DocInfo(props) {
     (type) => {
       if (type === "message") {
         dispatch(messageFormToggleVisibility(true));
+      } else if (type === "meet") {
+        dispatch(meetFormToggleVisibility(true));
       }
     },
     [dispatch]

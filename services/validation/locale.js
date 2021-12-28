@@ -7,10 +7,10 @@ setLocale({
       let typeMsg = "";
 
       if (type === "number") {
-        typeMsg = "întroduceți un număr";
+        typeMsg = ", întroduceți un număr";
       }
 
-      return `Format invalid, ${typeMsg}`;
+      return `Format invalid ${typeMsg}`;
     },
   },
   string: {

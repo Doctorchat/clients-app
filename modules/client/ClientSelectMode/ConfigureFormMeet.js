@@ -11,7 +11,7 @@ import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { addConversation } from "@/store/slices/conversationListSlice";
 import { CHAT_TYPES } from "@/context/constants";
-import { messageFormUpdateChatId } from "@/store/slices/messageFormSlice";
+import { meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { configureFormSchema } from "@/services/validation";
 
@@ -35,7 +35,7 @@ export default function ConfigureFormMeet() {
         const response = await api.conversation.create(data);
 
         dispatch(addConversation(response.data));
-        dispatch(messageFormUpdateChatId(response.data.id));
+        dispatch(meetFormUpdateChatId(response.data.id));
 
         onSelectMode("meet");
       } catch (error) {
