@@ -4,20 +4,20 @@ import { useForm } from "react-hook-form";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import Button from "@/components/Button";
 import Input from "@/components/Inputs";
-import { messageFormTabs } from "@/context/TabsKeys";
+import { meetFormTabs } from "@/context/TabsKeys";
 import BackTitle from "@/components/BackTitle";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import Form from "@/components/Form";
 import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
-import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
+import { meetFormReset, meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 
-function MessageFormConfirmation() {
+function MeetFormConfirm() {
   const { updateTabsConfig } = useTabsContext();
   const {
-    messageForm: { values, chatId },
-  } = useSelector((store) => ({ messageForm: store.messageForm }));
+    meetForm: { values, chatId },
+  } = useSelector((store) => ({ meetForm: store.meetForm }));
   const [loading, setLoading] = useState(false);
   const form = useForm();
   const dispatch = useDispatch();
@@ -40,8 +40,8 @@ function MessageFormConfirmation() {
       if (response.data.redirect) {
         window.location.replace(response.data.redirect);
       } else {
-        dispatch(messageFormToggleVisibility(false));
-        dispatch(messageFormReset());
+        dispatch(meetFormToggleVisibility(false));
+        dispatch(meetFormReset());
       }
     } catch (error) {
       dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
@@ -54,7 +54,7 @@ function MessageFormConfirmation() {
     <div className="popup-body message-from-confirm">
       <PopupHeader
         title={
-          <BackTitle title="Confirmare" onBack={updateTabsConfig(messageFormTabs.main, "prev")} />
+          <BackTitle title="Confirmare" onBack={updateTabsConfig(meetFormTabs.main, "prev")} />
         }
       />
       <PopupContent>
@@ -69,6 +69,10 @@ function MessageFormConfirmation() {
                 <td className="dc-description-row-content">{values.content}</td>
               </tr>
               <tr className="dc-description-row">
+                <th className="dc-description-row-label">Data și ora</th>
+                <td className="dc-description-row-content">{`${values.date} ${values.time}`}</td>
+              </tr>
+              <tr className="dc-description-row">
                 <th className="dc-description-row-label">Termeni și condiții</th>
                 <td className="dc-description-row-content">
                   <a href="/terms-and-conditions" target="_blank">
@@ -79,10 +83,6 @@ function MessageFormConfirmation() {
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">Prețul</th>
                 <td className="dc-description-row-content">185 Lei</td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">Fișiere(0)</th>
-                <td className="dc-description-row-content">+0 Lei</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">Subtotal</th>
@@ -160,16 +160,14 @@ function MessageFormConfirmation() {
           </table>
         </div>
         <div className="confirmation-actions">
-          <Button type="outline" onClick={updateTabsConfig(messageFormTabs.main, "prev")}>
+          <Button type="outline" onClick={updateTabsConfig(meetFormTabs.main, "prev")}>
             Înapoi
           </Button>
-          <Button onClick={onConfirmHandler} loading={loading}>
-            Confirmă și Achită
-          </Button>
+          <Button loading={loading}>Confirmă și Achită</Button>
         </div>
       </PopupContent>
     </div>
   );
 }
 
-export default memo(MessageFormConfirmation);
+export default memo(MeetFormConfirm);

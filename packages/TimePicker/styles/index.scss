@@ -25,28 +25,6 @@
         cursor: auto;
       }
     }
-    .dc-picker-icon {
-      min-width: 18px;
-      height: 18px;
-      background-color: #fff;
-      margin-left: 4px;
-      background-color: var(--bs-gray-300);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      svg {
-        width: 14px;
-        height: 14px;
-      }
-    }
-    .ant-picker-clear {
-      margin-right: 4px;
-      right: 8px;
-    }
-    .dc-picker-suffix {
-      background-color: #fff;
-    }
   }
   &.ant-picker-md {
     min-height: 47px;
@@ -58,19 +36,36 @@
   .ant-picker-panel-container {
     border-radius: 10px;
     box-shadow: 0px 2px 8px 1px rgb(0 0 0 / 24%);
-    min-width: 180px;
-  }
-  .ant-picker-footer {
-    display: none;
   }
   .ant-picker-time-panel-column {
-    width: 100%;
-  }
-  .ant-picker-content {
     min-width: 90px;
   }
 }
 
 .ant-picker-range .ant-picker-active-bar {
   background-color: var(--bs-primary);
+}
+
+.ant-picker-footer {
+  .ant-picker-ok {
+    .ant-btn {
+      background-color: var(--bs-primary);
+      border-radius: 8px;
+      min-width: 64px;
+      &:disabled {
+        background-color: var(--bs-gray-200);
+      }
+      & > span {
+        font-size: 0;
+        &::after {
+          font-size: 14px;
+          content: "Aplică";
+        }
+      }
+    }
+  }
+}
+
+.ant-picker-ranges {
+  padding: 0 8px;
 }

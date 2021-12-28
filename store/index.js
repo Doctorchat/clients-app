@@ -12,5 +12,7 @@ export const store = configureStore({
     docReviews: slices.docReviewsSlice,
     bootstrap: slices.bootstrapSlice,
     investigationForm: slices.investigationFormSlice,
+    transactionsList: slices.transactionsListSlice,
+    meetForm: slices.meetFormSlice,
   },
 });

@@ -6,7 +6,6 @@ import BackTitle from "@/components/BackTitle";
 import { selectModeTabs } from "@/context/TabsKeys";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import Form from "@/components/Form";
-import Switch from "@/components/Switch";
 import Button from "@/components/Button";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
@@ -16,7 +15,7 @@ import { messageFormUpdateChatId } from "@/store/slices/messageFormSlice";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { configureFormSchema } from "@/services/validation";
 
-export default function ConfigureFormMessage() {
+export default function ConfigureFormMeet() {
   const { updateTabsConfig, docId, onSelectMode } = useTabsContext();
   const [loading, setLoading] = useState(false);
   const resolver = useYupValidationResolver(configureFormSchema);
@@ -38,7 +37,7 @@ export default function ConfigureFormMessage() {
         dispatch(addConversation(response.data));
         dispatch(messageFormUpdateChatId(response.data.id));
 
-        onSelectMode("message");
+        onSelectMode("meet");
       } catch (error) {
         dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
       } finally {
@@ -49,17 +48,14 @@ export default function ConfigureFormMessage() {
   );
 
   return (
-    <div className="configure-form-message px-1">
+    <div className="configure-form-meet px-1">
       <BackTitle
         className="configure-form-title"
-        title="Mesaj simplu"
+        title="Online meet"
         onBack={updateTabsConfig(selectModeTabs.choose, "prev")}
       />
       <Form methods={form} onFinish={onFormSubmit}>
         <SelectModeInvestigations />
-        <Form.Item name="isAnonym" label="Doresc Anonimitate">
-          <Switch />
-        </Form.Item>
         <Button htmlType="submit" size="sm" loading={loading}>
           Continuă
         </Button>

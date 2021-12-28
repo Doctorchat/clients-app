@@ -4,5 +4,15 @@ import registerSchema from "./schemas/registerSchema";
 import editProfileSchema from "./schemas/editProfileSchema";
 import messageFormSchema from "./schemas/messageFormSchema";
 import investigationFormSchema from "./schemas/investigationFormSchema";
+import configureFormSchema from "./schemas/configureFormSchema";
+import meetFormSchema from "./schemas/meetFormSchema";
 
-export { loginSchema, registerSchema, editProfileSchema, messageFormSchema, investigationFormSchema };
+export {
+  loginSchema,
+  registerSchema,
+  editProfileSchema,
+  messageFormSchema,
+  investigationFormSchema,
+  configureFormSchema,
+  meetFormSchema,
+};

@@ -9,3 +9,5 @@ export const DOC_REVIEWS_GET = "docInfo/getReview";
 export const DOC_LIST_GET = "selectDocList/get";
 
 export const MESSAGE_FORM_SUBMIT = "messageForm/submit";
+
+export const TRANSACTIONS_LIST_GET = "transactionsList/get";

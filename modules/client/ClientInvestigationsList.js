@@ -48,7 +48,7 @@ export default function ClientInvestigationsList() {
             errorConfig={{ disabled: true }}
             emptyConfig={{
               status: !user.data.investigations,
-              className: "pt-3",
+              className: "pt-4",
               content: "Aici va apărea lista de anchete",
               extra: (
                 <Button className="mt-3" onClick={openInvestigationForm}>

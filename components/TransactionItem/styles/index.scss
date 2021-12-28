@@ -1,0 +1,133 @@
+.transaction-item {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+  cursor: default;
+}
+
+.transaction-caption {
+  flex: 1;
+}
+
+.transaction-category {
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: rgba(#cbd3df, 0.3);
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+  &.meet {
+    color: var(--dc-meet-color);
+  }
+  &.message {
+    color: var(--bs-primary);
+  }
+}
+
+.transaction-title,
+.transaction-subtitle {
+  height: 27px;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.transaction-title {
+  .dc-btn {
+    width: unset;
+    padding: 0 10px;
+  }
+}
+
+.transaction-subtitle {
+  color: var(--bs-gray-700);
+}
+
+.transaction-sum {
+  &.outgoing {
+    color: var(--bs-gray-600);
+  }
+  &.incoming {
+    color: var(--bs-success);
+  }
+}
+
+.transaction-caption {
+  padding: 0 8px;
+  width: 100%;
+  span {
+    line-height: 27px;
+  }
+}
+
+.transaction-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+  }
+  &.success {
+    color: var(--bs-success);
+  }
+  &.pending {
+    color: var(--bs-warning);
+  }
+  &.cancel {
+    color: var(--bs-danger);
+  }
+}
+
+.transaction-date {
+  font-size: 14px;
+}
+
+.transaction-item.skeleton {
+  pointer-events: none;
+
+  .transaction-category,
+  .category-title,
+  .transaction-sum,
+  .transaction-subtitle {
+    @include skeleton-loading;
+  }
+
+  .transaction-subtitle,
+  .category-title,
+  .transaction-sum {
+    height: 16px;
+    line-height: 16px;
+    border-radius: 4px;
+  }
+
+  .transaction-title {
+    margin-bottom: 4px;
+  }
+
+  .category-title {
+    width: 80px;
+  }
+
+  .transaction-sum {
+    width: 60px;
+  }
+
+  .transaction-subtitle {
+    width: 65%;
+  }
+}

@@ -1,16 +1,25 @@
 .form-control {
   position: relative;
   margin-bottom: 20px;
-  // margin-top: 4px;
   &.invalid {
     .form-control-label {
       color: #dc3545;
     }
     .dc-input,
-    .dc-textarea {
+    .dc-textarea,
+    .ant-picker.dc-picker.ant-picker-focused {
       border-color: var(--bs-danger);
       &:focus {
         box-shadow: 0 0 0 0.2rem rgba(#dc3545, 0.2);
+      }
+    }
+    .ant-picker.dc-picker.ant-picker-focused {
+      box-shadow: 0 0 0 0.2rem rgba(#dc3545, 0.2);
+    }
+    .ant-picker.dc-picker {
+      border-color: var(--bs-danger);
+      &:hover {
+        border-color: var(--bs-danger);
       }
     }
     .react-select-container {

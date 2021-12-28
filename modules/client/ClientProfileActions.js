@@ -15,7 +15,9 @@ export default function ClientProfileActions() {
         Editează Profilul
       </Menu.Item>
       <Menu.Item icon={<TicketIcon />}>Bonusuri</Menu.Item>
-      <Menu.Item icon={<HistoryIcon />}>Istoricul</Menu.Item>
+      <Menu.Item icon={<HistoryIcon />} onClick={updateTabsConfig(leftSideTabs.transactions)}>
+        Istoricul
+      </Menu.Item>
       <Menu.Item icon={<LangIcon />}>Limba</Menu.Item>
     </Menu>
   );

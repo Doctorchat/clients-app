@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isOpen: false,
+  isOpen: true,
   values: {},
   chatId: null,
   prevChatId: null,
 };
 
-export const messageFormSlice = createSlice({
-  name: "messageForm",
+export const meetFormSlice = createSlice({
+  name: "meetForm",
   initialState,
   reducers: {
-    messageFormToggleVisibility(state, action) {
+    meetFormToggleVisibility(state, action) {
       state.isOpen = action.payload;
     },
-    messageFormUpdateChatId(state, action) {
+    meetFormUpdateChatId(state, action) {
       if (action.payload !== state.prevChatId) {
         state.values = {};
       }
@@ -22,10 +22,10 @@ export const messageFormSlice = createSlice({
       state.chatId = action.payload;
       state.prevChatId = action.payload;
     },
-    messageFormSetConfirmation(state, action) {
+    meetFormSetConfirmation(state, action) {
       state.values = action.payload;
     },
-    messageFormReset(state) {
+    meetFormReset(state) {
       state.isOpen = false;
       state.values = {};
       state.prevChatId = null;
@@ -35,9 +35,9 @@ export const messageFormSlice = createSlice({
 });
 
 export const {
-  messageFormToggleVisibility,
-  messageFormSetConfirmation,
-  messageFormUpdateChatId,
-  messageFormReset,
-} = messageFormSlice.actions;
-export default messageFormSlice.reducer;
+  meetFormToggleVisibility,
+  meetFormSetConfirmation,
+  meetFormUpdateChatId,
+  meetFormReset,
+} = meetFormSlice.actions;
+export default meetFormSlice.reducer;

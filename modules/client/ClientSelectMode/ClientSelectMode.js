@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
-import { memo, useCallback, useRef, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import SelectModeOptions from "./SelectModeOptions";
 import ConfigureFormMessage from "./ConfigureFormMessage";
+import ConfigureFormMeet from "./ConfigureFormMeet";
 import { selectModeTabs } from "@/context/TabsKeys";
 import Tabs from "@/packages/Tabs";
 
@@ -9,7 +10,6 @@ function ClientSelectMode(props) {
   const { onSelectMode, docId } = props;
   const [tabsConfig, setTabsConfig] = useState({ key: selectModeTabs.choose, dir: "next" });
   const [tabsHeight, setTabsHeight] = useState(68);
-  const configureMessageRef = useRef();
 
   const updateTabsHeight = (selector) => () => {
     if (!selector) {
@@ -28,6 +28,8 @@ function ClientSelectMode(props) {
 
         if (key === selectModeTabs.configureMessage) {
           selector = ".configure-form-message";
+        } else if (key === selectModeTabs.configureMeet) {
+          selector = ".configure-form-meet";
         }
 
         setTabsConfig({ key, dir });
@@ -48,7 +50,10 @@ function ClientSelectMode(props) {
         <SelectModeOptions />
       </Tabs.Pane>
       <Tabs.Pane className="configure-form" dataKey={selectModeTabs.configureMessage}>
-        <ConfigureFormMessage ref={configureMessageRef} />
+        <ConfigureFormMessage />
+      </Tabs.Pane>
+      <Tabs.Pane className="configure-form" dataKey={selectModeTabs.configureMeet}>
+        <ConfigureFormMeet />
       </Tabs.Pane>
     </Tabs>
   );

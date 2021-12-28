@@ -1,8 +1,10 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import dynamic from "next/dynamic";
 import ConversationsSidebar from "../ConversationsSidebar";
 import ProfileSidebar from "../ProfileSidebar";
 import EditProflie from "../EditProfile";
+import TransactionsList from "../TransactionsList";
 import Tabs from "@/packages/Tabs";
 import { leftSideTabs } from "@/context/TabsKeys";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
@@ -10,8 +12,16 @@ import { userRoles } from "@/context/constants";
 import { IconBtn } from "@/components/Button";
 import PlusIcon from "@/icons/plus.svg";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
-import { DocAppointmentsSettings, DocReviewsSidebar } from "@/modules/doctor";
-import { ClientInvestigationsList } from "@/modules/client";
+
+const ClientInvestigationsList = dynamic(() =>
+  import("@/modules/client").then((response) => response.ClientInvestigationsList)
+);
+const DocAppointmentsSettings = dynamic(() =>
+  import("@/modules/doctor").then((response) => response.DocAppointmentsSettings)
+);
+const DocReviewsSidebar = dynamic(() =>
+  import("@/modules/doctor").then((response) => response.DocReviewsSidebar)
+);
 
 export default function LeftSide() {
   const [tabsConfig, setTabsConfig] = useState({ key: leftSideTabs.conversationList, dir: "next" });
@@ -38,6 +48,9 @@ export default function LeftSide() {
         </Tabs.Pane>
         <Tabs.Pane dataKey={leftSideTabs.editProfile}>
           <EditProflie />
+        </Tabs.Pane>
+        <Tabs.Pane dataKey={leftSideTabs.transactions}>
+          <TransactionsList />
         </Tabs.Pane>
         <AuthRoleWrapper roles={[userRoles.get("client")]}>
           <>

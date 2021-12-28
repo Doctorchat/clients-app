@@ -57,7 +57,7 @@ export default function DocInfo(props) {
             <span className="name">{doctor.fullName}</span>
             <span className="doc-title-tag new">Nou</span>
             {!doctor.isGuard && (
-              <Tooltip title="Medic de gardă" placement="rightCenter">
+              <Tooltip title="Medic de gardă" placement="bottomCenter">
                 <span className="doc-tag guard">
                   <ShieldIcon />
                 </span>

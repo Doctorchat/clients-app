@@ -1,11 +1,11 @@
-import dayjs from "dayjs";
+import moment from "moment";
 
 export default function getMomentTime(range) {
   const transformToMomentTime = (time) => {
     if (!time) return null;
 
     const [hours, minutes] = time.split(":").map(Number);
-    return dayjs().hour(hours).minute(minutes);
+    return moment().hour(hours).minute(minutes);
   };
 
   if (typeof range === "string") {

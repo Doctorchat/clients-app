@@ -61,7 +61,7 @@
 // _T_ :: Tabs Animations
 
 .tabs-pane {
-  .tab-exit-animated {
+  &.tab-exit-animated {
     display: none !important;
   }
 }

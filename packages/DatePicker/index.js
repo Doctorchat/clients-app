@@ -1,15 +1,16 @@
 import PropTypes from "prop-types";
 import { forwardRef, useCallback, useEffect, useState } from "react";
-import TP from "antd/lib/time-picker";
-import getMomentTime from "./getMomentTime";
+import DP from "antd/lib/date-picker";
+import getMomentDate from "./getMomentDate";
 import cs from "@/utils/classNames";
+import TimesIcon from "@/icons/times.svg";
 
-const TimePicker = forwardRef((props, ref) => {
+const DatePicker = forwardRef((props, ref) => {
   const { className, disabled, size, label, name, value, onChange, type, ...rest } = props;
   const [momentVal, setMomentVal] = useState(value);
 
   useEffect(() => {
-    setMomentVal(getMomentTime(value));
+    setMomentVal(getMomentDate(value));
   }, [value]);
 
   const onChangeHandler = useCallback(
@@ -25,11 +26,9 @@ const TimePicker = forwardRef((props, ref) => {
     value: momentVal,
     onChange: onChangeHandler,
     disabled: disabled,
-    minuteStep: 20,
-    format: "HH:mm",
-    showNow: false,
-    popupClassName: "dc-picker-popup",
-    placeholder: ["De la", "Pană la"],
+    format: "DD.MM.YYYY",
+    showToday: false,
+    dropdownClassName: "dc-picker-popup",
     ...rest,
   };
 
@@ -42,15 +41,16 @@ const TimePicker = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         {type === "simple" ? (
-          <TP {...pickerProps} ref={ref} placeholder="Selectează" />
+          <DP {...pickerProps} ref={ref} placeholder="Selectează"  />
         ) : (
-          <TP.RangePicker {...pickerProps} ref={ref} placeholder={["De la", "Pană la"]} />
+          <DP.RangePicker {...pickerProps} ref={ref} placeholder={["De la", "Pană la"]} />
         )}
       </div>
     </>
   );
 });
-TimePicker.propTypes = {
+
+DatePicker.propTypes = {
   type: PropTypes.oneOf(["simple", "range"]),
   value: PropTypes.string,
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -61,12 +61,12 @@ TimePicker.propTypes = {
   onChange: PropTypes.func,
 };
 
-TimePicker.defaultProps = {
+DatePicker.defaultProps = {
   type: "simple",
   size: "md",
   value: null,
 };
 
-TimePicker.displayName = "TimePicker";
+DatePicker.displayName = "DatePicker";
 
-export default TimePicker;
+export default DatePicker;

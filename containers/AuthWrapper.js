@@ -35,6 +35,8 @@ export default function AuthWrapper(props) {
       if (!user.data?.id && !fetching) {
         setFetching(true);
         fetchUser();
+      } else if (user.data?.id) {
+        setLoading(false);
       }
     } else redirectToLogin();
   }, [dispatch, fetchUser, fetching, redirectToLogin, user.data?.id]);

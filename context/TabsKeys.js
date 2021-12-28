@@ -5,6 +5,8 @@ export const leftSideTabs = {
   appointments: "doc-appointments-settings",
   reviews: "doc-reviews-list",
   investigations: "user-investigations-list",
+  bonuses: "user-bonuses-list",
+  transactions: "user-transactions-list",
 };
 
 export const startConversationTabs = {
@@ -21,6 +23,11 @@ export const docInfoTabs = {
 export const messageFormTabs = {
   main: "message-from-main",
   confirm: "message-form-confirm",
+};
+
+export const meetFormTabs = {
+  main: "meet-from-main",
+  confirm: "meet-form-confirm",
 };
 
 export const selectModeTabs = {

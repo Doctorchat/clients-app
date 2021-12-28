@@ -103,7 +103,8 @@
   }
 }
 
-.configure-form-message {
+.configure-form-message,
+.configure-form-meet {
   overflow-y: overlay;
 }
 
@@ -112,7 +113,8 @@
   &.tab-pane-in-prev,
   &.tab-pane-out,
   &.tab-pane-out-prev {
-    .configure-form-message {
+    .configure-form-message,
+    .configure-form-meet {
       overflow: hidden;
     }
   }
