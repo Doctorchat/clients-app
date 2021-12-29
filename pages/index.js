@@ -6,7 +6,6 @@ function Home() {
           <h5 className="select-chat_title">Please Select Chat</h5>
         </div>
       </div>
-      <div id="column-right" />
     </>
   );
 }

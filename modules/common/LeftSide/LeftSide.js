@@ -38,7 +38,7 @@ export default function LeftSide() {
   const openStartConversation = () => dispatch(docListToggleVisibility(true));
 
   return (
-    <section id="column-left" className="sidebar-left">
+    <div id="column-left" className="sidebar-left">
       <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig}>
         <Tabs.Pane dataKey={leftSideTabs.conversationList} unmountOnExit={false}>
           <ConversationsSidebar />
@@ -78,6 +78,6 @@ export default function LeftSide() {
           className="start-conversation-btn"
         />
       </AuthRoleWrapper>
-    </section>
+    </div>
   );
 }

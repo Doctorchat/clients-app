@@ -119,3 +119,11 @@
     }
   }
 }
+
+.configure-form-alert {
+  padding: 6px 8px;
+  font-size: 13px;
+  .dc-alert-icon {
+    display: none;
+  }
+}

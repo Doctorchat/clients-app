@@ -3,11 +3,12 @@ import { string, object, ref, array } from "yup";
 
 const docGeneral = object().shape({
   name: string().required(),
-  category: array().of(string()).required(),
-  education: array().of(string()).required(),
+  category: array().min(1),
+  education: array().min(1),
   specialization: string().required(),
   professionalTitle: string().required(),
   price: number().min(0).required(),
+  meet_price: number().min(0).required(),
   experience: number().min(0).required(),
   workplace: string().required(),
   bio: string().required(),

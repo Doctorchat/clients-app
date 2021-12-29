@@ -6,7 +6,16 @@ import cs from "@/utils/classNames";
 import usePrevious from "@/hooks/usePrevious";
 
 export default function Tabs(props) {
-  const { config, className, updateTabsConfig, children, dataAnimation, styles, contextAdditionalData } = props;
+  const {
+    config,
+    className,
+    id,
+    updateTabsConfig,
+    children,
+    dataAnimation,
+    styles,
+    contextAdditionalData,
+  } = props;
   const prevActiveIndex = usePrevious(config.key);
   const tabsMouted = useRef(false); // Prevent animation on mount
 
@@ -25,10 +34,15 @@ export default function Tabs(props) {
         prevActiveIndex,
         updateTabsConfig,
         tabsMouted: tabsMouted.current,
-        ...contextAdditionalData
+        ...contextAdditionalData,
       }}
     >
-      <div className={cs("tabs-slider", className)} data-animation={dataAnimation} style={styles}>
+      <div
+        id={id}
+        className={cs("tabs-slider", className)}
+        data-animation={dataAnimation}
+        style={styles}
+      >
         {children}
       </div>
     </TabsContext.Provider>
@@ -37,6 +51,7 @@ export default function Tabs(props) {
 
 Tabs.propTypes = {
   className: PropTypes.string,
+  id: PropTypes.string,
   config: PropTypes.shape({
     key: PropTypes.string,
     dir: PropTypes.oneOf(["next", "prev"]),

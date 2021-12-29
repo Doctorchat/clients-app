@@ -52,7 +52,7 @@ const TimePicker = forwardRef((props, ref) => {
 });
 TimePicker.propTypes = {
   type: PropTypes.oneOf(["simple", "range"]),
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   label: PropTypes.string,
   className: PropTypes.string,

@@ -5,6 +5,7 @@ const formats = {
   time: "HH:mm",
   day: "MMM DD",
   year: "DD/MM/YYYY",
+  full: "DD.MM.YYYY HH:mm"
 };
 
 dayjs.locale("ro");
@@ -42,5 +43,7 @@ export default function date(date) {
   return {
     dynamic,
     default: dayjsDate.format("MMMM DD, YYYY"),
+    time: dayjsDate.format(formats.time),
+    full: dayjsDate.format(formats.full)
   };
 }

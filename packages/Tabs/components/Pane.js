@@ -5,7 +5,7 @@ import useTabsContext from "../hooks/useTabsContext";
 import cs from "@/utils/classNames";
 
 export default function Pane(props) {
-  const { className, dataKey, unmountOnExit, withAnimation, children } = props;
+  const { className, id, dataKey, unmountOnExit, withAnimation, children } = props;
   const { key, dir, tabsMouted } = useTabsContext();
   const [isActive, setIsActive] = useState(false);
   const paneRef = useRef();
@@ -27,7 +27,7 @@ export default function Pane(props) {
         exitDone: "tab-exit-animated",
       }}
     >
-      <div key={dataKey} className={cs("tabs-pane", className)} ref={paneRef}>
+      <div key={dataKey} id={id} className={cs("tabs-pane", className)} ref={paneRef}>
         {children}
       </div>
     </CSSTransition>
@@ -40,6 +40,7 @@ Pane.propTypes = {
   unmountOnExit: PropTypes.bool,
   children: PropTypes.element,
   withAnimation: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 Pane.defaultProps = {

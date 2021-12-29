@@ -12,6 +12,7 @@ import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { meetFormReset, meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
+import { MESSAGE_TYPES } from "@/context/constants";
 
 function MeetFormConfirm() {
   const { updateTabsConfig } = useTabsContext();
@@ -26,7 +27,7 @@ function MeetFormConfirm() {
     try {
       setLoading(true);
 
-      const payload = { ...values, chat_id: chatId };
+      const payload = { ...values, chat_id: chatId, type: MESSAGE_TYPES.meet };
       const response = await api.conversation.addMessage(payload);
       const updatedChatItem = {
         id: +response.data.chat_id,
@@ -163,7 +164,7 @@ function MeetFormConfirm() {
           <Button type="outline" onClick={updateTabsConfig(meetFormTabs.main, "prev")}>
             Înapoi
           </Button>
-          <Button loading={loading}>Confirmă și Achită</Button>
+          <Button onClick={onConfirmHandler} loading={loading}>Confirmă și Achită</Button>
         </div>
       </PopupContent>
     </div>

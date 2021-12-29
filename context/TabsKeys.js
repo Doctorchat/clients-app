@@ -35,3 +35,9 @@ export const selectModeTabs = {
   configureMeet: "configure-meet-tab",
   configureMessage: "configure-message-tab",
 };
+
+export const layoutTabs = {
+  all: "layout-all",
+  left: "layout-left",
+  center: "layout-center",
+};

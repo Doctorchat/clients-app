@@ -7,6 +7,8 @@ const api = {
     logout: () => axiosInstance.post("/auth/logout"),
     updateAvatar: (file) => axiosInstance.put("/user/update-avatar/", file),
     addInvestigation: (data) => axiosInstance.post("/user/investigations/new", data),
+    update: (data) => axiosInstance.post("/user/update", data),
+    disponibility: (data) => axiosInstance.post("/user/card/disponibility", data),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

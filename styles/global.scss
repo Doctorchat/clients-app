@@ -135,6 +135,12 @@ div {
   }
 }
 
+.remove-action {
+  svg {
+    color: var(--bs-danger);
+  }
+}
+
 .full-page-loading {
   position: fixed;
   z-index: 999;

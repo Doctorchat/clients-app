@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import TimePicker from "@/packages/TimePicker";
 import Sidebar from "@/components/Sidebar";
@@ -8,11 +9,28 @@ import { leftSideTabs } from "@/context/TabsKeys";
 import Form from "@/components/Form";
 import Button from "@/components/Button";
 import Alert from "@/components/Alert";
+import api from "@/services/axios/api";
+import { notification } from "@/store/slices/notificationsSlice";
 
 export default function DocAppointmentsSettings() {
   const { updateTabsConfig } = useTabsContext();
   const [loading, setLoding] = useState(false);
   const form = useForm();
+  const dispatch = useDispatch();
+
+  const onFormSubmit = useCallback(
+    async (values) => {
+      try {
+        setLoding(true);
+        const response = await api.user.disponibility(values);
+      } catch (error) {
+        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+      } finally {
+        setLoding(false);
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <Sidebar>
@@ -29,7 +47,7 @@ export default function DocAppointmentsSettings() {
             type="info"
             message="Lăsați câmpurile necompletate pentru a indica că nu sunteți disponibil în ziua corespunzătoare"
           />
-          <Form methods={form} onFinish={(values) => console.log(values)}>
+          <Form methods={form} onFinish={onFormSubmit}>
             <Form.Item name="mon" label="Luni">
               <TimePicker type="range" />
             </Form.Item>

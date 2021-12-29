@@ -21,8 +21,11 @@ export const userSlice = createSlice({
       state.data = {};
       localStorage.removeItem("dc_token");
     },
+    updateUser(state, action) {
+      state.data = action.payload;
+    },
   },
 });
 
-export const { setUserAuthorized, setUserUnauthorized } = userSlice.actions;
+export const { setUserAuthorized, setUserUnauthorized, updateUser } = userSlice.actions;
 export default userSlice.reducer;

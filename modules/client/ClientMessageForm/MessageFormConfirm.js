@@ -12,6 +12,7 @@ import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
+import { MESSAGE_TYPES } from "@/context/constants";
 
 function MessageFormConfirmation() {
   const { updateTabsConfig } = useTabsContext();
@@ -26,7 +27,7 @@ function MessageFormConfirmation() {
     try {
       setLoading(true);
 
-      const payload = { ...values, chat_id: chatId };
+      const payload = { ...values, chat_id: chatId, type: MESSAGE_TYPES.standard };
       const response = await api.conversation.addMessage(payload);
       const updatedChatItem = {
         id: +response.data.chat_id,

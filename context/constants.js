@@ -5,3 +5,5 @@ export const userRoles = new Map([
 ]);
 
 export const CHAT_TYPES = { standard: "standard", auto: "auto", consilium: "consilium" };
+
+export const MESSAGE_TYPES = { standard: "standard", meet: "meet" };

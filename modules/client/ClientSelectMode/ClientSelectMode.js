@@ -47,7 +47,7 @@ function ClientSelectMode(props) {
       contextAdditionalData={{ onSelectMode, docId }}
     >
       <Tabs.Pane dataKey={selectModeTabs.choose} unmountOnExit={false}>
-        <SelectModeOptions />
+        <SelectModeOptions setTabsHeight={setTabsHeight} />
       </Tabs.Pane>
       <Tabs.Pane className="configure-form" dataKey={selectModeTabs.configureMessage}>
         <ConfigureFormMessage />

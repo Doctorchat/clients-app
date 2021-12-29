@@ -4,12 +4,17 @@ import SidebarBody from "./SidebarBody";
 import cs from "@/utils/classNames";
 
 export default function Sidebar(props) {
-  const { className, children } = props;
+  const { id, className, children } = props;
 
-  return <div className={cs("sidebar", className)}>{children}</div>;
+  return (
+    <div id={id} className={cs("sidebar", className)}>
+      {children}
+    </div>
+  );
 }
 
 Sidebar.propTypes = {
+  id: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element),
 };

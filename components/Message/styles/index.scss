@@ -1,0 +1,121 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
+  max-width: 480px;
+  overflow: hidden;
+}
+
+.message.message-in {
+  align-self: flex-start;
+  background-color: lighten(#06f, 5);
+  border-bottom-left-radius: 4px;
+  color: #fff;
+}
+
+.message.message-out {
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.message-content {
+  padding: 6px 12px;
+  position: relative;
+}
+
+.message-time {
+  visibility: hidden;
+  font-size: 12px;
+  user-select: none;
+  line-height: 1;
+  vertical-align: middle;
+  pointer-events: none;
+  display: inline-flex;
+  z-index: 1;
+  height: 12px;
+  direction: ltr;
+  float: right;
+  padding-right: 8px;
+  margin-left: -4px;
+  .inner {
+    pointer-events: all;
+    position: absolute;
+    bottom: 3px;
+    right: 0;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    padding: inherit;
+    white-space: nowrap;
+    height: 12px;
+    visibility: visible;
+  }
+}
+
+.message-meet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-top: 1px solid var(--bs-gray-200);
+  background-color: #fff;
+}
+
+.meet-caption {
+  .title {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: var(--bs-gray-900);
+  }
+}
+
+.meet-date {
+  color: var(--bs-gray-700);
+  font-size: 14px;
+}
+
+.meet-icon {
+  width: 42px;
+  height: 42px;
+  background-color: rgba(#34a853, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dc-meet-color);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.meet-url {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: var(--bs-primary);
+  a {
+    background-color: rgba(#06f, 0.1);
+    display: block;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    &:hover {
+      background-color: rgba(#06f, 0.2);
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+  }
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}

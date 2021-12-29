@@ -1,11 +1,5 @@
-import PropTypes from "prop-types";
+import { ChatContent } from "@/modules/common";
 
-export default function ChatContent(props) {
-  //  const {  } = props;
-
-  return "Chat content";
+export default function ColumnCenter() {
+  return <ChatContent />;
 }
-
-ChatContent.propTypes = {};
-
-ChatContent.defaultProps = {};
