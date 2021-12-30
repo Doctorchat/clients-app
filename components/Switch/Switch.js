@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { forwardRef, useRef } from "react";
+import Spinner from "../Spinner";
 import cs from "@/utils/classNames";
 
 const sizeClassName = {
@@ -9,7 +10,7 @@ const sizeClassName = {
 };
 
 const Switch = forwardRef((props, ref) => {
-  const { className, disabled, size, label, value, onChange, name, labelAlign } = props;
+  const { className, disabled, size, label, value, onChange, name, labelAlign, loading } = props;
   const inputSizeClassName = useRef(sizeClassName[size]);
 
   const switchHandler = () => {
@@ -30,9 +31,9 @@ const Switch = forwardRef((props, ref) => {
           className={cs("dc-checkbox", value && "checked")}
           aria-checked={!!value}
           role="switch"
-          disabled={disabled}
+          disabled={disabled || loading}
         >
-          <span className="dc-switch-handle" />
+          <span className="dc-switch-handle">{loading && <Spinner />}</span>
         </button>
         {!!label && <span className="dc-checkbox-label">{label}</span>}
       </div>
@@ -44,6 +45,7 @@ Switch.propTypes = {
   size: PropTypes.oneOf(["sm", "md", "lg"]),
   className: PropTypes.string,
   disabled: PropTypes.bool,
+  loading: PropTypes.bool,
   label: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(["true", "false"])]),
   onChange: PropTypes.func,

@@ -45,6 +45,22 @@
   &.checked {
     background: var(--bs-primary);
   }
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.dc-checkbox .dc-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  svg {
+    color: lighten($color: #06f, $amount: 10);
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .dc-switch-handle {

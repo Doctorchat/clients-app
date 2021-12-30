@@ -9,6 +9,8 @@ const api = {
     addInvestigation: (data) => axiosInstance.post("/user/investigations/new", data),
     update: (data) => axiosInstance.post("/user/update", data),
     disponibility: (data) => axiosInstance.post("/user/card/disponibility", data),
+    updatePassword: (data) => axiosInstance.post("/user/change-password/", data),
+    toggleGuardStatus: (isGuard) => axiosInstance.post("/user/card/guard", { isGuard }),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

@@ -15,16 +15,22 @@ const useYupValidationResolver = (validationSchema) =>
       } catch (errors) {
         return {
           values: {},
-          errors: errors.inner.reduce(
-            (allErrors, currentError) => ({
+          errors: errors.inner.reduce((allErrors, currentError) => {
+            let path = currentError.path;
+
+            if (path.match(/\[(.*?)\]/)) {
+              const [obj, idx, prop] = path.replace(".", "").split(/\[(.*?)\]/);
+              path = `${obj}.${idx}.${prop}`;
+            }
+
+            return {
               ...allErrors,
-              [currentError.path]: {
+              [path]: {
                 type: currentError.type ?? "validation",
                 message: currentError.message,
               },
-            }),
-            {}
-          ),
+            };
+          }, {}),
         };
       }
     },

@@ -168,11 +168,15 @@
   }
 }
 
+.dc-btn-text {
+  color: lighten($color: #06f, $amount: 10)
+}
+
 .dc-btn-danger {
   color: #fff;
   background-color: var(--bs-danger);
   &:hover {
-    background-color: darken(#dc3545, 7)
+    background-color: darken(#dc3545, 7);
   }
   svg {
     color: #fff;

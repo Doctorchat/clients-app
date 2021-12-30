@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import SidebarHeader from "./SidebarHeader";
 import SidebarBody from "./SidebarBody";
+import SidebarFooter from "./SidebarFooter";
 import cs from "@/utils/classNames";
 
 export default function Sidebar(props) {
@@ -21,3 +22,4 @@ Sidebar.propTypes = {
 
 Sidebar.Header = SidebarHeader;
 Sidebar.Body = SidebarBody;
+Sidebar.Footer = SidebarFooter;

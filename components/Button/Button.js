@@ -8,6 +8,7 @@ const typeClassNames = {
   primary: "dc-btn-primary",
   outline: "dc-btn-outline",
   danger: "dc-btn-danger",
+  text: "dc-btn-text",
 };
 
 const sizeClassName = {
@@ -56,7 +57,7 @@ Button.propTypes = {
   className: PropTypes.string,
   htmlType: PropTypes.oneOf(["submit", "reset", "button"]),
   size: PropTypes.oneOf(["sm", "md", "lg"]),
-  type: PropTypes.oneOf(["primary", "outline", "danger"]),
+  type: PropTypes.oneOf(["primary", "outline", "danger", "text"]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   onClick: PropTypes.func,

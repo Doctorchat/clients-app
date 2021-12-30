@@ -13,6 +13,7 @@ import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
 import toSelectOpts from "@/utils/toSelectOpts";
 import TrashIcon from "@/icons/trash.svg";
+import PlusIcon from "@/icons/plus.svg";
 
 export default function DocEditProfile() {
   const { user, categories } = useSelector((store) => ({
@@ -24,22 +25,22 @@ export default function DocEditProfile() {
   const generaDataForm = useForm({
     defaultValues: {
       name: user.name,
-      category: toSelectOpts("id", "name_ro")(user.card.category),
-      specialization: user.card.about.specialization,
-      professionalTitle: user.card.about.professionalTitle,
-      price: user.card.price,
-      experience: user.card.about.experience,
-      meet_price: user.card.meet_price,
-      workplace: user.card.activity.workplace,
-      bio: user.card.about.bio,
-      education: user.card.activity.education,
+      category: toSelectOpts("id", "name_ro")(user.category),
+      specialization: user.about.specialization,
+      professionalTitle: user.about.professionalTitle,
+      price: user.price,
+      experience: user.about.experience,
+      meet_price: user.meet_price,
+      workplace: user.activity.workplace,
+      bio: user.about.bio,
+      education: user.activity.education.map((edc) => ({ value: edc })),
     },
     resolver: generalDataResolver,
   });
   const securityDataForm = useForm({ resolver: securityDataResolver });
   const [formEditConfig, setFormEditConfig] = useState({
     general: { edited: false, loading: false },
-    security: { edited: false },
+    security: { edited: false, loading: false },
   });
   const dispatch = useDispatch();
 
@@ -60,15 +61,43 @@ export default function DocEditProfile() {
       const data = { ...values };
 
       data.category = data.category.map((cat) => cat.value);
+      data.education = data.education.map((edc) => edc.value);
 
       try {
         setFormEditConfig((prev) => ({ ...prev, general: { ...prev.general, loading: true } }));
+
         const response = await api.user.update(data);
+
         dispatch(updateUser(response.data));
+        dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
       } catch (error) {
         dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
       } finally {
-        setFormEditConfig((prev) => ({ ...prev, general: { ...prev.general, loading: false } }));
+        setFormEditConfig((prev) => ({
+          ...prev,
+          general: { ...prev.general, loading: false, edited: false },
+        }));
+      }
+    },
+    [dispatch]
+  );
+
+  const onSecurityUpdate = useCallback(
+    async (values) => {
+      try {
+        setFormEditConfig((prev) => ({
+          ...prev,
+          security: { ...prev.security, loading: true },
+        }));
+        await api.user.updatePassword(values);
+        dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
+      } catch (error) {
+        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+      } finally {
+        setFormEditConfig((prev) => ({
+          ...prev,
+          security: { ...prev.security, loading: false, edited: false },
+        }));
       }
     },
     [dispatch]
@@ -110,18 +139,31 @@ export default function DocEditProfile() {
           <Form.Item name="workplace" label="Locul de muncă">
             <Input />
           </Form.Item>
-          <Form.List name="education">
+          <Form.List name="education" className="inputs-list-vertical">
             {({ fields, add, remove }) =>
               fields.map((field, idx) => (
                 <div
-                  className="inputs-list-item d-flex"
-                  key={`education-${idx}`}
+                  className="inputs-list-item d-flex align-items-center"
+                  key={`education-${field.id}`}
                 >
-                  <Form.Item label="Educație" className="w-100 me-1" name={`education.${idx}`}>
+                  <Form.Item
+                    label="Educație"
+                    className="w-100 me-1"
+                    name={`education.${idx}.value`}
+                  >
                     <Input />
                   </Form.Item>
-                  {idx !== 0 && (
+                  {idx === fields.length - 1 && (
                     <IconBtn
+                      size="sm"
+                      icon={<PlusIcon />}
+                      className="add-action"
+                      onClick={() => add({ name: "" })}
+                    />
+                  )}
+                  {fields.length !== 1 && idx !== fields.length - 1 && (
+                    <IconBtn
+                      size="sm"
                       icon={<TrashIcon />}
                       className="remove-action"
                       onClick={() => remove(idx)}
@@ -135,7 +177,12 @@ export default function DocEditProfile() {
             <Textarea />
           </Form.Item>
           <div className="d-flex justify-content-end">
-            <Button htmlType="submit" type="primary" disabled={!formEditConfig.general.edited}>
+            <Button
+              htmlType="submit"
+              type="primary"
+              loading={formEditConfig.general.loading}
+              disabled={!formEditConfig.general.edited}
+            >
               Editează
             </Button>
           </div>
@@ -143,15 +190,28 @@ export default function DocEditProfile() {
       </div>
       <div className="edit-profile-section">
         <h4 className="edit-profile-title">Securitate</h4>
-        <Form methods={securityDataForm} className="edit-profile-form">
-          <Form.Item name="password" label="Parolă Nouă">
+        <Form
+          methods={securityDataForm}
+          className="edit-profile-form"
+          onFinish={onSecurityUpdate}
+          onValuesChange={onFormsValuesChanges("security")}
+        >
+          <Form.Item name="current_password" label="Parola Curentă">
             <Input type="password" />
           </Form.Item>
-          <Form.Item name="password_confirmation" label="Repetă Parola">
+          <Form.Item name="new_password" label="Parola Nouă">
+            <Input type="password" />
+          </Form.Item>
+          <Form.Item name="new_confirm_password" label="Repetă Parola">
             <Input type="password" />
           </Form.Item>
           <div className="d-flex justify-content-end">
-            <Button htmlType="submit" type="primary">
+            <Button
+              htmlType="submit"
+              type="primary"
+              disabled={!formEditConfig.security.edited}
+              loading={formEditConfig.security.loading}
+            >
               Editează
             </Button>
           </div>

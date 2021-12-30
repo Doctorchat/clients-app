@@ -4,7 +4,9 @@ import { string, object, ref, array } from "yup";
 const docGeneral = object().shape({
   name: string().required(),
   category: array().min(1),
-  education: array().min(1),
+  education: array()
+    .min(1)
+    .of(object().shape({ value: string().required() })),
   specialization: string().required(),
   professionalTitle: string().required(),
   price: number().min(0).required(),
@@ -16,13 +18,13 @@ const docGeneral = object().shape({
 
 const clientGeneral = object().shape({
   name: string().required(),
-  bio: string(),
 });
 
 const security = object().shape({
-  password: string().min(6).required(),
-  passwordConfirmation: string()
-    .oneOf([ref("password")], "Parolele nu sunt identice")
+  current_password: string().required(),
+  new_password: string().required(),
+  new_confirm_password: string()
+    .oneOf([ref("new_password")], "Parolele nu sunt identice")
     .required(),
 });
 

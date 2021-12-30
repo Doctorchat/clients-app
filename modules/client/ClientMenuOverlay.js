@@ -8,7 +8,7 @@ import { logoutUser } from "@/store/actions";
 import UserIcon from "@/icons/user.svg";
 import LogoutIcon from "@/icons/logout.svg";
 // import SupportIcon from "@/icons/support.svg";
-import FAQIcon from "@/icons/question.svg";
+// import FAQIcon from "@/icons/question.svg";
 import InvestigationIcon from "@/icons/investigation.svg";
 
 export default function ClientMenuOverlay({ updateTabsConfig }) {
@@ -34,7 +34,7 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
         Anchete
       </Menu.Item>
       {/* <Menu.Item icon={<SupportIcon />}>Suport</Menu.Item> */}
-      <Menu.Item icon={<FAQIcon />}>FAQ</Menu.Item>
+      {/* <Menu.Item icon={<FAQIcon />}>FAQ</Menu.Item> */}
       <Menu.Item icon={<LogoutIcon />} className="logout-item" onClick={logoutHandler}>
         Deconectare
       </Menu.Item>
