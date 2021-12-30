@@ -37,7 +37,7 @@ function DocItem(props) {
         </div>
         <div className="doc-caption">
           <h4 className="doc-title">
-            <span className="doc-name">{fullName}</span>
+            <span className="doc-name ellipsis">{fullName}</span>
             {isDocNew(meta) && <span className="doc-title-tag new">Nou</span>}
           </h4>
           <div className="doc-item-meta">

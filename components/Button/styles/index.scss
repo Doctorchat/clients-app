@@ -169,7 +169,13 @@
 }
 
 .dc-btn-text {
-  color: lighten($color: #06f, $amount: 10)
+  color: lighten($color: #06f, $amount: 10);
+  &:hover {
+    background-color: lighten($color: #06f, $amount: 45);
+  }
+  &:focus {
+    background-color: lighten($color: #06f, $amount: 40);
+  }
 }
 
 .dc-btn-danger {

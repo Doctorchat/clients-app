@@ -161,7 +161,7 @@ export default function DocEditProfile() {
                       onClick={() => add({ name: "" })}
                     />
                   )}
-                  {fields.length !== 1 && idx !== fields.length - 1 && (
+                  {fields.length !== 1 && (
                     <IconBtn
                       size="sm"
                       icon={<TrashIcon />}

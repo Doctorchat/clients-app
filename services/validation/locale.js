@@ -21,4 +21,5 @@ setLocale({
   object: {
     noUnknown: "Cei asta",
   },
+  // array: {}
 });

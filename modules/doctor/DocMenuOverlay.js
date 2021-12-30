@@ -29,7 +29,7 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
     try {
       setGuradStatusUpdating(true);
       await api.user.toggleGuardStatus(!user?.isGuard);
-      dispatch(updateUser({ card: { isGuard: !user?.isGuard } }));
+      dispatch(updateUser({ isGuard: !user?.isGuard }));
     } catch (error) {
       dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
     } finally {

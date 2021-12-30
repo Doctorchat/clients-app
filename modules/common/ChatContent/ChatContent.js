@@ -1,11 +1,20 @@
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import Image from "@/components/Image";
 import Button, { IconBtn } from "@/components/Button";
 import EllipsisIcon from "@/icons/ellipsis-v.svg";
-import auv from "@/imgs/auth-layout.jpg";
 import Sidebar from "@/components/Sidebar";
-import Message from "@/components/Message";
+import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
+import auv from "@/imgs/auth-layout.jpg";
 
 export default function ChatContent() {
+  const dispatch = useDispatch();
+
+  const openMessageFormPopup = useCallback(
+    () => dispatch(messageFormToggleVisibility(true)),
+    [dispatch]
+  );
+
   return (
     <Sidebar id="column-center">
       <Sidebar.Header className="chat-content-header d-flex justify-contnet-between">
@@ -33,7 +42,9 @@ export default function ChatContent() {
       </Sidebar.Body>
       <Sidebar.Footer className="chat-content-footer">
         <div className="w-100 d-flex justify-content-center">
-          <Button type="text">Incepe Conversația</Button>
+          <Button type="text" onClick={openMessageFormPopup}>
+            Începe Conversația
+          </Button>
         </div>
       </Sidebar.Footer>
     </Sidebar>

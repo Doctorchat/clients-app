@@ -9,5 +9,5 @@ export default function SidebarHeader(props) {
 
 SidebarHeader.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
 };

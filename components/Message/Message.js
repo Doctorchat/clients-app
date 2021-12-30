@@ -15,7 +15,7 @@ export default function Message(props) {
           <span className="inner">{date(updated).time}</span>
         </span>
       </div>
-      <MessageType type={type} />
+      <MessageType type={type} componentProps={meet} />
     </div>
   );
 }
@@ -25,4 +25,5 @@ Message.propTypes = {
   updated: PropTypes.string,
   side: PropTypes.string,
   type: PropTypes.string,
+  meet: PropTypes.object,
 };
