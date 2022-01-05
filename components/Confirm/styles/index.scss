@@ -1,0 +1,104 @@
+.confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
+  background-color: rgba(#000, 0.25);
+}
+
+.confirm-body {
+  padding: 36px 24px 18px;
+  border-radius: 10px;
+  z-index: 1002;
+  overflow: hidden;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: #fff;
+  max-width: 390px;
+  width: 100%;
+}
+
+.confirm-trigger.disabled {
+  pointer-events: none;
+}
+
+.confirm-content {
+  margin-bottom: 10px;
+  font-size: 17px;
+}
+
+.confirm-actions {
+  .dc-btn {
+    min-width: 98px;
+    min-height: 40px;
+  }
+  .confirm-cancel-btn {
+    color: var(--bs-danger);
+    &:hover {
+      background-color: lighten($color: #dc3545, $amount: 40);
+    }
+    &:focus {
+      background-color: lighten($color: #dc3545, $amount: 35);
+    }
+  }
+}
+
+.confirm-backdrop,
+.confirm-body {
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+.confirm {
+  &.enter-active {
+    .confirm-backdrop {
+      animation-name: backdropIn;
+    }
+    .confirm-body {
+      animation-name: bodyIn;
+    }
+  }
+  &.exit-active {
+    .confirm-backdrop {
+      animation-name: backdropIn;
+      animation-direction: reverse;
+    }
+    .confirm-body {
+      animation-name: bodyIn;
+      animation-direction: reverse;
+    }
+  }
+}
+
+@keyframes backdropIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes backdropIn {
+  0% {
+    opacity: 0;
+    transform: translateX(10px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}

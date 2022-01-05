@@ -6,7 +6,7 @@ import cs from "@/utils/classNames";
 
 const TimePicker = forwardRef((props, ref) => {
   const { className, disabled, size, label, name, value, onChange, type, ...rest } = props;
-  const [momentVal, setMomentVal] = useState(value);
+  const [momentVal, setMomentVal] = useState(getMomentTime(value));
 
   useEffect(() => {
     setMomentVal(getMomentTime(value));

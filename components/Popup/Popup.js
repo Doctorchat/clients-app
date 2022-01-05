@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import Confirm from "../Confirm";
 import PopupContext from "./PopupContext";
 import PopupHeader from "./PopupHeader";
 import PopupContent from "./PopupContent";
@@ -8,7 +9,8 @@ import cs from "@/utils/classNames";
 import usePrevious from "@/hooks/usePrevious";
 
 export default function Popup(props) {
-  const { id, className, visible, children, onVisibleChange } = props;
+  const { id, className, visible, children, onVisibleChange, onAfterClose, confirmationClose } =
+    props;
   const [state, setState] = useState(visible);
   const prevState = usePrevious(state);
   const popupBodyRef = useRef();
@@ -19,11 +21,29 @@ export default function Popup(props) {
         e.preventDefault();
         e.stopPropagation();
       }
-      setState(false);
-      onVisibleChange(false);
+
+      const close = () => {
+        setState(false);
+        onVisibleChange(false);
+      };
+
+      if (onAfterClose) onAfterClose(close);
+      else close();
     },
-    [onVisibleChange]
+    [onAfterClose, onVisibleChange]
   );
+
+  const PopupBackdrop = useMemo(() => {
+    if (confirmationClose && !confirmationClose.disabled) {
+      return (
+        <Confirm onConfirm={closePopup} content={confirmationClose.content}>
+          <div className="popup-backdrop" role="banner" />
+        </Confirm>
+      );
+    }
+
+    return <div className="popup-backdrop" role="banner" onClick={closePopup} />;
+  }, [closePopup, confirmationClose]);
 
   useEffect(() => {
     if (prevState !== visible) {
@@ -33,8 +53,8 @@ export default function Popup(props) {
 
   return (
     <div id={id} className={cs("popup", className, state && "is-active")}>
-      <div className="popup-backdrop" role="banner" onClick={closePopup} />
-      <PopupContext.Provider value={{ closePopup }}>
+      {PopupBackdrop}
+      <PopupContext.Provider value={{ closePopup, confirmationClose }}>
         <CSSTransition in={state} timeout={200} nodeRef={popupBodyRef} unmountOnExit>
           <div className="popup-body" ref={popupBodyRef}>
             {children}
@@ -51,6 +71,11 @@ Popup.propTypes = {
   visible: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
   onVisibleChange: PropTypes.func,
+  onAfterClose: PropTypes.func,
+  confirmationClose: PropTypes.shape({
+    content: PropTypes.string,
+    disabled: PropTypes.bool,
+  }),
 };
 
 Popup.defaultProps = {

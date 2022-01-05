@@ -6,7 +6,10 @@ const api = {
     login: (data) => axiosInstance.post("/auth/login", data),
     logout: () => axiosInstance.post("/auth/logout"),
     updateAvatar: (file) => axiosInstance.put("/user/update-avatar/", file),
-    addInvestigation: (data) => axiosInstance.post("/user/investigations/new", data),
+    addInvestigation: (data) => axiosInstance.post("/user/investigations/add", data),
+    updateInvestigation: (data) => axiosInstance.post("/user/investigations/update", data),
+    removeInvestigation: (id) =>
+      axiosInstance.delete("/user/investigations/delete", { params: { id } }),
     update: (data) => axiosInstance.post("/user/update", data),
     disponibility: (data) => axiosInstance.post("/user/card/disponibility", data),
     updatePassword: (data) => axiosInstance.post("/user/change-password/", data),
@@ -25,6 +28,7 @@ const api = {
   },
   bootstrap: {
     categories: () => axiosInstance.get("/specialities"),
+    global: () => axiosInstance.get("/settings/info"),
   },
 };
 

@@ -2,12 +2,13 @@ import { setBootstrapData } from "../slices/bootstrapSlice";
 import api from "@/services/axios/api";
 
 export const getBootstrapData = () => async (dispatch) => {
-  Promise.allSettled([api.bootstrap.categories()])
+  Promise.allSettled([api.bootstrap.categories(), api.bootstrap.global()])
     .then((settledPromises) => {
-      const [categories] = settledPromises;
+      const [categories, global] = settledPromises;
 
       const data = {
         categories: categories.value?.data || [],
+        global: global.value?.data || [],
       };
 
       dispatch(setBootstrapData(data));

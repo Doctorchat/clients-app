@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import TimePicker from "@/packages/TimePicker";
 import Sidebar from "@/components/Sidebar";
@@ -11,18 +11,26 @@ import Button from "@/components/Button";
 import Alert from "@/components/Alert";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
+import { updateUserProperty } from "@/store/slices/userSlice";
 
 export default function DocAppointmentsSettings() {
+  const { disponibility } = useSelector((store) => ({
+    disponibility: store.user.data.disponibility,
+  }));
   const { updateTabsConfig } = useTabsContext();
   const [loading, setLoding] = useState(false);
-  const form = useForm();
+  const form = useForm({ defaultValues: disponibility });
   const dispatch = useDispatch();
 
   const onFormSubmit = useCallback(
     async (values) => {
       try {
         setLoding(true);
-        const response = await api.user.disponibility(values);
+
+        await api.user.disponibility(values);
+
+        dispatch(updateUserProperty({ prop: "disponibility", value: values }));
+        dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
       } catch (error) {
         dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
       } finally {

@@ -30,8 +30,7 @@ const Input = forwardRef((props, ref) => {
     else setIsActive(false);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(activeStatusHandler, []);
+  useEffect(activeStatusHandler, [placeholder, value]);
 
   const onFocusHandler = () => {
     if (rest.onFocus) rest.onFocus();

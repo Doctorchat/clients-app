@@ -7,13 +7,19 @@ import { leftSideTabs } from "@/context/TabsKeys";
 import List from "@/components/List";
 import SidebarList from "@/components/SidebarList";
 import Button from "@/components/Button";
-import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
+import {
+  investigationFormSetEdit,
+  investigationFormToggleVisibility,
+} from "@/store/slices/investigationFormSlice";
 import Alert from "@/components/Alert";
 import InvestigationItem from "@/components/InvestigationItem";
+import { updateUser } from "@/store/slices/userSlice";
+import api from "@/services/axios/api";
+import { notification } from "@/store/slices/notificationsSlice";
 
 export default function ClientInvestigationsList() {
   const { updateTabsConfig } = useTabsContext();
-  const { user } = useSelector((store) => ({ user: store.user }));
+  const { user } = useSelector((store) => ({ user: store.user.data }));
   const dispatch = useDispatch();
 
   const openInvestigationForm = useCallback(
@@ -21,13 +27,32 @@ export default function ClientInvestigationsList() {
     [dispatch]
   );
 
-  const removeInvestigation = useCallback((id) => {
-    console.log(id);
-  }, []);
+  const removeInvestigation = useCallback(
+    async (id) => {
+      try {
+        const response = await api.user.removeInvestigation(id);
+        dispatch(updateUser(response.data));
 
-  const editInvestigation = useCallback((id) => {
-    console.log(id);
-  }, []);
+        return Promise.resolve();
+      } catch (error) {
+        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+
+        return Promise.reject();
+      }
+    },
+    [dispatch]
+  );
+
+  const editInvestigation = useCallback(
+    (id) => {
+      const investigation = user.investigations.find((investigation) => investigation.id === id);
+
+      if (investigation) {
+        dispatch(investigationFormSetEdit(investigation));
+      }
+    },
+    [dispatch, user]
+  );
 
   return (
     <Sidebar>
@@ -47,7 +72,7 @@ export default function ClientInvestigationsList() {
             loadingConfig={{ disabled: true }}
             errorConfig={{ disabled: true }}
             emptyConfig={{
-              status: !user.data.investigations,
+              status: !user.investigations.length,
               className: "pt-4",
               content: "Aici va apărea lista de anchete",
               extra: (
@@ -59,15 +84,16 @@ export default function ClientInvestigationsList() {
           >
             <SidebarList
               component={InvestigationItem}
-              data={user.data.investigations}
+              data={user.investigations}
               componentProps={{
                 withActions: true,
                 onRemove: removeInvestigation,
                 onEdit: editInvestigation,
+                removeDisabled: user.investigations.length === 1,
               }}
             />
           </List>
-          {!!user.data.investigations.length && (
+          {!!user.investigations.length && (
             <div className="d-flex justify-content-center mt-4">
               <Button onClick={openInvestigationForm}>Adaugă o anchetă</Button>
             </div>

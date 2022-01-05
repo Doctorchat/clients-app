@@ -30,8 +30,7 @@ const Textarea = forwardRef((props, ref) => {
     else setIsActive(false);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(activeStatusHandler, []);
+  useEffect(activeStatusHandler, [placeholder, value]);
 
   useEffect(() => {
     // Initialize autoheigt
@@ -63,7 +62,14 @@ const Textarea = forwardRef((props, ref) => {
   return (
     <>
       {label && (
-        <label className={cs("form-control-label", isActive && "is-active", !animateLabel && "no-animation")} htmlFor={name}>
+        <label
+          className={cs(
+            "form-control-label",
+            isActive && "is-active",
+            !animateLabel && "no-animation"
+          )}
+          htmlFor={name}
+        >
           {label}
         </label>
       )}

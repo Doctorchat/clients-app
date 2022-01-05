@@ -5,6 +5,9 @@
   background-color: var(--bs-gray-100);
   border-radius: 8px;
   padding: 2px 8px 10px;
+  &:not(:last-of-type) {
+    margin-bottom: 8px;
+  }
   &.no-actions {
     padding-top: 10px;
     .investigation-item-caption {

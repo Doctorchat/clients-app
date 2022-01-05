@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import Popup from "@/components/Popup";
 import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
@@ -14,32 +14,114 @@ import {
   epidemiologicalOptions,
 } from "@/context/staticSelectOpts";
 import Button from "@/components/Button";
+import api from "@/services/axios/api";
+import { notification } from "@/store/slices/notificationsSlice";
+import { updateUser } from "@/store/slices/userSlice";
 
 export default function ClientInvestigationForm() {
-  const { isOpen } = useSelector((store) => ({
-    isOpen: store.investigationForm.isOpen,
+  const {
+    investigationForm: { isOpen, isEditing, values },
+  } = useSelector((store) => ({
+    investigationForm: store.investigationForm,
   }));
+  const [loading, setLoading] = useState(false);
+  const [formEdited, setFormEdited] = useState(false);
   const resolver = useYupValidationResolver(investigationFormSchema);
-  const form = useForm({ resolver });
+  const form = useForm({ resolver, values });
   const dispatch = useDispatch();
 
-  const visibilityHandler = (v) => dispatch(investigationFormToggleVisibility(v));
+  const visibilityHandler = (v) => {
+    if (!v) form.reset();
+    dispatch(investigationFormToggleVisibility(v));
+  };
 
-  const onSubmitHandler = useCallback((values) => {
-    const data = { ...values };
-
-    data.allergies = data.allergies.value;
-    data.diseases = data.diseases.value;
-    data.epidemiological = data.epidemiological.value;
-
-    console.log(data);
+  const onFormsValuesChanges = useCallback(() => {
+    setFormEdited(true);
   }, []);
 
+  const onAddNewInvestigation = async (data, { onSuccess, onError }) => {
+    try {
+      setLoading(true);
+
+      const response = await api.user.addInvestigation(data);
+      onSuccess(response.data);
+    } catch (error) {
+      onError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onUpdateInvestigation = async (data, { onSuccess, onError }) => {
+    try {
+      setLoading(true);
+
+      const response = await api.user.updateInvestigation(data);
+      onSuccess(response.data);
+    } catch (error) {
+      onError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const onSubmitHandler = useCallback(
+    async (values) => {
+      const data = { ...values };
+
+      data.sex = data.sex.value;
+      data.epidemiological = data.epidemiological.value;
+      data.diseases = data.diseases.value;
+      data.allergies = data.allergies.value;
+
+      const onSuccess = (response) => {
+        dispatch(investigationFormToggleVisibility(false));
+        dispatch(updateUser(response));
+        dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
+      };
+
+      const onError = () => {
+        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+      };
+
+      if (isEditing) {
+        onUpdateInvestigation(data, { onSuccess, onError });
+      } else {
+        onAddNewInvestigation(data, { onSuccess, onError });
+      }
+    },
+    [dispatch, isEditing]
+  );
+
   return (
-    <Popup id="investigation-form" visible={isOpen} onVisibleChange={visibilityHandler}>
+    <Popup
+      id="investigation-form"
+      visible={isOpen}
+      onVisibleChange={visibilityHandler}
+      confirmationClose={{ content: "Are you sure?", disabled: !formEdited }}
+    >
       <Popup.Header title="Adaugă o anchetă" />
       <Popup.Content>
-        <Form methods={form} name="add-investigation" onFinish={onSubmitHandler}>
+        <Form
+          methods={form}
+          name="add-investigation"
+          onFinish={onSubmitHandler}
+          onValuesChange={onFormsValuesChanges}
+          initialValues={values}
+        >
+          <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
+            <Form.Item className="w-100" name="name" label="Nume">
+              <Input placeholder="John" />
+            </Form.Item>
+            <Form.Item className="w-50" label="Gen" name="sex">
+              <Select
+                options={[
+                  { value: "male", label: "Masculin" },
+                  { value: "female", label: "Feminin" },
+                ]}
+              />
+            </Form.Item>
+          </div>
           <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
             <Form.Item className="w-100" label="Vârsta" name="age">
               <InputNumber />
@@ -82,7 +164,9 @@ export default function ClientInvestigationForm() {
             <Textarea />
           </Form.Item>
           <div className="d-flex justify-content-end">
-            <Button htmlType="submit">Adaugă</Button>
+            <Button htmlType="submit" loading={loading}>
+              Adaugă
+            </Button>
           </div>
         </Form>
       </Popup.Content>

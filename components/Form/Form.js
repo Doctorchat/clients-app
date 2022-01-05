@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { FormProvider } from "react-hook-form";
 import FormItem from "./FormItem";
 import FormList from "./FormList";
 
 export default function Form(props) {
-  const { name, className, methods, onFinish, onValuesChange, children } = props;
+  const { name, className, methods, onFinish, onValuesChange, initialValues, children } = props;
   const { handleSubmit } = methods;
   const subscription = useRef(null);
+  const [valuesInitiated, setValuesInitiated] = useState(false);
 
   const onFormChange = useCallback(
     (values, { type, name }) => {
@@ -30,6 +31,14 @@ export default function Form(props) {
     };
   }, [methods, onFormChange]);
 
+  useEffect(() => {
+    if (initialValues && !valuesInitiated) {
+      Object.entries(initialValues).forEach(([key, value]) => methods.setValue(key, value));
+
+      setValuesInitiated(true);
+    }
+  }, [initialValues, methods, valuesInitiated]);
+
   return (
     <FormProvider {...methods}>
       <form className={className} id={name} onSubmit={handleSubmit(onFinish)}>
@@ -50,6 +59,7 @@ Form.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
   ]),
   onValuesChange: PropTypes.func,
+  initialValues: PropTypes.object,
 };
 
 Form.Item = FormItem;

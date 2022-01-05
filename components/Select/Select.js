@@ -43,6 +43,16 @@ const Select = forwardRef((props, ref) => {
     ...rest
   } = props;
   const [isActive, setIsActive] = useState(false);
+  const [selectValue, setSelectValue] = useState(value);
+
+  useEffect(() => {
+    if (typeof value === "string" || typeof value === "number") {
+      const normalValue = options.find((opt) => opt.value === value);
+
+      if (normalValue) setSelectValue(normalValue);
+      else setSelectValue(null);
+    }
+  }, [options, value]);
 
   const activeStatusHandler = () => {
     if (value || placeholder) setIsActive(true);
@@ -79,7 +89,7 @@ const Select = forwardRef((props, ref) => {
       <RcSelect
         className={cs("react-select-container", size)}
         classNamePrefix="react-select"
-        value={value}
+        value={selectValue}
         onChange={onChange}
         name={name}
         placeholder={placeholder}
@@ -115,6 +125,8 @@ Select.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.shape({ value: PropTypes.string, label: PropTypes.string }),
     PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })),
+    PropTypes.string,
+    PropTypes.number,
   ]),
   disabled: PropTypes.bool,
   label: PropTypes.string,
