@@ -78,10 +78,21 @@
   }
 }
 
+.dc-radio-group {
+  .dc-radio-input.investigation-select-radio {
+    &:not(:last-of-type) {
+      margin-bottom: 6px;
+    }
+  }
+}
+
 .investigation-select-radio {
   margin: 0;
   display: block;
   width: 100%;
+  .investigation-select-radio:not(:last-of-type) {
+    margin-bottom: 6px;
+  }
   .investigation-item.no-actions .investigation-item-caption {
     margin-bottom: 8px;
   }

@@ -7,13 +7,6 @@ import ClockIcon from "@/icons/clock.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import LineIcon from "@/icons/line.svg";
 
-const isDocNew = (meta) => {
-  if (!meta.helpedUsers) {
-    return true;
-  }
-
-  return false;
-};
 function DocItem(props) {
   const {
     onClick,
@@ -21,10 +14,10 @@ function DocItem(props) {
       isOnline,
       isGuard,
       isAvailable,
+      isNew,
       fullName,
       category,
       avatar,
-      meta,
       meta: { helpedUsers, responseTime },
     },
   } = props;
@@ -38,7 +31,7 @@ function DocItem(props) {
         <div className="doc-caption">
           <h4 className="doc-title">
             <span className="doc-name ellipsis">{fullName}</span>
-            {isDocNew(meta) && <span className="doc-title-tag new">Nou</span>}
+            {isNew && <span className="doc-title-tag new">Nou</span>}
           </h4>
           <div className="doc-item-meta">
             <div className="doc-meta-item">
@@ -74,6 +67,7 @@ DocItem.propTypes = {
     isOnline: PropTypes.bool,
     isGuard: PropTypes.bool,
     isAvailable: PropTypes.bool,
+    isNew: PropTypes.bool,
     fullName: PropTypes.string,
     category: PropTypes.arrayOf(PropTypes.string),
     avatar: PropTypes.string,

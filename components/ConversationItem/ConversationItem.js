@@ -39,6 +39,7 @@ function ConversationItem(props) {
     onClick,
   } = props;
 
+
   return (
     <li className={cs("dialog-item", isSelected && "active", status)} role="link" onClick={onClick}>
       <div className={cs("dialog-avatar", isOnline && "is-online")}>

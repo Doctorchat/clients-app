@@ -53,12 +53,12 @@ export default function DocInfo(props) {
     <div className="doc-info">
       <div className="doc-info-top">
         <div className="dialog-avatar">
-          <Image w="128" h="128" alt={doctor.fullName} src={doctor.avatar} />
+          <Image w="128" h="128" alt={doctor.name} src={doctor.avatar} />
         </div>
         <div className="doc-info-caption">
           <h4 className="title">
-            <span className="name">{doctor.fullName}</span>
-            <span className="doc-title-tag new">Nou</span>
+            <span className="name">{doctor.name}</span>
+            {doctor.isNew && <span className="doc-title-tag new">Nou</span>}
             {!doctor.isGuard && (
               <Tooltip title="Medic de gardă" placement="bottomCenter">
                 <span className="doc-tag guard">
@@ -67,7 +67,7 @@ export default function DocInfo(props) {
               </Tooltip>
             )}
           </h4>
-          <h6 className="category">{doctor?.category?.join(", ")}</h6>
+          <h6 className="category">{doctor?.category?.map((cat) => cat.name_ro).join(", ")}</h6>
           {loading ? (
             <Skeleton>
               <Skeleton.Line className="mb-1" w="93%" h="20px" />
@@ -118,12 +118,13 @@ export default function DocInfo(props) {
 DocInfo.propTypes = {
   doctor: PropTypes.shape({
     id: PropTypes.number,
-    fullName: PropTypes.string,
+    name: PropTypes.string,
     avatar: PropTypes.string,
     isGuard: PropTypes.bool,
     category: PropTypes.array,
     activity: PropTypes.object,
     about: PropTypes.object,
+    isNew: PropTypes.bool,
   }),
   scrollableContainer: PropTypes.string,
   loading: PropTypes.bool,

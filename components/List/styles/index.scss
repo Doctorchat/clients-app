@@ -1,0 +1,35 @@
+.list-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 60px 0 0;
+  &.enter-active {
+    animation: error-in 0.2s;
+  }
+  &.exit-active {
+    display: none;
+  }
+  .list-error-icon svg {
+    width: 56px;
+    height: 56px;
+    color: var(--bs-danger);
+    .warn-duo_svg__fa-secondary {
+      opacity: 0.4;
+    }
+  }
+  .list-error-title {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  .list-error-descrp {
+    .mr-1 {
+      margin-right: 6px;
+    }
+  }
+  .list-error-action {
+    margin-top: 20px;
+    max-width: 180px;
+  }
+}

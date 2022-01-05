@@ -4,12 +4,12 @@ import Spinner from "@/components/Spinner";
 import WarnIcon from "@/icons/warn-duo.svg";
 
 const ListError = forwardRef(({ extra }, ref) => (
-  <div className="chatlist-error" ref={ref}>
-    <div className="chatlist-error-icon">
+  <div className="list-error" ref={ref}>
+    <div className="list-error-icon">
       <WarnIcon />
     </div>
-    <h3 className="chatlist-error-title">A apărut o eroare</h3>
-    <p className="chatlist-error-descrp d-flex align-items-center">
+    <h3 className="list-error-title">A apărut o eroare</h3>
+    <p className="list-error-descrp d-flex align-items-center">
       <Spinner className="mr-1" /> <span>Lucrăm...</span>
     </p>
     {extra}
