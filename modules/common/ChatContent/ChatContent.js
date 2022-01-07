@@ -1,34 +1,72 @@
-import { useCallback } from "react";
+import PropTypes from "prop-types";
+import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
+import { MessagesList } from "..";
+import ChatContentFooter from "./ChatContentFooter";
 import Image from "@/components/Image";
-import Button, { IconBtn } from "@/components/Button";
-import EllipsisIcon from "@/icons/ellipsis-v.svg";
+import { IconBtn } from "@/components/Button";
 import Sidebar from "@/components/Sidebar";
-import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
-import auv from "@/imgs/auth-layout.jpg";
-import Message from "@/components/Message";
+import {
+  messageFormToggleVisibility,
+  messageFormUpdateChatId,
+} from "@/store/slices/messageFormSlice";
+import { Bar } from "@/components/Spinner";
+import cs from "@/utils/classNames";
+import date from "@/utils/date";
+import EllipsisIcon from "@/icons/ellipsis-v.svg";
+import { updateConversation } from "@/store/slices/conversationListSlice";
+import { readChatMessages } from "@/store/actions";
 
-export default function ChatContent() {
+export default function ChatContent(props) {
+  const { loading, userInfo, messages, chatId } = props;
   const dispatch = useDispatch();
 
-  const openMessageFormPopup = useCallback(
-    () => dispatch(messageFormToggleVisibility(true)),
-    [dispatch]
-  );
+  const openMessageFormPopup = useCallback(() => {
+    dispatch(messageFormToggleVisibility(true));
+    dispatch(messageFormUpdateChatId(chatId));
+  }, [chatId, dispatch]);
+
+  useEffect(() => {
+    if (messages) {
+      const unreadedMessages = messages
+        .filter((msg) => !msg.seen)
+        .map((msg) => msg.id)
+        .join(",");
+
+      if (unreadedMessages.length) {
+        setTimeout(() => {
+          dispatch(readChatMessages({ id: chatId, messages: unreadedMessages }));
+          dispatch(updateConversation({ id: +chatId, unread: 0 }));
+        }, 500);
+      }
+    }
+  }, [chatId, dispatch, messages]);
+
+  const HeaderInfo = useMemo(() => {
+    if (userInfo?.isOnline) {
+      return <span className="online">Online</span>;
+    }
+
+    if (userInfo?.last_seen) {
+      return date(userInfo.last_seen).relative;
+    }
+
+    return "Deconectat";
+  }, [userInfo?.isOnline, userInfo.last_seen]);
 
   return (
     <Sidebar id="column-center">
       <Sidebar.Header className="chat-content-header d-flex justify-contnet-between">
         <div className="header-info d-flex align-items-center">
           <div className="dialog-avatar">
-            <Image w="42" h="42" alt={"ceva"} src={auv.src} />
+            <Image w="42" h="42" alt={userInfo.name} src={userInfo.avatar} />
           </div>
           <div className="user-caption ps-3">
             <h4 className="dialog-title mb-0">
-              <span className="user-title">Full Name</span>
+              <span className="user-title">{userInfo.name}</span>
             </h4>
             <p className="dialog-subtitle mb-0">
-              <span className="user-last-message ellipsis">last seen 15 min</span>
+              <span className="user-last-message ellipsis">{HeaderInfo}</span>
             </p>
           </div>
         </div>
@@ -36,31 +74,28 @@ export default function ChatContent() {
           <IconBtn icon={<EllipsisIcon />} size="sm" />
         </div>
       </Sidebar.Header>
-      <Sidebar.Body>
+      <Sidebar.Body className={cs("chat-content", loading && "loading")}>
         <div className="scrollable scrollable-y conversation-content">
+          <Bar />
           <div className="chat-content-inner">
-            <Message
-              content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the"
-              updated="2021-12-28 20:23:31"
-              side="message-out"
-              type="meet"
-            />
-            <Message
-              content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was p"
-              updated="2021-12-28 20:23:31"
-              side="message-in"
-              type="standard"
-            />
+            <MessagesList list={messages} />
           </div>
         </div>
       </Sidebar.Body>
       <Sidebar.Footer className="chat-content-footer">
-        <div className="w-100 d-flex justify-content-center">
-          <Button type="text" onClick={openMessageFormPopup}>
-            Începe Conversația
-          </Button>
-        </div>
+        <ChatContentFooter
+          openMessageFormPopup={openMessageFormPopup}
+          isInitiated={!!messages.length}
+          chatId={chatId}
+        />
       </Sidebar.Footer>
     </Sidebar>
   );
 }
+
+ChatContent.propTypes = {
+  loading: PropTypes.bool,
+  userInfo: PropTypes.object,
+  messages: PropTypes.array,
+  chatId: PropTypes.string,
+};

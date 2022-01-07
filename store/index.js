@@ -5,7 +5,7 @@ export const store = configureStore({
   reducer: {
     conversationList: slices.conversationListSlice,
     user: slices.userSlice,
-    docInfo: slices.docInfoSlice,
+    userInfo: slices.userInfoSlice,
     docSelectList: slices.docSelectListSlice,
     messageForm: slices.messageFormSlice,
     notifications: slices.notificationsSlice,
@@ -14,5 +14,6 @@ export const store = configureStore({
     investigationForm: slices.investigationFormSlice,
     transactionsList: slices.transactionsListSlice,
     meetForm: slices.meetFormSlice,
+    chatContent: slices.chatContentSlice,
   },
 });

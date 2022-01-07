@@ -5,21 +5,21 @@ import DocInfo from "@/components/DocInfo";
 import BackTitle from "@/components/BackTitle";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { startConversationTabs } from "@/context/TabsKeys";
-import { getDocInfo } from "@/store/actions";
-import { cleanDocInfo } from "@/store/slices/docInfoSlice";
+import { getUserInfo } from "@/store/actions";
+import { cleanUserInfo } from "@/store/slices/userInfoSlice";
 import objectIsEmpty from "@/utils/objectIsEmpty";
 
 export default function ClientFindDoc() {
   const {
-    docInfo: { temp, data, selectedId, isLoading },
-  } = useSelector((store) => ({ docInfo: store.docInfo }));
+    userInfo: { temp, data, selectedId, isLoading },
+  } = useSelector((store) => ({ userInfo: store.userInfo }));
   const { updateTabsConfig } = useTabsContext();
   const [docCurrentInfo, setDocCurrentInfo] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedId) {
-      dispatch(getDocInfo(selectedId));
+      dispatch(getUserInfo(selectedId));
     }
   }, [dispatch, selectedId]);
 
@@ -33,7 +33,7 @@ export default function ClientFindDoc() {
 
   useEffect(() => {
     return () => {
-      dispatch(cleanDocInfo());
+      dispatch(cleanUserInfo());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

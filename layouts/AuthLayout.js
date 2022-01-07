@@ -1,6 +1,20 @@
 import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 export default function AuthLayout({ children }) {
+  const user = useSelector((store) => store.user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user.isAuthorized || localStorage.getItem("dc_token")) {
+      router.push({
+        pathname: "/",
+      });
+    }
+  }, [router, user.isAuthorized]);
+
   return (
     <main className="auth-layout">
       <div className="auth-content">

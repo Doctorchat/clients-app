@@ -56,8 +56,8 @@ export default function Confirm(props) {
         {children}
       </a>
       <Portal portalName="modalRoot">
-        <CSSTransition in={active} timeout={200} unmountOnExit nodeRef={confirmRef}>
-          <div className={cs("confirm", className)}>
+        <CSSTransition in={active} timeout={200} nodeRef={confirmRef} unmountOnExit>
+          <div className={cs("confirm", className)} ref={confirmRef}>
             <div className="confirm-backdrop" role="banner" onClick={onCancelHandler} />
             <div className="confirm-body">
               <p className="confirm-content">{content}</p>

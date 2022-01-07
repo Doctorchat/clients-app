@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDocInfo as getInfo } from "../actions";
+import { getUserInfo as getInfo } from "../actions";
 
 const initialState = {
   data: {},
@@ -19,18 +19,18 @@ const cacheHandler = (state, payload) => {
   return state;
 };
 
-export const docInfoSlice = createSlice({
-  name: "docInfo",
+export const userInfoSlice = createSlice({
+  name: "userInfo",
   initialState,
   reducers: {
-    cleanDocInfo(state) {
+    cleanUserInfo(state) {
       state.data = {};
       state.temp = {};
     },
-    setDocSelectedId(state, action) {
+    setUserSelectedId(state, action) {
       state.selectedId = action.payload;
     },
-    setTempDocInfo(state, action) {
+    setTempUserInfo(state, action) {
       state.temp = action.payload;
     },
   },
@@ -58,5 +58,5 @@ export const docInfoSlice = createSlice({
   },
 });
 
-export const { cleanDocInfo, setTempDocInfo, setDocSelectedId } = docInfoSlice.actions;
-export default docInfoSlice.reducer;
+export const { cleanUserInfo, setTempUserInfo, setUserSelectedId } = userInfoSlice.actions;
+export default userInfoSlice.reducer;

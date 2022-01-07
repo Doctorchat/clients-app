@@ -1,13 +1,13 @@
 .message {
   display: flex;
   flex-direction: column;
-  width: 100%;
   background-color: #fff;
   margin-bottom: 10px;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
   max-width: 480px;
   overflow: hidden;
+  transition: box-shadow 0.5s;
 }
 
 .message.in {
@@ -15,6 +15,9 @@
   background-color: lighten(#06f, 5);
   border-bottom-left-radius: 4px;
   color: #fff;
+  &.new {
+    box-shadow: 0 0 0 0.2rem rgba(#06f, 0.25), 0 0 0 0.4rem rgba(#06f, 0.15);
+  }
 }
 
 .message.out {

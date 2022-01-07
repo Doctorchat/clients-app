@@ -94,7 +94,7 @@
   &.responded {
     color: var(--bs-success);
   }
-  &.pending {
+  &.open {
     color: var(--bs-warning);
   }
   &.declined,

@@ -3,7 +3,6 @@ import { forwardRef, useCallback, useEffect, useState } from "react";
 import DP from "antd/lib/date-picker";
 import getMomentDate from "./getMomentDate";
 import cs from "@/utils/classNames";
-import TimesIcon from "@/icons/times.svg";
 
 const DatePicker = forwardRef((props, ref) => {
   const { className, disabled, size, label, name, value, onChange, type, ...rest } = props;

@@ -4,10 +4,10 @@ import cs from "@/utils/classNames";
 import date from "@/utils/date";
 
 export default function Message(props) {
-  const { content, updated, side, type, meet } = props;
+  const { content, updated, side, type, meet, seen } = props;
 
   return (
-    <div className={cs("message", side)}>
+    <div className={cs("message", side, !seen && "new")}>
       <div className="message-content">
         {content}
         <span className="message-time">
@@ -26,4 +26,6 @@ Message.propTypes = {
   side: PropTypes.string,
   type: PropTypes.string,
   meet: PropTypes.object,
+  seen: PropTypes.bool,
+  status: PropTypes.oneOf(["edited", "deleted"]),
 };

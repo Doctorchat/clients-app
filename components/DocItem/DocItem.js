@@ -15,7 +15,7 @@ function DocItem(props) {
       isGuard,
       isAvailable,
       isNew,
-      fullName,
+      name,
       category,
       avatar,
       meta: { helpedUsers, responseTime },
@@ -26,11 +26,11 @@ function DocItem(props) {
     <li className={cs("doc-item", !isAvailable && "unavailable")} role="button" onClick={onClick}>
       <div className="doc-item-info">
         <div className={cs("dialog-avatar", isOnline && "is-online")}>
-          <Image w="76" h="76" alt={fullName} src={avatar} />
+          <Image w="76" h="76" alt={name} src={avatar} />
         </div>
         <div className="doc-caption">
           <h4 className="doc-title">
-            <span className="doc-name ellipsis">{fullName}</span>
+            <span className="doc-name ellipsis">{name}</span>
             {isNew && <span className="doc-title-tag new">Nou</span>}
           </h4>
           <div className="doc-item-meta">
@@ -68,7 +68,7 @@ DocItem.propTypes = {
     isGuard: PropTypes.bool,
     isAvailable: PropTypes.bool,
     isNew: PropTypes.bool,
-    fullName: PropTypes.string,
+    name: PropTypes.string,
     category: PropTypes.arrayOf(PropTypes.string),
     avatar: PropTypes.string,
     meta: PropTypes.shape({

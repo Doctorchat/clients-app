@@ -15,7 +15,7 @@ export const messageFormSlice = createSlice({
       state.isOpen = action.payload;
     },
     messageFormUpdateChatId(state, action) {
-      if (action.payload !== state.prevChatId) {
+      if (+action.payload !== +state.prevChatId) {
         state.values = {};
       }
 

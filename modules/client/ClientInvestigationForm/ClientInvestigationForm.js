@@ -98,7 +98,10 @@ export default function ClientInvestigationForm() {
       id="investigation-form"
       visible={isOpen}
       onVisibleChange={visibilityHandler}
-      confirmationClose={{ content: "Are you sure?", disabled: !formEdited }}
+      confirmationClose={{
+        content: "Ești sigur că vrei să închizi forma? Datele nu vor fi salvate.",
+        disabled: !formEdited,
+      }}
     >
       <Popup.Header title="Adaugă o anchetă" />
       <Popup.Content>

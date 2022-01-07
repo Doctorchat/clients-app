@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { forwardRef, useCallback, useRef, useState } from "react";
+import { Children, cloneElement, forwardRef, useCallback, useRef, useState } from "react";
 import UploadContext from "./UploadContext";
 import UploadFile from "./UploadFile";
 import uniqId from "@/utils/uniqId";
@@ -20,6 +20,7 @@ const Upload = forwardRef((props, ref) => {
     onFileListUpdate,
     fileItemClassName,
     displayList,
+    target,
     action,
   } = props;
   const [fileList, setFileList] = useState([]);
@@ -111,19 +112,24 @@ const Upload = forwardRef((props, ref) => {
 
   return (
     <div className="upload-container" ref={ref}>
-      <div className={cs("upload-drop-btn", isDragOver && "drag-in")} role="button">
-        <div
-          className="upload-handler"
-          onDragLeave={dragleave}
-          onDragEnter={dragenter}
-          onDragOver={dragover}
-          onDrop={drop}
-          onClick={initUploadMethod}
-        />
-        <i className="upload-icon">{icon}</i>
-        {label && <label className="upload-label">{label}</label>}
-        {description && <span className="upload-descrp">{description}</span>}
-      </div>
+      {target ? (
+        cloneElement(Children.only(target), { onClick: initUploadMethod })
+      ) : (
+        <div className={cs("upload-drop-btn", isDragOver && "drag-in")} role="button">
+          <div
+            className="upload-handler"
+            onDragLeave={dragleave}
+            onDragEnter={dragenter}
+            onDragOver={dragover}
+            onDrop={drop}
+            onClick={initUploadMethod}
+          />
+          <i className="upload-icon">{icon}</i>
+          {label && <label className="upload-label">{label}</label>}
+          {description && <span className="upload-descrp">{description}</span>}
+        </div>
+      )}
+
       <div className="upload-list">
         <UploadContext.Provider value={{ action, displayList, onFileListUpdate }}>
           {fileList.map((file) => (
@@ -159,6 +165,7 @@ Upload.propTypes = {
   fileItemClassName: PropTypes.string,
   displayList: PropTypes.bool,
   action: PropTypes.func,
+  target: PropTypes.element,
 };
 
 Upload.defaultProps = {

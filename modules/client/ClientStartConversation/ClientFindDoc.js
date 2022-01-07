@@ -4,7 +4,7 @@ import { ClientDocsSearch } from "..";
 import DocList from "@/components/DocList/";
 import { PopupHeader, PopupContent } from "@/components/Popup";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { setDocSelectedId, setTempDocInfo } from "@/store/slices/docInfoSlice";
+import { setTempUserInfo, setUserSelectedId } from "@/store/slices/userInfoSlice";
 import { startConversationTabs } from "@/context/TabsKeys";
 import List from "@/components/List";
 import { DocItemSkeleton } from "@/components/DocItem";
@@ -36,8 +36,8 @@ export default function ClientFindDoc() {
   const onDocClick = useCallback(
     (info) => () => {
       updateTabsConfig(startConversationTabs.docInfo)();
-      dispatch(setTempDocInfo(info));
-      dispatch(setDocSelectedId(info.id));
+      dispatch(setTempUserInfo(info));
+      dispatch(setUserSelectedId(info.id));
     },
     [dispatch, updateTabsConfig]
   );

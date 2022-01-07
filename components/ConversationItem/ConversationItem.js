@@ -10,7 +10,7 @@ import CheckIcon from "@/icons/check.svg";
 import WarnIcon from "@/icons/warning.svg";
 
 const ticketStatuses = {
-  pending: {
+  open: {
     icon: <ClockIcon />,
     report: "În așteptare",
   },
@@ -34,7 +34,7 @@ const ticketStatuses = {
 
 function ConversationItem(props) {
   const {
-    conversation: { description, isOnline, fullName, updated, unread, avatar, status },
+    conversation: { description, isOnline, name, updated, unread, avatar, status },
     isSelected,
     onClick,
   } = props;
@@ -43,11 +43,11 @@ function ConversationItem(props) {
   return (
     <li className={cs("dialog-item", isSelected && "active", status)} role="link" onClick={onClick}>
       <div className={cs("dialog-avatar", isOnline && "is-online")}>
-        <Image w="58" h="58" alt={fullName} src={avatar} />
+        <Image w="58" h="58" alt={name} src={avatar} />
       </div>
       <div className="user-caption">
         <h4 className="dialog-title">
-          <span className="user-title">{fullName}</span>
+          <span className="user-title">{name}</span>
           <span className="dialog-title-details">
             <span className="message-time ellipsis">{date(updated).dynamic()}</span>
           </span>
@@ -68,11 +68,11 @@ function ConversationItem(props) {
 ConversationItem.propTypes = {
   conversation: PropTypes.shape({
     isOnline: PropTypes.bool,
-    fullName: PropTypes.string,
+    name: PropTypes.string,
     description: PropTypes.string,
     updated: PropTypes.string,
     avatar: PropTypes.string,
-    status: PropTypes.oneOf(["pending", "declined", "responded", "closed", "unpaid"]),
+    status: PropTypes.oneOf(["open", "responded", "closed", "unpaid"]),
     unread: PropTypes.number,
   }),
   isSelected: PropTypes.bool,
