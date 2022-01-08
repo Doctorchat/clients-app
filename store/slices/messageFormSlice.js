@@ -18,6 +18,7 @@ export const messageFormSlice = createSlice({
     messageFormUpdateChatId(state, action) {
       if (+action.payload !== +state.prevChatId) {
         state.values = {};
+        state.uploads = {};
       }
 
       state.chatId = action.payload;
@@ -32,6 +33,7 @@ export const messageFormSlice = createSlice({
     messageFormReset(state) {
       state.isOpen = false;
       state.values = {};
+      state.uploads = {};
       state.prevChatId = null;
       state.chatId = null;
     },
