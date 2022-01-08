@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import Image from "../Image";
 import { IconBtn } from "../Button";
 import uploadHandler from "./uploadHandler";
 import UploadContext from "./UploadContext";
-import { ADD_FILE } from ".";
 import formatBytes from "@/utils/formatBytes";
 import cs from "@/utils/classNames";
 import documnetPlaceholder from "@/imgs/doc.png";
 import TimesIcon from "@/icons/times.svg";
 import WarnIcon from "@/icons/warning.svg";
+import api from "@/services/axios/api";
 
 export default function UploadFile(props) {
   const {
@@ -20,12 +20,13 @@ export default function UploadFile(props) {
     updateFile,
     className,
   } = props;
-  const { action, displayList, onFileListUpdate } = useContext(UploadContext);
+  const { action, displayList, onFileUploaded, originalFileList } = useContext(UploadContext);
   const [animationStates, setAnimationStates] = useState({
     placeholder: false,
     file: false,
   });
   const [placeholder, setPlaceholder] = useState(null);
+  const [removeLoading, setRemoveLoading] = useState(false);
   const animationPlaceholder = useRef();
   const progressRef = useRef();
   const fileRef = useRef();
@@ -48,15 +49,19 @@ export default function UploadFile(props) {
     updateFile({ config });
   };
 
-  const onSuccess = () => {
+  const onSuccess = (attach) => {
     const config = {
       uploading: false,
       uploaded: true,
       progress: "100.00",
     };
 
-    onFileListUpdate(ADD_FILE, file);
-    updateFile({ config });
+    if (file.url.startsWith("blob")) {
+      URL.revokeObjectURL(file.url);
+    }
+
+    updateFile({ config, file_id: attach.id, url: attach.file_url });
+    onFileUploaded(file.id);
   };
 
   const onError = (response) => {
@@ -68,13 +73,25 @@ export default function UploadFile(props) {
     };
 
     updateFile({ config });
+    onFileUploaded(file.id);
   };
 
-  useEffect(() => {
-    const { config, originaFileObj } = file;
+  const removeFileHandler = useCallback(async () => {
+    if (file.file_id) {
+      setRemoveLoading(true);
+      await api.conversation.removeUpload(file.file_id);
+      setRemoveLoading(false);
+    }
 
-    if (!config.error && !config.uploading && !config.uploaded) {
-      uploadHandler(originaFileObj, action, { onProgress, onSuccess, onError });
+    removeFile();
+  }, [file.file_id, removeFile]);
+
+  useEffect(() => {
+    const { config } = file;
+    const originalFileObj = originalFileList.find((attach) => attach.id === file.id);
+
+    if (originalFileObj && !config.error && !config.uploading && !config.uploaded) {
+      uploadHandler(originalFileObj.file, action, { onProgress, onSuccess, onError });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -144,7 +161,12 @@ export default function UploadFile(props) {
               </div>
             </div>
             <div className="upload-file-actions">
-              <IconBtn className="file-remove-btn" onClick={removeFile} icon={<TimesIcon />} />
+              <IconBtn
+                className="file-remove-btn"
+                onClick={removeFileHandler}
+                loading={removeLoading}
+                icon={<TimesIcon />}
+              />
             </div>
           </div>
         </div>
@@ -156,6 +178,7 @@ export default function UploadFile(props) {
 UploadFile.propTypes = {
   file: PropTypes.shape({
     id: PropTypes.string,
+    file_id: PropTypes.number,
     url: PropTypes.string,
     name: PropTypes.string,
     size: PropTypes.number,

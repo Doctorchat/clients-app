@@ -2,12 +2,55 @@
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
   max-width: 480px;
   overflow: hidden;
   transition: box-shadow 0.5s;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  max-width: 480px;
+  &.out {
+    align-self: flex-end;
+    align-items: flex-end;
+  }
+  &.in {
+    align-self: flex-start;
+    align-items: flex-start;
+  }
+}
+
+.message-file {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 320px;
+  max-height: 400px;
+  &:not(:last-of-type) {
+    margin-bottom: 4px;
+  }
+  &.out {
+    border-top-right-radius: 4px;
+    &:not(:last-of-type) {
+      border-bottom-right-radius: 4px;
+    }
+  }
+  &.in {
+    border-top-left-radius: 4px;
+    &:not(:last-of-type) {
+      border-bottom-left-radius: 4px;
+    }
+  }
+  img {
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 
 .message.in {

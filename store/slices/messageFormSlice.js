@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isOpen: false,
   values: {},
+  uploads: {},
   chatId: null,
   prevChatId: null,
 };
@@ -25,6 +26,9 @@ export const messageFormSlice = createSlice({
     messageFormSetConfirmation(state, action) {
       state.values = action.payload;
     },
+    messageFormUpdateUploads(state, action) {
+      state.uploads = action.payload;
+    },
     messageFormReset(state) {
       state.isOpen = false;
       state.values = {};
@@ -39,5 +43,6 @@ export const {
   messageFormSetConfirmation,
   messageFormUpdateChatId,
   messageFormReset,
+  messageFormUpdateUploads,
 } = messageFormSlice.actions;
 export default messageFormSlice.reducer;

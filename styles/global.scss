@@ -220,6 +220,12 @@ div {
   }
 }
 
+mark.dc-mark {
+  font-weight: 500;
+  background-color: transparent;
+  color: var(--bs-primary);
+}
+
 .no-animation {
   transition: unset !important;
 }

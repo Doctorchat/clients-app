@@ -51,7 +51,7 @@ const Select = forwardRef((props, ref) => {
 
       if (normalValue) setSelectValue(normalValue);
       else setSelectValue(null);
-    }
+    } else setSelectValue(value);
   }, [options, value]);
 
   const activeStatusHandler = () => {

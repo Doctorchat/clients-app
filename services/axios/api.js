@@ -18,10 +18,12 @@ const api = {
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),
+    removeUpload: (id) => axiosInstance.delete(`/chat/upload/${id}`),
     create: (data) => axiosInstance.post("/chat/new", data),
     addMessage: (data) => axiosInstance.post("/chat/send", data),
     single: (id) => axiosInstance.get(`/chat/get/${id}`),
     readMessages: (id, messages) => axiosInstance.post("/chat/read", { id, messages }),
+    promo: (code) => axiosInstance.get(`/promocodes/code/${code}`),
   },
   conversationList: { get: () => axiosInstance.get("/chat/list") },
   docList: {

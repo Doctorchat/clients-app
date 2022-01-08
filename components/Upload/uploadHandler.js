@@ -8,7 +8,7 @@ export default async function uploadHandler(file, action, { onProgress, onSucces
       },
     });
 
-    if (onSuccess) onSuccess(response.data, file);
+    if (onSuccess) onSuccess(response);
   } catch (error) {
     if (onError) onError(error, file);
   }

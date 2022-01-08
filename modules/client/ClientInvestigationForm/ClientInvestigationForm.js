@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Popup from "@/components/Popup";
 import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
@@ -29,6 +29,10 @@ export default function ClientInvestigationForm() {
   const resolver = useYupValidationResolver(investigationFormSchema);
   const form = useForm({ resolver, values });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isOpen) setFormEdited(false);
+  }, [isOpen]);
 
   const visibilityHandler = (v) => {
     if (!v) form.reset();
@@ -78,6 +82,7 @@ export default function ClientInvestigationForm() {
         dispatch(investigationFormToggleVisibility(false));
         dispatch(updateUser(response));
         dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
+        setFormEdited(false);
       };
 
       const onError = () => {

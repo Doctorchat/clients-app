@@ -20,6 +20,8 @@ const Input = forwardRef((props, ref) => {
     onBlur,
     placeholder,
     animateLabel,
+    onChange,
+    pattern,
     ...rest
   } = props;
   const [isActive, setIsActive] = useState(false);
@@ -40,6 +42,13 @@ const Input = forwardRef((props, ref) => {
   const onBlurHandler = () => {
     onBlur();
     activeStatusHandler();
+  };
+
+  const onChangeHanlder = (e) => {
+    const value = e.target.value;
+
+    if (pattern) onChange(pattern(value));
+    else onChange(e);
   };
 
   return (
@@ -69,6 +78,7 @@ const Input = forwardRef((props, ref) => {
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
           onInput={onFocusHandler}
+          onChange={onChangeHanlder}
           {...rest}
         />
       </div>
@@ -90,6 +100,7 @@ Input.propTypes = {
   onBlur: PropTypes.func,
   animateLabel: PropTypes.bool,
   placeholder: PropTypes.string,
+  pattern: PropTypes.func,
 };
 
 Input.defaultProps = {

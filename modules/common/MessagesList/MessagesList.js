@@ -15,6 +15,7 @@ export default function MessagesList(props) {
           type={msg.type}
           updated={msg.updated}
           seen={msg.seen}
+          files={msg.files}
         />
       )),
     [list]

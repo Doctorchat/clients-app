@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 import { memo, useCallback, useState } from "react";
 import SelectModeOptions from "./SelectModeOptions";
 import ConfigureFormMessage from "./ConfigureFormMessage";
@@ -10,6 +11,7 @@ function ClientSelectMode(props) {
   const { onSelectMode, docId } = props;
   const [tabsConfig, setTabsConfig] = useState({ key: selectModeTabs.choose, dir: "next" });
   const [tabsHeight, setTabsHeight] = useState(68);
+  const router = useRouter();
 
   const updateTabsHeight = (selector) => () => {
     if (!selector) {
@@ -38,13 +40,15 @@ function ClientSelectMode(props) {
     []
   );
 
+  const goToCreatedChat = useCallback((id) => router.push(`/chat?id=${id}`), [router]);
+
   return (
     <Tabs
       config={{ ...tabsConfig }}
       updateTabsConfig={updateTabsConfig}
       className="doc-info-choose-mode"
       styles={{ "--scroll-height": tabsHeight + "px" }}
-      contextAdditionalData={{ onSelectMode, docId }}
+      contextAdditionalData={{ onSelectMode, docId, onCreated: goToCreatedChat }}
     >
       <Tabs.Pane dataKey={selectModeTabs.choose} unmountOnExit={false}>
         <SelectModeOptions setTabsHeight={setTabsHeight} />

@@ -37,9 +37,10 @@ export default function Confirm(props) {
       setConfirmLoading(true);
       await onConfirm();
       setConfirmLoading(false);
+    } else {
+      onConfirm();
     }
 
-    onConfirm();
     destroyConfirm();
   };
 

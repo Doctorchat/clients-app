@@ -16,7 +16,7 @@ import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { configureFormSchema } from "@/services/validation";
 
 export default function ConfigureFormMeet() {
-  const { updateTabsConfig, docId, onSelectMode } = useTabsContext();
+  const { updateTabsConfig, docId, onSelectMode, onCreated } = useTabsContext();
   const [loading, setLoading] = useState(false);
   const resolver = useYupValidationResolver(configureFormSchema);
   const form = useForm({ defaultValues: { isAnonym: false }, resolver });
@@ -36,6 +36,7 @@ export default function ConfigureFormMeet() {
 
         dispatch(addConversation(response.data));
         dispatch(meetFormUpdateChatId(response.data.id));
+        onCreated(response.data.id);
 
         onSelectMode("meet");
       } catch (error) {
@@ -44,7 +45,7 @@ export default function ConfigureFormMeet() {
         setLoading(false);
       }
     },
-    [dispatch, docId, onSelectMode]
+    [dispatch, docId, onSelectMode, onCreated]
   );
 
   return (
