@@ -46,7 +46,7 @@ MessageFile.propTypes = {
   file: PropTypes.shape({
     name: PropTypes.string,
     file_url: PropTypes.string,
-    size: PropTypes.number,
+    size: PropTypes.string,
     type: PropTypes.string,
   }),
   side: PropTypes.string,

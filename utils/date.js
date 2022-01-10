@@ -7,6 +7,7 @@ dayjs.extend(relativeTime);
 const formats = {
   time: "HH:mm",
   day: "MMM DD",
+  month: "MMMM DD",
   year: "DD/MM/YYYY",
   full: "DD.MM.YYYY HH:mm",
 };
@@ -43,8 +44,17 @@ export default function date(date) {
     return dayjsDate.format(formats.time);
   };
 
+  const monthDate = () => {
+    const today = dayjs();
+    const isCurrentDay = today.day() === dayjsDate.day();
+
+    if (isCurrentDay) return "Astăzi";
+    return dayjsDate.format(formats.month);
+  };
+
   return {
     dynamic,
+    monthDate,
     default: dayjsDate.format("MMMM DD, YYYY"),
     time: dayjsDate.format(formats.time),
     full: dayjsDate.format(formats.full),

@@ -8,8 +8,13 @@ import HistoryIcon from "@/icons/history.svg";
 import BanIcon from "@/icons/ban.svg";
 import CheckIcon from "@/icons/check.svg";
 import WarnIcon from "@/icons/warning.svg";
+import BelIcon from "@/icons/bel-on.svg";
 
 const ticketStatuses = {
+  initied: {
+    icon: <BelIcon />,
+    report: "Inițializat",
+  },
   open: {
     icon: <ClockIcon />,
     report: "În așteptare",
@@ -38,7 +43,6 @@ function ConversationItem(props) {
     isSelected,
     onClick,
   } = props;
-
 
   return (
     <li className={cs("dialog-item", isSelected && "active", status)} role="link" onClick={onClick}>
@@ -72,7 +76,7 @@ ConversationItem.propTypes = {
     description: PropTypes.string,
     updated: PropTypes.string,
     avatar: PropTypes.string,
-    status: PropTypes.oneOf(["open", "responded", "closed", "unpaid"]),
+    status: PropTypes.oneOf(["open", "responded", "closed", "unpaid", "initied"]),
     unread: PropTypes.number,
   }),
   isSelected: PropTypes.bool,

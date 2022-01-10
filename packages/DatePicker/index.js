@@ -5,12 +5,16 @@ import getMomentDate from "./getMomentDate";
 import cs from "@/utils/classNames";
 
 const DatePicker = forwardRef((props, ref) => {
-  const { className, disabled, size, label, name, value, onChange, type, ...rest } = props;
+  const { className, disabled, size, label, name, value, onChange, onDateUpdated, type, ...rest } =
+    props;
   const [momentVal, setMomentVal] = useState(value);
 
   useEffect(() => {
-    setMomentVal(getMomentDate(value));
-  }, [value]);
+    const momentDate = getMomentDate(value);
+
+    setMomentVal(momentDate);
+    onDateUpdated(momentDate);
+  }, [onDateUpdated, value]);
 
   const onChangeHandler = useCallback(
     (_, event) => {
@@ -40,7 +44,7 @@ const DatePicker = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         {type === "simple" ? (
-          <DP {...pickerProps} ref={ref} placeholder="Selectează"  />
+          <DP {...pickerProps} ref={ref} placeholder="Selectează" />
         ) : (
           <DP.RangePicker {...pickerProps} ref={ref} placeholder={["De la", "Pană la"]} />
         )}
@@ -58,6 +62,7 @@ DatePicker.propTypes = {
   size: PropTypes.oneOf(["sm", "md"]),
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onDateUpdated: PropTypes.func,
 };
 
 DatePicker.defaultProps = {

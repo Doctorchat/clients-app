@@ -5,6 +5,7 @@ import EditProflie from "./EditProfile";
 import TransactionsList from "./TransactionsList";
 import ChatContent from "./ChatContent";
 import MessagesList from "./MessagesList";
+import RightSide from "./RightSide";
 
 export {
   ConversationsSidebar,
@@ -14,4 +15,5 @@ export {
   TransactionsList,
   ChatContent,
   MessagesList,
+  RightSide,
 };

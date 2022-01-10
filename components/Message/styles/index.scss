@@ -14,7 +14,6 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  max-width: 480px;
   &.out {
     align-self: flex-end;
     align-items: flex-end;
@@ -164,4 +163,26 @@
     width: 18px;
     height: 18px;
   }
+}
+
+.messages-group-date {
+  position: sticky;
+  top: 0.25rem;
+  padding-bottom: 0.25rem;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+  opacity: 0.99999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.group-date-text {
+  padding: 4.5px 10px;
+  border-radius: 30px;
+  background-color: hsla(168.889, 54.8361%, 57.2255%, 0.5);
+  color: #fff;
+  font-size: 15px;
+  text-shadow: 0px 0px 10px rgba(#000, 0.3);
 }

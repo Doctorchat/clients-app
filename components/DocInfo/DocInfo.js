@@ -70,9 +70,9 @@ export default function DocInfo(props) {
           <h6 className="category">{doctor?.category?.map((cat) => cat.name_ro).join(", ")}</h6>
           {loading ? (
             <Skeleton>
-              <Skeleton.Line className="mb-1" w="93%" h="20px" />
-              <Skeleton.Line className="mb-1" w="85%" h="20px" />
-              <Skeleton.Line w="40%" h="20px" />
+              <Skeleton.Line className="mb-1" w="93%" h="16px" />
+              <Skeleton.Line className="mb-1" w="85%" h="16px" />
+              <Skeleton.Line w="40%" h="16px" />
             </Skeleton>
           ) : (
             <p className="description mb-0">

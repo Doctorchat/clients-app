@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { ChatContent } from "@/modules/common";
+import { ChatContent, RightSide } from "@/modules/common";
 import { getChatContent, getUserInfo } from "@/store/actions";
 import objectIsEmpty from "@/utils/objectIsEmpty";
 
@@ -34,11 +34,16 @@ export default function ColumnCenter() {
   }, [dispatch, selectedId]);
 
   return (
-    <ChatContent
-      loading={chatContent.isLoading}
-      userInfo={userCurrentInfo}
-      messages={chatContent.content?.messages || []}
-      chatId={id}
-    />
+    <>
+      <ChatContent
+        loading={chatContent.isLoading}
+        userInfo={userCurrentInfo}
+        messages={chatContent.content?.messages || []}
+        status={chatContent.content?.status}
+        type={chatContent.content?.type}
+        chatId={id}
+      />
+      <RightSide userId={chatContent.content?.user_id} />
+    </>
   );
 }

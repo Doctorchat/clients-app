@@ -3,11 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isOpen: false,
   values: {},
+  uploads: {},
   chatId: null,
   prevChatId: null,
 };
 
-export const meetFormSlice = createSlice({
+export const meetForm = createSlice({
   name: "meetForm",
   initialState,
   reducers: {
@@ -15,8 +16,9 @@ export const meetFormSlice = createSlice({
       state.isOpen = action.payload;
     },
     meetFormUpdateChatId(state, action) {
-      if (action.payload !== state.prevChatId) {
+      if (+action.payload !== +state.prevChatId) {
         state.values = {};
+        state.uploads = {};
       }
 
       state.chatId = action.payload;
@@ -25,9 +27,13 @@ export const meetFormSlice = createSlice({
     meetFormSetConfirmation(state, action) {
       state.values = action.payload;
     },
+    meetFormUpdateUploads(state, action) {
+      state.uploads = action.payload;
+    },
     meetFormReset(state) {
       state.isOpen = false;
       state.values = {};
+      state.uploads = {};
       state.prevChatId = null;
       state.chatId = null;
     },
@@ -39,5 +45,6 @@ export const {
   meetFormSetConfirmation,
   meetFormUpdateChatId,
   meetFormReset,
-} = meetFormSlice.actions;
-export default meetFormSlice.reducer;
+  meetFormUpdateUploads,
+} = meetForm.actions;
+export default meetForm.reducer;

@@ -91,6 +91,9 @@
   align-items: center;
   justify-content: flex-start;
   font-size: 14px;
+  &.initied {
+    color: var(--bs-primary);
+  }
   &.responded {
     color: var(--bs-success);
   }

@@ -2,11 +2,25 @@ import PropTypes from "prop-types";
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import TP from "antd/lib/time-picker";
 import getMomentTime from "./getMomentTime";
+import getDisabledParts from "./getDisabledParts";
 import cs from "@/utils/classNames";
 
 const TimePicker = forwardRef((props, ref) => {
-  const { className, disabled, size, label, name, value, onChange, type, ...rest } = props;
+  const {
+    className,
+    disabled,
+    size,
+    label,
+    name,
+    value,
+    onChange,
+    type,
+    disabledHours,
+    disabledMinutes,
+    ...rest
+  } = props;
   const [momentVal, setMomentVal] = useState(getMomentTime(value));
+  const [disabledParts, setDisabledParts] = useState({ hours: [], minutes: {} });
 
   useEffect(() => {
     setMomentVal(getMomentTime(value));
@@ -19,17 +33,26 @@ const TimePicker = forwardRef((props, ref) => {
     [onChange]
   );
 
+  useEffect(() => {
+    if (disabledHours && disabledHours.length) {
+      setDisabledParts(getDisabledParts(disabledHours, disabledMinutes));
+    }
+  }, [disabledHours, disabledMinutes]);
+
   const pickerProps = {
     className: cs("dc-picker", className),
     size: size,
     value: momentVal,
     onChange: onChangeHandler,
     disabled: disabled,
-    minuteStep: 20,
+    minuteStep: 10,
     format: "HH:mm",
     showNow: false,
     popupClassName: "dc-picker-popup",
     placeholder: ["De la", "Pană la"],
+    disabledHours: () => disabledParts.hours,
+    disabledMinutes: (hour) => disabledParts.minutes?.[hour] || [],
+    hideDisabledOptions: true,
     ...rest,
   };
 
@@ -59,12 +82,16 @@ TimePicker.propTypes = {
   size: PropTypes.oneOf(["sm", "md"]),
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  disabledHours: PropTypes.array,
+  disabledMinutes: PropTypes.array,
 };
 
 TimePicker.defaultProps = {
   type: "simple",
   size: "md",
   value: null,
+  disabledHours: [],
+  disabledMinutes: [],
 };
 
 TimePicker.displayName = "TimePicker";

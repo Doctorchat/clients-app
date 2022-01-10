@@ -16,15 +16,21 @@ import date from "@/utils/date";
 import EllipsisIcon from "@/icons/ellipsis-v.svg";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { readChatMessages } from "@/store/actions";
+import { meetFormToggleVisibility, meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
 
 export default function ChatContent(props) {
-  const { loading, userInfo, messages, chatId } = props;
+  const { loading, userInfo, messages, chatId, status, type } = props;
   const dispatch = useDispatch();
 
   const openMessageFormPopup = useCallback(() => {
-    dispatch(messageFormToggleVisibility(true));
-    dispatch(messageFormUpdateChatId(chatId));
-  }, [chatId, dispatch]);
+    if (type !== "standard") {
+      dispatch(messageFormToggleVisibility(true));
+      dispatch(messageFormUpdateChatId(chatId));
+    } else if (type === "standard") {
+      dispatch(meetFormToggleVisibility(true));
+      dispatch(meetFormUpdateChatId(chatId));
+    }
+  }, [chatId, dispatch, type]);
 
   useEffect(() => {
     if (messages) {
@@ -85,7 +91,7 @@ export default function ChatContent(props) {
       <Sidebar.Footer className="chat-content-footer">
         <ChatContentFooter
           openMessageFormPopup={openMessageFormPopup}
-          isInitiated={!!messages.length}
+          status={status}
           chatId={chatId}
         />
       </Sidebar.Footer>
@@ -98,4 +104,6 @@ ChatContent.propTypes = {
   userInfo: PropTypes.object,
   messages: PropTypes.array,
   chatId: PropTypes.string,
+  status: PropTypes.string,
+  type: PropTypes.string,
 };
