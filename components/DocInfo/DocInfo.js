@@ -56,8 +56,8 @@ export default function DocInfo(props) {
           <Image w="128" h="128" alt={doctor.name} src={doctor.avatar} />
         </div>
         <div className="doc-info-caption">
-          <h4 className="title">
-            <span className="name">{doctor.name}</span>
+          <h4 className="title ellipsis">
+            <span className="name ellipsis">{doctor.name}</span>
             {doctor.isNew && <span className="doc-title-tag new">Nou</span>}
             {!doctor.isGuard && (
               <Tooltip title="Medic de gardă" placement="bottomCenter">
@@ -100,13 +100,13 @@ export default function DocInfo(props) {
           <Line.Item title="Recenzii" dataKey={docInfoTabs.reviews} />
         </Line>
         <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig} dataAnimation="tabs">
-          <Tabs.Pane dataKey={docInfoTabs.activity} unmountOnExit={false}>
+          <Tabs.Pane dataKey={docInfoTabs.activity} unmountOnExit={false} withAnimation={!loading}>
             <DocInfoActivity activity={doctor?.activity} loading={loading} />
           </Tabs.Pane>
-          <Tabs.Pane dataKey={docInfoTabs.about}>
+          <Tabs.Pane dataKey={docInfoTabs.about} withAnimation={!loading}>
             <DocInfoAbout about={doctor?.about} loading={loading} />
           </Tabs.Pane>
-          <Tabs.Pane dataKey={docInfoTabs.reviews}>
+          <Tabs.Pane dataKey={docInfoTabs.reviews} withAnimation={!loading}>
             <DocReviews docId={doctor?.id} />
           </Tabs.Pane>
         </Tabs>

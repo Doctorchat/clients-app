@@ -6,7 +6,7 @@ const initialState = {
   cache: [],
   temp: {},
   selectedId: null,
-  isLoading: false,
+  isLoading: true,
   isError: false,
 };
 
