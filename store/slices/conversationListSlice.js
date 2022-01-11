@@ -16,7 +16,6 @@ export const conversationListSlice = createSlice({
       state.data.push(action.payload);
     },
     updateConversation(state, action) {
-      console.log(action);
       state.data = state.data.map((conversation) => {
         if (conversation.id === action.payload.id) {
           return { ...conversation, ...action.payload };

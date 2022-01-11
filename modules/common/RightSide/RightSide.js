@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 import BackTitle from "@/components/BackTitle";
 import Sidebar from "@/components/Sidebar";
 import { userRoles } from "@/context/constants";
+import ClientInfo from "@/components/ClientInfo";
 
 const DocInfo = dynamic(() => import("@/components/DocInfo"));
 
 export default function RightSide(props) {
-  const { userInfo, loading } = props;
+  const { userInfo, loading, selectedInvestigation } = props;
   const user = useSelector((store) => store.user);
 
   return (
@@ -26,6 +27,13 @@ export default function RightSide(props) {
                 doctor={userInfo}
               />
             )}
+            {userRoles.get("doctor") === user.data.role && (
+              <ClientInfo
+                client={userInfo}
+                selectedInvestigation={selectedInvestigation}
+                loading={loading || !selectedInvestigation}
+              />
+            )}
           </div>
         </Sidebar.Body>
       </Sidebar>
@@ -36,4 +44,5 @@ export default function RightSide(props) {
 RightSide.propTypes = {
   userInfo: PropTypes.object,
   loading: PropTypes.bool,
+  selectedInvestigation: PropTypes.number,
 };

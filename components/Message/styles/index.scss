@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  margin-bottom: 6px;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
   max-width: 480px;
@@ -22,6 +21,23 @@
     align-self: flex-start;
     align-items: flex-start;
   }
+  &.center {
+    align-self: center;
+    align-items: center;
+    .message-content {
+      padding: 6px 12px;
+    }
+    .message {
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.1;
+      border-left: 3px solid var(--bs-warning);
+      box-shadow: unset;
+    }
+    .message-time {
+      display: none;
+    }
+  }
 }
 
 .message-file {
@@ -30,9 +46,7 @@
   overflow: hidden;
   max-width: 320px;
   max-height: 400px;
-  &:not(:last-of-type) {
-    margin-bottom: 4px;
-  }
+  margin-top: 4px;
   &.out {
     border-top-right-radius: 4px;
     &:not(:last-of-type) {

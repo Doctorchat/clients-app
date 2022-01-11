@@ -95,7 +95,6 @@ function MessageFormConfirmation() {
       }
     } catch (error) {
       dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
-      console.log(error);
     } finally {
       setLoading(false);
     }

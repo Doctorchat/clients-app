@@ -38,7 +38,11 @@ export default function ColumnCenter() {
         type={chatContent.content?.type}
         chatId={id}
       />
-      <RightSide userInfo={userCurrentInfo} loading={isLoading} />
+      <RightSide
+        selectedInvestigation={chatContent.content?.investigation_id}
+        userInfo={userCurrentInfo}
+        loading={isLoading}
+      />
     </>
   );
 }
