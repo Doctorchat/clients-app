@@ -23,10 +23,10 @@ export default function ChatContent(props) {
   const dispatch = useDispatch();
 
   const openMessageFormPopup = useCallback(() => {
-    if (type !== "standard") {
+    if (type === "standard") {
       dispatch(messageFormToggleVisibility(true));
       dispatch(messageFormUpdateChatId(chatId));
-    } else if (type === "standard") {
+    } else if (type === "meet") {
       dispatch(meetFormToggleVisibility(true));
       dispatch(meetFormUpdateChatId(chatId));
     }

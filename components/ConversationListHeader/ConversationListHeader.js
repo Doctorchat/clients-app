@@ -23,6 +23,7 @@ export default function ConversationListHeader(props) {
       props: { updateTabsConfig },
     },
   ]);
+  
 
   return (
     <div className={cs("conversation-list__search", className)}>

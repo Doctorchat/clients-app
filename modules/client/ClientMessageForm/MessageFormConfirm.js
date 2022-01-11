@@ -75,7 +75,7 @@ function MessageFormConfirmation() {
       payload.chat_id = chatId;
       payload.type = MESSAGE_TYPES.standard;
       payload.code = promo.code;
-      payload.uploads = uploads.list.map(({ file_id }) => file_id);
+      payload.uploads = uploads.list?.map(({ file_id }) => file_id) || [];
 
       const response = await api.conversation.addMessage(payload);
       const updatedChatItem = {
@@ -95,6 +95,7 @@ function MessageFormConfirmation() {
       }
     } catch (error) {
       dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
+      console.log(error);
     } finally {
       setLoading(false);
     }
