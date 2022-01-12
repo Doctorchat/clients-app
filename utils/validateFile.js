@@ -26,6 +26,7 @@ export default function validateFile(file, maxSize = 2048, accept = null) {
     return {
       type: "ext",
       message: "Not allowed",
+      error_code: "ext_not_allowed",
     };
   }
 
@@ -33,6 +34,7 @@ export default function validateFile(file, maxSize = 2048, accept = null) {
     return {
       type: "size",
       message: "To big",
+      error_code: "size_to_big",
     };
   }
 

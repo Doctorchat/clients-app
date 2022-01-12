@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { DocSetVacation } from ".";
 import { leftSideTabs } from "@/context/TabsKeys";
 import { logoutUser } from "@/store/actions";
@@ -23,6 +24,7 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
   const [guradStatusUpdating, setGuradStatusUpdating] = useState(false);
   const { closeDropdown } = useDropdownContext();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const logoutHandler = () => dispatch(logoutUser());
 
@@ -49,15 +51,15 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
   return (
     <Menu>
       <Menu.Item icon={<UserIcon />} onClick={onTabsConfigChange(leftSideTabs.profile)}>
-        Profilul meu
+        {t("my_profile")}
       </Menu.Item>
       <Menu.Item icon={<VideoIcon />} onClick={onTabsConfigChange(leftSideTabs.appointments)}>
-        Programări Video
+        {t("video_appointments")}
       </Menu.Item>
       <Menu.Item className="switch" icon={<ShieldIcon />}>
         <Switch
           labelAlign="left"
-          label="Medic de gardă"
+          label={t("guard_doctor")}
           className="w-100"
           value={user?.isGuard}
           onChange={updateUserGuardStatus}
@@ -67,7 +69,7 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
       <DocSetVacation />
       {/* <Menu.Item icon={<FAQIcon />}>FAQ</Menu.Item> */}
       <Menu.Item icon={<LogoutIcon />} className="logout-item" onClick={logoutHandler}>
-        Deconectare
+        {t("logout")}
       </Menu.Item>
     </Menu>
   );

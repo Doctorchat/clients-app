@@ -5,7 +5,7 @@ const api = {
     get: () => axiosInstance.get("/user"),
     login: (data) => axiosInstance.post("/auth/login", data),
     logout: () => axiosInstance.post("/auth/logout"),
-    updateAvatar: (file) => axiosInstance.put("/user/update-avatar/", file),
+    updateAvatar: (file) => axiosInstance.post("/user/update-avatar/", file),
     addInvestigation: (data) => axiosInstance.post("/user/investigations/add", data),
     updateInvestigation: (data) => axiosInstance.post("/user/investigations/update", data),
     removeInvestigation: (id) =>
@@ -15,6 +15,9 @@ const api = {
     updatePassword: (data) => axiosInstance.post("/user/change-password/", data),
     toggleGuardStatus: (isGuard) => axiosInstance.post("/user/card/guard", { isGuard }),
     card: (id) => axiosInstance.get(`/user/card/${id}`),
+    transactions: () => axiosInstance.get("/user/transactions"),
+    setVacation: (data) => axiosInstance.post("/user/card/vacation", data),
+    resetVacation: () => axiosInstance.put("/user/card/vacation"),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

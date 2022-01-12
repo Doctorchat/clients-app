@@ -28,12 +28,6 @@
   border-left: 1px solid var(--bs-gray-300);
 }
 
-@media only screen and(max-width: 1268px) {
-  #column-right {
-    position: absolute;
-  }
-}
-
 .start-conversation-btn {
   position: absolute;
   bottom: 16px;
@@ -41,4 +35,25 @@
   z-index: 12;
   width: 54px;
   height: 54px;
+}
+
+@media only screen and(max-width: 1268px) {
+  #column-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 768;
+    width: 360px;
+  }
+}
+
+@media only screen and(max-width: 768px) {
+  #column-left {
+    max-width: unset;
+  }
+  #column-center {
+    position: absolute;
+    z-index: 760;
+  }
 }

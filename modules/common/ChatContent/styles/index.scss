@@ -7,6 +7,11 @@
     padding: 0;
     background-color: transparent;
   }
+  .header-actions {
+    .open-info {
+      display: none;
+    }
+  }
 }
 
 .chat-content-header {
@@ -20,6 +25,21 @@
   }
   .user-caption span {
     line-height: 21px;
+  }
+  span.online {
+    position: relative;
+    padding-left: 12px;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background-color: var(--bs-primary);
+    }
   }
 }
 
@@ -57,4 +77,27 @@
 .chat-content-start {
   background-color: #fff;
   padding: 4px 0;
+}
+
+.header-info-back {
+  display: none;
+  transform: translateX(-8px);
+}
+
+@media (max-width: 1268px) {
+  #column-center {
+    .header-actions {
+      .open-info {
+        display: unset;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #column-center {
+    .header-info-back {
+      display: unset;
+    }
+  }
 }

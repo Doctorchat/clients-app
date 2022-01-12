@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import { registerSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
@@ -10,6 +11,7 @@ import Button from "@/components/Button";
 export default function Register() {
   const resolver = useYupValidationResolver(registerSchema);
   const form = useForm({ resolver });
+  const { t } = useTranslation();
 
   return (
     <>
@@ -19,36 +21,33 @@ export default function Register() {
         </div>
         <Link href="/auth/login">
           <a>
-            <Button type="outline">Autentificare</Button>
+            <Button type="outline">{t("login")}</Button>
           </a>
         </Link>
       </div>
       <div className="auth-form">
         <Form name="login-form" methods={form}>
           <p className="form-subtitle">DoctorChat</p>
-          <h3 className="form-title">Forma de înregistrare</h3>
-          <Form.Item label="Email*" name="email">
+          <h3 className="form-title">{t("auth_register_title")}</h3>
+          <Form.Item label={`${t("email")}*`} name="email">
             <Input />
           </Form.Item>
-          <Form.Item label="Nr. Telefon" name="phone">
+          <Form.Item label={`${t("phone")}*`} name="phone">
             <Input />
           </Form.Item>
-          <Form.Item label="Prenume*" name="firstName">
+          <Form.Item label={`${t("name")}*`}name="name">
             <Input />
           </Form.Item>
-          <Form.Item label="Nume*" name="lastName">
+          <Form.Item label={`${t("password")}*`} name="password">
             <Input />
           </Form.Item>
-          <Form.Item label="Parola*" name="password">
-            <Input />
-          </Form.Item>
-          <Form.Item label="Repetă parola*" name="passwordConfirmation">
+          <Form.Item label={`${t("repeat_password")}*`} name="passwordConfirmation">
             <Input />
           </Form.Item>
           <div className="form-bottom">
-            <Button htmlType="submit">Înregistre</Button>
+            <Button htmlType="submit">{t("registration")}</Button>
             <Link href="/auth/login">
-              <a>Deja ai cont?</a>
+              <a>{t("already_registered")}</a>
             </Link>
           </div>
         </Form>

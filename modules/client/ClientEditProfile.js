@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { editProfileSchema } from "@/services/validation";
 import Form from "@/components/Form";
@@ -23,6 +24,7 @@ export default function ClientEditProfile() {
     general: { edited: false, loading: false },
     security: { edited: false, loading: false },
   });
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const onFormsValuesChanges = useCallback(
@@ -45,9 +47,9 @@ export default function ClientEditProfile() {
         const response = await api.user.update(values);
 
         dispatch(updateUser(response.data));
-        dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
+        dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
         setFormEditConfig((prev) => ({
           ...prev,
@@ -66,9 +68,9 @@ export default function ClientEditProfile() {
           security: { ...prev.security, loading: true },
         }));
         await api.user.updatePassword(values);
-        dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
+        dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
         setFormEditConfig((prev) => ({
           ...prev,
@@ -82,14 +84,14 @@ export default function ClientEditProfile() {
   return (
     <div className="edit-profile-content">
       <div className="edit-profile-section">
-        <h4 className="edit-profile-title">Informație Generală</h4>
+        <h4 className="edit-profile-title">{t("general_information")}</h4>
         <Form
           methods={generaDataForm}
           className="edit-profile-form"
           onValuesChange={onFormsValuesChanges("general")}
           onFinish={onUpdateData}
         >
-          <Form.Item name="name" label="Nume Prenume">
+          <Form.Item name="name" label={t("name")}>
             <Input />
           </Form.Item>
           <div className="d-flex justify-content-end">
@@ -99,26 +101,26 @@ export default function ClientEditProfile() {
               loading={formEditConfig.general.loading}
               disabled={!formEditConfig.general.edited}
             >
-              Editează
+              {t("edit")}
             </Button>
           </div>
         </Form>
       </div>
       <div className="edit-profile-section">
-        <h4 className="edit-profile-title">Securitate</h4>
+        <h4 className="edit-profile-title">{t("security")}</h4>
         <Form
           methods={securityDataForm}
           className="edit-profile-form"
           onFinish={onSecurityUpdate}
           onValuesChange={onFormsValuesChanges("security")}
         >
-          <Form.Item name="current_password" label="Parola Curentă">
+          <Form.Item name="current_password" label={t("current_password")}>
             <Input type="password" />
           </Form.Item>
-          <Form.Item name="new_password" label="Parola Nouă">
+          <Form.Item name="new_password" label={t("new_password")}>
             <Input type="password" />
           </Form.Item>
-          <Form.Item name="new_confirm_password" label="Repetă Parola">
+          <Form.Item name="new_confirm_password" label={t("repeat_password")}>
             <Input type="password" />
           </Form.Item>
           <div className="d-flex justify-content-end">
@@ -128,7 +130,7 @@ export default function ClientEditProfile() {
               disabled={!formEditConfig.security.edited}
               loading={formEditConfig.security.loading}
             >
-              Editează
+              {t("edit")}
             </Button>
           </div>
         </Form>

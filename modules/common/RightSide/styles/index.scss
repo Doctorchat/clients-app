@@ -1,4 +1,6 @@
 #column-right {
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
   .dialog-avatar {
     align-self: flex-start;
     img {
@@ -6,7 +8,48 @@
       --img-h: 100px !important;
     }
   }
-  .doc-info-caption .name {
-    font-size: 20px;
+  .doc-info-caption {
+    overflow: hidden;
+    .name {
+      font-size: 20px;
+    }
+  }
+  &.enter-active {
+    animation-name: columnIn;
+  }
+  &.exit-active {
+    animation-name: columnIn;
+    animation-direction: reverse;
+  }
+  &.exit-done {
+    display: none;
+  }
+}
+
+.column-right-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .dc-btn-icon {
+    display: none;
+    width: 36px;
+    height: 36px;
+    min-height: 36px;
+    min-width: 36px;
+  }
+}
+
+@keyframes columnIn {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 1268px) {
+  #column-right .column-right-title .dc-btn-icon {
+    display: unset;
   }
 }

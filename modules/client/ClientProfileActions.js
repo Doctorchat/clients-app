@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
@@ -8,17 +9,18 @@ import TicketIcon from "@/icons/ticket.svg";
 
 export default function ClientProfileActions() {
   const { updateTabsConfig } = useTabsContext();
+  const { t } = useTranslation();
 
   return (
     <Menu>
       <Menu.Item icon={<EditIcon />} onClick={updateTabsConfig(leftSideTabs.editProfile)}>
-        Editează Profilul
+        {t("edit_profile")}
       </Menu.Item>
-      <Menu.Item icon={<TicketIcon />}>Bonusuri</Menu.Item>
+      <Menu.Item icon={<TicketIcon />}>{t("bonuses")}</Menu.Item>
       <Menu.Item icon={<HistoryIcon />} onClick={updateTabsConfig(leftSideTabs.transactions)}>
-        Istoricul
+        {t("history")}
       </Menu.Item>
-      <Menu.Item icon={<LangIcon />}>Limba</Menu.Item>
+      <Menu.Item icon={<LangIcon />}>{t("language")}</Menu.Item>
     </Menu>
   );
 }

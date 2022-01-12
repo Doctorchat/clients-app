@@ -22,6 +22,10 @@ export default function DocInfoAbout(props) {
   return (
     <div className="doc-info-tab-content doc-info-activiy">
       <div className="doc-info-section">
+        <h4 className="info-section-title">Despre Mine</h4>
+        <p className="info-section-descrp">{about?.bio}</p>
+      </div>
+      <div className="doc-info-section">
         <h4 className="info-section-title">Informație generală</h4>
         <ul className="doc-info-list">
           <li className="doc-info-list-item">
@@ -46,10 +50,6 @@ export default function DocInfoAbout(props) {
             </div>
           </li>
         </ul>
-      </div>
-      <div className="doc-info-section">
-        <h4 className="info-section-title">Despre Mine</h4>
-        <p className="info-section-descrp">{about?.bio}</p>
       </div>
     </div>
   );

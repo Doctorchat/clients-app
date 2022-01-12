@@ -77,51 +77,48 @@ export default function ClientInfo(props) {
                   Boli suportate pe toată perioada vieții
                 </th>
                 <td className="dc-description-row-content">
-                  <p className="mb-1 bolder-p">
-                    {loading ? (
-                      <Skeleton>
-                        <Skeleton.Line w="45%" h="16px" />
-                      </Skeleton>
-                    ) : (
-                      getSelectLabel(investigation.diseases, diseasesOptions)
-                    )}
-                  </p>
-                  <p className="mb-0">
-                    {loading ? (
-                      <Skeleton>
-                        <Skeleton.Line className="mb-1" w="45%" h="12px" />
-                        <Skeleton.Line className="mb-1" w="65%" h="12px" />
-                        <Skeleton.Line w="35%" h="12px" />
-                      </Skeleton>
-                    ) : (
-                      investigation.diseases_spec
-                    )}
-                  </p>
+                  {loading ? (
+                    <Skeleton>
+                      <Skeleton.Line w="45%" h="16px" />
+                    </Skeleton>
+                  ) : (
+                    <p className="mb-1 bolder-p">
+                      {getSelectLabel(investigation.diseases, diseasesOptions)}
+                    </p>
+                  )}
+                  {loading ? (
+                    <Skeleton>
+                      <Skeleton.Line className="mb-1" w="45%" h="12px" />
+                      <Skeleton.Line className="mb-1" w="65%" h="12px" />
+                      <Skeleton.Line w="35%" h="12px" />
+                    </Skeleton>
+                  ) : (
+                    <p className="mb-0">{investigation.diseases_spec}</p>
+                  )}
                 </td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">Alergii</th>
                 <td className="dc-description-row-content">
-                  <p className="mb-1 bolder-p">
-                    {loading ? (
-                      <Skeleton>
-                        <Skeleton.Line w="45%" h="16px" />
-                      </Skeleton>
-                    ) : (
-                      getSelectLabel(investigation.allergies, allergiesOptions)
-                    )}
-                  </p>
-                  <p className="mb-0">
-                    {loading ? (
-                      <Skeleton>
-                        <Skeleton.Line className="mb-1" w="45%" h="12px" />
-                        <Skeleton.Line className="mb-1" w="65%" h="12px" />
-                        <Skeleton.Line w="35%" h="12px" />
-                      </Skeleton>
-                    ) : (
-                      investigation.allergies_spec
-                    )}
-                  </p>
+                  {loading ? (
+                    <Skeleton>
+                      <Skeleton.Line className="mb-1" w="45%" h="16px" />
+                    </Skeleton>
+                  ) : (
+                    <p className="mb-1 bolder-p">
+                      {getSelectLabel(investigation.allergies, allergiesOptions)}
+                    </p>
+                  )}
+
+                  {loading ? (
+                    <Skeleton>
+                      <Skeleton.Line className="mb-1" w="45%" h="12px" />
+                      <Skeleton.Line className="mb-1" w="65%" h="12px" />
+                      <Skeleton.Line w="35%" h="12px" />
+                    </Skeleton>
+                  ) : (
+                    <p className="mb-0">{investigation.allergies_spec}</p>
+                  )}
                 </td>
               </tr>
             </tbody>

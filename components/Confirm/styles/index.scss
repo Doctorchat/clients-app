@@ -45,15 +45,6 @@
     min-width: 98px;
     min-height: 40px;
   }
-  .confirm-cancel-btn {
-    color: var(--bs-danger);
-    &:hover {
-      background-color: lighten($color: #dc3545, $amount: 40);
-    }
-    &:focus {
-      background-color: lighten($color: #dc3545, $amount: 35);
-    }
-  }
 }
 
 .confirm-backdrop,

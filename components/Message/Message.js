@@ -15,7 +15,7 @@ export default function Message(props) {
 
   return (
     <div className={cs("message-container", side)}>
-      <div className={cs("message", side, !seen && "new")}>
+      <div className={cs("message", side, type, !seen && "new")}>
         <div className="message-content">
           {content}
           <span className="message-time">

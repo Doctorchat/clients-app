@@ -2,10 +2,12 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function AuthLayout({ children }) {
   const user = useSelector((store) => store.user);
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (user.isAuthorized || localStorage.getItem("dc_token")) {
@@ -25,7 +27,7 @@ export default function AuthLayout({ children }) {
               {children}
               <div className="auth-bottom">
                 <a href="#" target="_blank">
-                  Termeni și Condiții
+                  {t("terms_conditions")}
                 </a>
               </div>
             </div>

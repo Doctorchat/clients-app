@@ -203,6 +203,7 @@ div {
   img {
     border-radius: inherit;
     border-radius: 50%;
+    @include skeleton-loading;
   }
   &.is-online {
     &::after {

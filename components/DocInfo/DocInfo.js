@@ -18,7 +18,7 @@ import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 
 export default function DocInfo(props) {
-  const { doctor, scrollableContainer, loading } = props;
+  const { doctor, scrollableContainer, allowCreate, loading } = props;
   const [tabsConfig, setTabsConfig] = useState({ key: docInfoTabs.activity, dir: "next" });
   const dispatch = useDispatch();
 
@@ -79,18 +79,19 @@ export default function DocInfo(props) {
               <Truncate text={doctor?.about?.bio} length={105} />
             </p>
           )}
-
-          <div className="start-conversation mt-1 d-flex justify-content-end">
-            <Dropdown
-              overlay={<ClientSelectMode docId={doctor.id} onSelectMode={selectModeHandler} />}
-              overlayClassName="choose-mode-overlay"
-              placement="bottomLeft"
-            >
-              <Button size="sm" className="w-auto">
-                Descrie Problema
-              </Button>
-            </Dropdown>
-          </div>
+          {allowCreate && (
+            <div className="start-conversation mt-1 d-flex justify-content-end">
+              <Dropdown
+                overlay={<ClientSelectMode docId={doctor.id} onSelectMode={selectModeHandler} />}
+                overlayClassName="choose-mode-overlay"
+                placement="bottomLeft"
+              >
+                <Button size="sm" className="w-auto">
+                  Descrie Problema
+                </Button>
+              </Dropdown>
+            </div>
+          )}
         </div>
       </div>
       <div className="doc-info-tabs">
@@ -128,10 +129,12 @@ DocInfo.propTypes = {
   }),
   scrollableContainer: PropTypes.string,
   loading: PropTypes.bool,
+  allowCreate: PropTypes.bool,
 };
 
 DocInfo.defaultProps = {
   doctor: {
     activity: {},
   },
+  allowCreate: true,
 };

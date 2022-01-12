@@ -4,6 +4,7 @@ import Head from "next/head";
 import { store } from "../store";
 import MainLayout from "@/layouts/MainLayout";
 import NotificationsWrapper from "@/containers/NotificationsWrapper";
+import "@/services/i18next";
 
 // Styles
 import "../styles/global.scss";

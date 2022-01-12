@@ -10,9 +10,9 @@ export default function searchObjectsByKeys(searchKeys, list) {
       let result = "";
 
       if (Array.isArray(value)) {
-        result = value.join("");
+        result = value.filter(Boolean).join("");
       } else {
-        result = value;
+        result = value || "";
       }
 
       return result.trim().toLowerCase();
@@ -37,12 +37,9 @@ export default function searchObjectsByKeys(searchKeys, list) {
 
     const filteredList = listStrings
       .filter(({ str }) => {
-        console.log(str.match(searchTermRegex));
         return str.match(searchTermRegex);
       })
       .map(({ id }) => id);
-
-    console.log();
 
     return [...list].filter(({ id }) => filteredList.includes(id));
   };

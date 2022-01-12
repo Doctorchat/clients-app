@@ -3,6 +3,7 @@ import { getChatContent, readChatMessages } from "../actions";
 
 const initialState = {
   isLoading: false,
+  infoVisible: { visible: true, animate: true },
   content: {},
   cache: [],
   isError: false,
@@ -32,6 +33,9 @@ export const chatContentSlice = createSlice({
       state.content.messages.push(action.payload);
     },
     chatContentUpdateMessage(state, action) {},
+    chatContentToggleInfoVisibility(state, action) {
+      state.infoVisible = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -63,5 +67,6 @@ export const chatContentSlice = createSlice({
   },
 });
 
-export const { chatContentAddMessage, chatContentUpdateMessage } = chatContentSlice.actions;
+export const { chatContentAddMessage, chatContentUpdateMessage, chatContentToggleInfoVisibility } =
+  chatContentSlice.actions;
 export default chatContentSlice.reducer;

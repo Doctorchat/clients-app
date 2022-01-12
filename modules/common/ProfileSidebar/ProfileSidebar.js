@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import Image from "@/components/Image";
 import cs from "@/utils/classNames";
 import Sidebar from "@/components/Sidebar";
@@ -11,6 +12,7 @@ import { userRoles } from "@/context/constants";
 export default function ProfileSidebar() {
   const { updateTabsConfig } = useTabsContext();
   const { user } = useSelector((store) => ({ user: store.user }));
+  const { t } = useTranslation();
   const ProfileActions = useComponentByRole([
     {
       role: userRoles.get("client"),
@@ -25,7 +27,10 @@ export default function ProfileSidebar() {
   return (
     <Sidebar>
       <Sidebar.Header>
-        <BackTitle title="Profilul meu" onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")} />
+        <BackTitle
+          title={t('my_profile')}
+          onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")}
+        />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-content-wrapper">

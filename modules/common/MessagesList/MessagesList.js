@@ -37,15 +37,7 @@ export default function MessagesList(props) {
             <span className="group-date-text">{date(group).monthDate()}</span>
           </div>
           {groupedMessage[group].map((msg) => (
-            <Message
-              key={msg.id}
-              content={msg.content}
-              side={msg.side}
-              type={msg.type}
-              updated={msg.updated}
-              seen={msg.seen}
-              files={msg.files}
-            />
+            <Message key={msg.id} {...msg} />
           ))}
         </div>
       )),

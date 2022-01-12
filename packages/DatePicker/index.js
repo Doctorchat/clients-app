@@ -7,13 +7,13 @@ import cs from "@/utils/classNames";
 const DatePicker = forwardRef((props, ref) => {
   const { className, disabled, size, label, name, value, onChange, onDateUpdated, type, ...rest } =
     props;
-  const [momentVal, setMomentVal] = useState(value);
+  const [momentVal, setMomentVal] = useState(getMomentDate(value));
 
   useEffect(() => {
     const momentDate = getMomentDate(value);
 
     setMomentVal(momentDate);
-    onDateUpdated(momentDate);
+    if (onDateUpdated) onDateUpdated(momentDate);
   }, [onDateUpdated, value]);
 
   const onChangeHandler = useCallback(
@@ -55,7 +55,7 @@ const DatePicker = forwardRef((props, ref) => {
 
 DatePicker.propTypes = {
   type: PropTypes.oneOf(["simple", "range"]),
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   label: PropTypes.string,
   className: PropTypes.string,

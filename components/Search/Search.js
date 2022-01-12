@@ -8,7 +8,6 @@ import searchObjectsByKeys from "@/utils/searchObjectsByKeys";
 export default function Search(props) {
   const { searchKeys, placeholder, request, localList, onFocus, onBlur, updateSearchConfig } =
     props;
-  const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
   const search = useRef(null);
 
@@ -18,22 +17,15 @@ export default function Search(props) {
 
   const apiSearch = useCallback(async () => {
     try {
-      setLoading(true);
       const searchResult = await request(input);
       updateSearchConfig("list", searchResult);
     } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+      return Promise.reject(error);
     }
   }, [input, request, updateSearchConfig]);
 
   const localSearch = useCallback(() => {
     const searchResult = search.current(input);
-
-    // if (searchResult.length <= minSearchedLocalList) {
-    //   apiSearch();
-    // }
 
     updateSearchConfig("list", searchResult);
   }, [input, updateSearchConfig]);
@@ -70,7 +62,6 @@ export default function Search(props) {
       value={input}
       onChange={onInputChange}
       placeholder={placeholder}
-      // loading={loading}
       prefix={<SearchIcon />}
       onFocus={onFocus}
       onBlur={onBlur}

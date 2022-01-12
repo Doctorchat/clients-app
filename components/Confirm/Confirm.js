@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useRef, useState } from "react";
+import { t } from "i18next";
 import { CSSTransition } from "react-transition-group";
 import Button from "../Button";
 import cs from "@/utils/classNames";
@@ -100,8 +101,8 @@ Confirm.propTypes = {
 };
 
 Confirm.defaultProps = {
-  confirmText: "Confirm",
-  cancelText: "Anulare",
+  confirmText: t("confirm"),
+  cancelText: t("cancel"),
   isAsync: false,
   confirmBtnProps: {},
   cancelBtnProps: {},

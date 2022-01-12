@@ -16,7 +16,14 @@ export default function ChatContentFooter(props) {
           </Button>
         </div>
       </AuthRoleWrapper>
-      {status && status !== "initied" && <MessageBar chatId={chatId} />}
+      <AuthRoleWrapper extraValidation={status === "unpaid"} roles={[userRoles.get("client")]}>
+        <div className="chat-content-start w-100 d-flex justify-content-center">
+          <Button type="text" className="confirm-cancel-btn" onClick={openMessageFormPopup}>
+            Achită
+          </Button>
+        </div>
+      </AuthRoleWrapper>
+      {status && !["initied", "unpaid"].includes(status) && <MessageBar chatId={chatId} />}
     </>
   );
 }

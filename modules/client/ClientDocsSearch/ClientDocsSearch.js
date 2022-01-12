@@ -26,7 +26,7 @@ export default function ClientDocsSearch(props) {
         placeholder="Nume, Prenume, Categorie"
         localList={localList}
         updateSearchConfig={updateSearchConfig}
-        searchKeys={["fullName", "category"]}
+        searchKeys={["name", "category"]}
       />
       <div className="find-doc-filters d-flex align-items-center justify-content-between mt-3 gap-5">
         <Select

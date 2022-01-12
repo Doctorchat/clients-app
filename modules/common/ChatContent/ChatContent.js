@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo } from "react";
+import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { MessagesList } from "..";
 import ChatContentFooter from "./ChatContentFooter";
@@ -17,10 +18,38 @@ import EllipsisIcon from "@/icons/ellipsis-v.svg";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { readChatMessages } from "@/store/actions";
 import { meetFormToggleVisibility, meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
+import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
+import ArrowLeftIcon from "@/icons/arrow-left.svg";
 
 export default function ChatContent(props) {
   const { loading, userInfo, messages, chatId, status, type } = props;
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (window.innerWidth <= 1268) {
+      dispatch(chatContentToggleInfoVisibility({ visible: false, animate: false }));
+    }
+
+    const toggleChatInfo = () => {
+      if (window.innerWidth <= 1268) {
+        dispatch(chatContentToggleInfoVisibility({ visible: false, animate: true }));
+      } else {
+        dispatch(chatContentToggleInfoVisibility({ visible: true, animate: true }));
+      }
+    };
+
+    window.addEventListener("resize", toggleChatInfo);
+
+    return () => {
+      window.removeEventListener("resize", toggleChatInfo);
+    };
+  }, [dispatch]);
+
+  const openChatInfo = useCallback(
+    () => dispatch(chatContentToggleInfoVisibility({ visible: true, animate: true })),
+    [dispatch]
+  );
 
   const openMessageFormPopup = useCallback(() => {
     if (type === "standard") {
@@ -31,6 +60,8 @@ export default function ChatContent(props) {
       dispatch(meetFormUpdateChatId(chatId));
     }
   }, [chatId, dispatch, type]);
+
+  const onBack = useCallback(() => router.push("/"), [router]);
 
   useEffect(() => {
     if (messages) {
@@ -64,6 +95,7 @@ export default function ChatContent(props) {
     <Sidebar id="column-center">
       <Sidebar.Header className="chat-content-header d-flex justify-contnet-between">
         <div className="header-info d-flex align-items-center">
+          <IconBtn className="header-info-back" onClick={onBack} icon={<ArrowLeftIcon />} />
           <div className="dialog-avatar">
             <Image w="42" h="42" alt={userInfo.name} src={userInfo.avatar} />
           </div>
@@ -77,7 +109,7 @@ export default function ChatContent(props) {
           </div>
         </div>
         <div className="header-actions">
-          <IconBtn icon={<EllipsisIcon />} size="sm" />
+          <IconBtn icon={<EllipsisIcon />} className="open-info" size="sm" onClick={openChatInfo} />
         </div>
       </Sidebar.Header>
       <Sidebar.Body className={cs("chat-content", loading && "loading")}>

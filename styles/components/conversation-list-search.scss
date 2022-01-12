@@ -8,6 +8,12 @@
     width: 100%;
     margin-left: 12px;
   }
+  .dc-input {
+    max-width: unset;
+    min-height: unset;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
 }
 
 .logout-item {

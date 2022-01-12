@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
+import { useTranslation } from "react-i18next";
 import { IconBtn } from "../Button";
 import cs from "@/utils/classNames";
 import TimesIcon from "@/icons/times.svg";
@@ -39,6 +40,7 @@ function Notification(props) {
   const notificationRef = useRef();
   const [notificationTop, setNotificationTop] = useState(0);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMouted(true);
@@ -91,8 +93,8 @@ function Notification(props) {
       >
         <i className="notification-icon">{Icon}</i>
         <div className="notification-caption">
-          <h4 className="title">{title}</h4>
-          {typeof descrp === "string" ? <p className="description">{descrp}</p> : descrp}
+          <h4 className="title">{t(title)}</h4>
+          {typeof descrp === "string" ? <p className="description">{t(descrp)}</p> : descrp}
         </div>
         <IconBtn
           className="notification-destroy"

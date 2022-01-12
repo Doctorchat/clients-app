@@ -13,6 +13,7 @@
       "@/layouts/*": ["layouts/*"],
       "@/imgs/*": ["assets/images/*"],
       "@/icons/*": ["assets/icons/*"],
+      "@/locales/*": ["assets/locales/*"],
       "@/context/*": ["context/*"],
       "@/store/*": ["store/*"]
     }

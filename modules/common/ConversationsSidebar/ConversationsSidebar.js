@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Sidebar from "@/components/Sidebar";
@@ -19,6 +19,17 @@ export default function ConversationsSidebar() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { id } = router.query;
+  const [currentList, setCurrentList] = useState([]);
+  const [searchConfig, setSearchConfig] = useState({
+    list: [],
+    active: false,
+    loading: false,
+  });
+
+  useEffect(() => {
+    if (searchConfig.active) setCurrentList(searchConfig.list);
+    else setCurrentList(conversationList.data);
+  }, [conversationList.data, searchConfig]);
 
   useEffect(() => dispatch(getConversationList()), [dispatch]);
 
@@ -27,10 +38,14 @@ export default function ConversationsSidebar() {
     [dispatch]
   );
 
+  const updateSearchConfig = (actionType, value) => {
+    setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
+  };
+
   return (
     <Sidebar>
       <Sidebar.Header>
-        <ConversationListHeader />
+        <ConversationListHeader localList={currentList} updateSearchConfig={updateSearchConfig} />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y conversation-list-parts">
@@ -45,8 +60,11 @@ export default function ConversationsSidebar() {
               extra: <Button type="outline">Reâncarcă pagina</Button>,
             }}
             emptyConfig={{
-              status: !conversationList.data.length,
+              status: !currentList.length,
               className: "pt-4",
+              content: searchConfig.active
+                ? "Nu am găsit nici o coversație"
+                : "Aici va apărea lista de conversații",
               extra: (
                 <AuthRoleWrapper roles={[userRoles.get("client")]}>
                   <Button className="mt-3" onClick={openStartConversation}>
@@ -56,7 +74,7 @@ export default function ConversationsSidebar() {
               ),
             }}
           >
-            <ConversationList conversations={conversationList.data} activeConversation={id} />
+            <ConversationList conversations={currentList} activeConversation={id} />
           </List>
         </div>
       </Sidebar.Body>

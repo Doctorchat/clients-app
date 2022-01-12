@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -17,6 +18,7 @@ export default function Login() {
   const form = useForm({ resolver });
   const router = useRouter();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onLoginSubmit = useCallback(
     async (values) => {
@@ -46,25 +48,25 @@ export default function Login() {
         </div>
         <Link href="/auth/register">
           <a>
-            <Button type="outline">Înregistrare</Button>
+            <Button type="outline">{t("registration")}</Button>
           </a>
         </Link>
       </div>
       <div className="auth-form">
         <Form name="login-form" methods={form} onFinish={onLoginSubmit}>
           <p className="form-subtitle">DoctorChat</p>
-          <h3 className="form-title">Forma de autentificare</h3>
-          <Form.Item label="Email" name="email">
+          <h3 className="form-title">{t("auth_login_title")}</h3>
+          <Form.Item label={t("email")} name="email">
             <Input />
           </Form.Item>
-          <Form.Item label="Parola" name="password">
+          <Form.Item label={t("password")} name="password">
             <Input type="password" />
           </Form.Item>
           <div className="form-bottom">
             <Button htmlType="submit" loading={loading}>
-              Autentificare
+              {t("login")}
             </Button>
-            <Link href="/auth/restore">Ai uitat parola?</Link>
+            <Link href="/auth/restore">{t("forgot_password")}</Link>
           </div>
         </Form>
       </div>

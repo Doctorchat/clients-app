@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import Input from "../Inputs";
 import { IconBtn } from "../Button";
 import Dropdown from "../Dropdown";
+import Search from "../Search/Search";
 import { userRoles } from "@/context/constants";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import useComponentByRole from "@/hooks/useComponentByRole";
@@ -9,7 +9,7 @@ import cs from "@/utils/classNames";
 import BarsIcon from "@/icons/bars.svg";
 
 export default function ConversationListHeader(props) {
-  const { className } = props;
+  const { className, localList, updateSearchConfig } = props;
   const { updateTabsConfig } = useTabsContext();
   const menuOverlay = useComponentByRole([
     {
@@ -23,7 +23,6 @@ export default function ConversationListHeader(props) {
       props: { updateTabsConfig },
     },
   ]);
-  
 
   return (
     <div className={cs("conversation-list__search", className)}>
@@ -33,7 +32,12 @@ export default function ConversationListHeader(props) {
         </Dropdown>
       </div>
       <div className="search-bar">
-        <Input onChange={() => null} placeholder="Caută..." size="sm" />
+        <Search
+          placeholder="Nume, Descriere"
+          localList={localList}
+          updateSearchConfig={updateSearchConfig}
+          searchKeys={["name", "description"]}
+        />
       </div>
     </div>
   );
@@ -41,4 +45,6 @@ export default function ConversationListHeader(props) {
 
 ConversationListHeader.propTypes = {
   className: PropTypes.string,
+  localList: PropTypes.array,
+  updateSearchConfig: PropTypes.func,
 };

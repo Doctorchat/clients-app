@@ -1,22 +1,23 @@
+import { t } from "i18next";
 import { setLocale } from "yup";
 
 setLocale({
   mixed: {
-    required: "Acest câmp este obligatoriu",
+    required: t("required_input"),
     notType: ({ type }) => {
       let typeMsg = "";
 
       if (type === "number") {
-        typeMsg = ", întroduceți un număr";
+        typeMsg = t("yup_mixed_number");
       }
 
-      return `Format invalid ${typeMsg}`;
+      return `${t("yup_mixed_format")} ${typeMsg}`;
     },
   },
   string: {
-    email: "Acest email nu este valid",
-    min: "Cel puțin ${min} caractere",
-    max: "Lungimea maximă este ${max} caractere",
+    email: t("yup_string_email"),
+    min: t("yup_string_min"),
+    max: t("yup_string_max"),
   },
   object: {
     noUnknown: "Cei asta",
