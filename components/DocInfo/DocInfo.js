@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import Image from "../Image";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
@@ -17,9 +18,12 @@ import { ClientSelectMode } from "@/modules/client";
 import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 
+const selectedLng = localStorage.getItem("i18nextLng") || "ro";
+
 export default function DocInfo(props) {
   const { doctor, scrollableContainer, allowCreate, loading } = props;
   const [tabsConfig, setTabsConfig] = useState({ key: docInfoTabs.activity, dir: "next" });
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const updateTabsConfig = useCallback(
@@ -58,7 +62,7 @@ export default function DocInfo(props) {
         <div className="doc-info-caption">
           <h4 className="title ellipsis">
             <span className="name ellipsis">{doctor.name}</span>
-            {doctor.isNew && <span className="doc-title-tag new">Nou</span>}
+            {doctor.isNew && <span className="doc-title-tag new">{t("new")}</span>}
             {!doctor.isGuard && (
               <Tooltip title="Medic de gardă" placement="bottomCenter">
                 <span className="doc-tag guard">
@@ -67,7 +71,9 @@ export default function DocInfo(props) {
               </Tooltip>
             )}
           </h4>
-          <h6 className="category">{doctor?.category?.map((cat) => cat.name_ro).join(", ")}</h6>
+          <h6 className="category">
+            {doctor?.category?.map((cat) => cat[`name_${selectedLng}`]).join(", ")}
+          </h6>
           {loading ? (
             <Skeleton>
               <Skeleton.Line className="mb-1" w="93%" h="16px" />
@@ -87,7 +93,7 @@ export default function DocInfo(props) {
                 placement="bottomLeft"
               >
                 <Button size="sm" className="w-auto">
-                  Descrie Problema
+                  {t("describe_problem")}
                 </Button>
               </Dropdown>
             </div>
@@ -96,9 +102,9 @@ export default function DocInfo(props) {
       </div>
       <div className="doc-info-tabs">
         <Line activeKey={tabsConfig.key} updateTabsConfig={updateTabsConfig}>
-          <Line.Item title="Activitate" dataKey={docInfoTabs.activity} />
-          <Line.Item title="Despre" dataKey={docInfoTabs.about} />
-          <Line.Item title="Recenzii" dataKey={docInfoTabs.reviews} />
+          <Line.Item title={t("activity")} dataKey={docInfoTabs.activity} />
+          <Line.Item title={t("about")} dataKey={docInfoTabs.about} />
+          <Line.Item title={t("reviews")} dataKey={docInfoTabs.reviews} />
         </Line>
         <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig} dataAnimation="tabs">
           <Tabs.Pane dataKey={docInfoTabs.activity} unmountOnExit={false} withAnimation={!loading}>

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { ClientDocsSearch } from "..";
 import DocList from "@/components/DocList/";
 import { PopupHeader, PopupContent } from "@/components/Popup";
@@ -21,6 +22,7 @@ export default function ClientFindDoc() {
     active: false,
     loading: false,
   });
+  const { t } = useTranslation();
   const { updateTabsConfig } = useTabsContext();
   const dispatch = useDispatch();
 
@@ -48,7 +50,7 @@ export default function ClientFindDoc() {
 
   return (
     <div className="popup-body position-relative">
-      <PopupHeader title="Selecteză un doctor" />
+      <PopupHeader title={t('select_doctor')} />
       <PopupContent>
         <ClientDocsSearch updateSearchConfig={updateSearchConfig} localList={docSelectList.data} />
         <List
@@ -63,8 +65,8 @@ export default function ClientFindDoc() {
             status: !currentList.length,
             className: "pt-4",
             content: searchConfig.active
-              ? "Nu am găsit nici un doctor"
-              : "Aici va apărea lista de doctori",
+              ? t('search_not_found')
+              : t('doctor_list_empty'),
           }}
         >
           <DocList onDocClick={onDocClick} data={currentList} />

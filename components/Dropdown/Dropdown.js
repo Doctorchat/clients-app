@@ -13,6 +13,7 @@ export default function Dropdown(props) {
     visibile,
     onVisibleChange,
     destroyOnHide,
+    forcedClose,
     children,
   } = props;
   const [status, setStatus] = useState(visibile);
@@ -37,6 +38,12 @@ export default function Dropdown(props) {
     },
     [closeDropdown]
   );
+
+  useEffect(() => {
+    if (forcedClose) {
+      if (forcedClose === "__forced-close") closeDropdown();
+    }
+  }, [closeDropdown, forcedClose]);
 
   useEffect(() => {
     window.addEventListener("keydown", escCloseHandler);
@@ -81,6 +88,7 @@ Dropdown.propTypes = {
   onVisibleChange: PropTypes.func,
   children: PropTypes.element,
   destroyOnHide: PropTypes.bool,
+  forcedClose: PropTypes.any,
 };
 
 Dropdown.defaultProps = {

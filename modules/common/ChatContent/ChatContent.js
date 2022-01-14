@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { MessagesList } from "..";
 import ChatContentFooter from "./ChatContentFooter";
@@ -22,7 +23,8 @@ import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
 
 export default function ChatContent(props) {
-  const { loading, userInfo, messages, chatId, status, type } = props;
+  const { loading, userInfo, messages, chatId, status, type, paymentUrl } = props;
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -81,15 +83,15 @@ export default function ChatContent(props) {
 
   const HeaderInfo = useMemo(() => {
     if (userInfo?.isOnline) {
-      return <span className="online">Online</span>;
+      return <span className="online">{t("online")}</span>;
     }
 
     if (userInfo?.last_seen) {
       return date(userInfo.last_seen).relative;
     }
 
-    return "Deconectat";
-  }, [userInfo?.isOnline, userInfo.last_seen]);
+    return t("offline");
+  }, [t, userInfo?.isOnline, userInfo.last_seen]);
 
   return (
     <Sidebar id="column-center">
@@ -125,6 +127,7 @@ export default function ChatContent(props) {
           openMessageFormPopup={openMessageFormPopup}
           status={status}
           chatId={chatId}
+          paymentUrl={paymentUrl}
         />
       </Sidebar.Footer>
     </Sidebar>
@@ -138,4 +141,5 @@ ChatContent.propTypes = {
   chatId: PropTypes.string,
   status: PropTypes.string,
   type: PropTypes.string,
+  paymentUrl: PropTypes.string,
 };

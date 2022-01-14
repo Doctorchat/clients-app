@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
-// import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import Image from "../Image";
 import emptyIcon from "@/imgs/empty-folder.png";
 import cs from "@/utils/classNames";
 
 export default function EmptyBox(props) {
-  const { className, title, content, extra } = props;
+  const { t } = useTranslation();
+  const { className, title = t("no_data"), content = t("conversation_list_empty"), extra } = props;
 
   return (
     <div className={cs("empty-box", className)}>
@@ -26,9 +27,4 @@ EmptyBox.propTypes = {
   content: PropTypes.string,
   className: PropTypes.string,
   extra: PropTypes.element,
-};
-
-EmptyBox.defaultProps = {
-  title: "Nu-s date",
-  content: "Aici va apărea lista de converații",
 };

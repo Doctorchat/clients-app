@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import Image from "../Image";
 import cs from "@/utils/classNames";
 import date from "@/utils/date";
 import ClockIcon from "@/icons/clock.svg";
 import HistoryIcon from "@/icons/history.svg";
-import BanIcon from "@/icons/ban.svg";
 import CheckIcon from "@/icons/check.svg";
 import WarnIcon from "@/icons/warning.svg";
 import BelIcon from "@/icons/bel-on.svg";
@@ -13,27 +13,23 @@ import BelIcon from "@/icons/bel-on.svg";
 const ticketStatuses = {
   initied: {
     icon: <BelIcon />,
-    report: "Inițializat",
+    report: "coversation_status.initied",
   },
   open: {
     icon: <ClockIcon />,
-    report: "În așteptare",
+    report: "coversation_status.pending",
   },
   closed: {
     icon: <HistoryIcon />,
-    report: "Arhivat",
-  },
-  declined: {
-    icon: <BanIcon />,
-    report: "Refuzat",
+    report: "coversation_status.closed",
   },
   responded: {
     icon: <CheckIcon />,
-    report: "Răspuns primit",
+    report: "coversation_status.responded",
   },
   unpaid: {
     icon: <WarnIcon />,
-    report: "Achitare",
+    report: "coversation_status.unpaid",
   },
 };
 
@@ -43,6 +39,7 @@ function ConversationItem(props) {
     isSelected,
     onClick,
   } = props;
+  const { t } = useTranslation();
 
   return (
     <li className={cs("dialog-item", isSelected && "active", status)} role="link" onClick={onClick}>
@@ -58,7 +55,7 @@ function ConversationItem(props) {
         </h4>
         <p className={cs("dialog-status", status)}>
           <span className="status-icon">{ticketStatuses[status]?.icon}</span>
-          <span className="status-text">{ticketStatuses[status]?.report}</span>
+          <span className="status-text">{t(ticketStatuses[status]?.report)}</span>
         </p>
         <p className="dialog-subtitle">
           <span className="user-last-message ellipsis">{description}</span>

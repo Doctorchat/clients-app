@@ -1,7 +1,10 @@
+import i18next from "@/services/i18next";
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
 
 require("dayjs/locale/ro");
+require("dayjs/locale/ru");
+require("dayjs/locale/en");
 dayjs.extend(relativeTime);
 
 const formats = {
@@ -12,7 +15,7 @@ const formats = {
   full: "DD.MM.YYYY HH:mm",
 };
 
-dayjs.locale("ro");
+dayjs.locale(i18next.language || "ro");
 
 /**
  * @typedef {Object} Tranformers
@@ -48,7 +51,7 @@ export default function date(date) {
     const today = dayjs();
     const isCurrentDay = today.day() === dayjsDate.day();
 
-    if (isCurrentDay) return "Astăzi";
+    if (isCurrentDay) return i18next.t("today");
     return dayjsDate.format(formats.month);
   };
 

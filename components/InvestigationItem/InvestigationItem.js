@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { IconBtn } from "../Button";
 import Tooltip from "../Tooltip";
 import Confirm from "../Confirm";
@@ -9,6 +10,7 @@ import cs from "@/utils/classNames";
 
 export default function InvestigationItem(props) {
   const { name, age, weight, height, withActions, onEdit, onRemove, removeDisabled } = props;
+  const { t } = useTranslation();
 
   const onEditHandler = useCallback(() => {
     onEdit(props.id);
@@ -37,11 +39,7 @@ export default function InvestigationItem(props) {
                 isAsync
               >
                 <Tooltip title="Șterge" placement="leftCenter">
-                  <IconBtn
-                    icon={<TrashIcon />}
-                    className="remove-action"
-                    size="sm"
-                  />
+                  <IconBtn icon={<TrashIcon />} className="remove-action" size="sm" />
                 </Tooltip>
               </Confirm>
             )}
@@ -51,15 +49,15 @@ export default function InvestigationItem(props) {
       <div className="investigation-item-descrp">
         <div className="descrp-item">
           <span className="value">{age}</span>
-          <span className="label">Vârsta</span>
+          <span className="label">{t('age')}</span>
         </div>
         <div className="descrp-item">
           <span className="value">{weight}</span>
-          <span className="label">Greutate</span>
+          <span className="label">{t('weight')}</span>
         </div>
         <div className="descrp-item">
           <span className="value">{height}</span>
-          <span className="label">Înălțime</span>
+          <span className="label">{t('height')}</span>
         </div>
       </div>
     </div>

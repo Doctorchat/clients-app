@@ -36,6 +36,7 @@ export default function ColumnCenter() {
         messages={chatContent.content?.messages || []}
         status={chatContent.content?.status}
         type={chatContent.content?.type}
+        paymentUrl={chatContent.content?.payment_url}
         chatId={id}
       />
       <RightSide

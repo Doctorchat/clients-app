@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/Sidebar";
 import BackTitle from "@/components/BackTitle";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -17,6 +18,7 @@ export default function TransactionsList() {
   const { transactionsList } = useSelector((store) => ({
     transactionsList: store.transactionsList,
   }));
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function TransactionsList() {
   return (
     <Sidebar>
       <Sidebar.Header>
-        <BackTitle title="Istoricul" onBack={updateTabsConfig(leftSideTabs.profile, "prev")} />
+        <BackTitle title={t("history")} onBack={updateTabsConfig(leftSideTabs.profile, "prev")} />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-content-wrapper px-2">
@@ -70,7 +72,7 @@ export default function TransactionsList() {
             emptyConfig={{
               status: !transactionsList.data.length,
               className: "pt-4",
-              content: "Aici va apărea lista de tranzacții",
+              content: t("transactions_list_empty"),
             }}
           >
             <SidebarList component={TransactionItem} data={transactionsList.data} />

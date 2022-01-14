@@ -49,4 +49,18 @@
     bottom: calc(100% + 4px);
     transform-origin: bottom right;
   }
+  &.topRight {
+    bottom: calc(100% + 4px);
+    left: 0;
+    transform-origin: bottom left;
+  }
+  &.topCenter {
+    left: 50%;
+    transform: scale3d(1, 0.8, 1) translateX(-50%);
+    bottom: calc(100% + 4px);
+    transform-origin: bottom;
+    &.enter-done {
+      transform: scale3d(1, 1, 1) translateX(-50%);
+    }
+  }
 }

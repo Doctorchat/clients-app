@@ -43,7 +43,7 @@ export default function EditProflie() {
     async (e) => {
       const file = e.target.files[0];
       const isInvalid = validateFile(file, 1024, avatarAcceptExts);
-      setAvatarLoading(false);
+      setAvatarLoading(true);
 
       if (!isInvalid) {
         const formData = new FormData();

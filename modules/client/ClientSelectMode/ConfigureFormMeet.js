@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import SelectModeInvestigations from "./SelectModeInvestigations";
 import BackTitle from "@/components/BackTitle";
 import { selectModeTabs } from "@/context/TabsKeys";
@@ -20,6 +21,7 @@ export default function ConfigureFormMeet() {
   const [loading, setLoading] = useState(false);
   const resolver = useYupValidationResolver(configureFormSchema);
   const form = useForm({ defaultValues: { isAnonym: false }, resolver });
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const onFormSubmit = useCallback(
@@ -40,7 +42,7 @@ export default function ConfigureFormMeet() {
 
         onSelectMode("meet");
       } catch (error) {
-        dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
         setLoading(false);
       }
@@ -52,13 +54,13 @@ export default function ConfigureFormMeet() {
     <div className="configure-form-meet px-1">
       <BackTitle
         className="configure-form-title"
-        title="Online meet"
+        title={(t('online_meet'))}
         onBack={updateTabsConfig(selectModeTabs.choose, "prev")}
       />
       <Form methods={form} onFinish={onFormSubmit}>
         <SelectModeInvestigations />
         <Button htmlType="submit" size="sm" loading={loading}>
-          Continuă
+          {t('continue')}
         </Button>
       </Form>
     </div>

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/Sidebar";
 import ConversationListHeader from "@/components/ConversationListHeader";
 import ConversationList from "@/components/ConversationList";
@@ -16,15 +17,16 @@ export default function ConversationsSidebar() {
   const { conversationList } = useSelector((store) => ({
     conversationList: store.conversationList,
   }));
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const { id } = router.query;
   const [currentList, setCurrentList] = useState([]);
   const [searchConfig, setSearchConfig] = useState({
     list: [],
     active: false,
     loading: false,
   });
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { id } = router.query;
 
   useEffect(() => {
     if (searchConfig.active) setCurrentList(searchConfig.list);
@@ -57,18 +59,16 @@ export default function ConversationsSidebar() {
             }}
             errorConfig={{
               status: conversationList.isError,
-              extra: <Button type="outline">Reâncarcă pagina</Button>,
+              extra: <Button type="outline">{t("reload_page")}</Button>,
             }}
             emptyConfig={{
               status: !currentList.length,
               className: "pt-4",
-              content: searchConfig.active
-                ? "Nu am găsit nici o coversație"
-                : "Aici va apărea lista de conversații",
+              content: searchConfig.active ? t("search_not_found") : t("conversation_list_empty"),
               extra: (
                 <AuthRoleWrapper roles={[userRoles.get("client")]}>
                   <Button className="mt-3" onClick={openStartConversation}>
-                    Selecteză doctor
+                    {t("select_doctor")}
                   </Button>
                 </AuthRoleWrapper>
               ),

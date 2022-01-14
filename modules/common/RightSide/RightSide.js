@@ -3,6 +3,7 @@ import { useCallback, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
+import { useTranslation } from "react-i18next";
 import BackTitle from "@/components/BackTitle";
 import Sidebar from "@/components/Sidebar";
 import { userRoles } from "@/context/constants";
@@ -19,6 +20,7 @@ export default function RightSide(props) {
     user: store.user,
     infoVisible: store.chatContent.infoVisible,
   }));
+  const { t } = useTranslation();
   const columnRef = useRef();
   const dispatch = useDispatch();
 
@@ -40,7 +42,7 @@ export default function RightSide(props) {
             <BackTitle
               title={
                 <div className="column-right-title">
-                  <span>Informație</span>
+                  <span>{t("information")}</span>
                   <IconBtn icon={<TimesIcon />} onClick={closeChatInfo} />
                 </div>
               }

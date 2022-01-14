@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import Alert from "@/components/Alert";
 import { selectModeTabs } from "@/context/TabsKeys";
@@ -15,6 +16,7 @@ export default function SelectModeOptions(props) {
   const {
     user: { investigations },
   } = useSelector((store) => ({ user: store.user.data }));
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const openInvestigationForm = useCallback(
@@ -34,10 +36,10 @@ export default function SelectModeOptions(props) {
         <Alert
           className="configure-form-alert"
           type="error"
-          message="Prentu a avea acces la doctorii de pe platforma DoctorChat este nevoie să adăugați cel puțin o anchetă"
+          message={t('no_investigation_error')}
         />
         <Button size="sm" className="mt-2" onClick={openInvestigationForm}>
-          Adaugă o anchetă
+          {t('add_investigation')}
         </Button>
       </>
     );
@@ -52,7 +54,7 @@ export default function SelectModeOptions(props) {
         <div className="mode-item-icon meet">
           <VideoIcon />
         </div>
-        <h4 className="mode-item-title">Online meet</h4>
+        <h4 className="mode-item-title">{t('online_meet')}</h4>
       </div>
       <div
         className="choose-mode-item"
@@ -62,7 +64,7 @@ export default function SelectModeOptions(props) {
         <div className="mode-item-icon">
           <CommentIcon />
         </div>
-        <h4 className="mode-item-title">Mesaj simplu</h4>
+        <h4 className="mode-item-title">{t('simple_message')}</h4>
       </div>
     </div>
   );

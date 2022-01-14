@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
+import Spinner from "../Spinner";
 import cs from "@/utils/classNames";
 
 export default function MenuItem(props) {
-  const { className, icon, onClick, notify, children } = props;
+  const { className, icon, onClick, notify, loading, children } = props;
 
   return (
     <li className={cs("menu-item", className, notify && "notify")} role="button" onClick={onClick}>
-      {icon && <span className="menu-item-prefix">{icon}</span>}
+      {icon && <span className="menu-item-prefix">{loading ? <Spinner /> : icon}</span>}
       {typeof children === "string" ? (
         <span className="menu-item-content">{children}</span>
       ) : (
@@ -22,6 +23,7 @@ MenuItem.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   onClick: PropTypes.func,
   notify: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 MenuItem.defaultProps = {

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Select from "@/components/Select";
 import Search from "@/components/Search/Search";
@@ -11,11 +12,12 @@ const options = [
 ];
 
 export default function ClientDocsSearch(props) {
-  const { localList, updateSearchConfig, } = props;
+  const { localList, updateSearchConfig } = props;
   const [filters, setFilters] = useState({
     online: false,
     categories: [],
   });
+  const { t } = useTranslation();
 
   const onFiltersChange = (name) => (value) =>
     setFilters((prevState) => ({ ...prevState, [name]: value }));
@@ -23,7 +25,7 @@ export default function ClientDocsSearch(props) {
   return (
     <div className="find-doc-search">
       <Search
-        placeholder="Nume, Prenume, Categorie"
+        placeholder={t("conversation_search_placeholder")}
         localList={localList}
         updateSearchConfig={updateSearchConfig}
         searchKeys={["name", "category"]}
@@ -31,16 +33,15 @@ export default function ClientDocsSearch(props) {
       <div className="find-doc-filters d-flex align-items-center justify-content-between mt-3 gap-5">
         <Select
           value={filters.categories}
-          placeholder="Selecteză categorii"
+          placeholder={t("select_categories")}
           size="sm"
           options={options}
           onChange={onFiltersChange("categories")}
-          
           multiple
         />
         <Switch
           value={filters.online}
-          label="Doctori Online"
+          label={t("online_doctors")}
           onChange={onFiltersChange("online")}
         />
       </div>

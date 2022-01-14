@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { PopupHeader, PopupContent } from "@/components/Popup";
 import DocInfo from "@/components/DocInfo";
 import BackTitle from "@/components/BackTitle";
@@ -15,6 +16,7 @@ export default function ClientFindDoc() {
   } = useSelector((store) => ({ userInfo: store.userInfo }));
   const { updateTabsConfig } = useTabsContext();
   const [docCurrentInfo, setDocCurrentInfo] = useState({});
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function ClientFindDoc() {
       <PopupHeader
         title={
           <BackTitle
-            title="Informație despre doctor"
+            title={t('information_about_doctor')}
             onBack={updateTabsConfig(startConversationTabs.findDoc, "prev")}
           />
         }

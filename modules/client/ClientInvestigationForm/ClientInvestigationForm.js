@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import Popup from "@/components/Popup";
 import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
 import Form from "@/components/Form";
@@ -28,6 +29,7 @@ export default function ClientInvestigationForm() {
   const [formEdited, setFormEdited] = useState(false);
   const resolver = useYupValidationResolver(investigationFormSchema);
   const form = useForm({ resolver, values });
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -81,12 +83,12 @@ export default function ClientInvestigationForm() {
       const onSuccess = (response) => {
         dispatch(investigationFormToggleVisibility(false));
         dispatch(updateUser(response));
-        dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
+        dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
         setFormEdited(false);
       };
 
       const onError = () => {
-        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       };
 
       if (isEditing) {
@@ -104,11 +106,11 @@ export default function ClientInvestigationForm() {
       visible={isOpen}
       onVisibleChange={visibilityHandler}
       confirmationClose={{
-        content: "Ești sigur că vrei să închizi forma? Datele nu vor fi salvate.",
+        content: t('investigation_form.confirmation'),
         disabled: !formEdited,
       }}
     >
-      <Popup.Header title="Adaugă o anchetă" />
+      <Popup.Header title={t("add_investigation")} />
       <Popup.Content>
         <Form
           methods={form}
@@ -118,10 +120,10 @@ export default function ClientInvestigationForm() {
           initialValues={values}
         >
           <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-            <Form.Item className="w-100" name="name" label="Nume">
+            <Form.Item className="w-100" name="name" label={t("name")}>
               <Input placeholder="John" />
             </Form.Item>
-            <Form.Item className="w-50" label="Gen" name="sex">
+            <Form.Item className="w-50" label={t("investigation_form.sex")} name="sex">
               <Select
                 options={[
                   { value: "male", label: "Masculin" },
@@ -131,49 +133,40 @@ export default function ClientInvestigationForm() {
             </Form.Item>
           </div>
           <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-            <Form.Item className="w-100" label="Vârsta" name="age">
+            <Form.Item className="w-100" label={t("age")} name="age">
               <InputNumber />
             </Form.Item>
-            <Form.Item className="w-100" label="Înălțime(cm)" name="height">
+            <Form.Item className="w-100" label={t("height_cm")} name="height">
               <InputNumber />
             </Form.Item>
-            <Form.Item className="w-100" label="Greutate(kg)" name="weight">
+            <Form.Item className="w-100" label={t("weight_kg")} name="weight">
               <InputNumber />
             </Form.Item>
           </div>
-          <Form.Item label="Locul de trai" name="location">
+          <Form.Item label={t("investigation_form.location")} name="location">
             <Input />
           </Form.Item>
-          <Form.Item label="Gen de activitate(specificați)" name="activity">
+          <Form.Item label={t("investigation_form.activity")} name="activity">
             <Textarea />
           </Form.Item>
-          <Form.Item
-            label="Datele epidemiologice(dacă ați suportat boli infecțioase)"
-            name="epidemiological"
-          >
+          <Form.Item label={t("investigation_form.epidemiological")} name="epidemiological">
             <Select options={epidemiologicalOptions} />
           </Form.Item>
-          <Form.Item
-            label="Boli suportate pe toată perioada vieții(specificați dacă este cazul)"
-            name="diseases"
-          >
+          <Form.Item label={t("investigation_form.diseases")} name="diseases">
             <Select options={diseasesOptions} />
           </Form.Item>
-          <Form.Item
-            label="Boli suportate pe toată perioada vieții - specificați"
-            name="diseases_spec"
-          >
+          <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
             <Textarea />
           </Form.Item>
-          <Form.Item label="Alergii" name="allergies">
+          <Form.Item label={t("investigation_form.allergies")} name="allergies">
             <Select options={allergiesOptions} />
           </Form.Item>
-          <Form.Item label="Cum se manifestă alergia(descrieți)" name="allergies_spec">
+          <Form.Item label={t("investigation_form.allergies_spec")} name="allergies_spec">
             <Textarea />
           </Form.Item>
           <div className="d-flex justify-content-end">
             <Button htmlType="submit" loading={loading}>
-              Adaugă
+              {t("apply")}
             </Button>
           </div>
         </Form>

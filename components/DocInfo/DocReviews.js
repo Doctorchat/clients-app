@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import ReviewsList, { ReviewItemSkeleton } from "../ReviewsList";
 import List from "../List";
 import { getDocReviews } from "@/store/actions";
@@ -8,6 +9,7 @@ import { getDocReviews } from "@/store/actions";
 export default function DocReviews(props) {
   const { docId } = props;
   const { docReviews } = useSelector((store) => ({ docReviews: store.docReviews }));
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function DocReviews(props) {
         emptyConfig={{
           status: !docReviews.data?.list?.length,
           className: "pt-4",
-          content: "Aici va apărea lista de recenzii",
+          content: t("reviews_list_empty"),
         }}
       >
         <ReviewsList data={docReviews.data?.list} />

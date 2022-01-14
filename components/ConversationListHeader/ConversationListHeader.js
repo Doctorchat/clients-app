@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { IconBtn } from "../Button";
 import Dropdown from "../Dropdown";
 import Search from "../Search/Search";
@@ -11,6 +12,7 @@ import BarsIcon from "@/icons/bars.svg";
 export default function ConversationListHeader(props) {
   const { className, localList, updateSearchConfig } = props;
   const { updateTabsConfig } = useTabsContext();
+  const { t } = useTranslation();
   const menuOverlay = useComponentByRole([
     {
       role: userRoles.get("client"),
@@ -33,7 +35,7 @@ export default function ConversationListHeader(props) {
       </div>
       <div className="search-bar">
         <Search
-          placeholder="Nume, Descriere"
+          placeholder={t("conversation_search_placeholder")}
           localList={localList}
           updateSearchConfig={updateSearchConfig}
           searchKeys={["name", "description"]}

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
+import { ProfileChangeLang } from "../common";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
-import LangIcon from "@/icons/lang.svg";
 import HistoryIcon from "@/icons/history.svg";
 import EditIcon from "@/icons/edit.svg";
 import CommentIcon from "@/icons/comment.svg";
@@ -22,7 +22,7 @@ export default function DocProfileActions() {
       <Menu.Item icon={<HistoryIcon />} onClick={updateTabsConfig(leftSideTabs.transactions)}>
         {t("history")}
       </Menu.Item>
-      <Menu.Item icon={<LangIcon />}>{t("language")}</Menu.Item>
+      <ProfileChangeLang />
     </Menu>
   );
 }

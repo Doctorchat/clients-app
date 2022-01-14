@@ -134,6 +134,12 @@
   }
 }
 
+.lang-items {
+  .menu-item {
+    border-radius: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .select-chat {
     display: none !important;

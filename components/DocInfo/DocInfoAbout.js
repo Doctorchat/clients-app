@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Skeleton from "../Skeleton";
 
 export default function DocInfoAbout(props) {
   const { about, loading } = props;
+  const { t } = useTranslation();
 
   if (loading) {
     return (
@@ -22,30 +24,30 @@ export default function DocInfoAbout(props) {
   return (
     <div className="doc-info-tab-content doc-info-activiy">
       <div className="doc-info-section">
-        <h4 className="info-section-title">Despre Mine</h4>
+        <h4 className="info-section-title">{t("doctor_info.about_me")}</h4>
         <p className="info-section-descrp">{about?.bio}</p>
       </div>
       <div className="doc-info-section">
-        <h4 className="info-section-title">Informație generală</h4>
+        <h4 className="info-section-title">{t("general_information")}</h4>
         <ul className="doc-info-list">
           <li className="doc-info-list-item">
             <div className="content">
               <span className="text">
-                Ani experiență <b>{about?.experience}</b>
+                {t("doctor_info.years_experience")} <b>{about?.experience}</b>
               </span>
             </div>
           </li>
           <li className="doc-info-list-item">
             <div className="content">
               <span className="text">
-                Titlu Profesional <b>{about?.professionalTitle}</b>
+                {t("professional_title")} <b>{about?.professionalTitle}</b>
               </span>
             </div>
           </li>
           <li className="doc-info-list-item">
             <div className="content">
               <span className="text">
-                Specializare <b>{about?.specialization}</b>
+                {t("specialization")} <b>{about?.specialization}</b>
               </span>
             </div>
           </li>

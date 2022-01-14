@@ -16,6 +16,8 @@ import toSelectOpts from "@/utils/toSelectOpts";
 import TrashIcon from "@/icons/trash.svg";
 import PlusIcon from "@/icons/plus.svg";
 
+const selectedLng = localStorage.getItem("i18nextLng") || "ro";
+
 export default function DocEditProfile() {
   const { user, categories } = useSelector((store) => ({
     user: store.user.data,
@@ -27,7 +29,7 @@ export default function DocEditProfile() {
   const generaDataForm = useForm({
     defaultValues: {
       name: user.name,
-      category: toSelectOpts("id", "name_ro")(user.category),
+      category: toSelectOpts("id", `name_${selectedLng}`)(user.category),
       specialization: user.about.specialization,
       professionalTitle: user.about.professionalTitle,
       price: user.price,

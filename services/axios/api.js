@@ -18,6 +18,7 @@ const api = {
     transactions: () => axiosInstance.get("/user/transactions"),
     setVacation: (data) => axiosInstance.post("/user/card/vacation", data),
     resetVacation: () => axiosInstance.put("/user/card/vacation"),
+    changeLocale: (lng) => axiosInstance.post("/user/locale", { locale: lng }),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

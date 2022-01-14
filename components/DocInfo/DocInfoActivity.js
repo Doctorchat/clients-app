@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Skeleton from "../Skeleton";
 import HeartIcon from "@/icons/heart.svg";
 import LikeIcon from "@/icons/like.svg";
@@ -9,6 +10,7 @@ import GraduationIcon from "@/icons/graduation-cap.svg";
 
 export default function DocInfoActivity(props) {
   const { activity, loading } = props;
+  const { t } = useTranslation();
 
   if (loading) {
     return (
@@ -34,7 +36,7 @@ export default function DocInfoActivity(props) {
   return (
     <div className="doc-info-tab-content doc-info-activiy">
       <div className="doc-info-section">
-        <h4 className="info-section-title">Activitate</h4>
+        <h4 className="info-section-title">{t("activity")}</h4>
         <ul className="doc-info-list">
           <li className="doc-info-list-item">
             <div className="content">
@@ -42,7 +44,8 @@ export default function DocInfoActivity(props) {
                 <HeartIcon />
               </span>
               <span className="text">
-                Am ajutat <b>{activity?.helpedUsers || "—"}</b> oameni
+                {t("doctor_info_helped.left")} <b>{activity?.helpedUsers || "—"}</b>{" "}
+                {t("doctor_info_helped.right")}
               </span>
             </div>
           </li>
@@ -52,7 +55,7 @@ export default function DocInfoActivity(props) {
                 <LikeIcon />
               </span>
               <span className="text">
-                Utilizatori mulțumiți <b>{activity?.likes?.like || "—"}</b>
+                {t("doctor_info.likes")} <b>{activity?.likes?.like || "—"}</b>
               </span>
             </div>
           </li>
@@ -62,7 +65,7 @@ export default function DocInfoActivity(props) {
                 <StarIcon />
               </span>
               <span className="text">
-                Recenzii de la utilizaotri <b>{activity?.testimonialsCount || "—"}</b>
+                {t("doctor_info.reviews")} <b>{activity?.testimonialsCount || "—"}</b>
               </span>
             </div>
           </li>
@@ -72,18 +75,15 @@ export default function DocInfoActivity(props) {
                 <ClockIcon />
               </span>
               <span className="text">
-                Timp de răspuns: <b>{activity?.responseTime || "—"}</b>
+                {t("doctor_info.response_time")} <b>{activity?.responseTime || "—"}</b>
               </span>
             </div>
-            <span className="descrp">
-              Acest timp este estimat folosind cele mai recente răspunsuri. Ocazional poate fi mai
-              mare sau mai mic decât intervalul afișat.
-            </span>
+            <span className="descrp">{t("doctor_info.response_time_description")}</span>
           </li>
         </ul>
       </div>
       <div className="doc-info-section">
-        <h4 className="info-section-title">Loc de muncă</h4>
+        <h4 className="info-section-title">{t("work")}</h4>
         <ul className="doc-info-list">
           <li className="doc-info-list-item">
             <div className="content">
@@ -96,7 +96,7 @@ export default function DocInfoActivity(props) {
         </ul>
       </div>
       <div className="doc-info-section">
-        <h4 className="info-section-title">Educație</h4>
+        <h4 className="info-section-title">{t("education")}</h4>
         <ul className="doc-info-list">
           {activity?.education &&
             activity?.education.map((edc) => (

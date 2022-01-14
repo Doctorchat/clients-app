@@ -1,26 +1,25 @@
-import { t } from "i18next";
 import { setLocale } from "yup";
+import i18next from "@/services/i18next";
 
 setLocale({
   mixed: {
-    required: t("required_input"),
+    required: i18next.t("yup_mixed_required"),
     notType: ({ type }) => {
       let typeMsg = "";
 
       if (type === "number") {
-        typeMsg = t("yup_mixed_number");
+        typeMsg = i18next.t("yup_mixed_number");
       }
 
-      return `${t("yup_mixed_format")} ${typeMsg}`;
+      return `${i18next.t("yup_mixed_format")} ${typeMsg}`;
     },
   },
   string: {
-    email: t("yup_string_email"),
-    min: t("yup_string_min"),
-    max: t("yup_string_max"),
+    email: i18next.t("yup_string_email"),
+    min: i18next.t("yup_string_min"),
+    max: i18next.t("yup_string_max"),
   },
   object: {
     noUnknown: "Cei asta",
   },
-  // array: {}
 });

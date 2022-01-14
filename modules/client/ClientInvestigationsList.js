@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/Sidebar";
 import BackTitle from "@/components/BackTitle";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -20,6 +21,7 @@ import { notification } from "@/store/slices/notificationsSlice";
 export default function ClientInvestigationsList() {
   const { updateTabsConfig } = useTabsContext();
   const { user } = useSelector((store) => ({ user: store.user.data }));
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const openInvestigationForm = useCallback(
@@ -58,16 +60,15 @@ export default function ClientInvestigationsList() {
     <Sidebar>
       <Sidebar.Header>
         <BackTitle
-          title="Anchete"
+          title={t("investigations")}
           onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")}
         />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-content-wrapper px-2">
-          {/* <Alert
-            type="error"
-            message="Prentu a avea acces la doctorii de pe platforma DoctorChat este nevoie să adăugați cel puțin o anchetă"
-          /> */}
+          {!user.investigations.length && (
+            <Alert type="error" message={t("no_investigation_error")} />
+          )}
           <List
             loadingConfig={{ disabled: true }}
             errorConfig={{ disabled: true }}
@@ -77,7 +78,7 @@ export default function ClientInvestigationsList() {
               content: "Aici va apărea lista de anchete",
               extra: (
                 <Button className="mt-3" onClick={openInvestigationForm}>
-                  Adaugă o anchetă
+                  {t("add_investigation")}
                 </Button>
               ),
             }}
@@ -95,7 +96,7 @@ export default function ClientInvestigationsList() {
           </List>
           {!!user.investigations.length && (
             <div className="d-flex justify-content-center mt-4">
-              <Button onClick={openInvestigationForm}>Adaugă o anchetă</Button>
+              <Button onClick={openInvestigationForm}>{t("add_investigation")}</Button>
             </div>
           )}
         </div>
