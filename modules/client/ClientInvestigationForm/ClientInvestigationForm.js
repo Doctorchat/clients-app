@@ -106,7 +106,7 @@ export default function ClientInvestigationForm() {
       visible={isOpen}
       onVisibleChange={visibilityHandler}
       confirmationClose={{
-        content: t('investigation_form.confirmation'),
+        content: t("investigation_form.confirmation"),
         disabled: !formEdited,
       }}
     >
@@ -121,13 +121,13 @@ export default function ClientInvestigationForm() {
         >
           <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
             <Form.Item className="w-100" name="name" label={t("name")}>
-              <Input placeholder="John" />
+              <Input />
             </Form.Item>
             <Form.Item className="w-50" label={t("investigation_form.sex")} name="sex">
               <Select
                 options={[
-                  { value: "male", label: "Masculin" },
-                  { value: "female", label: "Feminin" },
+                  { value: "male", label: t("male") },
+                  { value: "female", label: t("female") },
                 ]}
               />
             </Form.Item>

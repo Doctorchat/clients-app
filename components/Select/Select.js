@@ -4,6 +4,7 @@ import RcSelect, { components } from "react-select";
 import TimesIcon from "@/icons/times.svg";
 import AngleIcon from "@/icons/angle-down.svg";
 import cs from "@/utils/classNames";
+import i18next from "@/services/i18next";
 
 const ClearIndicator = (props) => (
   <components.ClearIndicator {...props}>
@@ -136,7 +137,7 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-  placeholder: "Selectează",
+  placeholder: i18next.t("select"),
   size: "md",
   onBlur: () => null,
 };

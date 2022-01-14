@@ -141,7 +141,8 @@
     "diseases_spec": "Boli suportate pe toată perioada vieții - specificați",
     "allergies": "Alergii",
     "allergies_spec": "Cum se manifestă alergia(descrieți)",
-    "confirmation": "Ești sigur că vrei să închizi forma? Datele nu vor fi salvate."
+    "confirmation": "Ești sigur că vrei să închizi forma? Datele nu vor fi salvate.",
+    "bmi": "IMC"
   },
   "transactions_list_empty": "Aici va apărea lista de tranzacții",
   "today": "Astăzi",
@@ -150,5 +151,32 @@
   "message_bar_placeholder": "Mesajul...",
   "all": "Toate",
   "doctor_unavailable": "Acest doctor nu este disponibil",
-  "stop_conversation_confirmation": "Ești sigur că vrei să închizi conversația?"
+  "stop_conversation_confirmation": "Ești sigur că vrei să închizi conversația?",
+  "epidemiological": "Datele epidemiologice",
+  "diseases": "Boli suportate pe toată perioada vieții",
+  "allergies": "Alergii",
+  "epidemiological_options": {
+    "1": "Hepatita(A, B, C)",
+    "2": "Tuberculoză",
+    "3": "Boli sexual-transmisibile",
+    "4": "Infecțiile virale sezoniere(SARS COV-2, Gripa)",
+    "5": "Nu am suportat"
+  },
+  "diseases_options": {
+    "1": "Intervenții chirurgicale",
+    "2": "Traumatizme",
+    "3": "Boli cronice cu care sunteți la evidența",
+    "4": "Altele"
+  },
+  "allergies_options": {
+    "1": "Polen",
+    "2": "Insect",
+    "3": "Animale",
+    "4": "Alimente",
+    "5": "Medicamente",
+    "6": "Altele"
+  },
+  "select": "Selectează",
+  "male": "Masculin",
+  "female": "Feminin"
 }

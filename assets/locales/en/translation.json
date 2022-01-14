@@ -141,7 +141,8 @@
     "diseases_spec": "Life-long illnesses - clarifications",
     "allergies": "Allergies",
     "allergies_spec": "How does allergy manifest (describe)",
-    "confirmation": "Are you sure you want to close the shape? Data will not be saved."
+    "confirmation": "Are you sure you want to close the shape? Data will not be saved.",
+    "bmi": "BMI"
   },
   "transactions_list_empty": "The list of transactions will appear here",
   "today": "Today",
@@ -150,5 +151,32 @@
   "message_bar_placeholder": "Message...",
   "all": "All",
   "doctor_unavailable": "This doctor is not available",
-  "stop_conversation_confirmation": "Are you sure you want to end the conversation?"
+  "stop_conversation_confirmation": "Are you sure you want to end the conversation?",
+  "epidemiological": "Epidemiological data",
+  "diseases": "Life-long illness",
+  "allergies": "Allergies",
+  "epidemiological_options": {
+    "1": "Hepatitis (A, B, C)",
+    "2": "Tuberculosis",
+    "3": "Venereal diseases",
+    "4": "Seasonal viral infections (SARS COV-2, influenza)",
+    "5": "Others"
+  },
+  "diseases_options": {
+    "1": "Operation",
+    "2": "Trauma",
+    "3": "Chronic medical conditions that you suffer from",
+    "4": "Others"
+  },
+  "allergies_options": {
+    "1": "Pollen",
+    "2": "Insect",
+    "3": "Animals",
+    "4": "Food",
+    "5": "Medicines",
+    "6": "Others"
+  },
+  "select": "Select",
+  "male": "Male",
+  "female": "Female"
 }

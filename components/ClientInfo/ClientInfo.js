@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Image from "../Image";
 import Skeleton from "../Skeleton";
 import {
@@ -12,6 +13,7 @@ import getSelectLabel from "@/utils/getSelectLabel";
 export default function ClientInfo(props) {
   const { client, loading, selectedInvestigation } = props;
   const [investigation, setInvetigation] = useState({});
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (client.investigations) {
@@ -49,7 +51,7 @@ export default function ClientInfo(props) {
           <table>
             <tbody>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">Activitate</th>
+                <th className="dc-description-row-label">{t("activity")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -61,7 +63,7 @@ export default function ClientInfo(props) {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">Date epidemiologice</th>
+                <th className="dc-description-row-label">{t("epidemiological")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -73,9 +75,7 @@ export default function ClientInfo(props) {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  Boli suportate pe toată perioada vieții
-                </th>
+                <th className="dc-description-row-label">{t("diseases")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -98,7 +98,7 @@ export default function ClientInfo(props) {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">Alergii</th>
+                <th className="dc-description-row-label">{t("allergies")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -128,7 +128,7 @@ export default function ClientInfo(props) {
           <table>
             <tbody>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">Vârsta</th>
+                <th className="dc-description-row-label">{t("age")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -140,7 +140,7 @@ export default function ClientInfo(props) {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">Înălțime(cm)</th>
+                <th className="dc-description-row-label">{t("height_cm")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -152,7 +152,7 @@ export default function ClientInfo(props) {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">Greutate(kg)</th>
+                <th className="dc-description-row-label">{t("weight_kg")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -164,7 +164,7 @@ export default function ClientInfo(props) {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">IMC</th>
+                <th className="dc-description-row-label">{t("investigation_form.bmi")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -176,7 +176,7 @@ export default function ClientInfo(props) {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">Gen</th>
+                <th className="dc-description-row-label">{t("investigation_form.sex")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
@@ -191,7 +191,7 @@ export default function ClientInfo(props) {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">Locul de trai</th>
+                <th className="dc-description-row-label">{t("investigation_form.location")}</th>
                 <td className="dc-description-row-content">
                   {loading ? (
                     <Skeleton>
