@@ -3,7 +3,7 @@ import { getChatContent, readChatMessages } from "../actions";
 
 const initialState = {
   isLoading: false,
-  infoVisible: { visible: true, animate: true },
+  infoVisible: { visible: false, animate: true },
   content: {},
   cache: [],
   isError: false,

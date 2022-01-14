@@ -16,6 +16,11 @@
 
 .chat-content-header {
   border-bottom: 1px solid var(--bs-gray-300);
+  &.support {
+    .header-actions .open-info {
+      display: none !important;
+    }
+  }
   .dialog-title,
   .dialog-subtitle {
     height: 21px;

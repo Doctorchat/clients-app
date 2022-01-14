@@ -29,8 +29,12 @@ export default function ChatContent(props) {
   const router = useRouter();
 
   useEffect(() => {
-    if (window.innerWidth <= 1268) {
-      dispatch(chatContentToggleInfoVisibility({ visible: false, animate: false }));
+    if (type) {
+      if (window.innerWidth <= 1268 || type === "support") {
+        dispatch(chatContentToggleInfoVisibility({ visible: false, animate: false }));
+      } else {
+        dispatch(chatContentToggleInfoVisibility({ visible: true, animate: false }));
+      }
     }
 
     const toggleChatInfo = () => {
@@ -46,7 +50,7 @@ export default function ChatContent(props) {
     return () => {
       window.removeEventListener("resize", toggleChatInfo);
     };
-  }, [dispatch]);
+  }, [dispatch, type]);
 
   const openChatInfo = useCallback(
     () => dispatch(chatContentToggleInfoVisibility({ visible: true, animate: true })),
@@ -95,7 +99,7 @@ export default function ChatContent(props) {
 
   return (
     <Sidebar id="column-center">
-      <Sidebar.Header className="chat-content-header d-flex justify-contnet-between">
+      <Sidebar.Header className={cs("chat-content-header d-flex justify-contnet-between", type)}>
         <div className="header-info d-flex align-items-center">
           <IconBtn className="header-info-back" onClick={onBack} icon={<ArrowLeftIcon />} />
           <div className="dialog-avatar">
