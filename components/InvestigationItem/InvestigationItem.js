@@ -29,16 +29,16 @@ export default function InvestigationItem(props) {
         <h4 className="title">{name}</h4>
         {withActions && (
           <div className="investigation-actions">
-            <Tooltip title="Editează" placement="leftCenter">
+            <Tooltip title={t("edit")} placement="leftCenter">
               <IconBtn icon={<EditIcon />} size="sm" onClick={onEditHandler} />
             </Tooltip>
             {!removeDisabled && (
               <Confirm
                 onConfirm={onRemoveHandler(props.id)}
-                content="Ești sigur că vrei să ștergi ancheta?"
+                content={t("remove_investigation_confirmation")}
                 isAsync
               >
-                <Tooltip title="Șterge" placement="leftCenter">
+                <Tooltip title={t('remove')} placement="leftCenter">
                   <IconBtn icon={<TrashIcon />} className="remove-action" size="sm" />
                 </Tooltip>
               </Confirm>
@@ -49,15 +49,15 @@ export default function InvestigationItem(props) {
       <div className="investigation-item-descrp">
         <div className="descrp-item">
           <span className="value">{age}</span>
-          <span className="label">{t('age')}</span>
+          <span className="label">{t("age")}</span>
         </div>
         <div className="descrp-item">
           <span className="value">{weight}</span>
-          <span className="label">{t('weight')}</span>
+          <span className="label">{t("weight")}</span>
         </div>
         <div className="descrp-item">
           <span className="value">{height}</span>
-          <span className="label">{t('height')}</span>
+          <span className="label">{t("height")}</span>
         </div>
       </div>
     </div>

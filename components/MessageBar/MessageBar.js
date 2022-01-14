@@ -2,33 +2,54 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 import { IconBtn } from "../Button";
 import Form from "../Form";
+import Confirm from "../Confirm";
 import Input from "../Inputs";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import cs from "@/utils/classNames";
-import ClipIcon from "@/icons/clip.svg";
-import LevelIcon from "@/icons/level-up.svg";
 import { MESSAGE_TYPES, userRoles } from "@/context/constants";
 import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
+import ClipIcon from "@/icons/clip.svg";
+import LevelIcon from "@/icons/level-up.svg";
+import StopIcon from "@/icons/stop.svg";
 
 export default function MessageBar(props) {
   const { defaultValue, disabled, chatId } = props;
   const user = useSelector((store) => store.user.data);
   const [isFormEnabled, setIsFormEnabled] = useState(defaultValue && defaultValue.length > 3);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
+  const history = useRouter();
   const form = useForm();
 
   const onFormChange = useCallback(({ name, value }) => {
     if (name === "content") {
-      if (value && value.length > 3) setIsFormEnabled(true);
+      if (value && value.length > 0) setIsFormEnabled(true);
       else setIsFormEnabled(false);
     }
   }, []);
+
+  const closeConversationHanlder = useCallback(async () => {
+    try {
+      const response = await api.conversation.close(chatId);
+
+      dispatch(
+        notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
+      );
+      form.reset();
+      return Promise.resolve();
+    } catch (error) {
+      dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+      return Promise.reject();
+    }
+  }, [chatId, dispatch, form]);
 
   const onFormSubmit = useCallback(
     async (values) => {
@@ -82,7 +103,11 @@ export default function MessageBar(props) {
             <IconBtn className="message-bar-attach" size="sm" icon={<ClipIcon />} />
           </AuthRoleWrapper>
           <Form.Item name="content" className="mb-0">
-            <Input placeholder="Mesajul..." disabled={disabled} autoComplete="off" />
+            <Input
+              placeholder={t("message_bar_placeholder")}
+              disabled={disabled}
+              autoComplete="off"
+            />
           </Form.Item>
         </div>
       </Form>
@@ -93,6 +118,20 @@ export default function MessageBar(props) {
         icon={<LevelIcon />}
         onClick={form.handleSubmit(onFormSubmit)}
       />
+      <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
+        <Confirm
+          isAsync
+          onConfirm={closeConversationHanlder}
+          content={t("stop_conversation_confirmation")}
+        >
+          <IconBtn
+            className="message-bar-send remove-action"
+            loading={loading}
+            disabled={isFormEnabled}
+            icon={<StopIcon />}
+          />
+        </Confirm>
+      </AuthRoleWrapper>
     </div>
   );
 }

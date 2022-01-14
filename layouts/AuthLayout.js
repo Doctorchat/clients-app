@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { ProfileChangeLang } from "@/modules/common";
 
 export default function AuthLayout({ children }) {
   const user = useSelector((store) => store.user);
@@ -26,6 +27,9 @@ export default function AuthLayout({ children }) {
             <div className="auth-inner">
               {children}
               <div className="auth-bottom">
+                <div className="auth-layout-lang d-flex justify-content-center">
+                  <ProfileChangeLang />
+                </div>
                 <a href="#" target="_blank">
                   {t("terms_conditions")}
                 </a>

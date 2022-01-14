@@ -17,6 +17,7 @@ import { docInfoTabs } from "@/context/TabsKeys";
 import { ClientSelectMode } from "@/modules/client";
 import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
+import cs from "@/utils/classNames";
 
 const selectedLng = localStorage.getItem("i18nextLng") || "ro";
 
@@ -54,7 +55,7 @@ export default function DocInfo(props) {
   );
 
   return (
-    <div className="doc-info">
+    <div className={cs("doc-info", !doctor.isAvailable && "unavailable")}>
       <div className="doc-info-top">
         <div className="dialog-avatar">
           <Image w="128" h="128" alt={doctor.name} src={doctor.avatar} />
@@ -71,19 +72,25 @@ export default function DocInfo(props) {
               </Tooltip>
             )}
           </h4>
-          <h6 className="category">
-            {doctor?.category?.map((cat) => cat[`name_${selectedLng}`]).join(", ")}
-          </h6>
-          {loading ? (
-            <Skeleton>
-              <Skeleton.Line className="mb-1" w="93%" h="16px" />
-              <Skeleton.Line className="mb-1" w="85%" h="16px" />
-              <Skeleton.Line w="40%" h="16px" />
-            </Skeleton>
+          {doctor.isAvailable ? (
+            <>
+              <h6 className="category">
+                {doctor?.category?.map((cat) => cat[`name_${selectedLng}`]).join(", ")}
+              </h6>
+              {loading ? (
+                <Skeleton>
+                  <Skeleton.Line className="mb-1" w="93%" h="16px" />
+                  <Skeleton.Line className="mb-1" w="85%" h="16px" />
+                  <Skeleton.Line w="40%" h="16px" />
+                </Skeleton>
+              ) : (
+                <p className="description mb-0">
+                  <Truncate text={doctor?.about?.bio} length={105} />
+                </p>
+              )}
+            </>
           ) : (
-            <p className="description mb-0">
-              <Truncate text={doctor?.about?.bio} length={105} />
-            </p>
+            <p className="mb-0 doc-unavailable-msg">{t("doctor_unavailable")}</p>
           )}
           {allowCreate && (
             <div className="start-conversation mt-1 d-flex justify-content-end">
@@ -132,6 +139,7 @@ DocInfo.propTypes = {
     activity: PropTypes.object,
     about: PropTypes.object,
     isNew: PropTypes.bool,
+    isAvailable: PropTypes.bool,
   }),
   scrollableContainer: PropTypes.string,
   loading: PropTypes.bool,

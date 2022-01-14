@@ -22,14 +22,37 @@ export default function ClientFindDoc() {
     active: false,
     loading: false,
   });
+  const [filters, setFilters] = useState({
+    online: false,
+    category: null,
+  });
   const { t } = useTranslation();
   const { updateTabsConfig } = useTabsContext();
   const dispatch = useDispatch();
 
+  const filterList = useCallback(
+    (list) => {
+      let filteredList = [...list];
+
+      if (filters.category?.label && filters.category.value !== "all") {
+        filteredList = filteredList.filter((item) =>
+          item.category.includes(filters.category?.label)
+        );
+      }
+
+      if (filters.online) {
+        filteredList = filteredList.filter((item) => Boolean(item.isOnline));
+      }
+
+      return filteredList;
+    },
+    [filters.category, filters.online]
+  );
+
   useEffect(() => {
-    if (searchConfig.active) setCurrentList(searchConfig.list);
-    else setCurrentList(docSelectList.data);
-  }, [docSelectList.data, searchConfig]);
+    if (searchConfig.active) setCurrentList(filterList(searchConfig.list));
+    else setCurrentList(filterList(docSelectList.data));
+  }, [docSelectList.data, filterList, searchConfig]);
 
   useEffect(() => {
     dispatch(getDocList());
@@ -50,9 +73,14 @@ export default function ClientFindDoc() {
 
   return (
     <div className="popup-body position-relative">
-      <PopupHeader title={t('select_doctor')} />
+      <PopupHeader title={t("select_doctor")} />
       <PopupContent>
-        <ClientDocsSearch updateSearchConfig={updateSearchConfig} localList={docSelectList.data} />
+        <ClientDocsSearch
+          updateSearchConfig={updateSearchConfig}
+          localList={docSelectList.data}
+          filters={filters}
+          setFilters={setFilters}
+        />
         <List
           loaded={docSelectList.isLoaded}
           loadingConfig={{
@@ -64,9 +92,7 @@ export default function ClientFindDoc() {
           emptyConfig={{
             status: !currentList.length,
             className: "pt-4",
-            content: searchConfig.active
-              ? t('search_not_found')
-              : t('doctor_list_empty'),
+            content: searchConfig.active ? t("search_not_found") : t("doctor_list_empty"),
           }}
         >
           <DocList onDocClick={onDocClick} data={currentList} />

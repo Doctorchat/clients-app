@@ -144,5 +144,11 @@
     "confirmation": "Ești sigur că vrei să închizi forma? Datele nu vor fi salvate."
   },
   "transactions_list_empty": "Aici va apărea lista de tranzacții",
-  "today": "Astăzi"
+  "today": "Astăzi",
+  "remove_investigation_confirmation": "Ești sigur că vrei să ștergi ancheta?",
+  "remove": "Șterge",
+  "message_bar_placeholder": "Mesajul...",
+  "all": "Toate",
+  "doctor_unavailable": "Acest doctor nu este disponibil",
+  "stop_conversation_confirmation": "Ești sigur că vrei să închizi conversația?"
 }

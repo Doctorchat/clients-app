@@ -1,22 +1,16 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import Select from "@/components/Select";
 import Search from "@/components/Search/Search";
 import Switch from "@/components/Switch";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+import { categoriesOptionsSelector } from "@/store/selectors";
 
 export default function ClientDocsSearch(props) {
-  const { localList, updateSearchConfig } = props;
-  const [filters, setFilters] = useState({
-    online: false,
-    categories: [],
-  });
+  const { localList, updateSearchConfig, filters, setFilters } = props;
+  const { categories } = useSelector((store) => ({
+    categories: categoriesOptionsSelector(store),
+  }));
   const { t } = useTranslation();
 
   const onFiltersChange = (name) => (value) =>
@@ -35,9 +29,8 @@ export default function ClientDocsSearch(props) {
           value={filters.categories}
           placeholder={t("select_categories")}
           size="sm"
-          options={options}
-          onChange={onFiltersChange("categories")}
-          multiple
+          options={[{ label: t("all"), value: "all" }, ...categories]}
+          onChange={onFiltersChange("category")}
         />
         <Switch
           value={filters.online}
@@ -54,4 +47,6 @@ ClientDocsSearch.propTypes = {
   setSearchedList: PropTypes.func,
   toggleSearchStatus: PropTypes.func,
   updateSearchConfig: PropTypes.func,
+  filters: PropTypes.object,
+  setFilters: PropTypes.func,
 };

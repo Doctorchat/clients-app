@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import Image from "../Image";
 import cs from "@/utils/classNames";
 import HeartIcon from "@/icons/heart.svg";
@@ -21,6 +22,7 @@ function DocItem(props) {
       meta: { helpedUsers, responseTime },
     },
   } = props;
+  const { t } = useTranslation();
 
   return (
     <li className={cs("doc-item", !isAvailable && "unavailable")} role="button" onClick={onClick}>
@@ -33,21 +35,27 @@ function DocItem(props) {
             <span className="doc-name ellipsis">{name}</span>
             {isNew && <span className="doc-title-tag new">Nou</span>}
           </h4>
-          <div className="doc-item-meta">
-            <div className="doc-meta-item">
-              <span className="icon like">
-                <HeartIcon />
-              </span>
-              <span className="text">{helpedUsers || <LineIcon className="line-icon" />}</span>
-            </div>
-            <div className="doc-meta-item">
-              <span className="icon">
-                <ClockIcon />
-              </span>
-              <span className="text">{responseTime || <LineIcon className="line-icon" />}</span>
-            </div>
-          </div>
-          <p className="doc-category">{category.join(", ")}</p>
+          {isAvailable ? (
+            <>
+              <div className="doc-item-meta">
+                <div className="doc-meta-item">
+                  <span className="icon like">
+                    <HeartIcon />
+                  </span>
+                  <span className="text">{helpedUsers || <LineIcon className="line-icon" />}</span>
+                </div>
+                <div className="doc-meta-item">
+                  <span className="icon">
+                    <ClockIcon />
+                  </span>
+                  <span className="text">{responseTime || <LineIcon className="line-icon" />}</span>
+                </div>
+              </div>
+              <p className="doc-category">{category.join(", ")}</p>
+            </>
+          ) : (
+            <p className="mb-0 doc-unavailable-msg">{t("doctor_unavailable")}</p>
+          )}
         </div>
       </div>
 

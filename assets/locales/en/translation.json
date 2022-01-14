@@ -144,5 +144,11 @@
     "confirmation": "Are you sure you want to close the shape? Data will not be saved."
   },
   "transactions_list_empty": "The list of transactions will appear here",
-  "today": "Today"
+  "today": "Today",
+  "remove_investigation_confirmation": "Are you sure you want to delete the investigation?",
+  "remove": "Remove",
+  "message_bar_placeholder": "Message...",
+  "all": "All",
+  "doctor_unavailable": "This doctor is not available",
+  "stop_conversation_confirmation": "Are you sure you want to end the conversation?"
 }

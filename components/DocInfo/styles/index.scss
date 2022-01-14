@@ -1,3 +1,9 @@
+.doc-info.unavailable {
+  font-style: italic;
+  filter: grayscale(70%);
+  opacity: 0.8;
+}
+
 .doc-info-top {
   display: flex;
   align-items: center;

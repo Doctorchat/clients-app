@@ -140,6 +140,19 @@
   }
 }
 
+.lang-list-dropdown {
+  .dropdown-overlay {
+    min-width: unset;
+  }
+}
+
+.lang-icon {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  transform: translateY(1px);
+}
+
 @media (max-width: 768px) {
   .select-chat {
     display: none !important;

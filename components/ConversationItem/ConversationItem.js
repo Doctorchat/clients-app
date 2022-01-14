@@ -73,7 +73,7 @@ ConversationItem.propTypes = {
     description: PropTypes.string,
     updated: PropTypes.string,
     avatar: PropTypes.string,
-    status: PropTypes.oneOf(["open", "responded", "closed", "unpaid", "initied"]),
+    status: PropTypes.any,
     unread: PropTypes.number,
   }),
   isSelected: PropTypes.bool,

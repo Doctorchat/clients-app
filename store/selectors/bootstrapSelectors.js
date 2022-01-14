@@ -1,9 +1,12 @@
 import { createSelector } from "@reduxjs/toolkit";
-import toSelectOpts from "@/utils/toSelectOpts";
 
-const selectedLng = localStorage.getItem("i18nextLng") || "ro";
+const toSelectOpts = () => (list) => {
+  const selectedLng = (window && localStorage.getItem("i18nextLng")) || "ro";
+
+  return list.map((item) => ({ value: item.id, label: item[`name_${selectedLng}`] }));
+};
 
 export const categoriesOptionsSelector = createSelector(
   (store) => store.bootstrap.payload?.categories || [],
-  toSelectOpts("id", `name_${selectedLng}`)
+  toSelectOpts()
 );

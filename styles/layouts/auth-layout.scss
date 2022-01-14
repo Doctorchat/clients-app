@@ -95,6 +95,12 @@
   color: var(--bs-gray-600);
 }
 
+.auth-layout-lang {
+  .menu-item {
+    border-radius: 10px;
+  }
+}
+
 @media only screen and (max-width: 1360px) {
   .auth-content {
     width: 100%;

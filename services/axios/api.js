@@ -28,6 +28,7 @@ const api = {
     single: (id) => axiosInstance.get(`/chat/get/${id}`),
     readMessages: (id, messages) => axiosInstance.post("/chat/read", { id, messages }),
     promo: (code) => axiosInstance.get(`/promocodes/code/${code}`),
+    close: (id) => axiosInstance.put(`/chat/close/${id}`),
   },
   conversationList: { get: () => axiosInstance.get("/chat/list") },
   docList: {
