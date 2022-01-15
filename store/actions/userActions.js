@@ -25,12 +25,23 @@ export const loginUser = (data) => async (dispatch) => {
   }
 };
 
+export const registerUser = (data) => async (dispatch) => {
+  try {
+    const response = await api.user.register(data);
+
+    dispatch(setUserAuthorized({ user: response.data }));
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export const logoutUser =
   (path = "/auth/login") =>
   (dispatch) => {
     dispatch(setUserUnauthorized());
     window.location.replace(window.location.origin + path);
-    
+
     api.user.logout();
     return Promise.resolve();
   };

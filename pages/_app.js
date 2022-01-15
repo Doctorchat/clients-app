@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
 import Head from "next/head";
+import LocaleProvider from "antd/lib/locale-provider";
+import ro_RO from 'antd/lib/locale-provider/ro_RO';
 import { store } from "../store";
 import MainLayout from "@/layouts/MainLayout";
 import NotificationsWrapper from "@/containers/NotificationsWrapper";
@@ -29,8 +31,10 @@ export default function App({ Component, pageProps }) {
         <title>Doctorchat</title>
       </Head>
       <Provider store={store}>
-        <NotificationsWrapper />
-        {getLayout(<Component {...pageProps} />)}
+        <LocaleProvider locale={ro_RO}>
+          <NotificationsWrapper />
+          {getLayout(<Component {...pageProps} />)}
+        </LocaleProvider>
       </Provider>
     </>
   );

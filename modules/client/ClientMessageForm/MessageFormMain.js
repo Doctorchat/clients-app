@@ -116,7 +116,6 @@ export default function MessageFormMain() {
                   <span className="message-price-active">
                     {userInfo?.price + attachments.price} Lei
                   </span>
-                  {/* <span className="message-price-old">325 Lei</span> */}
                 </div>
                 <Button htmlType="submit" loading={loading}>
                   {t("continue")}

@@ -30,6 +30,7 @@ export default function ConfigureFormMeet() {
 
       data.doctor_id = docId;
       data.type = CHAT_TYPES.standard;
+      data.isMeet = true;
 
       try {
         setLoading(true);
@@ -54,13 +55,13 @@ export default function ConfigureFormMeet() {
     <div className="configure-form-meet px-1">
       <BackTitle
         className="configure-form-title"
-        title={(t('online_meet'))}
+        title={t("online_meet")}
         onBack={updateTabsConfig(selectModeTabs.choose, "prev")}
       />
       <Form methods={form} onFinish={onFormSubmit}>
         <SelectModeInvestigations />
         <Button htmlType="submit" size="sm" loading={loading}>
-          {t('continue')}
+          {t("continue")}
         </Button>
       </Form>
     </div>

@@ -1,13 +1,27 @@
 import PropTypes from "prop-types";
 import { forwardRef, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import moment from "moment";
 import DP from "antd/lib/date-picker";
 import getMomentDate from "./getMomentDate";
 import cs from "@/utils/classNames";
 
 const DatePicker = forwardRef((props, ref) => {
-  const { className, disabled, size, label, name, value, onChange, onDateUpdated, type, ...rest } =
-    props;
+  const {
+    className,
+    disabled,
+    size,
+    label,
+    name,
+    value,
+    onChange,
+    onDateUpdated,
+    type,
+    additionalCheckDisabledDay,
+    ...rest
+  } = props;
   const [momentVal, setMomentVal] = useState(getMomentDate(value));
+  const { t } = useTranslation();
 
   useEffect(() => {
     const momentDate = getMomentDate(value);
@@ -21,6 +35,24 @@ const DatePicker = forwardRef((props, ref) => {
       onChange(event);
     },
     [onChange]
+  );
+
+  const disabledDateHandler = useCallback(
+    (date) => {
+      const today = moment().subtract(1, "days");
+      const dateAfter7Days = moment().add(6, "days");
+
+      if (date.isAfter(dateAfter7Days) || date.isBefore(today)) {
+        return true;
+      }
+
+      if (additionalCheckDisabledDay) {
+        return additionalCheckDisabledDay(date);
+      }
+
+      return false;
+    },
+    [additionalCheckDisabledDay]
   );
 
   const pickerProps = {
@@ -44,9 +76,18 @@ const DatePicker = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         {type === "simple" ? (
-          <DP {...pickerProps} ref={ref} placeholder="Selectează" />
+          <DP
+            {...pickerProps}
+            ref={ref}
+            placeholder={t("select")}
+            disabledDate={disabledDateHandler}
+          />
         ) : (
-          <DP.RangePicker {...pickerProps} ref={ref} placeholder={["De la", "Pană la"]} />
+          <DP.RangePicker
+            {...pickerProps}
+            ref={ref}
+            placeholder={[t("range_picker_placeholder.start"), t("range_picker_placeholder.end")]}
+          />
         )}
       </div>
     </>
@@ -63,6 +104,7 @@ DatePicker.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onDateUpdated: PropTypes.func,
+  additionalCheckDisabledDay: PropTypes.func,
 };
 
 DatePicker.defaultProps = {

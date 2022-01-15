@@ -15,8 +15,6 @@ const formats = {
   full: "DD.MM.YYYY HH:mm",
 };
 
-dayjs.locale(i18next.language || "ro");
-
 /**
  * @typedef {Object} Tranformers
  * @property {Function} chatItem
@@ -30,6 +28,13 @@ dayjs.locale(i18next.language || "ro");
 export default function date(date) {
   if (!dayjs(date).isValid()) {
     return date;
+  }
+
+  if (i18next.language) {
+    const chunks = i18next.language.split("-");
+    dayjs.locale(chunks[0]);
+  } else {
+    dayjs.locale("ro");
   }
 
   const dayjsDate = dayjs(date);

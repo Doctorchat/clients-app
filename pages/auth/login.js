@@ -11,6 +11,7 @@ import Form from "@/components/Form";
 import Input from "@/components/Inputs";
 import Button from "@/components/Button";
 import { loginUser } from "@/store/actions";
+import { notification } from "@/store/slices/notificationsSlice";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);
@@ -32,7 +33,9 @@ export default function Login() {
           router.push("/");
         }
       } catch (error) {
-        console.log(error);
+        dispatch(
+          notification({ type: "error", title: "error", descrip: "Așa utilizator nu există" })
+        );
       } finally {
         setLoading(false);
       }

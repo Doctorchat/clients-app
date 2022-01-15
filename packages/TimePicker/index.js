@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { forwardRef, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import TP from "antd/lib/time-picker";
 import getMomentTime from "./getMomentTime";
 import getDisabledParts from "./getDisabledParts";
@@ -17,10 +18,12 @@ const TimePicker = forwardRef((props, ref) => {
     type,
     disabledHours,
     disabledMinutes,
+    activeDate,
     ...rest
   } = props;
   const [momentVal, setMomentVal] = useState(getMomentTime(value));
   const [disabledParts, setDisabledParts] = useState({ hours: [], minutes: {} });
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMomentVal(getMomentTime(value));
@@ -35,9 +38,9 @@ const TimePicker = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (disabledHours && disabledHours.length) {
-      setDisabledParts(getDisabledParts(disabledHours, disabledMinutes));
+      setDisabledParts(getDisabledParts(disabledHours, disabledMinutes, activeDate));
     }
-  }, [disabledHours, disabledMinutes]);
+  }, [activeDate, disabledHours, disabledMinutes]);
 
   const pickerProps = {
     className: cs("dc-picker", className),
@@ -49,7 +52,6 @@ const TimePicker = forwardRef((props, ref) => {
     format: "HH:mm",
     showNow: false,
     popupClassName: "dc-picker-popup",
-    placeholder: ["De la", "Pană la"],
     disabledHours: () => disabledParts.hours,
     disabledMinutes: (hour) => disabledParts.minutes?.[hour] || [],
     hideDisabledOptions: true,
@@ -65,9 +67,13 @@ const TimePicker = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         {type === "simple" ? (
-          <TP {...pickerProps} ref={ref} placeholder="Selectează" />
+          <TP {...pickerProps} ref={ref} placeholder={t("select")} />
         ) : (
-          <TP.RangePicker {...pickerProps} ref={ref} placeholder={["De la", "Pană la"]} />
+          <TP.RangePicker
+            {...pickerProps}
+            ref={ref}
+            placeholder={[t("range_picker_placeholder.start"), t("range_picker_placeholder.end")]}
+          />
         )}
       </div>
     </>
@@ -84,6 +90,7 @@ TimePicker.propTypes = {
   onChange: PropTypes.func,
   disabledHours: PropTypes.array,
   disabledMinutes: PropTypes.array,
+  activeDate: PropTypes.string,
 };
 
 TimePicker.defaultProps = {

@@ -3,7 +3,7 @@ import { createSelector } from "@reduxjs/toolkit";
 const toSelectOpts = () => (list) => {
   const selectedLng = (window && localStorage.getItem("i18nextLng")) || "ro";
 
-  return list.map((item) => ({ value: item.id, label: item[`name_${selectedLng}`] }));
+  return list.map((item) => ({ value: String(item.id), label: item[`name_${selectedLng}`] }));
 };
 
 export const categoriesOptionsSelector = createSelector(

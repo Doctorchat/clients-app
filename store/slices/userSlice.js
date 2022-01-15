@@ -25,9 +25,9 @@ export const userSlice = createSlice({
       state.data = action.payload;
     },
     updateUserProperty(state, action) {
-      const { prop, value } = action.payload;
+      const { prop, value, as_send } = action.payload;
 
-      if (Array.isArray(state.data[prop])) {
+      if (Array.isArray(state.data[prop]) && !as_send) {
         state.data[prop].push(value);
       } else {
         state.data[action.payload.prop] = action.payload.value;

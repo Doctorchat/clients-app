@@ -27,7 +27,9 @@ export default function ChatContentFooter(props) {
           </a>
         </div>
       </AuthRoleWrapper>
-      {status && !["initied", "unpaid"].includes(status) && <MessageBar chatId={chatId} />}
+      {status && !["initied", "unpaid", "closed"].includes(status) && (
+        <MessageBar chatId={chatId} />
+      )}
     </>
   );
 }

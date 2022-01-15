@@ -91,7 +91,7 @@
   "continue": "Continuă",
   "age": "Vârsta",
   "weight": "Greutate",
-  "weight(kg)": "Greutate(kg)",
+  "weight_kg": "Greutate(kg)",
   "height": "Înălțime",
   "height_cm": "Înălțime(cm)",
   "reviews_list_empty": "Aici va apărea lista de recenzii",
@@ -105,7 +105,9 @@
     "line1": "Contextul apariției problemei medicale (cum și când)",
     "line2": "Simptomele resimțite în detaliu",
     "line3": "Evoluția problemei în timp",
-    "line4": "Investigații sau intervenții medicale făcute în acest sens"
+    "line4": "Investigații sau intervenții medicale făcute în acest sens",
+    "date": "Data",
+    "time": "Ora"
   },
   "message_form_placeholder": "Exemplu: În urmă cu 3 zile, am început să am o durere de cap surdă care se resimte și în spatele ochilor. Pe lângă acest simptom, îmi curge nasul și uneori am amețeli, în special seara. Menționez că am început să am aceste simptome după ce m-am întors de la pescuit. Până acum nu a părut că simptomele s-au agravat, însă nici nu s-au ameliorat după ce am luat Paracetamol și Nurofen. Nu am făcut vreo investigație medicală în acest sens și nu am alte boli cronice. De asemenea, sunt fumător.",
   "message_uploads_label": "Adaugă document / imagine",
@@ -178,5 +180,9 @@
   },
   "select": "Selectează",
   "male": "Masculin",
-  "female": "Feminin"
+  "female": "Feminin",
+  "range_picker_placeholder": {
+    "start": "De la",
+    "end": "Până la"
+  }
 }

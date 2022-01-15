@@ -23,12 +23,14 @@ export default function DocSetVacation() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  console.log(user.vacation);
+
   const openSetVacationForm = () => setIsOpen(true);
 
   const clearVacation = useCallback(async () => {
     try {
       await api.user.resetVacation();
-      dispatch(updateUserProperty({ prop: "vacation", value: null }));
+      dispatch(updateUserProperty({ prop: "vacation", value: null, as_send: true }));
       dispatch(
         notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
       );
@@ -45,7 +47,7 @@ export default function DocSetVacation() {
       try {
         setLoading(true);
         await api.user.setVacation(values);
-        dispatch(updateUserProperty({ prop: "vacation", value: values.range }));
+        dispatch(updateUserProperty({ prop: "vacation", value: values.range, as_send: true }));
         dispatch(
           notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
         );
@@ -68,7 +70,13 @@ export default function DocSetVacation() {
         <Popup id="vacation-form" visible={isOpen} onVisibleChange={setIsOpen}>
           <Popup.Header title={t("set_vacation")} />
           <Popup.Content>
-            <Form methods={form} onFinish={onSubmitHandler}>
+            <Form
+              methods={form}
+              onFinish={onSubmitHandler}
+              initialValues={{
+                range: user?.vacation && user.vacation.length ? user.vacation : null,
+              }}
+            >
               <Form.Item label={t("interval")} name="range">
                 <DatePicker type="range" />
               </Form.Item>
@@ -76,10 +84,12 @@ export default function DocSetVacation() {
                 <Confirm
                   content={t("cancel_vacation_confirmation")}
                   onConfirm={clearVacation}
-                  disabled={!user.vacation}
+                  disabled={!user.vacation || !user?.vacation?.length}
                   isAsync
                 >
-                  <Button type="outline" disabled={!user.vacation}>{t("cancel")}</Button>
+                  <Button type="outline" disabled={!user.vacation || !user?.vacation?.length}>
+                    {t("cancel")}
+                  </Button>
                 </Confirm>
                 <Button htmlType="submit" loading={loading}>
                   {t("apply")}

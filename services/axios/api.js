@@ -19,6 +19,7 @@ const api = {
     setVacation: (data) => axiosInstance.post("/user/card/vacation", data),
     resetVacation: () => axiosInstance.put("/user/card/vacation"),
     changeLocale: (lng) => axiosInstance.post("/user/locale", { locale: lng }),
+    register: (data) => axiosInstance.post("/auth/register", data),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

@@ -5,7 +5,7 @@ const registerSchema = object().shape({
   phone: string().min(6),
   name: string().min(2).required(),
   password: string().min(6).required(),
-  passwordConfirmation: string()
+  password_confirmation: string()
     .oneOf([ref("password")], "Parolele nu sunt identice")
     .required(),
 });

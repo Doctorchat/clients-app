@@ -23,7 +23,7 @@ import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
 
 export default function ChatContent(props) {
-  const { loading, userInfo, messages, chatId, status, type, paymentUrl } = props;
+  const { loading, userInfo, messages, chatId, status, type, paymentUrl, isMeet } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -38,10 +38,12 @@ export default function ChatContent(props) {
     }
 
     const toggleChatInfo = () => {
-      if (window.innerWidth <= 1268) {
-        dispatch(chatContentToggleInfoVisibility({ visible: false, animate: true }));
-      } else {
-        dispatch(chatContentToggleInfoVisibility({ visible: true, animate: true }));
+      if (type !== "support") {
+        if (window.innerWidth <= 1268) {
+          dispatch(chatContentToggleInfoVisibility({ visible: false, animate: true }));
+        } else {
+          dispatch(chatContentToggleInfoVisibility({ visible: true, animate: true }));
+        }
       }
     };
 
@@ -58,14 +60,14 @@ export default function ChatContent(props) {
   );
 
   const openMessageFormPopup = useCallback(() => {
-    if (type === "standard") {
+    if (!isMeet) {
       dispatch(messageFormToggleVisibility(true));
       dispatch(messageFormUpdateChatId(chatId));
-    } else if (type === "meet") {
+    } else {
       dispatch(meetFormToggleVisibility(true));
       dispatch(meetFormUpdateChatId(chatId));
     }
-  }, [chatId, dispatch, type]);
+  }, [chatId, dispatch, isMeet]);
 
   const onBack = useCallback(() => router.push("/"), [router]);
 
@@ -146,4 +148,5 @@ ChatContent.propTypes = {
   status: PropTypes.string,
   type: PropTypes.string,
   paymentUrl: PropTypes.string,
+  isMeet: PropTypes.bool,
 };

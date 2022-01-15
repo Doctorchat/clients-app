@@ -1,17 +1,52 @@
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
+import i18nextlocal from "@/services/i18next";
 import { registerSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
 import Button from "@/components/Button";
+import { notification } from "@/store/slices/notificationsSlice";
+import { registerUser } from "@/store/actions";
 
 export default function Register() {
   const resolver = useYupValidationResolver(registerSchema);
   const form = useForm({ resolver });
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const getActiveLng = () => {
+    if (i18nextlocal.language) {
+      const chunks = i18nextlocal.language.split("-");
+      return chunks[0];
+    } else {
+      return "ro";
+    }
+  };
+
+  const onRegisterSubmit = useCallback(
+    async (values) => {
+      const data = { ...values };
+
+      data.role = 3;
+      data.locale = getActiveLng();
+
+      try {
+        setLoading(true);
+        await dispatch(registerUser(data));
+      } catch (error) {
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+      } finally {
+        setLoading(false);
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <>
@@ -26,26 +61,28 @@ export default function Register() {
         </Link>
       </div>
       <div className="auth-form">
-        <Form name="login-form" methods={form}>
+        <Form name="login-form" methods={form} onFinish={onRegisterSubmit}>
           <p className="form-subtitle">DoctorChat</p>
           <h3 className="form-title">{t("auth_register_title")}</h3>
           <Form.Item label={`${t("email")}*`} name="email">
             <Input />
           </Form.Item>
-          <Form.Item label={`${t("phone")}*`} name="phone">
+          <Form.Item label={`${t("phone")}`} name="phone">
             <Input />
           </Form.Item>
-          <Form.Item label={`${t("name")}*`}name="name">
+          <Form.Item label={`${t("name")}*`} name="name">
             <Input />
           </Form.Item>
           <Form.Item label={`${t("password")}*`} name="password">
-            <Input />
+            <Input type="password" />
           </Form.Item>
-          <Form.Item label={`${t("repeat_password")}*`} name="passwordConfirmation">
-            <Input />
+          <Form.Item label={`${t("repeat_password")}*`} name="password_confirmation">
+            <Input type="password" />
           </Form.Item>
           <div className="form-bottom">
-            <Button htmlType="submit">{t("registration")}</Button>
+            <Button htmlType="submit" loading={loading}>
+              {t("registration")}
+            </Button>
             <Link href="/auth/login">
               <a>{t("already_registered")}</a>
             </Link>

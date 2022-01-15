@@ -19,7 +19,7 @@ export default function DocAppointmentsSettings() {
   }));
   const { updateTabsConfig } = useTabsContext();
   const [loading, setLoding] = useState(false);
-  const form = useForm({ defaultValues: disponibility });
+  const form = useForm();
   const dispatch = useDispatch();
 
   const onFormSubmit = useCallback(
@@ -55,7 +55,11 @@ export default function DocAppointmentsSettings() {
             type="info"
             message="Lăsați câmpurile necompletate pentru a indica că nu sunteți disponibil în ziua corespunzătoare"
           />
-          <Form methods={form} onFinish={onFormSubmit}>
+          <Form
+            methods={form}
+            onFinish={onFormSubmit}
+            initialValues={disponibility && Array.isArray(disponibility) ? {} : disponibility}
+          >
             <Form.Item name="mon" label="Luni">
               <TimePicker type="range" />
             </Form.Item>
