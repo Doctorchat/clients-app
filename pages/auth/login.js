@@ -47,7 +47,7 @@ export default function Login() {
     <>
       <div className="auth-header">
         <div className="auth-header-logo">
-          <h3 className="m-0">DoctorChat</h3>
+          <h3 className="m-0">Doctorchat</h3>
         </div>
         <Link href="/auth/register">
           <a>
@@ -57,7 +57,7 @@ export default function Login() {
       </div>
       <div className="auth-form">
         <Form name="login-form" methods={form} onFinish={onLoginSubmit}>
-          <p className="form-subtitle">DoctorChat</p>
+          <p className="form-subtitle">Doctorchat</p>
           <h3 className="form-title">{t("auth_login_title")}</h3>
           <Form.Item label={t("email")} name="email">
             <Input />

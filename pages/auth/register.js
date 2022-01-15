@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import i18nextlocal from "@/services/i18next";
 import { registerSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
@@ -19,6 +20,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const getActiveLng = () => {
     if (i18nextlocal.language) {
@@ -39,20 +41,21 @@ export default function Register() {
       try {
         setLoading(true);
         await dispatch(registerUser(data));
+        router.push("/");
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
         setLoading(false);
       }
     },
-    [dispatch]
+    [dispatch, router]
   );
 
   return (
     <>
       <div className="auth-header">
         <div className="auth-header-logo">
-          <h3 className="m-0">DoctorChat</h3>
+          <h3 className="m-0">Doctorchat</h3>
         </div>
         <Link href="/auth/login">
           <a>
@@ -62,7 +65,7 @@ export default function Register() {
       </div>
       <div className="auth-form">
         <Form name="login-form" methods={form} onFinish={onRegisterSubmit}>
-          <p className="form-subtitle">DoctorChat</p>
+          <p className="form-subtitle">Doctorchat</p>
           <h3 className="form-title">{t("auth_register_title")}</h3>
           <Form.Item label={`${t("email")}*`} name="email">
             <Input />
