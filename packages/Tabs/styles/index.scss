@@ -59,6 +59,7 @@
 
 // _S_ :: Sidebar animations
 // _T_ :: Tabs Animations
+// _Y_ :: Y Animation
 
 .tabs-pane {
   &.tab-exit-animated {
@@ -105,6 +106,25 @@
   }
 }
 
+.tabs-slider[data-animation="y-animation"] {
+  .tabs-pane {
+    &.tab-pane-in {
+      animation-name: _Y_tabPaneIn;
+    }
+    &.tab-pane-in-prev {
+      animation-name: _Y_tabPaneInPrev;
+    }
+    &.tab-pane-out {
+      animation-name: _Y_tabPaneInPrev;
+      animation-direction: reverse;
+    }
+    &.tab-pane-out-prev {
+      animation-name: _Y_tabPaneIn;
+      animation-direction: reverse;
+    }
+  }
+}
+
 @keyframes _S_tabPaneIn {
   0% {
     transform: translate3d(100%, 0, 0);
@@ -145,6 +165,28 @@
   }
   100% {
     transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes _Y_tabPaneIn {
+  0% {
+    transform: translate3d(0, 20%, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes _Y_tabPaneInPrev {
+  0% {
+    transform: translate3d(0, -20%, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }

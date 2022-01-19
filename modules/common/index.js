@@ -7,6 +7,7 @@ import ChatContent from "./ChatContent";
 import MessagesList from "./MessagesList";
 import RightSide from "./RightSide";
 import ProfileChangeLang from "./ProfileChangeLang";
+import EditProfileSecurity from "./EditProfileSecurity";
 
 export {
   ConversationsSidebar,
@@ -18,4 +19,5 @@ export {
   MessagesList,
   RightSide,
   ProfileChangeLang,
+  EditProfileSecurity,
 };

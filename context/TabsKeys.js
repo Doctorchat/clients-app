@@ -31,6 +31,7 @@ export const meetFormTabs = {
 };
 
 export const selectModeTabs = {
+  menu: "select-mode-menu",
   choose: "choose-mode-tab",
   configureMeet: "configure-meet-tab",
   configureMessage: "configure-message-tab",

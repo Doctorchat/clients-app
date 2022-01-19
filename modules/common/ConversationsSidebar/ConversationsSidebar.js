@@ -12,6 +12,7 @@ import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 import { ConversationItemSkeleton } from "@/components/ConversationItem";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
+import { ClientStartConversationMenu } from "@/modules/client";
 
 export default function ConversationsSidebar() {
   const { conversationList } = useSelector((store) => ({
@@ -67,9 +68,11 @@ export default function ConversationsSidebar() {
               content: searchConfig.active ? t("search_not_found") : t("conversation_list_empty"),
               extra: (
                 <AuthRoleWrapper roles={[userRoles.get("client")]}>
-                  <Button className="mt-3" onClick={openStartConversation}>
-                    {t("select_doctor")}
-                  </Button>
+                  <ClientStartConversationMenu placement="bottomCenter">
+                    <Button className="mt-3" onClick={openStartConversation}>
+                      {t("select_doctor")}
+                    </Button>
+                  </ClientStartConversationMenu>
                 </AuthRoleWrapper>
               ),
             }}

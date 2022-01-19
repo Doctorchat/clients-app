@@ -11,7 +11,7 @@ export default function EmptyBox(props) {
   return (
     <div className={cs("empty-box", className)}>
       <div className="empty-box-image">
-        <Image alt="Nu-s date" w="64" h="64" src={emptyIcon.src} />
+        <Image alt={t("no_data")} w="64" h="64" src={emptyIcon.src} />
       </div>
       <div className="empty-box-content">
         <h4 className="empty-box-title">{title}</h4>

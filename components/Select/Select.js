@@ -25,7 +25,7 @@ const MultiValueRemove = (props) => (
 );
 
 const NoOptionsMessage = (props) => (
-  <components.NoOptionsMessage {...props}>Nu-s date</components.NoOptionsMessage>
+  <components.NoOptionsMessage {...props}>{i18next.t("no_data")}</components.NoOptionsMessage>
 );
 
 const Select = forwardRef((props, ref) => {

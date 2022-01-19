@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import ConversationsSidebar from "../ConversationsSidebar";
 import ProfileSidebar from "../ProfileSidebar";
@@ -11,7 +10,7 @@ import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
 import { IconBtn } from "@/components/Button";
 import PlusIcon from "@/icons/plus.svg";
-import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
+import { ClientStartConversationMenu } from "@/modules/client";
 
 const ClientInvestigationsList = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientInvestigationsList)
@@ -25,7 +24,6 @@ const DocReviewsSidebar = dynamic(() =>
 
 export default function LeftSide() {
   const [tabsConfig, setTabsConfig] = useState({ key: leftSideTabs.conversationList, dir: "next" });
-  const dispatch = useDispatch();
 
   const updateTabsConfig = useCallback(
     (key, dir = "next") =>
@@ -34,8 +32,6 @@ export default function LeftSide() {
       },
     []
   );
-
-  const openStartConversation = () => dispatch(docListToggleVisibility(true));
 
   return (
     <div id="column-left" className="sidebar-left">
@@ -71,12 +67,11 @@ export default function LeftSide() {
         </AuthRoleWrapper>
       </Tabs>
       <AuthRoleWrapper roles={[userRoles.get("client")]}>
-        <IconBtn
-          icon={<PlusIcon />}
-          type="primary"
-          onClick={openStartConversation}
-          className="start-conversation-btn"
-        />
+        <div className="start-conversation-btn">
+          <ClientStartConversationMenu placement="topLeft">
+            <IconBtn icon={<PlusIcon />} type="primary" />
+          </ClientStartConversationMenu>
+        </div>
       </AuthRoleWrapper>
     </div>
   );

@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import i18next from "i18next";
 import { useSelector } from "react-redux";
 import { useCallback, useState } from "react";
-import i18nextlocal from "@/services/i18next";
 import Dropdown from "@/components/Dropdown";
 import Menu from "@/components/Menu";
 import LangIcon from "@/icons/lang.svg";
 import api from "@/services/axios/api";
+import getActiveLng from "@/utils/getActiveLng";
 
 const langs = {
   ro: "Română",
@@ -62,15 +62,6 @@ export default function ProfileChangeLang({ onUpdate }) {
     </Menu>
   );
 
-  const getActiveLng = () => {
-    if (i18nextlocal.language) {
-      const chunks = i18nextlocal.language.split("-");
-      return langs[chunks[0]];
-    } else {
-      return langs.ro;
-    }
-  };
-
   return (
     <Dropdown
       overlay={options}
@@ -78,7 +69,7 @@ export default function ProfileChangeLang({ onUpdate }) {
       placement="topRight"
       forcedClose={dropdownForcedClose}
     >
-      <Menu.Item icon={<LangIcon />}>{getActiveLng()}</Menu.Item>
+      <Menu.Item icon={<LangIcon />}>{langs[getActiveLng()]}</Menu.Item>
     </Dropdown>
   );
 }

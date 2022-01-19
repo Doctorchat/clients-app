@@ -7,13 +7,26 @@ const docGeneral = object().shape({
   education: array()
     .min(1)
     .of(object().shape({ value: string().required() })),
-  specialization: string().required(),
   professionalTitle: string().required(),
   price: number().min(0).required(),
   meet_price: number().min(0).required(),
   experience: number().min(0).required(),
   workplace: string().required(),
-  bio: string().required(),
+  specialization_ro: string().required(),
+  specialization_ru: string(),
+  specialization_en: string(),
+  bio_ro: string().required(),
+  bio_ru: string(),
+  bio_en: string(),
+});
+
+const docMultilangEdit = object().shape({
+  specialization_ro: string().required(),
+  specialization_ru: string(),
+  specialization_en: string(),
+  bio_ro: string().required(),
+  bio_ru: string(),
+  bio_en: string(),
 });
 
 const clientGeneral = object().shape({
@@ -28,4 +41,4 @@ const security = object().shape({
     .required(),
 });
 
-export default { docGeneral, security, clientGeneral };
+export default { docGeneral, security, clientGeneral, docMultilangEdit };

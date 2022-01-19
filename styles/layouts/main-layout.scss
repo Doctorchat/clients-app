@@ -29,12 +29,26 @@
 }
 
 .start-conversation-btn {
+  & > .dc-btn-icon {
+    width: 54px;
+    height: 54px;
+  }
   position: absolute;
   bottom: 16px;
   right: 16px;
   z-index: 12;
-  width: 54px;
-  height: 54px;
+}
+
+.start-conversation-dropdown {
+  min-width: unset;
+  .council-item {
+    .menu-item-prefix {
+      transform: translateX(-2px);
+    }
+    .menu-item-content {
+      transform: translateX(-4px);
+    }
+  }
 }
 
 @media only screen and(max-width: 1268px) {

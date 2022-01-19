@@ -18,8 +18,9 @@ import { ClientSelectMode } from "@/modules/client";
 import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 import cs from "@/utils/classNames";
+import getActiveLng from "@/utils/getActiveLng";
 
-const selectedLng = localStorage.getItem("i18nextLng") || "ro";
+const selectedLng = getActiveLng();
 
 export default function DocInfo(props) {
   const { doctor, scrollableContainer, allowCreate, loading } = props;
@@ -85,7 +86,7 @@ export default function DocInfo(props) {
                 </Skeleton>
               ) : (
                 <p className="description mb-0">
-                  <Truncate text={doctor?.about?.bio} length={105} />
+                  <Truncate text={doctor?.about?.[`bio_${selectedLng}`]} length={105} />
                 </p>
               )}
             </>

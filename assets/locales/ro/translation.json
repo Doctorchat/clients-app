@@ -184,5 +184,7 @@
   "range_picker_placeholder": {
     "start": "De la",
     "end": "Până la"
-  }
+  },
+  "dont_know_speciality": "Nu cunoști specialitatea?",
+  "consilium": "Consiliu"
 }

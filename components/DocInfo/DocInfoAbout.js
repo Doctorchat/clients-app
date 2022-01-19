@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Skeleton from "../Skeleton";
+import getActiveLng from "@/utils/getActiveLng";
+
+const selectedLng = getActiveLng();
 
 export default function DocInfoAbout(props) {
   const { about, loading } = props;
@@ -25,7 +28,7 @@ export default function DocInfoAbout(props) {
     <div className="doc-info-tab-content doc-info-activiy">
       <div className="doc-info-section">
         <h4 className="info-section-title">{t("doctor_info.about_me")}</h4>
-        <p className="info-section-descrp">{about?.bio}</p>
+        <p className="info-section-descrp">{about?.[`bio_${selectedLng}`]}</p>
       </div>
       <div className="doc-info-section">
         <h4 className="info-section-title">{t("general_information")}</h4>
@@ -47,7 +50,7 @@ export default function DocInfoAbout(props) {
           <li className="doc-info-list-item">
             <div className="content">
               <span className="text">
-                {t("specialization")} <b>{about?.specialization}</b>
+                {t("specialization")} <b>{about?.[`specialization_${selectedLng}`]}</b>
               </span>
             </div>
           </li>

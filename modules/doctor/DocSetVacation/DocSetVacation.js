@@ -23,8 +23,6 @@ export default function DocSetVacation() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  console.log(user.vacation);
-
   const openSetVacationForm = () => setIsOpen(true);
 
   const clearVacation = useCallback(async () => {

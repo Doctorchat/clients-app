@@ -44,6 +44,15 @@
     top: calc(100% + 4px);
     transform-origin: top right;
   }
+  &.bottomCenter {
+    left: 50%;
+    transform: scale3d(1, 0.8, 1) translateX(-50%);
+    top: calc(100% + 4px);
+    transform-origin: top;
+    &.enter-done {
+      transform: scale3d(1, 1, 1) translateX(-50%);
+    }
+  }
   &.topLeft {
     right: 0;
     bottom: calc(100% + 4px);

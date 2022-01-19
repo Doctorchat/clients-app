@@ -34,6 +34,17 @@
     margin-bottom: 4px;
     color: var(--bs-gray-800);
     padding-left: 4px;
+    &.inside {
+      padding-left: 12px;
+      font-size: 15px;
+    }
+  }
+  &-line {
+    margin: 0 8px;
+    .tabs-line-item {
+      padding: 10px 8px;
+      font-size: 14px;
+    }
   }
 }
 

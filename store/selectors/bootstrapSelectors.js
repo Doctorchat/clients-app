@@ -1,7 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
+import getActiveLng from "@/utils/getActiveLng";
 
 const toSelectOpts = () => (list) => {
-  const selectedLng = (window && localStorage.getItem("i18nextLng")) || "ro";
+  const selectedLng = window && getActiveLng();
 
   return list.map((item) => ({ value: String(item.id), label: item[`name_${selectedLng}`] }));
 };

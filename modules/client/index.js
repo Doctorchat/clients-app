@@ -8,6 +8,7 @@ import ClientEditProfile from "./ClientEditProfile";
 import ClientInvestigationForm from "./ClientInvestigationForm";
 import ClientInvestigationsList from "./ClientInvestigationsList";
 import ClientMeetForm from "./ClientMeetForm";
+import ClientStartConversationMenu from "./ClientStartCoversationMenu";
 
 export {
   ClientMenuOverlay,
@@ -20,4 +21,5 @@ export {
   ClientInvestigationForm,
   ClientInvestigationsList,
   ClientMeetForm,
+  ClientStartConversationMenu,
 };

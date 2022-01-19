@@ -184,5 +184,7 @@
   "range_picker_placeholder": {
     "start": "From",
     "end": "To"
-  }
+  },
+  "dont_know_speciality": "Don't know the specialty?",
+  "consilium": "Council"
 }

@@ -12,13 +12,13 @@ import Button from "@/components/Button";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { addConversation } from "@/store/slices/conversationListSlice";
-import { CHAT_TYPES } from "@/context/constants";
 import { messageFormUpdateChatId } from "@/store/slices/messageFormSlice";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { configureFormSchema } from "@/services/validation";
 
 export default function ConfigureFormMessage() {
-  const { updateTabsConfig, docId, onSelectMode, onCreated } = useTabsContext();
+  const { updateTabsConfig, docId, onSelectMode, onCreated, formsBackKey, chatType } =
+    useTabsContext();
   const [loading, setLoading] = useState(false);
   const resolver = useYupValidationResolver(configureFormSchema);
   const form = useForm({ defaultValues: { isAnonym: false }, resolver });
@@ -30,7 +30,7 @@ export default function ConfigureFormMessage() {
       const data = { ...values };
 
       data.doctor_id = docId;
-      data.type = CHAT_TYPES.standard;
+      data.type = chatType;
 
       try {
         setLoading(true);
@@ -48,15 +48,15 @@ export default function ConfigureFormMessage() {
         setLoading(false);
       }
     },
-    [dispatch, docId, onCreated, onSelectMode]
+    [chatType, dispatch, docId, onCreated, onSelectMode]
   );
 
   return (
-    <div className="configure-form-message px-1">
+    <div className="configure-form-message">
       <BackTitle
         className="configure-form-title"
         title={t("simple_message")}
-        onBack={updateTabsConfig(selectModeTabs.choose, "prev")}
+        onBack={updateTabsConfig(formsBackKey || selectModeTabs.choose, "prev")}
       />
       <Form methods={form} onFinish={onFormSubmit}>
         <SelectModeInvestigations />

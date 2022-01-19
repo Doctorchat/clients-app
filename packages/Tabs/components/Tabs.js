@@ -58,7 +58,7 @@ Tabs.propTypes = {
   }),
   children: PropTypes.arrayOf(PropTypes.element),
   updateTabsConfig: PropTypes.func,
-  dataAnimation: PropTypes.oneOf(["sidebar", "tabs"]),
+  dataAnimation: PropTypes.oneOf(["sidebar", "tabs", 'y-animation']),
   styles: PropTypes.object,
   contextAdditionalData: PropTypes.object,
 };

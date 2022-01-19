@@ -1,3 +1,4 @@
+import getActiveLng from "./getActiveLng";
 import i18next from "@/services/i18next";
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
@@ -30,12 +31,7 @@ export default function date(date) {
     return date;
   }
 
-  if (i18next.language) {
-    const chunks = i18next.language.split("-");
-    dayjs.locale(chunks[0]);
-  } else {
-    dayjs.locale("ro");
-  }
+  dayjs.locale(getActiveLng());
 
   const dayjsDate = dayjs(date);
 

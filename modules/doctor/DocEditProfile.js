@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { EditProfileSecurity } from "../common";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { editProfileSchema } from "@/services/validation";
 import Form from "@/components/Form";
@@ -15,8 +16,16 @@ import { updateUser } from "@/store/slices/userSlice";
 import toSelectOpts from "@/utils/toSelectOpts";
 import TrashIcon from "@/icons/trash.svg";
 import PlusIcon from "@/icons/plus.svg";
+import getActiveLng from "@/utils/getActiveLng";
+import Tabs, { Line } from "@/packages/Tabs";
 
-const selectedLng = localStorage.getItem("i18nextLng") || "ro";
+const tabsKeys = {
+  ro: "edit-ro",
+  ru: "edit-ru",
+  en: "edit-en",
+};
+
+const selectedLng = getActiveLng();
 
 export default function DocEditProfile() {
   const { user, categories } = useSelector((store) => ({
@@ -24,41 +33,40 @@ export default function DocEditProfile() {
     categories: categoriesOptionsSelector(store),
   }));
   const { t } = useTranslation();
-  const generalDataResolver = useYupValidationResolver(editProfileSchema.docGeneral);
-  const securityDataResolver = useYupValidationResolver(editProfileSchema.security);
-  const generaDataForm = useForm({
+  const resolver = useYupValidationResolver(editProfileSchema.docGeneral);
+  const form = useForm({
     defaultValues: {
       name: user.name,
       category: toSelectOpts("id", `name_${selectedLng}`)(user.category),
-      specialization: user.about.specialization,
       professionalTitle: user.about.professionalTitle,
       price: user.price,
       experience: user.about.experience,
       meet_price: user.meet_price,
       workplace: user.activity.workplace,
-      bio: user.about.bio,
       education: user.activity.education.map((edc) => ({ value: edc })),
+      specialization_ro: user.about?.specialization_ro,
+      specialization_ru: user.about?.specialization_ru,
+      specialization_en: user.about?.specialization_en,
+      bio_ro: user.about?.bio_ro,
+      bio_ru: user.about?.bio_ru,
+      bio_en: user.about?.bio_en,
     },
-    resolver: generalDataResolver,
+    resolver,
   });
-  const securityDataForm = useForm({ resolver: securityDataResolver });
-  const [formEditConfig, setFormEditConfig] = useState({
-    general: { edited: false, loading: false },
-    security: { edited: false, loading: false },
-  });
+  const [tabsConfig, setTabsConfig] = useState({ key: tabsKeys[selectedLng], dir: "next" });
+  const [loading, setLoading] = useState();
+  const [isFormEdited, setIsFromEdited] = useState(false);
   const dispatch = useDispatch();
 
-  const onFormsValuesChanges = useCallback(
-    (formName) => () => {
-      if (!formEditConfig[formName].edited) {
-        const formsConfig = { ...formEditConfig };
-        formsConfig[formName].edited = true;
-
-        setFormEditConfig(formsConfig);
-      }
-    },
-    [formEditConfig]
+  const updateTabsConfig = useCallback(
+    (key, dir = "next") =>
+      () => {
+        setTabsConfig({ key, dir });
+      },
+    []
   );
+
+  const onFormsValuesChanges = useCallback(() => setIsFromEdited(true), []);
 
   const onUpdateData = useCallback(
     async (values) => {
@@ -68,7 +76,7 @@ export default function DocEditProfile() {
       data.education = data.education.map((edc) => edc.value);
 
       try {
-        setFormEditConfig((prev) => ({ ...prev, general: { ...prev.general, loading: true } }));
+        setLoading(true);
 
         const response = await api.user.update(data);
 
@@ -77,31 +85,7 @@ export default function DocEditProfile() {
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
-        setFormEditConfig((prev) => ({
-          ...prev,
-          general: { ...prev.general, loading: false, edited: false },
-        }));
-      }
-    },
-    [dispatch]
-  );
-
-  const onSecurityUpdate = useCallback(
-    async (values) => {
-      try {
-        setFormEditConfig((prev) => ({
-          ...prev,
-          security: { ...prev.security, loading: true },
-        }));
-        await api.user.updatePassword(values);
-        dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
-      } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
-      } finally {
-        setFormEditConfig((prev) => ({
-          ...prev,
-          security: { ...prev.security, loading: false, edited: false },
-        }));
+        setLoading(false);
       }
     },
     [dispatch]
@@ -112,9 +96,9 @@ export default function DocEditProfile() {
       <div className="edit-profile-section">
         <h4 className="edit-profile-title">{t("general_information")}</h4>
         <Form
-          methods={generaDataForm}
+          methods={form}
           className="edit-profile-form"
-          onValuesChange={onFormsValuesChanges("general")}
+          onValuesChange={onFormsValuesChanges}
           onFinish={onUpdateData}
         >
           <Form.Item name="name" label={t("name")}>
@@ -122,9 +106,6 @@ export default function DocEditProfile() {
           </Form.Item>
           <Form.Item name="category" label={t("speciality")}>
             <Select multiple options={categories} />
-          </Form.Item>
-          <Form.Item name="specialization" label={t("specialization")}>
-            <Input />
           </Form.Item>
           <Form.Item name="professionalTitle" label={t("professional_title")}>
             <Input />
@@ -169,50 +150,61 @@ export default function DocEditProfile() {
               ))
             }
           </Form.List>
-          <Form.Item name="bio" label={t("about")}>
-            <Textarea />
-          </Form.Item>
+          <h4 className="edit-profile-title inside">{t("about")}</h4>
+          <Line
+            className="edit-profile-line"
+            activeKey={tabsConfig.key}
+            updateTabsConfig={updateTabsConfig}
+          >
+            <Line.Item title="Ro" dataKey={tabsKeys.ro} />
+            <Line.Item title="Ру" dataKey={tabsKeys.ru} />
+            <Line.Item title="En" dataKey={tabsKeys.en} />
+          </Line>
+          <Tabs
+            config={{ ...tabsConfig }}
+            updateTabsConfig={updateTabsConfig}
+            dataAnimation="y-animation"
+            className="overflow-hidden"
+          >
+            <Tabs.Pane dataKey={tabsKeys.ro} className="px-1 pt-3" unmountOnExit>
+              <>
+                <Form.Item name="specialization_ro" label={t("specialization", { lng: "ro" })}>
+                  <Input />
+                </Form.Item>
+                <Form.Item name="bio_ro" label={t("about", { lng: "ro" })}>
+                  <Textarea />
+                </Form.Item>
+              </>
+            </Tabs.Pane>
+            <Tabs.Pane dataKey={tabsKeys.ru} className="px-1 pt-3" unmountOnExit>
+              <>
+                <Form.Item name="specialization_ru" label={t("specialization", { lng: "ru" })}>
+                  <Input />
+                </Form.Item>
+                <Form.Item name="bio_ru" label={t("about", { lng: "ru" })}>
+                  <Textarea />
+                </Form.Item>
+              </>
+            </Tabs.Pane>
+            <Tabs.Pane dataKey={tabsKeys.en} className="px-1 pt-3" unmountOnExit>
+              <>
+                <Form.Item name="specialization_en" label={t("specialization", { lng: "en" })}>
+                  <Input />
+                </Form.Item>
+                <Form.Item name="bio_en" label={t("about", { lng: "en" })}>
+                  <Textarea />
+                </Form.Item>
+              </>
+            </Tabs.Pane>
+          </Tabs>
           <div className="d-flex justify-content-end">
-            <Button
-              htmlType="submit"
-              type="primary"
-              loading={formEditConfig.general.loading}
-              disabled={!formEditConfig.general.edited}
-            >
+            <Button htmlType="submit" type="primary" loading={loading} disabled={!isFormEdited}>
               {t("edit")}
             </Button>
           </div>
         </Form>
       </div>
-      <div className="edit-profile-section">
-        <h4 className="edit-profile-title">{t("security")}</h4>
-        <Form
-          methods={securityDataForm}
-          className="edit-profile-form"
-          onFinish={onSecurityUpdate}
-          onValuesChange={onFormsValuesChanges("security")}
-        >
-          <Form.Item name="current_password" label={t("current_password")}>
-            <Input type="password" />
-          </Form.Item>
-          <Form.Item name="new_password" label={t("new_password")}>
-            <Input type="password" />
-          </Form.Item>
-          <Form.Item name="new_confirm_password" label={t("repeat_password")}>
-            <Input type="password" />
-          </Form.Item>
-          <div className="d-flex justify-content-end">
-            <Button
-              htmlType="submit"
-              type="primary"
-              disabled={!formEditConfig.security.edited}
-              loading={formEditConfig.security.loading}
-            >
-              {t("edit")}
-            </Button>
-          </div>
-        </Form>
-      </div>
+      <EditProfileSecurity />
     </div>
   );
 }

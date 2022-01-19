@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import i18nextlocal from "@/services/i18next";
 import { registerSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
@@ -13,6 +12,7 @@ import Input from "@/components/Inputs";
 import Button from "@/components/Button";
 import { notification } from "@/store/slices/notificationsSlice";
 import { registerUser } from "@/store/actions";
+import getActiveLng from "@/utils/getActiveLng";
 
 export default function Register() {
   const resolver = useYupValidationResolver(registerSchema);
@@ -21,15 +21,6 @@ export default function Register() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const getActiveLng = () => {
-    if (i18nextlocal.language) {
-      const chunks = i18nextlocal.language.split("-");
-      return chunks[0];
-    } else {
-      return "ro";
-    }
-  };
 
   const onRegisterSubmit = useCallback(
     async (values) => {
