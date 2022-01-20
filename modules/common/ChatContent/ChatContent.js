@@ -82,7 +82,7 @@ export default function ChatContent(props) {
         setTimeout(() => {
           dispatch(readChatMessages({ id: chatId, messages: unreadedMessages }));
           dispatch(updateConversation({ id: +chatId, unread: 0 }));
-        }, 500);
+        }, 750);
       }
     }
   }, [chatId, dispatch, messages]);

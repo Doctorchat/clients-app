@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { memo, useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import SelectModeMenu from "./SelectModeMenu";
 import SelectModeOptions from "./SelectModeOptions";
 import ConfigureFormMessage from "./ConfigureFormMessage";
@@ -8,15 +10,23 @@ import ConfigureFormMeet from "./ConfigureFormMeet";
 import { selectModeTabs } from "@/context/TabsKeys";
 import Tabs from "@/packages/Tabs";
 import { CHAT_TYPES } from "@/context/constants";
+import Alert from "@/components/Alert";
+import Button from "@/components/Button";
+import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
 
 function ClientSelectMode(props) {
   const { onSelectMode, docId, activeTab, formsBackKey, onMenuItemSelected, chatType } = props;
+  const {
+    user: { investigations },
+  } = useSelector((store) => ({ user: store.user.data }));
   const [tabsConfig, setTabsConfig] = useState({
     key: activeTab || selectModeTabs.choose,
     dir: "next",
   });
   const [tabsHeight, setTabsHeight] = useState(68);
+  const dispatch = useDispatch();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const getActiveTabSelector = (key) => {
     if (key === selectModeTabs.configureMessage) {
@@ -60,6 +70,25 @@ function ClientSelectMode(props) {
   );
 
   const goToCreatedChat = useCallback((id) => router.push(`/chat?id=${id}`), [router]);
+
+  const openInvestigationForm = useCallback(
+    () => dispatch(investigationFormToggleVisibility(true)),
+    [dispatch]
+  );
+
+  if (!investigations.length)
+    return (
+      <div className="px-2">
+        <Alert
+          className="configure-form-alert"
+          type="error"
+          message={t("no_investigation_error")}
+        />
+        <Button size="sm" className="mt-2" onClick={openInvestigationForm}>
+          {t("add_investigation")}
+        </Button>
+      </div>
+    );
 
   return (
     <Tabs

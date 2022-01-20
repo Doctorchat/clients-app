@@ -186,5 +186,6 @@
     "end": "To"
   },
   "dont_know_speciality": "Don't know the specialty?",
-  "consilium": "Council"
+  "consilium": "Council",
+  "login_error": "Wrong data. Please try again."
 }

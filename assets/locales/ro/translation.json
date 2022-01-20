@@ -186,5 +186,6 @@
     "end": "Până la"
   },
   "dont_know_speciality": "Nu cunoști specialitatea?",
-  "consilium": "Consiliu"
+  "consilium": "Consiliu",
+  "login_error": "Date greșite. Vă rugăm să mai încercați o dată."
 }

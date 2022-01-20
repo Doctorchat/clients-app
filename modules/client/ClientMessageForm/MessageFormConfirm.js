@@ -147,7 +147,7 @@ function MessageFormConfirmation() {
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">
-                  {t("message_form_confirmation.subtotal")}
+                  {t("message_form_confirmation.subtotal_price")}
                 </th>
                 <td className="dc-description-row-content">{`${price.subtotal} Lei`}</td>
               </tr>

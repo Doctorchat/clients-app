@@ -24,6 +24,9 @@
     font-weight: 500;
     color: var(--bs-gray-800);
   }
+  &.confirmation-section .dc-description-row-label {
+    max-width: unset;
+  }
 } 
 
 .client-info-section.vertical {

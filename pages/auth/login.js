@@ -33,9 +33,7 @@ export default function Login() {
           router.push("/");
         }
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrip: "Așa utilizator nu există" })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: "login_error", duration: 0 }));
       } finally {
         setLoading(false);
       }
