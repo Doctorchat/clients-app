@@ -5,6 +5,7 @@ import WarnIcon from "@/icons/warning.svg";
 const alertIcons = {
   info: <WarnIcon />,
   error: <WarnIcon />,
+  warn: <WarnIcon />,
 };
 
 export default function Alert(props) {
@@ -23,7 +24,7 @@ export default function Alert(props) {
 
 Alert.propTypes = {
   className: PropTypes.string,
-  type: PropTypes.oneOf(["info", "error"]),
-  message: PropTypes.string,
+  type: PropTypes.oneOf(["info", "error", "warn"]),
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   extra: PropTypes.element,
 };

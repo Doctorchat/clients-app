@@ -24,6 +24,8 @@
   "yup_string_max": "Maximum length ${max} characters",
   "yup_mixed_number": ", enter a number",
   "yup_mixed_format": "Invalid format",
+  "yup_passwords_match": "The passwords do not match",
+  "yup_array_min": "Field must have at least ${min} item(-s)",
   "reviews": "Reviews",
   "video_appointments": "Video appointments",
   "guard_doctor": "Doctor on duty",
@@ -198,7 +200,10 @@
     "subtitle1": "Do you have a suggestion or found some bug?",
     "subtitle2": "Let us know in the field below.",
     "experience": "How was your experience?",
-    "description": "Describe your experience here..."
+    "description": "Describe your experience here...",
+    "warn_title": "Your account is being verified.",
+    "warn_subtitle": "Upon completion of the verification process, you will receive an email at the specified email address."
   },
-  "optional": "Optional"
+  "optional": "Optional",
+  "fixing": "Fixing"
 }

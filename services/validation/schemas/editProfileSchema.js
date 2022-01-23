@@ -1,5 +1,6 @@
 import { number } from "yup";
 import { string, object, ref, array } from "yup";
+import i18next from "@/services/i18next";
 
 const docGeneral = object().shape({
   name: string().required(),
@@ -37,7 +38,7 @@ const security = object().shape({
   current_password: string().required(),
   new_password: string().required(),
   new_confirm_password: string()
-    .oneOf([ref("new_password")], "Parolele nu sunt identice")
+    .oneOf([ref("new_password")], i18next.t("yup_passwords_match"))
     .required(),
 });
 

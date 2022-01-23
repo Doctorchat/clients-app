@@ -24,6 +24,8 @@
   "yup_string_max": "Lungimea maximă este ${max} caractere",
   "yup_mixed_number": ", întroduceți un număr",
   "yup_mixed_format": "Format invalid",
+  "yup_passwords_match": "Parolele nu sunt identice",
+  "yup_array_min": "Câmpul trebuie să conțină cel puțin ${min} element(-e)",
   "reviews": "Recenzii",
   "video_appointments": "Programări video",
   "guard_doctor": "Medic de gardă",
@@ -198,7 +200,10 @@
     "subtitle1": "Ai o sugestie sau ai găsit vreo eroare?",
     "subtitle2": "Anunțați-ne în câmpul de mai jos.",
     "experience": "Cum a fost experiența ta?",
-    "description": "Descrie experiența ta aici..."
+    "description": "Descrie experiența ta aici...",
+    "warn_title": "Сontul dvs. este în curs de verificare.",
+    "warn_subtitle": "La finalizarea procesului de verificare, veți primi un e-mail la adresa de e-mail specificată."
   },
-  "optional": "Opțional"
+  "optional": "Opțional",
+  "fixing": "Fixăm"
 }

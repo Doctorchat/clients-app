@@ -60,7 +60,11 @@ export default function ConversationsSidebar() {
             }}
             errorConfig={{
               status: conversationList.isError,
-              extra: <Button type="outline">{t("reload_page")}</Button>,
+              extra: (
+                <Button type="outline" onClick={window.location.reload}>
+                  {t("reload_page")}
+                </Button>
+              ),
             }}
             emptyConfig={{
               status: !currentList.length,

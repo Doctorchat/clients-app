@@ -1,37 +1,56 @@
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { loginSchema } from "@/services/validation";
+import { registerDoctorSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import Form from "@/components/Form";
 import Input, { InputNumber, Textarea } from "@/components/Inputs";
 import Button, { IconBtn } from "@/components/Button";
-import { loginUser } from "@/store/actions";
+import { registerDoctor } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
 import PlusIcon from "@/icons/plus.svg";
 import TrashIcon from "@/icons/trash.svg";
 import Select from "@/components/Select";
-import { categoriesOptionsSelector } from "@/store/selectors";
+import { toSelectOpts } from "@/store/selectors";
+import api from "@/services/axios/api";
+import Spinner from "@/components/Spinner";
+import { ProfileChangeLang } from "@/modules/common";
+import getActiveLng from "@/utils/getActiveLng";
 
 export default function BecomeDoctor() {
-  const { categories } = useSelector((store) => ({
-    categories: categoriesOptionsSelector(store),
-  }));
-  const resolver = useYupValidationResolver(loginSchema);
+  const resolver = useYupValidationResolver(registerDoctorSchema);
   const [loading, setLoading] = useState(false);
-  const form = useForm({ resolver, defaultValues: { education: [{ id: 1 }] } });
+  const [categories, setCategories] = useState([]);
+  const form = useForm({ resolver, defaultValues: { education: [{ id: 1 }], category: [] } });
   const router = useRouter();
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const onLoginSubmit = useCallback(
+  const fetchCategories = useCallback(async () => {
+    try {
+      const response = await api.bootstrap.categories();
+      setCategories(toSelectOpts()(response.data));
+    } catch (error) {
+      dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+    }
+  }, [dispatch]);
+
+  useEffect(() => fetchCategories(), [fetchCategories]);
+
+  const onBecomeDoctorSubmit = useCallback(
     async (values) => {
+      const data = { ...values };
+
+      data.category = data.category.map((cat) => cat.value);
+      data.education = data.education.map((edc) => edc.value);
+      data.locale = getActiveLng();
+
       try {
         setLoading(true);
-        await dispatch(loginUser(values));
+        await dispatch(registerDoctor(data));
 
         if (router.query.redirect) {
           router.push(router.query.redirect);
@@ -40,7 +59,7 @@ export default function BecomeDoctor() {
         }
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "error", descrp: "login_error", duration: 0 })
+          notification({ type: "error", title: "error", descrp: "login_error" })
         );
       } finally {
         setLoading(false);
@@ -62,7 +81,8 @@ export default function BecomeDoctor() {
         </Link>
       </div>
       <div className="auth-form mt-4">
-        <Form name="become-doctor-form" methods={form} onFinish={onLoginSubmit}>
+        {!categories.length && <Spinner />}
+        <Form name="become-doctor-form" methods={form} onFinish={onBecomeDoctorSubmit}>
           <p className="form-subtitle">Doctorchat</p>
           <h3 className="form-title">
             {t("part_of_team")} <br /> Doctorchat
@@ -98,7 +118,7 @@ export default function BecomeDoctor() {
           <Form.Item name="category" label={`${t("speciality")}*`}>
             <Select multiple options={categories} />
           </Form.Item>
-          <Form.Item name="workplace" label={`${t("work")}*`}>
+          <Form.Item name="work" label={`${t("work")}*`}>
             <Input />
           </Form.Item>
           <Form.List name="education" className="inputs-list-vertical">
@@ -139,19 +159,26 @@ export default function BecomeDoctor() {
             <Textarea />
           </Form.Item>
           <div className="d-sm-flex gap-2">
-            <Form.Item className="w-100 mb-0" label={`${t("password")}*`} name="password">
+            <Form.Item className="w-100" label={`${t("password")}*`} name="password">
               <Input type="password" />
             </Form.Item>
-            <Form.Item className="w-100 mb-0" label={`${t("repeat_password")}*`} name="password_confirmation">
+            <Form.Item
+              className="w-100"
+              label={`${t("repeat_password")}*`}
+              name="password_confirmation"
+            >
               <Input type="password" />
             </Form.Item>
           </div>
-          <div className="form-bottom justify-content-end">
-            <Button htmlType="submit" loading={loading}>
+          <div className="form-bottom justify-content-end mt-0">
+            <Button htmlType="submit" className="mt-1" loading={loading}>
               {t("send")}
             </Button>
           </div>
         </Form>
+      </div>
+      <div className="mt-3 auth-layout-lang d-flex justify-content-center">
+        <ProfileChangeLang />
       </div>
     </div>
   );

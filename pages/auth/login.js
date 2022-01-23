@@ -33,7 +33,9 @@ export default function Login() {
           router.push("/");
         }
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "login_error", duration: 0 }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: "login_error", duration: 0 })
+        );
       } finally {
         setLoading(false);
       }

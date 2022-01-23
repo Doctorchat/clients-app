@@ -6,6 +6,7 @@ import messageFormSchema from "./schemas/messageFormSchema";
 import investigationFormSchema from "./schemas/investigationFormSchema";
 import configureFormSchema from "./schemas/configureFormSchema";
 import meetFormSchema from "./schemas/meetFormSchema";
+import registerDoctorSchema from "./schemas/registerDoctorSchema";
 
 export {
   loginSchema,
@@ -15,4 +16,5 @@ export {
   investigationFormSchema,
   configureFormSchema,
   meetFormSchema,
+  registerDoctorSchema,
 };

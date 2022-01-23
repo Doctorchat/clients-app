@@ -33,3 +33,24 @@
     max-width: 180px;
   }
 }
+
+.list-warning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 60px 0 0;
+  .list-warning-icon svg {
+    width: 56px;
+    height: 56px;
+    color: var(--bs-warning);
+    .warn-duo_svg__fa-secondary {
+      opacity: 0.4;
+    }
+  }
+  .list-warning-title {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+}

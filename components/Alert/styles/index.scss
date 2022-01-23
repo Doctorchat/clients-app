@@ -33,4 +33,9 @@
     background-color: rgba(#dc3545, 0.1);
     color: var(--bs-danger);
   }
+  &.warn {
+    color: #d46b08;
+    background: #fff7e6;
+    border-color: #ffd591;
+  }
 }
