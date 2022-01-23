@@ -55,7 +55,7 @@ export default function BecomeDoctor() {
         <div className="auth-header-logo">
           <h3 className="m-0">Doctorchat</h3>
         </div>
-        <Link href="/auth/register">
+        <Link href="/auth/login">
           <a>
             <Button type="outline">{t("login")}</Button>
           </a>
@@ -138,6 +138,14 @@ export default function BecomeDoctor() {
           <Form.Item name="bio_ro" label={`${t("about")}*`}>
             <Textarea />
           </Form.Item>
+          <div className="d-sm-flex gap-2">
+            <Form.Item className="w-100 mb-0" label={`${t("password")}*`} name="password">
+              <Input type="password" />
+            </Form.Item>
+            <Form.Item className="w-100 mb-0" label={`${t("repeat_password")}*`} name="password_confirmation">
+              <Input type="password" />
+            </Form.Item>
+          </div>
           <div className="form-bottom justify-content-end">
             <Button htmlType="submit" loading={loading}>
               {t("send")}

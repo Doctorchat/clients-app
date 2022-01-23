@@ -124,7 +124,7 @@ export default function ChatContent(props) {
         <div className="scrollable scrollable-y conversation-content">
           <Bar />
           <div className="chat-content-inner">
-            <MessagesList list={messages} />
+            <MessagesList chatId={chatId} list={messages} docId={userInfo?.id} />
           </div>
         </div>
       </Sidebar.Body>

@@ -191,5 +191,14 @@
   "login_error": "Date greșite. Vă rugăm să mai încercați o dată.",
   "accept_terms": "Accept",
   "part_of_team": "Fii parte din echipa",
-  "send": "Trimite"
+  "send": "Trimite",
+  "feedback_form": {
+    "thank": "Vă mulțumim pentru feedback - prețuim opinia dumneavoastră!",
+    "title": "Trimite-ne feedback-ul tău!",
+    "subtitle1": "Ai o sugestie sau ai găsit vreo eroare?",
+    "subtitle2": "Anunțați-ne în câmpul de mai jos.",
+    "experience": "Cum a fost experiența ta?",
+    "description": "Descrie experiența ta aici..."
+  },
+  "optional": "Opțional"
 }

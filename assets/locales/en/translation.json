@@ -46,7 +46,7 @@
   "speciality": "Speciality",
   "specialization": "Specialization",
   "professional_title": "Professional title",
-  "experience": "Experience",
+  "experience": "experience",
   "work": "Work",
   "education": "Education",
   "about": "About",
@@ -191,5 +191,14 @@
   "login_error": "Wrong data. Please try again.",
   "accept_terms": "I accept",
   "part_of_team": "Be part of the team",
-  "send": "Send"
+  "send": "Send",
+  "feedback_form": {
+    "thank": "Thanks for your feedback - we value your opinion!",
+    "title": "Send us your feedback!",
+    "subtitle1": "Do you have a suggestion or found some bug?",
+    "subtitle2": "Let us know in the field below.",
+    "experience": "How was your experience?",
+    "description": "Describe your experience here..."
+  },
+  "optional": "Optional"
 }

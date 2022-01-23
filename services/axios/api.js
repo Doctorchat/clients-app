@@ -31,6 +31,7 @@ const api = {
     promo: (code) => axiosInstance.get(`/promocodes/code/${code}`),
     close: (id) => axiosInstance.put(`/chat/close/${id}`),
     editMessage: (data) => axiosInstance.put("/chat/message/update/", data),
+    feedback: (data) => axiosInstance.post("/reviews/new", data),
   },
   conversationList: { get: () => axiosInstance.get("/chat/list") },
   docList: {

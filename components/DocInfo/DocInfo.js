@@ -5,14 +5,12 @@ import { useTranslation } from "react-i18next";
 import Image from "../Image";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
-import Tooltip from "../Tooltip";
 import Skeleton from "../Skeleton";
 import Truncate from "../Truncate";
 import DocInfoActivity from "./DocInfoActivity";
 import DocReviews from "./DocReviews";
 import DocInfoAbout from "./DocInfoAbout";
 import Tabs, { Line } from "@/packages/Tabs";
-import ShieldIcon from "@/icons/shield.svg";
 import { docInfoTabs } from "@/context/TabsKeys";
 import { ClientSelectMode } from "@/modules/client";
 import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
@@ -65,13 +63,6 @@ export default function DocInfo(props) {
           <h4 className="title ellipsis">
             <span className="name ellipsis">{doctor.name}</span>
             {doctor.isNew && <span className="doc-title-tag new">{t("new")}</span>}
-            {!doctor.isGuard && (
-              <Tooltip title="Medic de gardă" placement="bottomCenter">
-                <span className="doc-tag guard">
-                  <ShieldIcon />
-                </span>
-              </Tooltip>
-            )}
           </h4>
           {doctor.isAvailable ? (
             <>
@@ -116,7 +107,11 @@ export default function DocInfo(props) {
         </Line>
         <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig} dataAnimation="tabs">
           <Tabs.Pane dataKey={docInfoTabs.activity} unmountOnExit={false} withAnimation={!loading}>
-            <DocInfoActivity activity={doctor?.activity} loading={loading} />
+            <DocInfoActivity
+              isGuard={doctor?.isGuard}
+              activity={doctor?.activity}
+              loading={loading}
+            />
           </Tabs.Pane>
           <Tabs.Pane dataKey={docInfoTabs.about} withAnimation={!loading}>
             <DocInfoAbout about={doctor?.about} loading={loading} />

@@ -7,6 +7,7 @@ import StarIcon from "@/icons/star.svg";
 import ClockIcon from "@/icons/clock.svg";
 import HospitalIcon from "@/icons/hospital.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
+import ShieldIcon from "@/icons/shield.svg";
 
 export default function DocInfoActivity(props) {
   const { activity, loading } = props;
@@ -17,6 +18,7 @@ export default function DocInfoActivity(props) {
       <Skeleton className="mt-3 overflow-hidden" smooth>
         <Skeleton.Line className="mb-3" w="40%" h="26px" />
         <Skeleton.Line className="mb-2" w="80%" h="20px" />
+        <Skeleton.Line className="mb-2" w="71%" h="20px" />
         <Skeleton.Line className="mb-2" w="65%" h="20px" />
         <Skeleton.Line className="mb-2" w="90%" h="20px" />
         <Skeleton.Line className="mb-4" w="70%" h="20px" />
@@ -38,6 +40,14 @@ export default function DocInfoActivity(props) {
       <div className="doc-info-section">
         <h4 className="info-section-title">{t("activity")}</h4>
         <ul className="doc-info-list">
+          <li className="doc-info-list-item">
+            <div className="content">
+              <span className="icon shield">
+                <ShieldIcon />
+              </span>
+              <span className="text">{t("guard_doctor")}</span>
+            </div>
+          </li>
           <li className="doc-info-list-item">
             <div className="content">
               <span className="icon heart">

@@ -7,7 +7,7 @@ import date from "@/utils/date";
 import ChatFeedback from "@/components/ChatFeedback";
 
 export default function MessagesList(props) {
-  const { list } = props;
+  const { chatId, docId, list } = props;
   const [groupedMessage, setGroupedMessages] = useState({});
 
   useEffect(() => {
@@ -37,13 +37,22 @@ export default function MessagesList(props) {
           <div className="messages-group-date">
             <span className="group-date-text">{date(group).monthDate()}</span>
           </div>
-          {groupedMessage[group].map((msg) => (
-            <Message key={msg.id} {...msg} />
-          ))}
-          <ChatFeedback />
+          {groupedMessage[group].map((msg) =>
+            msg.type === "feedback" ? (
+              <ChatFeedback
+                key={msg.id}
+                status={msg.content}
+                messageId={msg.id}
+                chatId={chatId}
+                docId={docId}
+              />
+            ) : (
+              <Message key={msg.id} {...msg} />
+            )
+          )}
         </div>
       )),
-    [groupedMessage]
+    [chatId, docId, groupedMessage]
   );
 
   return Messages;
@@ -51,6 +60,8 @@ export default function MessagesList(props) {
 
 MessagesList.propTypes = {
   list: PropTypes.array,
+  chatId: PropTypes.string,
+  docId: PropTypes.number,
 };
 
 MessagesList.defaultProps = {
