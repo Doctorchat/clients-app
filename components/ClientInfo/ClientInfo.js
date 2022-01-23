@@ -15,6 +15,7 @@ export default function ClientInfo(props) {
   const [investigation, setInvetigation] = useState({});
   const { t } = useTranslation();
 
+
   useEffect(() => {
     if (client.investigations) {
       const activeInvetigation = client.investigations.find(

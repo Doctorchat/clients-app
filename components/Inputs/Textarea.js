@@ -19,6 +19,7 @@ const Textarea = forwardRef((props, ref) => {
     value,
     onBlur,
     animateLabel,
+    minHeight,
     ...rest
   } = props;
   const [isActive, setIsActive] = useState(false);
@@ -41,7 +42,9 @@ const Textarea = forwardRef((props, ref) => {
         target.style.height = `${target.scrollHeight}px`;
       };
 
-      node.style.minHeight = `${node.scrollHeight}px`;
+      console.log(minHeight);
+
+      node.style.minHeight = `${minHeight || node.scrollHeight}px`;
       node.style.height = `${node.scrollHeight}px`;
       node.addEventListener("input", adjustHeight);
       ref(textareaRef.current);
@@ -102,6 +105,7 @@ Textarea.propTypes = {
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   animateLabel: PropTypes.bool,
+  minHeight: PropTypes.number,
 };
 
 Textarea.defaultProps = {

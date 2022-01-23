@@ -14,6 +14,7 @@ import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { MESSAGE_TYPES } from "@/context/constants";
+import Checkbox from "@/components/Checkbox";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -32,6 +33,7 @@ function MessageFormConfirmation() {
   const [promoLoading, setPromoLoading] = useState(false);
   const [price, setPrice] = useState({ doc: 0, uploads: 0, subtotal: 0, total: 0, discount: 0 });
   const [promo, setPromo] = useState({ code: "", sum: 0 });
+  const [areTermsConfirmed, setAreTermsConfirmed] = useState(false);
   const { t } = useTranslation();
   const form = useForm();
   const dispatch = useDispatch();
@@ -57,9 +59,7 @@ function MessageFormConfirmation() {
         setPrice((prev) => ({ ...prev, total: discoutedPrice }));
         setPromo({ code, sum: price.subtotal - discoutedPrice });
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: "invalid_promo" })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: "invalid_promo" }));
       } finally {
         setPromoLoading(false);
         form.reset();
@@ -177,7 +177,7 @@ function MessageFormConfirmation() {
                 <th className="dc-description-row-label">
                   {t("message_form_confirmation.product")}
                 </th>
-                <td className="dc-description-row-content">DoctorChat</td>
+                <td className="dc-description-row-content">Doctorchat</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">
@@ -251,11 +251,22 @@ function MessageFormConfirmation() {
             </tbody>
           </table>
         </div>
+        <div className="confirmation-terms">
+          <Checkbox
+            value={areTermsConfirmed}
+            onChange={() => setAreTermsConfirmed((prev) => !prev)}
+            label={
+              <>
+                {t("accept_terms")} <a className="terms">{t("terms_conditions")}</a>
+              </>
+            }
+          />
+        </div>
         <div className="confirmation-actions">
           <Button type="outline" onClick={updateTabsConfig(messageFormTabs.main, "prev")}>
             {t("back")}
           </Button>
-          <Button onClick={onConfirmHandler} loading={loading}>
+          <Button onClick={onConfirmHandler} loading={loading} disabled={!areTermsConfirmed}>
             {t("message_form_confirmation.confirm")}
           </Button>
         </div>

@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import getActiveLng from "@/utils/getActiveLng";
 
 const toSelectOpts = () => (list) => {
-  const selectedLng = window && getActiveLng();
+  const selectedLng = typeof window !== "undefined" ? getActiveLng() : "ro";
 
   return list.map((item) => ({ value: String(item.id), label: item[`name_${selectedLng}`] }));
 };

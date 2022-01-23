@@ -127,7 +127,8 @@
     "have_promo": "Do you have a promo code?",
     "confirm": "Confirm and Pay",
     "code": "Promo-code",
-    "discount": "Discount"
+    "discount": "Discount",
+    "datetime": "Date and time"
   },
   "back": "Back",
   "confirmation": "Confrimation",
@@ -187,5 +188,8 @@
   },
   "dont_know_speciality": "Don't know the specialty?",
   "consilium": "Council",
-  "login_error": "Wrong data. Please try again."
+  "login_error": "Wrong data. Please try again.",
+  "accept_terms": "I accept",
+  "part_of_team": "Be part of the team",
+  "send": "Send"
 }

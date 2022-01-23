@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 import Message from "@/components/Message";
 import date from "@/utils/date";
+import ChatFeedback from "@/components/ChatFeedback";
 
 export default function MessagesList(props) {
   const { list } = props;
@@ -39,6 +40,7 @@ export default function MessagesList(props) {
           {groupedMessage[group].map((msg) => (
             <Message key={msg.id} {...msg} />
           ))}
+          <ChatFeedback />
         </div>
       )),
     [groupedMessage]

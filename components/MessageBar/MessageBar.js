@@ -24,6 +24,7 @@ export default function MessageBar(props) {
   const user = useSelector((store) => store.user.data);
   const [isFormEnabled, setIsFormEnabled] = useState(defaultValue && defaultValue.length > 3);
   const [loading, setLoading] = useState(false);
+  const [stopChatLoading, setStopChatLoading] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useRouter();
@@ -38,18 +39,22 @@ export default function MessageBar(props) {
 
   const closeConversationHanlder = useCallback(async () => {
     try {
-      const response = await api.conversation.close(chatId);
+      setStopChatLoading(true);
+      await api.conversation.close(chatId);
 
       dispatch(
         notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
       );
+      history.push("/");
       form.reset();
       return Promise.resolve();
     } catch (error) {
       dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       return Promise.reject();
+    } finally {
+      setStopChatLoading(true);
     }
-  }, [chatId, dispatch, form]);
+  }, [chatId, dispatch, form, history]);
 
   const onFormSubmit = useCallback(
     async (values) => {
@@ -74,6 +79,7 @@ export default function MessageBar(props) {
 
         dispatch(updateConversation(updatedChatItem));
         dispatch(chatContentAddMessage(updatedChatContent));
+        setIsFormEnabled(false);
         form.reset();
       } catch (error) {
         dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
@@ -126,7 +132,7 @@ export default function MessageBar(props) {
         >
           <IconBtn
             className="message-bar-send remove-action"
-            loading={loading}
+            loading={stopChatLoading}
             disabled={isFormEnabled}
             icon={<StopIcon />}
           />

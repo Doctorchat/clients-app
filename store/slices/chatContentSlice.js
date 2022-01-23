@@ -32,7 +32,14 @@ export const chatContentSlice = createSlice({
     chatContentAddMessage(state, action) {
       state.content.messages.push(action.payload);
     },
-    chatContentUpdateMessage(state, action) {},
+    chatContentUpdateMessage(state, action) {
+      const { id, content } = action.payload;
+      const messageIndex = state.content.messages.findIndex((msg) => msg.id === id);
+
+      if (messageIndex !== -1) {
+        state.content.messages[messageIndex].content = content;
+      }
+    },
     chatContentToggleInfoVisibility(state, action) {
       state.infoVisible = action.payload;
     },

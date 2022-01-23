@@ -1,7 +1,7 @@
 #message-form {
   .popup-body {
     width: 600px;
-    height: 703px;
+    height: 749px;
     max-height: 100%;
     max-height: -webkit-fill-available;
   }
@@ -119,5 +119,13 @@
   justify-content: flex-start;
   .form-control {
     margin: 0 8px 0 0;
+  }
+}
+
+.confirmation-terms {
+  margin-bottom: 20px;
+  padding-left: 4px;
+  a.terms {
+    color: var(--bs-primary);
   }
 }

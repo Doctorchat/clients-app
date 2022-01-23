@@ -5,8 +5,28 @@
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
   max-width: 480px;
-  overflow: hidden;
   transition: box-shadow 0.5s;
+  position: relative;
+}
+
+.message-edit-icon {
+  position: absolute;
+  bottom: 100%;
+  right: 0px;
+  transform: translate(0, 50%);
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  &.dc-btn-icon {
+    height: 26px;
+    width: 26px;
+    min-height: 26px;
+    min-width: 26px;
+    z-index: 9;
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
 }
 
 .message-container {
@@ -210,4 +230,18 @@
   color: #fff;
   font-size: 15px;
   text-shadow: 0px 0px 10px rgba(#000, 0.3);
+}
+
+.message-edit-container {
+  width: 380px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
+}
+
+.message-edit-actions {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

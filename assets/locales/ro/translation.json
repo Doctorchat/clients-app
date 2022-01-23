@@ -127,7 +127,8 @@
     "have_promo": "Aveți un promo-code?",
     "confirm": "Confirmă și Achită",
     "code": "Promo-cod",
-    "discount": "Reducere"
+    "discount": "Reducere",
+    "datetime": "Data și ora"
   },
   "back": "Înapoi",
   "confirmation": "Confirmare",
@@ -187,5 +188,8 @@
   },
   "dont_know_speciality": "Nu cunoști specialitatea?",
   "consilium": "Consiliu",
-  "login_error": "Date greșite. Vă rugăm să mai încercați o dată."
+  "login_error": "Date greșite. Vă rugăm să mai încercați o dată.",
+  "accept_terms": "Accept",
+  "part_of_team": "Fii parte din echipa",
+  "send": "Trimite"
 }

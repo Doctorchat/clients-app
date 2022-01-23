@@ -101,6 +101,27 @@
   }
 }
 
+.become-doctor-page {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url("../../assets/images/auth-layout.jpg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .auth-form {
+    width: 100%;
+    max-width: 520px;
+    background-color: #fff;
+    padding: 16px 16px 24px;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+}
+
 @media only screen and (max-width: 1360px) {
   .auth-content {
     width: 100%;
@@ -135,6 +156,17 @@
   }
 }
 
+@media only screen and (max-width: 545px) {
+  .become-doctor-page {
+    padding: 15px;
+    background: unset;
+    .auth-form {
+      padding: 0;
+      box-shadow: unset;
+    }
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .auth-main-content {
     padding: 12px 16px;
@@ -148,5 +180,8 @@
   }
   .form-bottom {
     margin-top: 24px;
+  }
+  .become-doctor-page {
+    padding: 15px;
   }
 }
