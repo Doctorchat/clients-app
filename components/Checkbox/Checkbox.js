@@ -29,7 +29,7 @@ const Checkbox = forwardRef((props, ref) => {
 
 Checkbox.propTypes = {
   className: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   value: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(["true", "false"])]),
   onChange: PropTypes.func,
   name: PropTypes.string,

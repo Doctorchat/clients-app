@@ -16,9 +16,10 @@ import EditIcon from "@/icons/edit.svg";
 import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
 import { chatContentUpdateMessage } from "@/store/slices/chatContentSlice";
+import { updateConversation } from "@/store/slices/conversationListSlice";
 
 export default function Message(props) {
-  const { id, content, updated, side, type, meet, seen, files } = props;
+  const { id, content, updated, side, type, meet, seen, files, chatId, isLastMessage } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
   const editForm = useForm({ defaultValues: { content } });
@@ -35,15 +36,22 @@ export default function Message(props) {
       setEditLoading(true);
 
       try {
-        await api.conversation.editMessage({ content: values.content, id });
+        const response = await api.conversation.editMessage({ content: values.content, id });
+
         dispatch(chatContentUpdateMessage({ content: values.content, id }));
+
+        if (isLastMessage) {
+          dispatch(updateConversation({ id: +chatId, description: response.data.content }));
+        }
+
+        setIsEditing(false);
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
         setEditLoading(false);
       }
     },
-    [dispatch, id]
+    [chatId, dispatch, id, isLastMessage]
   );
 
   const toggleMessageEditStatus = useCallback((status) => () => setIsEditing(status), []);
@@ -65,7 +73,7 @@ export default function Message(props) {
               >
                 {t("cancel")}
               </Button>
-              <Button size="sm" loading={editLoading}>
+              <Button htmlType="submit" size="sm" loading={editLoading}>
                 {t("edit")}
               </Button>
             </div>
@@ -110,6 +118,8 @@ Message.propTypes = {
   status: PropTypes.oneOf(["edited", "deleted"]),
   files: PropTypes.array,
   id: PropTypes.number,
+  chatId: PropTypes.string,
+  isLastMessage: PropTypes.bool,
 };
 
 Message.defaultProps = {

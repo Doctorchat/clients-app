@@ -34,15 +34,12 @@ const Textarea = forwardRef((props, ref) => {
   useEffect(activeStatusHandler, [placeholder, value]);
 
   useEffect(() => {
-    // Initialize autoheigt
     if (textareaRef.current) {
       const node = textareaRef.current;
       const adjustHeight = ({ target }) => {
         target.style.height = "auto";
         target.style.height = `${target.scrollHeight}px`;
       };
-
-      console.log(minHeight);
 
       node.style.minHeight = `${minHeight || node.scrollHeight}px`;
       node.style.height = `${node.scrollHeight}px`;
