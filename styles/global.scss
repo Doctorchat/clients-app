@@ -215,6 +215,7 @@ div {
   justify-content: center;
   position: relative;
   img {
+    object-fit: cover;
     border-radius: inherit;
     border-radius: 50%;
   }
