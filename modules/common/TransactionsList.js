@@ -15,7 +15,8 @@ import { userRoles } from "@/context/constants";
 
 export default function TransactionsList() {
   const { updateTabsConfig } = useTabsContext();
-  const { transactionsList } = useSelector((store) => ({
+  const { transactionsList, user } = useSelector((store) => ({
+    user: store.user.data,
     transactionsList: store.transactionsList,
   }));
   const { t } = useTranslation();
@@ -44,7 +45,7 @@ export default function TransactionsList() {
                     label="Preț mesaj"
                     readOnly
                     format="decimal"
-                    value="20"
+                    value={user.price}
                     addonBefore="MDL"
                   />
                 </div>
@@ -53,7 +54,7 @@ export default function TransactionsList() {
                     label="Preț meet"
                     readOnly
                     format="decimal"
-                    value="50"
+                    value={user.meet_price}
                     addonBefore="MDL"
                   />
                 </div>
