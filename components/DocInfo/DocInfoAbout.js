@@ -62,9 +62,13 @@ export default function DocInfoAbout(props) {
 
 DocInfoAbout.propTypes = {
   about: PropTypes.shape({
-    bio: PropTypes.string,
+    bio_ro: PropTypes.string,
+    bio_ru: PropTypes.string,
+    bio_en: PropTypes.string,
     experience: PropTypes.number,
-    specialization: PropTypes.string,
+    specialization_ro: PropTypes.string,
+    specialization_ru: PropTypes.string,
+    specialization_en: PropTypes.string,
     professionalTitle: PropTypes.string,
   }),
   loading: PropTypes.bool,

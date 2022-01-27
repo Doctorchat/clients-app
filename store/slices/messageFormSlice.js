@@ -5,6 +5,7 @@ const initialState = {
   values: {},
   uploads: {},
   chatId: null,
+  chatType: null,
   prevChatId: null,
 };
 
@@ -21,8 +22,9 @@ export const messageFormSlice = createSlice({
         state.uploads = {};
       }
 
-      state.chatId = action.payload;
-      state.prevChatId = action.payload;
+      state.chatId = action.payload.id;
+      state.chatType = action.payload.type;
+      state.prevChatId = action.payload.id;
     },
     messageFormSetConfirmation(state, action) {
       state.values = action.payload;
@@ -36,6 +38,7 @@ export const messageFormSlice = createSlice({
       state.uploads = {};
       state.prevChatId = null;
       state.chatId = null;
+      state.chatType = null;
     },
   },
 });

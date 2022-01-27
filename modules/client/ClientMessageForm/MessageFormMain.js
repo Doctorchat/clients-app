@@ -21,7 +21,7 @@ import {
 
 export default function MessageFormMain() {
   const {
-    messageForm: { values, chatId, uploads },
+    messageForm: { values, chatId, uploads, chatType },
     userInfo,
     global,
   } = useSelector((store) => ({
@@ -31,11 +31,22 @@ export default function MessageFormMain() {
   }));
   const [loading, setLoading] = useState(false);
   const [attachments, setAttachments] = useState({ list: [], price: 0, initiated: false });
+  const [basePrice, setBasePrice] = useState(0);
   const { updateTabsConfig } = useTabsContext();
   const resolver = useYupValidationResolver(messageFormSchema);
   const form = useForm({ resolver });
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (chatType === "auto") {
+      setBasePrice(global.auto);
+    } else if (chatType === "consilium") {
+      setBasePrice(global.consilium);
+    } else {
+      setBasePrice(userInfo?.price);
+    }
+  }, [chatType, global.auto, global.consilium, userInfo?.price]);
 
   useEffect(() => {
     if (!attachments.initiated && uploads?.list) {
@@ -49,7 +60,7 @@ export default function MessageFormMain() {
 
       data.uploads_count = attachments.list.length;
       data.uploads_price = attachments.list.length * global.attach;
-      data.price = userInfo?.price;
+      data.price = basePrice;
 
       try {
         setLoading(true);
@@ -63,7 +74,7 @@ export default function MessageFormMain() {
         setLoading(false);
       }
     },
-    [attachments.list.length, dispatch, global.attach, updateTabsConfig, userInfo?.price]
+    [attachments.list.length, basePrice, dispatch, global.attach, updateTabsConfig]
   );
 
   const setFileList = useCallback(
@@ -113,9 +124,7 @@ export default function MessageFormMain() {
               </div>
               <div className="message-form-bottom">
                 <div className="message-price">
-                  <span className="message-price-active">
-                    {userInfo?.price + attachments.price} Lei
-                  </span>
+                  <span className="message-price-active">{basePrice + attachments.price} Lei</span>
                 </div>
                 <Button htmlType="submit" loading={loading}>
                   {t("continue")}

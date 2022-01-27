@@ -38,7 +38,7 @@ export default function ConfigureFormMessage() {
         const response = await api.conversation.create(data);
 
         dispatch(addConversation(response.data));
-        dispatch(messageFormUpdateChatId(response.data.id));
+        dispatch(messageFormUpdateChatId(response.data));
         onCreated(response.data.id);
 
         onSelectMode("message");

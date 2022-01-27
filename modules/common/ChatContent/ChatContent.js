@@ -62,12 +62,12 @@ export default function ChatContent(props) {
   const openMessageFormPopup = useCallback(() => {
     if (!isMeet) {
       dispatch(messageFormToggleVisibility(true));
-      dispatch(messageFormUpdateChatId(chatId));
+      dispatch(messageFormUpdateChatId({ id: chatId, type }));
     } else {
       dispatch(meetFormToggleVisibility(true));
       dispatch(meetFormUpdateChatId(chatId));
     }
-  }, [chatId, dispatch, isMeet]);
+  }, [chatId, dispatch, isMeet, type]);
 
   const onBack = useCallback(() => router.push("/"), [router]);
 

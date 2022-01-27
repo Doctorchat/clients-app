@@ -24,7 +24,7 @@ export default function ClientDocsSearch(props) {
         updateSearchConfig={updateSearchConfig}
         searchKeys={["name", "category"]}
       />
-      <div className="find-doc-filters d-flex align-items-center justify-content-between mt-3 gap-5">
+      <div className="find-doc-filters d-flex flex-sm-row flex-column align-items-sm-center align-items-start justify-content-between mt-3 gap-3">
         <Select
           value={filters.categories}
           placeholder={t("select_categories")}
