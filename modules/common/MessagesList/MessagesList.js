@@ -3,9 +3,8 @@ import { useEffect } from "react";
 import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 import Message from "@/components/Message";
-import date from "@/utils/date";
+import { IOSMonthDate } from "@/utils/date";
 import ChatFeedback from "@/components/ChatFeedback";
-import moment from "moment";
 
 export default function MessagesList(props) {
   const { chatId, docId, list } = props;
@@ -32,18 +31,16 @@ export default function MessagesList(props) {
     if (list.length) {
       groupMessageHandler();
     } else {
-      setGroupedMessages(null)
+      setGroupedMessages(null);
     }
   }, [list]);
-
-  console.log(date("2022.01.27")?.monthDate());
 
   const Messages = useMemo(() => {
     if (groupedMessage && Object.keys(groupedMessage).length) {
       return Object.keys(groupedMessage).map((group) => (
         <div className="messages-group" key={group}>
           <div className="messages-group-date">
-            <span className="group-date-text">{group}</span>
+            <span className="group-date-text">{IOSMonthDate(group)}</span>
           </div>
           {groupedMessage[group].map((msg) =>
             msg.type === "feedback" ? (

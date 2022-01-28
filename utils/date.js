@@ -18,8 +18,12 @@ const formats = {
 
 /**
  * @typedef {Object} Tranformers
- * @property {Function} chatItem
+ * @property {Function} dynamic
+ * @property {Function} monthDate
  * @property {String} default
+ * @property {String} time
+ * @property {String} full
+ * @property {String} relative
  */
 
 /**
@@ -65,3 +69,18 @@ export default function date(date) {
     relative: dayjsDate.fromNow(),
   };
 }
+
+export const IOSMonthDate = (date) => {
+  if (dayjs(date).isValid()) {
+    const dayjsDate = dayjs(date);
+    const today = dayjs();
+    const isCurrentDay = today.day() === dayjsDate.day();
+
+    dayjs.locale(getActiveLng());
+
+    if (isCurrentDay) return i18next.t("today");
+    return dayjs(date).format("MMMM DD");
+  }
+
+  return date;
+};
