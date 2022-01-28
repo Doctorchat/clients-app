@@ -22,6 +22,8 @@ import { meetFormToggleVisibility, meetFormUpdateChatId } from "@/store/slices/m
 import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
 
+const withoutInfo = ["support", "auto", "consilium"];
+
 export default function ChatContent(props) {
   const { loading, userInfo, messages, chatId, status, type, paymentUrl, isMeet } = props;
   const { t } = useTranslation();
@@ -30,7 +32,7 @@ export default function ChatContent(props) {
 
   useEffect(() => {
     if (type) {
-      if (window.innerWidth <= 1268 || type === "support") {
+      if (window.innerWidth <= 1268 || withoutInfo.includes(type)) {
         dispatch(chatContentToggleInfoVisibility({ visible: false, animate: false }));
       } else {
         dispatch(chatContentToggleInfoVisibility({ visible: true, animate: false }));
@@ -38,7 +40,7 @@ export default function ChatContent(props) {
     }
 
     const toggleChatInfo = () => {
-      if (type !== "support") {
+      if (!withoutInfo.includes(type)) {
         if (window.innerWidth <= 1268) {
           dispatch(chatContentToggleInfoVisibility({ visible: false, animate: true }));
         } else {
@@ -54,10 +56,11 @@ export default function ChatContent(props) {
     };
   }, [dispatch, type]);
 
-  const openChatInfo = useCallback(
-    () => dispatch(chatContentToggleInfoVisibility({ visible: true, animate: true })),
-    [dispatch]
-  );
+  const openChatInfo = useCallback(() => {
+    if (type && !withoutInfo.includes(type)) {
+      dispatch(chatContentToggleInfoVisibility({ visible: true, animate: true }));
+    }
+  }, [dispatch, type]);
 
   const openMessageFormPopup = useCallback(() => {
     if (!isMeet) {

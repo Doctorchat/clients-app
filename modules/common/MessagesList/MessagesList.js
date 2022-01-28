@@ -36,7 +36,7 @@ export default function MessagesList(props) {
     }
   }, [list]);
 
-  console.log(date(moment()));
+  console.log(date("2022.01.27")?.monthDate());
 
   const Messages = useMemo(() => {
     if (groupedMessage && Object.keys(groupedMessage).length) {
