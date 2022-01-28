@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import dynamic from "next/dynamic";
+import { useTranslation } from "react-i18next";
 import ConversationsSidebar from "../ConversationsSidebar";
 import ProfileSidebar from "../ProfileSidebar";
 import EditProflie from "../EditProfile";
@@ -8,7 +9,7 @@ import Tabs from "@/packages/Tabs";
 import { leftSideTabs } from "@/context/TabsKeys";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
-import { IconBtn } from "@/components/Button";
+import Button from "@/components/Button";
 import PlusIcon from "@/icons/plus.svg";
 import { ClientStartConversationMenu } from "@/modules/client";
 
@@ -24,6 +25,7 @@ const DocReviewsSidebar = dynamic(() =>
 
 export default function LeftSide() {
   const [tabsConfig, setTabsConfig] = useState({ key: leftSideTabs.conversationList, dir: "next" });
+  const { t } = useTranslation();
 
   const updateTabsConfig = useCallback(
     (key, dir = "next") =>
@@ -69,7 +71,9 @@ export default function LeftSide() {
       <AuthRoleWrapper roles={[userRoles.get("client")]}>
         <div className="start-conversation-btn">
           <ClientStartConversationMenu placement="topLeft">
-            <IconBtn icon={<PlusIcon />} type="primary" />
+            <Button icon={<PlusIcon />} type="primary">
+              {t("start_conversation")}
+            </Button>
           </ClientStartConversationMenu>
         </div>
       </AuthRoleWrapper>

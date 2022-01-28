@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import Message from "@/components/Message";
 import date from "@/utils/date";
 import ChatFeedback from "@/components/ChatFeedback";
+import moment from "moment";
 
 export default function MessagesList(props) {
   const { chatId, docId, list } = props;
@@ -30,15 +31,19 @@ export default function MessagesList(props) {
 
     if (list.length) {
       groupMessageHandler();
+    } else {
+      setGroupedMessages(null)
     }
   }, [list]);
 
+  console.log(date(moment()));
+
   const Messages = useMemo(() => {
-    if (Object.keys(groupedMessage).length) {
+    if (groupedMessage && Object.keys(groupedMessage).length) {
       return Object.keys(groupedMessage).map((group) => (
         <div className="messages-group" key={group}>
           <div className="messages-group-date">
-            <span className="group-date-text">{date(group)?.monthDate() || group}</span>
+            <span className="group-date-text">{group}</span>
           </div>
           {groupedMessage[group].map((msg) =>
             msg.type === "feedback" ? (
