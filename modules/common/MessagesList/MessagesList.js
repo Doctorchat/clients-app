@@ -9,6 +9,7 @@ import ChatFeedback from "@/components/ChatFeedback";
 export default function MessagesList(props) {
   const { chatId, docId, list } = props;
   const [groupedMessage, setGroupedMessages] = useState({});
+  const [listLastMessage, setListLastMessage] = useState(null);
 
   useEffect(() => {
     const groupMessageHandler = () => {
@@ -23,43 +24,42 @@ export default function MessagesList(props) {
           groups[date] = [list[i]];
         }
       }
-
+      setListLastMessage(list[list.length - 1]);
       setGroupedMessages(groups);
     };
 
     groupMessageHandler();
   }, [list]);
 
-  const Messages = useMemo(() => {
-    const lastGroup = Object.keys(groupedMessage).at(-1);
-    const lastMessageId = groupedMessage[lastGroup]?.at(-1);
-
-    return Object.keys(groupedMessage).map((group) => (
-      <div className="messages-group" key={group}>
-        <div className="messages-group-date">
-          <span className="group-date-text">{date(group).monthDate()}</span>
+  const Messages = useMemo(
+    () =>
+      Object.keys(groupedMessage).map((group) => (
+        <div className="messages-group" key={group}>
+          <div className="messages-group-date">
+            <span className="group-date-text">{date(group).monthDate()}</span>
+          </div>
+          {groupedMessage[group].map((msg) =>
+            msg.type === "feedback" ? (
+              <ChatFeedback
+                key={msg.id}
+                status={msg.content}
+                messageId={msg.id}
+                chatId={chatId}
+                docId={docId}
+              />
+            ) : (
+              <Message
+                key={msg.id}
+                isLastMessage={listLastMessage ? listLastMessage?.id === msg.id : false}
+                chatId={chatId}
+                {...msg}
+              />
+            )
+          )}
         </div>
-        {groupedMessage[group].map((msg) => {
-          return msg.type === "feedback" ? (
-            <ChatFeedback
-              key={msg.id}
-              status={msg.content}
-              messageId={msg.id}
-              chatId={chatId}
-              docId={docId}
-            />
-          ) : (
-            <Message
-              key={msg.id}
-              isLastMessage={lastMessageId ? lastMessageId?.id === msg.id : false}
-              chatId={chatId}
-              {...msg}
-            />
-          );
-        })}
-      </div>
-    ));
-  }, [chatId, docId, groupedMessage]);
+      )),
+    [chatId, docId, groupedMessage, listLastMessage]
+  );
 
   return Messages;
 }

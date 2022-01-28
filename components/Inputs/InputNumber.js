@@ -58,7 +58,7 @@ const InputNumber = forwardRef((props, ref) => {
     if (value) {
       switch (format) {
         case "decimal": {
-          if ([",", "0"].includes(value.at(-1))) break;
+          if ([",", "0"].includes(value[value.length - 1])) break;
 
           const prepared = value.replace(/[^0-9,]/g, "").replace(",", ".");
           const formatted = formatter.format(Number(prepared));

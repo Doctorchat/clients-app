@@ -40,13 +40,15 @@ const Upload = forwardRef((props, ref) => {
       const fileError = validateFile(files[i]);
       const uniq = uniqId();
 
+      const file_ext = files[i].name.split(".");
+
       newOriginalFileList.push({ file: files[i], id: uniq });
       newFileList.push({
         id: uniq,
         url: URL.createObjectURL(files[i]),
         name: files[i].name,
         size: files[i].size,
-        ext: files[i].name.split(".").at(-1),
+        ext: file_ext[file_ext.length - 1],
         type: files[i].type,
         config: {
           error: fileError,

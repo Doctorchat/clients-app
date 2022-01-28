@@ -4,7 +4,9 @@
   justify-content: center;
   height: 100vh;
   max-height: 100%;
+  max-height: -moz-available;
   max-height: -webkit-fill-available;
+  max-height: stretch;
   overflow-y: overlay;
 }
 

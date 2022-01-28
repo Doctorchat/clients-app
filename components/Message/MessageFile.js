@@ -10,7 +10,10 @@ export default function MessageFile(props) {
   const [extraConfig, setExtraConfig] = useState({ placeholder: null, ext: null });
 
   useEffect(() => {
-    const file_ext = file.name.split(".").at(-1);
+    let file_ext = file.name.split(".");
+
+    file_ext = file_ext[file_ext.length - 1];
+
     const placeholder = !file.type.match(/image/g) && documnetPlaceholder.src;
 
     setExtraConfig({ ext: file_ext, placeholder });
