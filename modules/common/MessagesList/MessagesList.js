@@ -28,15 +28,17 @@ export default function MessagesList(props) {
       setGroupedMessages(groups);
     };
 
-    groupMessageHandler();
+    if (list.length) {
+      groupMessageHandler();
+    }
   }, [list]);
 
-  const Messages = useMemo(
-    () =>
-      Object.keys(groupedMessage).map((group) => (
+  const Messages = useMemo(() => {
+    if (Object.keys(groupedMessage).length) {
+      return Object.keys(groupedMessage).map((group) => (
         <div className="messages-group" key={group}>
           <div className="messages-group-date">
-            <span className="group-date-text">{date(group).monthDate()}</span>
+            <span className="group-date-text">{date(group)?.monthDate() || group}</span>
           </div>
           {groupedMessage[group].map((msg) =>
             msg.type === "feedback" ? (
@@ -57,9 +59,11 @@ export default function MessagesList(props) {
             )
           )}
         </div>
-      )),
-    [chatId, docId, groupedMessage, listLastMessage]
-  );
+      ));
+    }
+
+    return null;
+  }, [chatId, docId, groupedMessage, listLastMessage]);
 
   return Messages;
 }
