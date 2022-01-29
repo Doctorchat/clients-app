@@ -14,3 +14,5 @@ export const TRANSACTIONS_LIST_GET = "transactionsList/get";
 
 export const CHAT_CONTENT_GET = "chatContent/get";
 export const CHAT_CONTENT_READ = "chatContent/read";
+
+export const MEETINGS_LIST_GET = "meetingsList/get";

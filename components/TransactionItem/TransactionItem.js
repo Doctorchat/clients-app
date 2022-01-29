@@ -38,7 +38,7 @@ const categories = {
 };
 
 function TransactionItem(props) {
-  const { type, title, category, sum, status, created } = props;
+  const { type, title, category, amount, status, created } = props;
   const { updateTabsConfig } = useTabsContext();
 
   const goToBonuses = useCallback(() => updateTabsConfig(leftSideTabs.bonuses), [updateTabsConfig]);
@@ -54,7 +54,7 @@ function TransactionItem(props) {
               Bonus +1
             </Button>
           ) : (
-            <span className={cs("transaction-sum", type)}>{sum}</span>
+            <span className={cs("transaction-sum", type)}>{amount}</span>
           )}
         </h4>
         <p className="transaction-subtitle">
@@ -70,7 +70,7 @@ TransactionItem.propTypes = {
   type: PropTypes.oneOf(["incoming", "outgoing"]),
   title: PropTypes.string,
   category: PropTypes.oneOf(["message", "meet"]),
-  sum: PropTypes.string,
+  amount: PropTypes.string,
   status: PropTypes.oneOf(["success", "pending", "cancel"]),
   created: PropTypes.string,
 };

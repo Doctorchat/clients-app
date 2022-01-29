@@ -205,5 +205,9 @@
     "warn_subtitle": "Upon completion of the verification process, you will receive an email at the specified email address."
   },
   "optional": "Optional",
-  "fixing": "Fixing"
+  "fixing": "Fixing",
+  "appointments": "Appointments",
+  "settings": "Settings",
+  "appointments_list_empty": "The list of appointments will appear here",
+  "appintments_warning": "Leave the fields blank to indicate that you are not available on the appropriate day"
 }

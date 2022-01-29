@@ -19,14 +19,6 @@ axiosInstance.isCancel = axios.isCancel;
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    const {
-      response: { status },
-    } = error;
-
-    if (status === 401) {
-      // window.location.reload();
-    }
-
     return Promise.reject(error);
   }
 );

@@ -205,5 +205,9 @@
     "warn_subtitle": "La finalizarea procesului de verificare, veți primi un e-mail la adresa de e-mail specificată."
   },
   "optional": "Opțional",
-  "fixing": "Fixăm"
+  "fixing": "Fixăm",
+  "appointments": "Programări",
+  "settings": "Setări",
+  "appointments_list_empty": "Lista programărilor va apărea aici",
+  "appintments_warning": "Lăsați câmpurile necompletate pentru a indica că nu sunteți disponibil în ziua corespunzătoare"
 }
