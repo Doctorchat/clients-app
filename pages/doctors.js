@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import DocList from "@/components/DocList";
 import api from "@/services/axios/api";
 import List from "@/components/List";
@@ -10,6 +11,7 @@ export default function Doctors() {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const router = useRouter();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -38,21 +40,11 @@ export default function Doctors() {
           content: t("doctor_list_empty"),
         }}
       >
-        <DocList onDocClick={() => {}} data={doctors} />
+        <DocList onDocClick={() => () => router.push("/")} data={doctors} />
       </List>
     </div>
   );
 }
-
-// export async function getStaticProps() {
-//   const res = await api.docList.get();
-
-//   return {
-//     props: {
-//       doctors: res.data,
-//     },
-//   };
-// }
 
 Doctors.getLayout = function (page) {
   return (
