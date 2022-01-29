@@ -171,12 +171,38 @@ input[type="checkbox"] {
   }
 }
 
-.external-doc-list {
+.external-docs-layout {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  background-image: url(../assets/images/chat-content.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
 }
- 
+
+.external-doc-list {
+  max-width: 620px;
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 10px;
+  .doclist {
+    width: 100%;
+  }
+  h3 {
+    flex-grow: 1;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 4px;
+    margin-bottom: 12px;
+  }
+}
+
 @media (max-width: 768px) {
   .select-chat {
     display: none !important;
