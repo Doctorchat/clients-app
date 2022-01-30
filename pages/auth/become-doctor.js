@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { registerDoctorSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import Form from "@/components/Form";
-import Input, { InputNumber, Textarea } from "@/components/Inputs";
+import Input, { InputNumber, InputPhone, Textarea } from "@/components/Inputs";
 import Button, { IconBtn } from "@/components/Button";
 import { registerDoctor } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
@@ -19,6 +19,7 @@ import api from "@/services/axios/api";
 import Spinner from "@/components/Spinner";
 import { ProfileChangeLang } from "@/modules/common";
 import getActiveLng from "@/utils/getActiveLng";
+import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 
 export default function BecomeDoctor() {
   const resolver = useYupValidationResolver(registerDoctorSchema);
@@ -27,6 +28,7 @@ export default function BecomeDoctor() {
   const form = useForm({ resolver, defaultValues: { education: [{ id: 1 }], category: [] } });
   const router = useRouter();
   const dispatch = useDispatch();
+  const setFormApiErrors = useApiErrorsWithForm(form, dispatch);
   const { t } = useTranslation();
 
   const fetchCategories = useCallback(async () => {
@@ -58,14 +60,12 @@ export default function BecomeDoctor() {
           router.push("/");
         }
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: "login_error" })
-        );
+        setFormApiErrors(error);
       } finally {
         setLoading(false);
       }
     },
-    [dispatch, router]
+    [dispatch, router, setFormApiErrors]
   );
 
   return (
@@ -92,7 +92,7 @@ export default function BecomeDoctor() {
               <Input />
             </Form.Item>
             <Form.Item className="w-100" label={`${t("phone")}*`} name="phone">
-              <Input />
+              <InputPhone />
             </Form.Item>
           </div>
           <div className="d-sm-flex gap-2">

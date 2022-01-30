@@ -3,7 +3,7 @@ import i18next from "@/services/i18next";
 
 const registerDoctorSchema = object().shape({
   email: string().email().required(),
-  phone: string().min(6).required(),
+  phone: string().phone().required(),
   professionalTitle: string().required(),
   specialization_ro: string().required(),
   name: string().min(2).required(),

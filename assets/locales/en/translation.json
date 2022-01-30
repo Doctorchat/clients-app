@@ -51,7 +51,7 @@
   "experience": "experience",
   "work": "Work",
   "education": "Education",
-  "about": "About",
+  "about": "Professional skills",
   "ext_not_allowed": "This extension is not supported",
   "size_to_big": "File size is too big",
   "conversation_search_placeholder": "Name, Description",
@@ -82,7 +82,7 @@
     "reviews": "User reviews",
     "response_time": "Response time",
     "response_time_description": "This time is estimated using the most recent answers. Occasionally it may be higher or lower than the displayed range.",
-    "about_me": "About me",
+    "about_me": "Professional skills",
     "years_experience": "Years of experience"
   },
   "no_investigation_error": "To access doctors on the Doctorchat platform, you need to add at least one investigation",
@@ -209,5 +209,7 @@
   "appointments": "Appointments",
   "settings": "Settings",
   "appointments_list_empty": "The list of appointments will appear here",
-  "appintments_warning": "Leave the fields blank to indicate that you are not available on the appropriate day"
+  "appintments_warning": "Leave the fields blank to indicate that you are not available on the appropriate day",
+  "the_email_has_already_been_taken": "The email has already been taken",
+  "invalid_phone": "Invalid phone number"
 }

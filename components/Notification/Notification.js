@@ -40,7 +40,7 @@ function Notification(props) {
   const notificationRef = useRef();
   const [notificationTop, setNotificationTop] = useState(0);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     setMouted(true);
@@ -93,8 +93,12 @@ function Notification(props) {
       >
         <i className="notification-icon">{Icon}</i>
         <div className="notification-caption">
-          <h4 className="title">{t(title)}</h4>
-          {typeof descrp === "string" ? <p className="description">{t(descrp)}</p> : descrp}
+          <h4 className="title">{i18n.exists(title) ? t(title) : title}</h4>
+          {typeof descrp === "string" ? (
+            <p className="description">{i18n.exists(descrp) ? t(descrp) : descrp}</p>
+          ) : (
+            descrp
+          )}
         </div>
         <IconBtn
           className="notification-destroy"

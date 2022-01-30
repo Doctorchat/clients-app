@@ -51,7 +51,7 @@
   "experience": "Experientă",
   "work": "Locul de muncă",
   "education": "Educație",
-  "about": "Despre",
+  "about": "Aptitudini profesionale",
   "ext_not_allowed": "Această extensie nu este acceptată",
   "size_to_big": "Dimensiunea fișierului este prea mare",
   "conversation_search_placeholder": "Nume, Descriere",
@@ -82,7 +82,7 @@
     "reviews": "Recenzii de la utilizatori",
     "response_time": "Timp de răspuns",
     "response_time_description": "Acest timp este estimat folosind cele mai recente răspunsuri. Ocazional poate fi mai mare sau mai mic decât intervalul afișat.",
-    "about_me": "Despre Mine",
+    "about_me": "Aptitudini profesionale",
     "years_experience": "Ani experiență"
   },
   "no_investigation_error": "Pentru a avea acces la doctorii de pe platforma Doctorchat este nevoie să adăugați cel puțin o anchetă",
@@ -209,5 +209,7 @@
   "appointments": "Programări",
   "settings": "Setări",
   "appointments_list_empty": "Lista programărilor va apărea aici",
-  "appintments_warning": "Lăsați câmpurile necompletate pentru a indica că nu sunteți disponibil în ziua corespunzătoare"
+  "appintments_warning": "Lăsați câmpurile necompletate pentru a indica că nu sunteți disponibil în ziua corespunzătoare",
+  "the_email_has_already_been_taken": "E-mailul a fost deja preluat",
+  "invalid_phone": "Număr de telefon invalid"
 }

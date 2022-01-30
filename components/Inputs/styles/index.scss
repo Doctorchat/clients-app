@@ -99,6 +99,19 @@
   min-height: 32px;
 }
 
+.dc-input_wrapper {
+  .PhoneInputInput {
+    outline: none;
+    margin: 0;
+    border: none;
+    padding: 0 0 0 6px;
+  }
+  .PhoneInputCountryIcon--border {
+    border: none;
+    box-shadow: none;
+  }
+}
+
 @keyframes dc-input-spinner {
   0% {
     opacity: 0;

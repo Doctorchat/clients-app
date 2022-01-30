@@ -3,7 +3,7 @@ import i18next from "@/services/i18next";
 
 const registerSchema = object().shape({
   email: string().email().required(),
-  phone: string().min(6),
+  phone: string().phone(),
   name: string().min(2).required(),
   password: string().min(6).required(),
   password_confirmation: string()

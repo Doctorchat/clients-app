@@ -8,7 +8,7 @@ import { registerSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import Form from "@/components/Form";
-import Input from "@/components/Inputs";
+import Input, { InputPhone } from "@/components/Inputs";
 import Button from "@/components/Button";
 import { notification } from "@/store/slices/notificationsSlice";
 import { registerUser } from "@/store/actions";
@@ -62,7 +62,7 @@ export default function Register() {
             <Input />
           </Form.Item>
           <Form.Item label={`${t("phone")}`} name="phone">
-            <Input />
+            <InputPhone />
           </Form.Item>
           <Form.Item label={`${t("name")}*`} name="name">
             <Input />
