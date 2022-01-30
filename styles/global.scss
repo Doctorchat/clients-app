@@ -89,12 +89,13 @@ a {
   }
 }
 
+html, body, #__next {
+  height: 100%;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
-  min-height: -moz-available;
-  min-height: -webkit-fill-available;
-  min-height: stretch;
 }
 
 h1,
