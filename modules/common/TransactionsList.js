@@ -38,23 +38,27 @@ export default function TransactionsList() {
         <div className="scrollable scrollable-y profile-content-wrapper px-2">
           <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
             <div className="doc-wallet">
-              <h3 className="total">0 Lei</h3>
+              <h3 className="total">{user.private?.balance} Lei</h3>
               <div className="d-flex justify-content-between gap-3">
                 <div className="position-relative">
+                  <p className="m-0" style={{ fontSize: 14, paddingLeft: 4 }}>
+                    {t("price_message")}
+                  </p>
                   <InputNumber
-                    label="Preț mesaj"
                     readOnly
                     format="decimal"
-                    value={user.price}
+                    value={user.private?.chat}
                     addonBefore="MDL"
                   />
                 </div>
                 <div className="position-relative">
+                  <p className="m-0" style={{ fontSize: 14, paddingLeft: 4 }}>
+                    {t("price_meet")}
+                  </p>
                   <InputNumber
-                    label="Preț meet"
                     readOnly
                     format="decimal"
-                    value={user.meet_price}
+                    value={user.private?.meet || 0}
                     addonBefore="MDL"
                   />
                 </div>

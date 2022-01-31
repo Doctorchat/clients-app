@@ -5,8 +5,7 @@ import List from "@/components/List";
 import SidebarList from "@/components/SidebarList";
 import { TransactionItemSkeleton } from "@/components/TransactionItem";
 import { getMeetingsList } from "@/store/actions";
-
-const AppointmentItem = () => <div>AppointmentItem</div>;
+import AppointmentItem from "@/components/AppointmentItem";
 
 export default function DocAppointmentsList() {
   const { meetingsList } = useSelector((store) => ({
@@ -42,7 +41,3 @@ export default function DocAppointmentsList() {
     </List>
   );
 }
-
-DocAppointmentsList.propTypes = {};
-
-DocAppointmentsList.defaultProps = {};

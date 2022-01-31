@@ -56,7 +56,7 @@ const Select = forwardRef((props, ref) => {
   }, [options, value]);
 
   const activeStatusHandler = () => {
-    if (value || placeholder) setIsActive(true);
+    if (Boolean(value)  || placeholder) setIsActive(true);
     else setIsActive(false);
   };
 

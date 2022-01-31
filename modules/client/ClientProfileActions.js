@@ -5,7 +5,7 @@ import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
 import HistoryIcon from "@/icons/history.svg";
 import EditIcon from "@/icons/edit.svg";
-import TicketIcon from "@/icons/ticket.svg";
+// import TicketIcon from "@/icons/ticket.svg";
 
 export default function ClientProfileActions() {
   const { updateTabsConfig } = useTabsContext();
@@ -16,7 +16,7 @@ export default function ClientProfileActions() {
       <Menu.Item icon={<EditIcon />} onClick={updateTabsConfig(leftSideTabs.editProfile)}>
         {t("edit_profile")}
       </Menu.Item>
-      <Menu.Item icon={<TicketIcon />}>{t("bonuses")}</Menu.Item>
+      {/* <Menu.Item icon={<TicketIcon />}>{t("bonuses")}</Menu.Item> */}
       <Menu.Item icon={<HistoryIcon />} onClick={updateTabsConfig(leftSideTabs.transactions)}>
         {t("history")}
       </Menu.Item>

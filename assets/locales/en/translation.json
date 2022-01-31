@@ -211,5 +211,7 @@
   "appointments_list_empty": "The list of appointments will appear here",
   "appintments_warning": "Leave the fields blank to indicate that you are not available on the appropriate day",
   "the_email_has_already_been_taken": "The email has already been taken",
-  "invalid_phone": "Invalid phone number"
+  "invalid_phone": "Invalid phone number",
+  "price_meet": "Meeting price",
+  "price_message": "Message price"
 }

@@ -27,7 +27,7 @@ const Textarea = forwardRef((props, ref) => {
   const textareaRef = useRef();
 
   const activeStatusHandler = () => {
-    if (value || placeholder) setIsActive(true);
+    if (Boolean(value)  || placeholder) setIsActive(true);
     else setIsActive(false);
   };
 

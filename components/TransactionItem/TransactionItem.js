@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "../Button";
 import cs from "@/utils/classNames";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -38,8 +39,9 @@ const categories = {
 };
 
 function TransactionItem(props) {
-  const { type, title, category, amount, status, created } = props;
+  const { type, category, amount, status, created } = props;
   const { updateTabsConfig } = useTabsContext();
+  const { t } = useTranslation();
 
   const goToBonuses = useCallback(() => updateTabsConfig(leftSideTabs.bonuses), [updateTabsConfig]);
 
@@ -48,7 +50,9 @@ function TransactionItem(props) {
       <div className={cs("transaction-category", category)}>{categories[category]}</div>
       <div className="transaction-caption">
         <h4 className="transaction-title">
-          <span className="category-title">{title}</span>
+          <span className="category-title">
+            {category === "meet" ? t("online_meet") : t("simple_message")}
+          </span>
           {status === "cancel" ? (
             <Button onClick={goToBonuses} size="sm">
               Bonus +1
@@ -68,7 +72,6 @@ function TransactionItem(props) {
 
 TransactionItem.propTypes = {
   type: PropTypes.oneOf(["incoming", "outgoing"]),
-  title: PropTypes.string,
   category: PropTypes.oneOf(["message", "meet"]),
   amount: PropTypes.string,
   status: PropTypes.oneOf(["success", "pending", "cancel"]),

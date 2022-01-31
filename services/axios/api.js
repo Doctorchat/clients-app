@@ -21,6 +21,7 @@ const api = {
     changeLocale: (lng) => axiosInstance.post("/user/locale", { locale: lng }),
     register: (data) => axiosInstance.post("/auth/register", data),
     registerDoctor: (data) => axiosInstance.post("/auth/become-doctor", data),
+    meetings: () => axiosInstance.get("/user/meetings"),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

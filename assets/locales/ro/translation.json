@@ -211,5 +211,7 @@
   "appointments_list_empty": "Lista programărilor va apărea aici",
   "appintments_warning": "Lăsați câmpurile necompletate pentru a indica că nu sunteți disponibil în ziua corespunzătoare",
   "the_email_has_already_been_taken": "E-mailul a fost deja preluat",
-  "invalid_phone": "Număr de telefon invalid"
+  "invalid_phone": "Număr de telefon invalid",
+  "price_meet": "Preț conferintă",
+  "price_message": "Preț mesaj"
 }

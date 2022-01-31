@@ -34,7 +34,7 @@ const InputNumber = forwardRef((props, ref) => {
   const inputSizeClassName = useRef(sizeClassName[size]);
 
   const activeStatusHandler = () => {
-    if (value || placeholder) setIsActive(true);
+    if (Boolean(value)  || placeholder) setIsActive(true);
     else setIsActive(false);
   };
 
