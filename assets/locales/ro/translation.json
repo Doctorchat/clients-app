@@ -1,8 +1,10 @@
 {
   "auth_login_title": "Forma de autentificare",
+  "auth_reset_title": "Resetarea parolei",
   "auth_register_title": "Forma de înregistrare",
   "registration": "Înregistrare",
   "password": "Parola",
+  "reset_password": "Resetează parola",
   "forgot_password": "Ai uitat parola?",
   "login": "Autentificare",
   "terms_conditions": "Termeni și Condiții",
@@ -213,5 +215,6 @@
   "the_email_has_already_been_taken": "E-mailul a fost deja preluat",
   "invalid_phone": "Număr de telefon invalid",
   "price_meet": "Preț conferintă",
-  "price_message": "Preț mesaj"
+  "price_message": "Preț mesaj",
+  "check_email": "Vă rugăm să verificați e-mailul!"
 }

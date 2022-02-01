@@ -1,8 +1,10 @@
 {
   "auth_login_title": "Форма аутентификации",
+  "auth_reset_title": "Сброс пароля",
   "auth_register_title": "Форма регистрации",
   "registration": "Регистрация",
   "password": "Пароль",
+  "reset_password": "Сбросить",
   "forgot_password": "Забыли пароль?",
   "login": "Вход",
   "terms_conditions": "Условия и Положения",
@@ -213,5 +215,6 @@
   "the_email_has_already_been_taken": "Электронная почта уже занята",
   "invalid_phone": "Неправильный номер телефона",
   "price_meet": "Цена за видеовстречу",
-  "price_message": "Цена за сообщение"
+  "price_message": "Цена за сообщение",
+  "check_email": "Пожалуйста, проверьте электронную почту!"
 }

@@ -1,8 +1,10 @@
 {
   "auth_login_title": "Authentication form",
+  "auth_reset_title": "Password reset",
   "auth_register_title": "Registration form",
   "registration": "Registration",
   "password": "Password",
+  "reset_password": "Reset password",
   "forgot_password": "Forgot password?",
   "login": "Log In",
   "terms_conditions": "Terms and Conditions",
@@ -213,5 +215,6 @@
   "the_email_has_already_been_taken": "The email has already been taken",
   "invalid_phone": "Invalid phone number",
   "price_meet": "Meeting price",
-  "price_message": "Message price"
+  "price_message": "Message price",
+  "check_email": "Please check email!"
 }

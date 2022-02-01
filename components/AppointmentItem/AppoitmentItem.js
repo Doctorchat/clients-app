@@ -28,7 +28,7 @@ export default function AppointmentItem(props) {
       <a href={props.url} target="_blank" rel="noopener noreferrer">
         Deschide
       </a>
-      <span>{date(momentTime).full}</span>
+      <span>{momentTime && date(momentTime)?.full}</span>
     </div>
   );
 }
