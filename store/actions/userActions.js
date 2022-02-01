@@ -1,4 +1,5 @@
 import { setUserAuthorized, setUserUnauthorized } from "../slices/userSlice";
+import i18next from "@/services/i18next";
 import api from "@/services/axios/api";
 
 export const fetchUserByToken = () => async (dispatch) => {
@@ -17,6 +18,12 @@ export const fetchUserByToken = () => async (dispatch) => {
 export const loginUser = (data) => async (dispatch) => {
   try {
     const response = await api.user.login(data);
+    const userLocale = response.data.user.locale;
+
+    if (userLocale) {
+      i18next.changeLanguage(userLocale);
+      localStorage.setItem("i18nextLng", userLocale);
+    }
 
     dispatch(setUserAuthorized(response.data));
     return Promise.resolve(response.data);
