@@ -60,6 +60,9 @@
   resize: none;
   overflow: hidden;
   max-width: unset;
+  &.scroll {
+    overflow-y: scroll;
+  }
 }
 
 .dc-input_wrapper .dc-input-spinner {

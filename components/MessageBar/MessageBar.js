@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { IconBtn } from "../Button";
 import Form from "../Form";
 import Confirm from "../Confirm";
-import Input from "../Inputs";
+import { Textarea } from "../Inputs";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import cs from "@/utils/classNames";
 import { MESSAGE_TYPES, userRoles } from "@/context/constants";
@@ -109,10 +109,13 @@ export default function MessageBar(props) {
             <IconBtn className="message-bar-attach" size="sm" icon={<ClipIcon />} />
           </AuthRoleWrapper>
           <Form.Item name="content" className="mb-0">
-            <Input
+            <Textarea
               placeholder={t("message_bar_placeholder")}
               disabled={disabled}
               autoComplete="off"
+              removePaddings
+              minHeight={48}
+              maxHeight={260}
             />
           </Form.Item>
         </div>

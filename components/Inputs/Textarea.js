@@ -20,14 +20,17 @@ const Textarea = forwardRef((props, ref) => {
     onBlur,
     animateLabel,
     minHeight,
+    removePaddings,
+    maxHeight,
     ...rest
   } = props;
   const [isActive, setIsActive] = useState(false);
+  const [maxHeightExceeded, setMaxHeightExceeded] = useState(false);
   const textareaSizeClassName = useRef(sizeClassName[size]);
   const textareaRef = useRef();
 
   const activeStatusHandler = () => {
-    if (Boolean(value)  || placeholder) setIsActive(true);
+    if (Boolean(value) || placeholder) setIsActive(true);
     else setIsActive(false);
   };
 
@@ -37,12 +40,30 @@ const Textarea = forwardRef((props, ref) => {
     if (textareaRef.current) {
       const node = textareaRef.current;
       const adjustHeight = ({ target }) => {
+        let paddings = 0;
+
+        if (removePaddings) {
+          const targetStyles = window.getComputedStyle(target, null);
+          const paddingTop = +targetStyles.getPropertyValue("padding-top").replace("px", "");
+          const paddingBottom = +targetStyles.getPropertyValue("padding-bottom").replace("px", "");
+
+          paddings += paddingTop + paddingBottom;
+        }
+
+        if (maxHeight) {
+          if (target.scrollHeight > maxHeight) {
+            setMaxHeightExceeded(true);
+          } else {
+            setMaxHeightExceeded(false);
+          }
+        }
+
         target.style.height = "auto";
-        target.style.height = `${target.scrollHeight}px`;
+        target.style.height = `${target.scrollHeight - paddings}px`;
       };
 
       node.style.minHeight = `${minHeight || node.scrollHeight}px`;
-      node.style.height = `${node.scrollHeight}px`;
+      node.style.height = `${minHeight}px`;
       node.addEventListener("input", adjustHeight);
       ref(textareaRef.current);
     }
@@ -79,7 +100,12 @@ const Textarea = forwardRef((props, ref) => {
           name={name}
           value={value}
           ref={textareaRef}
-          className={cs(className, "dc-textarea", textareaSizeClassName.current)}
+          className={cs(
+            className,
+            "dc-textarea",
+            textareaSizeClassName.current,
+            maxHeightExceeded && "scroll"
+          )}
           disabled={disabled}
           placeholder={placeholder}
           onFocus={onFocusHandler}
@@ -103,12 +129,15 @@ Textarea.propTypes = {
   onBlur: PropTypes.func,
   animateLabel: PropTypes.bool,
   minHeight: PropTypes.number,
+  removePaddings: PropTypes.bool,
+  maxHeight: PropTypes.number,
 };
 
 Textarea.defaultProps = {
   size: "md",
   onBlur: () => null,
   value: "",
+  removePaddings: false,
 };
 
 Textarea.displayName = "Textarea";
