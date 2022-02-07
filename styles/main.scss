@@ -173,8 +173,8 @@ input[type="checkbox"] {
 
 .external-docs-layout {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
   height: 100%;
   background-image: url(../assets/images/chat-content.jpg);
@@ -186,10 +186,14 @@ input[type="checkbox"] {
 .external-doc-list {
   max-width: 620px;
   width: 100%;
-  padding: 14px 20px;
+  padding: 14px 20px 0 20px;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  border-radius: 10px;
+  overflow: scroll;
+  height: 100%;
+  .dc-input {
+    max-width: unset;
+  }
   .doclist {
     width: 100%;
   }
@@ -206,6 +210,9 @@ input[type="checkbox"] {
 @media (max-width: 768px) {
   .select-chat {
     display: none !important;
+  }
+  .external-doc-list {
+    padding: 14px 8px 0 12px;
   }
 }
 
