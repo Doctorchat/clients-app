@@ -21,7 +21,7 @@ import getActiveLng from "@/utils/getActiveLng";
 const selectedLng = getActiveLng();
 
 export default function DocInfo(props) {
-  const { doctor, scrollableContainer, allowCreate, loading } = props;
+  const { doctor, scrollableContainer, allowCreate, loading, actionBtn } = props;
   const [tabsConfig, setTabsConfig] = useState({ key: docInfoTabs.activity, dir: "next" });
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -97,6 +97,7 @@ export default function DocInfo(props) {
               </Dropdown>
             </div>
           )}
+          {actionBtn && actionBtn}
         </div>
       </div>
       <div className="doc-info-tabs">
@@ -140,6 +141,7 @@ DocInfo.propTypes = {
   scrollableContainer: PropTypes.string,
   loading: PropTypes.bool,
   allowCreate: PropTypes.bool,
+  actionBtn: PropTypes.element,
 };
 
 DocInfo.defaultProps = {

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -6,6 +6,7 @@ import Popup from "@/components/Popup";
 import DocInfo from "@/components/DocInfo";
 import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
+import Button from "@/components/Button";
 
 export default function ExternalDocList() {
   const [visible, setVisible] = useState(false);
@@ -52,6 +53,17 @@ export default function ExternalDocList() {
     [router]
   );
 
+  const ActionBtn = useMemo(
+    () => (
+      <div className="start-conversation mt-1 d-flex justify-content-end">
+        <Button size="sm" className="w-auto" onClick={() => router.push("/")}>
+          {t("describe_problem")}
+        </Button>
+      </div>
+    ),
+    [router, t]
+  );
+
   if (!doc_id) return null;
 
   return (
@@ -63,6 +75,7 @@ export default function ExternalDocList() {
           scrollableContainer=".external-doc-info-body .popup-scroll-container"
           doctor={doctor}
           allowCreate={false}
+          actionBtn={ActionBtn}
         />
       </Popup.Content>
     </Popup>
