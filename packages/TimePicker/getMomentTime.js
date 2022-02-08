@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from "@/utils/localMoment";
 
 export default function getMomentTime(range) {
   const transformToMomentTime = (time) => {

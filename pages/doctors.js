@@ -28,7 +28,7 @@ export default function Doctors() {
 
   useEffect(() => {
     api.docList
-      .get()
+      .get({ external: true })
       .then((res) => {
         setDoctors(res.data);
       })

@@ -2,7 +2,9 @@ import PropTypes from "prop-types";
 import { Provider } from "react-redux";
 import Head from "next/head";
 import LocaleProvider from "antd/lib/locale-provider";
-import ro_RO from 'antd/lib/locale-provider/ro_RO';
+import ru_RU from "antd/lib/locale-provider/ru_RU";
+import en_US from "antd/lib/locale-provider/en_US";
+import ro_RO from "antd/lib/locale-provider/ro_RO";
 import { store } from "../store";
 import MainLayout from "@/layouts/MainLayout";
 import NotificationsWrapper from "@/containers/NotificationsWrapper";
@@ -10,6 +12,13 @@ import "@/services/i18next";
 
 // Styles
 import "../styles/global.scss";
+import getActiveLng from "@/utils/getActiveLng";
+
+const antLocales = {
+  ro: ro_RO,
+  ru: ru_RU,
+  en: en_US,
+};
 
 export default function App({ Component, pageProps }) {
   const getLayout =
@@ -31,7 +40,7 @@ export default function App({ Component, pageProps }) {
         <title>Doctorchat</title>
       </Head>
       <Provider store={store}>
-        <LocaleProvider locale={ro_RO}>
+        <LocaleProvider locale={antLocales[getActiveLng()]}>
           <NotificationsWrapper />
           {getLayout(<Component {...pageProps} />)}
         </LocaleProvider>

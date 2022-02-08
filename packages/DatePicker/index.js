@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 import DP from "antd/lib/date-picker";
 import getMomentDate from "./getMomentDate";
+import moment from "@/utils/localMoment";
 import cs from "@/utils/classNames";
 
 const DatePicker = forwardRef((props, ref) => {

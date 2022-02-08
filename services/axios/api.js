@@ -38,7 +38,7 @@ const api = {
   },
   conversationList: { get: () => axiosInstance.get("/chat/list") },
   docList: {
-    get: () => axiosInstance.get("/chat/medics"),
+    get: (params = {}) => axiosInstance.get("/chat/medics", { params: { ...params } }),
     getReviews: (id) => axiosInstance.get(`/reviews/${id}`),
   },
   bootstrap: {
