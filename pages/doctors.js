@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import DocList from "@/components/DocList";
@@ -6,6 +6,7 @@ import api from "@/services/axios/api";
 import List from "@/components/List";
 import { DocItemSkeleton } from "@/components/DocItem";
 import Search from "@/components/Search/Search";
+import { ExternalDocList } from "@/modules/common";
 
 export default function Doctors() {
   const [doctors, setDoctors] = useState([]);
@@ -39,8 +40,14 @@ export default function Doctors() {
     setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
   };
 
+  const onDocClickHandler = useCallback(
+    (doc) => () => router.push(`/doctors?id=${doc.id}`),
+    [router]
+  );
+
   return (
     <div className="external-doc-list">
+      <ExternalDocList />
       <h3>Lista de doctori</h3>
       <div className="search-bar mb-3">
         <Search
@@ -63,7 +70,7 @@ export default function Doctors() {
           content: t("doctor_list_empty"),
         }}
       >
-        <DocList onDocClick={() => () => router.push("/")} data={currentList} />
+        <DocList onDocClick={onDocClickHandler} data={currentList} />
       </List>
     </div>
   );

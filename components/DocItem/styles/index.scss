@@ -53,13 +53,13 @@
 
 .doc-caption {
   margin-left: 10px;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
   .doc-title,
   .doc-category {
     margin: 0;
     font-size: 16px;
-  }
-  .doc-name {
-    max-width: 120px;
   }
   .doc-title {
     margin-bottom: 6px;
@@ -144,10 +144,6 @@
     min-width: 76px;
     max-height: 76px;
     border-radius: 50%;
-  }
-
-  .doc-caption {
-    width: 100%;
   }
 
   .doc-title,

@@ -1,0 +1,18 @@
+#external-doc-info {
+  .popup-body {
+    width: 560px;
+    height: 800px;
+    max-height: 100%;
+    max-height: -moz-available;
+    max-height: -webkit-fill-available;
+    max-height: stretch;
+  }
+}
+
+@media only screen and (max-height: 800px) {
+  #external-doc-info {
+    .popup-body {
+      height: 100%;
+    }
+  }
+}

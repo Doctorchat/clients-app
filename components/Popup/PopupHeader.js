@@ -24,7 +24,7 @@ export default function PopupHeader(props) {
 
   return (
     <div className={cs("popup-header", className)}>
-      {typeof title === "string" ? <h3>{title}</h3> : title}
+      {typeof title === "string" ? <h3 className="mb-0">{title}</h3> : title}
       {CloseBtn}
     </div>
   );

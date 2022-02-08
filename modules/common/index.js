@@ -8,6 +8,7 @@ import MessagesList from "./MessagesList";
 import RightSide from "./RightSide";
 import ProfileChangeLang from "./ProfileChangeLang";
 import EditProfileSecurity from "./EditProfileSecurity";
+import ExternalDocList from "./ExternalDocList/";
 
 export {
   ConversationsSidebar,
@@ -20,4 +21,5 @@ export {
   RightSide,
   ProfileChangeLang,
   EditProfileSecurity,
+  ExternalDocList,
 };
