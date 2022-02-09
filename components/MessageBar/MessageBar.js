@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,13 +15,11 @@ import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
-import ClipIcon from "@/icons/clip.svg";
 import LevelIcon from "@/icons/level-up.svg";
 import StopIcon from "@/icons/stop.svg";
 
 export default function MessageBar(props) {
   const { defaultValue, disabled, chatId } = props;
-  const user = useSelector((store) => store.user.data);
   const [isFormEnabled, setIsFormEnabled] = useState(defaultValue && defaultValue.length > 3);
   const [loading, setLoading] = useState(false);
   const [stopChatLoading, setStopChatLoading] = useState(false);
@@ -99,15 +97,10 @@ export default function MessageBar(props) {
         onValuesChange={onFormChange}
         onFinish={onFormSubmit}
       >
-        <div
-          className={cs(
-            "message-bar-input",
-            userRoles.get("doctor") === user?.role && "with-attach"
-          )}
-        >
-          <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
-            <IconBtn className="message-bar-attach" size="sm" icon={<ClipIcon />} />
-          </AuthRoleWrapper>
+        <div className={cs("message-bar-input")}>
+          {/* <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
+            <MessageBarAttach chatId={chatId} />
+          </AuthRoleWrapper> */}
           <Form.Item name="content" className="mb-0">
             <Textarea
               placeholder={t("message_bar_placeholder")}

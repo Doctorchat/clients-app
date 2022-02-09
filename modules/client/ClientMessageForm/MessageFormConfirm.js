@@ -57,7 +57,7 @@ function MessageFormConfirmation() {
         const discoutedPrice = price.total - price.total * discount;
 
         setPrice((prev) => ({ ...prev, total: discoutedPrice }));
-        setPromo({ code, sum: price.subtotal - discoutedPrice });
+        setPromo({ code, sum: (price.subtotal - discoutedPrice).toPrecision(3) });
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: "invalid_promo" }));
       } finally {

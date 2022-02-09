@@ -44,7 +44,7 @@ export default function MeetFormDateTime(props) {
 
   const additionalCheckDisabledDay = useCallback(
     (date) => {
-      const selectedDayRange = daysRange[daysIndexes.get(date.day())];
+      const selectedDayRange = daysRange && daysRange[daysIndexes.get(date.day())];
 
       if (!selectedDayRange) return true;
       if (!selectedDayRange.every(Boolean)) return true;

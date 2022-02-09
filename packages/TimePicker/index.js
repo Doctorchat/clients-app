@@ -54,7 +54,6 @@ const TimePicker = forwardRef((props, ref) => {
     popupClassName: "dc-picker-popup",
     disabledHours: () => disabledParts.hours,
     disabledMinutes: (hour) => disabledParts.minutes?.[hour] || [],
-    hideDisabledOptions: true,
     ...rest,
   };
 

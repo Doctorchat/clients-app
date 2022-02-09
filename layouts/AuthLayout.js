@@ -30,7 +30,11 @@ export default function AuthLayout({ children }) {
                 <div className="auth-layout-lang d-flex justify-content-center">
                   <ProfileChangeLang />
                 </div>
-                <a href="#" target="_blank">
+                <a
+                  href="https://doctorchat.md/termeni-si-conditii/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
                   {t("terms_conditions")}
                 </a>
               </div>
