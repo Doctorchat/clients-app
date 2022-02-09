@@ -67,6 +67,7 @@ export default function MeetFormDateTime(props) {
           disabledHours={disabledHours}
           disabledMinutes={disabledMinutes}
           activeDate={currentDate}
+          disabled={!currentDate}
         />
       </FormItem>
     </div>

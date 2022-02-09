@@ -3,7 +3,7 @@ import { forwardRef, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TP from "antd/lib/time-picker";
 import getMomentTime from "./getMomentTime";
-import getDisabledParts from "./getDisabledParts";
+import getDisabledParts, { fullDay, fullHour } from "./getDisabledParts";
 import cs from "@/utils/classNames";
 
 const TimePicker = forwardRef((props, ref) => {
@@ -38,7 +38,13 @@ const TimePicker = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (disabledHours && disabledHours.length) {
-      setDisabledParts(getDisabledParts(disabledHours, disabledMinutes, activeDate));
+      const disabledParts = getDisabledParts(disabledHours, disabledMinutes, activeDate);
+
+      if (disabledParts.hours.length === fullDay.length) {
+        disabledParts.minutes = fullHour;
+      }
+
+      setDisabledParts(disabledParts);
     }
   }, [activeDate, disabledHours, disabledMinutes]);
 
