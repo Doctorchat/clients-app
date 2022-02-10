@@ -6,7 +6,7 @@ import { userRoles } from "@/context/constants";
 import MessageBar from "@/components/MessageBar";
 
 export default function ChatContentFooter(props) {
-  const { openMessageFormPopup, status, chatId, paymentUrl } = props;
+  const { openMessageFormPopup, status, chatId, paymentUrl, type } = props;
   const { t } = useTranslation();
 
   return (
@@ -28,7 +28,7 @@ export default function ChatContentFooter(props) {
         </div>
       </AuthRoleWrapper>
       {status && !["initied", "unpaid", "closed"].includes(status) && (
-        <MessageBar chatId={chatId} status={status} />
+        <MessageBar chatId={chatId} status={status} type={type} />
       )}
     </>
   );
@@ -40,6 +40,7 @@ ChatContentFooter.propTypes = {
   chatId: PropTypes.string,
   status: PropTypes.string,
   paymentUrl: PropTypes.string,
+  type: PropTypes.string,
 };
 
 ChatContentFooter.defaultProps = {};

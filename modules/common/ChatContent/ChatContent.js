@@ -137,6 +137,7 @@ export default function ChatContent(props) {
           status={status}
           chatId={chatId}
           paymentUrl={paymentUrl}
+          type={type}
         />
       </Sidebar.Footer>
     </Sidebar>

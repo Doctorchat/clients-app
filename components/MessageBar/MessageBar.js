@@ -19,7 +19,7 @@ import LevelIcon from "@/icons/level-up.svg";
 import StopIcon from "@/icons/stop.svg";
 
 export default function MessageBar(props) {
-  const { defaultValue, disabled, chatId, status } = props;
+  const { defaultValue, disabled, chatId, status, type } = props;
   const [isFormEnabled, setIsFormEnabled] = useState(defaultValue && defaultValue.length > 3);
   const [loading, setLoading] = useState(false);
   const [stopChatLoading, setStopChatLoading] = useState(false);
@@ -121,7 +121,7 @@ export default function MessageBar(props) {
         />
       )}
       <AuthRoleWrapper
-        extraValidation={status !== "responded" && !isFormEnabled}
+        extraValidation={status !== "responded" && type !== "support" && !isFormEnabled}
         roles={[userRoles.get("doctor")]}
       >
         <Confirm
@@ -147,6 +147,7 @@ MessageBar.propTypes = {
   disabled: PropTypes.bool,
   chatId: PropTypes.string,
   status: PropTypes.string,
+  type: PropTypes.string,
 };
 
 MessageBar.defaultValue = {
