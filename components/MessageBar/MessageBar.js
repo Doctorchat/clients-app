@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import TextArea from "antd/lib/input/TextArea";
 import { useRouter } from "next/router";
 import { IconBtn } from "../Button";
 import Form from "../Form";
 import Confirm from "../Confirm";
-import { Textarea } from "../Inputs";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import cs from "@/utils/classNames";
 import { MESSAGE_TYPES, userRoles } from "@/context/constants";
@@ -102,29 +102,33 @@ export default function MessageBar(props) {
             <MessageBarAttach chatId={chatId} />
           </AuthRoleWrapper> */}
           <Form.Item name="content" className="mb-0">
-            <Textarea
+            <TextArea
               placeholder={t("message_bar_placeholder")}
-              disabled={disabled}
               autoComplete="off"
-              removePaddings
-              minHeight={48}
-              maxHeight={260}
+              disabled={disabled}
+              autoSize={{ maxRows: 8 }}
             />
           </Form.Item>
         </div>
       </Form>
-      <IconBtn
-        className="message-bar-send"
-        loading={loading}
-        disabled={!isFormEnabled}
-        icon={<LevelIcon />}
-        onClick={form.handleSubmit(onFormSubmit)}
-      />
-      <AuthRoleWrapper extraValidation={status !== "responded"} roles={[userRoles.get("doctor")]}>
+      {isFormEnabled && (
+        <IconBtn
+          className="message-bar-send"
+          loading={loading}
+          disabled={!isFormEnabled}
+          icon={<LevelIcon />}
+          onClick={form.handleSubmit(onFormSubmit)}
+        />
+      )}
+      <AuthRoleWrapper
+        extraValidation={status !== "responded" && !isFormEnabled}
+        roles={[userRoles.get("doctor")]}
+      >
         <Confirm
           isAsync
           onConfirm={closeConversationHanlder}
           content={t("stop_conversation_confirmation")}
+          disabled={isFormEnabled}
         >
           <IconBtn
             className="message-bar-send remove-action"
