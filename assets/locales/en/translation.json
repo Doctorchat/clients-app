@@ -216,5 +216,6 @@
   "invalid_phone": "Invalid phone number",
   "price_meet": "Meeting price",
   "price_message": "Message price",
-  "check_email": "Please check email!"
+  "check_email": "Please check email!",
+  "home_page": "Home Page"
 }

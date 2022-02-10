@@ -16,6 +16,12 @@
   }
 }
 
+.home-item {
+  svg {
+    width: 20px;
+  }
+}
+
 .logout-item {
   color: var(--bs-red);
   .menu-item-prefix {
