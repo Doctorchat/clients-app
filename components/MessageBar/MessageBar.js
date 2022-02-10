@@ -19,7 +19,7 @@ import LevelIcon from "@/icons/level-up.svg";
 import StopIcon from "@/icons/stop.svg";
 
 export default function MessageBar(props) {
-  const { defaultValue, disabled, chatId } = props;
+  const { defaultValue, disabled, chatId, status } = props;
   const [isFormEnabled, setIsFormEnabled] = useState(defaultValue && defaultValue.length > 3);
   const [loading, setLoading] = useState(false);
   const [stopChatLoading, setStopChatLoading] = useState(false);
@@ -120,7 +120,7 @@ export default function MessageBar(props) {
         icon={<LevelIcon />}
         onClick={form.handleSubmit(onFormSubmit)}
       />
-      <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
+      <AuthRoleWrapper extraValidation={status !== "responded"} roles={[userRoles.get("doctor")]}>
         <Confirm
           isAsync
           onConfirm={closeConversationHanlder}
@@ -142,6 +142,7 @@ MessageBar.propTypes = {
   defaultValue: PropTypes.string,
   disabled: PropTypes.bool,
   chatId: PropTypes.string,
+  status: PropTypes.string,
 };
 
 MessageBar.defaultValue = {

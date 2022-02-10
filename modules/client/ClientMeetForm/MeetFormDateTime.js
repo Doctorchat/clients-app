@@ -62,12 +62,16 @@ export default function MeetFormDateTime(props) {
           additionalCheckDisabledDay={additionalCheckDisabledDay}
         />
       </FormItem>
-      <FormItem className="w-100" name="time" label={t("message_from_info.time")}>
+      <FormItem
+        className="w-100"
+        name="time"
+        label={t("message_from_info.time")}
+        disabled={!currentDate}
+      >
         <TimePicker
           disabledHours={disabledHours}
           disabledMinutes={disabledMinutes}
           activeDate={currentDate}
-          disabled={!currentDate}
         />
       </FormItem>
     </div>

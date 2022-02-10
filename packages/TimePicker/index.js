@@ -22,7 +22,11 @@ const TimePicker = forwardRef((props, ref) => {
     ...rest
   } = props;
   const [momentVal, setMomentVal] = useState(getMomentTime(value));
-  const [disabledParts, setDisabledParts] = useState({ hours: [], minutes: {} });
+  const [disabledParts, setDisabledParts] = useState({
+    hours: [],
+    minutes: {},
+    isHourSelected: false,
+  });
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -34,6 +38,19 @@ const TimePicker = forwardRef((props, ref) => {
       onChange(event);
     },
     [onChange]
+  );
+
+  const onSelectTime = useCallback(
+    (event) => {
+      const selectedHour = event.hour();
+
+      if (disabledParts.hours.includes(selectedHour)) {
+        setDisabledParts({ ...disabledParts, isHourSelected: false });
+      } else {
+        setDisabledParts({ ...disabledParts, isHourSelected: true });
+      }
+    },
+    [disabledParts]
   );
 
   useEffect(() => {
@@ -53,13 +70,14 @@ const TimePicker = forwardRef((props, ref) => {
     size: size,
     value: momentVal,
     onChange: onChangeHandler,
-    disabled: disabled,
     minuteStep: 10,
     format: "HH:mm",
     showNow: false,
     popupClassName: "dc-picker-popup",
     disabledHours: () => disabledParts.hours,
-    disabledMinutes: (hour) => disabledParts.minutes?.[hour] || [],
+    disabledMinutes: (hour) =>
+      disabledParts.isHourSelected ? disabledParts.minutes?.[hour] || [] : fullHour,
+    disabled,
     ...rest,
   };
 
@@ -72,7 +90,7 @@ const TimePicker = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         {type === "simple" ? (
-          <TP {...pickerProps} ref={ref} placeholder={t("select")} />
+          <TP {...pickerProps} ref={ref} placeholder={t("select")} onSelect={onSelectTime} inputReadOnly />
         ) : (
           <TP.RangePicker
             {...pickerProps}

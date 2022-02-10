@@ -46,7 +46,11 @@ export default function Register() {
     <>
       <div className="auth-header">
         <div className="auth-header-logo">
-          <h3 className="m-0">Doctorchat</h3>
+          <h3 className="m-0">
+            <Link href="https://doctorchat.md/">
+              <a>Doctorchat</a>
+            </Link>
+          </h3>
         </div>
         <Link href="/auth/login">
           <a>
