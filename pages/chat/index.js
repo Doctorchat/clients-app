@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatContent, RightSide } from "@/modules/common";
@@ -14,9 +14,20 @@ export default function ColumnCenter() {
   const router = useRouter();
   const { id } = router.query;
 
+  const fetchConversationList = useCallback(() => dispatch(getChatContent(id)), [dispatch, id]);
+
   useEffect(() => {
-    dispatch(getChatContent(id));
-  }, [dispatch, id]);
+    fetchConversationList();
+
+    let interval = null;
+
+    interval = setInterval(fetchConversationList, 30000);
+
+    return () => {
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (selectedId) {

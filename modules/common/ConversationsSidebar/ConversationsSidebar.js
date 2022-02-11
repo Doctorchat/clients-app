@@ -34,7 +34,20 @@ export default function ConversationsSidebar() {
     else setCurrentList(conversationList.data);
   }, [conversationList.data, searchConfig]);
 
-  useEffect(() => dispatch(getConversationList()), [dispatch]);
+  const fetchConversationList = useCallback(() => dispatch(getConversationList()), [dispatch]);
+
+  useEffect(() => {
+    fetchConversationList();
+
+    let interval = null;
+
+    interval = setInterval(fetchConversationList, 30000);
+
+    return () => {
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const openStartConversation = useCallback(
     () => dispatch(docListToggleVisibility(true)),
