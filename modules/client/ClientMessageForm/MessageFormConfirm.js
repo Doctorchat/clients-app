@@ -57,7 +57,7 @@ function MessageFormConfirmation() {
         const discoutedPrice = price.total - price.total * discount;
 
         setPrice((prev) => ({ ...prev, total: discoutedPrice }));
-        setPromo({ code, sum: (price.subtotal - discoutedPrice).toPrecision(3) });
+        setPromo({ code, sum: parseFloat(price.subtotal - discoutedPrice).toPrecision(2) });
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: "invalid_promo" }));
       } finally {
@@ -244,8 +244,10 @@ function MessageFormConfirmation() {
                   {t("message_form_confirmation.total_price")}
                 </th>
                 <td className="dc-description-row-content">
-                  <span>{`${price.total} Lei`}</span>
-                  {promo.code && <del className="ms-2">{`${price.total + promo.sum} Lei`}</del>}
+                  <span>{`${+price.total.toPrecision(2)} Lei`}</span>
+                  {promo.code && (
+                    <del className="ms-2">{`${(+price.total + +promo.sum).toPrecision(2)} Lei`}</del>
+                  )}
                 </td>
               </tr>
             </tbody>

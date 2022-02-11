@@ -128,12 +128,10 @@ export default function MessageBar(props) {
           isAsync
           onConfirm={closeConversationHanlder}
           content={t("stop_conversation_confirmation")}
-          disabled={isFormEnabled}
         >
           <IconBtn
             className="message-bar-send remove-action"
             loading={stopChatLoading}
-            disabled={isFormEnabled}
             icon={<StopIcon />}
           />
         </Confirm>
