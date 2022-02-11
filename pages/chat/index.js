@@ -27,7 +27,7 @@ export default function ColumnCenter() {
       clearInterval(interval);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (selectedId) {
