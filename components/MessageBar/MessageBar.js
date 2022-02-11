@@ -115,7 +115,6 @@ export default function MessageBar(props) {
         <IconBtn
           className="message-bar-send"
           loading={loading}
-          disabled={!isFormEnabled}
           icon={<LevelIcon />}
           onClick={form.handleSubmit(onFormSubmit)}
         />
