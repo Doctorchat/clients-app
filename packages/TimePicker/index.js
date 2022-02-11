@@ -19,13 +19,14 @@ const TimePicker = forwardRef((props, ref) => {
     disabledHours,
     disabledMinutes,
     activeDate,
+    allowSelectHourWithoutMins,
     ...rest
   } = props;
   const [momentVal, setMomentVal] = useState(getMomentTime(value));
   const [disabledParts, setDisabledParts] = useState({
     hours: [],
     minutes: {},
-    isHourSelected: false,
+    isHourSelected: allowSelectHourWithoutMins,
   });
   const { t } = useTranslation();
 
@@ -90,7 +91,13 @@ const TimePicker = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         {type === "simple" ? (
-          <TP {...pickerProps} ref={ref} placeholder={t("select")} onSelect={onSelectTime} inputReadOnly />
+          <TP
+            {...pickerProps}
+            ref={ref}
+            placeholder={t("select")}
+            onSelect={onSelectTime}
+            inputReadOnly
+          />
         ) : (
           <TP.RangePicker
             {...pickerProps}
@@ -114,6 +121,7 @@ TimePicker.propTypes = {
   disabledHours: PropTypes.array,
   disabledMinutes: PropTypes.array,
   activeDate: PropTypes.string,
+  allowSelectHourWithoutMins: PropTypes.bool,
 };
 
 TimePicker.defaultProps = {
@@ -122,6 +130,7 @@ TimePicker.defaultProps = {
   value: null,
   disabledHours: [],
   disabledMinutes: [],
+  allowSelectHourWithoutMins: true,
 };
 
 TimePicker.displayName = "TimePicker";
