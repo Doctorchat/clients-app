@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { forwardRef } from "react";
 import cs from "@/utils/classNames";
-import CheckIcon from "@/icons/check.svg";
 
 const Checkbox = forwardRef((props, ref) => {
   const { className, label, value, onChange, name } = props;
@@ -12,7 +11,7 @@ const Checkbox = forwardRef((props, ref) => {
 
   return (
     <div className={cs("dc-simple-checkbox-wrapper", className)} ref={ref}>
-      <button
+      {/* <button
         id={name}
         type="button"
         onClick={toggleHandler}
@@ -21,7 +20,8 @@ const Checkbox = forwardRef((props, ref) => {
         role="switch"
       >
         <CheckIcon />
-      </button>
+      </button> */}
+      <input type="checkbox" id={name} checked={value} onChange={toggleHandler}  />
       {!!label && <span className="dc-simple-checkbox-label">{label}</span>}
     </div>
   );

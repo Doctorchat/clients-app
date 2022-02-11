@@ -41,7 +41,7 @@ export default function ConversationsSidebar() {
 
     let interval = null;
 
-    interval = setInterval(fetchConversationList, 30000);
+    interval = setInterval(fetchConversationList, 15000);
 
     return () => {
       clearInterval(interval);
