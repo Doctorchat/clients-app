@@ -56,7 +56,7 @@ export default function ExternalDocList() {
   const ActionBtn = useMemo(
     () => (
       <div className="start-conversation mt-1 d-flex justify-content-end">
-        <Button size="sm" className="w-auto" onClick={() => router.push("/")}>
+        <Button size="sm" className="w-auto" onClick={() => router.push("/auth/login")}>
           {t("describe_problem")}
         </Button>
       </div>
