@@ -85,7 +85,8 @@ export default function DocInfoActivity(props) {
                 <ClockIcon />
               </span>
               <span className="text">
-                {t("doctor_info.response_time")} <b>{activity?.responseTime || "—"}</b>
+                {t("doctor_info.response_time")}{" "}
+                <b>{activity?.responseTime ? `${activity?.responseTime} ${t("mins")}` : "—"}</b>
               </span>
             </div>
             <span className="descrp">{t("doctor_info.response_time_description")}</span>

@@ -48,7 +48,13 @@ function DocItem(props) {
                   <span className="icon">
                     <ClockIcon />
                   </span>
-                  <span className="text">{responseTime || <LineIcon className="line-icon" />}</span>
+                  <span className="text">
+                    {responseTime ? (
+                      `${responseTime} ${t("mins")}`
+                    ) : (
+                      <LineIcon className="line-icon" />
+                    )}
+                  </span>
                 </div>
               </div>
               <p className="doc-category">{category.join(", ")}</p>

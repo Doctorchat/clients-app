@@ -44,7 +44,7 @@
   "data_updated_with_success": "Data was successfully updated",
   "general_information": "General Information",
   "security": "Security",
-  "edit": "Edit",
+  "edit": "Save",
   "current_password": "Current Password",
   "new_password": "New Password",
   "speciality": "Speciality",
@@ -217,5 +217,6 @@
   "price_meet": "Meeting price",
   "price_message": "Message price",
   "check_email": "Please check email!",
-  "home_page": "Home Page"
+  "home_page": "Home Page",
+  "mins": "min."
 }

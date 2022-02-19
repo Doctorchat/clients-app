@@ -44,7 +44,7 @@
   "data_updated_with_success": "Date au fost actualizate cu succes",
   "general_information": "Informație Generală",
   "security": "Securitate",
-  "edit": "Editează",
+  "edit": "Salvează",
   "current_password": "Parola Curentă",
   "new_password": "Parola Nouă",
   "speciality": "Specialitate",
@@ -217,5 +217,6 @@
   "price_meet": "Preț conferintă",
   "price_message": "Preț mesaj",
   "check_email": "Vă rugăm să verificați e-mailul!",
-  "home_page": "Pagina Principală"
+  "home_page": "Pagina Principală",
+  "mins": "min."
 }
