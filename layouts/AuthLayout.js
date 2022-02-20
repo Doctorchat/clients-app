@@ -12,7 +12,7 @@ export default function AuthLayout({ children }) {
 
   useEffect(() => {
     if (user.isAuthorized || localStorage.getItem("dc_token")) {
-      router.push({
+      router.replace({
         pathname: "/",
       });
     }
