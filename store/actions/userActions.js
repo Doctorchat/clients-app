@@ -32,6 +32,23 @@ export const loginUser = (data) => async (dispatch) => {
   }
 };
 
+export const emulateLogin = (data) => async (dispatch) => {
+  try {
+    const response = await api.user.emulate(data);
+    const userLocale = response.data.user.locale;
+
+    if (userLocale) {
+      i18next.changeLanguage(userLocale);
+      localStorage.setItem("i18nextLng", userLocale);
+    }
+
+    dispatch(setUserAuthorized(response.data));
+    return Promise.resolve(response.data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export const registerUser = (data) => async (dispatch) => {
   try {
     const response = await api.user.register(data);

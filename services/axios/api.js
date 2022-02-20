@@ -23,6 +23,7 @@ const api = {
     registerDoctor: (data) => axiosInstance.post("/auth/become-doctor", data),
     meetings: () => axiosInstance.get("/user/meetings"),
     resetPassword: (data) => axiosInstance.post("/auth/forgot-password", data),
+    emulate: (data) => axiosInstance.post("/auth/emulate", data),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

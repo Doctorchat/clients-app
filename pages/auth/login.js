@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -10,7 +10,7 @@ import AuthLayout from "@/layouts/AuthLayout";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
 import Button from "@/components/Button";
-import { loginUser } from "@/store/actions";
+import { emulateLogin, loginUser } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
 
 export default function Login() {
@@ -20,6 +20,14 @@ export default function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const { query } = router;
+
+    if (query?.hash && query?.id) {
+      dispatch(emulateLogin(query));
+    }
+  }, [dispatch, router]);
 
   const onLoginSubmit = useCallback(
     async (values) => {
