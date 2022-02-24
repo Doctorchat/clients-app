@@ -7,6 +7,8 @@ import HeartIcon from "@/icons/heart.svg";
 import ClockIcon from "@/icons/clock.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import LineIcon from "@/icons/line.svg";
+import VideoIcon from "@/icons/video.svg";
+import CommentIcon from "@/icons/comment-lines.svg";
 
 function DocItem(props) {
   const {
@@ -19,6 +21,7 @@ function DocItem(props) {
       name,
       category,
       avatar,
+      price: { video, text },
       meta: { helpedUsers, responseTime },
     },
   } = props;
@@ -62,9 +65,18 @@ function DocItem(props) {
           ) : (
             <p className="mb-0 doc-unavailable-msg">{t("doctor_unavailable")}</p>
           )}
+          <div className="doc-price d-flex align-items-center">
+            <div className="text d-flex align-items-center">
+              <CommentIcon />
+              <span>{text} Lei</span>
+            </div>
+            <div className="video d-flex align-items-center">
+              <VideoIcon />
+              <span>{video} Lei</span>
+            </div>
+          </div>
         </div>
       </div>
-
       <div className="doc-tags">
         {isGuard && (
           <span className="doc-tag guard">
@@ -85,6 +97,10 @@ DocItem.propTypes = {
     name: PropTypes.string,
     category: PropTypes.arrayOf(PropTypes.string),
     avatar: PropTypes.string,
+    price: PropTypes.shape({
+      text: PropTypes.number,
+      video: PropTypes.number,
+    }),
     meta: PropTypes.shape({
       helpedUsers: PropTypes.number,
       responseTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

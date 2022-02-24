@@ -131,6 +131,25 @@
   }
 }
 
+.doc-price {
+  font-size: 15px;
+  margin-top: 8px;
+  font-weight: 500;
+  svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+  }
+  .video {
+    margin-left: 8px;
+    svg {
+      transform: translateY(-1px);
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
 .doc-item.skeleton {
   pointer-events: none;
   .dialog-avatar,

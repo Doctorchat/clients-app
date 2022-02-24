@@ -7,16 +7,16 @@ import List from "../List";
 import { getDocReviews } from "@/store/actions";
 
 export default function DocReviews(props) {
-  const { docId } = props;
+  const { docId, reviewsAction } = props;
   const { docReviews } = useSelector((store) => ({ docReviews: store.docReviews }));
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (docId) {
-      dispatch(getDocReviews(docId));
+      dispatch(getDocReviews({ id: docId, action: reviewsAction }));
     }
-  }, [dispatch, docId]);
+  }, [dispatch, docId, reviewsAction]);
 
   return (
     <div className="doc-info-tab-content doc-info-reviews">
@@ -41,4 +41,5 @@ export default function DocReviews(props) {
 
 DocReviews.propTypes = {
   docId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  reviewsAction: PropTypes.func,
 };

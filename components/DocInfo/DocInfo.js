@@ -21,7 +21,7 @@ import getActiveLng from "@/utils/getActiveLng";
 const selectedLng = getActiveLng();
 
 export default function DocInfo(props) {
-  const { doctor, scrollableContainer, allowCreate, loading, actionBtn } = props;
+  const { doctor, scrollableContainer, allowCreate, loading, actionBtn, reviewsAction } = props;
   const [tabsConfig, setTabsConfig] = useState({ key: docInfoTabs.activity, dir: "next" });
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -118,7 +118,7 @@ export default function DocInfo(props) {
             <DocInfoAbout about={doctor?.about} loading={loading} />
           </Tabs.Pane>
           <Tabs.Pane dataKey={docInfoTabs.reviews} withAnimation={!loading}>
-            <DocReviews docId={doctor?.id} />
+            <DocReviews docId={doctor?.id} reviewsAction={reviewsAction} />
           </Tabs.Pane>
         </Tabs>
       </div>
@@ -142,6 +142,7 @@ DocInfo.propTypes = {
   loading: PropTypes.bool,
   allowCreate: PropTypes.bool,
   actionBtn: PropTypes.element,
+  reviewsAction: PropTypes.func,
 };
 
 DocInfo.defaultProps = {
