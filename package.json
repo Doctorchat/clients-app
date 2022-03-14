@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build && next export",
-    "build:development": "NODE_ENV=development next build && next export",
+    "build:staging": "env-cmd -f .env.development next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
@@ -14,6 +14,7 @@
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",
     "dayjs": "^1.10.7",
+    "env-cmd": "^10.1.0",
     "i18next": "^21.6.6",
     "i18next-browser-languagedetector": "^6.1.2",
     "moment": "^2.29.1",
