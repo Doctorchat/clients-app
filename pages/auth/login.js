@@ -42,7 +42,7 @@ export default function Login() {
         }
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "error", descrp: "login_error", duration: 0 })
+          notification({ type: "error", title: "error", descrp: "login_error", duration: 6000 })
         );
       } finally {
         setLoading(false);
