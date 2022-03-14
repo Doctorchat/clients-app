@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 import Sidebar from "@/components/Sidebar";
 import BackTitle from "@/components/BackTitle";
@@ -9,14 +10,14 @@ import List from "@/components/List";
 import SidebarList from "@/components/SidebarList";
 import TransactionItem, { TransactionItemSkeleton } from "@/components/TransactionItem";
 import { getTransactionsList } from "@/store/actions";
-import { InputNumber } from "@/components/Inputs";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
 
+const DocWallet = dynamic(() => import("@/modules/doctor").then((response) => response.DocWallet));
+
 export default function TransactionsList() {
   const { updateTabsConfig } = useTabsContext();
-  const { transactionsList, user } = useSelector((store) => ({
-    user: store.user.data,
+  const { transactionsList } = useSelector((store) => ({
     transactionsList: store.transactionsList,
   }));
   const { t } = useTranslation();
@@ -37,33 +38,7 @@ export default function TransactionsList() {
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-content-wrapper px-2">
           <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
-            <div className="doc-wallet">
-              <h3 className="total">{user.private?.balance} Lei</h3>
-              <div className="d-flex justify-content-between gap-3">
-                <div className="position-relative">
-                  <p className="m-0" style={{ fontSize: 14, paddingLeft: 4 }}>
-                    {t("price_message")}
-                  </p>
-                  <InputNumber
-                    readOnly
-                    format="decimal"
-                    value={user.private?.chat}
-                    addonBefore="MDL"
-                  />
-                </div>
-                <div className="position-relative">
-                  <p className="m-0" style={{ fontSize: 14, paddingLeft: 4 }}>
-                    {t("price_meet")}
-                  </p>
-                  <InputNumber
-                    readOnly
-                    format="decimal"
-                    value={user.private?.meet || 0}
-                    addonBefore="MDL"
-                  />
-                </div>
-              </div>
-            </div>
+            <DocWallet />
           </AuthRoleWrapper>
           <List
             loaded={transactionsList.isLoaded}

@@ -4,6 +4,7 @@ import DocProfileActions from "./DocProfileActions";
 import DocAppointmentsSettings from "./DocAppointmentsSettings";
 import DocReviewsSidebar from "./DocReviewsSidebar";
 import DocSetVacation from "./DocSetVacation";
+import DocWallet from "./DocWallet";
 
 export {
   DocMenuOverlay,
@@ -12,4 +13,5 @@ export {
   DocAppointmentsSettings,
   DocReviewsSidebar,
   DocSetVacation,
+  DocWallet,
 };
