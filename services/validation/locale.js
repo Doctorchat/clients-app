@@ -22,6 +22,10 @@ setLocale({
   object: {
     noUnknown: "Cei asta",
   },
+  number: {
+    min: i18next.t("yup_number_min"),
+    max: i18next.t("yup_number_max"),
+  },
   array: {
     min: i18next.t("yup_array_min"),
   },

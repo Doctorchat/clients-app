@@ -36,7 +36,11 @@ export default function Confirm(props) {
   const onConfirmHanlder = async () => {
     if (isAsync) {
       setConfirmLoading(true);
-      await onConfirm();
+      try {
+        await onConfirm();
+      } catch (error) {
+        Promise.reject(error);
+      }
       setConfirmLoading(false);
     } else {
       onConfirm();

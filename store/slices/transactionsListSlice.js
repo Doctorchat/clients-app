@@ -13,7 +13,7 @@ export const transactionsListSlice = createSlice({
   initialState,
   reducers: {
     addTransaction(state, action) {
-      state.data.push(action.payload);
+      state.data.unshift(action.payload);
     },
     updateTransaction(state, action) {
       state.data = state.data.map((transaction) => {

@@ -24,6 +24,12 @@ const api = {
     meetings: () => axiosInstance.get("/user/meetings"),
     resetPassword: (data) => axiosInstance.post("/auth/forgot-password", data),
     emulate: (data) => axiosInstance.post("/auth/emulate", data),
+    withdrawn: (data) =>
+      axiosInstance.post("/user/transactions/new", {
+        type: "outgoing",
+        category: "withdraw",
+        ...data,
+      }),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

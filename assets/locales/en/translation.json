@@ -23,7 +23,9 @@
   "yup_mixed_required": "This field is required",
   "yup_string_email": "This is not a valid email",
   "yup_string_min": "At least ${min} characters",
+  "yup_number_min": "Sum must be greater than or equal to ${min}",
   "yup_string_max": "Maximum length ${max} characters",
+  "yup_number_max": "Sum must be less than or equal to ${max}",
   "yup_mixed_number": ", enter a number",
   "yup_mixed_format": "Invalid format",
   "yup_passwords_match": "The passwords do not match",
@@ -219,5 +221,8 @@
   "check_email": "Please check email!",
   "home_page": "Home Page",
   "mins": "min.",
-  "withdraw": "Withdraw"
+  "withdraw": "Withdraw",
+  "withdrawal_form": "Withdrawal form",
+  "sum": "Amount",
+  "withdraw_confirmation": "Are you sure you want to withdraw money?"
 }

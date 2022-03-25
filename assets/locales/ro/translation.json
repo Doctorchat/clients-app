@@ -23,7 +23,9 @@
   "yup_mixed_required": "Acest câmp este obligatoriu",
   "yup_string_email": "Acest email nu este valid",
   "yup_string_min": "Cel puțin ${min} caractere",
+  "yup_number_min": "Suma trebuie să fie mai mare sau egală cu ${min}",
   "yup_string_max": "Lungimea maximă este ${max} caractere",
+  "yup_number_max": "Suma trebuie să fie mai mică sau egală cu ${max}",
   "yup_mixed_number": ", întroduceți un număr",
   "yup_mixed_format": "Format invalid",
   "yup_passwords_match": "Parolele nu sunt identice",
@@ -203,7 +205,7 @@
     "subtitle2": "Anunțați-ne în câmpul de mai jos.",
     "experience": "Cum a fost experiența ta?",
     "description": "Descrie experiența ta aici...",
-    "warn_title": "Сontul dvs. este în curs de verificare.",
+    "warn_title": "Contul dvs. este în curs de verificare.",
     "warn_subtitle": "La finalizarea procesului de verificare, veți primi un e-mail la adresa de e-mail specificată."
   },
   "optional": "Opțional",
@@ -219,5 +221,8 @@
   "check_email": "Vă rugăm să verificați e-mailul!",
   "home_page": "Pagina Principală",
   "mins": "min.",
-  "withdraw": "Extrage"
+  "withdraw": "Extrage",
+  "withdrawal_form": "Formular de retragere",
+  "sum": "Suma",
+  "withdraw_confirmation": "Ești sigur că dorești să retragi bani?"
 }

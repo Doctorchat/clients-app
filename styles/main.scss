@@ -121,6 +121,7 @@
   .total {
     margin-bottom: 18px;
     text-align: center;
+    margin-bottom: 0;
   }
 }
 
@@ -204,6 +205,16 @@ input[type="checkbox"] {
     font-weight: 500;
     padding-left: 4px;
     margin-bottom: 12px;
+  }
+}
+
+#withdraw-popup {
+  .popup-body {
+    height: 195px;
+    width: 320px;
+  }
+  .popup-content-inner {
+    padding-top: 8px;
   }
 }
 

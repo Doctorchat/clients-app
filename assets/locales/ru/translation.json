@@ -23,7 +23,9 @@
   "yup_mixed_required": "Это поле обязательно к заполнению",
   "yup_string_email": "Недействительный электронный адрес",
   "yup_string_min": "Не менее ${min} символов",
+  "yup_number_min": "сумма должна быть больше или равна ${min}",
   "yup_string_max": "Максимально кол-во символов ${max}",
+  "yup_number_max": "Cумма должна быть меньше или равна ${max}",
   "yup_mixed_number": ", введите число",
   "yup_mixed_format": "Неверный формат",
   "yup_passwords_match": "Пароли не совпадают",
@@ -219,5 +221,8 @@
   "check_email": "Пожалуйста, проверьте электронную почту!",
   "home_page": "Домашняя Страница",
   "mins": "мин.",
-  "withdraw": "Вывод"
+  "withdraw": "Вывод",
+  "withdrawal_form": "Форма вывода",
+  "sum": "Сумма",
+  "withdraw_confirmation": "Вы уверены, что хотите вывести деньги?"
 }
