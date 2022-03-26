@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import { ProfileChangeLang } from "../common";
 import { DocSetVacation } from ".";
 import { leftSideTabs } from "@/context/TabsKeys";
 import { logoutUser } from "@/store/actions";
@@ -14,7 +15,6 @@ import { updateUserProperty } from "@/store/slices/userSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import UserIcon from "@/icons/user.svg";
 import LogoutIcon from "@/icons/logout.svg";
-// import FAQIcon from "@/icons/question.svg";
 import VideoIcon from "@/icons/video.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import HomeIcon from "@/icons/home.svg";
@@ -69,12 +69,12 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
         />
       </Menu.Item>
       <DocSetVacation />
-      {/* <Menu.Item icon={<FAQIcon />}>FAQ</Menu.Item> */}
       <Menu.Item icon={<HomeIcon />} className="home-item">
         <Link href="https://doctorchat.md/">
           <a>{t("home_page")}</a>
         </Link>
       </Menu.Item>
+      <ProfileChangeLang />
       <Menu.Item icon={<LogoutIcon />} className="logout-item" onClick={logoutHandler}>
         {t("logout")}
       </Menu.Item>

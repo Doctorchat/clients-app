@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { ProfileChangeLang } from "../common";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
@@ -22,7 +21,6 @@ export default function DocProfileActions() {
       <Menu.Item icon={<HistoryIcon />} onClick={updateTabsConfig(leftSideTabs.transactions)}>
         {t("history")}
       </Menu.Item>
-      <ProfileChangeLang />
     </Menu>
   );
 }
