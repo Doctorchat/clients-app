@@ -225,5 +225,6 @@
   "withdrawal": "Retragere",
   "withdrawal_form": "Formular de retragere",
   "sum": "Suma",
-  "withdraw_confirmation": "Ești sigur că dorești să retragi bani?"
+  "withdraw_confirmation": "Ești sigur că dorești să retragi bani?",
+  "login_with": "Loghează-te cu"
 }

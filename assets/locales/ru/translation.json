@@ -225,5 +225,6 @@
   "withdrawal": "Снятие",
   "withdrawal_form": "Форма вывода",
   "sum": "Сумма",
-  "withdraw_confirmation": "Вы уверены, что хотите вывести деньги?"
+  "withdraw_confirmation": "Вы уверены, что хотите вывести деньги?",
+  "login_with": "Войти с помощью"
 }

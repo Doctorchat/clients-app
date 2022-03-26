@@ -225,5 +225,6 @@
   "withdrawal": "Withdrawal",
   "withdrawal_form": "Withdrawal form",
   "sum": "Amount",
-  "withdraw_confirmation": "Are you sure you want to withdraw money?"
+  "withdraw_confirmation": "Are you sure you want to withdraw money?",
+  "login_with": "Login with"
 }
