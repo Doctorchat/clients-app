@@ -29,7 +29,8 @@
   &.meet {
     color: var(--dc-meet-color);
   }
-  &.message {
+  &.message,
+  &.withdraw {
     color: var(--bs-primary);
   }
 }
