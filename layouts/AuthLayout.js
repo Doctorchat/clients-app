@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { ProfileChangeLang } from "@/modules/common";
+import axiosInstance from "@/services/axios/apiConfig";
 
 export default function AuthLayout({ children }) {
   const user = useSelector((store) => store.user);
@@ -15,13 +16,12 @@ export default function AuthLayout({ children }) {
 
     if (query?.token) {
       localStorage.setItem("dc_token", query.token);
+      axiosInstance.defaults.headers.authorization = `Bearer ${query.token}`;
       router.replace({ pathname: "/auth/login" });
     }
 
     if (user.isAuthorized || localStorage.getItem("dc_token")) {
-      router.replace({
-        pathname: "/",
-      });
+      router.replace({ pathname: "/" });
     }
   }, [router, user.isAuthorized]);
 

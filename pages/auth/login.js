@@ -4,8 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import GoogleLogin from "react-google-login";
 import { loginSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
@@ -55,14 +53,6 @@ export default function Login() {
     [dispatch, router]
   );
 
-  const responseFacebook = (response) => {
-    console.log(response);
-  };
-
-  const responseGoogle = (response) => {
-    console.log(response);
-  };
-
   return (
     <>
       <div className="auth-header">
@@ -101,21 +91,11 @@ export default function Login() {
             <span>{t("login_with")}</span>
           </div>
           <div className="login-media__group">
-            <FacebookLogin
-              appId="1088597931155576"
-              callback={responseFacebook}
-              autoLoad
-              render={(renderProps) => (
-                <button
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.isDisabled}
-                  className="login-media__btn"
-                  type="button"
-                >
-                  <FacebookLogo />
-                </button>
-              )}
-            />
+            <a href="https://api2.doctorchat.md/auth/facebook">
+              <button className="login-media__btn" type="button">
+                <FacebookLogo />
+              </button>
+            </a>
 
             <a href="https://api2.doctorchat.md/auth/google">
               <button className="login-media__btn" type="button">
