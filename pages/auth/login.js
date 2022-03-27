@@ -116,22 +116,12 @@ export default function Login() {
                 </button>
               )}
             />
-            <GoogleLogin
-              clientId="104052918349-3a083ertc41ur7a396bf0lanla47lnri.apps.googleusercontent.com"
-              cookiePolicy="single_host_origin"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              render={(renderProps) => (
-                <button
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                  className="login-media__btn"
-                  type="button"
-                >
-                  <GoogleLogo />
-                </button>
-              )}
-            />
+
+            <a href="https://api2.doctorchat.md/auth/google">
+              <button className="login-media__btn" type="button">
+                <GoogleLogo />
+              </button>
+            </a>
           </div>
         </div>
       </div>

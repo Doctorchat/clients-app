@@ -11,6 +11,13 @@ export default function AuthLayout({ children }) {
   const { t } = useTranslation();
 
   useEffect(() => {
+    const { query } = router;
+
+    if (query?.token) {
+      localStorage.setItem("dc_token", query.token);
+      router.replace({ pathname: "/auth/login" });
+    }
+
     if (user.isAuthorized || localStorage.getItem("dc_token")) {
       router.replace({
         pathname: "/",
