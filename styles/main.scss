@@ -292,6 +292,12 @@ input[type="checkbox"] {
     }
   }
 
+  &__group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__btn {
     background-color: transparent;
     border: 1px solid #d8dce6;

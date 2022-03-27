@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { string, object } from "yup";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { loginSchema } from "@/services/validation";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import Form from "@/components/Form";
@@ -12,10 +12,13 @@ import Button from "@/components/Button";
 import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
 
+const restoreSchema = object().shape({
+  email: string().email().required(),
+});
+
 export default function Login() {
-  const resolver = useYupValidationResolver(loginSchema);
   const [loading, setLoading] = useState(false);
-  const form = useForm({ resolver });
+  const form = useForm({ resolver: useYupValidationResolver(restoreSchema) });
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -26,6 +29,7 @@ export default function Login() {
         await api.user.resetPassword(values);
 
         dispatch(notification({ title: "success", descrp: "check_email" }));
+        form.reset();
       } catch (error) {
         dispatch(
           notification({ type: "error", title: "error", descrp: "login_error", duration: 0 })
@@ -34,7 +38,7 @@ export default function Login() {
         setLoading(false);
       }
     },
-    [dispatch]
+    [dispatch, form]
   );
 
   return (
