@@ -96,7 +96,6 @@ export default function Login() {
                 <FacebookLogo />
               </button>
             </a>
-
             <a href="https://api2.doctorchat.md/auth/google">
               <button className="login-media__btn" type="button">
                 <GoogleLogo />

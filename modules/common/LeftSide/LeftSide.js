@@ -68,7 +68,10 @@ export default function LeftSide() {
           </>
         </AuthRoleWrapper>
       </Tabs>
-      <AuthRoleWrapper roles={[userRoles.get("client")]}>
+      <AuthRoleWrapper
+        extraValidation={tabsConfig.key === leftSideTabs.conversationList}
+        roles={[userRoles.get("client")]}
+      >
         <div className="start-conversation-btn">
           <ClientStartConversationMenu placement="topLeft">
             <Button icon={<PlusIcon />} type="primary">

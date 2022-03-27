@@ -299,6 +299,9 @@ input[type="checkbox"] {
     margin: 0 6px;
     width: 48px;
     height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     &:hover {
       background-color: #f1f2f5;
