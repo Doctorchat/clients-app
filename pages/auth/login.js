@@ -91,12 +91,12 @@ export default function Login() {
             <span>{t("login_with")}</span>
           </div>
           <div className="login-media__group">
-            <a href="https://api2.doctorchat.md/auth/facebook">
+            <a href="https://api.doctorchat.md/auth/facebook">
               <button className="login-media__btn" type="button">
                 <FacebookLogo />
               </button>
             </a>
-            <a href="https://api2.doctorchat.md/auth/google">
+            <a href="https://api.doctorchat.md/auth/google">
               <button className="login-media__btn" type="button">
                 <GoogleLogo />
               </button>
