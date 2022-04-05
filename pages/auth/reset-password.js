@@ -38,7 +38,7 @@ export default function ResetPassword() {
     async (values) => {
       try {
         setLoading(true);
-        await api.user.restorePassword({ ...values, token: router.query?.reset_token });
+        await api.user.restorePassword({ ...values, reset_token: router.query?.reset_token });
 
         dispatch(
           notification({
