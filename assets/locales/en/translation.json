@@ -226,5 +226,8 @@
   "withdrawal_form": "Withdrawal form",
   "sum": "Amount",
   "withdraw_confirmation": "Are you sure you want to withdraw money?",
-  "login_with": "Login with"
+  "login_with": "Login with",
+  "password_recovery": "Password recovery",
+  "parssword_recovery_success": "Password changed successfully",
+  "token_expired": "Token is no longer valid"
 }

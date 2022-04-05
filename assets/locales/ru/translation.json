@@ -226,5 +226,8 @@
   "withdrawal_form": "Форма вывода",
   "sum": "Сумма",
   "withdraw_confirmation": "Вы уверены, что хотите вывести деньги?",
-  "login_with": "Войти с помощью"
+  "login_with": "Войти с помощью",
+  "password_recovery": "Восстановления пароля",
+  "parssword_recovery_success": "Пароль успешно изменен",
+  "token_expired": "Токен больше не действителен"
 }

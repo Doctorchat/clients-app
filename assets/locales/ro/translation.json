@@ -226,5 +226,8 @@
   "withdrawal_form": "Formular de retragere",
   "sum": "Suma",
   "withdraw_confirmation": "Ești sigur că dorești să retragi bani?",
-  "login_with": "Loghează-te cu"
+  "login_with": "Loghează-te cu",
+  "password_recovery": "Recuperare parola",
+  "parssword_recovery_success": "Parola a fost schimbată cu succes",
+  "token_expired": "Tokenul nu mai este valid"
 }

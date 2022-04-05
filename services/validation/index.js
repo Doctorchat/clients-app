@@ -8,6 +8,7 @@ import investigationFormSchema from "./schemas/investigationFormSchema";
 import configureFormSchema from "./schemas/configureFormSchema";
 import meetFormSchema from "./schemas/meetFormSchema";
 import registerDoctorSchema from "./schemas/registerDoctorSchema";
+import resetPasswordShcema from "./schemas/resetPasswordShcema";
 
 export {
   loginSchema,
@@ -18,4 +19,5 @@ export {
   configureFormSchema,
   meetFormSchema,
   registerDoctorSchema,
+  resetPasswordShcema,
 };

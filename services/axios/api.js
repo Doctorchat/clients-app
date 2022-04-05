@@ -30,6 +30,7 @@ const api = {
         category: "withdraw",
         ...data,
       }),
+    restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),
