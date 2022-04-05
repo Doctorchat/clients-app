@@ -77,7 +77,7 @@ export default function ResetPassword() {
           <p className="form-subtitle">Doctorchat</p>
           <h3 className="form-title">{t("password_recovery")}</h3>
           <Form.Item name="email" label={t("email")}>
-            <Input />
+            <Input autoComplete="off" />
           </Form.Item>
           <Form.Item name="password" label={t("new_password")}>
             <Input type="password" />
