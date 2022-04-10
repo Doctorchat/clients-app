@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,6 +20,9 @@ import StopIcon from "@/icons/stop.svg";
 
 export default function MessageBar(props) {
   const { defaultValue, disabled, chatId, status, type } = props;
+  const { chatContent } = useSelector((store) => ({
+    chatContent: store.chatContent,
+  }));
   const [isFormEnabled, setIsFormEnabled] = useState(defaultValue && defaultValue.length > 3);
   const [loading, setLoading] = useState(false);
   const [stopChatLoading, setStopChatLoading] = useState(false);
@@ -120,7 +123,12 @@ export default function MessageBar(props) {
         />
       )}
       <AuthRoleWrapper
-        extraValidation={status !== "responded" && type !== "support" && !isFormEnabled}
+        extraValidation={
+          !isFormEnabled &&
+          type !== "support" &&
+          status !== "responded" &&
+          chatContent?.content?.has_doc_messages
+        }
         roles={[userRoles.get("doctor")]}
       >
         <Confirm
