@@ -60,3 +60,7 @@
     box-shadow: unset;
   }
 }
+
+.message-bar-input .message-bar-attach ~ div textarea {
+  padding-left: 44px !important;
+}

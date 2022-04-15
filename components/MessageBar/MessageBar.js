@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { IconBtn } from "../Button";
 import Form from "../Form";
 import Confirm from "../Confirm";
+import MessageBarAttach from "./MessageBarAttach";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import cs from "@/utils/classNames";
 import { MESSAGE_TYPES, userRoles } from "@/context/constants";
@@ -83,7 +84,9 @@ export default function MessageBar(props) {
         setIsFormEnabled(false);
         form.reset();
       } catch (error) {
-        dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
+        dispatch(
+          notification({ type: "error", title: "error", description: "default_error_message" })
+        );
       } finally {
         setLoading(false);
       }
@@ -101,9 +104,9 @@ export default function MessageBar(props) {
         onFinish={onFormSubmit}
       >
         <div className={cs("message-bar-input")}>
-          {/* <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
+          <AuthRoleWrapper roles={[userRoles.get("doctor")]} extraValidation={type === "internal"}>
             <MessageBarAttach chatId={chatId} />
-          </AuthRoleWrapper> */}
+          </AuthRoleWrapper>
           <Form.Item name="content" className="mb-0">
             <TextArea
               placeholder={t("message_bar_placeholder")}
@@ -125,7 +128,7 @@ export default function MessageBar(props) {
       <AuthRoleWrapper
         extraValidation={
           !isFormEnabled &&
-          type !== "support" &&
+          !["support", "internal"].includes(type) &&
           status !== "responded" &&
           chatContent?.content?.has_doc_messages
         }
