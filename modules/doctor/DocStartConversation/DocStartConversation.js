@@ -42,6 +42,8 @@ export default function DocStartConversation() {
         const response = await api.conversation.create(data);
 
         dispatch(addConversation(response.data));
+        dispatch(docListToggleVisibility(false));
+
         history.push(`/chat?id=${response.data.id}`);
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
