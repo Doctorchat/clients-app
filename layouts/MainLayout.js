@@ -8,6 +8,7 @@ import Portal from "@/containers/Portal";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
 import { getBootstrapData } from "@/store/actions";
+import { DocStartConversation } from "@/modules/doctor";
 
 const ClientStartConversation = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientStartConversation)
@@ -35,6 +36,11 @@ export default function MainLayout({ children }) {
           <ClientMessageForm />
           <ClientMeetForm />
           <ClientInvestigationForm />
+        </Portal>
+      </AuthRoleWrapper>
+      <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
+        <Portal portalName="modalRoot">
+          <DocStartConversation />
         </Portal>
       </AuthRoleWrapper>
       <div id="chat-columns">

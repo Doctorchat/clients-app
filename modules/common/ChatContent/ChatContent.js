@@ -22,7 +22,7 @@ import { meetFormToggleVisibility, meetFormUpdateChatId } from "@/store/slices/m
 import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
 
-const withoutInfo = ["support", "auto", "consilium"];
+const withoutInfo = ["support", "auto", "consilium", "internal"];
 
 export default function ChatContent(props) {
   const { loading, userInfo, messages, chatId, status, type, paymentUrl, isMeet } = props;

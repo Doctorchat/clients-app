@@ -76,7 +76,7 @@ function ClientSelectMode(props) {
     [dispatch]
   );
 
-  if (!investigations.length)
+  if (!investigations?.length)
     return (
       <div className="px-2">
         <Alert

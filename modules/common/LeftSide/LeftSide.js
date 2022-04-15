@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import ConversationsSidebar from "../ConversationsSidebar";
 import ProfileSidebar from "../ProfileSidebar";
 import EditProflie from "../EditProfile";
@@ -12,6 +13,7 @@ import { userRoles } from "@/context/constants";
 import Button from "@/components/Button";
 import PlusIcon from "@/icons/plus.svg";
 import { ClientStartConversationMenu } from "@/modules/client";
+import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 
 const ClientInvestigationsList = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientInvestigationsList)
@@ -24,8 +26,12 @@ const DocReviewsSidebar = dynamic(() =>
 );
 
 export default function LeftSide() {
+  const { user } = useSelector((store) => ({
+    user: store.user?.data,
+  }));
   const [tabsConfig, setTabsConfig] = useState({ key: leftSideTabs.conversationList, dir: "next" });
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const updateTabsConfig = useCallback(
     (key, dir = "next") =>
@@ -34,6 +40,10 @@ export default function LeftSide() {
       },
     []
   );
+
+  const openStartConversation = () => {
+    dispatch(docListToggleVisibility(true));
+  };
 
   return (
     <div id="column-left" className="sidebar-left">
@@ -78,6 +88,16 @@ export default function LeftSide() {
               {t("start_conversation")}
             </Button>
           </ClientStartConversationMenu>
+        </div>
+      </AuthRoleWrapper>
+      <AuthRoleWrapper
+        extraValidation={tabsConfig.key === leftSideTabs.conversationList && user?.hidden}
+        roles={[userRoles.get("doctor")]}
+      >
+        <div className="start-conversation-btn">
+          <Button icon={<PlusIcon />} type="primary" onClick={openStartConversation}>
+            {t("start_conversation")}
+          </Button>
         </div>
       </AuthRoleWrapper>
     </div>

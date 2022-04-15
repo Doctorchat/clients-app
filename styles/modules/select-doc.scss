@@ -1,4 +1,5 @@
-#select-doc {
+#select-doc,
+#doc-select-doc {
   .popup-body {
     width: 560px;
     height: 800px;
@@ -10,7 +11,8 @@
 }
 
 @media only screen and (max-height: 800px) {
-  #select-doc {
+  #select-doc,
+  #doc-select-doc {
     .popup-body {
       height: 100%;
     }

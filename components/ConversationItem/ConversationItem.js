@@ -71,7 +71,7 @@ ConversationItem.propTypes = {
     isOnline: PropTypes.bool,
     name: PropTypes.string,
     description: PropTypes.string,
-    updated: PropTypes.string,
+    updated: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     avatar: PropTypes.string,
     status: PropTypes.any,
     unread: PropTypes.number,
