@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import api from "@/services/axios/api";
 import { setTempUserInfo } from "@/store/slices/userInfoSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import { addConversation } from "@/store/slices/conversationListSlice";
+import { ClientDocsSearch } from "@/modules/client";
 
 export default function DocStartConversation() {
   const { t } = useTranslation();
@@ -19,12 +20,46 @@ export default function DocStartConversation() {
     docSelectList: store.docSelectList,
     isOpen: store.docSelectList.isOpen,
   }));
+  const [currentList, setCurrentList] = useState([]);
+  const [searchConfig, setSearchConfig] = useState({
+    list: [],
+    active: false,
+    loading: false,
+  });
+  const [filters, setFilters] = useState({
+    online: false,
+    category: null,
+  });
   const dispatch = useDispatch();
   const history = useRouter();
 
   React.useEffect(() => {
     dispatch(getDocList());
   }, [dispatch]);
+
+  const filterList = useCallback(
+    (list) => {
+      let filteredList = [...list];
+
+      if (filters.category?.label && filters.category.value !== "all") {
+        filteredList = filteredList.filter((item) =>
+          item.category.includes(filters.category?.label)
+        );
+      }
+
+      if (filters.online) {
+        filteredList = filteredList.filter((item) => Boolean(item.isOnline));
+      }
+
+      return filteredList;
+    },
+    [filters.category, filters.online]
+  );
+
+  useEffect(() => {
+    if (searchConfig.active) setCurrentList(filterList(searchConfig.list));
+    else setCurrentList(filterList(docSelectList.data));
+  }, [docSelectList.data, filterList, searchConfig]);
 
   const VisibilityHandler = (v) => dispatch(docListToggleVisibility(v));
 
@@ -52,10 +87,20 @@ export default function DocStartConversation() {
     [dispatch, history]
   );
 
+  const updateSearchConfig = (actionType, value) => {
+    setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
+  };
+
   return (
     <Popup id="doc-select-doc" visible={isOpen} onVisibleChange={VisibilityHandler}>
       <Popup.Header title={t("select_doctor")} />
       <Popup.Content>
+        <ClientDocsSearch
+          updateSearchConfig={updateSearchConfig}
+          localList={docSelectList.data}
+          filters={filters}
+          setFilters={setFilters}
+        />
         <List
           loaded={docSelectList.isLoaded}
           loadingConfig={{
@@ -65,12 +110,12 @@ export default function DocStartConversation() {
           }}
           errorConfig={{ status: docSelectList.isError }}
           emptyConfig={{
-            status: !docSelectList?.data?.length,
+            status: !currentList.length,
             className: "pt-4",
-            content: t("doctor_list_empty"),
+            content: searchConfig.active ? t("search_not_found") : t("doctor_list_empty"),
           }}
         >
-          <DocList onDocClick={onDocClick} data={docSelectList?.data || []} />
+          <DocList onDocClick={onDocClick} data={currentList} />
         </List>
       </Popup.Content>
     </Popup>
