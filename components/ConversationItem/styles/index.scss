@@ -148,3 +148,21 @@
     margin-bottom: 12px;
   }
 }
+
+.dc-badge {
+  margin-left: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid var(--bs-gray-500);
+  background-color: #f4f4f4;
+  border-radius: 2px;
+}
+
+.dialog-item.active {
+  .dc-badge {
+    color: #fff;
+    background-color: transparent;
+    border-color: rgba(#fff, 0.8);
+  }
+}
