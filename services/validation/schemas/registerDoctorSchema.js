@@ -1,9 +1,16 @@
 import { string, object, ref, number, array } from "yup";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import i18next from "@/services/i18next";
 
 const registerDoctorSchema = object().shape({
   email: string().email().required(),
-  phone: string().phone().required(),
+  phone: string()
+    .required()
+    .test({
+      name: "phone-validation",
+      message: i18next.t("invalid_phone"),
+      test: (value) => isValidPhoneNumber(value),
+    }),
   professionalTitle: string().required(),
   specialization_ro: string().required(),
   name: string().min(2).required(),
