@@ -30,13 +30,12 @@ export const conversationListSlice = createSlice({
       .addCase(getConversationList.pending, (state) => {
         state.isError = false;
         state.isLoading = true;
-        state.data = [];
       })
       .addCase(getConversationList.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
         state.isLoaded = true;
-        state.data.push(...action.payload);
+        state.data = action.payload;
       })
       .addCase(getConversationList.rejected, (state) => {
         state.isError = true;

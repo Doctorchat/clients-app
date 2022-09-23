@@ -229,5 +229,14 @@
   "login_with": "Loghează-te cu",
   "password_recovery": "Recuperare parola",
   "parssword_recovery_success": "Parola a fost schimbată cu succes",
-  "token_expired": "Tokenul nu mai este valid"
+  "token_expired": "Tokenul nu mai este valid",
+  "phone_verification": "Verificarea numărului de telefon",
+  "resend_code": "Retrimite codul",
+  "redact": "Editează",
+  "send_again": "Trimite din nou",
+  "sending": "Se trimite",
+  "code_sent": "Cod trimis",
+  "phone_verification_success": "Numărul de telefon a fost verificat",
+  "phone_verification_error": "Cod de confirmare invalid",
+  "phone_verification_error2": "Numar de telefon gresit"
 }

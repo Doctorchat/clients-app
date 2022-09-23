@@ -65,7 +65,7 @@ export default function Register() {
           <Form.Item label={`${t("email")}*`} name="email">
             <Input />
           </Form.Item>
-          <Form.Item label={`${t("phone")}`} name="phone">
+          <Form.Item label={`${t("phone")}*`} name="phone">
             <InputPhone />
           </Form.Item>
           <Form.Item label={`${t("name")}*`} name="name">

@@ -229,5 +229,13 @@
   "login_with": "Войти с помощью",
   "password_recovery": "Восстановления пароля",
   "parssword_recovery_success": "Пароль успешно изменен",
-  "token_expired": "Токен больше не действителен"
+  "token_expired": "Токен больше не действителен",
+  "phone_verification": "Проверка номера телефона",
+  "send_again": "Отправить еще раз",
+  "sending": "Отправка",
+  "code_sent": "Код отправлен",
+  "phone_verification_success": "Номер телефона успешно подтвержден",
+  "phone_verification_error": "Неверный код подтверждения",
+  "phone_verification_error2": "Неверный номер телефона",
+  "redact": "Редактировать"
 }

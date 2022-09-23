@@ -81,15 +81,23 @@ html:not(.is-safari):not(.is-ios) ::-webkit-scrollbar-thumb {
 a {
   color: unset;
   text-decoration: none;
+
   &:hover,
   &:visited,
   &:active {
     color: unset;
     text-decoration: none;
   }
+
+  &.link {
+    color: var(--bs-primary);
+    text-decoration: underline;
+  }
 }
 
-html, body, #__next {
+html,
+body,
+#__next {
   height: 100%;
 }
 
@@ -171,10 +179,12 @@ div {
   align-items: center;
   justify-content: center;
   transition: opacity 0.2s;
+
   svg {
     width: 56px;
     height: 56px;
   }
+
   &.exit-active {
     opacity: 0;
   }
@@ -193,6 +203,7 @@ div {
   bottom: 0px;
   right: 0px;
   -webkit-overflow-scrolling: touch;
+
   &.scrollable-y {
     overflow-y: auto;
     overflow-y: overlay;
@@ -206,6 +217,7 @@ div {
   width: 100%;
   height: 100%;
   min-height: 100px;
+
   svg {
     width: 24px;
     height: 24px;
@@ -218,11 +230,13 @@ div {
   align-items: center;
   justify-content: center;
   position: relative;
+
   img {
     object-fit: cover;
     border-radius: inherit;
     border-radius: 50%;
   }
+
   &.is-online {
     &::after {
       content: "";
@@ -268,6 +282,7 @@ img {
   0% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0 50%;
   }

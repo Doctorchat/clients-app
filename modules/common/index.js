@@ -9,6 +9,7 @@ import RightSide from "./RightSide";
 import ProfileChangeLang from "./ProfileChangeLang";
 import EditProfileSecurity from "./EditProfileSecurity";
 import ExternalDocList from "./ExternalDocList/";
+import PhoneConfirmation from "./PhoneConfirmation";
 
 export {
   ConversationsSidebar,
@@ -22,4 +23,5 @@ export {
   ProfileChangeLang,
   EditProfileSecurity,
   ExternalDocList,
+  PhoneConfirmation,
 };

@@ -9,7 +9,7 @@ import cs from "@/utils/classNames";
 import usePrevious from "@/hooks/usePrevious";
 
 export default function Popup(props) {
-  const { id, className, visible, children, onVisibleChange, onAfterClose, confirmationClose } =
+  const { id, className, visible, children, onVisibleChange, onBeforeClose, confirmationClose } =
     props;
   const [state, setState] = useState(visible);
   const prevState = usePrevious(state);
@@ -27,10 +27,10 @@ export default function Popup(props) {
         onVisibleChange(false);
       };
 
-      if (onAfterClose) onAfterClose(close);
+      if (onBeforeClose) onBeforeClose(close);
       else close();
     },
-    [onAfterClose, onVisibleChange]
+    [onBeforeClose, onVisibleChange]
   );
 
   const PopupBackdrop = useMemo(() => {
@@ -71,7 +71,7 @@ Popup.propTypes = {
   visible: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
   onVisibleChange: PropTypes.func,
-  onAfterClose: PropTypes.func,
+  onBeforeClose: PropTypes.func,
   confirmationClose: PropTypes.shape({
     content: PropTypes.string,
     disabled: PropTypes.bool,

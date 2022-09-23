@@ -39,9 +39,7 @@ export default function ConversationsSidebar() {
   useEffect(() => {
     fetchConversationList();
 
-    let interval = null;
-
-    interval = setInterval(fetchConversationList, 15000);
+    let interval = setInterval(fetchConversationList, 15000);
 
     return () => {
       clearInterval(interval);
@@ -68,7 +66,7 @@ export default function ConversationsSidebar() {
           <List
             loaded={conversationList.isLoaded}
             loadingConfig={{
-              status: conversationList.isLoading,
+              status: !currentList.length && conversationList.isLoading,
               skeleton: ConversationItemSkeleton,
             }}
             errorConfig={{
@@ -92,8 +90,7 @@ export default function ConversationsSidebar() {
                   </ClientStartConversationMenu>
                 </AuthRoleWrapper>
               ),
-            }}
-          >
+            }}>
             <ConversationList conversations={currentList} activeConversation={id} />
           </List>
         </div>

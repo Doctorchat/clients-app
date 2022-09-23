@@ -54,6 +54,10 @@ const api = {
     categories: () => axiosInstance.get("/specialities"),
     global: () => axiosInstance.get("/settings/info"),
   },
+  smsVerification: {
+    sendCode: (data) => axiosInstance.post("/sms/send", data),
+    verifyCode: (data) => axiosInstance.post("/sms/verify", data),
+  },
 };
 
 export default api;
