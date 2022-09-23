@@ -36,10 +36,11 @@
 }
 
 .start-conversation-btn {
-  & > .dc-btn-icon {
+  &>.dc-btn-icon {
     width: 54px;
     height: 54px;
   }
+
   position: absolute;
   bottom: 16px;
   right: 16px;
@@ -48,24 +49,26 @@
 
 .start-conversation-dropdown {
   min-width: unset;
+
   .council-item {
     .menu-item-prefix {
       transform: translateX(-2px);
     }
+
     .menu-item-content {
       transform: translateX(-4px);
     }
   }
 }
 
-@media only screen and(max-width: 1680px) {
+@media only screen and (max-width: 1680px) {
   #column-center {
     border: unset;
     box-shadow: unset;
   }
 }
 
-@media only screen and(max-width: 1268px) {
+@media only screen and (max-width: 1268px) {
   #column-right {
     position: absolute;
     top: 0;
@@ -76,10 +79,11 @@
   }
 }
 
-@media only screen and(max-width: 768px) {
+@media only screen and (max-width: 768px) {
   #column-left {
     max-width: unset;
   }
+
   #column-center {
     position: absolute;
     z-index: 760;
