@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { LeftSide } from "@/modules/common";
+import { LeftSide, PhoneConfirmation } from "@/modules/common";
 import AuthWrapper from "@/containers/AuthWrapper";
 import Portal from "@/containers/Portal";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
@@ -30,6 +30,10 @@ export default function MainLayout({ children }) {
 
   return (
     <AuthWrapper>
+      <Portal portalName="modalRoot">
+        <PhoneConfirmation />
+      </Portal>
+
       <AuthRoleWrapper roles={[userRoles.get("client")]}>
         <Portal portalName="modalRoot">
           <ClientStartConversation />
@@ -38,11 +42,13 @@ export default function MainLayout({ children }) {
           <ClientInvestigationForm />
         </Portal>
       </AuthRoleWrapper>
+
       <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
         <Portal portalName="modalRoot">
           <DocStartConversation />
         </Portal>
       </AuthRoleWrapper>
+
       <div id="chat-columns">
         <LeftSide />
         {children}

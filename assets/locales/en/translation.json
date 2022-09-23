@@ -229,5 +229,15 @@
   "login_with": "Login with",
   "password_recovery": "Password recovery",
   "parssword_recovery_success": "Password changed successfully",
-  "token_expired": "Token is no longer valid"
+  "token_expired": "Token is no longer valid",
+  "phone_verification": "Phone number verification",
+  "resend_code": "Send code again",
+  "redact": "Edit",
+
+  "send_again": "Send again",
+  "sending": "Sending",
+  "code_sent": "Code sent",
+  "phone_verification_success": "Phone number successfully verified",
+  "phone_verification_error": "Invalid confirmation code",
+  "phone_verification_error2": "Wrong phone number"
 }

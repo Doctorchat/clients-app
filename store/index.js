@@ -16,5 +16,6 @@ export const store = configureStore({
     meetForm: slices.meetFormSlice,
     chatContent: slices.chatContentSlice,
     meetingsList: slices.meetingsListSlice,
+    phoneConfirmation: slices.phoneConfirmationSlice,
   },
 });
