@@ -81,7 +81,11 @@ const PhoneConfirmation = memo(() => {
   );
 
   useEffect(() => {
-    if (!user.verified && dayjs(user.created_at).isAfter("2022-09-23T15:04:28.977Z")) {
+    if (
+      !user.verified &&
+      user.created_at &&
+      dayjs(user.created_at).isAfter("2022-09-23T15:04:28.977Z")
+    ) {
       dispatch(phoneConfirmationToggleVisibility(true));
       sendConfirmationCode();
     }
