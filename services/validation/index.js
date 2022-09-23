@@ -1,5 +1,4 @@
 import "./locale";
-import "./methods";
 import loginSchema from "./schemas/loginSchema";
 import registerSchema from "./schemas/registerSchema";
 import editProfileSchema from "./schemas/editProfileSchema";
