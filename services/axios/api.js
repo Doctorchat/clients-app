@@ -57,6 +57,7 @@ const api = {
   smsVerification: {
     sendCode: (data) => axiosInstance.post("/sms/send", data),
     verifyCode: (data) => axiosInstance.post("/sms/verify", data),
+    changePhone: (data) => axiosInstance.post("/sms/change-phone", data),
   },
 };
 
