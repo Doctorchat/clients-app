@@ -230,13 +230,18 @@
   "password_recovery": "Recuperare parola",
   "parssword_recovery_success": "Parola a fost schimbată cu succes",
   "token_expired": "Tokenul nu mai este valid",
-  "phone_verification": "Verificarea numărului de telefon",
-  "resend_code": "Retrimite codul",
-  "redact": "Editează",
-  "send_again": "Trimite din nou",
-  "sending": "Se trimite",
-  "code_sent": "Cod trimis",
-  "phone_verification_success": "Numărul de telefon a fost verificat",
-  "phone_verification_error": "Cod de confirmare invalid",
-  "phone_verification_error2": "Numar de telefon gresit"
+  "phone_verification": {
+    "title1": "Verificarea numărului de telefon",
+    "subtitle1": "Vă rugăm să introduceți un număr de telefon. Veți primi un cod din 6 cifre.",
+    "title2": "Codul de confirmare",
+    "subtitle2": "Vă rugăm să introduceți codul trimis către",
+    "send_code": "Trimiteți codul",
+    "code_sent": "Cod trimis",
+    "invalid_phone_number": "Număr de telefon greșit",
+    "resend": "Trimite din nou",
+    "sent": "Trimis",
+    "edit_phone": "Schimbă numărul",
+    "success": "Numărul de telefon a fost verificat",
+    "invalid_code": "Cod incorect"
+  }
 }

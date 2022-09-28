@@ -1,37 +1,43 @@
 .phone-confirmation {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   height: 100%;
   padding: 0 10px;
 
-  &>p {
+  & > p {
     color: var(--bs-gray-600);
-    margin-bottom: 32px;
+    margin-bottom: 12px;
+    text-align: center;
   }
 
   &__countdown {
     margin-left: 3px;
-
   }
 
   &__footer {
-    margin-top: 32px;
-    width: 348px;
+    width: 100%;
+    margin-top: 28px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--bs-gray-600);
+    flex-direction: column;
 
     button {
-      width: 100%;
+      &:not(:last-of-type) {
+        margin-bottom: 6px;
+      }
     }
+  }
+
+  form {
+    margin-top: 12px;
+    width: 100%;
   }
 }
 
 #phone-confirmation {
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
 
   .popup-header {
     height: 62px;
@@ -43,23 +49,15 @@
 
   .popup-body {
     width: 385px;
-    height: 320px !important;
-    border-radius: 10px;
+    height: 280px !important;
   }
 }
 
 @media screen and (max-width: 390px) {
-  #phone-confirmation {
-    .popup-body {
-      width: 95%;
-      height: 260px !important;
-    }
-  }
-
   .phone-confirmation {
     padding: 0px;
 
-    &>p {
+    & > p {
       font-size: 15px;
       margin-bottom: 24px;
     }
