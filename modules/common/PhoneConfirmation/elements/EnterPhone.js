@@ -88,7 +88,7 @@ const EnterPhone = React.memo(() => {
             name="enter-phone-form"
             methods={form}
             onFinish={onPhoneEntered}
-            initialValues={{ phone: user.phone }}
+            initialValues={{ phone: user.phone ?? "" }}
           >
             <Form.Item label={`${t("phone")}*`} name="phone">
               <InputPhone />

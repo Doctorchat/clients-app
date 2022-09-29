@@ -14,7 +14,7 @@ const InputPhone = forwardRef((props, ref) => {
   const inputSizeClassName = useRef(sizeClassName[size]);
 
   const onChangeHanlder = (value) => {
-    onChange(value);
+    onChange(value ?? "");
   };
 
   return (

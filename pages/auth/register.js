@@ -59,7 +59,12 @@ export default function Register() {
         </Link>
       </div>
       <div className="auth-form">
-        <Form name="login-form" methods={form} onFinish={onRegisterSubmit}>
+        <Form
+          name="login-form"
+          methods={form}
+          onFinish={onRegisterSubmit}
+          initialValues={{ phone: "" }}
+        >
           <p className="form-subtitle">Doctorchat</p>
           <h3 className="form-title">{t("auth_register_title")}</h3>
           <Form.Item label={`${t("email")}*`} name="email">

@@ -86,7 +86,12 @@ export default function BecomeDoctor() {
       </div>
       <div className="auth-form mt-4">
         {!categories.length && <Spinner />}
-        <Form name="become-doctor-form" methods={form} onFinish={onBecomeDoctorSubmit}>
+        <Form
+          name="become-doctor-form"
+          methods={form}
+          onFinish={onBecomeDoctorSubmit}
+          initialValues={{ phone: "" }}
+        >
           <p className="form-subtitle">Doctorchat</p>
           <h3 className="form-title">
             {t("part_of_team")} <br /> Doctorchat
