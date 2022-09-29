@@ -33,7 +33,7 @@ const EnterPhone = React.memo(() => {
   }));
 
   const resolver = useYupValidationResolver(enterPhoneSchema);
-  const form = useForm({ resolver, defaultValues: { phone: user.phone } });
+  const form = useForm({ resolver });
   const { setCountdown, updateTabsConfig } = useTabsContext();
 
   const dispatch = useDispatch();

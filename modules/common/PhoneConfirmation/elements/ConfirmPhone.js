@@ -80,7 +80,7 @@ const ConfirmPhone = React.memo(() => {
     <div className="popup-body message-form-main">
       <PopupHeader title={t("phone_verification.title2")} />
       <PopupContent>
-        <div className="phone-confirmation centered">
+        <div className="phone-confirmation">
           <p>
             {t("phone_verification.subtitle2")} {user.phone}
           </p>
