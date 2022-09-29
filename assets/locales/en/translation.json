@@ -242,6 +242,8 @@
     "sent": "Sent",
     "edit_phone": "Edit number",
     "success": "Phone number successfully verified",
-    "invalid_code": "Incorrect code"
+    "invalid_code": "Incorrect code",
+    "phone_already_used": "Phone number is already taken",
+    "phone_already_verifed": "Phone number already verified"
   }
 }

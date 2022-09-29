@@ -242,6 +242,8 @@
     "sent": "Trimis",
     "edit_phone": "Schimbă numărul",
     "success": "Numărul de telefon a fost verificat",
-    "invalid_code": "Cod incorect"
+    "invalid_code": "Cod incorect",
+    "phone_already_used": "Numărul de telefon este deja ocupat",
+    "phone_already_verifed": "Număr de telefon deja verificat"
   }
 }
