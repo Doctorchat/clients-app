@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { object, string } from "yup";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import ConfirmPhone from "./ConfirmPhone";
 import { PopupHeader, PopupContent } from "@/components/Popup";
 import { InputPhone } from "@/components/Inputs";
@@ -55,11 +56,19 @@ const EnterPhone = React.memo(() => {
 
         updateTabsConfig(ConfirmPhone.displayName, "next")();
       } catch (error) {
+        let message = "phone_verification.invalid_phone_number";
+
+        if (axios.isAxiosError(error)) {
+          if (error.response.status === 400) message = "phone_verification.phone_already_verifed";
+          else if (error.response.status === 422)
+            message = "phone_verification.phone_already_verifed";
+        }
+
         dispatch(
           notification({
             type: "error",
             title: "error",
-            descrp: "phone_verification.invalid_phone_number",
+            descrp: message,
           })
         );
       } finally {
