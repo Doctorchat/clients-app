@@ -128,7 +128,11 @@ function MessageFormConfirmation() {
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("terms_conditions")}</th>
                 <td className="dc-description-row-content">
-                  <a href="/terms-and-conditions" target="_blank">
+                  <a
+                    href="https://doctorchat.md/termeni-si-conditii/"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
                     {t("terms_conditions")}
                   </a>
                 </td>
@@ -161,7 +165,7 @@ function MessageFormConfirmation() {
                 <th colSpan="2">
                   <div className="dc-description-title-trunc">
                     <span>{t("message_form_confirmation.payment_security")}</span>
-                    <a href="#" target="_blank">
+                    <a href="https://mobilpay.com/" target="_blank" rel="noreferrer">
                       MobilPay
                     </a>
                   </div>
@@ -246,7 +250,9 @@ function MessageFormConfirmation() {
                 <td className="dc-description-row-content">
                   <span>{`${+price.total.toPrecision(2)} Lei`}</span>
                   {promo.code && (
-                    <del className="ms-2">{`${(+price.total + +promo.sum).toPrecision(2)} Lei`}</del>
+                    <del className="ms-2">{`${(+price.total + +promo.sum).toPrecision(
+                      2
+                    )} Lei`}</del>
                   )}
                 </td>
               </tr>
@@ -259,7 +265,15 @@ function MessageFormConfirmation() {
             onChange={() => setAreTermsConfirmed((prev) => !prev)}
             label={
               <>
-                {t("accept_terms")} <a className="terms">{t("terms_conditions")}</a>
+                {t("accept_terms")}{" "}
+                <a
+                  href="https://doctorchat.md/termeni-si-conditii/"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className="terms"
+                >
+                  {t("terms_conditions")}
+                </a>
               </>
             }
           />
