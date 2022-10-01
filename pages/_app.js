@@ -8,11 +8,11 @@ import ro_RO from "antd/lib/locale-provider/ro_RO";
 import { store } from "../store";
 import MainLayout from "@/layouts/MainLayout";
 import NotificationsWrapper from "@/containers/NotificationsWrapper";
+import getActiveLng from "@/utils/getActiveLng";
 import "@/services/i18next";
 
 // Styles
 import "../styles/global.scss";
-import getActiveLng from "@/utils/getActiveLng";
 
 const antLocales = {
   ro: ro_RO,

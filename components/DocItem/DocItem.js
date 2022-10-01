@@ -3,7 +3,6 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "../Image";
 import cs from "@/utils/classNames";
-import HeartIcon from "@/icons/heart.svg";
 import ClockIcon from "@/icons/clock.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import LineIcon from "@/icons/line.svg";
@@ -22,7 +21,7 @@ function DocItem(props) {
       category,
       avatar,
       price: { video, text },
-      meta: { helpedUsers, responseTime },
+      meta: { responseTime },
     },
   } = props;
   const { t } = useTranslation();
@@ -41,12 +40,6 @@ function DocItem(props) {
           {isAvailable ? (
             <>
               <div className="doc-item-meta">
-                <div className="doc-meta-item">
-                  <span className="icon like">
-                    <HeartIcon />
-                  </span>
-                  <span className="text">{helpedUsers || <LineIcon className="line-icon" />}</span>
-                </div>
                 <div className="doc-meta-item">
                   <span className="icon">
                     <ClockIcon />
