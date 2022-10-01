@@ -15,6 +15,7 @@ import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { MESSAGE_TYPES } from "@/context/constants";
 import Checkbox from "@/components/Checkbox";
+import { asPrice } from "@/utils/asPrice";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -141,19 +142,19 @@ function MessageFormConfirmation() {
                 <th className="dc-description-row-label">
                   {t("message_form_confirmation.basic_price")}
                 </th>
-                <td className="dc-description-row-content">{`${price.doc} Lei`}</td>
+                <td className="dc-description-row-content">{`${asPrice(+price.doc)} Lei`}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{`${t(
                   "message_form_confirmation.files"
                 )}(${values.uploads_count})`}</th>
-                <td className="dc-description-row-content">{`+${price.uploads} Lei`}</td>
+                <td className="dc-description-row-content">{`+${asPrice(+price.uploads)} Lei`}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">
                   {t("message_form_confirmation.subtotal_price")}
                 </th>
-                <td className="dc-description-row-content">{`${price.subtotal} Lei`}</td>
+                <td className="dc-description-row-content">{`${asPrice(+price.subtotal)} Lei`}</td>
               </tr>
             </tbody>
           </table>
@@ -248,9 +249,9 @@ function MessageFormConfirmation() {
                   {t("message_form_confirmation.total_price")}
                 </th>
                 <td className="dc-description-row-content">
-                  <span>{`${+price.total.toPrecision(2)} Lei`}</span>
+                  <span>{`${asPrice(+price.total)} Lei`}</span>
                   {promo.code && (
-                    <del className="ms-2">{`${(+price.total + +promo.sum).toPrecision(
+                    <del className="ms-2">{`${asPrice(+price.total + +promo.sum)}).toFixed(
                       2
                     )} Lei`}</del>
                   )}
