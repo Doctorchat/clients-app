@@ -5,6 +5,8 @@ import { useCallback, useMemo } from "react";
 export default function Truncate(props) {
   const { text, length, onReadMore } = props;
 
+  const readMoreText = t("read_more");
+
   const onReadMoreHandler = useCallback(
     (event) => {
       event.preventDefault();
@@ -14,18 +16,18 @@ export default function Truncate(props) {
   );
 
   const Content = useMemo(() => {
-    if (text && text.length > length)
+    if (text && text.length + readMoreText.length > length)
       return (
         <>
-          {text.substr(0, length)}{" "}
+          {text.substr(0, length - readMoreText.length)}{" "}
           <a href="#read-more" className="link" onClick={onReadMoreHandler}>
-            {t("read_more")}
+            {readMoreText}
           </a>
         </>
       );
 
     return text;
-  }, [length, text, onReadMoreHandler]);
+  }, [length, text, readMoreText, onReadMoreHandler]);
 
   return Content || null;
 }

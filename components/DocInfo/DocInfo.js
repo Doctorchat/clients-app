@@ -78,7 +78,9 @@ export default function DocInfo(props) {
               ) : (
                 <p className="description mb-0">
                   <Truncate
-                    text={doctor?.about?.[`bio_${selectedLng}`]}
+                    text={
+                      "asdasd asda sdasd kasdkj asnd kjashdn asjkd, naskjd nkjasm, ndaskjdm, hanskjd amsnd asm,d nasjkd ,masndjk as,mdna"
+                    }
                     length={105}
                     onReadMore={updateTabsConfig(docInfoTabs.about)}
                   />
