@@ -48,8 +48,15 @@
   }
 
   .popup-body {
+    transition: height 0.2s;
     width: 385px;
-    height: 280px !important;
+    height: 330px !important;
+  }
+
+  &.ConfirmPhone {
+    .popup-body {
+      height: 280px !important;
+    }
   }
 }
 

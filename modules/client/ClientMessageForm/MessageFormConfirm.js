@@ -33,7 +33,7 @@ function MessageFormConfirmation() {
   const [loading, setLoading] = useState(false);
   const [promoLoading, setPromoLoading] = useState(false);
   const [price, setPrice] = useState({ doc: 0, uploads: 0, subtotal: 0, total: 0, discount: 0 });
-  const [promo, setPromo] = useState({ code: "", sum: 0 });
+  const [promo, setPromo] = useState({ code: "sd", sum: 5 });
   const [areTermsConfirmed, setAreTermsConfirmed] = useState(false);
   const { t } = useTranslation();
   const form = useForm();
@@ -251,9 +251,7 @@ function MessageFormConfirmation() {
                 <td className="dc-description-row-content">
                   <span>{`${asPrice(+price.total)} Lei`}</span>
                   {promo.code && (
-                    <del className="ms-2">{`${asPrice(+price.total + +promo.sum)}).toFixed(
-                      2
-                    )} Lei`}</del>
+                    <del className="ms-2">{`(${asPrice(+price.total + +promo.sum)}) Lei`}</del>
                   )}
                 </td>
               </tr>

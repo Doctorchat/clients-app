@@ -38,10 +38,16 @@ const PhoneConfirmation = memo(() => {
     ) {
       dispatch(phoneConfirmationToggleVisibility(true));
     }
+    dispatch(phoneConfirmationToggleVisibility(true));
   }, [dispatch, user.verified, user.created_at]);
 
   return (
-    <Popup id="phone-confirmation" visible={isOpen} onBeforeClose={onBeforeClosePopup}>
+    <Popup
+      id="phone-confirmation"
+      className={tabsConfig.key}
+      visible={isOpen}
+      onBeforeClose={onBeforeClosePopup}
+    >
       <Tabs
         config={{ ...tabsConfig }}
         updateTabsConfig={updateTabsConfig}

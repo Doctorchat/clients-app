@@ -16,6 +16,7 @@ import { updateUserProperty } from "@/store/slices/userSlice";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import { logoutUser } from "@/store/actions";
 
 const enterPhoneSchema = object().shape({
   phone: string()
@@ -40,6 +41,8 @@ const EnterPhone = React.memo(() => {
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const logoutHandler = () => dispatch(logoutUser());
 
   const onPhoneEntered = useCallback(
     async (values) => {
@@ -93,9 +96,12 @@ const EnterPhone = React.memo(() => {
             <Form.Item label={`${t("phone")}*`} name="phone">
               <InputPhone />
             </Form.Item>
-            <div className="d-flex justify-content-end">
+            <div>
               <Button htmlType="submit" loading={isLoading} className="w-100">
                 {t("phone_verification.send_code")}
+              </Button>
+              <Button type="text" className="mt-3 w-100" onClick={logoutHandler}>
+                {t("logout")}
               </Button>
             </div>
           </Form>

@@ -74,9 +74,9 @@ export const registerDoctor = (data) => async (dispatch) => {
 export const logoutUser =
   (path = "/auth/login") =>
   (dispatch) => {
+    api.user.logout();
     dispatch(setUserUnauthorized());
     window.location.replace(window.location.origin + path);
 
-    api.user.logout();
     return Promise.resolve();
   };
