@@ -5,6 +5,7 @@ import LocaleProvider from "antd/lib/locale-provider";
 import ru_RU from "antd/lib/locale-provider/ru_RU";
 import en_US from "antd/lib/locale-provider/en_US";
 import ro_RO from "antd/lib/locale-provider/ro_RO";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { store } from "../store";
 import MainLayout from "@/layouts/MainLayout";
 import NotificationsWrapper from "@/containers/NotificationsWrapper";
@@ -39,12 +40,14 @@ export default function App({ Component, pageProps }) {
         />
         <title>Doctorchat</title>
       </Head>
-      <Provider store={store}>
-        <LocaleProvider locale={antLocales[getActiveLng()]}>
-          <NotificationsWrapper />
-          {getLayout(<Component {...pageProps} />)}
-        </LocaleProvider>
-      </Provider>
+      <TooltipProvider delayDuration={0}>
+        <Provider store={store}>
+          <LocaleProvider locale={antLocales[getActiveLng()]}>
+            <NotificationsWrapper />
+            {getLayout(<Component {...pageProps} />)}
+          </LocaleProvider>
+        </Provider>
+      </TooltipProvider>
     </>
   );
 }

@@ -94,3 +94,78 @@
     }
   }
 }
+
+div[data-radix-popper-content-wrapper] {
+  z-index: 999 !important;
+}
+
+.dc-tooltip {
+  &__trigger {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    position: relative;
+  }
+
+  &__content {
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 15px;
+    line-height: 1;
+    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+    user-select: none;
+  }
+
+  &__arrow {
+    fill: white;
+  }
+}
+
+@keyframes slideRightAndFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  0% {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUpAndFade {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { IconBtn } from "../Button";
-import Tooltip from "../Tooltip";
+import DcTooltip from "../DcTooltip";
 import Confirm from "../Confirm";
 import EditIcon from "@/icons/edit.svg";
 import TrashIcon from "@/icons/trash.svg";
@@ -29,18 +29,18 @@ export default function InvestigationItem(props) {
         <h4 className="title">{name}</h4>
         {withActions && (
           <div className="investigation-actions">
-            <Tooltip title={t("edit")} placement="leftCenter">
+            <DcTooltip content={t("edit")} side="left" align="center">
               <IconBtn icon={<EditIcon />} size="sm" onClick={onEditHandler} />
-            </Tooltip>
+            </DcTooltip>
             {!removeDisabled && (
               <Confirm
                 onConfirm={onRemoveHandler(props.id)}
                 content={t("remove_investigation_confirmation")}
                 isAsync
               >
-                <Tooltip title={t('remove')} placement="leftCenter">
+                <DcTooltip content={t("remove")} side="left" align="center">
                   <IconBtn icon={<TrashIcon />} className="remove-action" size="sm" />
-                </Tooltip>
+                </DcTooltip>
               </Confirm>
             )}
           </div>

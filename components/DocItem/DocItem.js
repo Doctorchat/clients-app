@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import Image from "../Image";
+import DcTooltip from "../DcTooltip";
 import cs from "@/utils/classNames";
 import ClockIcon from "@/icons/clock.svg";
 import ShieldIcon from "@/icons/shield.svg";
@@ -73,7 +74,9 @@ function DocItem(props) {
       <div className="doc-tags">
         {isGuard && (
           <span className="doc-tag guard">
-            <ShieldIcon />
+            <DcTooltip side="top" align="end" content={t("guard_doctor")}>
+              <ShieldIcon />
+            </DcTooltip>
           </span>
         )}
       </div>
