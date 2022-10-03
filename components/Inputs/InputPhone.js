@@ -36,7 +36,6 @@ const InputPhone = forwardRef((props, ref) => {
           countryCallingCodeEditable={false}
           international
           defaultCountry="MD"
-          countries={["RO", "MD"]}
         />
       </div>
     </>
