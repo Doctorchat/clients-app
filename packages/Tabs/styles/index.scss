@@ -39,6 +39,10 @@
   transition: color 0.2s;
   outline: none;
   color: var(--bs-gray-700);
+  min-width: 96px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   &:hover {
     color: lighten(#06f, 15%);
   }

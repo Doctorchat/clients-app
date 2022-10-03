@@ -246,5 +246,6 @@
     "phone_already_used": "Номер телефона уже занят",
     "phone_already_verifed": "Номер телефона уже подтвержден"
   },
-  "not_registered_yet": "Еще не зарегистрированы?"
+  "not_registered_yet": "Еще не зарегистрированы?",
+  "read_more": "Читать дальше"
 }

@@ -246,5 +246,6 @@
     "phone_already_used": "Phone number is already taken",
     "phone_already_verifed": "Phone number already verified"
   },
-  "not_registered_yet": "Not registered yet?"
+  "not_registered_yet": "Not registered yet?",
+  "read_more": "Read more"
 }
