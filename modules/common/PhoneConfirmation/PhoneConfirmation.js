@@ -38,7 +38,6 @@ const PhoneConfirmation = memo(() => {
     ) {
       dispatch(phoneConfirmationToggleVisibility(true));
     }
-    dispatch(phoneConfirmationToggleVisibility(true));
   }, [dispatch, user.verified, user.created_at]);
 
   return (
