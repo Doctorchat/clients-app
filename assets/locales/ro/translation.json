@@ -245,5 +245,6 @@
     "invalid_code": "Cod incorect",
     "phone_already_used": "Numărul de telefon este deja ocupat",
     "phone_already_verifed": "Număr de telefon deja verificat"
-  }
+  },
+  "not_registered_yet": "Nu sunteți încă înregistrat?"
 }

@@ -86,6 +86,12 @@ export default function Login() {
             <Link href="/auth/restore">{t("forgot_password")}</Link>
           </div>
         </Form>
+        <div className="auth-footer">
+          {t("not_registered_yet")}{" "}
+          <Link href="/auth/register">
+            <a className="link">{t("registration")}</a>
+          </Link>
+        </div>
         <div className="login-media">
           <div className="login-media__separator">
             <span>{t("login_with")}</span>

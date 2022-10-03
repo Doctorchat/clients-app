@@ -245,5 +245,6 @@
     "invalid_code": "Неверный код",
     "phone_already_used": "Номер телефона уже занят",
     "phone_already_verifed": "Номер телефона уже подтвержден"
-  }
+  },
+  "not_registered_yet": "Еще не зарегистрированы?"
 }

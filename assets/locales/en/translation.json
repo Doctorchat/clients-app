@@ -245,5 +245,6 @@
     "invalid_code": "Incorrect code",
     "phone_already_used": "Phone number is already taken",
     "phone_already_verifed": "Phone number already verified"
-  }
+  },
+  "not_registered_yet": "Not registered yet?"
 }
