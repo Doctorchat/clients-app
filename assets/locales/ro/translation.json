@@ -247,5 +247,7 @@
     "phone_already_verifed": "Număr de telefon deja verificat"
   },
   "not_registered_yet": "Nu sunteți încă înregistrat?",
-  "read_more": "Citește mai mult"
+  "read_more": "Citește mai mult",
+  "notifications": "Notificări",
+  "newsletter_help": "Selectați limba în care veți primi știri și actualizări."
 }

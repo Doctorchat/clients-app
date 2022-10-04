@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isValidPhoneNumber } from "react-phone-number-input";
-import { object, string } from "yup";
+import { boolean, object, string } from "yup";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import ConfirmPhone from "./ConfirmPhone";
@@ -17,8 +17,17 @@ import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { logoutUser } from "@/store/actions";
+import Select from "@/components/Select";
+import Checkbox from "@/components/Checkbox";
+
+const langsOptions = [
+  { value: "ro", label: "Română" },
+  { value: "ru", label: "Русский" },
+  { value: "en", label: "English" },
+];
 
 const enterPhoneSchema = object().shape({
+  marketing_lang: object().required(),
   phone: string()
     .required()
     .test({
@@ -26,6 +35,7 @@ const enterPhoneSchema = object().shape({
       message: i18next.t("invalid_phone"),
       test: (value) => isValidPhoneNumber(value),
     }),
+  marketing_consent: boolean().required(),
 });
 
 const EnterPhone = React.memo(() => {
@@ -36,7 +46,7 @@ const EnterPhone = React.memo(() => {
 
   const resolver = useYupValidationResolver(enterPhoneSchema);
   const form = useForm({ resolver });
-  const { setCountdown, updateTabsConfig } = useTabsContext();
+  const { setCountdown, setMarketingLang, updateTabsConfig } = useTabsContext();
 
   const dispatch = useDispatch();
 
@@ -47,6 +57,7 @@ const EnterPhone = React.memo(() => {
   const onPhoneEntered = useCallback(
     async (values) => {
       setIsLoading(true);
+      setMarketingLang(values.marketing_lang);
 
       try {
         await api.smsVerification.changePhone(values);
@@ -78,7 +89,7 @@ const EnterPhone = React.memo(() => {
         setIsLoading(false);
       }
     },
-    [dispatch, setCountdown, updateTabsConfig]
+    [dispatch, setCountdown, setMarketingLang, updateTabsConfig]
   );
 
   return (
@@ -91,10 +102,32 @@ const EnterPhone = React.memo(() => {
             name="enter-phone-form"
             methods={form}
             onFinish={onPhoneEntered}
-            initialValues={{ phone: user.phone ?? "" }}
+            initialValues={{ phone: user.phone ?? "", marketing_lang: user.locale }}
           >
+            <Form.Item label={t("notifications")} name="marketing_lang" help={t("newsletter_help")}>
+              <Select options={langsOptions} />
+            </Form.Item>
             <Form.Item label={`${t("phone")}*`} name="phone">
               <InputPhone />
+            </Form.Item>
+            <Form.Item
+              className="ps-1"
+              name="marketing_consent"
+              label={
+                <>
+                  {t("accept_terms")}{" "}
+                  <a
+                    href="https://doctorchat.md/termeni-si-conditii/"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    className="terms link"
+                  >
+                    {t("terms_conditions")}
+                  </a>
+                </>
+              }
+            >
+              <Checkbox />
             </Form.Item>
             <div>
               <Button htmlType="submit" loading={isLoading} className="w-100">

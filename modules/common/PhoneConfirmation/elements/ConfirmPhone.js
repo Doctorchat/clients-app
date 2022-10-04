@@ -16,7 +16,7 @@ const ConfirmPhone = React.memo(() => {
   const { user } = useSelector((store) => ({
     user: store.user.data,
   }));
-  const { countdown, setCountdown, updateTabsConfig } = useTabsContext();
+  const { countdown, setCountdown, marketingLang, updateTabsConfig } = useTabsContext();
 
   const [isConfirming, setIsConfirming] = useState(false);
   const [isRequesting, setIsRequesting] = useState(false);
@@ -28,7 +28,11 @@ const ConfirmPhone = React.memo(() => {
       setIsConfirming(true);
 
       try {
-        await api.smsVerification.verifyCode({ code: value });
+        await api.smsVerification.verifyCode({
+          code: value,
+          marketing_consent: true,
+          marketing_lang: marketingLang,
+        });
         dispatch(notification({ title: "success", descrp: "phone_verification.success" }));
         dispatch(updateUserProperty({ prop: "verified", value: true }));
         dispatch(phoneConfirmationToggleVisibility(false));
@@ -40,7 +44,7 @@ const ConfirmPhone = React.memo(() => {
         setIsConfirming(false);
       }
     },
-    [dispatch]
+    [dispatch, marketingLang]
   );
 
   const onRequestCode = useCallback(

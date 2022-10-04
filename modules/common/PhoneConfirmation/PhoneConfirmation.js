@@ -17,6 +17,7 @@ const PhoneConfirmation = memo(() => {
 
   const [tabsConfig, setTabsConfig] = useState({ key: EnterPhone.displayName, dir: "next" });
   const [countdown, setCountdown] = useState(null);
+  const [marketingLang, setMarketingLang] = useState(null);
 
   const updateTabsConfig = useCallback(
     (key, dir = "next") =>
@@ -53,6 +54,8 @@ const PhoneConfirmation = memo(() => {
         contextAdditionalData={{
           countdown,
           setCountdown,
+          marketingLang,
+          setMarketingLang,
         }}
       >
         <Tabs.Pane dataKey={EnterPhone.displayName} unmountOnExit={false}>

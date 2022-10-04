@@ -247,5 +247,7 @@
     "phone_already_verifed": "Phone number already verified"
   },
   "not_registered_yet": "Not registered yet?",
-  "read_more": "Read more"
+  "read_more": "Read more",
+  "notifications": "Notifications",
+  "newsletter_help": "Select the language in which you will receive news and updates."
 }
