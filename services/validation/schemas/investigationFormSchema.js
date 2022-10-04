@@ -1,4 +1,4 @@
-import { number } from "yup";
+import { mixed, number } from "yup";
 import { string, object } from "yup";
 import i18next from "@/services/i18next";
 import isValidSelectOption from "@/utils/isValidSelectOption";
@@ -10,21 +10,21 @@ const investigationFormSchema = object().shape({
   height: number().min(0).required(),
   location: string().required(),
   activity: string().required(),
-  sex: string()
+  sex: mixed()
     .required()
     .test({
       name: "select-validation",
       message: i18next.t("yup_mixed_required"),
       test: (value) => isValidSelectOption(value),
     }),
-  epidemiological: string()
+  epidemiological: mixed()
     .required()
     .test({
       name: "select-validation",
       message: i18next.t("yup_mixed_required"),
       test: (value) => isValidSelectOption(value),
     }),
-  diseases: string()
+  diseases: mixed()
     .required()
     .test({
       name: "select-validation",
@@ -32,7 +32,7 @@ const investigationFormSchema = object().shape({
       test: (value) => isValidSelectOption(value),
     }),
   diseases_spec: string().required(),
-  allergies: string()
+  allergies: mixed()
     .required()
     .test({
       name: "select-validation",

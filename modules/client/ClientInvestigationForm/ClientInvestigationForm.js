@@ -28,7 +28,7 @@ export default function ClientInvestigationForm() {
   const [loading, setLoading] = useState(false);
   const [formEdited, setFormEdited] = useState(false);
   const resolver = useYupValidationResolver(investigationFormSchema);
-  const form = useForm({ resolver, values });
+  const form = useForm({ resolver });
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -72,13 +72,16 @@ export default function ClientInvestigationForm() {
   };
 
   const onSubmitHandler = useCallback(
-    async (values) => {
-      const data = { ...values };
+    async (formValues) => {
+      const data = { ...values, ...formValues };
 
-      data.sex = data.sex.value;
-      data.epidemiological = data.epidemiological.value;
-      data.diseases = data.diseases.value;
-      data.allergies = data.allergies.value;
+      data.sex = typeof data.sex === "object" ? data.sex.value : data.sex;
+      data.epidemiological =
+        typeof data.epidemiological === "object"
+          ? data.epidemiological.value
+          : data.epidemiological;
+      data.diseases = typeof data.diseases === "object" ? data.diseases.value : data.diseases;
+      data.allergies = typeof data.allergies === "object" ? data.allergies.value : data.allergies;
 
       const onSuccess = (response) => {
         dispatch(investigationFormToggleVisibility(false));
@@ -97,7 +100,7 @@ export default function ClientInvestigationForm() {
         onAddNewInvestigation(data, { onSuccess, onError });
       }
     },
-    [dispatch, isEditing]
+    [dispatch, isEditing, values]
   );
 
   return (
