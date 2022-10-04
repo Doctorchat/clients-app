@@ -52,7 +52,7 @@ export default function DocMultiLangEdit() {
       try {
         setLoading(true);
 
-        const response = await api.user.update(values);
+        const response = await api.user.updateDoctor(values);
 
         dispatch(updateUser(response.data));
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));

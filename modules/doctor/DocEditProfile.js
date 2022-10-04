@@ -78,7 +78,7 @@ export default function DocEditProfile() {
       try {
         setLoading(true);
 
-        const response = await api.user.update(data);
+        const response = await api.user.updateDoctor(data);
 
         dispatch(updateUser(response.data));
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
