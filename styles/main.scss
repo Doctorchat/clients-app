@@ -198,13 +198,9 @@ input[type="checkbox"] {
   .doclist {
     width: 100%;
   }
-  h3 {
-    flex-grow: 1;
-    margin-bottom: 0;
-    font-size: 20px;
-    font-weight: 500;
-    padding-left: 4px;
-    margin-bottom: 12px;
+  .sidebar-header {
+    padding: 0;
+    margin-bottom: 8px;
   }
 }
 

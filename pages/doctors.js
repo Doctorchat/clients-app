@@ -7,6 +7,8 @@ import List from "@/components/List";
 import { DocItemSkeleton } from "@/components/DocItem";
 import Search from "@/components/Search/Search";
 import { ExternalDocList } from "@/modules/common";
+import SidebarHeader from "@/components/Sidebar/SidebarHeader";
+import BackTitle from "@/components/BackTitle";
 
 export default function Doctors() {
   const [doctors, setDoctors] = useState([]);
@@ -48,7 +50,12 @@ export default function Doctors() {
   return (
     <div className="external-doc-list">
       <ExternalDocList />
-      <h3>Lista de doctori</h3>
+      <SidebarHeader>
+        <BackTitle
+          title={t("home_page")}
+          onBack={() => (window.location.href = "https://doctorchat.md/")}
+        />
+      </SidebarHeader>
       <div className="search-bar mb-3">
         <Search
           placeholder={t("conversation_search_placeholder")}
