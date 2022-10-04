@@ -1,7 +1,7 @@
 #column-right {
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
-  .dialog-avatar {
+  & > .dialog-avatar {
     align-self: flex-start;
     img {
       --img-w: 100px !important;

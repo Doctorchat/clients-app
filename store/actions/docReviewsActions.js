@@ -16,7 +16,7 @@ export const getDocReviews = createAsyncThunk(
     if (action) {
       res = await action(id);
     } else {
-      res = await api.docList.getReviews(id);
+      res = await api.docList.getPublicReviews(id);
     }
 
     return {

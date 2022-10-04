@@ -76,7 +76,6 @@ export default function ExternalDocList() {
           doctor={doctor}
           allowCreate={false}
           actionBtn={ActionBtn}
-          reviewsAction={api.docList.getPublicReviews}
         />
       </Popup.Content>
     </Popup>
