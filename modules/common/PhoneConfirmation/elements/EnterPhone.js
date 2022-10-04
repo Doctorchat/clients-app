@@ -57,7 +57,7 @@ const EnterPhone = React.memo(() => {
   const onPhoneEntered = useCallback(
     async (values) => {
       setIsLoading(true);
-      setMarketingLang(values.marketing_lang);
+      setMarketingLang(values.marketing_lang.value);
 
       try {
         await api.smsVerification.changePhone(values);
@@ -102,7 +102,10 @@ const EnterPhone = React.memo(() => {
             name="enter-phone-form"
             methods={form}
             onFinish={onPhoneEntered}
-            initialValues={{ phone: user.phone ?? "", marketing_lang: user.locale }}
+            initialValues={{
+              phone: user.phone ?? "",
+              marketing_lang: langsOptions.find((lang) => lang.value === user?.locale),
+            }}
           >
             <Form.Item label={t("notifications")} name="marketing_lang" help={t("newsletter_help")}>
               <Select options={langsOptions} />
