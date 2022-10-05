@@ -33,7 +33,7 @@ function MessageFormConfirmation() {
   const [loading, setLoading] = useState(false);
   const [promoLoading, setPromoLoading] = useState(false);
   const [price, setPrice] = useState({ doc: 0, uploads: 0, subtotal: 0, total: 0, discount: 0 });
-  const [promo, setPromo] = useState({ code: "sd", sum: 5 });
+  const [promo, setPromo] = useState({ code: "", sum: 0 });
   const [areTermsConfirmed, setAreTermsConfirmed] = useState(false);
   const { t } = useTranslation();
   const form = useForm();
@@ -58,7 +58,7 @@ function MessageFormConfirmation() {
         const discoutedPrice = price.total - price.total * discount;
 
         setPrice((prev) => ({ ...prev, total: discoutedPrice }));
-        setPromo({ code, sum: parseFloat(price.subtotal - discoutedPrice).toPrecision(2) });
+        setPromo({ code, sum: parseFloat(price.subtotal - discoutedPrice).toFixed(2) });
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: "invalid_promo" }));
       } finally {
