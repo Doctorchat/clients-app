@@ -21,10 +21,12 @@ export default function MeetFormMain() {
   const {
     meetForm: { values, chatId, uploads },
     userInfo,
+    chatUserInfo,
     global,
   } = useSelector((store) => ({
     meetForm: store.meetForm,
     userInfo: store.userInfo.data,
+    chatUserInfo: store.chatUserInfo,
     global: store.bootstrap.payload?.global,
   }));
   const [loading, setLoading] = useState(false);
@@ -113,7 +115,9 @@ export default function MeetFormMain() {
               <div className="message-form-bottom">
                 <div className="message-price">
                   <span className="message-price-active">
-                    {userInfo?.meet_price + attachments.price} Lei
+                    {(userInfo?.meet_price ?? chatUserInfo.data?.meet_price ?? 0) +
+                      attachments.price}{" "}
+                    Lei
                   </span>
                 </div>
                 <Button htmlType="submit" loading={loading}>

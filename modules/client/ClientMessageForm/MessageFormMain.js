@@ -23,10 +23,12 @@ export default function MessageFormMain() {
   const {
     messageForm: { values, chatId, uploads, chatType },
     userInfo,
+    chatUserInfo,
     global,
   } = useSelector((store) => ({
     messageForm: store.messageForm,
     userInfo: store.userInfo.data,
+    chatUserInfo: store.chatUserInfo,
     global: store.bootstrap.payload?.global,
   }));
   const [loading, setLoading] = useState(false);
@@ -44,9 +46,9 @@ export default function MessageFormMain() {
     } else if (chatType === "consilium") {
       setBasePrice(global.consilium);
     } else {
-      setBasePrice(userInfo?.price);
+      setBasePrice(userInfo?.price ?? chatUserInfo.data?.price ?? 0);
     }
-  }, [chatType, global.auto, global.consilium, userInfo?.price]);
+  }, [chatType, global.auto, global.consilium, userInfo?.price, chatUserInfo.data?.price]);
 
   useEffect(() => {
     if (!attachments.initiated && uploads?.list) {
