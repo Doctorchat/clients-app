@@ -6,7 +6,7 @@ import { getChatContent, getUserInfo } from "@/store/actions";
 
 export default function ColumnCenter() {
   const {
-    userInfo: { selectedId, cache, isLoading },
+    userInfo: { selectedId, cache, isLoading, data },
     chatContent,
   } = useSelector((store) => ({ userInfo: store.userInfo, chatContent: store.chatContent }));
   const [userCurrentInfo, setUserCurrentInfo] = useState({});
@@ -30,14 +30,13 @@ export default function ColumnCenter() {
   }, [id]);
 
   useEffect(() => {
-    if (selectedId) {
+    if (selectedId && !data?.id) {
       const userInfo = cache.find((user) => user.id === selectedId);
 
-      if (userInfo) {
-        setUserCurrentInfo(userInfo);
-      } else dispatch(getUserInfo(selectedId));
+      if (userInfo) setUserCurrentInfo(userInfo);
+      dispatch(getUserInfo(selectedId));
     }
-  }, [cache, dispatch, selectedId]);
+  }, [cache, dispatch, selectedId, data]);
 
   return (
     <>
