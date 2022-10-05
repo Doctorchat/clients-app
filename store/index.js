@@ -17,5 +17,6 @@ export const store = configureStore({
     chatContent: slices.chatContentSlice,
     meetingsList: slices.meetingsListSlice,
     phoneConfirmation: slices.phoneConfirmationSlice,
+    chatUserInfo: slices.chatUserInfoSlice,
   },
 });

@@ -12,6 +12,7 @@ export const MESSAGE_FORM_SUBMIT = "messageForm/submit";
 
 export const TRANSACTIONS_LIST_GET = "transactionsList/get";
 
+export const CHAT_USER_INFO_GET = "chatUserInfo/get";
 export const CHAT_CONTENT_GET = "chatContent/get";
 export const CHAT_CONTENT_READ = "chatContent/read";
 

@@ -2,11 +2,11 @@ import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatContent, RightSide } from "@/modules/common";
-import { getChatContent, getUserInfo } from "@/store/actions";
+import { getChatContent, getChatUserInfo } from "@/store/actions";
 
 export default function ColumnCenter() {
-  const { userInfo, chatContent } = useSelector((store) => ({
-    userInfo: store.userInfo,
+  const { chatUserInfo, chatContent } = useSelector((store) => ({
+    chatUserInfo: store.chatUserInfo,
     chatContent: store.chatContent,
   }));
   const dispatch = useDispatch();
@@ -18,9 +18,7 @@ export default function ColumnCenter() {
   useEffect(() => {
     fetchConversationList();
 
-    let interval = null;
-
-    interval = setInterval(fetchConversationList, 15000);
+    let interval = setInterval(fetchConversationList, 15000);
 
     return () => {
       clearInterval(interval);
@@ -29,16 +27,14 @@ export default function ColumnCenter() {
   }, [id]);
 
   useEffect(() => {
-    if (userInfo.selectedId) {
-      dispatch(getUserInfo(userInfo.selectedId));
-    }
-  }, [dispatch, userInfo.selectedId]);
+    if (chatContent.content?.user_id) dispatch(getChatUserInfo(chatContent.content.user_id));
+  }, [dispatch, chatContent.content]);
 
   return (
     <>
       <ChatContent
         loading={chatContent.isLoading}
-        userInfo={userInfo.data}
+        userInfo={chatUserInfo.data}
         messages={chatContent.content?.messages || []}
         status={chatContent.content?.status}
         type={chatContent.content?.type}
@@ -48,8 +44,8 @@ export default function ColumnCenter() {
       />
       <RightSide
         selectedInvestigation={chatContent.content?.investigation_id}
-        userInfo={userInfo.data}
-        loading={userInfo.isLoading}
+        userInfo={chatUserInfo.data}
+        loading={chatUserInfo.isLoading}
       />
     </>
   );

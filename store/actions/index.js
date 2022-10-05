@@ -8,3 +8,4 @@ export * from "./bootstrapActions";
 export * from "./transactionsListActions";
 export * from "./chatContentActions";
 export * from "./meetingsListActions";
+export * from "./chatUserInfoActions";

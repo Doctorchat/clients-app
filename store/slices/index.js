@@ -12,3 +12,4 @@ export { default as meetFormSlice } from "./meetFormSlice";
 export { default as chatContentSlice } from "./chatContentSlice";
 export { default as meetingsListSlice } from "./meetingsListSlice";
 export { default as phoneConfirmationSlice } from "./phoneConfirmationSlice";
+export { default as chatUserInfoSlice } from "./chatUserInfoSlice";
