@@ -7,7 +7,6 @@ import BackTitle from "@/components/BackTitle";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { startConversationTabs } from "@/context/TabsKeys";
 import { getUserInfo } from "@/store/actions";
-import { cleanUserInfo } from "@/store/slices/userInfoSlice";
 import objectIsEmpty from "@/utils/objectIsEmpty";
 
 export default function ClientFindDoc() {
@@ -33,19 +32,12 @@ export default function ClientFindDoc() {
     }
   }, [temp, data]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(cleanUserInfo());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="popup-body star-conversation-doc-info">
       <PopupHeader
         title={
           <BackTitle
-            title={t('information_about_doctor')}
+            title={t("information_about_doctor")}
             onBack={updateTabsConfig(startConversationTabs.findDoc, "prev")}
           />
         }
