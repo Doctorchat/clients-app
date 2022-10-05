@@ -28,7 +28,7 @@ export default function ColumnCenter() {
 
   useEffect(() => {
     if (chatContent.content?.user_id) dispatch(getChatUserInfo(chatContent.content.user_id));
-  }, [dispatch, chatContent.content]);
+  }, [dispatch, chatContent.content?.user_id]);
 
   return (
     <>
