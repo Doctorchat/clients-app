@@ -11,14 +11,10 @@ import HomeIcon from "@/icons/home.svg";
 import InvestigationIcon from "@/icons/investigation.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import UserIcon from "@/icons/user.svg";
+import WalletIcon from "@/icons/wallet.svg";
 import { logoutUser } from "@/store/actions";
 
 import { ProfileChangeLang } from "../common";
-
-
-
-
-
 
 export default function ClientMenuOverlay({ updateTabsConfig }) {
   const { closeDropdown } = useDropdownContext();
@@ -39,6 +35,9 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
     <Menu>
       <Menu.Item icon={<UserIcon />} onClick={onTabsConfigChange(leftSideTabs.profile)}>
         {t("my_profile")}
+      </Menu.Item>
+      <Menu.Item icon={<WalletIcon />} onClick={onTabsConfigChange(leftSideTabs.wallet)}>
+        {t("wallet")}
       </Menu.Item>
       <Menu.Item
         icon={<InvestigationIcon />}

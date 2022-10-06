@@ -1,6 +1,7 @@
 export const leftSideTabs = {
   conversationList: "user-conversation-list",
   profile: "user-profile",
+  wallet: "user-wallet",
   editProfile: "user-edit-profile",
   appointments: "doc-appointments-settings",
   reviews: "doc-reviews-list",

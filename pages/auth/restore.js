@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { object,string } from "yup";
+import { object, string } from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";

@@ -1,5 +1,7 @@
+import React from "react";
 import { Provider } from "react-redux";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ConfigProvider from "antd/lib/config-provider";
 import en_US from "antd/lib/locale-provider/en_US";
 import ro_RO from "antd/lib/locale-provider/ro_RO";
@@ -25,6 +27,8 @@ const antLocales = {
 };
 
 export default function App({ Component, pageProps }) {
+  const [queryClient] = React.useState(() => new QueryClient());
+
   const getLayout =
     Component.getLayout ||
     ((page) => (
@@ -35,7 +39,7 @@ export default function App({ Component, pageProps }) {
     ));
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Head>
         <meta
           name="viewport"
@@ -51,7 +55,7 @@ export default function App({ Component, pageProps }) {
           </ConfigProvider>
         </Provider>
       </TooltipProvider>
-    </>
+    </QueryClientProvider>
   );
 }
 

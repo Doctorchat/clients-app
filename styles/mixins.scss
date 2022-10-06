@@ -14,3 +14,7 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+.skeleton-loading {
+  @include skeleton-loading;
+}

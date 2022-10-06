@@ -6,11 +6,6 @@ import cs from "@/utils/classNames";
 
 import Spinner from "../Spinner";
 
-
-
-
-
-
 const typeClassNames = {
   primary: "dc-btn-primary",
   outline: "dc-btn-outline",

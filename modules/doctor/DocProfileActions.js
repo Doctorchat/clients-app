@@ -4,7 +4,6 @@ import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
 import CommentIcon from "@/icons/comment.svg";
 import EditIcon from "@/icons/edit.svg";
-import HistoryIcon from "@/icons/history.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 
 export default function DocProfileActions() {
@@ -18,9 +17,6 @@ export default function DocProfileActions() {
       </Menu.Item>
       <Menu.Item icon={<CommentIcon />} onClick={updateTabsConfig(leftSideTabs.reviews)}>
         {t("reviews")}
-      </Menu.Item>
-      <Menu.Item icon={<HistoryIcon />} onClick={updateTabsConfig(leftSideTabs.transactions)}>
-        {t("history")}
       </Menu.Item>
     </Menu>
   );

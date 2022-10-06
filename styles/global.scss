@@ -272,6 +272,10 @@ img {
   transition: filter 0.2s;
 }
 
+.text-transparent {
+  color: transparent;
+}
+
 @keyframes spin {
   100% {
     transform: rotate(360deg);

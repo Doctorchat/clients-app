@@ -7,11 +7,6 @@ import { setTempUserInfo, setUserSelectedId } from "@/store/slices/userInfoSlice
 
 import ConversationItem from "../ConversationItem";
 
-
-
-
-
-
 function ConversationList(props) {
   const { conversations, activeConversation } = props;
   const {

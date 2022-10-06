@@ -221,11 +221,7 @@
   "check_email": "Vă rugăm să verificați e-mailul!",
   "home_page": "Pagina Principală",
   "mins": "min.",
-  "withdraw": "Extrage",
-  "withdrawal": "Retragere",
-  "withdrawal_form": "Formular de retragere",
   "sum": "Suma",
-  "withdraw_confirmation": "Ești sigur că dorești să retragi bani?",
   "login_with": "Loghează-te cu",
   "password_recovery": "Recuperare parola",
   "parssword_recovery_success": "Parola a fost schimbată cu succes",
@@ -249,5 +245,22 @@
   "not_registered_yet": "Nu sunteți încă înregistrat?",
   "read_more": "Citește mai mult",
   "notifications": "Notificări",
-  "newsletter_help": "Selectați limba în care veți primi știri și actualizări."
+  "newsletter_help": "Selectați limba în care veți primi știri și actualizări.",
+  "wallet": "Portofel",
+  "total_balance": "Sold total",
+  "frozen_balance": "Sold blocat",
+  "transactions": {
+    "history": "Istoricul tranzactiilor",
+    "empty": "Lista tranzacțiilor va apărea aici",
+    "top_up": "Пополнение",
+    "withdraw": "Retrage",
+    "incoming": "Profit",
+    "outgoing": "Cheltuieli",
+    "pending": "In așteptare",
+    "success": "Cu succes",
+    "cancel": "Fără succes",
+    "withdraw_confirmation": "Ești sigur că vrei să retragi bani?",
+    "top_up_form": "Форма пополнения",
+    "withdraw_form": "Formular de retragere"
+  }
 }

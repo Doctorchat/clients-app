@@ -15,7 +15,7 @@ import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 import ConversationsSidebar from "../ConversationsSidebar";
 import EditProflie from "../EditProfile";
 import ProfileSidebar from "../ProfileSidebar";
-import TransactionsList from "../TransactionsList";
+import Wallet, { WalletTopupNotification } from "../Wallet";
 
 const ClientInvestigationsList = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientInvestigationsList)
@@ -56,11 +56,11 @@ export default function LeftSide() {
         <Tabs.Pane dataKey={leftSideTabs.profile}>
           <ProfileSidebar />
         </Tabs.Pane>
+        <Tabs.Pane dataKey={leftSideTabs.wallet}>
+          <Wallet />
+        </Tabs.Pane>
         <Tabs.Pane dataKey={leftSideTabs.editProfile}>
           <EditProflie />
-        </Tabs.Pane>
-        <Tabs.Pane dataKey={leftSideTabs.transactions}>
-          <TransactionsList />
         </Tabs.Pane>
         <AuthRoleWrapper roles={[userRoles.get("client")]}>
           <>
@@ -80,6 +80,9 @@ export default function LeftSide() {
           </>
         </AuthRoleWrapper>
       </Tabs>
+
+      <WalletTopupNotification />
+
       <AuthRoleWrapper
         extraValidation={tabsConfig.key === leftSideTabs.conversationList}
         roles={[userRoles.get("client")]}

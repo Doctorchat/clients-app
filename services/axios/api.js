@@ -59,6 +59,12 @@ const api = {
     verifyCode: (data) => axiosInstance.post("/sms/verify", data),
     changePhone: (data) => axiosInstance.post("/sms/change-phone", data),
   },
+  wallet: {
+    get: () => axiosInstance.get("/user/wallet"),
+    transactions: () => axiosInstance.get("/user/transactions"),
+    topup: (data) => axiosInstance.post("/user/wallet/topup", data),
+    withdraw: (data) => axiosInstance.post("/user/wallet/withdraw", data),
+  },
 };
 
 export default api;

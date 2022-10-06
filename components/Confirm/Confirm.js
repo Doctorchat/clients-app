@@ -8,11 +8,6 @@ import cs from "@/utils/classNames";
 
 import Button from "../Button";
 
-
-
-
-
-
 export default function Confirm(props) {
   const {
     onConfirm,

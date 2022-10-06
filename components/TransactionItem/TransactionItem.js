@@ -14,11 +14,6 @@ import date from "@/utils/date";
 
 import Button from "../Button";
 
-
-
-
-
-
 const statuses = {
   success: (
     <>

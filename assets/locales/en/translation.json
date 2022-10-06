@@ -221,11 +221,7 @@
   "check_email": "Please check email!",
   "home_page": "Home Page",
   "mins": "min.",
-  "withdraw": "Withdraw",
-  "withdrawal": "Withdrawal",
-  "withdrawal_form": "Withdrawal form",
   "sum": "Amount",
-  "withdraw_confirmation": "Are you sure you want to withdraw money?",
   "login_with": "Login with",
   "password_recovery": "Password recovery",
   "parssword_recovery_success": "Password changed successfully",
@@ -249,5 +245,22 @@
   "not_registered_yet": "Not registered yet?",
   "read_more": "Read more",
   "notifications": "Notifications",
-  "newsletter_help": "Select the language in which you will receive news and updates."
+  "newsletter_help": "Select the language in which you will receive news and updates.",
+  "wallet": "Wallet",
+  "total_balance": "Total balance",
+  "frozen_balance": "Frozen balance",
+  "transactions": {
+    "history": "Transaction history",
+    "empty": "The list of transactions will appear here",
+    "top_up": "Replenishment",
+    "withdraw": "Withdraw",
+    "incoming": "Incoming",
+    "outgoing": "Outgoing",
+    "pending": "Pending",
+    "success": "Success",
+    "cancel": "Cancel",
+    "withdraw_confirmation": "Are you sure you want to withdraw funds?",
+    "top_up_form": "Replenishment form",
+    "withdraw_form": "Withdrawal form"
+  }
 }

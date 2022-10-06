@@ -1,0 +1,95 @@
+.wallet-transactions {
+  margin-top: 32px;
+
+  &__header {
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+
+  &__body > div {
+    &:not(:last-of-type) {
+      margin-bottom: 8px;
+    }
+    &:nth-child(odd) {
+      background-color: var(--bs-gray-100);
+    }
+  }
+}
+
+.transaction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 6px;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 12px;
+    border: 1px solid var(--bs-gray-300);
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &.success {
+      color: var(--bs-success);
+      background-color: rgba(var(--bs-success-rgb), 0.15);
+    }
+
+    &.pending {
+      color: var(--bs-warning);
+      background-color: rgba(var(--bs-warning-rgb), 0.15);
+    }
+
+    &.cancel {
+      color: var(--bs-danger);
+      background-color: rgba(var(--bs-danger-rgb), 0.15);
+    }
+  }
+
+  &__title {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+
+  &__date {
+    font-size: 14px;
+    color: var(--bs-gray-600);
+    margin-bottom: 0;
+    margin-top: 6px;
+  }
+
+  &__amount-value {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 30px;
+    &.top_up,
+    &.incoming {
+      color: var(--bs-success);
+      background-color: rgba(var(--bs-success-rgb), 0.1);
+    }
+
+    &.withdraw,
+    &.outgoing {
+      color: var(--bs-danger);
+      background-color: rgba(var(--bs-danger-rgb), 0.1);
+    }
+  }
+}
