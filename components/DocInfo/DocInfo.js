@@ -17,6 +17,7 @@ import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 import cs from "@/utils/classNames";
 import getActiveLng from "@/utils/getActiveLng";
+import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
 
 const selectedLng = getActiveLng();
 
@@ -78,7 +79,7 @@ export default function DocInfo(props) {
               ) : (
                 <p className="description mb-0">
                   <Truncate
-                    text={doctor?.about?.[`bio_${selectedLng}`]}
+                    text={getPropByLangOrThrow(doctor?.about?.bio, selectedLng)}
                     length={105}
                     onReadMore={updateTabsConfig(docInfoTabs.about)}
                   />

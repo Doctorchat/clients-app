@@ -19,7 +19,8 @@ export default function Truncate(props) {
     if (text && text.length + readMoreText.length > length)
       return (
         <>
-          {text.substr(0, length - readMoreText.length)}{" "}
+          {text.substr(0, length - readMoreText.length)}
+          {"... "}
           <a href="#read-more" className="link" onClick={onReadMoreHandler}>
             {readMoreText}
           </a>

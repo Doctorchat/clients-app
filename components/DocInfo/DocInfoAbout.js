@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Skeleton from "../Skeleton";
 import getActiveLng from "@/utils/getActiveLng";
+import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
 
 const selectedLng = getActiveLng();
 
@@ -28,7 +29,7 @@ export default function DocInfoAbout(props) {
     <div className="doc-info-tab-content doc-info-activiy">
       <div className="doc-info-section">
         <h4 className="info-section-title">{t("doctor_info.about_me")}</h4>
-        <p className="info-section-descrp">{about?.[`bio_${selectedLng}`]}</p>
+        <p className="info-section-descrp">{getPropByLangOrThrow(about?.bio, selectedLng)}</p>
       </div>
       <div className="doc-info-section">
         <h4 className="info-section-title">{t("general_information")}</h4>
@@ -62,9 +63,7 @@ export default function DocInfoAbout(props) {
 
 DocInfoAbout.propTypes = {
   about: PropTypes.shape({
-    bio_ro: PropTypes.string,
-    bio_ru: PropTypes.string,
-    bio_en: PropTypes.string,
+    bio: PropTypes.object,
     experience: PropTypes.number,
     specialization_ro: PropTypes.string,
     specialization_ru: PropTypes.string,
