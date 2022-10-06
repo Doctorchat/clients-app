@@ -1,8 +1,9 @@
-import PropTypes from "prop-types";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+
 import { ProfileChangeLang } from "@/modules/common";
 import axiosInstance from "@/services/axios/apiConfig";
 

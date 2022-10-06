@@ -1,6 +1,6 @@
-import Spinner from "./Spinner";
-import ContainerLoading from "./ContainerLoading";
 import Bar from "./Bar";
+import ContainerLoading from "./ContainerLoading";
+import Spinner from "./Spinner";
 
 export { ContainerLoading, Bar };
 export default Spinner;

@@ -1,17 +1,24 @@
-import PropTypes from "prop-types";
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { ProfileChangeLang } from "../common";
-import { leftSideTabs } from "@/context/TabsKeys";
+import PropTypes from "prop-types";
+
 import { useDropdownContext } from "@/components/Dropdown";
 import Menu from "@/components/Menu";
-import { logoutUser } from "@/store/actions";
-import UserIcon from "@/icons/user.svg";
-import LogoutIcon from "@/icons/logout.svg";
-import InvestigationIcon from "@/icons/investigation.svg";
+import { leftSideTabs } from "@/context/TabsKeys";
 import HomeIcon from "@/icons/home.svg";
+import InvestigationIcon from "@/icons/investigation.svg";
+import LogoutIcon from "@/icons/logout.svg";
+import UserIcon from "@/icons/user.svg";
+import { logoutUser } from "@/store/actions";
+
+import { ProfileChangeLang } from "../common";
+
+
+
+
+
 
 export default function ClientMenuOverlay({ updateTabsConfig }) {
   const { closeDropdown } = useDropdownContext();

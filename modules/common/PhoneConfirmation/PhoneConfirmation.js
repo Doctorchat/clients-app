@@ -3,10 +3,17 @@ import { memo } from "react";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { ConfirmPhone, EnterPhone } from "./elements";
+
 import Popup from "@/components/Popup";
-import { phoneConfirmationToggleVisibility } from "@/store/slices/phoneConfirmationSlice";
 import Tabs from "@/packages/Tabs";
+import { phoneConfirmationToggleVisibility } from "@/store/slices/phoneConfirmationSlice";
+
+import { ConfirmPhone, EnterPhone } from "./elements";
+
+
+
+
+
 
 const PhoneConfirmation = memo(() => {
   const { isOpen, user } = useSelector((store) => ({

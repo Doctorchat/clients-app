@@ -1,10 +1,12 @@
-import PropTypes from "prop-types";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import ReviewsList, { ReviewItemSkeleton } from "../ReviewsList";
-import List from "../List";
+import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+
 import { getDocReviews } from "@/store/actions";
+
+import List from "../List";
+import ReviewsList, { ReviewItemSkeleton } from "../ReviewsList";
 
 export default function DocReviews(props) {
   const { docId, reviewsAction } = props;

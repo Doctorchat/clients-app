@@ -1,4 +1,5 @@
 import { setLocale } from "yup";
+
 import i18next from "@/services/i18next";
 
 setLocale({

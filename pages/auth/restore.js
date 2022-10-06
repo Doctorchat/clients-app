@@ -1,16 +1,17 @@
-import Link from "next/link";
-import { string, object } from "yup";
 import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import AuthLayout from "@/layouts/AuthLayout";
+import Link from "next/link";
+import { object,string } from "yup";
+
+import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
-import Button from "@/components/Button";
-import { notification } from "@/store/slices/notificationsSlice";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
+import { notification } from "@/store/slices/notificationsSlice";
 
 const restoreSchema = object().shape({
   email: string().email().required(),

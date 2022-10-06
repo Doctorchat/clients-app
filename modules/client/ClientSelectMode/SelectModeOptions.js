@@ -1,11 +1,12 @@
-import PropTypes from "prop-types";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+
 import { selectModeTabs } from "@/context/TabsKeys";
 import CommentIcon from "@/icons/comment-lines.svg";
 import VideoIcon from "@/icons/video.svg";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 
 export default function SelectModeOptions(props) {
   const { setTabsHeight } = props;

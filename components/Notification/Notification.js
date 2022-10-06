@@ -1,14 +1,21 @@
-import PropTypes from "prop-types";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
-import { useTranslation } from "react-i18next";
-import { IconBtn } from "../Button";
-import cs from "@/utils/classNames";
-import TimesIcon from "@/icons/times.svg";
+import PropTypes from "prop-types";
+
 import CheckIcon from "@/icons/check.svg";
+import TimesIcon from "@/icons/times.svg";
 import WarnIcon from "@/icons/warning.svg";
 import { notificationRemove, notificationRemovedTrigger } from "@/store/slices/notificationsSlice";
+import cs from "@/utils/classNames";
+
+import { IconBtn } from "../Button";
+
+
+
+
+
 
 export const defaultNotificationData = {
   duration: 3000,

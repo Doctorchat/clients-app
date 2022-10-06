@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+
 import date from "@/utils/date";
 
 export default function AppointmentItem(props) {

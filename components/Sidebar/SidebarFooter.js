@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import cs from "@/utils/classNames";
 
 export default function SidebarFooter(props) {

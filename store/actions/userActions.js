@@ -1,6 +1,12 @@
-import { setUserAuthorized, setUserUnauthorized } from "../slices/userSlice";
-import i18next from "@/services/i18next";
 import api from "@/services/axios/api";
+import i18next from "@/services/i18next";
+
+import { setUserAuthorized, setUserUnauthorized } from "../slices/userSlice";
+
+
+
+
+
 
 export const fetchUserByToken = () => async (dispatch) => {
   try {

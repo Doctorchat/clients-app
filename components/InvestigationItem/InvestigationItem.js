@@ -1,12 +1,14 @@
-import PropTypes from "prop-types";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { IconBtn } from "../Button";
-import DcTooltip from "../DcTooltip";
-import Confirm from "../Confirm";
+import PropTypes from "prop-types";
+
 import EditIcon from "@/icons/edit.svg";
 import TrashIcon from "@/icons/trash.svg";
 import cs from "@/utils/classNames";
+
+import { IconBtn } from "../Button";
+import Confirm from "../Confirm";
+import DcTooltip from "../DcTooltip";
 
 export default function InvestigationItem(props) {
   const { name, age, weight, height, withActions, onEdit, onRemove, removeDisabled } = props;

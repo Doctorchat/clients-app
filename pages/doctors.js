@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-import DocList from "@/components/DocList";
-import api from "@/services/axios/api";
-import List from "@/components/List";
-import { DocItemSkeleton } from "@/components/DocItem";
-import Search from "@/components/Search/Search";
-import { ExternalDocList } from "@/modules/common";
-import SidebarHeader from "@/components/Sidebar/SidebarHeader";
+
 import BackTitle from "@/components/BackTitle";
+import { DocItemSkeleton } from "@/components/DocItem";
+import DocList from "@/components/DocList";
+import List from "@/components/List";
+import Search from "@/components/Search/Search";
+import SidebarHeader from "@/components/Sidebar/SidebarHeader";
+import { ExternalDocList } from "@/modules/common";
+import api from "@/services/axios/api";
 
 export default function Doctors() {
   const [doctors, setDoctors] = useState([]);

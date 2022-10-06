@@ -1,16 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { ClientDocsSearch } from "..";
-import DocList from "@/components/DocList/";
-import { PopupHeader, PopupContent } from "@/components/Popup";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { setTempUserInfo, setUserSelectedId } from "@/store/slices/userInfoSlice";
-import { startConversationTabs } from "@/context/TabsKeys";
-import List from "@/components/List";
+import { useDispatch, useSelector } from "react-redux";
+
 import { DocItemSkeleton } from "@/components/DocItem";
-import { getDocList } from "@/store/actions";
+import DocList from "@/components/DocList/";
+import List from "@/components/List";
+import { PopupContent,PopupHeader } from "@/components/Popup";
 import { ContainerLoading } from "@/components/Spinner";
+import { startConversationTabs } from "@/context/TabsKeys";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import { getDocList } from "@/store/actions";
+import { setTempUserInfo, setUserSelectedId } from "@/store/slices/userInfoSlice";
+
+import { ClientDocsSearch } from "..";
+
+
+
+
+
 
 export default function ClientFindDoc() {
   const { docSelectList } = useSelector((store) => ({

@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import ClientFindDoc from "./ClientFindDoc";
-import ClientDocInfo from "./ClientDocInfo";
+import { useDispatch,useSelector } from "react-redux";
+
 import Popup from "@/components/Popup";
+import { startConversationTabs } from "@/context/TabsKeys";
 import Tabs from "@/packages/Tabs";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
-import { startConversationTabs } from "@/context/TabsKeys";
+
+import ClientDocInfo from "./ClientDocInfo";
+import ClientFindDoc from "./ClientFindDoc";
 
 export default function ClientStartConversation() {
   const { isOpen } = useSelector((store) => ({

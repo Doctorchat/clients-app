@@ -1,4 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
+
 import getActiveLng from "@/utils/getActiveLng";
 
 export const toSelectOpts = () => (list) => {

@@ -1,5 +1,6 @@
-import PropTypes from "prop-types";
 import { forwardRef, memo } from "react";
+import PropTypes from "prop-types";
+
 import SpinnerIcon from "@/icons/spinner.svg";
 import cs from "@/utils/classNames";
 

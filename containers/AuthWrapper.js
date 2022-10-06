@@ -1,9 +1,10 @@
-import { useRouter } from "next/router";
-import PropTypes from "prop-types";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserByToken } from "@/store/actions";
+import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+
 import FullPageLoading from "@/components/FullPageLoading";
+import { fetchUserByToken } from "@/store/actions";
 
 export default function AuthWrapper(props) {
   const { children } = props;

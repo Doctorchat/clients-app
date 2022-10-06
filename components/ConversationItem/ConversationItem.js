@@ -1,14 +1,21 @@
-import PropTypes from "prop-types";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import Image from "../Image";
-import cs from "@/utils/classNames";
-import date from "@/utils/date";
+import PropTypes from "prop-types";
+
+import BelIcon from "@/icons/bel-on.svg";
+import CheckIcon from "@/icons/check.svg";
 import ClockIcon from "@/icons/clock.svg";
 import HistoryIcon from "@/icons/history.svg";
-import CheckIcon from "@/icons/check.svg";
 import WarnIcon from "@/icons/warning.svg";
-import BelIcon from "@/icons/bel-on.svg";
+import cs from "@/utils/classNames";
+import date from "@/utils/date";
+
+import Image from "../Image";
+
+
+
+
+
 
 const ticketStatuses = {
   initied: {

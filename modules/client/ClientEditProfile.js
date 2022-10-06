@@ -1,16 +1,23 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { EditProfileSecurity } from "../common";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { editProfileSchema } from "@/services/validation";
+import { useDispatch, useSelector } from "react-redux";
+
+import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
-import Button from "@/components/Button";
-import { notification } from "@/store/slices/notificationsSlice";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
+import { editProfileSchema } from "@/services/validation";
+import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
+
+import { EditProfileSecurity } from "../common";
+
+
+
+
+
 
 export default function ClientEditProfile() {
   const { user } = useSelector((store) => ({ user: store.user }));

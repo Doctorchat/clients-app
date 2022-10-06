@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { TransitionGroup } from "react-transition-group";
+
 import Notification from "@/components/Notification";
 
 export default function NotificationsWrapper() {

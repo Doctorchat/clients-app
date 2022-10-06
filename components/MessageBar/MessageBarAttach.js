@@ -1,15 +1,22 @@
-import PropTypes from "prop-types";
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { IconBtn } from "../Button";
+import PropTypes from "prop-types";
+
+import { MESSAGE_TYPES } from "@/context/constants";
 import ClipIcon from "@/icons/clip.svg";
+import api from "@/services/axios/api";
+import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
+import { updateConversation } from "@/store/slices/conversationListSlice";
+import { notification } from "@/store/slices/notificationsSlice";
 import uniqId from "@/utils/uniqId";
 import validateFile from "@/utils/validateFile";
-import { notification } from "@/store/slices/notificationsSlice";
-import api from "@/services/axios/api";
-import { MESSAGE_TYPES } from "@/context/constants";
-import { updateConversation } from "@/store/slices/conversationListSlice";
-import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
+
+import { IconBtn } from "../Button";
+
+
+
+
+
 
 export default function MessageBarAttach(props) {
   const { chatId } = props;

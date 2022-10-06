@@ -1,19 +1,21 @@
 import { useCallback, useState } from "react";
-import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import ConversationsSidebar from "../ConversationsSidebar";
-import ProfileSidebar from "../ProfileSidebar";
-import EditProflie from "../EditProfile";
-import TransactionsList from "../TransactionsList";
-import Tabs from "@/packages/Tabs";
-import { leftSideTabs } from "@/context/TabsKeys";
+import dynamic from "next/dynamic";
+
+import Button from "@/components/Button";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
-import Button from "@/components/Button";
+import { leftSideTabs } from "@/context/TabsKeys";
 import PlusIcon from "@/icons/plus.svg";
 import { ClientStartConversationMenu } from "@/modules/client";
+import Tabs from "@/packages/Tabs";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
+
+import ConversationsSidebar from "../ConversationsSidebar";
+import EditProflie from "../EditProfile";
+import ProfileSidebar from "../ProfileSidebar";
+import TransactionsList from "../TransactionsList";
 
 const ClientInvestigationsList = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientInvestigationsList)

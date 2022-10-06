@@ -1,21 +1,22 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import Popup from "@/components/Popup";
-import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
+import { useDispatch,useSelector } from "react-redux";
+
+import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputNumber, Textarea } from "@/components/Inputs";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { investigationFormSchema } from "@/services/validation";
+import Popup from "@/components/Popup";
 import Select from "@/components/Select";
 import {
   allergiesOptions,
   diseasesOptions,
   epidemiologicalOptions,
 } from "@/context/staticSelectOpts";
-import Button from "@/components/Button";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
+import { investigationFormSchema } from "@/services/validation";
+import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
 

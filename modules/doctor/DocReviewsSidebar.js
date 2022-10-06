@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Sidebar from "@/components/Sidebar";
+import { useSelector } from "react-redux";
+
 import BackTitle from "@/components/BackTitle";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { leftSideTabs } from "@/context/TabsKeys";
 import { DocReviews } from "@/components/DocInfo";
+import Sidebar from "@/components/Sidebar";
+import { leftSideTabs } from "@/context/TabsKeys";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 
 export default function DocReviewsSidebar() {

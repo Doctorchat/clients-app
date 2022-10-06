@@ -1,16 +1,23 @@
-import PropTypes from "prop-types";
 import { useCallback } from "react";
-import Button from "../Button";
-import i18next from "@/services/i18next";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import PropTypes from "prop-types";
+
 import { leftSideTabs } from "@/context/TabsKeys";
-import date from "@/utils/date";
-import cs from "@/utils/classNames";
-import CamIcon from "@/icons/webcam.svg";
 import CheckIcon from "@/icons/check.svg";
-import TimesIcon from "@/icons/times.svg";
 import ClockIcon from "@/icons/clock.svg";
 import FontIcon from "@/icons/font-case.svg";
+import TimesIcon from "@/icons/times.svg";
+import CamIcon from "@/icons/webcam.svg";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import i18next from "@/services/i18next";
+import cs from "@/utils/classNames";
+import date from "@/utils/date";
+
+import Button from "../Button";
+
+
+
+
+
 
 const statuses = {
   success: (

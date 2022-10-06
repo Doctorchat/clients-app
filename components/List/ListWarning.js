@@ -1,5 +1,6 @@
+import { forwardRef,memo } from "react";
 import PropTypes from "prop-types";
-import { memo, forwardRef } from "react";
+
 import WarnIcon from "@/icons/warn-duo.svg";
 
 const ListWarning = forwardRef(({ extra }, ref) => (

@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from "react";
-import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+
 import { ChatContent, RightSide } from "@/modules/common";
 import { getChatContent, getChatUserInfo } from "@/store/actions";
 

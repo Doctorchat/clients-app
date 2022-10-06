@@ -1,23 +1,26 @@
-import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import TextArea from "antd/lib/input/TextArea";
 import { useRouter } from "next/router";
-import { IconBtn } from "../Button";
-import Form from "../Form";
-import Confirm from "../Confirm";
-import MessageBarAttach from "./MessageBarAttach";
+import PropTypes from "prop-types";
+
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
-import cs from "@/utils/classNames";
 import { MESSAGE_TYPES, userRoles } from "@/context/constants";
-import { notification } from "@/store/slices/notificationsSlice";
-import api from "@/services/axios/api";
-import { updateConversation } from "@/store/slices/conversationListSlice";
-import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
 import LevelIcon from "@/icons/level-up.svg";
 import StopIcon from "@/icons/stop.svg";
+import api from "@/services/axios/api";
+import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
+import { updateConversation } from "@/store/slices/conversationListSlice";
+import { notification } from "@/store/slices/notificationsSlice";
+import cs from "@/utils/classNames";
+
+import { IconBtn } from "../Button";
+import Confirm from "../Confirm";
+import Form from "../Form";
+
+import MessageBarAttach from "./MessageBarAttach";
 
 export default function MessageBar(props) {
   const { defaultValue, disabled, chatId, status, type } = props;

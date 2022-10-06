@@ -1,26 +1,29 @@
-import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo } from "react";
-import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { MessagesList } from "..";
-import ChatContentFooter from "./ChatContentFooter";
-import Image from "@/components/Image";
+import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+
 import { IconBtn } from "@/components/Button";
+import Image from "@/components/Image";
 import Sidebar from "@/components/Sidebar";
+import { Bar } from "@/components/Spinner";
+import ArrowLeftIcon from "@/icons/arrow-left.svg";
+import EllipsisIcon from "@/icons/ellipsis-v.svg";
+import { readChatMessages } from "@/store/actions";
+import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
+import { updateConversation } from "@/store/slices/conversationListSlice";
+import { meetFormToggleVisibility, meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
 import {
   messageFormToggleVisibility,
   messageFormUpdateChatId,
 } from "@/store/slices/messageFormSlice";
-import { Bar } from "@/components/Spinner";
 import cs from "@/utils/classNames";
 import date from "@/utils/date";
-import EllipsisIcon from "@/icons/ellipsis-v.svg";
-import { updateConversation } from "@/store/slices/conversationListSlice";
-import { readChatMessages } from "@/store/actions";
-import { meetFormToggleVisibility, meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
-import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
-import ArrowLeftIcon from "@/icons/arrow-left.svg";
+
+import { MessagesList } from "..";
+
+import ChatContentFooter from "./ChatContentFooter";
 
 const withoutInfo = ["support", "auto", "consilium", "internal"];
 

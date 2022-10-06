@@ -1,24 +1,31 @@
-import { useTranslation } from "react-i18next";
 import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { isValidPhoneNumber } from "react-phone-number-input";
-import { boolean, object, string } from "yup";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { isValidPhoneNumber } from "react-phone-number-input";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import ConfirmPhone from "./ConfirmPhone";
-import { PopupHeader, PopupContent } from "@/components/Popup";
-import { InputPhone } from "@/components/Inputs";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import i18next from "@/services/i18next";
-import Form from "@/components/Form";
+import { boolean, object, string } from "yup";
+
 import Button from "@/components/Button";
-import { updateUserProperty } from "@/store/slices/userSlice";
-import api from "@/services/axios/api";
-import { notification } from "@/store/slices/notificationsSlice";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { logoutUser } from "@/store/actions";
-import Select from "@/components/Select";
 import Checkbox from "@/components/Checkbox";
+import Form from "@/components/Form";
+import { InputPhone } from "@/components/Inputs";
+import { PopupContent,PopupHeader } from "@/components/Popup";
+import Select from "@/components/Select";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import api from "@/services/axios/api";
+import i18next from "@/services/i18next";
+import { logoutUser } from "@/store/actions";
+import { notification } from "@/store/slices/notificationsSlice";
+import { updateUserProperty } from "@/store/slices/userSlice";
+
+import ConfirmPhone from "./ConfirmPhone";
+
+
+
+
+
 
 const langsOptions = [
   { value: "ro", label: "Română" },

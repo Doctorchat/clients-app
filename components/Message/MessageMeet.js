@@ -1,9 +1,10 @@
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import date from "@/utils/date";
-import CamIcon from "@/icons/webcam.svg";
+import PropTypes from "prop-types";
+
 import ExternalIcon from "@/icons/external-link.svg";
+import CamIcon from "@/icons/webcam.svg";
+import date from "@/utils/date";
 
 export default function MessageMeet(props) {
   const { url, time } = props;

@@ -1,8 +1,15 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import useTabsContext from "../hooks/useTabsContext";
+import PropTypes from "prop-types";
+
 import cs from "@/utils/classNames";
+
+import useTabsContext from "../hooks/useTabsContext";
+
+
+
+
+
 
 export default function Pane(props) {
   const { className, id, dataKey, unmountOnExit, withAnimation, children } = props;

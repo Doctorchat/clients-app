@@ -1,23 +1,26 @@
-import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { ProfileChangeLang } from "../common";
-import { DocSetVacation } from ".";
-import { leftSideTabs } from "@/context/TabsKeys";
-import { logoutUser } from "@/store/actions";
-import Menu from "@/components/Menu";
+import PropTypes from "prop-types";
+
 import { useDropdownContext } from "@/components/Dropdown";
+import Menu from "@/components/Menu";
 import Switch from "@/components/Switch";
-import api from "@/services/axios/api";
-import { updateUserProperty } from "@/store/slices/userSlice";
-import { notification } from "@/store/slices/notificationsSlice";
-import UserIcon from "@/icons/user.svg";
-import LogoutIcon from "@/icons/logout.svg";
-import VideoIcon from "@/icons/video.svg";
-import ShieldIcon from "@/icons/shield.svg";
+import { leftSideTabs } from "@/context/TabsKeys";
 import HomeIcon from "@/icons/home.svg";
+import LogoutIcon from "@/icons/logout.svg";
+import ShieldIcon from "@/icons/shield.svg";
+import UserIcon from "@/icons/user.svg";
+import VideoIcon from "@/icons/video.svg";
+import api from "@/services/axios/api";
+import { logoutUser } from "@/store/actions";
+import { notification } from "@/store/slices/notificationsSlice";
+import { updateUserProperty } from "@/store/slices/userSlice";
+
+import { ProfileChangeLang } from "../common";
+
+import { DocSetVacation } from ".";
 
 export default function DocMenuOverlay({ updateTabsConfig }) {
   const { user } = useSelector((store) => ({

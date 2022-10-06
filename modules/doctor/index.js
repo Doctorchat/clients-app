@@ -1,11 +1,11 @@
-import DocMenuOverlay from "./DocMenuOverlay";
-import DocEditProfile from "./DocEditProfile";
-import DocProfileActions from "./DocProfileActions";
 import DocAppointmentsSettings from "./DocAppointmentsSettings";
+import DocEditProfile from "./DocEditProfile";
+import DocMenuOverlay from "./DocMenuOverlay";
+import DocProfileActions from "./DocProfileActions";
 import DocReviewsSidebar from "./DocReviewsSidebar";
 import DocSetVacation from "./DocSetVacation";
-import DocWallet from "./DocWallet";
 import DocStartConversation from "./DocStartConversation";
+import DocWallet from "./DocWallet";
 
 export {
   DocMenuOverlay,

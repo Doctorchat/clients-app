@@ -1,17 +1,19 @@
-import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Button, { IconBtn } from "../Button";
-import { Textarea } from "../Inputs";
-import Form from "../Form";
-import LikeIcon from "@/icons/like.svg";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+
 import DislikeIcon from "@/icons/dislike.svg";
-import cs from "@/utils/classNames";
+import LikeIcon from "@/icons/like.svg";
 import api from "@/services/axios/api";
-import { notification } from "@/store/slices/notificationsSlice";
 import { chatContentUpdateMessage } from "@/store/slices/chatContentSlice";
+import { notification } from "@/store/slices/notificationsSlice";
+import cs from "@/utils/classNames";
+
+import Button, { IconBtn } from "../Button";
+import Form from "../Form";
+import { Textarea } from "../Inputs";
 
 export default function ChatFeedback(props) {
   const { chatId, docId, messageId, status } = props;

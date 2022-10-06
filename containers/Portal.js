@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 
 const portalContainers = {
   modalRoot: "#modals-root",

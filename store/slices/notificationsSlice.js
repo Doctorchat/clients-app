@@ -1,4 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+
 import { defaultNotificationData } from "@/components/Notification";
 
 const initialState = {

@@ -1,5 +1,6 @@
-import PropTypes from "prop-types";
 import { memo } from "react";
+import PropTypes from "prop-types";
+
 import DocItem from "../DocItem";
 
 function DocList(props) {

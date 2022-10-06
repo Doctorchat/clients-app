@@ -1,14 +1,15 @@
-import PropTypes from "prop-types";
 import { useCallback, useRef } from "react";
-import dynamic from "next/dynamic";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { CSSTransition } from "react-transition-group";
-import { useTranslation } from "react-i18next";
+import dynamic from "next/dynamic";
+import PropTypes from "prop-types";
+
 import BackTitle from "@/components/BackTitle";
+import { IconBtn } from "@/components/Button";
+import ClientInfo from "@/components/ClientInfo";
 import Sidebar from "@/components/Sidebar";
 import { userRoles } from "@/context/constants";
-import ClientInfo from "@/components/ClientInfo";
-import { IconBtn } from "@/components/Button";
 import TimesIcon from "@/icons/times.svg";
 import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
 

@@ -1,6 +1,7 @@
-import PropTypes from "prop-types";
+import { forwardRef,memo } from "react";
 import { useTranslation } from "react-i18next";
-import { memo, forwardRef } from "react";
+import PropTypes from "prop-types";
+
 import Spinner from "@/components/Spinner";
 import WarnIcon from "@/icons/warn-duo.svg";
 

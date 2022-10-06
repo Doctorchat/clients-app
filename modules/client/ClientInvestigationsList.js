@@ -1,22 +1,23 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import Sidebar from "@/components/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+
+import Alert from "@/components/Alert";
 import BackTitle from "@/components/BackTitle";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { leftSideTabs } from "@/context/TabsKeys";
-import List from "@/components/List";
-import SidebarList from "@/components/SidebarList";
 import Button from "@/components/Button";
+import InvestigationItem from "@/components/InvestigationItem";
+import List from "@/components/List";
+import Sidebar from "@/components/Sidebar";
+import SidebarList from "@/components/SidebarList";
+import { leftSideTabs } from "@/context/TabsKeys";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import api from "@/services/axios/api";
 import {
   investigationFormSetEdit,
   investigationFormToggleVisibility,
 } from "@/store/slices/investigationFormSlice";
-import Alert from "@/components/Alert";
-import InvestigationItem from "@/components/InvestigationItem";
-import { updateUser } from "@/store/slices/userSlice";
-import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
+import { updateUser } from "@/store/slices/userSlice";
 
 export default function ClientInvestigationsList() {
   const { updateTabsConfig } = useTabsContext();

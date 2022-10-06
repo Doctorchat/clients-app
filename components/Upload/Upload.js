@@ -1,10 +1,12 @@
-import PropTypes from "prop-types";
 import { Children, cloneElement, forwardRef, useCallback, useRef, useState } from "react";
+import PropTypes from "prop-types";
+
+import cs from "@/utils/classNames";
+import uniqId from "@/utils/uniqId";
+import validateFile from "@/utils/validateFile";
+
 import UploadContext from "./UploadContext";
 import UploadFile from "./UploadFile";
-import uniqId from "@/utils/uniqId";
-import cs from "@/utils/classNames";
-import validateFile from "@/utils/validateFile";
 
 const Upload = forwardRef((props, ref) => {
   const {

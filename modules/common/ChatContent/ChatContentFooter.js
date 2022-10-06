@@ -1,9 +1,10 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+
 import Button from "@/components/Button";
+import MessageBar from "@/components/MessageBar";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
-import MessageBar from "@/components/MessageBar";
 
 export default function ChatContentFooter(props) {
   const { openMessageFormPopup, status, chatId, paymentUrl, type } = props;

@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+
 import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
-import HistoryIcon from "@/icons/history.svg";
-import EditIcon from "@/icons/edit.svg";
 import CommentIcon from "@/icons/comment.svg";
+import EditIcon from "@/icons/edit.svg";
+import HistoryIcon from "@/icons/history.svg";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 
 export default function DocProfileActions() {
   const { updateTabsConfig } = useTabsContext();

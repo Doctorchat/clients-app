@@ -1,10 +1,11 @@
-import PropTypes from "prop-types";
 import { forwardRef, useEffect, useState } from "react";
 import RcSelect, { components } from "react-select";
-import TimesIcon from "@/icons/times.svg";
+import PropTypes from "prop-types";
+
 import AngleIcon from "@/icons/angle-down.svg";
-import cs from "@/utils/classNames";
+import TimesIcon from "@/icons/times.svg";
 import i18next from "@/services/i18next";
+import cs from "@/utils/classNames";
 
 const ClearIndicator = (props) => (
   <components.ClearIndicator {...props}>

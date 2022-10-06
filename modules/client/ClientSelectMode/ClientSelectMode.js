@@ -1,18 +1,20 @@
-import PropTypes from "prop-types";
-import { useRouter } from "next/router";
 import { memo, useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import SelectModeMenu from "./SelectModeMenu";
-import SelectModeOptions from "./SelectModeOptions";
-import ConfigureFormMessage from "./ConfigureFormMessage";
-import ConfigureFormMeet from "./ConfigureFormMeet";
-import { selectModeTabs } from "@/context/TabsKeys";
-import Tabs from "@/packages/Tabs";
-import { CHAT_TYPES } from "@/context/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";
+import { CHAT_TYPES } from "@/context/constants";
+import { selectModeTabs } from "@/context/TabsKeys";
+import Tabs from "@/packages/Tabs";
 import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
+
+import ConfigureFormMeet from "./ConfigureFormMeet";
+import ConfigureFormMessage from "./ConfigureFormMessage";
+import SelectModeMenu from "./SelectModeMenu";
+import SelectModeOptions from "./SelectModeOptions";
 
 function ClientSelectMode(props) {
   const { onSelectMode, docId, activeTab, formsBackKey, onMenuItemSelected, chatType } = props;

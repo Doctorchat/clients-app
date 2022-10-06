@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
 import { memo } from "react";
+import PropTypes from "prop-types";
 
 function SidebarList(props) {
   const { data, rowKey, componentProps } = props;

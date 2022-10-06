@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
-import SidebarHeader from "./SidebarHeader";
+
+import cs from "@/utils/classNames";
+
 import SidebarBody from "./SidebarBody";
 import SidebarFooter from "./SidebarFooter";
-import cs from "@/utils/classNames";
+import SidebarHeader from "./SidebarHeader";
 
 export default function Sidebar(props) {
   const { id, className, children } = props;

@@ -1,16 +1,19 @@
-import PropTypes from "prop-types";
 import { Provider } from "react-redux";
-import Head from "next/head";
-import LocaleProvider from "antd/lib/locale-provider";
-import ru_RU from "antd/lib/locale-provider/ru_RU";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
+import ConfigProvider from "antd/lib/config-provider";
 import en_US from "antd/lib/locale-provider/en_US";
 import ro_RO from "antd/lib/locale-provider/ro_RO";
-import { TooltipProvider } from "@radix-ui/react-tooltip";
-import { store } from "../store";
-import MainLayout from "@/layouts/MainLayout";
+import ru_RU from "antd/lib/locale-provider/ru_RU";
+import Head from "next/head";
+import PropTypes from "prop-types";
+
 import NotificationsWrapper from "@/containers/NotificationsWrapper";
+import MainLayout from "@/layouts/MainLayout";
 import getActiveLng from "@/utils/getActiveLng";
+
 import "@/services/i18next";
+
+import { store } from "../store";
 
 // Styles
 import "../styles/global.scss";
@@ -42,10 +45,10 @@ export default function App({ Component, pageProps }) {
       </Head>
       <TooltipProvider delayDuration={0}>
         <Provider store={store}>
-          <LocaleProvider locale={antLocales[getActiveLng()]}>
+          <ConfigProvider locale={antLocales[getActiveLng()]}>
             <NotificationsWrapper />
             {getLayout(<Component {...pageProps} />)}
-          </LocaleProvider>
+          </ConfigProvider>
         </Provider>
       </TooltipProvider>
     </>

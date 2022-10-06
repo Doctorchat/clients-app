@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import MessageMeet from "./MessageMeet";
 
 export default function MessageType(props) {

@@ -1,9 +1,12 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
-import TabsContext from "../context/TabsContext";
-import Pane from "./Pane";
-import cs from "@/utils/classNames";
+import PropTypes from "prop-types";
+
 import usePrevious from "@/hooks/usePrevious";
+import cs from "@/utils/classNames";
+
+import TabsContext from "../context/TabsContext";
+
+import Pane from "./Pane";
 
 export default function Tabs(props) {
   const {

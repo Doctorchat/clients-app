@@ -1,15 +1,22 @@
-import { useTranslation } from "react-i18next";
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import PinInput from "react-pin-input";
-import EnterPhone from "./EnterPhone";
-import { PopupHeader, PopupContent } from "@/components/Popup";
+import { useDispatch, useSelector } from "react-redux";
+
+import Button from "@/components/Button";
+import { PopupContent,PopupHeader } from "@/components/Popup";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
-import { updateUserProperty } from "@/store/slices/userSlice";
 import { phoneConfirmationToggleVisibility } from "@/store/slices/phoneConfirmationSlice";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import Button from "@/components/Button";
+import { updateUserProperty } from "@/store/slices/userSlice";
+
+import EnterPhone from "./EnterPhone";
+
+
+
+
+
 
 const ConfirmPhone = React.memo(() => {
   const { t } = useTranslation();

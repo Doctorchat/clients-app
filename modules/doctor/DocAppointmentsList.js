@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+
+import AppointmentItem from "@/components/AppointmentItem";
 import List from "@/components/List";
 import SidebarList from "@/components/SidebarList";
 import { TransactionItemSkeleton } from "@/components/TransactionItem";
 import { getMeetingsList } from "@/store/actions";
-import AppointmentItem from "@/components/AppointmentItem";
 
 export default function DocAppointmentsList() {
   const { meetingsList } = useSelector((store) => ({

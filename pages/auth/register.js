@@ -1,17 +1,18 @@
-import { useForm } from "react-hook-form";
-import Link from "next/link";
-import { useTranslation } from "react-i18next";
 import { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { registerSchema } from "@/services/validation";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import AuthLayout from "@/layouts/AuthLayout";
+
+import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
-import Button from "@/components/Button";
-import { notification } from "@/store/slices/notificationsSlice";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import AuthLayout from "@/layouts/AuthLayout";
+import { registerSchema } from "@/services/validation";
 import { registerUser } from "@/store/actions";
+import { notification } from "@/store/slices/notificationsSlice";
 import getActiveLng from "@/utils/getActiveLng";
 
 export default function Register() {

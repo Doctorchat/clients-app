@@ -2,15 +2,16 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import Form from "@/components/Form";
-import Tabs, { Line } from "@/packages/Tabs";
-import Input, { Textarea } from "@/components/Inputs";
+
 import Button from "@/components/Button";
-import { editProfileSchema } from "@/services/validation";
+import Form from "@/components/Form";
+import Input, { Textarea } from "@/components/Inputs";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { updateUser } from "@/store/slices/userSlice";
-import { notification } from "@/store/slices/notificationsSlice";
+import Tabs, { Line } from "@/packages/Tabs";
 import api from "@/services/axios/api";
+import { editProfileSchema } from "@/services/validation";
+import { notification } from "@/store/slices/notificationsSlice";
+import { updateUser } from "@/store/slices/userSlice";
 
 const tabsKeys = {
   ro: "edit-ro",

@@ -1,11 +1,13 @@
 import { useCallback, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import MessageFormMain from "./MessageFormMain";
-import MessageFormConfirm from "./MessageFormConfirm";
+import { useDispatch,useSelector } from "react-redux";
+
 import Popup from "@/components/Popup";
+import { messageFormTabs } from "@/context/TabsKeys";
 import Tabs from "@/packages/Tabs";
 import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
-import { messageFormTabs } from "@/context/TabsKeys";
+
+import MessageFormConfirm from "./MessageFormConfirm";
+import MessageFormMain from "./MessageFormMain";
 
 export default function ClientMessageForm() {
   const { isOpen } = useSelector((store) => ({

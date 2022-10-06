@@ -1,7 +1,9 @@
-import PropTypes from "prop-types";
 import { memo } from "react";
+import PropTypes from "prop-types";
+
 import EmptyBox from "../EmptyBox";
 import ListLoading from "../ListLoading";
+
 import ListError from "./ListError";
 
 function List(props) {

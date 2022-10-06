@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { getConversationList } from "../actions";
 
 const initialState = {

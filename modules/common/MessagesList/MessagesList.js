@@ -1,10 +1,11 @@
-import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useMemo, useState } from "react";
 import dayjs from "dayjs";
+import PropTypes from "prop-types";
+
+import ChatFeedback from "@/components/ChatFeedback";
 import Message from "@/components/Message";
 import { IOSMonthDate } from "@/utils/date";
-import ChatFeedback from "@/components/ChatFeedback";
 
 export default function MessagesList(props) {
   const { chatId, docId, list } = props;

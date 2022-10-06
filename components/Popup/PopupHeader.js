@@ -1,10 +1,13 @@
-import PropTypes from "prop-types";
 import { useContext, useMemo } from "react";
+import PropTypes from "prop-types";
+
+import TimesIcon from "@/icons/times.svg";
+import cs from "@/utils/classNames";
+
 import { IconBtn } from "../Button";
 import Confirm from "../Confirm";
+
 import PopupContext from "./PopupContext";
-import cs from "@/utils/classNames";
-import TimesIcon from "@/icons/times.svg";
 
 export default function PopupHeader(props) {
   const { className, title } = props;

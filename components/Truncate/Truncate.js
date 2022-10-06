@@ -1,6 +1,6 @@
+import { useCallback, useMemo } from "react";
 import { t } from "i18next";
 import PropTypes from "prop-types";
-import { useCallback, useMemo } from "react";
 
 export default function Truncate(props) {
   const { text, length, onReadMore } = props;

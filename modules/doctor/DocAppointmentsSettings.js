@@ -1,20 +1,27 @@
 import { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import DocAppointmentsList from "./DocAppointmentsList";
-import TimePicker from "@/packages/TimePicker";
-import Sidebar from "@/components/Sidebar";
-import BackTitle from "@/components/BackTitle";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { leftSideTabs } from "@/context/TabsKeys";
-import Form from "@/components/Form";
-import Button from "@/components/Button";
+import { useDispatch, useSelector } from "react-redux";
+
 import Alert from "@/components/Alert";
+import BackTitle from "@/components/BackTitle";
+import Button from "@/components/Button";
+import Form from "@/components/Form";
+import Sidebar from "@/components/Sidebar";
+import { leftSideTabs } from "@/context/TabsKeys";
+import Tabs, { Line } from "@/packages/Tabs";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import TimePicker from "@/packages/TimePicker";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
-import Tabs, { Line } from "@/packages/Tabs";
+
+import DocAppointmentsList from "./DocAppointmentsList";
+
+
+
+
+
 
 const appointmentsTabs = {
   settings: "appointments-settings",

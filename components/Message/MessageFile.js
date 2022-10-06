@@ -1,9 +1,16 @@
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import Image from "../Image";
-import formatBytes from "@/utils/formatBytes";
+import PropTypes from "prop-types";
+
 import documnetPlaceholder from "@/imgs/doc.png";
 import cs from "@/utils/classNames";
+import formatBytes from "@/utils/formatBytes";
+
+import Image from "../Image";
+
+
+
+
+
 
 export default function MessageFile(props) {
   const { file, side } = props;

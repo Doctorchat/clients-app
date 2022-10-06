@@ -2,11 +2,12 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import Popup from "@/components/Popup";
-import DocInfo from "@/components/DocInfo";
-import { notification } from "@/store/slices/notificationsSlice";
-import api from "@/services/axios/api";
+
 import Button from "@/components/Button";
+import DocInfo from "@/components/DocInfo";
+import Popup from "@/components/Popup";
+import api from "@/services/axios/api";
+import { notification } from "@/store/slices/notificationsSlice";
 
 export default function ExternalDocList() {
   const [visible, setVisible] = useState(false);

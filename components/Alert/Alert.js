@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
-import cs from "@/utils/classNames";
+
 import WarnIcon from "@/icons/warning.svg";
+import cs from "@/utils/classNames";
 
 const alertIcons = {
   info: <WarnIcon />,

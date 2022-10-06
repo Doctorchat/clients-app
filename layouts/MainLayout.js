@@ -1,14 +1,15 @@
-import PropTypes from "prop-types";
-import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { LeftSide, PhoneConfirmation } from "@/modules/common";
+import dynamic from "next/dynamic";
+import PropTypes from "prop-types";
+
+import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import AuthWrapper from "@/containers/AuthWrapper";
 import Portal from "@/containers/Portal";
-import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
-import { getBootstrapData } from "@/store/actions";
+import { LeftSide, PhoneConfirmation } from "@/modules/common";
 import { DocStartConversation } from "@/modules/doctor";
+import { getBootstrapData } from "@/store/actions";
 
 const ClientStartConversation = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientStartConversation)

@@ -1,8 +1,9 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import Select from "@/components/Select";
+import PropTypes from "prop-types";
+
 import Search from "@/components/Search/Search";
+import Select from "@/components/Select";
 import Switch from "@/components/Switch";
 import { categoriesOptionsSelector } from "@/store/selectors";
 

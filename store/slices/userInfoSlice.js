@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { getUserInfo as getInfo } from "../actions";
 
 const initialState = {

@@ -1,8 +1,11 @@
-import PropTypes from "prop-types";
 import { Children, cloneElement, useCallback, useState } from "react";
-import LineContext from "../context/LineContext";
-import LineItem from "./LineItem";
+import PropTypes from "prop-types";
+
 import cs from "@/utils/classNames";
+
+import LineContext from "../context/LineContext";
+
+import LineItem from "./LineItem";
 
 export default function Line(props) {
   const { className, activeKey, updateTabsConfig, children } = props;

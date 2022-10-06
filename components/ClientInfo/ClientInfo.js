@@ -1,14 +1,16 @@
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Image from "../Image";
-import Skeleton from "../Skeleton";
+import PropTypes from "prop-types";
+
 import {
   allergiesOptions,
   diseasesOptions,
   epidemiologicalOptions,
 } from "@/context/staticSelectOpts";
 import getSelectLabel from "@/utils/getSelectLabel";
+
+import Image from "../Image";
+import Skeleton from "../Skeleton";
 
 export default function ClientInfo(props) {
   const { client, loading, selectedInvestigation } = props;

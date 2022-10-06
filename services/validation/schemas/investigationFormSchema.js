@@ -1,5 +1,6 @@
 import { mixed, number } from "yup";
-import { string, object } from "yup";
+import { object,string } from "yup";
+
 import i18next from "@/services/i18next";
 import isValidSelectOption from "@/utils/isValidSelectOption";
 

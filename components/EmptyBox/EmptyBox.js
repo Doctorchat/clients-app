@@ -1,8 +1,15 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Image from "../Image";
+import PropTypes from "prop-types";
+
 import emptyIcon from "@/imgs/empty-folder.png";
 import cs from "@/utils/classNames";
+
+import Image from "../Image";
+
+
+
+
+
 
 export default function EmptyBox(props) {
   const { t } = useTranslation();

@@ -1,12 +1,15 @@
-import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import PropTypes from "prop-types";
+
+import usePrevious from "@/hooks/usePrevious";
+import cs from "@/utils/classNames";
+
 import Confirm from "../Confirm";
+
+import PopupContent from "./PopupContent";
 import PopupContext from "./PopupContext";
 import PopupHeader from "./PopupHeader";
-import PopupContent from "./PopupContent";
-import cs from "@/utils/classNames";
-import usePrevious from "@/hooks/usePrevious";
 
 export default function Popup(props) {
   const { id, className, visible, children, onVisibleChange, onBeforeClose, confirmationClose } =

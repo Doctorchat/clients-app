@@ -1,15 +1,16 @@
-import PropTypes from "prop-types";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useCallback } from "react";
+import PropTypes from "prop-types";
+
+import { useDropdownContext } from "@/components/Dropdown";
 import Menu from "@/components/Menu";
+import { selectModeTabs } from "@/context/TabsKeys";
 import CommentIcon from "@/icons/comment.svg";
 import QuestionIcon from "@/icons/question.svg";
 import UsersIcon from "@/icons/users.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { selectModeTabs } from "@/context/TabsKeys";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
-import { useDropdownContext } from "@/components/Dropdown";
 
 export default function SelectModeMenu(props) {
   const { onSelect } = props;

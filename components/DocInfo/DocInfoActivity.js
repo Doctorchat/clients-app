@@ -1,13 +1,20 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Skeleton from "../Skeleton";
-import HeartIcon from "@/icons/heart.svg";
-import LikeIcon from "@/icons/like.svg";
-import StarIcon from "@/icons/star.svg";
+import PropTypes from "prop-types";
+
 import ClockIcon from "@/icons/clock.svg";
-import HospitalIcon from "@/icons/hospital.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
+import HeartIcon from "@/icons/heart.svg";
+import HospitalIcon from "@/icons/hospital.svg";
+import LikeIcon from "@/icons/like.svg";
 import ShieldIcon from "@/icons/shield.svg";
+import StarIcon from "@/icons/star.svg";
+
+import Skeleton from "../Skeleton";
+
+
+
+
+
 
 export default function DocInfoActivity(props) {
   const { activity, loading } = props;

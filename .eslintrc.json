@@ -13,6 +13,8 @@
     "plugin:react-hooks/recommended"
   ],
 
+  "plugins": ["simple-import-sort"],
+
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "warn",
@@ -20,9 +22,37 @@
     "react/jsx-uses-vars": "error",
     "react/no-unknown-property": "warn",
     "react/self-closing-comp": "error",
-    "import/order": "warn",
+    "import/order": "off",
     "no-console": "warn",
     "import/no-anonymous-default-export": "off",
     "@next/next/no-img-element": "off"
-  }
+  },
+
+  "overrides": [
+    // override "simple-import-sort" config
+    {
+      "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "warn",
+          {
+            "groups": [
+              // Packages `react` related packages come first.
+              ["^react", "^@?\\w"],
+              // Internal packages.
+              ["^(@|components)(/.*|$)"],
+              // Side effect imports.
+              ["^\\u0000"],
+              // Parent imports. Put `..` last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+              // Style imports.
+              ["^.+\\.?(css)$"]
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }

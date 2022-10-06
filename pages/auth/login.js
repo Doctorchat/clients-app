@@ -1,19 +1,20 @@
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { loginSchema } from "@/services/validation";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import AuthLayout from "@/layouts/AuthLayout";
+
+import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
-import Button from "@/components/Button";
-import { emulateLogin, loginUser } from "@/store/actions";
-import { notification } from "@/store/slices/notificationsSlice";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import FacebookLogo from "@/icons/facebook-logo.svg";
 import GoogleLogo from "@/icons/google-logo.svg";
+import AuthLayout from "@/layouts/AuthLayout";
+import { loginSchema } from "@/services/validation";
+import { emulateLogin, loginUser } from "@/store/actions";
+import { notification } from "@/store/slices/notificationsSlice";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);

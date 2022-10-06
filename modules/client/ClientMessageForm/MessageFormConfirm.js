@@ -1,20 +1,21 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { PopupContent, PopupHeader } from "@/components/Popup";
-import Button from "@/components/Button";
-import Input from "@/components/Inputs";
-import { messageFormTabs } from "@/context/TabsKeys";
+import { useDispatch, useSelector } from "react-redux";
+
 import BackTitle from "@/components/BackTitle";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import Button from "@/components/Button";
+import Checkbox from "@/components/Checkbox";
 import Form from "@/components/Form";
-import { notification } from "@/store/slices/notificationsSlice";
+import Input from "@/components/Inputs";
+import { PopupContent, PopupHeader } from "@/components/Popup";
+import { MESSAGE_TYPES } from "@/context/constants";
+import { messageFormTabs } from "@/context/TabsKeys";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
-import { MESSAGE_TYPES } from "@/context/constants";
-import Checkbox from "@/components/Checkbox";
+import { notification } from "@/store/slices/notificationsSlice";
 import { asPrice } from "@/utils/asPrice";
 
 const promoInputReplacer = (value) => {

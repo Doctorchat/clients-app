@@ -1,5 +1,6 @@
 import { number } from "yup";
-import { string, object, ref, array } from "yup";
+import { array,object, ref, string } from "yup";
+
 import i18next from "@/services/i18next";
 
 const docGeneral = object().shape({

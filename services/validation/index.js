@@ -1,12 +1,13 @@
 import "./locale";
-import loginSchema from "./schemas/loginSchema";
-import registerSchema from "./schemas/registerSchema";
-import editProfileSchema from "./schemas/editProfileSchema";
-import messageFormSchema from "./schemas/messageFormSchema";
-import investigationFormSchema from "./schemas/investigationFormSchema";
+
 import configureFormSchema from "./schemas/configureFormSchema";
+import editProfileSchema from "./schemas/editProfileSchema";
+import investigationFormSchema from "./schemas/investigationFormSchema";
+import loginSchema from "./schemas/loginSchema";
 import meetFormSchema from "./schemas/meetFormSchema";
+import messageFormSchema from "./schemas/messageFormSchema";
 import registerDoctorSchema from "./schemas/registerDoctorSchema";
+import registerSchema from "./schemas/registerSchema";
 import resetPasswordShcema from "./schemas/resetPasswordShcema";
 
 export {

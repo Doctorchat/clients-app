@@ -1,4 +1,5 @@
-import { string, object, ref } from "yup";
+import { object, ref,string } from "yup";
+
 import i18next from "@/services/i18next";
 
 const resetPasswordShcema = object().shape({

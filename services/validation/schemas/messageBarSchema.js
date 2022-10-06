@@ -1,4 +1,4 @@
-import { string, object } from "yup";
+import { object,string } from "yup";
 
 const messageFormSchema = object().shape({
   message: string().max(750),

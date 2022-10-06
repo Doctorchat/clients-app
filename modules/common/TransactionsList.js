@@ -1,17 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
-import Sidebar from "@/components/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import dynamic from "next/dynamic";
+
 import BackTitle from "@/components/BackTitle";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { leftSideTabs } from "@/context/TabsKeys";
 import List from "@/components/List";
+import Sidebar from "@/components/Sidebar";
 import SidebarList from "@/components/SidebarList";
 import TransactionItem, { TransactionItemSkeleton } from "@/components/TransactionItem";
-import { getTransactionsList } from "@/store/actions";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
+import { leftSideTabs } from "@/context/TabsKeys";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import { getTransactionsList } from "@/store/actions";
 
 const DocWallet = dynamic(() => import("@/modules/doctor").then((response) => response.DocWallet));
 

@@ -1,23 +1,30 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { EditProfileSecurity } from "../common";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { editProfileSchema } from "@/services/validation";
+import { useDispatch,useSelector } from "react-redux";
+
+import Button, { IconBtn } from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputNumber, Textarea } from "@/components/Inputs";
-import Button, { IconBtn } from "@/components/Button";
 import Select from "@/components/Select";
-import { categoriesOptionsSelector } from "@/store/selectors";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import PlusIcon from "@/icons/plus.svg";
+import TrashIcon from "@/icons/trash.svg";
+import Tabs, { Line } from "@/packages/Tabs";
 import api from "@/services/axios/api";
+import { editProfileSchema } from "@/services/validation";
+import { categoriesOptionsSelector } from "@/store/selectors";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
-import toSelectOpts from "@/utils/toSelectOpts";
-import TrashIcon from "@/icons/trash.svg";
-import PlusIcon from "@/icons/plus.svg";
 import getActiveLng from "@/utils/getActiveLng";
-import Tabs, { Line } from "@/packages/Tabs";
+import toSelectOpts from "@/utils/toSelectOpts";
+
+import { EditProfileSecurity } from "../common";
+
+
+
+
+
 
 const tabsKeys = {
   ro: "edit-ro",

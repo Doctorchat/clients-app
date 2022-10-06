@@ -1,14 +1,16 @@
-import PropTypes from "prop-types";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import Image from "../Image";
-import DcTooltip from "../DcTooltip";
-import cs from "@/utils/classNames";
+import PropTypes from "prop-types";
+
 import ClockIcon from "@/icons/clock.svg";
-import ShieldIcon from "@/icons/shield.svg";
-import LineIcon from "@/icons/line.svg";
-import VideoIcon from "@/icons/video.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
+import LineIcon from "@/icons/line.svg";
+import ShieldIcon from "@/icons/shield.svg";
+import VideoIcon from "@/icons/video.svg";
+import cs from "@/utils/classNames";
+
+import DcTooltip from "../DcTooltip";
+import Image from "../Image";
 
 function DocItem(props) {
   const {

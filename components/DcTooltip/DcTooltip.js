@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
 import React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import PropTypes from "prop-types";
 
 const DcTooltip = ({ children, content, side = "top", align = "center" }) => {
   return (

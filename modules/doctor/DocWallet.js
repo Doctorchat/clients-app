@@ -1,19 +1,20 @@
 import { useCallback, useState } from "react";
-import * as yup from "yup";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { InputNumber } from "@/components/Inputs";
+import * as yup from "yup";
+
 import Button from "@/components/Button";
+import Confirm from "@/components/Confirm";
+import Form from "@/components/Form";
+import { InputNumber } from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import Portal from "@/containers/Portal";
-import Form from "@/components/Form";
-import Confirm from "@/components/Confirm";
-import { notification } from "@/store/slices/notificationsSlice";
-import { updateUserProperty } from "@/store/slices/userSlice";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
+import { notification } from "@/store/slices/notificationsSlice";
 import { addTransaction } from "@/store/slices/transactionsListSlice";
+import { updateUserProperty } from "@/store/slices/userSlice";
 
 export default function DocWallet() {
   const { user } = useSelector((store) => ({

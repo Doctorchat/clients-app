@@ -1,16 +1,19 @@
-import PropTypes from "prop-types";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import Image from "../Image";
-import { IconBtn } from "../Button";
-import uploadHandler from "./uploadHandler";
-import UploadContext from "./UploadContext";
-import formatBytes from "@/utils/formatBytes";
-import cs from "@/utils/classNames";
-import documnetPlaceholder from "@/imgs/doc.png";
+import PropTypes from "prop-types";
+
 import TimesIcon from "@/icons/times.svg";
 import WarnIcon from "@/icons/warning.svg";
+import documnetPlaceholder from "@/imgs/doc.png";
 import api from "@/services/axios/api";
+import cs from "@/utils/classNames";
+import formatBytes from "@/utils/formatBytes";
+
+import { IconBtn } from "../Button";
+import Image from "../Image";
+
+import UploadContext from "./UploadContext";
+import uploadHandler from "./uploadHandler";
 
 export default function UploadFile(props) {
   const {

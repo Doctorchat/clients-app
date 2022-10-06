@@ -1,23 +1,24 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { messageFormSchema } from "@/services/validation";
+import { useDispatch, useSelector } from "react-redux";
+
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import { Textarea } from "@/components/Inputs";
+import { PopupContent,PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
-import { PopupHeader, PopupContent } from "@/components/Popup";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { messageFormTabs } from "@/context/TabsKeys";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-img.svg";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import { messageFormSchema } from "@/services/validation";
 import { messageUploadFile } from "@/store/actions";
-import { notification } from "@/store/slices/notificationsSlice";
 import {
   messageFormSetConfirmation,
   messageFormUpdateUploads,
 } from "@/store/slices/messageFormSlice";
+import { notification } from "@/store/slices/notificationsSlice";
 
 export default function MessageFormMain() {
   const {

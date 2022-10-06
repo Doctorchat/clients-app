@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+
 import Spinner from "../Spinner";
 
 const FullPageLoading = forwardRef((_, ref) => {

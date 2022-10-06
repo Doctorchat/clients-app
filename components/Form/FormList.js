@@ -1,6 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import PropTypes from "prop-types";
+
 import cs from "@/utils/classNames";
 
 export default function FormList(props) {

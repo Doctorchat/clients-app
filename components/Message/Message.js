@@ -1,22 +1,25 @@
-import PropTypes from "prop-types";
 import { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import Button, { IconBtn } from "../Button";
-import { Textarea } from "../Inputs";
-import Form from "../Form";
-import MessageType from "./MessageType";
-import MessageFile from "./MessageFile";
-import cs from "@/utils/classNames";
-import date from "@/utils/date";
+import PropTypes from "prop-types";
+
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
 import EditIcon from "@/icons/edit.svg";
-import { notification } from "@/store/slices/notificationsSlice";
 import api from "@/services/axios/api";
 import { chatContentUpdateMessage } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
+import { notification } from "@/store/slices/notificationsSlice";
+import cs from "@/utils/classNames";
+import date from "@/utils/date";
+
+import Button, { IconBtn } from "../Button";
+import Form from "../Form";
+import { Textarea } from "../Inputs";
+
+import MessageFile from "./MessageFile";
+import MessageType from "./MessageType";
 
 export default function Message(props) {
   const { id, content, updated, side, type, meet, seen, files, chatId, isLastMessage } = props;

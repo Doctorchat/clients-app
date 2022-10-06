@@ -1,11 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { PopupHeader, PopupContent } from "@/components/Popup";
-import DocInfo from "@/components/DocInfo";
+import { useDispatch, useSelector } from "react-redux";
+
 import BackTitle from "@/components/BackTitle";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import DocInfo from "@/components/DocInfo";
+import { PopupContent,PopupHeader } from "@/components/Popup";
 import { startConversationTabs } from "@/context/TabsKeys";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { getUserInfo } from "@/store/actions";
 import objectIsEmpty from "@/utils/objectIsEmpty";
 

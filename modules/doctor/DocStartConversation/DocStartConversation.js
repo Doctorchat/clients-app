@@ -1,18 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import Popup from "@/components/Popup";
-import List from "@/components/List";
+import { useRouter } from "next/router";
+
 import { DocItemSkeleton } from "@/components/DocItem";
 import DocList from "@/components/DocList";
-import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
-import { getDocList } from "@/store/actions";
-import api from "@/services/axios/api";
-import { setTempUserInfo } from "@/store/slices/userInfoSlice";
-import { notification } from "@/store/slices/notificationsSlice";
-import { addConversation } from "@/store/slices/conversationListSlice";
+import List from "@/components/List";
+import Popup from "@/components/Popup";
 import { ClientDocsSearch } from "@/modules/client";
+import api from "@/services/axios/api";
+import { getDocList } from "@/store/actions";
+import { addConversation } from "@/store/slices/conversationListSlice";
+import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
+import { notification } from "@/store/slices/notificationsSlice";
+import { setTempUserInfo } from "@/store/slices/userInfoSlice";
 
 export default function DocStartConversation() {
   const { t } = useTranslation();

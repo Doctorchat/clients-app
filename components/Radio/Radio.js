@@ -1,8 +1,10 @@
-import PropTypes from "prop-types";
 import { useContext, useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+
+import cs from "@/utils/classNames";
+
 import RadioGroup from "./RadioGroup";
 import RadioGroupContext from "./RadioGroupContext";
-import cs from "@/utils/classNames";
 
 export default function Radio(props) {
   const { name, onChange, groupValue } = useContext(RadioGroupContext);

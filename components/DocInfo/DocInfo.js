@@ -1,23 +1,26 @@
-import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Image from "../Image";
-import Button from "../Button";
-import Dropdown from "../Dropdown";
-import Skeleton from "../Skeleton";
-import Truncate from "../Truncate";
-import DocInfoActivity from "./DocInfoActivity";
-import DocReviews from "./DocReviews";
-import DocInfoAbout from "./DocInfoAbout";
-import Tabs, { Line } from "@/packages/Tabs";
+import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+
 import { docInfoTabs } from "@/context/TabsKeys";
 import { ClientSelectMode } from "@/modules/client";
-import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
+import Tabs, { Line } from "@/packages/Tabs";
 import { meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
+import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import cs from "@/utils/classNames";
 import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
+
+import Button from "../Button";
+import Dropdown from "../Dropdown";
+import Image from "../Image";
+import Skeleton from "../Skeleton";
+import Truncate from "../Truncate";
+
+import DocInfoAbout from "./DocInfoAbout";
+import DocInfoActivity from "./DocInfoActivity";
+import DocReviews from "./DocReviews";
 
 const selectedLng = getActiveLng();
 

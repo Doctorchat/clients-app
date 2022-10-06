@@ -1,6 +1,7 @@
-import PropTypes from "prop-types";
 import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
+import PropTypes from "prop-types";
+
 import Spinner from ".";
 
 export default function ContainerLoading(props) {

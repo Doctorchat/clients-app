@@ -1,20 +1,27 @@
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import SelectModeInvestigations from "./SelectModeInvestigations";
+import { useDispatch } from "react-redux";
+
 import BackTitle from "@/components/BackTitle";
-import { selectModeTabs } from "@/context/TabsKeys";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Switch from "@/components/Switch";
-import Button from "@/components/Button";
+import { selectModeTabs } from "@/context/TabsKeys";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
-import { notification } from "@/store/slices/notificationsSlice";
+import { configureFormSchema } from "@/services/validation";
 import { addConversation } from "@/store/slices/conversationListSlice";
 import { messageFormUpdateChatId } from "@/store/slices/messageFormSlice";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { configureFormSchema } from "@/services/validation";
+import { notification } from "@/store/slices/notificationsSlice";
+
+import SelectModeInvestigations from "./SelectModeInvestigations";
+
+
+
+
+
 
 export default function ConfigureFormMessage() {
   const { updateTabsConfig, docId, onSelectMode, onCreated, formsBackKey, chatType } =

@@ -1,25 +1,26 @@
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { registerDoctorSchema } from "@/services/validation";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+
+import Button, { IconBtn } from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputNumber, InputPhone, Textarea } from "@/components/Inputs";
-import Button, { IconBtn } from "@/components/Button";
-import { registerDoctor } from "@/store/actions";
-import { notification } from "@/store/slices/notificationsSlice";
+import Select from "@/components/Select";
+import Spinner from "@/components/Spinner";
+import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import PlusIcon from "@/icons/plus.svg";
 import TrashIcon from "@/icons/trash.svg";
-import Select from "@/components/Select";
-import { toSelectOpts } from "@/store/selectors";
-import api from "@/services/axios/api";
-import Spinner from "@/components/Spinner";
 import { ProfileChangeLang } from "@/modules/common";
+import api from "@/services/axios/api";
+import { registerDoctorSchema } from "@/services/validation";
+import { registerDoctor } from "@/store/actions";
+import { toSelectOpts } from "@/store/selectors";
+import { notification } from "@/store/slices/notificationsSlice";
 import getActiveLng from "@/utils/getActiveLng";
-import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 
 export default function BecomeDoctor() {
   const resolver = useYupValidationResolver(registerDoctorSchema);

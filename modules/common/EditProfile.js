@@ -1,19 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { useCallback, useRef, useState } from "react";
-import Sidebar from "@/components/Sidebar";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+
 import BackTitle from "@/components/BackTitle";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { leftSideTabs } from "@/context/TabsKeys";
-import Image from "@/components/Image";
-import useComponentByRole from "@/hooks/useComponentByRole";
-import { userRoles } from "@/context/constants";
 import { IconBtn } from "@/components/Button";
+import Image from "@/components/Image";
+import Sidebar from "@/components/Sidebar";
+import { userRoles } from "@/context/constants";
+import { leftSideTabs } from "@/context/TabsKeys";
+import useComponentByRole from "@/hooks/useComponentByRole";
 import EditIcon from "@/icons/edit.svg";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
-import validateFile from "@/utils/validateFile";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
+import validateFile from "@/utils/validateFile";
 
 const avatarAcceptExts = ".png,.jpeg,.jpg";
 

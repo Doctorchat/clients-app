@@ -1,13 +1,14 @@
 import { useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import { editProfileSchema } from "@/services/validation";
 import api from "@/services/axios/api";
+import { editProfileSchema } from "@/services/validation";
 import { notification } from "@/store/slices/notificationsSlice";
 
 export default function EditProfileSecurity() {

@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
-import SkeletonLine from "./SkeletonLine";
-import SkeletonCircle from "./SkeletonCircle";
+
 import cs from "@/utils/classNames";
+
+import SkeletonCircle from "./SkeletonCircle";
+import SkeletonLine from "./SkeletonLine";
 
 export default function Skeleton(props) {
   const { className, smooth, children } = props;

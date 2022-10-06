@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { getTransactionsList } from "../actions";
 
 const initialState = {

@@ -1,13 +1,14 @@
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Image from "@/components/Image";
-import cs from "@/utils/classNames";
-import Sidebar from "@/components/Sidebar";
+import { useSelector } from "react-redux";
+
 import BackTitle from "@/components/BackTitle";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import Image from "@/components/Image";
+import Sidebar from "@/components/Sidebar";
+import { userRoles } from "@/context/constants";
 import { leftSideTabs } from "@/context/TabsKeys";
 import useComponentByRole from "@/hooks/useComponentByRole";
-import { userRoles } from "@/context/constants";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import cs from "@/utils/classNames";
 
 export default function ProfileSidebar() {
   const { updateTabsConfig } = useTabsContext();

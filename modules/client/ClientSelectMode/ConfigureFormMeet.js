@@ -1,20 +1,27 @@
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import SelectModeInvestigations from "./SelectModeInvestigations";
+import { useDispatch } from "react-redux";
+
 import BackTitle from "@/components/BackTitle";
-import { selectModeTabs } from "@/context/TabsKeys";
-import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import Form from "@/components/Form";
 import Button from "@/components/Button";
-import api from "@/services/axios/api";
-import { notification } from "@/store/slices/notificationsSlice";
-import { addConversation } from "@/store/slices/conversationListSlice";
+import Form from "@/components/Form";
 import { CHAT_TYPES } from "@/context/constants";
-import { meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
+import { selectModeTabs } from "@/context/TabsKeys";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
+import api from "@/services/axios/api";
 import { configureFormSchema } from "@/services/validation";
+import { addConversation } from "@/store/slices/conversationListSlice";
+import { meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
+import { notification } from "@/store/slices/notificationsSlice";
+
+import SelectModeInvestigations from "./SelectModeInvestigations";
+
+
+
+
+
 
 export default function ConfigureFormMeet() {
   const { updateTabsConfig, docId, onSelectMode, onCreated } = useTabsContext();

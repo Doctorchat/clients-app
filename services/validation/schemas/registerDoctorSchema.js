@@ -1,5 +1,6 @@
-import { string, object, ref, number, array } from "yup";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import { array,number, object, ref, string } from "yup";
+
 import i18next from "@/services/i18next";
 
 const registerDoctorSchema = object().shape({

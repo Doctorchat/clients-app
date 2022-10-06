@@ -1,7 +1,8 @@
-import PropTypes from "prop-types";
-import i18next from "i18next";
-import { useSelector } from "react-redux";
 import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
+import i18next from "i18next";
+import PropTypes from "prop-types";
+
 import Dropdown from "@/components/Dropdown";
 import Menu from "@/components/Menu";
 import LangIcon from "@/icons/lang.svg";

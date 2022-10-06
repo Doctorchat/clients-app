@@ -1,17 +1,18 @@
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
-import { resetPasswordShcema } from "@/services/validation";
-import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import AuthLayout from "@/layouts/AuthLayout";
+
+import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
-import Button from "@/components/Button";
-import { notification } from "@/store/slices/notificationsSlice";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
+import { resetPasswordShcema } from "@/services/validation";
+import { notification } from "@/store/slices/notificationsSlice";
 
 export default function ResetPassword() {
   const resolver = useYupValidationResolver(resetPasswordShcema);

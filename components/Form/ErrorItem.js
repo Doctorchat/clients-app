@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import PropTypes from "prop-types";
 
 export default function Error(props) {
   const { error } = props;

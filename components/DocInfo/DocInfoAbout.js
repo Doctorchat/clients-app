@@ -1,8 +1,15 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Skeleton from "../Skeleton";
+import PropTypes from "prop-types";
+
 import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
+
+import Skeleton from "../Skeleton";
+
+
+
+
+
 
 const selectedLng = getActiveLng();
 

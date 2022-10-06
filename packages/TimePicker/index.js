@@ -1,10 +1,12 @@
-import PropTypes from "prop-types";
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import TP from "antd/lib/time-picker";
-import getMomentTime from "./getMomentTime";
-import getDisabledParts, { fullDay, fullHour } from "./getDisabledParts";
+import PropTypes from "prop-types";
+
 import cs from "@/utils/classNames";
+
+import getDisabledParts, { fullDay, fullHour } from "./getDisabledParts";
+import getMomentTime from "./getMomentTime";
 
 const TimePicker = forwardRef((props, ref) => {
   const {
