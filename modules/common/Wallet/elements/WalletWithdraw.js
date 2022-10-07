@@ -13,6 +13,7 @@ import { InputNumber } from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import Portal from "@/containers/Portal";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 
 const WalletWithdraw = (props) => {
@@ -35,11 +36,13 @@ const WalletWithdraw = (props) => {
   const onSubmitHandler = useCallback(
     async (values) => {
       try {
+        await api.wallet.withdrawn(values);
         setIsWithdrawModalOpen(false);
         queryClient.invalidateQueries(["wallet"]);
         queryClient.invalidateQueries(["wallet-transactions"]);
+        dispatch(notification({ title: "success", descrp: "withdraw_success" }));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(notification({ type: "error", title: "error", descrp: "withdraw_error" }));
       }
     },
     [dispatch, queryClient]

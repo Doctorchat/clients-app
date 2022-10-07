@@ -252,7 +252,7 @@
   "transactions": {
     "history": "Istoricul tranzactiilor",
     "empty": "Lista tranzacțiilor va apărea aici",
-    "top_up": "Пополнение",
+    "top_up": "Suplinire",
     "withdraw": "Retrage",
     "incoming": "Profit",
     "outgoing": "Cheltuieli",
@@ -260,7 +260,11 @@
     "success": "Cu succes",
     "cancel": "Fără succes",
     "withdraw_confirmation": "Ești sigur că vrei să retragi bani?",
-    "top_up_form": "Форма пополнения",
-    "withdraw_form": "Formular de retragere"
+    "top_up_form": "Formular de suplinire",
+    "withdraw_form": "Formular de retragere",
+    "withdraw_success": "Solicitarea de retragere a fost trimisă cu succes",
+    "withdraw_error": "Eroare la retragerea fondurilor",
+    "top_up_success": "Soldul dvs. a fost suplinit cu succes",
+    "top_up_error": "Eroare la suplinirea contului"
   }
 }

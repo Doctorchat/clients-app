@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 
+import EmptyBox from "@/components/EmptyBox";
 import CheckIcon from "@/icons/check.svg";
 import ClockIcon from "@/icons/clock.svg";
 import TimesIcon from "@/icons/times.svg";
@@ -87,6 +88,10 @@ const WalletTransactions = () => {
         </div>
       </div>
     );
+  }
+
+  if (!walletTransactions?.data?.length) {
+    return <EmptyBox className="mt-5" content={t("transactions.empty")} />;
   }
 
   return (

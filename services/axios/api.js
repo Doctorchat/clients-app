@@ -24,12 +24,6 @@ const api = {
     meetings: () => axiosInstance.get("/user/meetings"),
     resetPassword: (data) => axiosInstance.post("/auth/forgot-password", data),
     emulate: (data) => axiosInstance.post("/auth/emulate", data),
-    withdrawn: (data) =>
-      axiosInstance.post("/user/transactions/new", {
-        type: "outgoing",
-        category: "withdraw",
-        ...data,
-      }),
     restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
   },
   conversation: {
@@ -63,7 +57,13 @@ const api = {
     get: () => axiosInstance.get("/user/wallet"),
     transactions: () => axiosInstance.get("/user/transactions"),
     topup: (data) => axiosInstance.post("/user/wallet/topup", data),
-    withdraw: (data) => axiosInstance.post("/user/wallet/withdraw", data),
+    checkTopup: (topupId) => axiosInstance.get(`/user/wallet/topup/${topupId}`),
+    withdrawn: (data) =>
+      axiosInstance.post("/user/transactions/new", {
+        type: "outgoing",
+        category: "withdraw",
+        ...data,
+      }),
   },
 };
 

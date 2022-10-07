@@ -35,7 +35,7 @@ export default function DocWallet() {
   const onSubmitHandler = useCallback(
     async (values) => {
       try {
-        const response = await api.user.withdrawn(values);
+        const response = await api.wallet.withdrawn(values);
         dispatch(
           updateUserProperty({
             prop: "private",

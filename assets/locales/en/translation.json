@@ -261,6 +261,10 @@
     "cancel": "Cancel",
     "withdraw_confirmation": "Are you sure you want to withdraw funds?",
     "top_up_form": "Replenishment form",
-    "withdraw_form": "Withdrawal form"
+    "withdraw_form": "Withdrawal form",
+    "withdraw_success": "Withdrawal request successfully sent",
+    "withdraw_error": "Error withdrawing funds",
+    "top_up_success": "Your balance has been successfully topped up",
+    "top_up_error": "Error filling out the account"
   }
 }

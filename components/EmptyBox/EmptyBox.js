@@ -6,11 +6,6 @@ import cs from "@/utils/classNames";
 
 import Image from "../Image";
 
-
-
-
-
-
 export default function EmptyBox(props) {
   const { t } = useTranslation();
   const { className, title = t("no_data"), content = t("conversation_list_empty"), extra } = props;
