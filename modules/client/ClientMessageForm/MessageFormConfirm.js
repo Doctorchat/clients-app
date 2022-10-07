@@ -110,6 +110,9 @@ function MessageFormConfirmation() {
     }
   }, [values, chatId, promo.code, uploads, dispatch]);
 
+  const totalPrice = +price.total - +promo.sum;
+  const toPayPrice = Math.max(0, totalPrice - (walletData?.data?.balance ?? 0));
+
   return (
     <div className="popup-body message-from-confirm">
       <PopupHeader
@@ -256,25 +259,22 @@ function MessageFormConfirmation() {
                   {t("message_form_confirmation.total_price")}
                 </th>
                 <td className="dc-description-row-content">
-                  <span>{`${asPrice(+price.total - +promo.sum)}`}</span>
+                  <span>{`${asPrice(totalPrice)}`}</span>
                   {promo.code && <del className="ms-2">{`(${asPrice(+price.total)})`}</del>}
                 </td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("to_pay")}</th>
                 <td className="dc-description-row-content to-pay-row">
-                  {asPrice(
-                    Math.max(0, +price.total - +promo.sum - (walletData?.data?.balance ?? 0))
-                  )}
+                  {asPrice(toPayPrice)}
                   {walletData?.data?.balance > 0 && (
                     <span>
                       ({t("your_account_will_be_debited")}{" "}
                       <strong>
                         {asPrice(
-                          Math.min(
-                            +price.total - +promo.sum - walletData.data.balance,
-                            walletData.data.balance
-                          )
+                          totalPrice > walletData.data.balance
+                            ? walletData.data.balance
+                            : totalPrice
                         )}
                       </strong>
                       )

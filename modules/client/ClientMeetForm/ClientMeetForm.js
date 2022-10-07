@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Popup from "@/components/Popup";
 import { meetFormTabs } from "@/context/TabsKeys";
@@ -24,7 +24,10 @@ export default function ClientMeetForm() {
     []
   );
 
-  const visibilityHandler = (v) => dispatch(meetFormToggleVisibility(v));
+  const visibilityHandler = (v) => {
+    if (!v) updateTabsConfig(meetFormTabs.main, "next");
+    dispatch(meetFormToggleVisibility(v));
+  };
 
   return (
     <Popup id="meet-form" visible={isOpen} onVisibleChange={visibilityHandler}>

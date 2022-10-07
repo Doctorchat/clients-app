@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Popup from "@/components/Popup";
 import { messageFormTabs } from "@/context/TabsKeys";
@@ -24,7 +24,10 @@ export default function ClientMessageForm() {
     []
   );
 
-  const visibilityHandler = (v) => dispatch(messageFormToggleVisibility(v));
+  const visibilityHandler = (v) => {
+    if (!v) updateTabsConfig(messageFormTabs.main, "next");
+    dispatch(messageFormToggleVisibility(v));
+  };
 
   return (
     <Popup id="message-form" visible={isOpen} onVisibleChange={visibilityHandler}>
