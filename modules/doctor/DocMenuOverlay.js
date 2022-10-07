@@ -13,6 +13,7 @@ import LogoutIcon from "@/icons/logout.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import UserIcon from "@/icons/user.svg";
 import VideoIcon from "@/icons/video.svg";
+import WalletIcon from "@/icons/wallet.svg";
 import api from "@/services/axios/api";
 import { logoutUser } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
@@ -20,7 +21,7 @@ import { updateUserProperty } from "@/store/slices/userSlice";
 
 import { ProfileChangeLang } from "../common";
 
-import { DocSetVacation } from ".";
+import DocSetVacation from "./DocSetVacation";
 
 export default function DocMenuOverlay({ updateTabsConfig }) {
   const { user } = useSelector((store) => ({
@@ -57,6 +58,9 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
     <Menu>
       <Menu.Item icon={<UserIcon />} onClick={onTabsConfigChange(leftSideTabs.profile)}>
         {t("my_profile")}
+      </Menu.Item>
+      <Menu.Item icon={<WalletIcon />} onClick={onTabsConfigChange(leftSideTabs.wallet)}>
+        {t("wallet")}
       </Menu.Item>
       <Menu.Item icon={<VideoIcon />} onClick={onTabsConfigChange(leftSideTabs.appointments)}>
         {t("video_appointments")}
