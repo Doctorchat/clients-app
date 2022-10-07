@@ -57,7 +57,7 @@ export default function DocWallet() {
     <>
       <div className="doc-wallet">
         <div className="d-flex justify-content-center align-items-center mb-3">
-          <h3 className="total me-3">{user.private?.balance || "0.00"} Lei</h3>
+          <h3 className="total me-3">{user.private?.balance || "0.00"} L</h3>
           <Button
             size="sm"
             onClick={() => setIsWithdrawOpen(true)}

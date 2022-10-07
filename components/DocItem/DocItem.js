@@ -64,11 +64,11 @@ function DocItem(props) {
           <div className="doc-price d-flex align-items-center">
             <div className="text d-flex align-items-center">
               <CommentIcon />
-              <span>{text} Lei</span>
+              <span>{text} L</span>
             </div>
             <div className="video d-flex align-items-center">
               <VideoIcon />
-              <span>{video} Lei</span>
+              <span>{video} L</span>
             </div>
           </div>
         </div>

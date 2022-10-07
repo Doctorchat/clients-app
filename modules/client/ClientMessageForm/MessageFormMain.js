@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import { Textarea } from "@/components/Inputs";
-import { PopupContent,PopupHeader } from "@/components/Popup";
+import { PopupContent, PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
 import { messageFormTabs } from "@/context/TabsKeys";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
@@ -127,7 +127,7 @@ export default function MessageFormMain() {
               </div>
               <div className="message-form-bottom">
                 <div className="message-price">
-                  <span className="message-price-active">{basePrice + attachments.price} Lei</span>
+                  <span className="message-price-active">{basePrice + attachments.price} L</span>
                 </div>
                 <Button htmlType="submit" loading={loading}>
                   {t("continue")}

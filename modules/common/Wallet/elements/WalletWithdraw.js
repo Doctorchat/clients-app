@@ -40,9 +40,11 @@ const WalletWithdraw = (props) => {
         setIsWithdrawModalOpen(false);
         queryClient.invalidateQueries(["wallet"]);
         queryClient.invalidateQueries(["wallet-transactions"]);
-        dispatch(notification({ title: "success", descrp: "withdraw_success" }));
+        dispatch(notification({ title: "success", descrp: "transactions.withdraw_success" }));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "withdraw_error" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: "transactions.withdraw_error" })
+        );
       }
     },
     [dispatch, queryClient]

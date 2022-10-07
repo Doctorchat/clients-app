@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import { Textarea } from "@/components/Inputs";
-import { PopupContent,PopupHeader } from "@/components/Popup";
+import { PopupContent, PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
 import { meetFormTabs } from "@/context/TabsKeys";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
@@ -18,11 +18,6 @@ import { meetFormSetConfirmation, meetFormUpdateUploads } from "@/store/slices/m
 import { notification } from "@/store/slices/notificationsSlice";
 
 import MeetFormDateTime from "./MeetFormDateTime";
-
-
-
-
-
 
 export default function MeetFormMain() {
   const {
@@ -124,7 +119,7 @@ export default function MeetFormMain() {
                   <span className="message-price-active">
                     {(userInfo?.meet_price ?? chatUserInfo.data?.meet_price ?? 0) +
                       attachments.price}{" "}
-                    Lei
+                    L
                   </span>
                 </div>
                 <Button htmlType="submit" loading={loading}>

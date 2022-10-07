@@ -18,7 +18,7 @@ const WalletTopup = () => {
   const form = useForm({
     resolver: useYupValidationResolver(
       yup.object().shape({
-        amount: yup.number().min(5).required(),
+        amount: yup.number().min(1).required(),
       })
     ),
   });

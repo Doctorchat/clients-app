@@ -16,7 +16,7 @@ import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { meetFormReset, meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
-import { asPrice } from "@/utils/asPrice";
+import asPrice from "@/utils/asPrice";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -152,19 +152,19 @@ function MeetFormConfirmation() {
                 <th className="dc-description-row-label">
                   {t("message_form_confirmation.basic_price")}
                 </th>
-                <td className="dc-description-row-content">{`${asPrice(+price.doc)} Lei`}</td>
+                <td className="dc-description-row-content">{`${asPrice(+price.doc)}`}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{`${t(
                   "message_form_confirmation.files"
                 )}(${values.uploads_count})`}</th>
-                <td className="dc-description-row-content">{`+${asPrice(+price.uploads)} Lei`}</td>
+                <td className="dc-description-row-content">{`+${asPrice(+price.uploads)}`}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">
                   {t("message_form_confirmation.subtotal_price")}
                 </th>
-                <td className="dc-description-row-content">{`${asPrice(+price.subtotal)} Lei`}</td>
+                <td className="dc-description-row-content">{`${asPrice(+price.subtotal)}`}</td>
               </tr>
             </tbody>
           </table>
@@ -235,7 +235,7 @@ function MeetFormConfirmation() {
                       </span>
                       <span>
                         {t("message_form_confirmation.discount")}:{" "}
-                        <mark className="dc-mark">{promo.sum} Lei</mark>
+                        <mark className="dc-mark">{asPrice(+promo.sum)}</mark>
                       </span>
                     </>
                   ) : (
@@ -260,9 +260,9 @@ function MeetFormConfirmation() {
                   {t("message_form_confirmation.total_price")}
                 </th>
                 <td className="dc-description-row-content">
-                  <span>{`${asPrice(+price.total)} Lei`}</span>
+                  <span>{`${asPrice(+price.total)}`}</span>
                   {promo.code && (
-                    <del className="ms-2">{`${asPrice(+price.total + +promo.sum)} Lei`}</del>
+                    <del className="ms-2">{`${asPrice(+price.total + +promo.sum)}`}</del>
                   )}
                 </td>
               </tr>

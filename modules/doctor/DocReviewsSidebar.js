@@ -9,7 +9,7 @@ import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 
 export default function DocReviewsSidebar() {
-  const { t } = useTranslation;
+  const { t } = useTranslation();
   const { updateTabsConfig } = useTabsContext();
   const { user } = useSelector((store) => ({ user: store.user }));
 
