@@ -196,13 +196,13 @@ function MessageFormConfirmation() {
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("email")}</th>
                 <td className="dc-description-row-content">
-                  <a href="mailto:clienti@doctorchat.md">clienti@doctorchat.md</a>
+                  <a href="mailto:info@doctorchat.md">info@doctorchat.md</a>
                 </td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("phone")}</th>
                 <td className="dc-description-row-content">
-                  <a href="tel:+40 (0) 757316087">+40 (0) 757316087</a>
+                  <a href="tel:+373 78 272 887">+373 78 272 887</a>
                 </td>
               </tr>
             </tbody>
