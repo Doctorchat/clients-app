@@ -269,7 +269,15 @@ function MessageFormConfirmation() {
                   {walletData?.data?.balance > 0 && (
                     <span>
                       ({t("your_account_will_be_debited")}{" "}
-                      <strong>{asPrice(walletData.data.balance)}</strong>)
+                      <strong>
+                        {asPrice(
+                          Math.min(
+                            +price.total - +promo.sum - walletData.data.balance,
+                            walletData.data.balance
+                          )
+                        )}
+                      </strong>
+                      )
                     </span>
                   )}
                 </td>
