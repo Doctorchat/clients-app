@@ -131,3 +131,12 @@
     color: var(--bs-primary);
   }
 }
+
+.to-pay-row {
+  font-weight: 500;
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 6px;
+  }
+}

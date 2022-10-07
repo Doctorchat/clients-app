@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 
 import BackTitle from "@/components/BackTitle";
 import Button from "@/components/Button";
@@ -40,6 +41,12 @@ function MessageFormConfirmation() {
   const form = useForm();
   const dispatch = useDispatch();
 
+  const { data: walletData } = useQuery(["wallet"], () => api.wallet.get(), {
+    keepPreviousData: true,
+    refetchInterval: 0,
+    refetchOnWindowFocus: false,
+  });
+
   useEffect(() => {
     setPrice({
       doc: values.price,
@@ -58,7 +65,6 @@ function MessageFormConfirmation() {
         const discount = response.data / 100;
         const discoutedPrice = price.total - price.total * discount;
 
-        setPrice((prev) => ({ ...prev, total: discoutedPrice }));
         setPromo({ code, sum: parseFloat(price.subtotal - discoutedPrice).toFixed(2) });
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: "invalid_promo" }));
@@ -250,9 +256,21 @@ function MessageFormConfirmation() {
                   {t("message_form_confirmation.total_price")}
                 </th>
                 <td className="dc-description-row-content">
-                  <span>{`${asPrice(+price.total)}`}</span>
-                  {promo.code && (
-                    <del className="ms-2">{`(${asPrice(+price.total + +promo.sum)})`}</del>
+                  <span>{`${asPrice(+price.total - +promo.sum)}`}</span>
+                  {promo.code && <del className="ms-2">{`(${asPrice(+price.total)})`}</del>}
+                </td>
+              </tr>
+              <tr className="dc-description-row">
+                <th className="dc-description-row-label">{t("to_pay")}</th>
+                <td className="dc-description-row-content to-pay-row">
+                  {asPrice(
+                    Math.max(0, +price.total - +promo.sum - (walletData?.data?.balance ?? 0))
+                  )}
+                  {walletData?.data?.balance > 0 && (
+                    <span>
+                      ({t("your_account_will_be_debited")}{" "}
+                      <strong>{asPrice(walletData.data.balance)}</strong>)
+                    </span>
                   )}
                 </td>
               </tr>
