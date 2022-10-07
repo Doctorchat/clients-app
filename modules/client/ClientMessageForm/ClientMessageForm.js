@@ -25,7 +25,7 @@ export default function ClientMessageForm() {
   );
 
   const visibilityHandler = (v) => {
-    if (!v) updateTabsConfig(messageFormTabs.main, "next");
+    if (!v) updateTabsConfig(messageFormTabs.main, "prev")();
     dispatch(messageFormToggleVisibility(v));
   };
 

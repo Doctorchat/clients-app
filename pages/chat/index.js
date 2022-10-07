@@ -28,8 +28,11 @@ export default function ColumnCenter() {
   }, [id]);
 
   useEffect(() => {
-    if (chatContent.content?.user_id) dispatch(getChatUserInfo(chatContent.content.user_id));
-  }, [dispatch, chatContent.content?.user_id]);
+    if (chatContent.content?.user_id)
+      dispatch(
+        getChatUserInfo({ id: chatContent.content.user_id, isAnonym: chatContent.content.isAnonym })
+      );
+  }, [dispatch, chatContent.content]);
 
   return (
     <>

@@ -25,7 +25,7 @@ export default function ClientMeetForm() {
   );
 
   const visibilityHandler = (v) => {
-    if (!v) updateTabsConfig(meetFormTabs.main, "next");
+    if (!v) updateTabsConfig(meetFormTabs.main, "prev")();
     dispatch(meetFormToggleVisibility(v));
   };
 
