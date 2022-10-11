@@ -24,7 +24,10 @@ export default function ProfileChangeLang({ onUpdate }) {
     (lng) => async () => {
       setChangeLngLoading(lng);
 
-      if (user.isAuthorized) await api.user.changeLocale(lng);
+      if (user.isAuthorized) {
+        await api.user.changeLocale(lng);
+        window.location.reload();
+      }
       if (onUpdate) onUpdate(lng);
 
       setChangeLngLoading(null);

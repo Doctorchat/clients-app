@@ -10,3 +10,7 @@ const getActiveLng = () => {
 };
 
 export default getActiveLng;
+
+export const getInstanceTranlation = (key) => {
+  return i18nextlocal.t(key, { lng: getActiveLng() });
+};
