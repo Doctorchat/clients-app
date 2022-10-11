@@ -1,4 +1,4 @@
-import { forwardRef,useRef } from "react";
+import { forwardRef, useRef } from "react";
 import PhoneInput from "react-phone-number-input";
 import PropTypes from "prop-types";
 
@@ -34,7 +34,6 @@ const InputPhone = forwardRef((props, ref) => {
           className={cs(className, "dc-input", inputSizeClassName.current)}
           disabled={disabled}
           onChange={onChangeHanlder}
-          countryCallingCodeEditable={false}
           international
           defaultCountry="MD"
         />

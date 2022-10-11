@@ -8,20 +8,23 @@ import { useRouter } from "next/router";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
+import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import { registerSchema } from "@/services/validation";
 import { registerUser } from "@/store/actions";
-import { notification } from "@/store/slices/notificationsSlice";
 import getActiveLng from "@/utils/getActiveLng";
 
 export default function Register() {
+  const { t } = useTranslation();
+
   const resolver = useYupValidationResolver(registerSchema);
   const form = useForm({ resolver });
-  const [loading, setLoading] = useState(false);
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
+  const setFormApiErrors = useApiErrorsWithForm(form, dispatch);
+
+  const [loading, setLoading] = useState(false);
 
   const onRegisterSubmit = useCallback(
     async (values) => {
@@ -35,12 +38,12 @@ export default function Register() {
         await dispatch(registerUser(data));
         router.push("/");
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        setFormApiErrors(error);
       } finally {
         setLoading(false);
       }
     },
-    [dispatch, router]
+    [dispatch, router, setFormApiErrors]
   );
 
   return (
