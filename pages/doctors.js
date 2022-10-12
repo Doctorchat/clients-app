@@ -1,15 +1,22 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import BackTitle from "@/components/BackTitle";
+import { IconBtn } from "@/components/Button";
 import { DocItemSkeleton } from "@/components/DocItem";
 import DocList from "@/components/DocList";
+import Dropdown from "@/components/Dropdown";
 import List from "@/components/List";
+import Menu from "@/components/Menu";
 import Search from "@/components/Search/Search";
 import SidebarHeader from "@/components/Sidebar/SidebarHeader";
-import { ExternalDocList } from "@/modules/common";
+import BarsIcon from "@/icons/bars.svg";
+import HomeIcon from "@/icons/home.svg";
+import { ExternalDocList, ProfileChangeLang } from "@/modules/common";
 import api from "@/services/axios/api";
+import getActiveLng from "@/utils/getActiveLng";
 
 export default function Doctors() {
   const [doctors, setDoctors] = useState([]);
@@ -31,7 +38,7 @@ export default function Doctors() {
 
   useEffect(() => {
     api.docList
-      .get({ external: true })
+      .get({ external: true, locale: getActiveLng() })
       .then((res) => {
         setDoctors(res.data);
       })
@@ -48,14 +55,28 @@ export default function Doctors() {
     [router]
   );
 
+  if (typeof window !== "undefined" && loading) return null;
+
   return (
     <div className="external-doc-list">
       <ExternalDocList />
       <SidebarHeader>
-        <BackTitle
-          title={t("home_page")}
-          onBack={() => (window.location.href = "https://doctorchat.md/")}
-        />
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item icon={<HomeIcon />} className="home-item">
+                <Link href="https://doctorchat.md/">
+                  <a>{t("home_page")}</a>
+                </Link>
+              </Menu.Item>
+              <ProfileChangeLang />
+            </Menu>
+          }
+          placement="bottomRight"
+        >
+          <IconBtn size="sm" icon={<BarsIcon />} />
+        </Dropdown>
+        <BackTitle className="ms-2" title={t("list_of_doctor")} />
       </SidebarHeader>
       <div className="search-bar mb-3">
         <Search

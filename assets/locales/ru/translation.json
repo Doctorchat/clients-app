@@ -267,5 +267,6 @@
     "top_up_error": "Ошибка при пополнении"
   },
   "to_pay": "К оплате",
-  "your_account_will_be_debited": "С вашего счета будет списаны"
+  "your_account_will_be_debited": "С вашего счета будет списаны",
+  "list_of_doctor": "Список врачей"
 }

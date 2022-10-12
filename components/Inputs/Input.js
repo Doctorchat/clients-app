@@ -1,4 +1,4 @@
-import { forwardRef,useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import cs from "@/utils/classNames";
@@ -29,7 +29,7 @@ const Input = forwardRef((props, ref) => {
   const inputSizeClassName = useRef(sizeClassName[size]);
 
   const activeStatusHandler = () => {
-    if (Boolean(value)  || placeholder) setIsActive(true);
+    if (Boolean(value) || placeholder) setIsActive(true);
     else setIsActive(false);
   };
 

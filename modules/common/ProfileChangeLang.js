@@ -70,7 +70,7 @@ export default function ProfileChangeLang({ onUpdate }) {
     <Dropdown
       overlay={options}
       className="lang-list-dropdown"
-      placement="topRight"
+      placement="bottomRight"
       forcedClose={dropdownForcedClose}
     >
       <Menu.Item icon={<LangIcon />}>{langs[getActiveLng()]}</Menu.Item>
