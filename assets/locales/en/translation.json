@@ -268,5 +268,6 @@
     "top_up_error": "Error filling out the account"
   },
   "to_pay": "To pay",
-  "your_account_will_be_debited": "Your account will be debited with"
+  "your_account_will_be_debited": "Your account will be debited with",
+  "list_of_doctor": "List of doctors"
 }

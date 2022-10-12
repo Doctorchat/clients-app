@@ -268,5 +268,6 @@
     "top_up_error": "Eroare la suplinirea contului"
   },
   "to_pay": "Spre plată",
-  "your_account_will_be_debited": "Contul dvs. va fi debitat cu"
+  "your_account_will_be_debited": "Contul dvs. va fi debitat cu",
+  "list_of_doctor": "Lista de doctori"
 }
