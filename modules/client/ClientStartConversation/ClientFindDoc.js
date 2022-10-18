@@ -1,28 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 
 import { DocItemSkeleton } from "@/components/DocItem";
 import DocList from "@/components/DocList/";
 import List from "@/components/List";
-import { PopupContent,PopupHeader } from "@/components/Popup";
+import { PopupContent, PopupHeader } from "@/components/Popup";
 import { ContainerLoading } from "@/components/Spinner";
 import { startConversationTabs } from "@/context/TabsKeys";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
-import { getDocList } from "@/store/actions";
+import api from "@/services/axios/api";
 import { setTempUserInfo, setUserSelectedId } from "@/store/slices/userInfoSlice";
 
-import { ClientDocsSearch } from "..";
-
-
-
-
-
+import ClientDocsSearch from "../ClientDocsSearch";
 
 export default function ClientFindDoc() {
-  const { docSelectList } = useSelector((store) => ({
-    docSelectList: store.docSelectList,
-  }));
   const [currentList, setCurrentList] = useState([]);
   const [searchConfig, setSearchConfig] = useState({
     list: [],
@@ -33,9 +26,19 @@ export default function ClientFindDoc() {
     online: false,
     category: null,
   });
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { updateTabsConfig } = useTabsContext();
   const dispatch = useDispatch();
+
+  const {
+    data: doctors,
+    isFetching,
+    isFetched,
+    isError,
+  } = useQuery(["doctors", i18n.language], () => api.docList.get({ locale: i18n.language }), {
+    keepPreviousData: true,
+    placeholderData: { data: [] },
+  });
 
   const filterList = useCallback(
     (list) => {
@@ -58,12 +61,8 @@ export default function ClientFindDoc() {
 
   useEffect(() => {
     if (searchConfig.active) setCurrentList(filterList(searchConfig.list));
-    else setCurrentList(filterList(docSelectList.data));
-  }, [docSelectList.data, filterList, searchConfig]);
-
-  useEffect(() => {
-    dispatch(getDocList());
-  }, [dispatch]);
+    else setCurrentList(filterList(doctors.data));
+  }, [doctors, filterList, searchConfig]);
 
   const onDocClick = useCallback(
     (info) => () => {
@@ -84,18 +83,17 @@ export default function ClientFindDoc() {
       <PopupContent>
         <ClientDocsSearch
           updateSearchConfig={updateSearchConfig}
-          localList={docSelectList.data}
+          localList={doctors.data}
           filters={filters}
           setFilters={setFilters}
         />
         <List
-          loaded={docSelectList.isLoaded}
           loadingConfig={{
-            status: docSelectList.isLoading,
+            status: !isFetched && isFetching,
             skeleton: DocItemSkeleton,
             className: "doclist",
           }}
-          errorConfig={{ status: docSelectList.isError }}
+          errorConfig={{ status: isError }}
           emptyConfig={{
             status: !currentList.length,
             className: "pt-4",

@@ -9,11 +9,6 @@ import { messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 
 import { ClientSelectMode } from ".";
 
-
-
-
-
-
 export default function ClientStartConversationMenu(props) {
   const { children, placement } = props;
   const [chatType, setChatType] = useState("");

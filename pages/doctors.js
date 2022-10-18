@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -16,35 +17,35 @@ import BarsIcon from "@/icons/bars.svg";
 import HomeIcon from "@/icons/home.svg";
 import { ExternalDocList, ProfileChangeLang } from "@/modules/common";
 import api from "@/services/axios/api";
-import getActiveLng from "@/utils/getActiveLng";
 
 export default function Doctors() {
-  const [doctors, setDoctors] = useState([]);
   const [currentList, setCurrentList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [searchConfig, setSearchConfig] = useState({
     list: [],
     active: false,
     loading: false,
   });
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const {
+    data: doctors,
+    isFetching,
+    isFetched,
+    isError,
+  } = useQuery(
+    ["doctors", i18n.language],
+    () => api.docList.get({ external: true, locale: i18n.language }),
+    {
+      keepPreviousData: true,
+      placeholderData: { data: [] },
+    }
+  );
 
   useEffect(() => {
     if (searchConfig.active) setCurrentList(searchConfig.list);
-    else setCurrentList(doctors);
-  }, [doctors, searchConfig]);
-
-  useEffect(() => {
-    api.docList
-      .get({ external: true, locale: getActiveLng() })
-      .then((res) => {
-        setDoctors(res.data);
-      })
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
+    else setCurrentList(doctors.data);
+  }, [doctors.data, searchConfig]);
 
   const updateSearchConfig = (actionType, value) => {
     setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
@@ -55,7 +56,7 @@ export default function Doctors() {
     [router]
   );
 
-  if (typeof window !== "undefined" && loading) return null;
+  if (typeof window === "undefined") return null;
 
   return (
     <div className="external-doc-list">
@@ -81,20 +82,20 @@ export default function Doctors() {
       <div className="search-bar mb-3">
         <Search
           placeholder={t("conversation_search_placeholder")}
-          localList={doctors}
+          localList={doctors.data}
           updateSearchConfig={updateSearchConfig}
           searchKeys={["name", "category"]}
         />
       </div>
       <List
         loadingConfig={{
-          status: loading,
+          status: !isFetched && isFetching,
           skeleton: DocItemSkeleton,
           className: "doclist",
         }}
-        errorConfig={{ status: error }}
+        errorConfig={{ status: isError }}
         emptyConfig={{
-          status: !doctors.length,
+          status: !doctors.data.length,
           className: "pt-4",
           content: t("doctor_list_empty"),
         }}
