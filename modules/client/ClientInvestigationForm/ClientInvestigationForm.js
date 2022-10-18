@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -13,6 +13,7 @@ import {
   diseasesOptions,
   epidemiologicalOptions,
 } from "@/context/staticSelectOpts";
+import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import { investigationFormSchema } from "@/services/validation";
@@ -32,6 +33,7 @@ export default function ClientInvestigationForm() {
   const form = useForm({ resolver });
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const setFormApiErrors = useApiErrorsWithForm(form, dispatch);
 
   useEffect(() => {
     if (!isOpen) setFormEdited(false);
@@ -91,8 +93,8 @@ export default function ClientInvestigationForm() {
         setFormEdited(false);
       };
 
-      const onError = () => {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+      const onError = (error) => {
+        setFormApiErrors(error);
       };
 
       if (isEditing) {
@@ -101,7 +103,7 @@ export default function ClientInvestigationForm() {
         onAddNewInvestigation(data, { onSuccess, onError });
       }
     },
-    [dispatch, isEditing, values]
+    [dispatch, setFormApiErrors, isEditing, values]
   );
 
   return (
