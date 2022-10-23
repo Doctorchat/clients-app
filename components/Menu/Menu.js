@@ -4,11 +4,6 @@ import cs from "@/utils/classNames";
 
 import MenuItem from "./MenuItem";
 
-
-
-
-
-
 export default function Menu(props) {
   const { className, children } = props;
 

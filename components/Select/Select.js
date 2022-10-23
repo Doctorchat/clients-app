@@ -41,7 +41,6 @@ const Select = forwardRef((props, ref) => {
     label,
     name,
     onBlur,
-    animateLabel,
     ...rest
   } = props;
   const [isActive, setIsActive] = useState(false);
@@ -77,14 +76,7 @@ const Select = forwardRef((props, ref) => {
   return (
     <>
       {label && (
-        <label
-          className={cs(
-            "form-control-label",
-            isActive && "is-active",
-            !animateLabel && "no-animation"
-          )}
-          htmlFor={name}
-        >
+        <label className={cs("form-control-label", isActive && "is-active")} htmlFor={name}>
           {label}
         </label>
       )}
@@ -134,7 +126,6 @@ Select.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   onBlur: PropTypes.func,
-  animateLabel: PropTypes.bool,
 };
 
 Select.defaultProps = {

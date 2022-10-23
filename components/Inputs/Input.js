@@ -20,7 +20,6 @@ const Input = forwardRef((props, ref) => {
     value,
     onBlur,
     placeholder,
-    animateLabel,
     onChange,
     pattern,
     ...rest
@@ -55,14 +54,7 @@ const Input = forwardRef((props, ref) => {
   return (
     <>
       {label && (
-        <label
-          className={cs(
-            "form-control-label",
-            isActive && "is-active",
-            !animateLabel && "no-animation"
-          )}
-          htmlFor={name}
-        >
+        <label className={cs("form-control-label", isActive && "is-active")} htmlFor={name}>
           {label}
         </label>
       )}
@@ -99,7 +91,6 @@ Input.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
-  animateLabel: PropTypes.bool,
   placeholder: PropTypes.string,
   pattern: PropTypes.func,
 };

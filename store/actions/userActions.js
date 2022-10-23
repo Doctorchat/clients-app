@@ -3,11 +3,6 @@ import i18next from "@/services/i18next";
 
 import { setUserAuthorized, setUserUnauthorized } from "../slices/userSlice";
 
-
-
-
-
-
 export const fetchUserByToken = () => async (dispatch) => {
   try {
     const response = await api.user.get();

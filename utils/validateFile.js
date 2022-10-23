@@ -2,6 +2,7 @@
  * @typedef {Object} Error
  * @property {string} type - The Error type
  * @property {string} message - The Error message
+ * @property {string} error_code - The Error code
  */
 
 /**
@@ -10,7 +11,7 @@
  * @param {String} [accept] eg: .png,.jpg
  * @returns {(Error|Boolean)}
  */
-export default function validateFile(file, maxSize = 2048, accept = null) {
+export default function validateFile(file, maxSize = 10240, accept = null) {
   const fsize = Math.round(file.size / 1024);
   const allowedExtensions = accept
     ? new RegExp(

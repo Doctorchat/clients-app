@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 
 import Button from "@/components/Button";
@@ -12,9 +12,15 @@ import Portal from "@/containers/Portal";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
+import { toggleTopUpModal } from "@/store/slices/userSlice";
 
 const WalletTopup = () => {
   const { t } = useTranslation();
+
+  const { isTopUpVisible } = useSelector((store) => ({
+    isTopUpVisible: store.user.isTopUpVisible,
+  }));
+
   const form = useForm({
     resolver: useYupValidationResolver(
       yup.object().shape({
@@ -22,9 +28,8 @@ const WalletTopup = () => {
       })
     ),
   });
-  const dispatch = useDispatch();
 
-  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const onSubmitHandler = useCallback(
     async (values) => {
@@ -41,15 +46,15 @@ const WalletTopup = () => {
   return (
     <>
       <div className="d-flex align-items-center justify-content-center mt-3">
-        <Button className="w-100" size="sm" onClick={() => setIsDepositModalOpen(true)}>
+        <Button className="w-100" size="sm" onClick={() => dispatch(toggleTopUpModal(true))}>
           {t("transactions.top_up")}
         </Button>
       </div>
       <Portal portalName="modalRoot">
         <Popup
           id="deposit-popup"
-          visible={isDepositModalOpen}
-          onVisibleChange={setIsDepositModalOpen}
+          visible={isTopUpVisible}
+          onVisibleChange={(v) => dispatch(toggleTopUpModal(v))}
         >
           <Popup.Header title={t("transactions.top_up_form")} />
           <Popup.Content>
@@ -62,7 +67,7 @@ const WalletTopup = () => {
                   className="me-2"
                   type="outline"
                   size="sm"
-                  onClick={() => setIsDepositModalOpen(false)}
+                  onClick={() => dispatch(toggleTopUpModal(false))}
                 >
                   {t("cancel")}
                 </Button>

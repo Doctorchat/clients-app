@@ -9,7 +9,7 @@ import { leftSideTabs } from "@/context/TabsKeys";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 
-import { WalletBalance, WalletTopup, WalletTransactions, WalletWithdraw } from "./elements";
+import { WalletBalance, WalletTransactions, WalletWithdraw } from "./elements";
 
 const Wallet = () => {
   const { t } = useTranslation();
@@ -31,10 +31,6 @@ const Wallet = () => {
         <div className="scrollable scrollable-y px-4">
           <div className="py-2">
             <WalletBalance />
-
-            <AuthRoleWrapper roles={[userRoles.get("client")]}>
-              <WalletTopup />
-            </AuthRoleWrapper>
 
             <AuthRoleWrapper extraValidation={!isLoading} roles={[userRoles.get("doctor")]}>
               <WalletWithdraw balance={walletData?.data?.balance} />

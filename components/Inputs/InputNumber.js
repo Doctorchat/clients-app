@@ -1,4 +1,4 @@
-import { forwardRef,useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import cs from "@/utils/classNames";
@@ -25,7 +25,6 @@ const InputNumber = forwardRef((props, ref) => {
     onBlur,
     onChange,
     placeholder,
-    animateLabel,
     addonAfter,
     addonBefore,
     format,
@@ -35,7 +34,7 @@ const InputNumber = forwardRef((props, ref) => {
   const inputSizeClassName = useRef(sizeClassName[size]);
 
   const activeStatusHandler = () => {
-    if (Boolean(value)  || placeholder) setIsActive(true);
+    if (Boolean(value) || placeholder) setIsActive(true);
     else setIsActive(false);
   };
 
@@ -84,7 +83,6 @@ const InputNumber = forwardRef((props, ref) => {
           className={cs(
             "form-control-label",
             isActive && "is-active",
-            !animateLabel && "no-animation",
             addonBefore && "input-number-prefix"
           )}
           htmlFor={name}
@@ -131,7 +129,6 @@ InputNumber.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
-  animateLabel: PropTypes.bool,
   placeholder: PropTypes.string,
   addonAfter: PropTypes.node,
   addonBefore: PropTypes.node,

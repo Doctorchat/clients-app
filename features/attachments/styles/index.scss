@@ -1,0 +1,8 @@
+@import "./confirmation-popup.scss";
+@import "./request-image-message.scss";
+@import "./request-image-popup.scss";
+
+.chat-attachments-dropdown .dropdown-overlay.topRight {
+  bottom: calc(100% + 8px);
+  left: -5px;
+}

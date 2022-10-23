@@ -12,11 +12,6 @@ import cs from "@/utils/classNames";
 
 import { IconBtn } from "../Button";
 
-
-
-
-
-
 export const defaultNotificationData = {
   duration: 3000,
   type: "success",

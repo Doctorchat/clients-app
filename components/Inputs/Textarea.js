@@ -1,4 +1,4 @@
-import { forwardRef,useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
 import cs from "@/utils/classNames";
@@ -19,7 +19,6 @@ const Textarea = forwardRef((props, ref) => {
     name,
     value,
     onBlur,
-    animateLabel,
     minHeight,
     removePaddings,
     maxHeight,
@@ -66,7 +65,8 @@ const Textarea = forwardRef((props, ref) => {
       node.style.minHeight = `${minHeight || node.scrollHeight}px`;
       node.style.height = `${minHeight}px`;
       node.addEventListener("input", adjustHeight);
-      ref(textareaRef.current);
+
+      if (ref) ref(textareaRef.current);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -84,14 +84,7 @@ const Textarea = forwardRef((props, ref) => {
   return (
     <>
       {label && (
-        <label
-          className={cs(
-            "form-control-label",
-            isActive && "is-active",
-            !animateLabel && "no-animation"
-          )}
-          htmlFor={name}
-        >
+        <label className={cs("form-control-label", isActive && "is-active")} htmlFor={name}>
           {label}
         </label>
       )}
@@ -128,7 +121,6 @@ Textarea.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
-  animateLabel: PropTypes.bool,
   minHeight: PropTypes.number,
   removePaddings: PropTypes.bool,
   maxHeight: PropTypes.number,

@@ -24,6 +24,7 @@ export default function Confirm(props) {
   } = props;
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [active, setActive] = useState(false);
+
   const confirmRef = useRef();
 
   const destroyConfirm = () => {

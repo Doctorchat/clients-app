@@ -1,0 +1,16 @@
+.request-image-popup {
+  padding: 24px 24px 16px;
+
+  &__title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &__actions {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

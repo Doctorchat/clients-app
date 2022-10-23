@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import TextArea from "antd/lib/input/TextArea";
+import { ClientChatAttachments, DoctorChatAttachments } from "features/attachments";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
@@ -19,8 +20,6 @@ import cs from "@/utils/classNames";
 import { IconBtn } from "../Button";
 import Confirm from "../Confirm";
 import Form from "../Form";
-
-import MessageBarAttach from "./MessageBarAttach";
 
 export default function MessageBar(props) {
   const { defaultValue, disabled, chatId, status, type } = props;
@@ -87,9 +86,7 @@ export default function MessageBar(props) {
         setIsFormEnabled(false);
         form.reset();
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", description: "default_error_message" })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
         setLoading(false);
       }
@@ -107,9 +104,20 @@ export default function MessageBar(props) {
         onFinish={onFormSubmit}
       >
         <div className={cs("message-bar-input")}>
-          <AuthRoleWrapper roles={[userRoles.get("doctor")]} extraValidation={type === "internal"}>
-            <MessageBarAttach chatId={chatId} />
+          <AuthRoleWrapper
+            roles={[userRoles.get("doctor")]}
+            extraValidation={!["support"].includes(type)}
+          >
+            <DoctorChatAttachments chatId={chatId} />
           </AuthRoleWrapper>
+
+          <AuthRoleWrapper
+            roles={[userRoles.get("client")]}
+            extraValidation={!["support"].includes(type)}
+          >
+            <ClientChatAttachments chatId={chatId} />
+          </AuthRoleWrapper>
+
           <Form.Item name="content" className="mb-0">
             <TextArea
               placeholder={t("message_bar_placeholder")}

@@ -70,9 +70,7 @@ export default function MessageFormMain() {
         dispatch(messageFormSetConfirmation(data));
         updateTabsConfig(messageFormTabs.confirm)();
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", description: "default_error_message" })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
         setLoading(false);
       }

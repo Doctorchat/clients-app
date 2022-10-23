@@ -24,6 +24,7 @@ import date from "@/utils/date";
 import { MessagesList } from "..";
 
 import ChatContentFooter from "./ChatContentFooter";
+import ChatFeedback from "@/components/ChatFeedback";
 
 const withoutInfo = ["support", "auto", "consilium", "internal"];
 

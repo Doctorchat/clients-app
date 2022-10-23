@@ -1,6 +1,13 @@
 .form-control {
   position: relative;
   margin-bottom: 20px;
+
+  &[data-animate-label="false"] {
+    .form-control-label {
+      transition: none !important;
+    }
+  }
+
   &.invalid {
     .form-control-label {
       color: #dc3545;

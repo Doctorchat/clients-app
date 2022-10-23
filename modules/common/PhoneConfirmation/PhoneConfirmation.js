@@ -10,11 +10,6 @@ import { phoneConfirmationToggleVisibility } from "@/store/slices/phoneConfirmat
 
 import { ConfirmPhone, EnterPhone } from "./elements";
 
-
-
-
-
-
 const PhoneConfirmation = memo(() => {
   const { isOpen, user } = useSelector((store) => ({
     isOpen: store.phoneConfirmation.isOpen,

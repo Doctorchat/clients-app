@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { forwardRef, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 
-import { MESSAGE_TYPES } from "@/context/constants";
+import { MESSAGE_TYPES, userRoles } from "@/context/constants";
 import ClipIcon from "@/icons/clip.svg";
 import api from "@/services/axios/api";
 import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
@@ -13,16 +14,16 @@ import validateFile from "@/utils/validateFile";
 
 import { IconBtn } from "../Button";
 
-
-
-
-
-
-export default function MessageBarAttach(props) {
+const MessageBarAttach = forwardRef((props, ref) => {
   const { chatId } = props;
+  const user = useSelector((store) => store.user);
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef();
   const dispatch = useDispatch();
+
+  const { data: walletData } = useQuery(["wallet"], () => api.wallet.get(), {
+    keepPreviousData: true,
+  });
 
   const uploadFile = React.useCallback(
     async (file) => {
@@ -71,9 +72,7 @@ export default function MessageBarAttach(props) {
         dispatch(updateConversation(updatedChatItem));
         dispatch(chatContentAddMessage(updatedChatContent));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", description: "default_error_message" })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       }
     },
     [chatId, dispatch, uploadFile]
@@ -99,20 +98,34 @@ export default function MessageBarAttach(props) {
         setLoading(true);
         await setUploadToChat(files[0]);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", description: "default_error_message" })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
       } finally {
         setLoading(false);
       }
     } else {
-      dispatch(notification({ type: "error", title: "error", description: fileError.error_code }));
+      dispatch(notification({ type: "error", title: "error", descrp: fileError.error_code }));
     }
 
     fileInputRef.current.value = "";
   };
 
-  const initUploadMethod = () => fileInputRef.current && fileInputRef.current.click();
+  const initUploadMethod = () => {
+    if (user.data.role === userRoles.get("client")) {
+      if (walletData.data.balance >= 7) {
+        fileInputRef.current && fileInputRef.current.click();
+      } else {
+        dispatch(
+          notification({
+            type: "error",
+            title: "error",
+            descrp: "insufficient_funds",
+          })
+        );
+      }
+    } else {
+      fileInputRef.current && fileInputRef.current.click();
+    }
+  };
   const onUploadInputChange = (e) => uploadPreparation(e.target.files);
 
   return (
@@ -123,6 +136,7 @@ export default function MessageBarAttach(props) {
         icon={<ClipIcon />}
         onClick={initUploadMethod}
         loading={loading}
+        ref={ref}
       />
       <input
         style={{ display: "none" }}
@@ -133,10 +147,13 @@ export default function MessageBarAttach(props) {
       />
     </>
   );
-}
+});
 
 MessageBarAttach.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  warning: PropTypes.string,
 };
 
 MessageBarAttach.defaultProps = {};
+
+export default MessageBarAttach;

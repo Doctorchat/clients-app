@@ -15,7 +15,8 @@
       "@/icons/*": ["assets/icons/*"],
       "@/locales/*": ["assets/locales/*"],
       "@/context/*": ["context/*"],
-      "@/store/*": ["store/*"]
+      "@/store/*": ["store/*"],
+      "@/features/*": ["features/*"]
     }
   }
 }

@@ -1,0 +1,52 @@
+.request-image {
+  max-width: 380px;
+  background-color: var(--bs-gray-100);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: rgb(0 0 0 / 12%) 0px 3px 8px;
+  position: relative;
+
+  margin: 10px 0;
+
+  &__header {
+    padding: 30px 20px;
+  }
+
+  &__title {
+    font-size: 18px;
+    margin-bottom: 8px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      transform: translateY(-1px);
+      color: var(--bs-primary);
+    }
+  }
+
+  &__description {
+    font-size: 15px;
+    margin-bottom: 0;
+  }
+
+  &__header-icon {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__actions {
+    .dc-btn {
+      width: 100%;
+      border-radius: 0px;
+    }
+  }
+}

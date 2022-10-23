@@ -4,6 +4,7 @@ import axiosInstance from "@/services/axios/apiConfig";
 
 const initialState = {
   data: {},
+  isTopUpVisible: false,
   isAuthorized: false,
 };
 
@@ -34,9 +35,17 @@ export const userSlice = createSlice({
         state.data[action.payload.prop] = action.payload.value;
       }
     },
+    toggleTopUpModal(state) {
+      state.isTopUpVisible = !state.isTopUpVisible;
+    },
   },
 });
 
-export const { setUserAuthorized, setUserUnauthorized, updateUser, updateUserProperty } =
-  userSlice.actions;
+export const {
+  setUserAuthorized,
+  setUserUnauthorized,
+  updateUser,
+  updateUserProperty,
+  toggleTopUpModal,
+} = userSlice.actions;
 export default userSlice.reducer;

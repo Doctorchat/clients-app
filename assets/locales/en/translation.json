@@ -57,7 +57,7 @@
   "education": "Education",
   "about": "Professional skills",
   "ext_not_allowed": "This extension is not supported",
-  "size_to_big": "File size is too big",
+  "size_to_big": "The file size is too large. Maximum size 10 MB",
   "conversation_search_placeholder": "Name, Description",
   "reload_page": "Reload Page",
   "search_not_found": "Nothing found for your request",
@@ -269,5 +269,20 @@
   },
   "to_pay": "To pay",
   "your_account_will_be_debited": "Your account will be debited with",
-  "list_of_doctor": "List of doctors"
+  "list_of_doctor": "List of doctors",
+  "add": "Add",
+  "comments": "Comments",
+  "request": "Request",
+  "chat_attach": {
+    "file": "File",
+    "you_will_be_charged": "Your account will be debited with {{price}} L",
+    "insufficient_funds": "You don't have enough funds. Please replenish the balance",
+    "upload_file": "Upload file",
+    "replenish_balance": "Top up balance",
+    "request_file": "Request file",
+    "request_file_title": "Additional file request",
+    "request_file_text": "Please provide a reason for requesting an additional file",
+    "request_file_success": "File request sent successfully",
+    "request_to_upload_file": "You have received a request to upload an additional file"
+  }
 }

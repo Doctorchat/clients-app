@@ -7,11 +7,6 @@ import formatBytes from "@/utils/formatBytes";
 
 import Image from "../Image";
 
-
-
-
-
-
 export default function MessageFile(props) {
   const { file, side } = props;
   const [extraConfig, setExtraConfig] = useState({ placeholder: null, ext: null });
@@ -56,7 +51,7 @@ MessageFile.propTypes = {
   file: PropTypes.shape({
     name: PropTypes.string,
     file_url: PropTypes.string,
-    size: PropTypes.string,
+    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     type: PropTypes.string,
   }),
   side: PropTypes.string,

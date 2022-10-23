@@ -57,7 +57,7 @@
   "education": "Educație",
   "about": "Aptitudini profesionale",
   "ext_not_allowed": "Această extensie nu este acceptată",
-  "size_to_big": "Dimensiunea fișierului este prea mare",
+  "size_to_big": "Dimensiunea fișierului este prea mare. Dimensiunea maximă 10 MB",
   "conversation_search_placeholder": "Nume, Descriere",
   "reload_page": "Reâncarcă pagina",
   "search_not_found": "Nu s-a găsit nimic pentru solicitarea dvs",
@@ -269,5 +269,20 @@
   },
   "to_pay": "Spre plată",
   "your_account_will_be_debited": "Contul dvs. va fi debitat cu",
-  "list_of_doctor": "Lista de doctori"
+  "list_of_doctor": "Lista de doctori",
+  "add": "Adaugă",
+  "comments": "Comentarii",
+  "request": "Solicitare",
+  "chat_attach": {
+    "file": "Fişier",
+    "you_will_be_charged": "Contul dvs. va fi debitat cu {{price}} L",
+    "insufficient_funds": "Nu ai suficiente fonduri. Vă rugăm să supliniți soldul",
+    "upload_file": "Incarcă fisier",
+    "replenish_balance": "Suplinire sold",
+    "request_file": "Solicitați fișier",
+    "request_file_title": "Cerere de fișier suplimentar",
+    "request_file_text": "Vă rugăm să furnizați un motiv pentru a solicita un fișier suplimentar",
+    "request_file_success": "Solicitarea fișierului a fost trimisă cu succes",
+    "request_to_upload_file": "Ați primit o solicitare de încărcare a unui fișier suplimentar"
+  }
 }

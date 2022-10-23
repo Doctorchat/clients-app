@@ -2,14 +2,10 @@ import { Children, cloneElement, useCallback, useEffect, useRef, useState } from
 import { CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 
+import Portal from "@/containers/Portal";
 import cs from "@/utils/classNames";
 
 import DropdownContext from "./DropdownContext";
-
-
-
-
-
 
 export default function Dropdown(props) {
   const {
@@ -63,7 +59,11 @@ export default function Dropdown(props) {
   return (
     <div className={cs("dropdown", className)}>
       {cloneElement(Children.only(children), { onClick: openDropdown })}
-      {status && <div className="dropdown-backdrop" aria-hidden="true" onClick={closeDropdown} />}
+      {status && (
+        <Portal portalName="modalRoot">
+          <div className="dropdown-backdrop" aria-hidden="true" onClick={closeDropdown} />
+        </Portal>
+      )}
       <CSSTransition in={status} timeout={200} nodeRef={overlayRef} unmountOnExit={destroyOnHide}>
         <DropdownContext.Provider
           value={{

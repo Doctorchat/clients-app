@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { forwardRef, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 
@@ -17,7 +17,7 @@ const sizeClassName = {
   lg: "dc-btn-lg",
 };
 
-export default function IconBtn(props) {
+const IconBtn = forwardRef((props, ref) => {
   const { className, htmlType, size, onClick, disabled, loading, icon, type, notify, ...rest } =
     props;
   const btnTypeClassName = useRef(typeClassNames[type]);
@@ -26,6 +26,7 @@ export default function IconBtn(props) {
 
   return (
     <button
+      ref={ref}
       className={cs(
         "dc-btn dc-btn-icon",
         btnSizeClassName.current,
@@ -48,7 +49,7 @@ export default function IconBtn(props) {
       </CSSTransition>
     </button>
   );
-}
+});
 
 IconBtn.propTypes = {
   className: PropTypes.string,
@@ -73,3 +74,5 @@ IconBtn.defaultProps = {
   type: "default",
   onClick: () => null,
 };
+
+export default IconBtn;

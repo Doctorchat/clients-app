@@ -2,10 +2,10 @@ import React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import PropTypes from "prop-types";
 
-const DcTooltip = ({ children, content, side = "top", align = "center" }) => {
+const DcTooltip = ({ children, content, side = "top", align = "center", asChild = false }) => {
   return (
     <TooltipPrimitive.Root disableHoverableContent>
-      <TooltipPrimitive.Trigger className="dc-tooltip__trigger">
+      <TooltipPrimitive.Trigger asChild={asChild} className="dc-tooltip__trigger">
         {children}
       </TooltipPrimitive.Trigger>
       <TooltipPrimitive.Portal className="dc-tooltip__portal">
@@ -28,6 +28,7 @@ DcTooltip.propTypes = {
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   side: PropTypes.oneOf(["top", "right", "bottom", "left"]),
   align: PropTypes.oneOf(["start", "center", "end"]),
+  asChild: PropTypes.bool,
 };
 
 export default DcTooltip;
