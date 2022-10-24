@@ -42,6 +42,12 @@ const RequestImageMessageRoot = React.memo((props) => {
     setTimeout(() => setTemporaryFile(null), 300);
   }, [setTemporaryFile]);
 
+  React.useEffect(() => {
+    if (temporaryFile) {
+      setIsConfirmationPopupVisible(true);
+    }
+  }, [temporaryFile]);
+
   return (
     <>
       <div className="request-image">

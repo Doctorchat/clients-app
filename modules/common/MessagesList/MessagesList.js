@@ -50,7 +50,7 @@ export default function MessagesList(props) {
             }
 
             if (msg.type === "request-media") {
-              return <RequestImageMessage key={msg.id} chatId={chatId} />;
+              return <RequestImageMessage key={msg.id} chatId={chatId} content={msg.content} />;
             }
 
             return (
