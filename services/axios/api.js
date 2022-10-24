@@ -40,7 +40,7 @@ const api = {
     requestMedia: (chatId, { content }) =>
       axiosInstance.post(`/chat/request-media/${chatId}`, { content }),
     sendMedia: (chatId, { content, upload_id }) =>
-      axiosInstance.get(`/chat/send-media/${chatId}`, { content, upload_id }),
+      axiosInstance.post(`/chat/send-media/${chatId}`, { content, upload_id }),
   },
   conversationList: { get: () => axiosInstance.get("/chat/list") },
   docList: {
