@@ -15,9 +15,9 @@ import { AttachmentInputProvider, useAttachmentInput } from "./AttachmentInputPr
 const RequestImageMessageRoot = React.memo((props) => {
   const { t } = useTranslation();
 
-  const { chatId } = props;
+  const { chatId, content } = props;
 
-  const { temporaryFile, setTemporaryFile } = useAttachmentInput();
+  const { temporaryFile, setTemporaryFile, triggerUploadInput } = useAttachmentInput();
   const { uploadFreeFile } = useUploadFile(chatId);
 
   const [isConfirmationPopupVisible, setIsConfirmationPopupVisible] = React.useState(false);
@@ -50,12 +50,12 @@ const RequestImageMessageRoot = React.memo((props) => {
             <BelOnIcon />
             {t("chat_attach.request_to_upload_file")}
           </h3>
-          <p className="request-image__description">
-            Aici trebuie description de la doctor. Clientul cum sa stie ce imagine sa incarce?
-          </p>
+          <p className="request-image__description">{content}</p>
         </div>
         <div className="request-image__actions">
-          <Button icon={<PlusIcon />}>{t("chat_attach.upload_file")}</Button>
+          <Button icon={<PlusIcon />} onClick={triggerUploadInput}>
+            {t("chat_attach.upload_file")}
+          </Button>
         </div>
       </div>
       <AttachmentConfirmationPopup
@@ -68,18 +68,20 @@ const RequestImageMessageRoot = React.memo((props) => {
   );
 });
 
-export const RequestImageMessage = ({ chatId }) => {
+export const RequestImageMessage = ({ chatId, content }) => {
   return (
     <AttachmentInputProvider>
-      <RequestImageMessageRoot chatId={chatId} />
+      <RequestImageMessageRoot chatId={chatId} content={content} />
     </AttachmentInputProvider>
   );
 };
 
 RequestImageMessage.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  content: PropTypes.string.isRequired,
 };
 
 RequestImageMessageRoot.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  content: PropTypes.string,
 };
