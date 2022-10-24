@@ -104,10 +104,7 @@ export default function MessageBar(props) {
         onFinish={onFormSubmit}
       >
         <div className={cs("message-bar-input")}>
-          <AuthRoleWrapper
-            roles={[userRoles.get("doctor")]}
-            extraValidation={!["support"].includes(type)}
-          >
+          <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
             <DoctorChatAttachments chatId={chatId} />
           </AuthRoleWrapper>
 

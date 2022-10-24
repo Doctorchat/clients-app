@@ -19,7 +19,7 @@ import { prepareFileForConfirmationModal } from "../utils";
 import { AttachmentConfirmationPopup } from "./AttachmentConfirmationPopup";
 import { AttachmentInputProvider, useAttachmentInput } from "./AttachmentInputProvider";
 
-const Overlay = React.memo(() => {
+const Overlay = React.memo(({ isFree }) => {
   const { t } = useTranslation();
 
   const { triggerUploadInput } = useAttachmentInput();
@@ -34,7 +34,7 @@ const Overlay = React.memo(() => {
 
   const dispatch = useDispatch();
 
-  if (walletData?.data?.balance < attachPrice) {
+  if (!isFree && walletData?.data?.balance < attachPrice) {
     return (
       <div className="px-2">
         <Alert
@@ -103,7 +103,7 @@ const ClientChatAttachmentsRoot = (props) => {
     <>
       <Dropdown
         className="chat-attachments-dropdown message-bar-attach"
-        overlay={<Overlay />}
+        overlay={<Overlay isFree={isFree} />}
         placement="topRight"
       >
         <IconBtn icon={<ClipIcon />} size="sm" />
@@ -133,5 +133,9 @@ ClientChatAttachments.propTypes = {
 
 ClientChatAttachmentsRoot.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  isFree: PropTypes.bool,
+};
+
+Overlay.propTypes = {
   isFree: PropTypes.bool,
 };
