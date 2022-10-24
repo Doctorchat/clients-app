@@ -62,17 +62,21 @@ const Overlay = React.memo(() => {
 });
 
 const ClientChatAttachmentsRoot = (props) => {
-  const { chatId } = props;
+  const { isFree = false, chatId } = props;
 
   const { temporaryFile, setTemporaryFile } = useAttachmentInput();
-  const { uploadPaidFile } = useUploadFile(chatId);
+  const { uploadFreeFile, uploadPaidFile } = useUploadFile(chatId);
 
   const [isConfirmationPopupVisible, setIsConfirmationPopupVisible] = React.useState(false);
 
   const onConfirmConfirmationPopup = React.useCallback(
     async (description) => {
       try {
-        await uploadPaidFile(temporaryFile, description);
+        if (isFree) {
+          await uploadFreeFile(temporaryFile, description);
+        } else {
+          await uploadPaidFile(temporaryFile, description);
+        }
         return Promise.resolve();
       } catch (error) {
         return Promise.reject();
@@ -81,7 +85,7 @@ const ClientChatAttachmentsRoot = (props) => {
         setIsConfirmationPopupVisible(false);
       }
     },
-    [setTemporaryFile, temporaryFile, uploadPaidFile]
+    [setTemporaryFile, temporaryFile, isFree, uploadFreeFile, uploadPaidFile]
   );
 
   const onCancelConfirmationPopup = React.useCallback(() => {
@@ -114,18 +118,20 @@ const ClientChatAttachmentsRoot = (props) => {
   );
 };
 
-export const ClientChatAttachments = ({ chatId }) => {
+export const ClientChatAttachments = ({ isFree, chatId }) => {
   return (
     <AttachmentInputProvider>
-      <ClientChatAttachmentsRoot chatId={chatId} />
+      <ClientChatAttachmentsRoot isFree={isFree} chatId={chatId} />
     </AttachmentInputProvider>
   );
 };
 
 ClientChatAttachments.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  isFree: PropTypes.bool,
 };
 
 ClientChatAttachmentsRoot.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  isFree: PropTypes.bool,
 };

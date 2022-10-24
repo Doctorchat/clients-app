@@ -111,11 +111,8 @@ export default function MessageBar(props) {
             <DoctorChatAttachments chatId={chatId} />
           </AuthRoleWrapper>
 
-          <AuthRoleWrapper
-            roles={[userRoles.get("client")]}
-            extraValidation={!["support"].includes(type)}
-          >
-            <ClientChatAttachments chatId={chatId} />
+          <AuthRoleWrapper roles={[userRoles.get("client")]}>
+            <ClientChatAttachments isFree={type === "support"} chatId={chatId} />
           </AuthRoleWrapper>
 
           <Form.Item name="content" className="mb-0">
