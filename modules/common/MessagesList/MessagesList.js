@@ -62,6 +62,7 @@ export default function MessagesList(props) {
               />
             );
           })}
+          <RequestImageMessage chatId={chatId} content="CONETESda sd asdasd asd" />
         </div>
       ));
     }

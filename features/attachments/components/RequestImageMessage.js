@@ -55,8 +55,8 @@ const RequestImageMessageRoot = React.memo((props) => {
       <div className="request-image">
         <div className="request-image__header">
           <h3 className="request-image__title">
-            <BelOnIcon />
             {t("chat_attach.request_to_upload_file")}
+            <BelOnIcon />
           </h3>
           <p className="request-image__description">{content}</p>
         </div>
