@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
+import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
+import { userRoles } from "@/context/constants";
 import BelOnIcon from "@/icons/bel-on.svg";
 import PlusIcon from "@/icons/plus.svg";
 
@@ -58,11 +60,13 @@ const RequestImageMessageRoot = React.memo((props) => {
           </h3>
           <p className="request-image__description">{content}</p>
         </div>
-        <div className="request-image__actions">
-          <Button icon={<PlusIcon />} onClick={triggerUploadInput}>
-            {t("chat_attach.upload_file")}
-          </Button>
-        </div>
+        <AuthRoleWrapper roles={[userRoles.get("client")]}>
+          <div className="request-image__actions">
+            <Button icon={<PlusIcon />} onClick={triggerUploadInput}>
+              {t("chat_attach.upload_file")}
+            </Button>
+          </div>
+        </AuthRoleWrapper>
       </div>
       <AttachmentConfirmationPopup
         isVisible={isConfirmationPopupVisible}

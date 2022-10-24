@@ -283,6 +283,6 @@
     "request_file_title": "Additional file request",
     "request_file_text": "Please provide a reason for requesting an additional file",
     "request_file_success": "File request sent successfully",
-    "request_to_upload_file": "You have received a request to upload an additional file"
+    "request_to_upload_file": "Request to upload an additional file"
   }
 }
