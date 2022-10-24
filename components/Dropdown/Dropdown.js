@@ -2,7 +2,7 @@ import { Children, cloneElement, useCallback, useEffect, useRef, useState } from
 import { CSSTransition } from "react-transition-group";
 import PropTypes from "prop-types";
 
-import Portal from "@/containers/Portal";
+import useOnClickOutside from "@/hooks/useOnClickOutside";
 import cs from "@/utils/classNames";
 
 import DropdownContext from "./DropdownContext";
@@ -56,14 +56,12 @@ export default function Dropdown(props) {
     };
   }, [escCloseHandler]);
 
+  useOnClickOutside(overlayRef, closeDropdown);
+
   return (
     <div className={cs("dropdown", className)}>
       {cloneElement(Children.only(children), { onClick: openDropdown })}
-      {status && (
-        <Portal portalName="modalRoot">
-          <div className="dropdown-backdrop" aria-hidden="true" onClick={closeDropdown} />
-        </Portal>
-      )}
+      {status && <div className="dropdown-backdrop" aria-hidden="true" onClick={closeDropdown} />}
       <CSSTransition in={status} timeout={200} nodeRef={overlayRef} unmountOnExit={destroyOnHide}>
         <DropdownContext.Provider
           value={{
