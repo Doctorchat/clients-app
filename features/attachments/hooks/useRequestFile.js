@@ -19,7 +19,7 @@ export const useRequestFile = (chatId) => {
         dispatch(getChatContent(chatId));
         dispatch(getConversationList());
 
-        dispatch(notification({ title: "success", descrp: "request_file_success" }));
+        dispatch(notification({ title: "success", descrp: "chat_attach.request_file_success" }));
 
         return Promise.resolve(response.data);
       } catch (error) {

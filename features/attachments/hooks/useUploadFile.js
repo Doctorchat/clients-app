@@ -41,7 +41,7 @@ export const useUploadFile = (chatId) => {
         const response = await uploadFile(file);
 
         await api.conversation.addMessage({
-          content: description || t("file"),
+          content: description || t("chat_attach.file"),
           chat_id: chatId,
           type: MESSAGE_TYPES.standard,
           uploads: [response.data.id],
@@ -68,7 +68,7 @@ export const useUploadFile = (chatId) => {
         const response = await uploadFile(file);
 
         await api.conversation.sendMedia(chatId, {
-          content: description || t("file"),
+          content: description || t("chat_attach.file"),
           upload_id: response.data.id,
         });
 
