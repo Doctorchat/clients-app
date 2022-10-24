@@ -1,2 +1,2 @@
-export * from "./useUploadChatFileWithMutation";
-export * from "./useRequestChatFileWithMutation";
+export * from "./useRequestFile";
+export * from "./useUploadFile";

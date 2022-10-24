@@ -9,7 +9,7 @@ import ClipIcon from "@/icons/clip.svg";
 import UploadIcon from "@/icons/upload.svg";
 import UploadPlusIcon from "@/icons/upload-plus.svg";
 
-import { useRequestChatFileWithMutation, useUploadChatFileWithMutation } from "../hooks";
+import { useRequestFile, useUploadFile } from "../hooks";
 import { prepareFileForConfirmationModal } from "../utils";
 
 import { AttachmentConfirmationPopup } from "./AttachmentConfirmationPopup";
@@ -19,7 +19,7 @@ import { RequestImagePopup } from "./RequestImagePopup";
 const OverlayUploadFile = React.memo(({ chatId }) => {
   const { t } = useTranslation();
 
-  const { uploadFile } = useUploadChatFileWithMutation(chatId);
+  const { uploadFreeFile } = useUploadFile(chatId);
   const { temporaryFile, setTemporaryFile, triggerUploadInput } = useAttachmentInput();
 
   const [isConfirmationPopupVisible, setIsConfirmationPopupVisible] = React.useState(false);
@@ -27,7 +27,7 @@ const OverlayUploadFile = React.memo(({ chatId }) => {
   const onConfirmConfirmationPopup = React.useCallback(
     async (description) => {
       try {
-        await uploadFile(temporaryFile, description);
+        await uploadFreeFile(temporaryFile, description);
         return Promise.resolve();
       } catch (error) {
         return Promise.reject();
@@ -36,7 +36,7 @@ const OverlayUploadFile = React.memo(({ chatId }) => {
         setIsConfirmationPopupVisible(false);
       }
     },
-    [setTemporaryFile, temporaryFile, uploadFile]
+    [setTemporaryFile, temporaryFile, uploadFreeFile]
   );
 
   const onCancelConfirmationPopup = React.useCallback(() => {
@@ -68,7 +68,7 @@ const OverlayUploadFile = React.memo(({ chatId }) => {
 const OverlayRequestFile = React.memo(({ chatId }) => {
   const { t } = useTranslation();
 
-  const { requestFile } = useRequestChatFileWithMutation(chatId);
+  const { requestFile } = useRequestFile(chatId);
 
   const [isRequestImagePopupVisible, setIsRequestImagePopupVisible] = React.useState(false);
 

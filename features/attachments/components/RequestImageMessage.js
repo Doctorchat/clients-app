@@ -6,7 +6,7 @@ import Button from "@/components/Button";
 import BelOnIcon from "@/icons/bel-on.svg";
 import PlusIcon from "@/icons/plus.svg";
 
-import { useUploadChatFileWithMutation } from "../hooks";
+import { useUploadFile } from "../hooks";
 import { prepareFileForConfirmationModal } from "../utils";
 
 import { AttachmentConfirmationPopup } from "./AttachmentConfirmationPopup";
@@ -18,14 +18,14 @@ const RequestImageMessageRoot = React.memo((props) => {
   const { chatId } = props;
 
   const { temporaryFile, setTemporaryFile } = useAttachmentInput();
-  const { uploadFile } = useUploadChatFileWithMutation(chatId);
+  const { uploadFreeFile } = useUploadFile(chatId);
 
   const [isConfirmationPopupVisible, setIsConfirmationPopupVisible] = React.useState(false);
 
   const onConfirmConfirmationPopup = React.useCallback(
     async (description) => {
       try {
-        await uploadFile(temporaryFile, description);
+        await uploadFreeFile(temporaryFile, description);
         return Promise.resolve();
       } catch (error) {
         return Promise.reject();
@@ -34,7 +34,7 @@ const RequestImageMessageRoot = React.memo((props) => {
         setIsConfirmationPopupVisible(false);
       }
     },
-    [setTemporaryFile, temporaryFile, uploadFile]
+    [setTemporaryFile, temporaryFile, uploadFreeFile]
   );
 
   const onCancelConfirmationPopup = React.useCallback(() => {

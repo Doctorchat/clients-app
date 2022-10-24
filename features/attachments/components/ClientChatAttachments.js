@@ -13,7 +13,7 @@ import UploadIcon from "@/icons/upload.svg";
 import api from "@/services/axios/api";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
 
-import { useUploadChatFileWithMutation } from "../hooks";
+import { useUploadFile } from "../hooks";
 import { prepareFileForConfirmationModal } from "../utils";
 
 import { AttachmentConfirmationPopup } from "./AttachmentConfirmationPopup";
@@ -65,14 +65,14 @@ const ClientChatAttachmentsRoot = (props) => {
   const { chatId } = props;
 
   const { temporaryFile, setTemporaryFile } = useAttachmentInput();
-  const { uploadFile } = useUploadChatFileWithMutation(chatId);
+  const { uploadPaidFile } = useUploadFile(chatId);
 
   const [isConfirmationPopupVisible, setIsConfirmationPopupVisible] = React.useState(false);
 
   const onConfirmConfirmationPopup = React.useCallback(
     async (description) => {
       try {
-        await uploadFile(temporaryFile, description);
+        await uploadPaidFile(temporaryFile, description);
         return Promise.resolve();
       } catch (error) {
         return Promise.reject();
@@ -81,7 +81,7 @@ const ClientChatAttachmentsRoot = (props) => {
         setIsConfirmationPopupVisible(false);
       }
     },
-    [setTemporaryFile, temporaryFile, uploadFile]
+    [setTemporaryFile, temporaryFile, uploadPaidFile]
   );
 
   const onCancelConfirmationPopup = React.useCallback(() => {
