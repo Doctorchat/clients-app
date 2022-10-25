@@ -21,7 +21,7 @@ export const AttachmentInputProvider = (props) => {
   const prepareFile = React.useCallback(
     (file) => {
       if (file) {
-        const fileErrors = validateFile(file, 10240, ALLOWED_FILE_TYPES);
+        const fileErrors = validateFile(file, 37720, ALLOWED_FILE_TYPES);
 
         if (fileErrors) {
           dispatch(notification({ type: "error", title: "error", descrp: fileErrors.error_code }));

@@ -11,7 +11,7 @@
  * @param {String} [accept] eg: .png,.jpg
  * @returns {(Error|Boolean)}
  */
-export default function validateFile(file, maxSize = 10240, accept = null) {
+export default function validateFile(file, maxSize = 37720, accept = null) {
   const fsize = Math.round(file.size / 1024);
   const allowedExtensions = accept
     ? new RegExp(

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import documnetPlaceholder from "@/imgs/doc.png";
+import FileIcon from "@/icons/file.svg";
 import cs from "@/utils/classNames";
 import formatBytes from "@/utils/formatBytes";
 
@@ -9,25 +9,32 @@ import Image from "../Image";
 
 export default function MessageFile(props) {
   const { file, side } = props;
-  const [extraConfig, setExtraConfig] = useState({ placeholder: null, ext: null });
+
+  const [extraConfig, setExtraConfig] = useState({ type: null, extension: null });
 
   useEffect(() => {
-    let file_ext = file.name.split(".");
+    const fileExtension = file.name.split(".").pop();
 
-    file_ext = file_ext[file_ext.length - 1];
-
-    const placeholder = !file.type.match(/image/g) && documnetPlaceholder.src;
-
-    setExtraConfig({ ext: file_ext, placeholder });
+    setExtraConfig({
+      type: file.type.startsWith("image") ? "image" : "document",
+      extension: fileExtension,
+    });
   }, [file]);
 
   return (
     <div className={cs("message-file upload-file", side)}>
       <div className="upload-file-main">
         <a href={file.file_url} target="_blank" rel="noopener noreferrer">
-          <div className="upload-file-preview">
-            <Image alt={file.name} src={extraConfig.placeholder || file.file_url} w="50" h="50" />
-          </div>
+          {extraConfig.type === "image" ? (
+            <div className="upload-file-preview">
+              <FileIcon />
+              <Image alt={file.name} src={file.file_url} w="50" h="50" />
+            </div>
+          ) : (
+            <div className="upload-file-preview document">
+              <FileIcon />
+            </div>
+          )}
         </a>
         <div className="upload-file-meta">
           <a href={file.file_url} target="_blank" rel="noopener noreferrer">
@@ -37,7 +44,7 @@ export default function MessageFile(props) {
           </a>
           <div className="file-caption">
             <div className="file-caption-info">
-              <span className="ext">{extraConfig.ext}</span>
+              <span className="ext">{extraConfig.extension}</span>
               <span className="size">{formatBytes(file.size)}</span>
             </div>
           </div>

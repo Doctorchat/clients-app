@@ -57,7 +57,7 @@
   "education": "Education",
   "about": "Professional skills",
   "ext_not_allowed": "This extension is not supported",
-  "size_to_big": "The file size is too large. Maximum size 10 MB",
+  "size_to_big": "The file size is too large. Maximum size 30 MB",
   "conversation_search_placeholder": "Name, Description",
   "reload_page": "Reload Page",
   "search_not_found": "Nothing found for your request",

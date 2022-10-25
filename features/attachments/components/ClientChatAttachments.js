@@ -54,9 +54,11 @@ const Overlay = React.memo(({ isFree }) => {
       <Menu.Item icon={<UploadIcon />} onClick={triggerUploadInput}>
         {t("chat_attach.upload_file")}
       </Menu.Item>
-      <span className="text-muted px-2 mt-2 d-block text-sm text-center">
-        {t("chat_attach.you_will_be_charged", { price: attachPrice })}
-      </span>
+      {!isFree && (
+        <span className="text-muted px-2 mt-2 d-block text-sm text-center">
+          {t("chat_attach.you_will_be_charged", { price: attachPrice })}
+        </span>
+      )}
     </Menu>
   );
 });
