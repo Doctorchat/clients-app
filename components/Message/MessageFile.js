@@ -13,12 +13,12 @@ export default function MessageFile(props) {
   const [extraConfig, setExtraConfig] = useState({ type: null, extension: null });
 
   useEffect(() => {
-    const fileExtension = file.name.split(".").pop();
-
-    setExtraConfig({
-      type: file.type.startsWith("image") ? "image" : "document",
-      extension: fileExtension,
-    });
+    if (file) {
+      setExtraConfig({
+        type: file.type.startsWith("image") ? "image" : "document",
+        extension: file.name.split(".").pop(),
+      });
+    }
   }, [file]);
 
   return (
