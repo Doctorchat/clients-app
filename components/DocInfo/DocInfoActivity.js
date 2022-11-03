@@ -3,18 +3,13 @@ import PropTypes from "prop-types";
 
 import ClockIcon from "@/icons/clock.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
-import HeartIcon from "@/icons/heart.svg";
+// import HeartIcon from "@/icons/heart.svg";
 import HospitalIcon from "@/icons/hospital.svg";
-import LikeIcon from "@/icons/like.svg";
+// import LikeIcon from "@/icons/like.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import StarIcon from "@/icons/star.svg";
 
 import Skeleton from "../Skeleton";
-
-
-
-
-
 
 export default function DocInfoActivity(props) {
   const { activity, loading } = props;
@@ -55,7 +50,7 @@ export default function DocInfoActivity(props) {
               <span className="text">{t("guard_doctor")}</span>
             </div>
           </li>
-          <li className="doc-info-list-item">
+          {/* <li className="doc-info-list-item">
             <div className="content">
               <span className="icon heart">
                 <HeartIcon />
@@ -75,7 +70,7 @@ export default function DocInfoActivity(props) {
                 {t("doctor_info.likes")} <b>{activity?.likes?.like || "—"}</b>
               </span>
             </div>
-          </li>
+          </li> */}
           <li className="doc-info-list-item">
             <div className="content">
               <span className="icon star">
