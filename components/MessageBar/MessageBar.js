@@ -137,7 +137,7 @@ export default function MessageBar(props) {
           status !== "responded" &&
           chatContent?.content?.has_doc_messages
         }
-        roles={[userRoles.get("doctor")]}
+        roles={[userRoles.get("doctor"), userRoles.get("client")]}
       >
         <Confirm
           isAsync
