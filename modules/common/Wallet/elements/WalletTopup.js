@@ -44,43 +44,36 @@ const WalletTopup = () => {
   );
 
   return (
-    <>
-      <div className="d-flex align-items-center justify-content-center mt-3">
-        <Button className="w-100" size="sm" onClick={() => dispatch(toggleTopUpModal(true))}>
-          {t("transactions.top_up")}
-        </Button>
-      </div>
-      <Portal portalName="modalRoot">
-        <Popup
-          id="deposit-popup"
-          visible={isTopUpVisible}
-          onVisibleChange={(v) => dispatch(toggleTopUpModal(v))}
-        >
-          <Popup.Header title={t("transactions.top_up_form")} />
-          <Popup.Content>
-            <Form methods={form} onFinish={onSubmitHandler}>
-              <Form.Item label={t("sum")} name="amount">
-                <InputNumber />
-              </Form.Item>
-              <div className="justify-content-end d-flex align-items-center space-x-2">
-                <Button
-                  className="me-2"
-                  type="outline"
-                  size="sm"
-                  onClick={() => dispatch(toggleTopUpModal(false))}
-                >
-                  {t("cancel")}
-                </Button>
+    <Portal portalName="modalRoot">
+      <Popup
+        id="deposit-popup"
+        visible={isTopUpVisible}
+        onVisibleChange={(v) => dispatch(toggleTopUpModal(v))}
+      >
+        <Popup.Header title={t("transactions.top_up_form")} />
+        <Popup.Content>
+          <Form methods={form} onFinish={onSubmitHandler}>
+            <Form.Item label={t("sum")} name="amount">
+              <InputNumber />
+            </Form.Item>
+            <div className="justify-content-end d-flex align-items-center space-x-2">
+              <Button
+                className="me-2"
+                type="outline"
+                size="sm"
+                onClick={() => dispatch(toggleTopUpModal(false))}
+              >
+                {t("cancel")}
+              </Button>
 
-                <Button size="sm" htmlType="submit">
-                  {t("apply")}
-                </Button>
-              </div>
-            </Form>
-          </Popup.Content>
-        </Popup>
-      </Portal>
-    </>
+              <Button size="sm" htmlType="submit">
+                {t("apply")}
+              </Button>
+            </div>
+          </Form>
+        </Popup.Content>
+      </Popup>
+    </Portal>
   );
 };
 

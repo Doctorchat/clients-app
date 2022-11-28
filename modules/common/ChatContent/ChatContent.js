@@ -75,7 +75,7 @@ export default function ChatContent(props) {
     }
   }, [chatId, dispatch, isMeet, type]);
 
-  const onBack = useCallback(() => router.push("/"), [router]);
+  const onBack = useCallback(() => router.push("/home"), [router]);
 
   useEffect(() => {
     if (messages) {
