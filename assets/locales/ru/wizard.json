@@ -1,0 +1,37 @@
+{
+  "account": "Аккаунт",
+  "doctor": "Доктор",
+  "confirmation": "Подтверждение",
+  "consultaion": "Консультация",
+  "tell_about_you": "Расскажите о себе",
+  "first_name/last_name": "Имя / Фамилия",
+  "confirm_phone_number": "Подтвердите номер телефона",
+  "phone_verification": {
+    "confirmation_code": "Код подтверждения",
+    "send_code": "Отправить код",
+    "resend_code": "Отправить повторно",
+    "please_enter_code": "Пожалуйста, введите код, отправленный на",
+    "invalid_phone_number": "Неверный номер телефона",
+    "invalid_code": "Неверный код",
+    "success": "Номер телефона успешно подтвержден"
+  },
+  "fill_in_medical_records": "Заполните медицинскую карту",
+  "available_doctors": "Доступные врачи",
+  "more": "Подробнее",
+  "search": "Поиск",
+  "category": "Специальность",
+  "search_by_fullname": "Поиск по имени и фамилии",
+  "select_doctor": {
+    "from_list": {
+      "title": "Выберите врача из списка",
+      "description": "Я понимаю, какой доктор мне нужен"
+    },
+    "automatic": {
+      "title": "Выберите врача автоматически",
+      "description": "Помогите мне выбрать доктора"
+    }
+  },
+  "send_anonymously": "Отправить анонимно",
+  "total": "Итого",
+  "completion": "Завершение"
+}

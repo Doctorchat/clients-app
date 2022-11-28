@@ -7,6 +7,7 @@ import Dropdown from "@/components/Dropdown";
 import Menu from "@/components/Menu";
 import LangIcon from "@/icons/lang.svg";
 import api from "@/services/axios/api";
+import cs from "@/utils/classNames";
 import getActiveLng from "@/utils/getActiveLng";
 
 const langs = {
@@ -15,7 +16,7 @@ const langs = {
   en: "English",
 };
 
-export default function ProfileChangeLang({ onUpdate }) {
+export default function ProfileChangeLang({ className, onUpdate, placement = "bottomRight" }) {
   const user = useSelector((store) => store.user);
   const [changeLngLoading, setChangeLngLoading] = useState();
   const [dropdownForcedClose, setDropdownForcedClose] = useState(null);
@@ -69,8 +70,8 @@ export default function ProfileChangeLang({ onUpdate }) {
   return (
     <Dropdown
       overlay={options}
-      className="lang-list-dropdown"
-      placement="bottomRight"
+      className={cs("lang-list-dropdown", className)}
+      placement={placement}
       forcedClose={dropdownForcedClose}
     >
       <Menu.Item icon={<LangIcon />}>{langs[getActiveLng()]}</Menu.Item>
@@ -79,5 +80,7 @@ export default function ProfileChangeLang({ onUpdate }) {
 }
 
 ProfileChangeLang.propTypes = {
+  className: PropTypes.string,
   onUpdate: PropTypes.func,
+  placement: PropTypes.string,
 };

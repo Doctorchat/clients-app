@@ -1,0 +1,112 @@
+.registration-flow__message-form {
+  .message-form-info {
+    background-color: #b8f4f366;
+    color: #000;
+  }
+
+  .upload-container {
+    .upload-drop-btn {
+      padding: 30px 18px;
+    }
+
+    .upload-icon svg {
+      width: unset;
+      height: unset;
+    }
+  }
+
+  .message-textarea__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    margin-bottom: 12px;
+
+    .form-control {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    label {
+      font-size: 18px;
+      font-weight: 500;
+      color: #000;
+      margin-bottom: 0;
+    }
+  }
+
+  .form-bottom {
+    align-items: stretch;
+  }
+
+  .message-form__total {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    margin-right: 20px;
+    padding: 0 40px;
+
+    span:not(:last-of-type) {
+      margin-right: 6px;
+    }
+  }
+}
+
+.message-form__time-selection {
+  display: flex;
+  margin-bottom: 40px;
+
+  .time-selection {
+    &__time {
+      display: grid;
+      grid-template-columns: repeat(3, 64px);
+      grid-template-rows: repeat(auto-fill, 31px);
+      grid-gap: 10px;
+      align-self: center;
+      justify-content: center;
+      padding: 0 54px;
+    }
+
+    &__time-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bs-secondary);
+      border-radius: 10px;
+      padding: 4px 17px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: darken(#92d4d2, 20%);
+      }
+
+      &.selected {
+        background-color: var(--bs-primary);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .registration-flow__message-form {
+    .message-textarea__header {
+      flex-direction: column;
+      align-items: flex-start;
+
+      label {
+        margin-bottom: 8px;
+      }
+    }
+
+    .message-form__total {
+      padding: 0 25px;
+    }
+  }
+}

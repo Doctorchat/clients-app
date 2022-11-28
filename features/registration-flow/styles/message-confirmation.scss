@@ -1,0 +1,40 @@
+.message-confirmation__modal {
+  .popup-header {
+    padding: 16px 30px 8px;
+  }
+
+  .popup-body {
+    max-height: calc(100vh - 40px);
+    width: clamp(300px, calc(100% - 30px), 800px);
+    border-radius: 20px;
+  }
+}
+
+.message-confirmation__content {
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 10px 40px 30px;
+
+  .confirmation-section .dc-description-row-label {
+    max-width: 270px;
+  }
+
+  .confirmation-actions {
+    .dc-btn-primary {
+      width: 100%;
+      margin-left: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .message-confirmation__modal {
+    .popup-header {
+      padding: 14px 14px 8px;
+    }
+  }
+
+  .message-confirmation__content {
+    padding: 8px 14px 20px;
+  }
+}

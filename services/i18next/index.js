@@ -5,6 +5,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import translationEN from "@/locales/en/translation.json";
 import translationRO from "@/locales/ro/translation.json";
 import translationRU from "@/locales/ru/translation.json";
+import wizardRU from "@/locales/ru/wizard.json";
 
 const fallbackLng = "ro";
 const availableLanguages = ["en", "ro", "ru"];
@@ -18,6 +19,7 @@ const resources = {
   },
   ru: {
     translation: translationRU,
+    wizard: wizardRU,
   },
 };
 
@@ -27,6 +29,7 @@ i18next
   .init({
     resources,
     fallbackLng,
+    ns: ["translation", "wizard"],
     detection: {
       checkWhitelist: true,
     },

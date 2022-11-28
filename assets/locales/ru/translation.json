@@ -31,6 +31,7 @@
   "yup_passwords_match": "Пароли не совпадают",
   "yup_array_min": "В поле должно быть не менее ${min} элемент(-ов)",
   "reviews": "Отзывы",
+  "video_appointment": "Видеовстреча",
   "video_appointments": "Видео встречи",
   "guard_doctor": "Дежурный врач",
   "vacation": "Отпуск",

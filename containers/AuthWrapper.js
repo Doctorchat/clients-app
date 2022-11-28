@@ -1,16 +1,18 @@
-import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import { useEffectOnce } from "usehooks-ts";
 
 import FullPageLoading from "@/components/FullPageLoading";
-import { fetchUserByToken } from "@/store/actions";
+import { getUserRedirectPath } from "@/features/registration-flow";
+import { fetchUserByToken, getBootstrapData } from "@/store/actions";
 
 export default function AuthWrapper(props) {
   const { children } = props;
+
   const [isLoading, setLoading] = useState(true);
-  const [fetching, setFetching] = useState(false);
-  const user = useSelector((store) => store.user);
+
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -21,26 +23,24 @@ export default function AuthWrapper(props) {
     });
   }, [router]);
 
-  const fetchUser = useCallback(async () => {
-    try {
-      setLoading(true);
-      await dispatch(fetchUserByToken());
-      setLoading(false);
-    } catch (error) {
-      redirectToLogin();
-    }
-  }, [dispatch, redirectToLogin]);
+  useEffectOnce(() => {
+    const accessToken = localStorage.getItem("dc_token");
 
-  useEffect(() => {
-    if (localStorage.getItem("dc_token")) {
-      if (!user.data?.id && !fetching) {
-        setFetching(true);
-        fetchUser();
-      } else if (user.data?.id) {
-        setLoading(false);
-      }
+    if (accessToken) {
+      dispatch(fetchUserByToken())
+        .then((user) => {
+          const redirect = getUserRedirectPath(user, router.pathname);
+
+          if (redirect) {
+            router.replace(redirect);
+          }
+        })
+        .catch(() => redirectToLogin())
+        .finally(() => {
+          dispatch(getBootstrapData()).finally(() => setLoading(false));
+        });
     } else redirectToLogin();
-  }, [dispatch, fetchUser, fetching, redirectToLogin, user.data?.id]);
+  });
 
   if (isLoading) {
     return <FullPageLoading />;

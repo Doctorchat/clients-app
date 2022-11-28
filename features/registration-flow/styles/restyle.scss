@@ -1,0 +1,145 @@
+.registration-flow__layout {
+  --bs-primary: #e81f41;
+  --bs-primary-hover: #ca1533;
+  --bs-secondary: #92d4d2;
+
+  .lang-list-dropdown {
+    & > .menu-item {
+      height: 36px;
+      padding: 2px 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      font-weight: 500;
+      color: var(--bs-gray-600);
+
+      .menu-item-prefix {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  // Input & Button & Select
+  .dc-input {
+    max-width: unset;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(#e81f41, 0.2);
+    }
+  }
+
+  .react-select-container {
+    .react-select__control {
+      &--is-focused {
+        box-shadow: 0 0 0 0.2rem rgba(#e81f41, 0.2);
+      }
+    }
+  }
+
+  .dc-textarea {
+    padding: 20px;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(#e81f41, 0.2);
+    }
+  }
+
+  .dc-btn.registration-flow__gray-btn {
+    color: var(--bs-gray-600);
+
+    &:hover,
+    &:focus {
+      background-color: var(--bs-gray-200);
+    }
+
+    .btn-icon {
+      margin-right: 10px;
+    }
+  }
+
+  .dc-btn-outline {
+    &:hover {
+      background-color: rgba(#e81f41, 0.1);
+    }
+  }
+
+  .form-control-label {
+    position: static;
+    transform: translateX(4px);
+    margin-bottom: 6px;
+    color: var(--bs-gray-600);
+    padding: 0 2px;
+
+    &.is-active {
+      color: var(--bs-gray-600);
+      font-weight: 400;
+    }
+  }
+
+  .form-control.invalid {
+    .form-control-label {
+      color: var(--bs-gray-600);
+    }
+  }
+
+  .dc-checkbox {
+    background: var(--bs-gray-400);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(#92d4d2, 0.2);
+    }
+
+    &.checked {
+      background: var(--bs-secondary);
+    }
+  }
+
+  // Calendar
+  .ant-picker-calendar-header {
+    justify-content: flex-start;
+
+    & > div {
+      flex: 1;
+    }
+  }
+
+  .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    border-color: var(--bs-primary);
+  }
+
+  .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+    .ant-select-selector {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.2rem rgba(#e81f41, 0.2);
+  }
+
+  .ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector {
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 10px;
+
+    .ant-select-selection-search-input {
+      height: 34px;
+    }
+
+    .ant-select-selection-item {
+      line-height: 34px;
+    }
+  }
+
+  .ant-radio-group.ant-radio-group-outline.ant-radio-group-small.ant-picker-calendar-mode-switch {
+    display: none;
+  }
+
+  .ant-picker-cell-inner {
+    width: 30px;
+    height: 30px;
+    border-radius: 12.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    .ant-picker-calendar-date-value {
+      line-height: 1;
+    }
+  }
+}

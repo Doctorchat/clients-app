@@ -1,0 +1,174 @@
+.doctor-card {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 25px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 25px 35px;
+
+  &__avatar {
+    grid-column: 1 / 6;
+    justify-self: center;
+    align-self: center;
+
+    width: 100%;
+    max-height: 196px;
+    max-width: 196px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__caption {
+    grid-column: 6 / 13;
+  }
+
+  &__experience {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  &__name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  &__category {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bs-primary);
+    margin-bottom: 15px;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: -6px;
+  }
+
+  &__meta-item {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 2px 12px;
+    margin: 6px;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+  }
+
+  &__footer {
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+    &-item {
+      &:not(:last-of-type) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &__price-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+  }
+
+  .doctor-card__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--bs-primary);
+    padding: 2px 6px;
+    font-size: 14px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: rgba(#e81f41, 0.1);
+    }
+
+    &:active {
+      background-color: rgba(#e81f41, 0.2);
+    }
+
+    svg {
+      margin-left: 6px;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .doctor-card {
+    padding: 20px 25px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .doctor-card {
+    grid-template-columns: 1fr;
+    grid-gap: 25px;
+
+    &__avatar {
+      grid-column: 1 / 2;
+    }
+
+    &__caption {
+      grid-column: 1 / 2;
+      text-align: center;
+      justify-self: center;
+    }
+
+    &__meta {
+      justify-content: center;
+    }
+
+    &__footer {
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .doctor-card {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}

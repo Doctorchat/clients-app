@@ -1,0 +1,36 @@
+@import "./restyle.scss";
+@import "./layout.scss";
+@import "./steps.scss";
+@import "./phone-confirmation.scss";
+@import "./select-doctor.scss";
+@import "./message-form.scss";
+@import "./message-confirmation.scss";
+@import "./payment.scss";
+
+.registration-flow__content {
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
+
+.registration-flow__form {
+  max-width: 700px;
+  margin: 0 auto;
+  padding-bottom: 5vh;
+}
+
+@media screen and (max-width: 768px) {
+  .registration-flow__form {
+    padding: 0 20px 5vh;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .registration-flow__modal {
+    .popup-body {
+      height: unset !important;
+      border-radius: 20px;
+    }
+  }
+}

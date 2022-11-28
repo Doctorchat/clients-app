@@ -5,11 +5,6 @@ import cs from "@/utils/classNames";
 
 import Spinner from "../Spinner";
 
-
-
-
-
-
 const sizeClassName = {
   sm: "dc-checkbox-sm",
   md: "dc-checkbox-md",

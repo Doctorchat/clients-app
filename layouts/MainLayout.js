@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import dynamic from "next/dynamic";
 import PropTypes from "prop-types";
 
@@ -9,7 +7,6 @@ import Portal from "@/containers/Portal";
 import { userRoles } from "@/context/constants";
 import { LeftSide, PhoneConfirmation } from "@/modules/common";
 import { DocStartConversation } from "@/modules/doctor";
-import { getBootstrapData } from "@/store/actions";
 
 const ClientStartConversation = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientStartConversation)
@@ -25,10 +22,6 @@ const ClientInvestigationForm = dynamic(() =>
 );
 
 export default function MainLayout({ children }) {
-  const dispatch = useDispatch();
-
-  useEffect(() => dispatch(getBootstrapData()), [dispatch]);
-
   return (
     <AuthWrapper>
       <Portal portalName="modalRoot">
