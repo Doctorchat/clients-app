@@ -6,6 +6,7 @@
 }
 
 .select-doctor__filters {
+  z-index: 20;
   position: absolute;
   top: 0;
   left: 50%;
@@ -29,6 +30,15 @@
 
   .select-doctor__filter:nth-child(2) {
     grid-column: 6 / 13;
+  }
+}
+
+.select-doctor__pagination {
+  max-width: 425px;
+  margin: 68px auto 0;
+
+  .dc-btn {
+    width: 100%;
   }
 }
 
@@ -120,6 +130,14 @@
       border-radius: 50%;
     }
   }
+
+  &[data-loading="true"] {
+    background-color: #f4f4f4;
+
+    &:hover {
+      border-color: #c6c6c6;
+    }
+  }
 }
 
 .select-doctor__options-action {
@@ -134,6 +152,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .select-doctor__pagination {
+    margin: 40px auto 0;
+  }
+
   .select-doctor__options-modal {
     header h3 {
       text-align: center;

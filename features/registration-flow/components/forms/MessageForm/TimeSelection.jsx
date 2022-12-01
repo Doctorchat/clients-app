@@ -2,6 +2,7 @@ import { Calendar } from "antd";
 import en_US from "antd/lib/locale-provider/en_US";
 import ro_RO from "antd/lib/locale-provider/ro_RO";
 import ru_RU from "antd/lib/locale-provider/ru_RU";
+import PropTypes from "prop-types";
 
 import cs from "@/utils/classNames";
 import getActiveLng from "@/utils/getActiveLng";
@@ -24,6 +25,12 @@ const TimeCard = ({ time, selected, onClick }) => {
   );
 };
 
+TimeCard.propTypes = {
+  time: PropTypes.string,
+  selected: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
 export const TimeSelection = () => {
   return (
     <div className="message-form__time-selection">
@@ -31,7 +38,7 @@ export const TimeSelection = () => {
         <Calendar
           mode="month"
           fullscreen={false}
-          locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro}
+          locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
         />
       </div>
       <div className="time-selection__time">

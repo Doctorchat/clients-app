@@ -1,20 +1,31 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 import { useBoolean, useEffectOnce } from "usehooks-ts";
 
 import Button, { IconBtn } from "@/components/Button";
 import Popup from "@/components/Popup";
+import Spinner from "@/components/Spinner";
 import CheckIcon from "@/icons/check.svg";
 import DoctorIcon from "@/icons/doctor.svg";
 import DoctorQuestionMarkIcon from "@/icons/doctor-question-mark.svg";
 import TimesIcon from "@/icons/times.svg";
+import cs from "@/utils/classNames";
 
-export const OptionsDialog = () => {
+export const OptionsDialog = ({ onAutoTypeClick }) => {
   const { t } = useTranslation();
 
   const { value: isOpen, setFalse: onHideModal, setTrue: onOpenModal } = useBoolean(false);
 
   useEffectOnce(() => setTimeout(onOpenModal));
+
+  const [isAutoTypeLoading, setIsAutoTypeLoading] = React.useState(false);
+
+  const onAutoTypeClickHandler = React.useCallback(async () => {
+    setIsAutoTypeLoading(true);
+    await onAutoTypeClick();
+    setIsAutoTypeLoading(false);
+  }, [onAutoTypeClick]);
 
   return (
     <Popup className="registration-flow__modal select-doctor__options-modal" visible={isOpen}>
@@ -26,10 +37,16 @@ export const OptionsDialog = () => {
         </header>
 
         <div className="select-doctor__options">
-          <div className="select-doctor__option active" role="button" onClick={onHideModal}>
-            <div className="option__checkmark">
-              <CheckIcon />
-            </div>
+          <div
+            className={cs("select-doctor__option", !isAutoTypeLoading && "active")}
+            role="button"
+            onClick={onHideModal}
+          >
+            {!isAutoTypeLoading && (
+              <div className="option__checkmark">
+                <CheckIcon />
+              </div>
+            )}
             <div className="option__icon">
               <DoctorIcon />
             </div>
@@ -38,7 +55,17 @@ export const OptionsDialog = () => {
               <p>{t("wizard:select_doctor.from_list.description")}</p>
             </div>
           </div>
-          <div className="select-doctor__option" role="button">
+          <div
+            className="select-doctor__option"
+            role="button"
+            data-loading={isAutoTypeLoading}
+            onClick={onAutoTypeClickHandler}
+          >
+            {isAutoTypeLoading && (
+              <div className="option__checkmark">
+                <Spinner />
+              </div>
+            )}
             <div className="option__icon">
               <DoctorQuestionMarkIcon />
             </div>
@@ -55,4 +82,8 @@ export const OptionsDialog = () => {
       </div>
     </Popup>
   );
+};
+
+OptionsDialog.propTypes = {
+  onAutoTypeClick: PropTypes.func,
 };

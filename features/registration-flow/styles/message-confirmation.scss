@@ -8,6 +8,35 @@
     width: clamp(300px, calc(100% - 30px), 800px);
     border-radius: 20px;
   }
+
+  .promo-code-form {
+    align-items: flex-end;
+    padding: 15px 0;
+
+    .form-control {
+      width: 100%;
+    }
+
+    .form-control-label,
+    .form-control-label.is-active {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  .promo-code-row {
+    font-size: 16px;
+  }
+
+  .confirmation-terms {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .confirmation-terms__to-pay {
+    font-weight: 500;
+  }
 }
 
 .message-confirmation__content {
@@ -31,6 +60,16 @@
   .message-confirmation__modal {
     .popup-header {
       padding: 14px 14px 8px;
+    }
+
+    .confirmation-terms {
+      text-align: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .confirmation-terms__to-pay {
+      margin-top: 10px;
     }
   }
 

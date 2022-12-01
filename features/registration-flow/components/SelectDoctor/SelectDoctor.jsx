@@ -1,21 +1,52 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
+import Button from "@/components/Button";
 import Input from "@/components/Inputs";
 import Select from "@/components/Select";
+import { CHAT_TYPES } from "@/context/constants";
 import { diseasesOptions } from "@/context/staticSelectOpts";
 import {
   DoctorCard,
   DoctorsGrid,
   DoctorViewDialog,
+  useDoctorPreview,
   useDoctorsInfiniteList,
 } from "@/features/doctors";
+import api from "@/services/axios/api";
 
 import { OptionsDialog } from "./OptionsDialog";
 
 export const SelectDoctor = () => {
   const { t } = useTranslation();
 
-  const { data } = useDoctorsInfiniteList();
+  const user = useSelector((state) => state.user?.data);
+  const router = useRouter();
+
+  const { doctors, isLoading, filters, pagination } = useDoctorsInfiniteList();
+  const {
+    data: doctorPreview,
+    isLoading: isDoctorPreviewLoading,
+    doctorPreviewId,
+    setDoctorPreviewId,
+  } = useDoctorPreview();
+
+  const createChatHandler = React.useCallback(
+    async (chatType = CHAT_TYPES.standard) => {
+      const res = await api.conversation.create({
+        doctor_id: doctorPreviewId,
+        type: chatType,
+        investigation_id: user?.investigations?.[0]?.id,
+      });
+
+      router.push(
+        `/registration-flow/message/${res.data.id}?type=${chatType}&doctorId=${doctorPreviewId}`
+      );
+    },
+    [doctorPreviewId, router, user?.investigations]
+  );
 
   return (
     <>
@@ -31,81 +62,41 @@ export const SelectDoctor = () => {
             <label className="select-doctor__filter-label" htmlFor="keyword">
               {t("wizard:search_by_fullname")}
             </label>
-            <Input className="w-100" name="keyword" placeholder={t("wizard:search")} />
+            <Input
+              className="w-100"
+              name="keyword"
+              placeholder={t("wizard:search")}
+              value={filters.search}
+              onChange={(e) => filters.setSearch(e.target.value)}
+            />
           </div>
         </div>
-        <DoctorsGrid>
-          {data.map((doctor) => (
-            <DoctorCard key={doctor.id} {...doctor} />
+        <DoctorsGrid isLoading={isLoading}>
+          {doctors.map((doctor) => (
+            <DoctorCard
+              key={doctor.id}
+              doctor={doctor}
+              onClickPreview={() => setDoctorPreviewId(doctor.id)}
+            />
           ))}
         </DoctorsGrid>
+
+        <div className="select-doctor__pagination">
+          <Button loading={pagination.isFetchingNextPage} onClick={pagination.fetchNextPage}>
+            {t("wizard:load_more_doctors")}
+          </Button>
+        </div>
       </div>
 
-      <DoctorViewDialog
-        doctor={{
-          id: 812,
-          isOnline: false,
-          name: "Maria Potrîmba",
-          avatar: "https://api.doctorchat.md/uploads/avatars/1666785889.jpg",
-          isGuard: true,
-          isAvailable: true,
-          category: [
-            {
-              id: 9,
-              name_ro: "Dermatovenerologie",
-              name_ru: "Дерматовенерология",
-              name_en: "Dermatovenereology",
-            },
-          ],
-          price: 200,
-          meet_price: 300,
-          activity: {
-            likes: 100,
-            responseTime: 267,
-            helpedUsers: 2,
-            testimonialsCount: 1,
-            workplace: "IMSP",
-            education: ['USMF "Nicolae Testemițanu"'],
-          },
-          about: {
-            bio: {
-              en: null,
-              ro: "Consultaţii de dermatologie generala si pediatrica, diagnosticul si tratamentul bolilor cu transmitere sexuala.Analiza tenului si consiliere cosmetica",
-              ru: null,
-            },
-            bio_ro:
-              "Consultaţii de dermatologie generala si pediatrica, diagnosticul si tratamentul bolilor cu transmitere sexuala.Analiza tenului si consiliere cosmetica",
-            bio_ru: null,
-            bio_en: null,
-            experience: 7,
-            specialization: {
-              ro: "Dermatovenerologie",
-              ru: null,
-              en: null,
-            },
-            specialization_ro: "Dermatovenerologie",
-            specialization_ru: null,
-            specialization_en: null,
-            professionalTitle: "Medic dermatovenerolog",
-          },
-          disponibility: {
-            fri: ["19:00", "22:00"],
-            mon: ["19:00", "21:00"],
-            sat: ["10:00", "22:00"],
-            sun: ["10:00", "22:00"],
-            thu: ["19:00", "21:00"],
-            tue: ["19:00", "21:00"],
-            wed: ["19:00", "21:00"],
-          },
-          reservations: [],
-          vacation: [],
-          hidden: false,
-          status: true,
-          locale: "ro",
-          role: 2,
-          last_seen: "2022-11-26 22:02:53",
-        }}
-      />
+      {doctorPreviewId && (
+        <DoctorViewDialog
+          doctor={doctorPreview}
+          isLoading={isDoctorPreviewLoading}
+          onClose={() => setDoctorPreviewId(null)}
+          onMessageTypeClick={() => createChatHandler()}
+          onVideoTypeClick={() => createChatHandler()}
+        />
+      )}
       <OptionsDialog />
     </>
   );

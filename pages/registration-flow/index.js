@@ -20,7 +20,7 @@ export default function RegistrationPage() {
 
 RegistrationPage.getLayout = function (page) {
   return (
-    <Layout activeStep="account" title={i18next.t("wizard:tell_about_you")}>
+    <Layout activeStep="account" title={i18next.t("wizard:tell_about_you")} backPath="/auth/login">
       {page}
     </Layout>
   );

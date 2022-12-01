@@ -62,6 +62,19 @@
     }
   }
 
+  .dc-btn-primary {
+    .dc-btn-spinner {
+      &::after {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(#e81f41, 0.85) 40%,
+          rgba(#e81f41, 1) 100%
+        );
+      }
+    }
+  }
+
   .form-control-label {
     position: static;
     transform: translateX(4px);

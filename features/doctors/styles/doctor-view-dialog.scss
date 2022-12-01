@@ -9,6 +9,28 @@
   }
 }
 
+.doctor-view.skeleton {
+  .doctor-view__avatar,
+  .doctor-view__name,
+  .doctor-view__category,
+  .doctor-view__meta-item,
+  .doctor-view__price-item,
+  .doctor-view__activity-description {
+    @include skeleton-loading;
+    color: transparent;
+  }
+
+  .doctor-view__name,
+  .doctor-view__activity-description {
+    border-radius: 4px;
+  }
+
+  .doctor-view__activity-description svg,
+  .doctor-view__experience {
+    color: transparent;
+  }
+}
+
 .doctor-view {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -17,7 +39,6 @@
   &__avatar {
     grid-column: 1 / 5;
     position: relative;
-    background-color: #000;
     overflow: hidden;
 
     img {
@@ -91,6 +112,7 @@
   }
 
   &__activity-item {
+    max-width: 60%;
     h4 {
       font-size: 16px;
       font-weight: 700;
@@ -101,9 +123,10 @@
   .doctor-view__activity-description {
     margin-bottom: 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 
     svg {
+      min-width: 16px;
       width: 16px;
       height: 16px;
       margin-right: 8px;

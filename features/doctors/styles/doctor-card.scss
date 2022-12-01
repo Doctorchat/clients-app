@@ -1,10 +1,37 @@
+.doctor-card.skeleton {
+  pointer-events: none;
+
+  .doctor-card__avatar,
+  .doctor-card__name,
+  .doctor-card__category,
+  .doctor-card__meta-item,
+  .doctor-card__price-item {
+    @include skeleton-loading;
+    color: transparent;
+  }
+
+  .doctor-card__name,
+  .doctor-card__category,
+  .doctor-card__price-item {
+    border-radius: 4px;
+  }
+
+  .doctor-card__name {
+    width: 50%;
+  }
+
+  .doctor-card__caption {
+    align-self: center;
+  }
+}
+
 .doctor-card {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: 25px;
+  grid-gap: 20px;
   background-color: #fff;
   border-radius: 10px;
-  padding: 25px 35px;
+  padding: 25px 30px;
 
   &__avatar {
     grid-column: 1 / 6;
@@ -12,8 +39,8 @@
     align-self: center;
 
     width: 100%;
-    max-height: 196px;
-    max-width: 196px;
+    max-height: 172px;
+    max-width: 172px;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     border-radius: 50%;
@@ -86,7 +113,7 @@
   &__price {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 15px;
 
     &-item {
       &:not(:last-of-type) {
@@ -119,6 +146,7 @@
     padding: 2px 6px;
     font-size: 14px;
     border-radius: 5px;
+    min-height: 28px;
 
     &:hover {
       background-color: rgba(#e81f41, 0.1);
@@ -134,14 +162,14 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1195px) {
+  .doctor-card.skeleton {
+    .doctor-card__name {
+      margin: 0 auto 10px;
+    }
+  }
   .doctor-card {
     padding: 20px 25px;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .doctor-card {
     grid-template-columns: 1fr;
     grid-gap: 25px;
 

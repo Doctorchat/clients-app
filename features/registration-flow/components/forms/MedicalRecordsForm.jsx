@@ -90,7 +90,7 @@ export const MedicalRecordsForm = () => {
 
         const response = await api.user.addInvestigation(data);
         dispatch(updateUser(response));
-        await router.replace("/registration/select-doctor");
+        await router.replace("/registration-flow/select-doctor");
       } catch (error) {
         setFormApiErrors(error);
       } finally {
