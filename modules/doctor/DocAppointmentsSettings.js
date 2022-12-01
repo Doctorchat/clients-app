@@ -21,10 +21,12 @@ import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
 
 import DocAppointmentsList from "./DocAppointmentsList";
+import DocAppointmentsSlots from "./DocAppointmentsSlots";
 
 const appointmentsTabs = {
   settings: "appointments-settings",
   list: "appointments-list",
+  slots: "appointments-slots",
 };
 
 const schema = yup.object().shape({
@@ -94,7 +96,7 @@ export default function DocAppointmentsSettings() {
           >
             <Line.Item title={t("settings")} dataKey={appointmentsTabs.settings} />
             <Line.Item title={t("appointments")} dataKey={appointmentsTabs.list} />
-            <Line.Item title={t("slots")} dataKey={appointmentsTabs.add} />
+            <Line.Item title={t("slots")} dataKey={appointmentsTabs.slots} />
           </Line>
           <Tabs
             config={{ ...appointmentsTabsConfig }}
@@ -150,6 +152,9 @@ export default function DocAppointmentsSettings() {
             </Tabs.Pane>
             <Tabs.Pane dataKey={appointmentsTabs.list} withAnimation={!loading}>
               <DocAppointmentsList />
+            </Tabs.Pane>
+            <Tabs.Pane dataKey={appointmentsTabs.slots} withAnimation={!loading}>
+              <DocAppointmentsSlots />
             </Tabs.Pane>
           </Tabs>
         </div>

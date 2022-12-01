@@ -26,6 +26,7 @@ const api = {
     resetPassword: (data) => axiosInstance.post("/auth/forgot-password", data),
     emulate: (data) => axiosInstance.post("/auth/emulate", data),
     restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
+    slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),
