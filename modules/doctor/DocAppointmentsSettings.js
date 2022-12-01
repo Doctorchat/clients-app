@@ -2,13 +2,17 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
 
 import Alert from "@/components/Alert";
 import BackTitle from "@/components/BackTitle";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
+import { InputNumber } from "@/components/Inputs";
 import Sidebar from "@/components/Sidebar";
 import { leftSideTabs } from "@/context/TabsKeys";
+import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import Tabs, { Line } from "@/packages/Tabs";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import TimePicker from "@/packages/TimePicker";
@@ -18,15 +22,15 @@ import { updateUserProperty } from "@/store/slices/userSlice";
 
 import DocAppointmentsList from "./DocAppointmentsList";
 
-
-
-
-
-
 const appointmentsTabs = {
   settings: "appointments-settings",
   list: "appointments-list",
 };
+
+const schema = yup.object().shape({
+  time_interval: yup.number().min(1).max(60).required(),
+  time_buffer: yup.number().min(1).max(60).required(),
+});
 
 export default function DocAppointmentsSettings() {
   const { disponibility } = useSelector((store) => ({
@@ -38,7 +42,11 @@ export default function DocAppointmentsSettings() {
   });
   const { updateTabsConfig } = useTabsContext();
   const [loading, setLoding] = useState(false);
-  const form = useForm();
+
+  const resolver = useYupValidationResolver(schema);
+  const form = useForm({ resolver });
+  const setFormApiErrors = useApiErrorsWithForm(form, dispatch);
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -52,12 +60,13 @@ export default function DocAppointmentsSettings() {
         dispatch(updateUserProperty({ prop: "disponibility", value: values }));
         dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
       } catch (error) {
+        setFormApiErrors(error);
         dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
       } finally {
         setLoding(false);
       }
     },
-    [dispatch]
+    [dispatch, setFormApiErrors]
   );
 
   const updateAppointmentsTabsConfig = useCallback(
@@ -97,16 +106,18 @@ export default function DocAppointmentsSettings() {
               withAnimation={!loading}
             >
               <div className="profile-appointments-box mt-3">
-                <Alert
-                  className="mb-4 mt-1"
-                  type="info"
-                  message={t('appintments_warning')}
-                />
+                <Alert className="mb-4 mt-1" type="info" message={t("appintments_warning")} />
                 <Form
                   methods={form}
                   onFinish={onFormSubmit}
                   initialValues={disponibility && Array.isArray(disponibility) ? {} : disponibility}
                 >
+                  <Form.Item name="time_interval" label="Durata consultației">
+                    <InputNumber />
+                  </Form.Item>
+                  <Form.Item name="time_buffer" label="Interval între consultații">
+                    <InputNumber />
+                  </Form.Item>
                   <Form.Item name="mon" label="Luni">
                     <TimePicker type="range" />
                   </Form.Item>
