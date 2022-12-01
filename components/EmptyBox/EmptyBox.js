@@ -26,7 +26,7 @@ export default function EmptyBox(props) {
 
 EmptyBox.propTypes = {
   title: PropTypes.string,
-  content: PropTypes.string,
+  content: PropTypes.any,
   className: PropTypes.string,
   extra: PropTypes.element,
 };

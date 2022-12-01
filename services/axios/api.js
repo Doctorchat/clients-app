@@ -27,6 +27,7 @@ const api = {
     emulate: (data) => axiosInstance.post("/auth/emulate", data),
     restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
+    removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
   },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),

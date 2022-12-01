@@ -30,7 +30,7 @@ const appointmentsTabs = {
 };
 
 const schema = yup.object().shape({
-  time_interval: yup.number().min(1).max(120).required(),
+  time_frame: yup.number().min(1).max(120).required(),
   time_buffer: yup.number().min(1).max(60).required(),
 });
 
@@ -48,6 +48,8 @@ export default function DocAppointmentsSettings() {
   const resolver = useYupValidationResolver(schema);
   const form = useForm({ resolver });
   const setFormApiErrors = useApiErrorsWithForm(form, dispatch);
+
+  console.log(disponibility);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -115,7 +117,7 @@ export default function DocAppointmentsSettings() {
                   onFinish={onFormSubmit}
                   initialValues={disponibility && Array.isArray(disponibility) ? {} : disponibility}
                 >
-                  <Form.Item name="time_interval" label="Durata consultației (minute)">
+                  <Form.Item name="time_frame" label="Durata consultației (minute)">
                     <InputNumber />
                   </Form.Item>
                   <Form.Item name="time_buffer" label="Interval între consultații (minute)">
