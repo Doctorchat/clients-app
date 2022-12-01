@@ -28,7 +28,7 @@ const appointmentsTabs = {
 };
 
 const schema = yup.object().shape({
-  time_interval: yup.number().min(1).max(60).required(),
+  time_interval: yup.number().min(1).max(120).required(),
   time_buffer: yup.number().min(1).max(60).required(),
 });
 
@@ -90,10 +90,11 @@ export default function DocAppointmentsSettings() {
           <Line
             activeKey={appointmentsTabsConfig.key}
             updateTabsConfig={updateAppointmentsTabsConfig}
-            className="px-3"
+            className="px-1"
           >
             <Line.Item title={t("settings")} dataKey={appointmentsTabs.settings} />
             <Line.Item title={t("appointments")} dataKey={appointmentsTabs.list} />
+            <Line.Item title={t("slots")} dataKey={appointmentsTabs.add} />
           </Line>
           <Tabs
             config={{ ...appointmentsTabsConfig }}
@@ -105,17 +106,17 @@ export default function DocAppointmentsSettings() {
               unmountOnExit={false}
               withAnimation={!loading}
             >
-              <div className="profile-appointments-box mt-3">
+              <div className="profile-appointments-box mt-3 px-1">
                 <Alert className="mb-4 mt-1" type="info" message={t("appintments_warning")} />
                 <Form
                   methods={form}
                   onFinish={onFormSubmit}
                   initialValues={disponibility && Array.isArray(disponibility) ? {} : disponibility}
                 >
-                  <Form.Item name="time_interval" label="Durata consultației">
+                  <Form.Item name="time_interval" label="Durata consultației (minute)">
                     <InputNumber />
                   </Form.Item>
-                  <Form.Item name="time_buffer" label="Interval între consultații">
+                  <Form.Item name="time_buffer" label="Interval între consultații (minute)">
                     <InputNumber />
                   </Form.Item>
                   <Form.Item name="mon" label="Luni">

@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
+import cs from "@/utils/classNames";
 import date from "@/utils/date";
+
+import Button from "../Button";
 
 export default function AppointmentItem(props) {
   const [momentTime, setMomentTime] = useState(null);
@@ -25,11 +28,19 @@ export default function AppointmentItem(props) {
   }, [props.date, props.time]);
 
   return (
-    <div className="appointment-item">
-      <a href={props.url} target="_blank" rel="noopener noreferrer">
-        Deschide
-      </a>
-      <span>{momentTime && date(momentTime)?.full}</span>
+    <div className={cs("appointment-item", props.completed && "completed")}>
+      <div className="appointment-item__status" />
+      <div className="appointment-item__caption">
+        <span>Data consultației</span>
+        <p>{momentTime && date(momentTime)?.full}</p>
+      </div>
+      <div className="appointment-item__action">
+        <a href={props.url}>
+          <Button type="text" size="sm">
+            {props.completed ? "Rezumat" : "Accesează"}
+          </Button>
+        </a>
+      </div>
     </div>
   );
 }
@@ -38,4 +49,5 @@ AppointmentItem.propTypes = {
   date: PropTypes.string,
   time: PropTypes.string,
   url: PropTypes.string,
+  completed: PropTypes.bool,
 };

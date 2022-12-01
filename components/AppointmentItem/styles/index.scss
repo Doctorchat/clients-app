@@ -3,11 +3,43 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  background-color: #f0f0f0;
   border-radius: 10px;
   margin: 4px 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  a {
-    color: var(--bs-primary);
+  border: 1px solid var(--bs-gray-200);
+  position: relative;
+}
+
+.appointment-item__status {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 5px;
+  background-color: #000;
+  border-radius: 0 4px 4px 0;
+  background-color: #facc15;
+}
+
+.appointment-item__caption {
+  padding-left: 8px;
+
+  span {
+    font-size: 14px;
+    color: var(--bs-gray-700);
+    display: block;
+  }
+
+  p {
+    font-size: 16px;
+    color: var(--bs-gray-900);
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+.appointment-item.completed {
+  .appointment-item__status {
+    background-color: #22c55e;
   }
 }
