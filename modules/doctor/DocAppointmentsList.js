@@ -16,7 +16,7 @@ export default function DocAppointmentsList() {
 
   const { data: finishedAppointments, isLoading: areFinishedAppointmentsLoading } = useQuery(
     ["finished-appointments"],
-    () => api.user.meetings(),
+    () => api.user.finishedMeetings(),
     {
       refetchOnWindowFocus: false,
     }
