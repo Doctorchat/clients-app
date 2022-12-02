@@ -1,0 +1,41 @@
+{
+  "account": "Account",
+  "doctor": "Doctor",
+  "confirmation": "Confirmation",
+  "consultaion": "Consultaion",
+  "tell_about_you": "Tell about you",
+  "first_name/last_name": "First name / Last name",
+  "confirm_phone_number": "Confirm phone number",
+  "phone_verification": {
+    "confirmation_code": "Confirmation code",
+    "send_code": "Send code",
+    "resend_code": "Resend code",
+    "please_enter_code": "Please enter the code sent to",
+    "invalid_phone_number": "Invalid phone number",
+    "invalid_code": "Invalid code",
+    "success": "Phone number successfully confirmed"
+  },
+  "fill_in_medical_records": "Fill in medical records",
+  "available_doctors": "Available doctors",
+  "more": "More",
+  "search": "Search",
+  "category": "Category",
+  "search_by_fullname": "Search by full name",
+  "select_doctor": {
+    "from_list": {
+      "title": "Select a doctor from the list",
+      "description": "I understand which doctor I need"
+    },
+    "automatic": {
+      "title": "Select a doctor automatically",
+      "description": "Help me choose a doctor"
+    }
+  },
+  "send_anonymously": "Send anonymously",
+  "total": "Total",
+  "completion": "Completion",
+  "work_experience": "Work experience",
+  "years": "years",
+  "load_more_doctors": "Load more doctors",
+  "please_select_time": "Please select time"
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { object, string } from "yup";
 
@@ -16,6 +16,7 @@ import { getDoctor } from "@/features/doctors/api";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-png.svg";
 import { messageUploadFile } from "@/store/actions";
+import { notification } from "@/store/slices/notificationsSlice";
 import asPrice from "@/utils/asPrice";
 
 import { ConfirmationDialog } from "./ConfirmationDialog";
@@ -28,6 +29,7 @@ const messageSchema = object().shape({
 export const MessageForm = () => {
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const { global } = useSelector((store) => ({
@@ -52,16 +54,27 @@ export const MessageForm = () => {
     async (values) => {
       const data = { ...values };
 
+      if (!data.slot_id && messageType === MESSAGE_TYPES.meet) {
+        document
+          .querySelector(".message-form__time-selection")
+          .scrollIntoView({ behavior: "smooth" });
+        dispatch(
+          notification({ type: "error", title: "error", descrp: "wizard:please_select_time" })
+        );
+        return;
+      }
+
       data.chat_id = router.query.chatId;
       data.uploads_count = attachments.list.length;
       data.uploads_price = attachments.list.length * global.attach;
       data.price = doctorPrice;
       data.type = messageType;
+      data.isMeet = messageType === MESSAGE_TYPES.meet;
       data.uploads = attachments.list.map(({ file_id }) => file_id);
 
       setConfirmationData(data);
     },
-    [router.query.chatId, attachments.list, global?.attach, doctorPrice, messageType]
+    [attachments.list, dispatch, doctorPrice, global?.attach, messageType, router.query.chatId]
   );
 
   const setFileList = React.useCallback(
@@ -105,7 +118,12 @@ export const MessageForm = () => {
             <p>{t("message_from_info.line4")}</p>
           </div>
 
-          {messageType === MESSAGE_TYPES.meet && <TimeSelection />}
+          {messageType === MESSAGE_TYPES.meet && (
+            <TimeSelection
+              doctorId={doctor?.id}
+              onSelectSlot={(slotId) => form.setValue("slot_id", slotId)}
+            />
+          )}
 
           <div className="message-textarea__header">
             <label form="content">{t("explain_problem")}</label>

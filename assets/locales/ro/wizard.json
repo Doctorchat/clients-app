@@ -1,0 +1,41 @@
+{
+  "account": "Cont",
+  "doctor": "Doctor",
+  "confirmation": "Confirmare",
+  "consultaion": "Consultatie",
+  "tell_about_you": "Spune-ne despre tine",
+  "first_name/last_name": "Nume / Prenume",
+  "confirm_phone_number": "Confirma numarul de telefon",
+  "phone_verification": {
+    "confirmation_code": "Cod de confirmare",
+    "send_code": "Trimite codul",
+    "resend_code": "Retrimite codul",
+    "please_enter_code": "Introdu codul trimis la",
+    "invalid_phone_number": "Numarul de telefon este invalid",
+    "invalid_code": "Codul este invalid",
+    "success": "Numarul de telefon a fost confirmat cu succes"
+  },
+  "fill_in_medical_records": "Completeaza cartea medicala",
+  "available_doctors": "Doctori disponibili",
+  "more": "Mai multe",
+  "search": "Caută",
+  "category": "Categorie",
+  "search_by_fullname": "Cauta dupa nume si prenume",
+  "select_doctor": {
+    "from_list": {
+      "title": "Selecteaza doctorul din lista",
+      "description": "Inteleg care doctor mi-e necesar"
+    },
+    "automatic": {
+      "title": "Selecteaza doctorul automat",
+      "description": "Ajuta-ma sa aleg doctorul"
+    }
+  },
+  "send_anonymously": "Trimite anonim",
+  "total": "Total",
+  "completion": "Completare",
+  "work_experience": "Experienta de lucru",
+  "years": "ani",
+  "load_more_doctors": "Incarca mai multi doctori",
+  "please_select_time": "Selecteaza timpul"
+}

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Button from "@/components/Button";
 import Input from "@/components/Inputs";
 import Select from "@/components/Select";
-import { CHAT_TYPES } from "@/context/constants";
+import { CHAT_TYPES, MESSAGE_TYPES } from "@/context/constants";
 import { diseasesOptions } from "@/context/staticSelectOpts";
 import {
   DoctorCard,
@@ -34,15 +34,16 @@ export const SelectDoctor = () => {
   } = useDoctorPreview();
 
   const createChatHandler = React.useCallback(
-    async (chatType = CHAT_TYPES.standard) => {
+    async (chatType = CHAT_TYPES.standard, messageType = MESSAGE_TYPES.standard) => {
       const res = await api.conversation.create({
         doctor_id: doctorPreviewId,
         type: chatType,
         investigation_id: user?.investigations?.[0]?.id,
+        isAnonym: false,
       });
 
       router.push(
-        `/registration-flow/message/${res.data.id}?type=${chatType}&doctorId=${doctorPreviewId}`
+        `/registration-flow/message/${res.data.id}?type=${messageType}&doctorId=${doctorPreviewId}`
       );
     },
     [doctorPreviewId, router, user?.investigations]
@@ -93,11 +94,13 @@ export const SelectDoctor = () => {
           doctor={doctorPreview}
           isLoading={isDoctorPreviewLoading}
           onClose={() => setDoctorPreviewId(null)}
-          onMessageTypeClick={() => createChatHandler()}
-          onVideoTypeClick={() => createChatHandler()}
+          onMessageTypeClick={() => createChatHandler(CHAT_TYPES.standard, MESSAGE_TYPES.standard)}
+          onVideoTypeClick={() => createChatHandler(CHAT_TYPES.standard, MESSAGE_TYPES.meet)}
         />
       )}
-      <OptionsDialog />
+      <OptionsDialog
+        onAutoTypeClick={() => createChatHandler(CHAT_TYPES.auto, MESSAGE_TYPES.standard)}
+      />
     </>
   );
 };

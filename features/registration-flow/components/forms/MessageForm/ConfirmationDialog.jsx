@@ -63,8 +63,13 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
     setLoading(true);
 
     try {
-      await api.conversation.addMessage({ ...data, code: promocode });
-      router.replace("/home");
+      const response = await api.conversation.addMessage({ ...data, code: promocode });
+
+      if (response.data.redirect) {
+        await router.push(`/registration-flow/payment/${response.data.redirect}`);
+      } else {
+        await router.push(`/chat?id=${response.data.chat_id}`);
+      }
     } catch (error) {
       dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
     } finally {

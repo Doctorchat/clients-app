@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
+import { getUserRedirectPath } from "@/features/registration-flow";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import FacebookLogo from "@/icons/facebook-logo.svg";
 import GoogleLogo from "@/icons/google-logo.svg";
@@ -34,11 +35,15 @@ export default function Login() {
 
   const onLoginSubmit = useCallback(
     async (values) => {
-      try {
-        setLoading(true);
-        await dispatch(loginUser(values));
+      setLoading(true);
 
-        if (router.query.redirect) {
+      try {
+        const response = await dispatch(loginUser(values));
+        const redirect = getUserRedirectPath(response.user, router.pathname);
+
+        if (redirect) {
+          router.push(redirect);
+        } else if (router.query.redirect) {
           router.push(router.query.redirect);
         } else {
           router.push("/");

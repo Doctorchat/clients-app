@@ -1,10 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
 
 export const Payment = () => {
   const { t } = useTranslation();
+
+  const router = useRouter();
 
   return (
     <div className="registration-flow__payment">
@@ -25,7 +28,9 @@ export const Payment = () => {
           </div>
         </div>
         <div className="payment__actions">
-          <Button>{t("continue")}</Button>
+          <a href={router.query.url} target="_blank" rel="noopener noreferrer">
+            <Button>{t("continue")}</Button>
+          </a>
         </div>
       </div>
     </div>

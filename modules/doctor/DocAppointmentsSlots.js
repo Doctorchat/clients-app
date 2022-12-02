@@ -1,13 +1,10 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
-import AppointmentItem from "@/components/AppointmentItem";
 import Button from "@/components/Button";
 import EmptyBox from "@/components/EmptyBox";
 import Spinner from "@/components/Spinner";
 import api from "@/services/axios/api";
-import cs from "@/utils/classNames";
 import date from "@/utils/date";
 
 export default function DocAppointmentsSlots() {

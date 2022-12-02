@@ -35,8 +35,10 @@ const schema = yup.object().shape({
 });
 
 export default function DocAppointmentsSettings() {
-  const { disponibility } = useSelector((store) => ({
+  const { disponibility, time_buffer, time_frame } = useSelector((store) => ({
     disponibility: store.user.data.disponibility,
+    time_buffer: store.user.data.time_buffer || "",
+    time_frame: store.user.data.time_frame || "",
   }));
   const [appointmentsTabsConfig, setAppointmentsTabsConfig] = useState({
     key: Array.isArray(disponibility) ? appointmentsTabs.settings : appointmentsTabs.list,
@@ -48,8 +50,6 @@ export default function DocAppointmentsSettings() {
   const resolver = useYupValidationResolver(schema);
   const form = useForm({ resolver });
   const setFormApiErrors = useApiErrorsWithForm(form, dispatch);
-
-  console.log(disponibility);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -115,7 +115,15 @@ export default function DocAppointmentsSettings() {
                 <Form
                   methods={form}
                   onFinish={onFormSubmit}
-                  initialValues={disponibility && Array.isArray(disponibility) ? {} : disponibility}
+                  initialValues={
+                    disponibility && Array.isArray(disponibility)
+                      ? {}
+                      : {
+                          time_frame,
+                          time_buffer,
+                          ...disponibility,
+                        }
+                  }
                 >
                   <Form.Item name="time_frame" label="Durata consultației (minute)">
                     <InputNumber />
