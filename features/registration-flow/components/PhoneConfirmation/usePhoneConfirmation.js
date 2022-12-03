@@ -23,12 +23,11 @@ const usePhoneConfirmation = () => {
   const onSendCode = React.useCallback(async () => {
     if (countdown || !user?.phone) return;
 
+    setIsRequesting(true);
+
     try {
-      setIsRequesting(true);
-
       const response = await api.smsVerification.sendCode({ phone: user.phone });
-
-      if (response.data.expired_in) setCountdown(response.data.expired_in + 1);
+      setCountdown(response?.data?.expired_in ?? 275);
     } catch (error) {
       dispatch(
         notification({
@@ -79,7 +78,7 @@ const usePhoneConfirmation = () => {
   }, [countdown, setCountdown]);
 
   React.useEffect(() => {
-    // onSendCode();
+    onSendCode();
   }, [onSendCode]);
 
   return {

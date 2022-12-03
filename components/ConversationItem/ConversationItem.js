@@ -12,11 +12,6 @@ import date from "@/utils/date";
 
 import Image from "../Image";
 
-
-
-
-
-
 const ticketStatuses = {
   initied: {
     icon: <BelIcon />,

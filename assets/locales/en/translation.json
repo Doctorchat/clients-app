@@ -31,6 +31,7 @@
   "yup_passwords_match": "The passwords do not match",
   "yup_array_min": "Field must have at least ${min} item(-s)",
   "reviews": "Reviews",
+  "video_appointment": "Video appointment",
   "video_appointments": "Video appointments",
   "guard_doctor": "Doctor on duty",
   "vacation": "Vacation",

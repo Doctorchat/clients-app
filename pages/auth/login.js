@@ -69,7 +69,7 @@ export default function Login() {
             </Link>
           </h3>
         </div>
-        <Link href="/auth/register">
+        <Link href="/registration-flow">
           <a>
             <Button type="outline">{t("registration")}</Button>
           </a>
@@ -94,7 +94,7 @@ export default function Login() {
         </Form>
         <div className="auth-footer">
           {t("not_registered_yet")}{" "}
-          <Link href="/auth/register">
+          <Link href="/registration-flow">
             <a className="link">{t("registration")}</a>
           </Link>
         </div>

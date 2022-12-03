@@ -31,6 +31,7 @@
   "yup_passwords_match": "Parolele nu sunt identice",
   "yup_array_min": "Câmpul trebuie să conțină cel puțin ${min} element(-e)",
   "reviews": "Recenzii",
+  "video_appointment": "Consultație video",
   "video_appointments": "Programări video",
   "guard_doctor": "Medic de gardă",
   "vacation": "Concediu",

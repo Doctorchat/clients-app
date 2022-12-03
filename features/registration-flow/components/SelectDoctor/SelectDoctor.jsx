@@ -83,7 +83,11 @@ export const SelectDoctor = () => {
         </DoctorsGrid>
 
         <div className="select-doctor__pagination">
-          <Button loading={pagination.isFetchingNextPage} onClick={pagination.fetchNextPage}>
+          <Button
+            disabled={!pagination.hasNextPage}
+            loading={pagination.isFetchingNextPage}
+            onClick={pagination.fetchNextPage}
+          >
             {t("wizard:load_more_doctors")}
           </Button>
         </div>
