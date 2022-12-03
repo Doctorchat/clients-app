@@ -21,7 +21,7 @@ const useDoctorsInfiniteList = () => {
       getDoctors({
         page: pageParam,
         search: debouncedSearch,
-        specialty: debouncedSpecialty,
+        specialty: debouncedSpecialty ? debouncedSpecialty.value : undefined,
         locale,
       }),
     getNextPageParam: (lastPage) => lastPage.next_page_url?.replace(/\D/g, "") ?? false,

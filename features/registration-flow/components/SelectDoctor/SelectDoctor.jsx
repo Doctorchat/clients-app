@@ -7,7 +7,6 @@ import Button from "@/components/Button";
 import Input from "@/components/Inputs";
 import Select from "@/components/Select";
 import { CHAT_TYPES, MESSAGE_TYPES } from "@/context/constants";
-import { diseasesOptions } from "@/context/staticSelectOpts";
 import {
   DoctorCard,
   DoctorsGrid,
@@ -16,6 +15,7 @@ import {
   useDoctorsInfiniteList,
 } from "@/features/doctors";
 import api from "@/services/axios/api";
+import { categoriesOptionsSelector } from "@/store/selectors";
 
 import { OptionsDialog } from "./OptionsDialog";
 
@@ -23,6 +23,8 @@ export const SelectDoctor = () => {
   const { t } = useTranslation();
 
   const user = useSelector((state) => state.user?.data);
+  const categories = useSelector((state) => categoriesOptionsSelector(state));
+
   const router = useRouter();
 
   const { doctors, isLoading, filters, pagination } = useDoctorsInfiniteList();
@@ -57,15 +59,20 @@ export const SelectDoctor = () => {
             <label className="select-doctor__filter-label" htmlFor="category">
               {t("wizard:category")}
             </label>
-            <Select name="category" options={diseasesOptions} />
+            <Select
+              name="speciality"
+              options={categories}
+              value={filters.specialty}
+              onChange={filters.setSpecialty}
+            />
           </div>
           <div className="select-doctor__filter">
-            <label className="select-doctor__filter-label" htmlFor="keyword">
+            <label className="select-doctor__filter-label" htmlFor="search">
               {t("wizard:search_by_fullname")}
             </label>
             <Input
               className="w-100"
-              name="keyword"
+              name="search"
               placeholder={t("wizard:search")}
               value={filters.search}
               onChange={(e) => filters.setSearch(e.target.value)}
