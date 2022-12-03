@@ -1,91 +1,115 @@
-import { useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Calendar } from "antd";
+import en_US from "antd/lib/locale-provider/en_US";
+import ro_RO from "antd/lib/locale-provider/ro_RO";
+import ru_RU from "antd/lib/locale-provider/ru_RU";
 import dayjs from "dayjs";
+import moment from "moment";
 import PropTypes from "prop-types";
 
-import FormItem from "@/components/Form/FormItem";
-import DatePicker from "@/packages/DatePicker";
-import TimePicker from "@/packages/TimePicker";
+import api from "@/services/axios/api";
+import cs from "@/utils/classNames";
+import getActiveLng from "@/utils/getActiveLng";
 
-const daysIndexes = new Map([
-  [0, "sun"],
-  [1, "mon"],
-  [2, "tue"],
-  [3, "wed"],
-  [4, "thu"],
-  [5, "fri"],
-  [6, "sat"],
-]);
+const antLocales = {
+  ro: ro_RO,
+  ru: ru_RU,
+  en: en_US,
+};
 
-export default function MeetFormDateTime(props) {
-  const { daysRange, reseravations } = props;
-  const [disabledHours, setDisabledHours] = useState([]);
-  const [disabledMinutes, setDisabledMinutes] = useState([]);
-  const [currentDate, setCurrentDate] = useState();
-  const { t } = useTranslation();
-
-  const setReservation = useCallback(
-    (selectedDate) => {
-      const selected = dayjs(selectedDate).format("DD.MM.YYYY");
-      setDisabledMinutes(reseravations.find(({ date }) => date === selected)?.time);
-    },
-    [reseravations]
-  );
-
-  const onDateUpdated = useCallback(
-    (selectedDate) => {
-      if (selectedDate) setCurrentDate(selectedDate.toISOString());
-      if (daysRange && selectedDate && selectedDate?.isValid()) {
-        setDisabledHours(daysRange[daysIndexes.get(selectedDate.day())]);
-      }
-      setReservation(selectedDate);
-    },
-    [daysRange, setReservation]
-  );
-
-  const additionalCheckDisabledDay = useCallback(
-    (date) => {
-      const selectedDayRange = daysRange && daysRange[daysIndexes.get(date.day())];
-
-      if (!selectedDayRange) return true;
-      if (!selectedDayRange.every(Boolean)) return true;
-
-      return false;
-    },
-    [daysRange]
-  );
-
+const TimeCard = ({ time, isSelected, isDisabled, onClick }) => {
   return (
-    <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-      <FormItem className="w-100" name="date" label={t("message_from_info.date")}>
-        <DatePicker
-          onDateUpdated={onDateUpdated}
-          additionalCheckDisabledDay={additionalCheckDisabledDay}
+    <div
+      role="button"
+      className={cs(
+        "time-selection__time-card",
+        isSelected && "selected",
+        isDisabled && "disabled"
+      )}
+      onClick={onClick}
+    >
+      {time}
+    </div>
+  );
+};
+
+TimeCard.propTypes = {
+  time: PropTypes.string,
+  isSelected: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+export default function MeetFormDateTime({ doctorId, onSelectSlot }) {
+  const [selectedDate, setSelectedDate] = React.useState(moment());
+  const [selectedSlotId, setSelectedSlotId] = React.useState(null);
+
+  const { data } = useQuery(
+    ["slots", doctorId],
+    () => api.user.slots(doctorId).then((res) => res.data),
+    {
+      refetchOnWindowFocus: false,
+      enabled: Boolean(doctorId),
+      onSuccess: (data) => {
+        setSelectedDate(moment(data[0].start_time));
+      },
+    }
+  );
+
+  const onChangeSelectedDate = React.useCallback((date) => {
+    setSelectedDate(date);
+    setSelectedSlotId(null);
+  }, []);
+
+  const onChangeSelectedSlot = React.useCallback(
+    (slotId) => {
+      setSelectedSlotId(slotId);
+      onSelectSlot(slotId);
+    },
+    [onSelectSlot]
+  );
+  return (
+    <div className="message-form__time-selection">
+      <div className="time-selection__date">
+        <Calendar
+          mode="month"
+          fullscreen={false}
+          value={moment(selectedDate)}
+          onSelect={onChangeSelectedDate}
+          disabledDate={(date) => {
+            return !data?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
+          }}
+          locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
         />
-      </FormItem>
-      <FormItem
-        className="w-100"
-        name="time"
-        label={t("message_from_info.time")}
-        disabled={!currentDate}
-      >
-        <TimePicker
-          disabledHours={disabledHours}
-          disabledMinutes={disabledMinutes}
-          activeDate={currentDate}
-          allowSelectHourWithoutMins={false}
-        />
-      </FormItem>
+      </div>
+      <div className="time-selection__time">
+        {data?.map((slot) => {
+          const date = dayjs(slot.start_time);
+          const isSelected = selectedSlotId === slot.id;
+          const isDisabled = date.isBefore(moment().add(5, "hours"));
+
+          return (
+            date.isSame(selectedDate, "day") && (
+              <TimeCard
+                key={slot.id}
+                time={date.format("HH:mm")}
+                isSelected={isSelected}
+                isDisabled={isDisabled}
+                onClick={() => {
+                  if (!isDisabled) {
+                    onChangeSelectedSlot(isSelected ? null : slot.id);
+                  }
+                }}
+              />
+            )
+          );
+        })}
+      </div>
     </div>
   );
 }
 
 MeetFormDateTime.propTypes = {
-  daysRange: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  reseravations: PropTypes.array,
-};
-
-MeetFormDateTime.defaultProps = {
-  daysRange: null,
-  reseravations: [],
+  doctorId: PropTypes.number,
+  onSelectSlot: PropTypes.func,
 };

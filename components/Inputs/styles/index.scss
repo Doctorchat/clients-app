@@ -54,6 +54,14 @@
     pointer-events: none;
     background: var(--bs-gray-200);
   }
+  &.PhoneInput--disabled {
+    background: var(--bs-gray-200);
+    pointer-events: none;
+
+    select {
+      opacity: 0;
+    }
+  }
 }
 
 .dc-textarea {

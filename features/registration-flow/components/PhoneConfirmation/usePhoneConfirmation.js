@@ -16,7 +16,7 @@ const usePhoneConfirmation = () => {
   const router = useRouter();
 
   const [confirmationCode, setConfrimationCode] = React.useState("");
-  const [countdown, setCountdown] = React.useState(10);
+  const [countdown, setCountdown] = React.useState(0);
   const [isCofirming, setIsConfirming] = React.useState(false);
   const [isRequesting, setIsRequesting] = React.useState(false);
 
@@ -79,7 +79,7 @@ const usePhoneConfirmation = () => {
   }, [countdown, setCountdown]);
 
   React.useEffect(() => {
-    onSendCode();
+    // onSendCode();
   }, [onSendCode]);
 
   return {

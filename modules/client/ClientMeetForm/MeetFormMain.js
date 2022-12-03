@@ -49,6 +49,16 @@ export default function MeetFormMain() {
     async (values) => {
       const data = { ...values };
 
+      if (!data.slot_id) {
+        document
+          .querySelector(".message-form__time-selection")
+          .scrollIntoView({ behavior: "smooth" });
+        dispatch(
+          notification({ type: "error", title: "error", descrp: "wizard:please_select_time" })
+        );
+        return;
+      }
+
       data.uploads_count = attachments.list.length;
       data.uploads_price = attachments.list.length * global.attach;
       data.price = userInfo?.meet_price;
@@ -65,7 +75,7 @@ export default function MeetFormMain() {
         setLoading(false);
       }
     },
-    [attachments.list.length, dispatch, global.attach, updateTabsConfig, userInfo?.meet_price]
+    [attachments.list.length, dispatch, global?.attach, updateTabsConfig, userInfo?.meet_price]
   );
 
   const setFileList = useCallback(
@@ -94,9 +104,12 @@ export default function MeetFormMain() {
             <Form
               methods={form}
               onFinish={onFormSubmit}
-              initialValues={{ content: values.content, date: values.date, time: values.time }}
+              initialValues={{ content: values.content }}
             >
-              <MeetFormDateTime daysRange={userInfo?.disponibility} />
+              <MeetFormDateTime
+                doctorId={48}
+                onSelectSlot={(slotId) => form.setValue("slot_id", slotId)}
+              />
               <Form.Item name="content" label={t("explain_problem")}>
                 <Textarea placeholder={t("message_form_placeholder")} />
               </Form.Item>

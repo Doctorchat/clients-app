@@ -8,3 +8,25 @@
     max-height: stretch;
   }
 }
+
+#meet-form {
+  .message-form__time-selection {
+    .time-selection__time {
+      padding: 48px 20px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #meet-form {
+    .message-form__time-selection {
+      flex-direction: column;
+
+      .time-selection__time {
+        padding: 20px 15px 0;
+        flex-wrap: wrap;
+        display: flex;
+      }
+    }
+  }
+}

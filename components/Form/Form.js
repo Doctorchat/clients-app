@@ -54,11 +54,7 @@ Form.propTypes = {
   className: PropTypes.string,
   methods: PropTypes.object,
   onFinish: PropTypes.func,
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
+  children: PropTypes.node,
   onValuesChange: PropTypes.func,
   initialValues: PropTypes.object,
 };

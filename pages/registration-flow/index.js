@@ -1,21 +1,66 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { useEffectOnce } from "usehooks-ts";
 
-import { Layout, RegistrationForm } from "@/features/registration-flow";
+import FullPageLoading from "@/components/FullPageLoading";
+import { Layout, PhoneConfirmation, RegistrationForm } from "@/features/registration-flow";
 import i18next from "@/services/i18next";
+import { fetchUserByToken, getBootstrapData } from "@/store/actions";
 
 export default function RegistrationPage() {
-  const user = useSelector((store) => store.user);
+  const [isPhoneConfirmationStep, setIsPhoneConfirmationStep] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (user.isAuthorized || localStorage.getItem("dc_token")) {
-      router.replace({ pathname: "/" });
-    }
-  }, [router, user.isAuthorized]);
+  const updateStepStatus = React.useCallback(
+    (user) => {
+      if (user.role === 2) {
+        return router.replace("/home");
+      }
 
-  return <RegistrationForm />;
+      if (!user.verified) {
+        return setIsPhoneConfirmationStep(true);
+      }
+
+      if (!user?.investigations?.length) {
+        return router.replace("/registration-flow/medical-records" + window.location.search);
+      }
+
+      return router.replace("/home");
+    },
+    [router]
+  );
+
+  useEffectOnce(() => {
+    const accessToken = localStorage.getItem("dc_token");
+
+    if (accessToken) {
+      dispatch(fetchUserByToken())
+        .then((user) => {
+          updateStepStatus(user);
+        })
+        .finally(() => {
+          dispatch(getBootstrapData()).finally(() => setLoading(false));
+        });
+    } else setLoading(false);
+  });
+
+  if (isLoading) {
+    return <FullPageLoading />;
+  }
+
+  return (
+    <>
+      <RegistrationForm
+        isFormDisabled={isPhoneConfirmationStep}
+        updateStepStatus={updateStepStatus}
+      />
+      {isPhoneConfirmationStep && <PhoneConfirmation />}
+    </>
+  );
 }
 
 RegistrationPage.getLayout = function (page) {

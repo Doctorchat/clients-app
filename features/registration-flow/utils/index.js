@@ -1,11 +1,9 @@
-import dayjs from "dayjs";
-
 const allowedPaths = ["select-doctor", "message"];
 
 export const getUserRedirectPath = (user, pathname = "") => {
   if (user.role === 3) {
     if (!user?.verified) {
-      return "/registration-flow/phone-confirmation";
+      return "/registration-flow";
     }
 
     if (!user?.investigations?.length) {
@@ -27,20 +25,4 @@ export const getUserRedirectPath = (user, pathname = "") => {
   }
 
   return null;
-};
-
-export const generateSlotsByDate = (slots) => {
-  const slotsByDate = {};
-
-  slots.forEach((slot) => {
-    const [slot_date, slot_time] = dayjs(slot.start_time).format("YYYY-MM-DD#HH:mm").split("#");
-
-    if (!slotsByDate[slot_date]) {
-      slotsByDate[slot_date] = [];
-    }
-
-    slotsByDate[slot_date].push(slot_time);
-  });
-
-  return slotsByDate;
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PinInput from "react-pin-input";
+import { useSelector } from "react-redux";
 
 import Button from "@/components/Button";
 
@@ -8,6 +9,8 @@ import usePhoneConfirmation from "./usePhoneConfirmation";
 
 export const PhoneConfirmation = () => {
   const { t } = useTranslation();
+
+  const user = useSelector((state) => state.user.data);
 
   const {
     confirmationCode,
@@ -49,7 +52,9 @@ export const PhoneConfirmation = () => {
             />
           </div>
           <footer className="phone-confirmation__footer">
-            <p>{t("wizard:phone_verification.please_enter_code")}</p>
+            <p>
+              {t("wizard:phone_verification.please_enter_code")} {user?.phone}
+            </p>
           </footer>
         </div>
       </div>

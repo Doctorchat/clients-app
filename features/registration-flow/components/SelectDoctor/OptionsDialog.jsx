@@ -17,7 +17,13 @@ export const OptionsDialog = ({ onAutoTypeClick }) => {
 
   const { value: isOpen, setFalse: onHideModal, setTrue: onOpenModal } = useBoolean(false);
 
-  useEffectOnce(() => setTimeout(onOpenModal));
+  useEffectOnce(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (!params.has("doctor_id")) {
+      onOpenModal();
+    }
+  });
 
   const [isAutoTypeLoading, setIsAutoTypeLoading] = React.useState(false);
 
