@@ -178,21 +178,25 @@ export const DoctorViewDialog = ({
             </div>
 
             <footer className="doctor-view__footer">
-              <Button
-                className="doctor-view__button"
-                loading={isMessageTypeLoading}
-                onClick={onMessageTypeClickHandler}
-              >
-                <span>{t("describe_problem")}</span>
-              </Button>
-              <Button
-                className="doctor-view__button"
-                type="outline"
-                loading={isVideoTypeLoading}
-                onClick={onVideoTypeClickHandler}
-              >
-                <span>{t("video_appointment")}</span>
-              </Button>
+              {doctor.chat && (
+                <Button
+                  className="doctor-view__button"
+                  loading={isMessageTypeLoading}
+                  onClick={onMessageTypeClickHandler}
+                >
+                  <span>{t("describe_problem")}</span>
+                </Button>
+              )}
+              {doctor.video && (
+                <Button
+                  className="doctor-view__button"
+                  type="outline"
+                  loading={isVideoTypeLoading}
+                  onClick={onVideoTypeClickHandler}
+                >
+                  <span>{t("video_appointment")}</span>
+                </Button>
+              )}
             </footer>
           </div>
         </article>
@@ -222,6 +226,8 @@ DoctorViewDialog.propTypes = {
       }),
       experience: PropTypes.number,
     }),
+    chat: PropTypes.bool,
+    video: PropTypes.bool,
   }),
   isLoading: PropTypes.bool,
   onClose: PropTypes.func,
