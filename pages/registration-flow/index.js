@@ -52,14 +52,15 @@ export default function RegistrationPage() {
     return <FullPageLoading />;
   }
 
+  if (isPhoneConfirmationStep) {
+    return <PhoneConfirmation />;
+  }
+
   return (
-    <>
-      <RegistrationForm
-        isFormDisabled={isPhoneConfirmationStep}
-        updateStepStatus={updateStepStatus}
-      />
-      {isPhoneConfirmationStep && <PhoneConfirmation />}
-    </>
+    <RegistrationForm
+      isFormDisabled={isPhoneConfirmationStep}
+      updateStepStatus={updateStepStatus}
+    />
   );
 }
 

@@ -44,24 +44,18 @@ export default function Login() {
 
   return (
     <>
-      <div className="auth-header">
+      <div className="auth-layout__main-header">
         <div className="auth-header-logo">
-          <h3 className="m-0">
-            <Link href="https://doctorchat.md/">
-              <a>Doctorchat</a>
-            </Link>
-          </h3>
+          <h3 className="m-0">{t("auth_reset_title")}</h3>
         </div>
         <Link href="/auth/login">
           <a>
-            <Button type="outline">{t("login")}</Button>
+            <Button className="auth-layout__green-btn">{t("login")}</Button>
           </a>
         </Link>
       </div>
       <div className="auth-form">
         <Form name="login-form" methods={form} onFinish={onLoginSubmit}>
-          <p className="form-subtitle">Doctorchat</p>
-          <h3 className="form-title">{t("auth_reset_title")}</h3>
           <Form.Item label={t("email")} name="email">
             <Input />
           </Form.Item>

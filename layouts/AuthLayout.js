@@ -27,25 +27,26 @@ export default function AuthLayout({ children }) {
   }, [router, user.isAuthorized]);
 
   return (
-    <div className="auth-layout">
-      <div className="auth-content">
-        <div className="auth-sections">
-          <div className="auth-background" />
-          <div className="auth-main-content">
-            <div className="auth-inner">
-              {children}
-              <div className="auth-bottom">
-                <div className="auth-layout-lang d-flex justify-content-center">
-                  <ProfileChangeLang />
-                </div>
-                <a
-                  href="https://doctorchat.md/termeni-si-conditii/"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  {t("terms_conditions")}
-                </a>
-              </div>
+    <div className="auth-layout doctorchat-v2">
+      <div className="auth-layout__sections">
+        <div className="auth-layout__content">
+          <header className="auth-layout__header">
+            <div>
+              {t("wizard:welcome_to")}&nbsp;
+              <a href="https://doctorchat.md/" target="_blank" rel="noopener noreferrer">
+                Doctorchat
+              </a>
+            </div>
+            <ProfileChangeLang />
+          </header>
+          <main className="auth-layout__main">{children}</main>
+        </div>
+        <div className="auth-layout__slider">
+          <div className="auth-layout__slider-card">
+            <p className="slider-card__descrpiption">{t("wizard:login_page_card_description")}</p>
+            <div className="slider-card__meta">
+              <h3 className="slider-card__title">Igor Cliuev</h3>
+              <p className="slider-card__subtitle">Founder CEO</p>
             </div>
           </div>
         </div>

@@ -1,10 +1,14 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
+import LogoutIcon from "@/icons/logout.svg";
 import { ProfileChangeLang } from "@/modules/common";
+import { logoutUser } from "@/store/actions";
 import cs from "@/utils/classNames";
 
 import { Steps } from "../Steps";
@@ -18,16 +22,37 @@ export const Layout = ({
 }) => {
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
   const roter = useRouter();
+
+  const [isLogoutVisible, setIsLogoutVisible] = React.useState(false);
 
   const onBackHandler = () => {
     roter.push(backPath);
   };
 
+  const logoutHandler = () => dispatch(logoutUser());
+
+  React.useEffect(() => {
+    const onScrollToBottom = () => {
+      if (window.innerHeight + window.pageYOffset >= document.body.scrollHeight - 50) {
+        setIsLogoutVisible(true);
+      } else {
+        setIsLogoutVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", onScrollToBottom);
+
+    return () => {
+      window.removeEventListener("scroll", onScrollToBottom);
+    };
+  }, []);
+
   return (
     <div
       className={cs(
-        "registration-flow__layout",
+        "registration-flow__layout doctorchat-v2",
         disableResponsiveRestriction && "disable-restrictions"
       )}
     >
@@ -52,6 +77,18 @@ export const Layout = ({
         <h1>{title}</h1>
         {children}
       </main>
+      <Button
+        className={cs(
+          "registration-flow__logout registration-flow__gray-btn",
+          isLogoutVisible && "show"
+        )}
+        type="text"
+        size="sm"
+        icon={<LogoutIcon />}
+        onClick={logoutHandler}
+      >
+        {t("logout")}
+      </Button>
     </div>
   );
 };

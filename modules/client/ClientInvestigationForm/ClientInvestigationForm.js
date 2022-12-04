@@ -8,11 +8,7 @@ import Form from "@/components/Form";
 import Input, { InputNumber, Textarea } from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import Select from "@/components/Select";
-import {
-  allergiesOptions,
-  diseasesOptions,
-  epidemiologicalOptions,
-} from "@/context/staticSelectOpts";
+import { diseasesOptions } from "@/context/staticSelectOpts";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
@@ -79,12 +75,7 @@ export default function ClientInvestigationForm() {
       const data = { ...values, ...formValues };
 
       data.sex = typeof data.sex === "object" ? data.sex.value : data.sex;
-      data.epidemiological =
-        typeof data.epidemiological === "object"
-          ? data.epidemiological.value
-          : data.epidemiological;
       data.diseases = typeof data.diseases === "object" ? data.diseases.value : data.diseases;
-      data.allergies = typeof data.allergies === "object" ? data.allergies.value : data.allergies;
 
       const onSuccess = (response) => {
         dispatch(investigationFormToggleVisibility(false));
@@ -155,19 +146,10 @@ export default function ClientInvestigationForm() {
           <Form.Item label={t("investigation_form.activity")} name="activity">
             <Textarea />
           </Form.Item>
-          <Form.Item label={t("investigation_form.epidemiological")} name="epidemiological">
-            <Select options={epidemiologicalOptions} />
-          </Form.Item>
           <Form.Item label={t("investigation_form.diseases")} name="diseases">
             <Select options={diseasesOptions} />
           </Form.Item>
           <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
-            <Textarea />
-          </Form.Item>
-          <Form.Item label={t("investigation_form.allergies")} name="allergies">
-            <Select options={allergiesOptions} />
-          </Form.Item>
-          <Form.Item label={t("investigation_form.allergies_spec")} name="allergies_spec">
             <Textarea />
           </Form.Item>
           <div className="d-flex justify-content-end">

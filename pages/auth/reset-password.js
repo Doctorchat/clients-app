@@ -59,24 +59,18 @@ export default function ResetPassword() {
 
   return (
     <>
-      <div className="auth-header">
+      <div className="auth-layout__main-header">
         <div className="auth-header-logo">
-          <h3 className="m-0">
-            <Link href="https://doctorchat.md/">
-              <a>Doctorchat</a>
-            </Link>
-          </h3>
+          <h3 className="m-0">{t("password_recovery")}</h3>
         </div>
         <Link href="/auth/login">
           <a>
-            <Button type="outline">{t("login")}</Button>
+            <Button className="auth-layout__green-btn">{t("login")}</Button>
           </a>
         </Link>
       </div>
       <div className="auth-form auth-login-form">
         <Form name="login-form" methods={form} onFinish={onResetSubmit}>
-          <p className="form-subtitle">Doctorchat</p>
-          <h3 className="form-title">{t("password_recovery")}</h3>
           <Form.Item name="email" label={t("email")}>
             <Input autoComplete="off" />
           </Form.Item>

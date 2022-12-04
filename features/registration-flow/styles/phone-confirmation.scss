@@ -41,6 +41,17 @@
   }
 }
 
+.phone-confirmation__edit-form {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 24px;
+
+  .form-control {
+    width: 100%;
+    margin-right: 1rem;
+  }
+}
+
 @media screen and (max-width: 520px) {
   .phone-confirmation {
     &__header {

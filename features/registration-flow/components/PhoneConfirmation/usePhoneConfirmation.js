@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { useEffectOnce } from "usehooks-ts";
 
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
@@ -20,26 +21,39 @@ const usePhoneConfirmation = () => {
   const [isCofirming, setIsConfirming] = React.useState(false);
   const [isRequesting, setIsRequesting] = React.useState(false);
 
-  const onSendCode = React.useCallback(async () => {
-    if (countdown || !user?.phone) return;
+  const [__resetPinInput, setResetPinInput] = React.useState(false);
 
-    setIsRequesting(true);
+  const onResetPinInput = React.useCallback(() => {
+    setResetPinInput(true);
+    setTimeout(() => {
+      setResetPinInput(false);
+    }, 0);
+  }, []);
 
-    try {
-      const response = await api.smsVerification.sendCode({ phone: user.phone });
-      setCountdown(response?.data?.expired_in ?? 275);
-    } catch (error) {
-      dispatch(
-        notification({
-          type: "error",
-          title: "error",
-          descrp: "wizard:phone_verification.invalid_phone_number",
-        })
-      );
-    } finally {
-      setIsRequesting(false);
-    }
-  }, [countdown, dispatch, user?.phone]);
+  const onSendCode = React.useCallback(
+    async (ignoreCountdown = false) => {
+      if ((!ignoreCountdown && countdown) || !user?.phone) return;
+
+      setIsRequesting(true);
+      onResetPinInput();
+      try {
+        const response = await api.smsVerification.sendCode({ phone: user.phone });
+        setCountdown(response?.data?.expired_in ?? 275);
+        dispatch(notification({ title: "success", descrp: "phone_verification.code_sent" }));
+      } catch (error) {
+        dispatch(
+          notification({
+            type: "error",
+            title: "error",
+            descrp: "wizard:phone_verification.invalid_phone_number",
+          })
+        );
+      } finally {
+        setIsRequesting(false);
+      }
+    },
+    [countdown, dispatch, user?.phone, onResetPinInput]
+  );
 
   const onConfirmCode = React.useCallback(async () => {
     setIsConfirming(true);
@@ -77,15 +91,16 @@ const usePhoneConfirmation = () => {
     countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000);
   }, [countdown, setCountdown]);
 
-  React.useEffect(() => {
+  useEffectOnce(() => {
     onSendCode();
-  }, [onSendCode]);
+  });
 
   return {
     confirmationCode,
     countdown,
     isCofirming,
     isRequesting,
+    __resetPinInput,
     setConfrimationCode,
     onSendCode,
     onConfirmCode,

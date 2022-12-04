@@ -37,5 +37,10 @@
   "work_experience": "Стаж работы",
   "years": "лет",
   "load_more_doctors": "Загрузить больше врачей",
-  "please_select_time": "Пожалуйста, выберите время"
+  "please_select_time": "Пожалуйста, выберите время",
+  "welcome_to": "Добро пожаловать в",
+  "sign_in": "Войти",
+  "login_with_google": "Войти с помощью Google",
+  "login_page_card_description": "\"Сейчас мы направляемся в положительном направлении в Интернете\"",
+  "edit": "Редактировать"
 }

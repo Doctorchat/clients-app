@@ -9,11 +9,7 @@ import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputNumber, Textarea } from "@/components/Inputs";
 import Select from "@/components/Select";
-import {
-  allergiesOptions,
-  diseasesOptions,
-  epidemiologicalOptions,
-} from "@/context/staticSelectOpts";
+import { diseasesOptions } from "@/context/staticSelectOpts";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
@@ -36,14 +32,6 @@ const medicalRecordsSchema = yup.object().shape({
       message: i18next.t("yup_mixed_required"),
       test: (value) => isValidSelectOption(value),
     }),
-  epidemiological: yup
-    .mixed()
-    .required()
-    .test({
-      name: "select-validation",
-      message: i18next.t("yup_mixed_required"),
-      test: (value) => isValidSelectOption(value),
-    }),
   diseases: yup
     .mixed()
     .required()
@@ -53,15 +41,6 @@ const medicalRecordsSchema = yup.object().shape({
       test: (value) => isValidSelectOption(value),
     }),
   diseases_spec: yup.string().required(),
-  allergies: yup
-    .mixed()
-    .required()
-    .test({
-      name: "select-validation",
-      message: i18next.t("yup_mixed_required"),
-      test: (value) => isValidSelectOption(value),
-    }),
-  allergies_spec: yup.string().required(),
 });
 
 export const MedicalRecordsForm = () => {
@@ -81,9 +60,7 @@ export const MedicalRecordsForm = () => {
       const data = { ...values };
 
       data.sex = data.sex.value;
-      data.epidemiological = data.epidemiological.value;
       data.diseases = data.diseases.value;
-      data.allergies = data.allergies.value;
 
       try {
         setIsLoading(true);
@@ -137,19 +114,10 @@ export const MedicalRecordsForm = () => {
       <Form.Item label={t("investigation_form.activity")} name="activity">
         <Textarea />
       </Form.Item>
-      <Form.Item label={t("investigation_form.epidemiological")} name="epidemiological">
-        <Select options={epidemiologicalOptions} />
-      </Form.Item>
       <Form.Item label={t("investigation_form.diseases")} name="diseases">
         <Select options={diseasesOptions} />
       </Form.Item>
       <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
-        <Textarea />
-      </Form.Item>
-      <Form.Item label={t("investigation_form.allergies")} name="allergies">
-        <Select options={allergiesOptions} />
-      </Form.Item>
-      <Form.Item label={t("investigation_form.allergies_spec")} name="allergies_spec">
         <Textarea />
       </Form.Item>
       <div className="form-bottom">

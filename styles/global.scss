@@ -21,6 +21,12 @@
   --dc-meet-color: #34a853;
 }
 
+html,
+body,
+#__next {
+  height: 100%;
+}
+
 input,
 textarea,
 select {

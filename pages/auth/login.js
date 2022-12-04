@@ -61,60 +61,57 @@ export default function Login() {
 
   return (
     <>
-      <div className="auth-header">
+      <div className="auth-layout__main-header">
         <div className="auth-header-logo">
-          <h3 className="m-0">
-            <Link href="https://doctorchat.md/">
-              <a>Doctorchat</a>
-            </Link>
-          </h3>
+          <h3 className="m-0">{t("wizard:sign_in")}</h3>
         </div>
         <Link href="/registration-flow">
           <a>
-            <Button type="outline">{t("registration")}</Button>
+            <Button className="auth-layout__green-btn">{t("registration")}</Button>
           </a>
         </Link>
       </div>
-      <div className="auth-form auth-login-form">
+      <div className="auth-layout__form">
         <Form name="login-form" methods={form} onFinish={onLoginSubmit}>
-          <p className="form-subtitle">Doctorchat</p>
-          <h3 className="form-title">{t("auth_login_title")}</h3>
           <Form.Item label={t("email")} name="email">
             <Input />
           </Form.Item>
-          <Form.Item label={t("password")} name="password">
+          <div className="d-flex align-items-center justify-content-between mb-2">
+            <label className="form-control-label mb-0" htmlFor="password">
+              {t("password")}
+            </label>
+            <Link href="/auth/restore">
+              <a className="forgot-password-link link pe-2">{t("forgot_password")}</a>
+            </Link>
+          </div>
+          <Form.Item name="password">
             <Input type="password" />
           </Form.Item>
-          <div className="form-bottom">
-            <Button htmlType="submit" loading={loading}>
+          <div className="form-bottom flex-column">
+            <div className="login-media w-100">
+              <a href="https://api.doctorchat.md/auth/google" className="d-block me-3 w-100">
+                <button className="login-media__btn is-google" type="button">
+                  <GoogleLogo />
+                  {t("wizard:login_with_google")}
+                </button>
+              </a>
+              <a href="https://api.doctorchat.md/auth/facebook">
+                <button className="login-media__btn" type="button">
+                  <FacebookLogo />
+                </button>
+              </a>
+            </div>
+            <Button className="w-100" htmlType="submit" loading={loading}>
               {t("login")}
             </Button>
-            <Link href="/auth/restore">{t("forgot_password")}</Link>
           </div>
         </Form>
-        <div className="auth-footer">
-          {t("not_registered_yet")}{" "}
-          <Link href="/registration-flow">
-            <a className="link">{t("registration")}</a>
-          </Link>
-        </div>
-        <div className="login-media">
-          <div className="login-media__separator">
-            <span>{t("login_with")}</span>
-          </div>
-          <div className="login-media__group">
-            <a href="https://api.doctorchat.md/auth/facebook">
-              <button className="login-media__btn" type="button">
-                <FacebookLogo />
-              </button>
-            </a>
-            <a href="https://api.doctorchat.md/auth/google">
-              <button className="login-media__btn" type="button">
-                <GoogleLogo />
-              </button>
-            </a>
-          </div>
-        </div>
+      </div>
+      <div className="auth-layout__meta">
+        {t("not_registered_yet")}&nbsp;
+        <Link href="/registration-flow">
+          <a className="link">{t("registration")}</a>
+        </Link>
       </div>
     </>
   );
