@@ -1,18 +1,23 @@
 #meet-form {
   .popup-body {
     width: 600px;
-    height: 764px;
-    max-height: 100%;
+    height: 1000px;
+    margin: 10px 0;
+    max-height: 97.5%;
     max-height: -moz-available;
     max-height: -webkit-fill-available;
     max-height: stretch;
+  }
+
+  .tabs-pane {
+    margin: -16px 0;
   }
 }
 
 #meet-form {
   .message-form__time-selection {
     .time-selection__time {
-      padding: 48px 20px 0;
+      padding: 52px 20px 0;
     }
   }
 }
