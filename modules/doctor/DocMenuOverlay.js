@@ -62,10 +62,14 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
       <Menu.Item icon={<WalletIcon />} onClick={onTabsConfigChange(leftSideTabs.wallet)}>
         {t("wallet")}
       </Menu.Item>
-      <Menu.Item icon={<VideoIcon />} onClick={onTabsConfigChange(leftSideTabs.appointments)}>
+      <Menu.Item
+        className="new-icon-style"
+        icon={<VideoIcon />}
+        onClick={onTabsConfigChange(leftSideTabs.appointments)}
+      >
         {t("video_appointments")}
       </Menu.Item>
-      <Menu.Item className="switch" icon={<ShieldIcon />}>
+      <Menu.Item className="switch new-icon-style" icon={<ShieldIcon />}>
         <Switch
           labelAlign="left"
           label={t("guard_doctor")}

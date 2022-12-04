@@ -9,7 +9,7 @@ import VideoIcon from "@/icons/video.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 
 export default function SelectModeOptions(props) {
-  const { setTabsHeight } = props;
+  const { setTabsHeight, isTextVisible, isVideoVisible } = props;
   const { updateTabsConfig } = useTabsContext();
   const {
     user: { investigations },
@@ -24,30 +24,36 @@ export default function SelectModeOptions(props) {
 
   return (
     <div className="choose-mode-items d-flex align-item-center justify-content-center">
-      <div
-        className="choose-mode-item mr-1"
-        role="button"
-        onClick={updateTabsConfig(selectModeTabs.configureMeet)}
-      >
-        <div className="mode-item-icon meet">
-          <VideoIcon />
+      {isVideoVisible && (
+        <div
+          className="choose-mode-item mr-1"
+          role="button"
+          onClick={updateTabsConfig(selectModeTabs.configureMeet)}
+        >
+          <div className="mode-item-icon meet">
+            <VideoIcon />
+          </div>
+          <h4 className="mode-item-title">{t("online_meet")}</h4>
         </div>
-        <h4 className="mode-item-title">{t("online_meet")}</h4>
-      </div>
-      <div
-        className="choose-mode-item"
-        role="button"
-        onClick={updateTabsConfig(selectModeTabs.configureMessage)}
-      >
-        <div className="mode-item-icon">
-          <CommentIcon />
+      )}
+      {isTextVisible && (
+        <div
+          className="choose-mode-item"
+          role="button"
+          onClick={updateTabsConfig(selectModeTabs.configureMessage)}
+        >
+          <div className="mode-item-icon">
+            <CommentIcon />
+          </div>
+          <h4 className="mode-item-title">{t("simple_message")}</h4>
         </div>
-        <h4 className="mode-item-title">{t("simple_message")}</h4>
-      </div>
+      )}
     </div>
   );
 }
 
 SelectModeOptions.propTypes = {
   setTabsHeight: PropTypes.func,
+  isTextVisible: PropTypes.bool,
+  isVideoVisible: PropTypes.bool,
 };

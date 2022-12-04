@@ -95,7 +95,14 @@ export default function DocInfo(props) {
           {allowCreate && (
             <div className="start-conversation mt-1 d-flex justify-content-end">
               <Dropdown
-                overlay={<ClientSelectMode docId={doctor.id} onSelectMode={selectModeHandler} />}
+                overlay={
+                  <ClientSelectMode
+                    docId={doctor.id}
+                    isTextVisible={doctor.chat}
+                    isVideoVisible={doctor.video}
+                    onSelectMode={selectModeHandler}
+                  />
+                }
                 overlayClassName="choose-mode-overlay"
                 placement="bottomLeft"
               >
@@ -145,6 +152,8 @@ DocInfo.propTypes = {
     about: PropTypes.object,
     isNew: PropTypes.bool,
     isAvailable: PropTypes.bool,
+    chat: PropTypes.bool,
+    video: PropTypes.bool,
   }),
   scrollableContainer: PropTypes.string,
   loading: PropTypes.bool,

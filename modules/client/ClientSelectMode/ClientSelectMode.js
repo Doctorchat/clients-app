@@ -17,7 +17,16 @@ import SelectModeMenu from "./SelectModeMenu";
 import SelectModeOptions from "./SelectModeOptions";
 
 function ClientSelectMode(props) {
-  const { onSelectMode, docId, activeTab, formsBackKey, onMenuItemSelected, chatType } = props;
+  const {
+    onSelectMode,
+    docId,
+    activeTab,
+    formsBackKey,
+    onMenuItemSelected,
+    chatType,
+    isTextVisible,
+    isVideoVisible,
+  } = props;
   const {
     user: { investigations },
   } = useSelector((store) => ({ user: store.user.data }));
@@ -110,7 +119,11 @@ function ClientSelectMode(props) {
         <SelectModeMenu onSelect={onMenuItemSelected} />
       </Tabs.Pane>
       <Tabs.Pane dataKey={selectModeTabs.choose} unmountOnExit={true}>
-        <SelectModeOptions setTabsHeight={setTabsHeight} />
+        <SelectModeOptions
+          isTextVisible={isTextVisible}
+          isVideoVisible={isVideoVisible}
+          setTabsHeight={setTabsHeight}
+        />
       </Tabs.Pane>
       <Tabs.Pane className="configure-form" dataKey={selectModeTabs.configureMessage}>
         <ConfigureFormMessage />
@@ -124,6 +137,8 @@ function ClientSelectMode(props) {
 
 ClientSelectMode.propTypes = {
   onSelectMode: PropTypes.func,
+  isTextVisible: PropTypes.bool,
+  isVideoVisible: PropTypes.bool,
   onMenuItemSelected: PropTypes.func,
   docId: PropTypes.number,
   activeTab: PropTypes.string,

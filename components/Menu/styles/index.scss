@@ -37,6 +37,16 @@
       height: 20px;
     }
   }
+
+  &.new-icon-style {
+    .menu-item-prefix {
+      margin-right: 20px;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
 }
 
 .menu-item.notify {

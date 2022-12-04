@@ -29,6 +29,10 @@ const api = {
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
   },
+  doctor: {
+    toggleTextStatus: () => axiosInstance.put("/user/card/toggle-chat"),
+    toggleVideoStatus: () => axiosInstance.put("/user/card/toggle-video"),
+  },
   conversation: {
     upload: (data, config) => axiosInstance.post("/chat/upload", data, config),
     removeUpload: (id) => axiosInstance.delete(`/chat/upload/${id}`),
