@@ -57,7 +57,7 @@
 
 .auth-layout__slider-card {
   position: absolute;
-  bottom: 5%;
+  bottom: 15%;
   left: 7.5%;
   right: 7.5%;
   padding: 4rem 3.5rem;
@@ -75,15 +75,7 @@
     &__descrpiption {
       font-size: 32px;
       font-weight: 500;
-      margin-bottom: 4rem;
-    }
-
-    &__title {
-      font-size: 32px;
-    }
-    &__subtitle {
-      font-size: 20px;
-      margin: 0;
+      margin-bottom: 0;
     }
   }
 }
@@ -166,11 +158,7 @@
     .slider-card {
       &__descrpiption {
         font-size: 24px;
-        margin-bottom: 2.5rem;
-      }
-
-      &__title {
-        font-size: 24px;
+        margin-bottom: 0;
       }
     }
   }

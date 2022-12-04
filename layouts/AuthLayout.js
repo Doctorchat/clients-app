@@ -44,10 +44,6 @@ export default function AuthLayout({ children }) {
         <div className="auth-layout__slider">
           <div className="auth-layout__slider-card">
             <p className="slider-card__descrpiption">{t("wizard:login_page_card_description")}</p>
-            <div className="slider-card__meta">
-              <h3 className="slider-card__title">Igor Cliuev</h3>
-              <p className="slider-card__subtitle">Founder CEO</p>
-            </div>
           </div>
         </div>
       </div>
