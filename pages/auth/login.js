@@ -88,6 +88,9 @@ export default function Login() {
             <Input type="password" />
           </Form.Item>
           <div className="form-bottom flex-column">
+            <Button className="w-100" htmlType="submit" loading={loading}>
+              {t("login")}
+            </Button>
             <div className="login-media w-100">
               <a href="https://api.doctorchat.md/auth/google" className="d-block me-3 w-100">
                 <button className="login-media__btn is-google" type="button">
@@ -101,9 +104,6 @@ export default function Login() {
                 </button>
               </a>
             </div>
-            <Button className="w-100" htmlType="submit" loading={loading}>
-              {t("login")}
-            </Button>
           </div>
         </Form>
       </div>

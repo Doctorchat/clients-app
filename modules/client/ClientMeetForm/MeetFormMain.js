@@ -107,7 +107,7 @@ export default function MeetFormMain() {
               initialValues={{ content: values.content }}
             >
               <MeetFormDateTime
-                doctorId={48}
+                doctorId={userInfo?.id}
                 onSelectSlot={(slotId) => form.setValue("slot_id", slotId)}
               />
               <Form.Item name="content" label={t("explain_problem")}>

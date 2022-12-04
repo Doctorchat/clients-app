@@ -8,12 +8,12 @@ import { getDoctors } from "../api";
 
 const useDoctorsInfiniteList = () => {
   const [search, setSearch] = useState("");
-  const [specialty, setSpecialty] = useState("");
+  const [speciality, setSpeciality] = useState("");
 
   const locale = getActiveLng();
 
   const debouncedSearch = useDebounce(search, 500);
-  const debouncedSpecialty = useDebounce(specialty, 500);
+  const debouncedSpecialty = useDebounce(speciality, 500);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
     queryKey: ["projects", { search: debouncedSearch, specialty: debouncedSpecialty, locale }],
@@ -21,7 +21,7 @@ const useDoctorsInfiniteList = () => {
       getDoctors({
         page: pageParam,
         search: debouncedSearch,
-        specialty: debouncedSpecialty ? debouncedSpecialty.value : undefined,
+        speciality: debouncedSpecialty ? debouncedSpecialty.value : undefined,
         locale,
       }),
     getNextPageParam: (lastPage) => lastPage.next_page_url?.replace(/\D/g, "") ?? false,
@@ -33,8 +33,8 @@ const useDoctorsInfiniteList = () => {
     filters: {
       search,
       setSearch,
-      specialty,
-      setSpecialty,
+      speciality,
+      setSpeciality,
     },
     pagination: {
       fetchNextPage,

@@ -19,7 +19,7 @@ import "@/services/i18next";
 import { store } from "../store";
 
 // Styles
-import "../styles/global.scss";
+import "../styles/index.scss";
 
 const antLocales = {
   ro: ro_RO,
