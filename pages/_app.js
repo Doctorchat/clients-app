@@ -9,6 +9,7 @@ import ru_RU from "antd/lib/locale-provider/ru_RU";
 import Head from "next/head";
 import PropTypes from "prop-types";
 
+import LocaleWrapper from "@/containers/LocaleWrapper";
 import NotificationsWrapper from "@/containers/NotificationsWrapper";
 import MainLayout from "@/layouts/MainLayout";
 import getActiveLng from "@/utils/getActiveLng";
@@ -39,23 +40,25 @@ export default function App({ Component, pageProps }) {
     ));
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-        <title>Doctorchat</title>
-      </Head>
-      <TooltipProvider delayDuration={0}>
-        <Provider store={store}>
-          <ConfigProvider locale={antLocales[getActiveLng()]}>
-            <NotificationsWrapper />
-            {getLayout(<Component {...pageProps} />)}
-          </ConfigProvider>
-        </Provider>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <LocaleWrapper>
+      <QueryClientProvider client={queryClient}>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          />
+          <title>Doctorchat</title>
+        </Head>
+        <TooltipProvider delayDuration={0}>
+          <Provider store={store}>
+            <ConfigProvider locale={antLocales[getActiveLng()]}>
+              <NotificationsWrapper />
+              {getLayout(<Component {...pageProps} />)}
+            </ConfigProvider>
+          </Provider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </LocaleWrapper>
   );
 }
 

@@ -37,5 +37,10 @@
   "work_experience": "Experienta de lucru",
   "years": "ani",
   "load_more_doctors": "Incarca mai multi doctori",
-  "please_select_time": "Selecteaza timpul"
+  "please_select_time": "Selecteaza timpul",
+  "welcome_to": "Bine ai venit la",
+  "sign_in": "Logare",
+  "login_with_google": "Logare cu Google",
+  "login_page_card_description": "\"Acum ne indreptam spre o directie pozitiva in Internet\"",
+  "edit": "Editeaza"
 }
