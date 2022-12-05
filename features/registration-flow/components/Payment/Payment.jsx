@@ -9,6 +9,10 @@ export const Payment = () => {
 
   const router = useRouter();
 
+  React.useEffect(() => {
+    router.push("/home");
+  }, [router]);
+
   return (
     <div className="registration-flow__payment">
       <div className="registration-flow__form">

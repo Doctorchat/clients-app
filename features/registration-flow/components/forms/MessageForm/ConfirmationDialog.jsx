@@ -66,9 +66,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
       const response = await api.conversation.addMessage({ ...data, code: promocode });
 
       if (response.data.redirect) {
-        await router.push(
-          `/registration-flow/payment/${encodeURIComponent(response.data.redirect)}`
-        );
+        window.location.replace(response.data.redirect);
       } else {
         await router.push(`/chat?id=${response.data.chat_id}`);
       }
