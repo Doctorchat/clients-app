@@ -45,7 +45,7 @@ export const SelectDoctor = () => {
       });
 
       router.push(
-        `/registration-flow/message/${res.data.id}?type=${messageType}&doctorId=${doctorPreviewId}`
+        `/registration-flow/message/${res.data.id}?chatType=${chatType}&messageType=${messageType}&doctorId=${doctorPreviewId}`
       );
     },
     [doctorPreviewId, router, user?.investigations]
@@ -62,8 +62,8 @@ export const SelectDoctor = () => {
             <Select
               name="speciality"
               options={categories}
-              value={filters.specialty}
-              onChange={filters.setSpecialty}
+              value={filters.speciality}
+              onChange={filters.setSpeciality}
             />
           </div>
           <div className="select-doctor__filter">

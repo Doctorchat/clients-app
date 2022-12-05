@@ -16,9 +16,9 @@ const usePhoneConfirmation = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [confirmationCode, setConfrimationCode] = React.useState("");
+  const [confirmationCode, setConfirmationCode] = React.useState("");
   const [countdown, setCountdown] = React.useState(0);
-  const [isCofirming, setIsConfirming] = React.useState(false);
+  const [isConfirming, setIsConfirming] = React.useState(false);
   const [isRequesting, setIsRequesting] = React.useState(false);
 
   const [__resetPinInput, setResetPinInput] = React.useState(false);
@@ -98,10 +98,10 @@ const usePhoneConfirmation = () => {
   return {
     confirmationCode,
     countdown,
-    isCofirming,
+    isConfirming,
     isRequesting,
     __resetPinInput,
-    setConfrimationCode,
+    setConfirmationCode,
     onSendCode,
     onConfirmCode,
   };

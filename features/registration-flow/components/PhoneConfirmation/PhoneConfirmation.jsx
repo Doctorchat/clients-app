@@ -42,11 +42,11 @@ export const PhoneConfirmation = () => {
   const {
     confirmationCode,
     countdown,
-    isCofirming,
+    isConfirming,
     isRequesting,
     __resetPinInput,
+    setConfirmationCode,
     onSendCode,
-    setConfrimationCode,
     onConfirmCode,
   } = usePhoneConfirmation();
 
@@ -108,7 +108,8 @@ export const PhoneConfirmation = () => {
                   margin: "0",
                   border: "2px solid var(--bs-gray-300)",
                 }}
-                onChange={setConfrimationCode}
+                onChange={setConfirmationCode}
+                onComplete={setConfirmationCode}
               />
             )}
           </div>
@@ -121,7 +122,7 @@ export const PhoneConfirmation = () => {
       </div>
       <div className="form-bottom">
         <Button
-          loading={isCofirming}
+          loading={isConfirming}
           disabled={
             isRequesting ||
             !confirmationCode ||
