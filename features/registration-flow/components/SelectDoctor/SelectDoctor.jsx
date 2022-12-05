@@ -61,7 +61,7 @@ export const SelectDoctor = () => {
             </label>
             <Select
               name="speciality"
-              options={categories}
+              options={[{ label: t("all"), value: "all" }, ...categories]}
               value={filters.speciality}
               onChange={filters.setSpeciality}
             />

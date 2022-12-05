@@ -28,7 +28,7 @@ export const Payment = () => {
           </div>
         </div>
         <div className="payment__actions">
-          <a href={router.query.url} target="_blank" rel="noopener noreferrer">
+          <a href={router.query.url}>
             <Button>{t("continue")}</Button>
           </a>
         </div>

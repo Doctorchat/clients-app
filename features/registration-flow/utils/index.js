@@ -1,4 +1,4 @@
-const allowedPaths = ["select-doctor", "message"];
+const allowedPaths = ["select-doctor", "message", "payment"];
 
 export const getUserRedirectPath = (user, pathname = "") => {
   if (user.role === 3) {
