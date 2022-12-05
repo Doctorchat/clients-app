@@ -3,11 +3,11 @@ const allowedPaths = ["select-doctor", "message", "payment"];
 export const getUserRedirectPath = (user, pathname = "") => {
   if (user.role === 3) {
     if (!user?.verified) {
-      return "/registration-flow";
+      return "/registration-flow" + window.location.search;
     }
 
     if (!user?.investigations?.length) {
-      return "/registration-flow/medical-records";
+      return "/registration-flow/medical-records" + window.location.search;
     }
 
     if (

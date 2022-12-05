@@ -19,11 +19,26 @@ import { notification } from "@/store/slices/notificationsSlice";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);
-  const [loading, setLoading] = useState(false);
   const form = useForm({ resolver });
   const router = useRouter();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  const [registrationFlowDoctorId, setRegistrationFlowDoctorId] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const validateQueryRedirect = useCallback(() => {
+    const { redirect } = router.query;
+
+    if (redirect && typeof redirect === "string") {
+      const [pathname, search] = redirect.split("?");
+      const searchParams = new URLSearchParams(`?${search}`);
+
+      if (pathname.startsWith("/registration-flow") && searchParams.has("doctor_id")) {
+        setRegistrationFlowDoctorId(`?${search}`);
+      }
+    }
+  }, [router]);
 
   useEffect(() => {
     const { query } = router;
@@ -31,7 +46,11 @@ export default function Login() {
     if (query?.hash && query?.id) {
       dispatch(emulateLogin(query));
     }
-  }, [dispatch, router]);
+
+    if (query.redirect) {
+      validateQueryRedirect();
+    }
+  }, [dispatch, validateQueryRedirect, router]);
 
   const onLoginSubmit = useCallback(
     async (values) => {
@@ -63,7 +82,7 @@ export default function Login() {
         <div className="auth-header-logo">
           <h3 className="m-0">{t("wizard:sign_in")}</h3>
         </div>
-        <Link href="/registration-flow">
+        <Link href={"/registration-flow" + registrationFlowDoctorId}>
           <a>
             <Button className="auth-layout__green-btn">{t("registration")}</Button>
           </a>
@@ -107,7 +126,7 @@ export default function Login() {
       </div>
       <div className="auth-layout__meta">
         {t("not_registered_yet")}&nbsp;
-        <Link href="/registration-flow">
+        <Link href={"/registration-flow" + registrationFlowDoctorId}>
           <a className="link">{t("registration")}</a>
         </Link>
       </div>
