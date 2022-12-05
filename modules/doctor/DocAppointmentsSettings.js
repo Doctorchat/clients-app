@@ -90,7 +90,12 @@ export default function DocAppointmentsSettings() {
         />
       </Sidebar.Header>
       <Sidebar.Body>
-        <div className="scrollable scrollable-y profile-appointments-wrapper">
+        <div
+          className="scrollable scrollable-y profile-appointments-wrapper"
+          style={{
+            height: "fit-content",
+          }}
+        >
           <Line
             activeKey={appointmentsTabsConfig.key}
             updateTabsConfig={updateAppointmentsTabsConfig}

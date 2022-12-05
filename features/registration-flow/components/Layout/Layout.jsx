@@ -42,6 +42,8 @@ export const Layout = ({
       }
     };
 
+    onScrollToBottom();
+
     window.addEventListener("scroll", onScrollToBottom);
 
     return () => {
