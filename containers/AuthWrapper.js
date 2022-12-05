@@ -19,7 +19,7 @@ export default function AuthWrapper(props) {
   const redirectToLogin = useCallback(() => {
     router.push({
       pathname: "/auth/login",
-      query: { redirect: router.pathname },
+      query: { redirect: router.pathname + window.location.search },
     });
   }, [router]);
 

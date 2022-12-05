@@ -42,18 +42,16 @@ export default function Login() {
         const redirect = getUserRedirectPath(response.user, router.pathname);
 
         if (redirect) {
-          router.push(redirect);
+          await router.push(redirect);
         } else if (router.query.redirect) {
-          router.push(router.query.redirect);
+          await router.push(router.query.redirect);
         } else {
-          router.push("/");
+          await router.push("/home");
         }
       } catch (error) {
         dispatch(
           notification({ type: "error", title: "error", descrp: "login_error", duration: 6000 })
         );
-      } finally {
-        setLoading(false);
       }
     },
     [dispatch, router]

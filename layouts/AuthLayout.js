@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import { useEffectOnce } from "usehooks-ts";
 
 import { ProfileChangeLang } from "@/modules/common";
 import axiosInstance from "@/services/axios/apiConfig";
@@ -12,7 +12,7 @@ export default function AuthLayout({ children }) {
   const router = useRouter();
   const { t } = useTranslation();
 
-  useEffect(() => {
+  useEffectOnce(() => {
     const { query } = router;
 
     if (query?.token) {
@@ -24,7 +24,7 @@ export default function AuthLayout({ children }) {
     if (user.isAuthorized || localStorage.getItem("dc_token")) {
       router.replace({ pathname: "/" });
     }
-  }, [router, user.isAuthorized]);
+  });
 
   return (
     <div className="auth-layout doctorchat-v2">
