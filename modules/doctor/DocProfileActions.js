@@ -63,7 +63,7 @@ export default function DocProfileActions() {
       <Menu.Item className="switch new-icon-style" icon={<CommentLinesIcon />}>
         <Switch
           labelAlign="left"
-          label={t("wizard:text_conusltations")}
+          label={t("wizard:text_consultations")}
           className="w-100"
           value={user?.chat}
           onChange={updateTextStatus}
@@ -73,7 +73,7 @@ export default function DocProfileActions() {
       <Menu.Item className="switch new-icon-style" icon={<VideoIcon />}>
         <Switch
           labelAlign="left"
-          label={t("wizard:video_conusltations")}
+          label={t("wizard:video_consultations")}
           className="w-100"
           value={user?.video}
           onChange={updateVideoStatus}

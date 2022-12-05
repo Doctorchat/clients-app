@@ -63,7 +63,7 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
   } = doctor;
 
   return (
-    <article className="doctor-card">
+    <article className="doctor-card" onClick={onClickPreview}>
       <div className="doctor-card__avatar">
         <img src={avatar} alt={name} />
       </div>
@@ -101,7 +101,7 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
             </span>
           </div>
           <Button className="doctor-card__button" size="sm" type="text" onClick={onClickPreview}>
-            <span>{t("wizard:more")}</span>
+            <span>{t("select")}</span>
             <ArrowRightIcon />
           </Button>
         </footer>

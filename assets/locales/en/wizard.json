@@ -2,7 +2,7 @@
   "account": "Account",
   "doctor": "Doctor",
   "confirmation": "Confirmation",
-  "consultaion": "Consultaion",
+  "consultation": "Consultation",
   "tell_about_you": "Tell about you",
   "first_name/last_name": "First name / Last name",
   "confirm_phone_number": "Confirm phone number",
@@ -43,6 +43,7 @@
   "login_with_google": "Login with Google",
   "login_page_card_description": "The largest virtual clinic in Moldova.",
   "edit": "Edit",
-  "text_conusltations": "Chat consultaions",
-  "video_conusltations": "Video consultations"
+  "text_consultations": "Chat consultations",
+  "video_consultations": "Video consultations",
+  "chat_consultation": "Chat consultation"
 }

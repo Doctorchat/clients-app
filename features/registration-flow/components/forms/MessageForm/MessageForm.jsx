@@ -102,16 +102,23 @@ export const MessageForm = () => {
     const doctorId = params.get("doctorId");
 
     if (messageType && doctorId) {
-      getDoctor(doctorId).then((response) => {
-        setDoctor(response);
+      if (doctorId === "auto") {
+        setDoctor({ price: global.auto, meet_price: global.auto });
         setChatType(chatType);
         setMessageType(messageType);
         setIsLoading(false);
-      });
+      } else {
+        getDoctor(doctorId).then((response) => {
+          setDoctor(response);
+          setChatType(chatType);
+          setMessageType(messageType);
+          setIsLoading(false);
+        });
+      }
     } else {
       router.push("/registration-flow/select-doctor");
     }
-  }, [router]);
+  }, [global?.auto, router]);
 
   if (isLoading) {
     return <FullPageLoading />;

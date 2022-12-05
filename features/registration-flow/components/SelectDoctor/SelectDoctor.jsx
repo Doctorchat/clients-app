@@ -38,14 +38,16 @@ export const SelectDoctor = () => {
   const createChatHandler = React.useCallback(
     async (chatType = CHAT_TYPES.standard, messageType = MESSAGE_TYPES.standard) => {
       const res = await api.conversation.create({
-        doctor_id: doctorPreviewId,
+        doctor_id: doctorPreviewId ?? 1,
         type: chatType,
         investigation_id: user?.investigations?.[0]?.id,
         isAnonym: false,
       });
 
       router.push(
-        `/registration-flow/message/${res.data.id}?chatType=${chatType}&messageType=${messageType}&doctorId=${doctorPreviewId}`
+        `/registration-flow/message/${
+          res.data.id
+        }?chatType=${chatType}&messageType=${messageType}&doctorId=${doctorPreviewId ?? "auto"}`
       );
     },
     [doctorPreviewId, router, user?.investigations]

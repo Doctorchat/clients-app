@@ -94,7 +94,7 @@ export const Layout = ({
 };
 
 Layout.propTypes = {
-  activeStep: PropTypes.oneOf(["account", "doctor", "confirmation", "consultaion"]),
+  activeStep: PropTypes.oneOf(["account", "doctor", "confirmation", "consultation"]),
   title: PropTypes.string,
   backPath: PropTypes.string,
   disableResponsiveRestriction: PropTypes.bool,

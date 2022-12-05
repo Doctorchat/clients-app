@@ -184,7 +184,7 @@ export const DoctorViewDialog = ({
                   loading={isMessageTypeLoading}
                   onClick={onMessageTypeClickHandler}
                 >
-                  <span>{t("describe_problem")}</span>
+                  <span>{t("wizard:chat_consultation")}</span>
                 </Button>
               )}
               {doctor.video && (

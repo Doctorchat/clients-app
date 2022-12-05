@@ -2,7 +2,7 @@
   "account": "Аккаунт",
   "doctor": "Доктор",
   "confirmation": "Подтверждение",
-  "consultaion": "Консультация",
+  "consultation": "Консультация",
   "tell_about_you": "Расскажите о себе",
   "first_name/last_name": "Имя / Фамилия",
   "confirm_phone_number": "Подтвердите номер телефона",
@@ -43,6 +43,7 @@
   "login_with_google": "Войти с помощью Google",
   "login_page_card_description": "Крупнейшная виртуальная клиника в Молдове.",
   "edit": "Редактировать",
-  "text_conusltations": "Консультации чат",
-  "video_conusltations": "Видео консультации"
+  "text_consultations": "Консультации чат",
+  "video_consultations": "Видео консультации",
+  "chat_consultation": "Консультация чат"
 }

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import cs from "@/utils/classNames";
 
-const steps = ["account", "doctor", "confirmation", "consultaion"];
+const steps = ["account", "doctor", "confirmation", "consultation"];
 
 export const Steps = ({ activeStep }) => {
   const { t } = useTranslation();
@@ -44,11 +44,11 @@ export const Steps = ({ activeStep }) => {
         />
       </div>
       <div className="registration-flow__step">
-        {t("wizard:consultaion")}
+        {t("wizard:consultation")}
         <span
           className={cs(
             "registration-flow__step-line",
-            activeSteps.includes("consultaion") ? "active" : ""
+            activeSteps.includes("consultation") ? "active" : ""
           )}
         />
       </div>
