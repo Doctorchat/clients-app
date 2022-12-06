@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
@@ -10,6 +11,8 @@ import { userRoles } from "@/context/constants";
 import ChatContentAccept from "./ChatContentAccept";
 
 export default function ChatContentFooter(props) {
+  const user = useSelector((store) => store.user);
+
   const { openMessageFormPopup, status, chatId, paymentUrl, type, isAccepted } = props;
   const { t } = useTranslation();
 
@@ -17,6 +20,13 @@ export default function ChatContentFooter(props) {
     () => type !== "support" && !isAccepted,
     [isAccepted, type]
   );
+
+  const isMessageBarVisible = React.useMemo(() => {
+    if (status && ["initied", "unpaid", "closed"].includes(status)) return false;
+    if (user?.data?.role === userRoles.get("doctor") && isAcceptedFalse) return false;
+
+    return true;
+  }, [isAcceptedFalse, status, user?.data?.role]);
 
   return (
     <>
@@ -41,9 +51,7 @@ export default function ChatContentFooter(props) {
         <ChatContentAccept chatId={chatId} />
       </AuthRoleWrapper>
 
-      {!isAcceptedFalse && status && !["initied", "unpaid", "closed"].includes(status) && (
-        <MessageBar chatId={chatId} status={status} type={type} />
-      )}
+      {isMessageBarVisible && <MessageBar chatId={chatId} status={status} type={type} />}
     </>
   );
 }
