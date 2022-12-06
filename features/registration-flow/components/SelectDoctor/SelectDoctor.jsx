@@ -42,6 +42,7 @@ export const SelectDoctor = () => {
         type: chatType,
         investigation_id: user?.investigations?.[0]?.id,
         isAnonym: false,
+        isMeet: messageType === MESSAGE_TYPES.meet,
       });
 
       router.push(

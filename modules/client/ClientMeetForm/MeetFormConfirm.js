@@ -85,7 +85,7 @@ function MeetFormConfirmation() {
       const payload = { ...values };
 
       payload.chat_id = chatId;
-      payload.type = MESSAGE_TYPES.meet;
+      payload.type = MESSAGE_TYPES.standard;
       payload.isMeet = true;
       payload.code = promo.code;
       payload.uploads = uploads.list?.map(({ file_id }) => file_id) || [];

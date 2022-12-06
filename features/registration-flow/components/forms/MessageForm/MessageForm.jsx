@@ -40,7 +40,6 @@ export const MessageForm = () => {
   const form = useForm({ resolver });
 
   const [doctor, setDoctor] = React.useState(0);
-  const [chatType, setChatType] = React.useState("");
   const [messageType, setMessageType] = React.useState("");
   const [attachments, setAttachments] = React.useState({ list: [], price: 0, initiated: false });
   const [isLoading, setIsLoading] = React.useState(true);
@@ -69,21 +68,13 @@ export const MessageForm = () => {
       data.uploads_count = attachments.list.length;
       data.uploads_price = attachments.list.length * global.attach;
       data.price = doctorPrice;
-      data.type = chatType;
+      data.type = MESSAGE_TYPES.standard;
       data.isMeet = messageType === MESSAGE_TYPES.meet;
       data.uploads = attachments.list.map(({ file_id }) => file_id);
 
       setConfirmationData(data);
     },
-    [
-      attachments.list,
-      dispatch,
-      doctorPrice,
-      global?.attach,
-      chatType,
-      messageType,
-      router.query.chatId,
-    ]
+    [attachments.list, dispatch, doctorPrice, global?.attach, messageType, router.query.chatId]
   );
 
   const setFileList = React.useCallback(
@@ -97,20 +88,17 @@ export const MessageForm = () => {
 
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const chatType = params.get("chatType");
     const messageType = params.get("messageType");
     const doctorId = params.get("doctorId");
 
     if (messageType && doctorId) {
       if (doctorId === "auto") {
         setDoctor({ price: global.auto, meet_price: global.auto });
-        setChatType(chatType);
         setMessageType(messageType);
         setIsLoading(false);
       } else {
         getDoctor(doctorId).then((response) => {
           setDoctor(response);
-          setChatType(chatType);
           setMessageType(messageType);
           setIsLoading(false);
         });

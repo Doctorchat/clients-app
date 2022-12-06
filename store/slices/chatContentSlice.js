@@ -35,7 +35,7 @@ export const chatContentSlice = createSlice({
     },
     chatContentUpdateMessage(state, action) {
       const { id, content } = action.payload;
-      const messageIndex = state.content.messages.findIndex((msg) => msg.id === id);
+      const messageIndex = state.content?.messages?.findIndex((msg) => msg.id === id);
 
       if (messageIndex !== -1) {
         state.content.messages[messageIndex].content = content;
@@ -70,7 +70,7 @@ export const chatContentSlice = createSlice({
         state.content = {};
       })
       .addCase(readChatMessages.fulfilled, (state) => {
-        state.content.messages = state.content.messages.map((msg) => ({ ...msg, seen: true }));
+        state.content.messages = state.content?.messages?.map((msg) => ({ ...msg, seen: true }));
       });
   },
 });
