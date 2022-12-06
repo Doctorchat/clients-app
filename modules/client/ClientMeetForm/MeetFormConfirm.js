@@ -18,6 +18,7 @@ import { updateConversation } from "@/store/slices/conversationListSlice";
 import { meetFormReset, meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import asPrice from "@/utils/asPrice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -68,7 +69,7 @@ function MeetFormConfirmation() {
         setPromo({ code, sum: price.subtotal - discoutedPrice });
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "Eroare", descrp: "Acest cod nu este valid" })
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
         );
       } finally {
         setPromoLoading(false);
@@ -107,7 +108,9 @@ function MeetFormConfirmation() {
         dispatch(meetFormReset());
       }
     } catch (error) {
-      dispatch(notification({ type: "error", title: "Eroare", descrp: "A apărut o eroare" }));
+      dispatch(
+        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+      );
     } finally {
       setLoading(false);
     }

@@ -18,6 +18,7 @@ import {
 } from "@/store/slices/investigationFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function ClientInvestigationsList() {
   const { updateTabsConfig } = useTabsContext();
@@ -38,7 +39,13 @@ export default function ClientInvestigationsList() {
 
         return Promise.resolve();
       } catch (error) {
-        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+        dispatch(
+          notification({
+            type: "error",
+            title: "Erorare",
+            descrp: getApiErrorMessages(error, true),
+          })
+        );
 
         return Promise.reject();
       }

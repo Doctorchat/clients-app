@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const WalletTopupNotification = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const WalletTopupNotification = () => {
         }
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "error", descrp: "transactions.top_up_error" })
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
         );
       }
     },

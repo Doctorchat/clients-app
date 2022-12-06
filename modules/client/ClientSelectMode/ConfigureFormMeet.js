@@ -15,13 +15,9 @@ import { configureFormSchema } from "@/services/validation";
 import { addConversation } from "@/store/slices/conversationListSlice";
 import { meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 import SelectModeInvestigations from "./SelectModeInvestigations";
-
-
-
-
-
 
 export default function ConfigureFormMeet() {
   const { updateTabsConfig, docId, onSelectMode, onCreated } = useTabsContext();
@@ -50,7 +46,9 @@ export default function ConfigureFormMeet() {
 
         onSelectMode("meet");
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }

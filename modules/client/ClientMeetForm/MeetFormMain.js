@@ -16,6 +16,7 @@ import { meetFormSchema } from "@/services/validation";
 import { messageUploadFile } from "@/store/actions";
 import { meetFormSetConfirmation, meetFormUpdateUploads } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 import MeetFormDateTime from "./MeetFormDateTime";
 
@@ -69,7 +70,11 @@ export default function MeetFormMain() {
         updateTabsConfig(meetFormTabs.confirm)();
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "Eroare", description: "A apărut o eroare" })
+          notification({
+            type: "error",
+            title: "error",
+            description: getApiErrorMessages(error, true),
+          })
         );
       } finally {
         setLoading(false);

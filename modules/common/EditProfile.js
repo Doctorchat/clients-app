@@ -14,6 +14,7 @@ import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 import validateFile from "@/utils/validateFile";
 
 const avatarAcceptExts = ".png,.jpeg,.jpg";
@@ -57,7 +58,11 @@ export default function EditProflie() {
           dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
         } catch (error) {
           dispatch(
-            notification({ type: "error", title: "error", descrp: "default_error_message" })
+            notification({
+              type: "error",
+              title: "error",
+              descrp: getApiErrorMessages(error, true),
+            })
           );
         } finally {
           avatarInputRef.current.value = "";

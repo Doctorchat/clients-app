@@ -65,7 +65,6 @@ export default function DocAppointmentsSettings() {
         dispatch(notification({ title: "Succes", descrp: "Date au fost actualizate cu succes" }));
       } catch (error) {
         setFormApiErrors(error);
-        dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
       } finally {
         setLoding(false);
       }

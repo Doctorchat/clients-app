@@ -8,6 +8,7 @@ import DocInfo from "@/components/DocInfo";
 import Popup from "@/components/Popup";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function ExternalDocList() {
   const [visible, setVisible] = useState(false);
@@ -34,7 +35,9 @@ export default function ExternalDocList() {
         setVisible(false);
         setDoctor(null);
 
-        dispatch(notification({ type: "error", titile: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", titile: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }

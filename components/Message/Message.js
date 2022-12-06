@@ -13,6 +13,7 @@ import { updateConversation } from "@/store/slices/conversationListSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import cs from "@/utils/classNames";
 import date from "@/utils/date";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 import Button, { IconBtn } from "../Button";
 import Form from "../Form";
@@ -49,7 +50,9 @@ export default function Message(props) {
 
         setIsEditing(false);
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setEditLoading(false);
       }

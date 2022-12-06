@@ -13,6 +13,7 @@ import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const WalletTopup = () => {
   const { t } = useTranslation();
@@ -37,7 +38,9 @@ const WalletTopup = () => {
         const response = await api.wallet.topup(values);
         window.location.href = response.data.redirect;
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       }
     },
     [dispatch]

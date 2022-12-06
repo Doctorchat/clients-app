@@ -18,6 +18,7 @@ import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import asPrice from "@/utils/asPrice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -67,7 +68,9 @@ function MessageFormConfirmation() {
 
         setPromo({ code, sum: parseFloat(price.subtotal - discoutedPrice).toFixed(2) });
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "invalid_promo" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setPromoLoading(false);
         form.reset();
@@ -104,7 +107,9 @@ function MessageFormConfirmation() {
         dispatch(messageFormReset());
       }
     } catch (error) {
-      dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+      dispatch(
+        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+      );
     } finally {
       setLoading(false);
     }

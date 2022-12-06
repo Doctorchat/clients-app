@@ -12,6 +12,7 @@ import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const restoreSchema = object().shape({
   email: string().email().required(),
@@ -33,7 +34,12 @@ export default function Login() {
         form.reset();
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "error", descrp: "login_error", duration: 0 })
+          notification({
+            type: "error",
+            title: "error",
+            descrp: getApiErrorMessages(error, true),
+            duration: 0,
+          })
         );
       } finally {
         setLoading(false);

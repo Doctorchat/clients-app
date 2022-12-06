@@ -15,6 +15,7 @@ import Popup from "@/components/Popup";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import asPrice from "@/utils/asPrice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -50,7 +51,9 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
         setPromocode(code);
         setDiscount(response.data);
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "invalid_promo" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setPromoLoading(false);
         form.reset();
@@ -71,7 +74,9 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
         await router.push(`/chat?id=${response.data.chat_id}`);
       }
     } catch (error) {
-      dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+      dispatch(
+        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+      );
     } finally {
       setLoading(false);
     }

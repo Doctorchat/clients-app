@@ -10,6 +10,7 @@ import api from "@/services/axios/api";
 import { chatContentUpdateMessage } from "@/store/slices/chatContentSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import cs from "@/utils/classNames";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 import Button, { IconBtn } from "../Button";
 import Form from "../Form";
@@ -40,7 +41,9 @@ export default function ChatFeedback(props) {
 
         dispatch(chatContentUpdateMessage({ id: messageId, content: "submitted" }));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(true);
       }

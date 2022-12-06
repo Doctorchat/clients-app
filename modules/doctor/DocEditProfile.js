@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button, { IconBtn } from "@/components/Button";
 import Form from "@/components/Form";
@@ -17,14 +17,10 @@ import { categoriesOptionsSelector } from "@/store/selectors";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
 import getActiveLng from "@/utils/getActiveLng";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 import toSelectOpts from "@/utils/toSelectOpts";
 
 import { EditProfileSecurity } from "../common";
-
-
-
-
-
 
 const tabsKeys = {
   ro: "edit-ro",
@@ -90,7 +86,9 @@ export default function DocEditProfile() {
         dispatch(updateUser(response.data));
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }

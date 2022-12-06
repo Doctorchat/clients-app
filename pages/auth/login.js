@@ -16,6 +16,7 @@ import AuthLayout from "@/layouts/AuthLayout";
 import { loginSchema } from "@/services/validation";
 import { emulateLogin, loginUser } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);
@@ -69,7 +70,12 @@ export default function Login() {
         }
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "error", descrp: "login_error", duration: 6000 })
+          notification({
+            type: "error",
+            title: "error",
+            descrp: getApiErrorMessages(error, true),
+            duration: 6000,
+          })
         );
       }
     },

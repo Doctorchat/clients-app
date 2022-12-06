@@ -12,6 +12,7 @@ import api from "@/services/axios/api";
 import { editProfileSchema } from "@/services/validation";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const tabsKeys = {
   ro: "edit-ro",
@@ -58,7 +59,9 @@ export default function DocMultiLangEdit() {
         dispatch(updateUser(response.data));
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }

@@ -7,6 +7,7 @@ import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
 import getActiveLng from "@/utils/getActiveLng";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const usePhoneConfirmation = () => {
   const { user } = useSelector((store) => ({
@@ -45,7 +46,7 @@ const usePhoneConfirmation = () => {
           notification({
             type: "error",
             title: "error",
-            descrp: "wizard:phone_verification.invalid_phone_number",
+            descrp: getApiErrorMessages(error, true),
           })
         );
       } finally {
@@ -79,7 +80,7 @@ const usePhoneConfirmation = () => {
         notification({
           type: "error",
           title: "error",
-          descrp: "wizard:phone_verification.invalid_code",
+          descrp: getApiErrorMessages(error, true),
         })
       );
     } finally {

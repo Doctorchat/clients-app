@@ -15,6 +15,7 @@ import DatePicker from "@/packages/DatePicker";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function DocSetVacation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +37,9 @@ export default function DocSetVacation() {
       form.reset();
       return Promise.resolve();
     } catch (error) {
-      dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+      dispatch(
+        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+      );
       return Promise.reject();
     }
   }, [dispatch, form]);
@@ -52,7 +55,9 @@ export default function DocSetVacation() {
         );
         setIsOpen(false);
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }

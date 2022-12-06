@@ -15,6 +15,7 @@ import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { addTransaction } from "@/store/slices/transactionsListSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function DocWallet() {
   const { user } = useSelector((store) => ({
@@ -46,7 +47,9 @@ export default function DocWallet() {
         setIsWithdrawOpen(false);
         return Promise.resolve();
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
         return Promise.reject();
       }
     },

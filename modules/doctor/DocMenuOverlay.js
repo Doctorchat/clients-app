@@ -18,6 +18,7 @@ import api from "@/services/axios/api";
 import { logoutUser } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 import { ProfileChangeLang } from "../common";
 
@@ -40,7 +41,9 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
       await api.user.toggleGuardStatus(!user?.isGuard);
       dispatch(updateUserProperty({ prop: "isGuard", value: !user?.isGuard }));
     } catch (error) {
-      dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+      dispatch(
+        notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) })
+      );
     } finally {
       setGuradStatusUpdating(false);
     }

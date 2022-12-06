@@ -13,6 +13,7 @@ import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
 import { resetPasswordShcema } from "@/services/validation";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function ResetPassword() {
   const resolver = useYupValidationResolver(resetPasswordShcema);
@@ -50,7 +51,9 @@ export default function ResetPassword() {
         );
         router.push("/auth/login");
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "token_expired" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
         setLoading(false);
       }
     },

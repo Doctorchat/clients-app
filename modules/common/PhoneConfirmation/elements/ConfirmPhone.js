@@ -4,19 +4,15 @@ import PinInput from "react-pin-input";
 import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@/components/Button";
-import { PopupContent,PopupHeader } from "@/components/Popup";
+import { PopupContent, PopupHeader } from "@/components/Popup";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { phoneConfirmationToggleVisibility } from "@/store/slices/phoneConfirmationSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 import EnterPhone from "./EnterPhone";
-
-
-
-
-
 
 const ConfirmPhone = React.memo(() => {
   const { t } = useTranslation();
@@ -45,7 +41,7 @@ const ConfirmPhone = React.memo(() => {
         dispatch(phoneConfirmationToggleVisibility(false));
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "error", descrp: "phone_verification.invalid_code" })
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
         );
       } finally {
         setIsConfirming(false);
@@ -73,7 +69,7 @@ const ConfirmPhone = React.memo(() => {
           notification({
             type: "error",
             title: "error",
-            descrp: "phone_verification.invalid_phone_number",
+            descrp: getApiErrorMessages(error, true),
           })
         );
       } finally {

@@ -9,6 +9,7 @@ import api from "@/services/axios/api";
 import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 import uniqId from "@/utils/uniqId";
 import validateFile from "@/utils/validateFile";
 
@@ -72,7 +73,9 @@ const MessageBarAttach = forwardRef((props, ref) => {
         dispatch(updateConversation(updatedChatItem));
         dispatch(chatContentAddMessage(updatedChatContent));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       }
     },
     [chatId, dispatch, uploadFile]
@@ -98,7 +101,9 @@ const MessageBarAttach = forwardRef((props, ref) => {
         setLoading(true);
         await setUploadToChat(files[0]);
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }

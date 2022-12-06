@@ -14,6 +14,7 @@ import { addConversation } from "@/store/slices/conversationListSlice";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import { setTempUserInfo } from "@/store/slices/userInfoSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function DocStartConversation() {
   const { t } = useTranslation();
@@ -82,7 +83,9 @@ export default function DocStartConversation() {
 
         history.push(`/chat?id=${response.data.id}`);
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       }
     },
     [dispatch, history]

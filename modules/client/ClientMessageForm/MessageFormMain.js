@@ -19,6 +19,7 @@ import {
   messageFormUpdateUploads,
 } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function MessageFormMain() {
   const {
@@ -70,7 +71,9 @@ export default function MessageFormMain() {
         dispatch(messageFormSetConfirmation(data));
         updateTabsConfig(messageFormTabs.confirm)();
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }

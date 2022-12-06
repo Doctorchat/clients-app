@@ -21,6 +21,7 @@ import { registerDoctor } from "@/store/actions";
 import { toSelectOpts } from "@/store/selectors";
 import { notification } from "@/store/slices/notificationsSlice";
 import getActiveLng from "@/utils/getActiveLng";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function BecomeDoctor() {
   const resolver = useYupValidationResolver(registerDoctorSchema);
@@ -37,7 +38,9 @@ export default function BecomeDoctor() {
       const response = await api.bootstrap.categories();
       setCategories(toSelectOpts()(response.data));
     } catch (error) {
-      dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+      dispatch(
+        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+      );
     }
   }, [dispatch]);
 

@@ -10,6 +10,7 @@ import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import { editProfileSchema } from "@/services/validation";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function EditProfileSecurity() {
   const [loading, setLoading] = useState();
@@ -28,7 +29,9 @@ export default function EditProfileSecurity() {
         await api.user.updatePassword(values);
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }

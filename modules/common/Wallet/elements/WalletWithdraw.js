@@ -15,6 +15,7 @@ import Portal from "@/containers/Portal";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const WalletWithdraw = (props) => {
   const { t } = useTranslation();
@@ -43,7 +44,7 @@ const WalletWithdraw = (props) => {
         dispatch(notification({ title: "success", descrp: "transactions.withdraw_success" }));
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "error", descrp: "transactions.withdraw_error" })
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
         );
       }
     },

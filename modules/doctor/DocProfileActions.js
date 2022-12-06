@@ -13,6 +13,7 @@ import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function DocProfileActions() {
   const user = useSelector((store) => store.user.data);
@@ -30,7 +31,9 @@ export default function DocProfileActions() {
       await api.doctor.toggleTextStatus();
       dispatch(updateUserProperty({ prop: "chat", value: !user?.chat }));
     } catch (error) {
-      dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+      dispatch(
+        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+      );
     } finally {
       setIsTextStatusUpdating(false);
     }
@@ -42,7 +45,9 @@ export default function DocProfileActions() {
       await api.doctor.toggleVideoStatus();
       dispatch(updateUserProperty({ prop: "video", value: !user?.video }));
     } catch (error) {
-      dispatch(notification({ type: "error", title: "Erorare", descrp: "A apărut o eroare" }));
+      dispatch(
+        notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) })
+      );
     } finally {
       setIsVideoStatusUpdating(false);
     }

@@ -16,6 +16,7 @@ import { chatContentAddMessage } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import cs from "@/utils/classNames";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 import { IconBtn } from "../Button";
 import Confirm from "../Confirm";
@@ -53,7 +54,9 @@ export default function MessageBar(props) {
       form.reset();
       return Promise.resolve();
     } catch (error) {
-      dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+      dispatch(
+        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+      );
       return Promise.reject();
     } finally {
       setStopChatLoading(true);
@@ -86,7 +89,9 @@ export default function MessageBar(props) {
         setIsFormEnabled(false);
         form.reset();
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: "default_error_message" }));
+        dispatch(
+          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+        );
       } finally {
         setLoading(false);
       }
