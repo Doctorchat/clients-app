@@ -90,12 +90,7 @@ export default function DocAppointmentsSettings() {
         />
       </Sidebar.Header>
       <Sidebar.Body>
-        <div
-          className="scrollable scrollable-y profile-appointments-wrapper"
-          style={{
-            height: "fit-content",
-          }}
-        >
+        <div className="scrollable scrollable-y profile-appointments-wrapper">
           <Line
             activeKey={appointmentsTabsConfig.key}
             updateTabsConfig={updateAppointmentsTabsConfig}
@@ -118,6 +113,7 @@ export default function DocAppointmentsSettings() {
               <div className="profile-appointments-box mt-3 px-1">
                 <Alert className="mb-4 mt-1" type="info" message={t("appintments_warning")} />
                 <Form
+                  className="pb-3"
                   methods={form}
                   onFinish={onFormSubmit}
                   initialValues={
@@ -157,6 +153,7 @@ export default function DocAppointmentsSettings() {
                   <Form.Item name="sun" label="Duminică">
                     <TimePicker type="range" />
                   </Form.Item>
+
                   <div className="d-flex justify-content-end">
                     <Button htmlType="submit" type="primary" loading={loading}>
                       {t("edit")}

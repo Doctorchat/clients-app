@@ -23,12 +23,12 @@ export const Layout = ({
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
-  const roter = useRouter();
+  const router = useRouter();
 
   const [isLogoutVisible, setIsLogoutVisible] = React.useState(false);
 
   const onBackHandler = () => {
-    roter.push(backPath);
+    router.push(backPath);
   };
 
   const logoutHandler = () => dispatch(logoutUser());

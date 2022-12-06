@@ -18,6 +18,10 @@
   z-index: 1;
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
+
+  .tabs-pane {
+    overflow: visible;
+  }
 }
 
 .tabs-line {

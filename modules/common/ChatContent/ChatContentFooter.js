@@ -1,3 +1,4 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
@@ -6,9 +7,16 @@ import MessageBar from "@/components/MessageBar";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
 
+import ChatContentAccept from "./ChatContentAccept";
+
 export default function ChatContentFooter(props) {
-  const { openMessageFormPopup, status, chatId, paymentUrl, type } = props;
+  const { openMessageFormPopup, status, chatId, paymentUrl, type, isAccepted } = props;
   const { t } = useTranslation();
+
+  const isAcceptedFalse = React.useMemo(
+    () => type !== "support" && !isAccepted,
+    [isAccepted, type]
+  );
 
   return (
     <>
@@ -28,7 +36,12 @@ export default function ChatContentFooter(props) {
           </a>
         </div>
       </AuthRoleWrapper>
-      {status && !["initied", "unpaid", "closed"].includes(status) && (
+
+      <AuthRoleWrapper roles={[userRoles.get("doctor")]} extraValidation={isAcceptedFalse}>
+        <ChatContentAccept chatId={chatId} />
+      </AuthRoleWrapper>
+
+      {!isAcceptedFalse && status && !["initied", "unpaid", "closed"].includes(status) && (
         <MessageBar chatId={chatId} status={status} type={type} />
       )}
     </>
@@ -42,6 +55,7 @@ ChatContentFooter.propTypes = {
   status: PropTypes.string,
   paymentUrl: PropTypes.string,
   type: PropTypes.string,
+  isAccepted: PropTypes.bool,
 };
 
 ChatContentFooter.defaultProps = {};
