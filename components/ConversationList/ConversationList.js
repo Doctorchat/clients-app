@@ -36,6 +36,8 @@ function ConversationList(props) {
     [dispatch, router]
   );
 
+  console.log("conversations", conversations);
+
   const Conversations = [...conversations]
     .sort((a, b) => new Date(b.updated) - new Date(a.updated))
     .map((conversation) => (

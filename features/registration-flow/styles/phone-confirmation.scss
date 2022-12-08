@@ -75,4 +75,18 @@
       width: 40px !important;
     }
   }
+
+  .phone-confirmation__edit-form {
+    flex-direction: column;
+
+    .dc-btn {
+      width: 100%;
+    }
+
+    .form-control {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 1rem !important;
+    }
+  }
 }

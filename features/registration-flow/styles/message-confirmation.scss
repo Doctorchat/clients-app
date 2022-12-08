@@ -58,6 +58,9 @@
 
 @media screen and (max-width: 768px) {
   .message-confirmation__modal {
+    .popup-body {
+      max-height: 85vh;
+    }
     .popup-header {
       padding: 14px 14px 8px;
     }

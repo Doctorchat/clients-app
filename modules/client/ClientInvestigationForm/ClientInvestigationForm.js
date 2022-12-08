@@ -8,7 +8,6 @@ import Form from "@/components/Form";
 import Input, { InputNumber, Textarea } from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import Select from "@/components/Select";
-import { diseasesOptions } from "@/context/staticSelectOpts";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
@@ -75,7 +74,6 @@ export default function ClientInvestigationForm() {
       const data = { ...values, ...formValues };
 
       data.sex = typeof data.sex === "object" ? data.sex.value : data.sex;
-      data.diseases = typeof data.diseases === "object" ? data.diseases.value : data.diseases;
 
       const onSuccess = (response) => {
         dispatch(investigationFormToggleVisibility(false));
@@ -145,9 +143,6 @@ export default function ClientInvestigationForm() {
           </Form.Item>
           <Form.Item label={t("investigation_form.activity")} name="activity">
             <Textarea />
-          </Form.Item>
-          <Form.Item label={t("investigation_form.diseases")} name="diseases">
-            <Select options={diseasesOptions} />
           </Form.Item>
           <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
             <Textarea />

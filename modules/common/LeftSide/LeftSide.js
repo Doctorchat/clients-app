@@ -2,13 +2,13 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 import Button from "@/components/Button";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
 import { leftSideTabs } from "@/context/TabsKeys";
 import PlusIcon from "@/icons/plus.svg";
-import { ClientStartConversationMenu } from "@/modules/client";
 import Tabs from "@/packages/Tabs";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 
@@ -89,11 +89,13 @@ export default function LeftSide() {
         roles={[userRoles.get("client")]}
       >
         <div className="start-conversation-btn">
-          <ClientStartConversationMenu placement="topLeft">
-            <Button icon={<PlusIcon />} type="primary">
-              {t("start_conversation")}
-            </Button>
-          </ClientStartConversationMenu>
+          <Link href="/registration-flow/select-doctor">
+            <a>
+              <Button icon={<PlusIcon />} type="primary">
+                {t("start_conversation")}
+              </Button>
+            </a>
+          </Link>
         </div>
       </AuthRoleWrapper>
       <AuthRoleWrapper

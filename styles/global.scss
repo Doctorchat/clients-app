@@ -302,3 +302,9 @@ img {
     background-position: 0 50%;
   }
 }
+
+@media (min-width: 648px) {
+  .w-50-sm {
+    width: 50% !important;
+  }
+}

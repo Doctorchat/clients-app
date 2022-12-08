@@ -83,10 +83,11 @@ const usePhoneConfirmation = () => {
           descrp: getApiErrorMessages(error, true),
         })
       );
+      onResetPinInput();
     } finally {
       setIsConfirming(false);
     }
-  }, [confirmationCode, dispatch, router]);
+  }, [confirmationCode, dispatch, router, onResetPinInput]);
 
   React.useEffect(() => {
     countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000);

@@ -173,9 +173,16 @@
 }
 
 @media screen and (max-width: 768px) {
+  .doctor-view__modal {
+    .popup-body {
+      max-height: 85vh;
+    }
+  }
+
   .doctor-view {
     grid-template-columns: 1fr;
     text-align: center;
+    overflow-y: auto;
 
     &__avatar {
       grid-column: 1 / 2;
@@ -241,6 +248,7 @@
     top: 20px;
     right: 20px;
     z-index: 2;
+    backdrop-filter: blur(10px);
 
     svg {
       width: 28px;

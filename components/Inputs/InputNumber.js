@@ -105,6 +105,7 @@ const InputNumber = forwardRef((props, ref) => {
             addonBefore && "with-prefix",
             addonAfter && "with-suffix"
           )}
+          inputMode="numeric"
           disabled={disabled}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}

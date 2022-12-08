@@ -31,7 +31,7 @@ export default function AuthWrapper(props) {
         .then((user) => {
           const redirect = getUserRedirectPath(user, router.pathname);
 
-          if (redirect) {
+          if (redirect && redirect !== router.pathname) {
             router.replace(redirect);
           }
         })

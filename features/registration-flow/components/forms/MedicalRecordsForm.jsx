@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import * as yup from "yup";
 
@@ -9,7 +9,6 @@ import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputNumber, Textarea } from "@/components/Inputs";
 import Select from "@/components/Select";
-import { diseasesOptions } from "@/context/staticSelectOpts";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
@@ -32,19 +31,13 @@ const medicalRecordsSchema = yup.object().shape({
       message: i18next.t("yup_mixed_required"),
       test: (value) => isValidSelectOption(value),
     }),
-  diseases: yup
-    .mixed()
-    .required()
-    .test({
-      name: "select-validation",
-      message: i18next.t("yup_mixed_required"),
-      test: (value) => isValidSelectOption(value),
-    }),
   diseases_spec: yup.string().required(),
 });
 
 export const MedicalRecordsForm = () => {
   const { t } = useTranslation();
+
+  const user = useSelector((state) => state.user.data);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -60,7 +53,6 @@ export const MedicalRecordsForm = () => {
       const data = { ...values };
 
       data.sex = data.sex.value;
-      data.diseases = data.diseases.value;
 
       try {
         setIsLoading(true);
@@ -82,13 +74,13 @@ export const MedicalRecordsForm = () => {
       className="registration-flow__form"
       methods={form}
       onFinish={onSubmit}
-      initialValues={{ phone: "" }}
+      initialValues={{ phone: "", name: user?.name ?? "" }}
     >
       <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
         <Form.Item className="w-100" name="name" label={t("name")}>
           <Input />
         </Form.Item>
-        <Form.Item className="w-50" label={t("investigation_form.sex")} name="sex">
+        <Form.Item className="w-100 w-50-sm" label={t("investigation_form.sex")} name="sex">
           <Select
             options={[
               { value: "male", label: t("male") },
@@ -113,9 +105,6 @@ export const MedicalRecordsForm = () => {
       </Form.Item>
       <Form.Item label={t("investigation_form.activity")} name="activity">
         <Textarea />
-      </Form.Item>
-      <Form.Item label={t("investigation_form.diseases")} name="diseases">
-        <Select options={diseasesOptions} />
       </Form.Item>
       <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
         <Textarea />

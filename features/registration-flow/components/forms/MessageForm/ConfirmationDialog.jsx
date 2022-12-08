@@ -86,6 +86,8 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
     setTotalPrice(data?.price + data?.uploads_price);
   }, [data?.price, data?.uploads_price]);
 
+  const formCodeValue = form.watch("code");
+
   return (
     <Popup
       className="registration-flow__modal message-confirmation__modal"
@@ -221,7 +223,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                             placeholder="WINTER20"
                           />
                         </Form.Item>
-                        <Button htmlType="submit" loading={promoLoading}>
+                        <Button htmlType="submit" loading={promoLoading} disabled={!formCodeValue}>
                           {t("apply")}
                         </Button>
                       </Form>
@@ -234,6 +236,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
 
           <div className="confirmation-terms mb-4">
             <Checkbox
+              name="terms"
               value={areTermsAccepted}
               onChange={() => onChangeAreTermsccepted(!areTermsAccepted)}
               label={

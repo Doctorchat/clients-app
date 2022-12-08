@@ -22,8 +22,12 @@ const Checkbox = forwardRef((props, ref) => {
       >
         <CheckIcon />
       </button> */}
-      <input type="checkbox" id={name} checked={value} onChange={toggleHandler}  />
-      {!!label && <span className="dc-simple-checkbox-label">{label}</span>}
+      <input type="checkbox" id={name} checked={value} onChange={toggleHandler} />
+      {!!label && (
+        <label htmlFor={name} className="dc-simple-checkbox-label">
+          {label}
+        </label>
+      )}
     </div>
   );
 });

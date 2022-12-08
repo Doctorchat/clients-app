@@ -28,6 +28,8 @@
   }
 
   .react-select-container {
+    max-width: unset;
+
     .react-select__control {
       &--is-focused {
         box-shadow: 0 0 0 0.2rem rgba(#e81f41, 0.2);

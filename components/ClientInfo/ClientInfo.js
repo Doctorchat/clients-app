@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-import {
-  allergiesOptions,
-  diseasesOptions,
-  epidemiologicalOptions,
-} from "@/context/staticSelectOpts";
 import getSelectLabel from "@/utils/getSelectLabel";
 
 import Image from "../Image";
@@ -14,18 +9,17 @@ import Skeleton from "../Skeleton";
 
 export default function ClientInfo(props) {
   const { client, loading, selectedInvestigation } = props;
-  const [investigation, setInvetigation] = useState({});
+  const [investigation, setInvestigation] = useState({});
   const { t } = useTranslation();
-
 
   useEffect(() => {
     if (client.investigations) {
-      const activeInvetigation = client.investigations.find(
+      const activeInvestigation = client.investigations.find(
         (investigation) => investigation.id === selectedInvestigation
       );
 
-      if (activeInvetigation) {
-        setInvetigation(activeInvetigation);
+      if (activeInvestigation) {
+        setInvestigation(activeInvestigation);
       }
     }
   }, [client.investigations, selectedInvestigation]);
@@ -62,65 +56,6 @@ export default function ClientInfo(props) {
                     </Skeleton>
                   ) : (
                     investigation.activity
-                  )}
-                </td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("epidemiological")}</th>
-                <td className="dc-description-row-content">
-                  {loading ? (
-                    <Skeleton>
-                      <Skeleton.Line w="45%" h="18px" />
-                    </Skeleton>
-                  ) : (
-                    getSelectLabel(investigation.epidemiological, epidemiologicalOptions)
-                  )}
-                </td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("diseases")}</th>
-                <td className="dc-description-row-content">
-                  {loading ? (
-                    <Skeleton>
-                      <Skeleton.Line w="45%" h="16px" />
-                    </Skeleton>
-                  ) : (
-                    <p className="mb-1 bolder-p">
-                      {getSelectLabel(investigation.diseases, diseasesOptions)}
-                    </p>
-                  )}
-                  {loading ? (
-                    <Skeleton>
-                      <Skeleton.Line className="mb-1" w="45%" h="12px" />
-                      <Skeleton.Line className="mb-1" w="65%" h="12px" />
-                      <Skeleton.Line w="35%" h="12px" />
-                    </Skeleton>
-                  ) : (
-                    <p className="mb-0">{investigation.diseases_spec}</p>
-                  )}
-                </td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("allergies")}</th>
-                <td className="dc-description-row-content">
-                  {loading ? (
-                    <Skeleton>
-                      <Skeleton.Line className="mb-1" w="45%" h="16px" />
-                    </Skeleton>
-                  ) : (
-                    <p className="mb-1 bolder-p">
-                      {getSelectLabel(investigation.allergies, allergiesOptions)}
-                    </p>
-                  )}
-
-                  {loading ? (
-                    <Skeleton>
-                      <Skeleton.Line className="mb-1" w="45%" h="12px" />
-                      <Skeleton.Line className="mb-1" w="65%" h="12px" />
-                      <Skeleton.Line w="35%" h="12px" />
-                    </Skeleton>
-                  ) : (
-                    <p className="mb-0">{investigation.allergies_spec}</p>
                   )}
                 </td>
               </tr>

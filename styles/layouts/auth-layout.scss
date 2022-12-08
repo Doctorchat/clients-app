@@ -181,6 +181,18 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .auth-layout {
+    &__content {
+      justify-content: flex-start;
+    }
+
+    &__main {
+      padding-top: 15vh;
+    }
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .form-bottom {
     margin-top: 24px;
