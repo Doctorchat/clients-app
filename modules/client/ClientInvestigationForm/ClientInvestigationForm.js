@@ -107,6 +107,9 @@ export default function ClientInvestigationForm() {
     >
       <Popup.Header title={t("add_investigation")} />
       <Popup.Content>
+        <p className="mb-3" style={{ padding: "0px 8px", fontSize: 17 }}>
+          *{t("investigation_form_description")}
+        </p>
         <Form
           methods={form}
           name="add-investigation"

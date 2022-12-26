@@ -70,50 +70,55 @@ export const MedicalRecordsForm = () => {
   );
 
   return (
-    <Form
-      className="registration-flow__form"
-      methods={form}
-      onFinish={onSubmit}
-      initialValues={{ phone: "", name: user?.name ?? "" }}
-    >
-      <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-        <Form.Item className="w-100" name="name" label={t("name")}>
+    <>
+      <Form
+        className="registration-flow__form"
+        methods={form}
+        onFinish={onSubmit}
+        initialValues={{ phone: "", name: user?.name ?? "" }}
+      >
+        <p className="mb-4" style={{ fontSize: 17 }}>
+          *{t("investigation_form_description")}
+        </p>
+        <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
+          <Form.Item className="w-100" name="name" label={t("name")}>
+            <Input />
+          </Form.Item>
+          <Form.Item className="w-100 w-50-sm" label={t("investigation_form.sex")} name="sex">
+            <Select
+              options={[
+                { value: "male", label: t("male") },
+                { value: "female", label: t("female") },
+              ]}
+            />
+          </Form.Item>
+        </div>
+        <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
+          <Form.Item className="w-100" label={t("age")} name="age">
+            <InputNumber />
+          </Form.Item>
+          <Form.Item className="w-100" label={t("height_cm")} name="height">
+            <InputNumber />
+          </Form.Item>
+          <Form.Item className="w-100" label={t("weight_kg")} name="weight">
+            <InputNumber />
+          </Form.Item>
+        </div>
+        <Form.Item label={t("investigation_form.location")} name="location">
           <Input />
         </Form.Item>
-        <Form.Item className="w-100 w-50-sm" label={t("investigation_form.sex")} name="sex">
-          <Select
-            options={[
-              { value: "male", label: t("male") },
-              { value: "female", label: t("female") },
-            ]}
-          />
+        <Form.Item label={t("investigation_form.activity")} name="activity">
+          <Textarea />
         </Form.Item>
-      </div>
-      <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-        <Form.Item className="w-100" label={t("age")} name="age">
-          <InputNumber />
+        <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
+          <Textarea />
         </Form.Item>
-        <Form.Item className="w-100" label={t("height_cm")} name="height">
-          <InputNumber />
-        </Form.Item>
-        <Form.Item className="w-100" label={t("weight_kg")} name="weight">
-          <InputNumber />
-        </Form.Item>
-      </div>
-      <Form.Item label={t("investigation_form.location")} name="location">
-        <Input />
-      </Form.Item>
-      <Form.Item label={t("investigation_form.activity")} name="activity">
-        <Textarea />
-      </Form.Item>
-      <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
-        <Textarea />
-      </Form.Item>
-      <div className="form-bottom">
-        <Button htmlType="submit" loading={isLoading}>
-          {t("continue")}
-        </Button>
-      </div>
-    </Form>
+        <div className="form-bottom">
+          <Button htmlType="submit" loading={isLoading}>
+            {t("continue")}
+          </Button>
+        </div>
+      </Form>
+    </>
   );
 };
