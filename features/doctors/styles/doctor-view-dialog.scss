@@ -2,6 +2,7 @@
   .popup-body {
     width: clamp(300px, calc(100% - 30px), 1000px);
     border-radius: 20px;
+    max-height: 95vh;
   }
 
   .popup-backdrop {
@@ -35,6 +36,7 @@
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   position: relative;
+  overflow-y: auto;
 
   &__avatar {
     grid-column: 1 / 5;
@@ -182,7 +184,6 @@
   .doctor-view {
     grid-template-columns: 1fr;
     text-align: center;
-    overflow-y: auto;
 
     &__avatar {
       grid-column: 1 / 2;
