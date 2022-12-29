@@ -17,6 +17,7 @@ export const notificationsSlice = createSlice({
       },
       /**
        * @typedef {Object} Notification
+       * @property {String} [id]
        * @property {String} [className]
        * @property {String} [type] "error" | "success" | "warning"
        * @property {String} title

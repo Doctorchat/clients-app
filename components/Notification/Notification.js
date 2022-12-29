@@ -88,6 +88,7 @@ function Notification(props) {
       unmountOnExit
     >
       <div
+        id={id}
         className={cs("notification", className, type)}
         style={{ "--top": notificationTop + "px" }}
         ref={notificationRef}

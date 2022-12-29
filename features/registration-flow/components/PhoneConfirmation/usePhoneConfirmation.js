@@ -68,6 +68,7 @@ const usePhoneConfirmation = () => {
 
       dispatch(
         notification({
+          id: "wizard:phone_verification_success",
           title: "success",
           descrp: "wizard:phone_verification.success",
         })
