@@ -77,6 +77,7 @@ export default function Login() {
             duration: 6000,
           })
         );
+        setLoading(false);
       }
     },
     [dispatch, router]
