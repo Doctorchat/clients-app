@@ -17,8 +17,6 @@ import {
 import api from "@/services/axios/api";
 import { categoriesOptionsSelector } from "@/store/selectors";
 
-import { OptionsDialog } from "./OptionsDialog";
-
 export const SelectDoctor = () => {
   const { t } = useTranslation();
 
@@ -26,6 +24,8 @@ export const SelectDoctor = () => {
   const categories = useSelector((state) => categoriesOptionsSelector(state));
 
   const router = useRouter();
+
+  const [isAutoTypeLoading, setIsAutoTypeLoading] = React.useState(false);
 
   const { doctors, isLoading, filters, pagination } = useDoctorsInfiniteList();
   const {
@@ -54,6 +54,12 @@ export const SelectDoctor = () => {
     [doctorPreviewId, router, user?.investigations]
   );
 
+  const onAutoTypeClickHandler = React.useCallback(async () => {
+    setIsAutoTypeLoading(true);
+    await createChatHandler(CHAT_TYPES.auto, MESSAGE_TYPES.standard);
+    setIsAutoTypeLoading(false);
+  }, [createChatHandler]);
+
   return (
     <>
       <div className="registration-flow__select-doctor">
@@ -80,6 +86,11 @@ export const SelectDoctor = () => {
               value={filters.search}
               onChange={(e) => filters.setSearch(e.target.value)}
             />
+          </div>
+          <div className="select-doctor__filter">
+            <Button loading={isAutoTypeLoading} onClick={onAutoTypeClickHandler}>
+              {t("wizard:select_doctor.automatic.short_title")}
+            </Button>
           </div>
         </div>
         <DoctorsGrid isLoading={isLoading}>
@@ -112,9 +123,9 @@ export const SelectDoctor = () => {
           onVideoTypeClick={() => createChatHandler(CHAT_TYPES.standard, MESSAGE_TYPES.meet)}
         />
       )}
-      <OptionsDialog
+      {/* <OptionsDialog
         onAutoTypeClick={() => createChatHandler(CHAT_TYPES.auto, MESSAGE_TYPES.standard)}
-      />
+      /> */}
     </>
   );
 };

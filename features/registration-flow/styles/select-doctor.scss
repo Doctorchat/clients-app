@@ -15,8 +15,10 @@
   max-width: 1000px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: 25px;
+  grid-gap: 15px;
   padding: 0 20px;
+  justify-content: stretch;
+  align-items: end;
 
   .select-doctor__filter-label {
     color: #c6c6c6;
@@ -25,11 +27,23 @@
   }
 
   .select-doctor__filter {
-    grid-column: 1 / 6;
+    width: 100%;
+  }
+
+  .select-doctor__filter button {
+    width: 100%;
+  }
+
+  .select-doctor__filter:nth-child(1) {
+    grid-column: 1 / 5;
   }
 
   .select-doctor__filter:nth-child(2) {
-    grid-column: 6 / 13;
+    grid-column: 5 / 10;
+  }
+
+  .select-doctor__filter:nth-child(3) {
+    grid-column: 10 / 13;
   }
 }
 
@@ -200,11 +214,9 @@
       }
     }
   }
-}
 
-@media screen and (max-width: 640px) {
   .registration-flow__select-doctor {
-    margin-top: 215px;
+    margin-top: 265px;
     padding: 6vh 20px 5vh;
   }
 
@@ -225,5 +237,12 @@
         max-width: unset;
       }
     }
+
+    .select-doctor__filter:nth-child(3) {
+      margin-top: 15px;
+    }
   }
+}
+
+@media screen and (max-width: 640px) {
 }
