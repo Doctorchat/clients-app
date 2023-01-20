@@ -28,6 +28,7 @@
     },
     "automatic": {
       "title": "Select a doctor automatically",
+      "short_title": "Select automatically",
       "description": "Help me choose a doctor"
     }
   },

@@ -28,6 +28,7 @@
     },
     "automatic": {
       "title": "Selecteaza doctorul automat",
+      "short_title": "Selectează automat",
       "description": "Ajuta-ma sa aleg doctorul"
     }
   },
