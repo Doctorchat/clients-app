@@ -287,5 +287,6 @@
     "request_to_upload_file": "Request to upload an additional file"
   },
   "slots": "Slots",
-  "investigation_form_description": "Fill in the form with the details of the person for whom you want to request a consultation!"
+  "investigation_form_description": "Fill in the form with the details of the person for whom you want to request a consultation!",
+  "access_meet": "Access meeting"
 }

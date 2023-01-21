@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
@@ -6,6 +7,8 @@ import CamIcon from "@/icons/webcam.svg";
 import date from "@/utils/date";
 
 export default function MessageMeet(props) {
+  const { t } = useTranslation();
+
   const { url, time } = props;
 
   return (
@@ -21,7 +24,7 @@ export default function MessageMeet(props) {
       </div>
       <div className="meet-url">
         <a href={url} target="_blank" rel="noopener noreferrer">
-          <ExternalIcon />
+          {t("access_meet")} <ExternalIcon />
         </a>
       </div>
     </div>

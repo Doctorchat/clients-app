@@ -287,5 +287,6 @@
     "request_to_upload_file": "Solicitare de încărcare a unui fișier suplimentar"
   },
   "slots": "Sloturi",
-  "investigation_form_description": "Indicaţi în anchetă datele persoanei pentru care doriţi să solicitaţi o consultaţie!"
+  "investigation_form_description": "Indicaţi în anchetă datele persoanei pentru care doriţi să solicitaţi o consultaţie!",
+  "access_meet": "Accesează conferința"
 }

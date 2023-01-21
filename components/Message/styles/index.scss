@@ -187,28 +187,25 @@
 }
 
 .meet-url {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
   color: var(--bs-primary);
   a {
     background-color: rgba(#06f, 0.1);
-    display: block;
-    width: inherit;
-    height: inherit;
-    border-radius: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.2s;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 15px;
     &:hover {
       background-color: rgba(#06f, 0.2);
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
   }
   svg {
-    width: 18px;
-    height: 18px;
+    margin-left: 8px;
+    width: 14px;
+    height: 14px;
   }
 }
 
