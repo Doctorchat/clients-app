@@ -88,7 +88,7 @@ export default function BecomeDoctor() {
           </a>
         </Link>
       </div>
-      <div className="auth-form mt-4">
+      <div className="auth-form mt-5">
         {!categories.length && <Spinner />}
         <Form
           name="become-doctor-form"
