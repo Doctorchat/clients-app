@@ -18,17 +18,25 @@
   }
 }
 
-.registration-flow__logout {
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 20;
-  background-color: #fff;
-  transition: all 0.2s;
-  opacity: 0;
+.registration-flow__quick-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &.show {
-    opacity: 1;
+  & > *:not(:last-child) {
+    margin-right: 12px;
+  }
+}
+
+.registration-flow__logout {
+  &:hover {
+    color: var(--bs-danger);
+    background-color: rgba(#dc3545, 0.2);
+
+    svg {
+      color: var(--bs-danger);
+    }
   }
 }
 

@@ -16,7 +16,12 @@ const langs = {
   en: "English",
 };
 
-export default function ProfileChangeLang({ className, onUpdate, placement = "bottomRight" }) {
+export default function ProfileChangeLang({
+  className,
+  onUpdate,
+  placement = "bottomRight",
+  children,
+}) {
   const user = useSelector((store) => store.user);
   const [changeLngLoading, setChangeLngLoading] = useState();
   const [dropdownForcedClose, setDropdownForcedClose] = useState(null);
@@ -74,7 +79,7 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
       placement={placement}
       forcedClose={dropdownForcedClose}
     >
-      <Menu.Item icon={<LangIcon />}>{langs[getActiveLng()]}</Menu.Item>
+      {children ? children : <Menu.Item icon={<LangIcon />}>{langs[getActiveLng()]}</Menu.Item>}
     </Dropdown>
   );
 }
@@ -83,4 +88,5 @@ ProfileChangeLang.propTypes = {
   className: PropTypes.string,
   onUpdate: PropTypes.func,
   placement: PropTypes.string,
+  children: PropTypes.node,
 };

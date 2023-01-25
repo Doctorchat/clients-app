@@ -1,11 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
-import Button from "@/components/Button";
+import Button, { IconBtn } from "@/components/Button";
+import DcTooltip from "@/components/DcTooltip";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
+import HomeIcon from "@/icons/home.svg";
+import LangIcon from "@/icons/lang.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import { ProfileChangeLang } from "@/modules/common";
 import { logoutUser } from "@/store/actions";
@@ -25,31 +29,11 @@ export const Layout = ({
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [isLogoutVisible, setIsLogoutVisible] = React.useState(false);
-
   const onBackHandler = () => {
     router.push(backPath);
   };
 
   const logoutHandler = () => dispatch(logoutUser());
-
-  React.useEffect(() => {
-    const onScrollToBottom = () => {
-      if (window.innerHeight + window.pageYOffset >= document.body.scrollHeight - 50) {
-        setIsLogoutVisible(true);
-      } else {
-        setIsLogoutVisible(false);
-      }
-    };
-
-    onScrollToBottom();
-
-    window.addEventListener("scroll", onScrollToBottom);
-
-    return () => {
-      window.removeEventListener("scroll", onScrollToBottom);
-    };
-  }, []);
 
   return (
     <div
@@ -73,24 +57,31 @@ export const Layout = ({
           <div />
         )}
         <Steps activeStep={activeStep} />
-        <ProfileChangeLang className="registration-flow__lang" placement="bottomLeft" />
+        <div className="registration-flow__quick-actions">
+          <ProfileChangeLang className="registration-flow__lang" placement="bottomLeft">
+            <IconBtn size="sm" icon={<LangIcon />} />
+          </ProfileChangeLang>
+          <Link href="https://doctorchat.md/">
+            <a>
+              <DcTooltip side="bottom" align="end" content={t("home_page")} asChild>
+                <IconBtn size="sm" icon={<HomeIcon />} onClick={logoutHandler} />
+              </DcTooltip>
+            </a>
+          </Link>
+          <DcTooltip side="bottom" align="end" content={t("logout")} asChild>
+            <IconBtn
+              className="registration-flow__logout"
+              size="sm"
+              icon={<LogoutIcon />}
+              onClick={logoutHandler}
+            />
+          </DcTooltip>
+        </div>
       </header>
       <main className="registration-flow__content">
         <h1>{title}</h1>
         {children}
       </main>
-      <Button
-        className={cs(
-          "registration-flow__logout registration-flow__gray-btn",
-          isLogoutVisible && "show"
-        )}
-        type="text"
-        size="sm"
-        icon={<LogoutIcon />}
-        onClick={logoutHandler}
-      >
-        {t("logout")}
-      </Button>
     </div>
   );
 };
