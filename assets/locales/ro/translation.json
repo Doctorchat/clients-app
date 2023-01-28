@@ -20,6 +20,7 @@
   "bonuses": "Bonusuri",
   "history": "Istoricul",
   "language": "Limba",
+  "change_language": "Schimbă limba",
   "yup_mixed_required": "Acest câmp este obligatoriu",
   "yup_string_email": "Acest email nu este valid",
   "yup_string_min": "Cel puțin ${min} caractere",

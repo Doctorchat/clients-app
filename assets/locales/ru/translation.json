@@ -20,6 +20,7 @@
   "bonuses": "Бонусы",
   "history": "История",
   "language": "Язык",
+  "change_language": "Изменить язык",
   "yup_mixed_required": "Это поле обязательно к заполнению",
   "yup_string_email": "Недействительный электронный адрес",
   "yup_string_min": "Не менее ${min} символов",

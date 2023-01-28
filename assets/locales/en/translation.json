@@ -20,6 +20,7 @@
   "bonuses": "Bonuses",
   "history": "History",
   "language": "Language",
+  "change_language": "Change language",
   "yup_mixed_required": "This field is required",
   "yup_string_email": "This is not a valid email",
   "yup_string_min": "At least ${min} characters",

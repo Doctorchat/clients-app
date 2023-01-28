@@ -40,6 +40,13 @@
   }
 }
 
+.registration-flow__lang {
+  .dropdown-overlay.bottomLeft {
+    right: -45px;
+    top: calc(100% + 20px);
+  }
+}
+
 @media screen and (max-width: 1240px) {
   .registration-flow__layout {
     .registration-flow__header {

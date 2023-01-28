@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import cs from "@/utils/classNames";
+import compose from "@/utils/compose";
 
 import DropdownContext from "./DropdownContext";
 
@@ -60,7 +61,9 @@ export default function Dropdown(props) {
 
   return (
     <div className={cs("dropdown", className)}>
-      {cloneElement(Children.only(children), { onClick: openDropdown })}
+      {cloneElement(Children.only(children), {
+        onClick: compose(openDropdown, children.props.onClick || (() => null)),
+      })}
       {status && <div className="dropdown-backdrop" aria-hidden="true" onClick={closeDropdown} />}
       <CSSTransition in={status} timeout={200} nodeRef={overlayRef} unmountOnExit={destroyOnHide}>
         <DropdownContext.Provider

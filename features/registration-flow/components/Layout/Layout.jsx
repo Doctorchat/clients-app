@@ -29,6 +29,8 @@ export const Layout = ({
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const changeLanguageRef = React.useRef();
+
   const onBackHandler = () => {
     router.push(backPath);
   };
@@ -59,12 +61,25 @@ export const Layout = ({
         <Steps activeStep={activeStep} />
         <div className="registration-flow__quick-actions">
           <ProfileChangeLang className="registration-flow__lang" placement="bottomLeft">
-            <IconBtn size="sm" icon={<LangIcon />} />
+            <div ref={changeLanguageRef} style={{ display: "none" }} />
           </ProfileChangeLang>
+          <DcTooltip side="bottom" align="end" content={t("change_language")} asChild>
+            <IconBtn
+              size="sm"
+              icon={<LangIcon />}
+              onClick={() => {
+                changeLanguageRef?.current?.click();
+              }}
+            />
+          </DcTooltip>
           <Link href="https://doctorchat.md/">
             <a>
               <DcTooltip side="bottom" align="end" content={t("home_page")} asChild>
-                <IconBtn size="sm" icon={<HomeIcon />} onClick={logoutHandler} />
+                <IconBtn
+                  size="sm"
+                  icon={<HomeIcon />}
+                  onClick={() => router.push("https://doctorchat.md/")}
+                />
               </DcTooltip>
             </a>
           </Link>
