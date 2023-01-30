@@ -76,6 +76,11 @@ const usePhoneConfirmation = () => {
       dispatch(updateUserProperty({ prop: "verified", value: true }));
 
       await router.replace("/registration-flow/medical-records" + window.location.search);
+
+      window?.dataLayer?.push({
+        event: "user_registered",
+        UserID: { user_id: user.id },
+      });
     } catch (error) {
       dispatch(
         notification({
@@ -88,7 +93,7 @@ const usePhoneConfirmation = () => {
     } finally {
       setIsConfirming(false);
     }
-  }, [confirmationCode, dispatch, router, onResetPinInput]);
+  }, [user?.id, confirmationCode, dispatch, router, onResetPinInput]);
 
   React.useEffect(() => {
     countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000);
