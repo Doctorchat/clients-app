@@ -14,7 +14,7 @@
     "@reduxjs/toolkit": "^1.9.0",
     "@tanstack/react-query": "^4.16.1",
     "antd": "^4.24.3",
-    "axios": "^0.24.0",
+    "axios": "^0.27.2",
     "bootstrap": "^5.2.3",
     "dayjs": "^1.11.6",
     "env-cmd": "^10.1.0",
