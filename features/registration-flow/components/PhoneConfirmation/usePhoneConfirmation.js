@@ -77,9 +77,11 @@ const usePhoneConfirmation = () => {
 
       await router.replace("/registration-flow/medical-records" + window.location.search);
 
-      window?.dataLayer?.push({
+      var UserID = user.id;
+
+      window.dataLayer.push({
         event: "user_registered",
-        UserID: { user_id: user.id },
+        UserID: UserID,
       });
     } catch (error) {
       dispatch(

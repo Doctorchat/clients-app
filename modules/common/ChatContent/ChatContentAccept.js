@@ -25,12 +25,17 @@ export default function ChatContentAccept({ chatId }) {
       await api.conversation.accept(chatId);
       await dispatch(getChatContent(chatId));
 
+      var UserID = chatContent?.content?.user_id;
+      var DoctorID = user?.data?.id;
+      var ChatID = chatContent?.content?.chat_id;
+      var amount = chatContent?.content?.amount;
+
       window.dataLayer.push({
         event: "chat_confirmed",
-        UserID: { user_id: chatContent?.content?.user_id },
-        DoctorID: { doctor_id: user?.data?.id },
-        ChatID: { chat_id: chatContent?.content?.chat_id },
-        amount: { amount: chatContent?.content?.amount },
+        UserID: UserID,
+        DoctorID: DoctorID,
+        ChatID: ChatID,
+        amount: amount,
       });
     } catch (error) {
       dispatch(
