@@ -27,3 +27,4 @@ jobs:
           private_key: ${{ secrets.SERVER_SSH_KEY }}
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_MD }}
+          
