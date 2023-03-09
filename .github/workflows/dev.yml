@@ -49,31 +49,31 @@ jobs:
 
 #     RO
       - name: Create env configs
-          run: |
-            rm .env
-            echo "${{ secrets.ENV_FILE_DEV }}" > .env
-            echo "${{ secrets.REGION_RO }}" >> .env
-          - name: Build
-            run: CI=false npm run build:staging
-          - name: SSH Server Deploy RO
-            uses: kostya-ten/ssh-server-deploy@v4
-            with:
-              host: ${{ secrets.REMOTE_HOST }}
-              username: ${{ secrets.REMOTE_USER }}
-              password: ${{ secrets.SSH_PASS }}
-              private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-              scp_source: "out/"
-              scp_target: ${{ secrets.TARGET_APP_RO_DEV }}
-          - name: Send notification to Telegram
-            uses: appleboy/telegram-action@master
-            with:
-              to: ${{ secrets.TELEGRAM_TO }}
-              token: ${{ secrets.TELEGRAM_TOKEN }}
-              message: |
-                Deployed RO
-                ${{ github.actor }} created commit:
-                Commit message: ${{ github.event.commits[0].message }}
-                
-                Repository: ${{ github.repository }}
-                
-                See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+        run: |
+          rm .env
+          echo "${{ secrets.ENV_FILE_DEV }}" > .env
+          echo "${{ secrets.REGION_RO }}" >> .env
+        - name: Build
+          run: CI=false npm run build:staging
+        - name: SSH Server Deploy RO
+          uses: kostya-ten/ssh-server-deploy@v4
+          with:
+            host: ${{ secrets.REMOTE_HOST }}
+            username: ${{ secrets.REMOTE_USER }}
+            password: ${{ secrets.SSH_PASS }}
+            private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
+            scp_source: "out/"
+            scp_target: ${{ secrets.TARGET_APP_RO_DEV }}
+        - name: Send notification to Telegram
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            message: |
+              Deployed RO
+              ${{ github.actor }} created commit:
+              Commit message: ${{ github.event.commits[0].message }}
+              
+              Repository: ${{ github.repository }}
+              
+              See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
