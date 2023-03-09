@@ -1,43 +1,29 @@
----
-name: Doctochat CI/CD
+name: Doctochat Production CI/CD
+
 on:
   push:
     branches:
       - main
+
 jobs:
-  Build:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: '14.x'
       - name: Install dependencies
         run: npm install
       - name: Build
         run: CI=false npm run build
-  Deploy:
-    needs: Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: kostya-ten/ssh-server-deploy@v4
-      - name: Deploy MD Region
+      - name: SSH Server Deploy MD
+        uses: kostya-ten/ssh-server-deploy@v4
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.SSH_PASS }}
           private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          scp_source: out/
-          scp_target: ${{ secrets.TARGET_APP_RO }}
-  Notify:
-    needs: Deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send telegram message on push
-        uses: appleboy/telegram-action@master
-        with:
-          format: html
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: lorem
+          scp_source: "out/"
+          scp_target: ${{ secrets.TARGET_APP_MD }}
