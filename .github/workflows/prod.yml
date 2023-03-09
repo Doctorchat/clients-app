@@ -40,23 +40,4 @@ jobs:
           format: html
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: >
-            ✅ <b>[PROD] Doctorchat Clients APP - deployed!</b>
-
-            🥷 <b>User</b>: ${{ github.actor }}
-
-            📂 <b>Commit:</b> <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">${{ github.event.commits[0].message }}</a>
-
-            📌 <b>Branch:</b> ${{ github.ref }}
-
-            📌 <b>Commit:</b> ${{ github.sha }}
-
-            📌 <b>Repository:</b> ${{ github.repository }}
-
-            📌 <b>Workflow:</b> ${{ github.workflow }}
-
-            📌 <b>Run:</b> ${{ github.run_id }}
-
-            📌 <b>Run Number:</b> ${{ github.run_number }}
-
-            📌 <b>Run URL:</b> ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          message: lorem
