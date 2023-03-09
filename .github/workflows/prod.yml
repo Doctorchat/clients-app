@@ -1,10 +1,9 @@
+---
 name: Doctochat CI/CD
-
 on:
   push:
     branches:
       - main
-
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -13,26 +12,15 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: "14.x"
+          node-version: 14.x
       - name: Install dependencies
         run: npm install
       - name: Build
         run: CI=false npm run build
-
   Deploy:
     needs: Build
     runs-on: ubuntu-latest
     steps:
-#      - uses: kostya-ten/ssh-server-deploy@v4
-#      - name: Deploy MD Region
-#        with:
-#          host: ${{ secrets.REMOTE_HOST }}
-#          username: ${{ secrets.REMOTE_USER }}
-#          password: ${{ secrets.SSH_PASS }}
-#          private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-#          scp_source: "out/"
-#          scp_target: ${{ secrets.TARGET_APP_MD }}
-
       - uses: kostya-ten/ssh-server-deploy@v4
       - name: Deploy MD Region
         with:
@@ -40,9 +28,8 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.SSH_PASS }}
           private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          scp_source: "out/"
+          scp_source: out/
           scp_target: ${{ secrets.TARGET_APP_RO }}
-
   Notify:
     needs: Deploy
     runs-on: ubuntu-latest
@@ -53,14 +40,23 @@ jobs:
           format: html
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
+          message: >
             ✅ <b>[PROD] Doctorchat Clients APP - deployed!</b>
+
             🥷 <b>User</b>: ${{ github.actor }}
+
             📂 <b>Commit:</b> <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">${{ github.event.commits[0].message }}</a>
+
             📌 <b>Branch:</b> ${{ github.ref }}
+
             📌 <b>Commit:</b> ${{ github.sha }}
+
             📌 <b>Repository:</b> ${{ github.repository }}
+
             📌 <b>Workflow:</b> ${{ github.workflow }}
+
             📌 <b>Run:</b> ${{ github.run_id }}
+
             📌 <b>Run Number:</b> ${{ github.run_number }}
+
             📌 <b>Run URL:</b> ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
