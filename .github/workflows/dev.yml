@@ -16,7 +16,7 @@ jobs:
           node-version: '14.x'
       - name: Install dependencies
         run: npm install
-      - name: 'Create env file'
+      - name: Create env configs
           run: |
             echo "${{ secrets.ENV_FILE_DEV }}" > .env
       - name: Build
