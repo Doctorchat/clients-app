@@ -23,15 +23,15 @@ jobs:
     needs: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: kostya-ten/ssh-server-deploy@v4
-      - name: Deploy MD Region
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.SSH_PASS }}
-          private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          scp_source: "out/"
-          scp_target: ${{ secrets.TARGET_APP_MD }}
+#      - uses: kostya-ten/ssh-server-deploy@v4
+#      - name: Deploy MD Region
+#        with:
+#          host: ${{ secrets.REMOTE_HOST }}
+#          username: ${{ secrets.REMOTE_USER }}
+#          password: ${{ secrets.SSH_PASS }}
+#          private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
+#          scp_source: "out/"
+#          scp_target: ${{ secrets.TARGET_APP_MD }}
 
       - uses: kostya-ten/ssh-server-deploy@v4
       - name: Deploy MD Region
