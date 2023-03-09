@@ -18,38 +18,38 @@ jobs:
         run: npm install
       - name: Build
         run: CI=false npm run build
-     
+
   Deploy:
-      needs: Build
-      runs-on: ubuntu-latest
-      steps:
-       - uses: kostya-ten/ssh-server-deploy@v4
-       - name: Deploy MD Region
-         with:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kostya-ten/ssh-server-deploy@v4
+      - name: Deploy MD Region
+        with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.SSH_PASS }}
           private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_MD }}
-      
-       - uses: kostya-ten/ssh-server-deploy@v4
-       - name: Deploy MD Region
-         with:
+
+      - uses: kostya-ten/ssh-server-deploy@v4
+      - name: Deploy MD Region
+        with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.SSH_PASS }}
           private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_RO }}
-          
+
   Notify:
-      needs: Deploy
-      runs-on: ubuntu-latest
-      steps:
-       - name: Send telegram message on push
-         uses: appleboy/telegram-action@master
-         with:
+    needs: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
           format: html
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -63,7 +63,4 @@ jobs:
             📌 <b>Workflow:</b> ${{ github.workflow }}
             📌 <b>Run:</b> ${{ github.run_id }}
             📌 <b>Run Number:</b> ${{ github.run_number }}
-
-    
-    
-
+            📌 <b>Run URL:</b> ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
