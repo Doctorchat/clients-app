@@ -1,12 +1,13 @@
 name: Doctochat Clients APP CI/CD PROD
 
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,6 +19,9 @@ jobs:
         run: npm install
       - name: Build
         run: CI=false npm run build
+  Deploy_MD:
+    runs-on: ubuntu-latest
+    steps:
       - name: SSH deploy MD region
         uses: kostya-ten/ssh-server-deploy@v4
         with:
@@ -27,6 +31,9 @@ jobs:
           private_key: ${{ secrets.SERVER_SSH_KEY }}
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_MD }}
+  Deploy_RO:
+      runs-on: ubuntu-latest
+      steps:
       - name: SSH deploy RO region
         uses: kostya-ten/ssh-server-deploy@v4
         with:
@@ -36,21 +43,6 @@ jobs:
           private_key: ${{ secrets.SERVER_SSH_KEY }}
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_RO }}
-      - name: Send telegram message on push
-        uses: appleboy/telegram-action@master
-        with:
-          format: html
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ✅ <b>[PROD] Doctorchat CLIENTS APP deployed!</b>
-            🥷 <b>User</b>: ${{ github.actor }}
-            📂 <b>Commit:</b> <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">${{ github.event.commits[0].message }}</a>
-            📌 <b>Branch:</b> ${{ github.ref }}
-            📌 <b>Commit:</b> ${{ github.sha }}
-            📌 <b>Repository:</b> ${{ github.repository }}
-            📌 <b>Workflow:</b> ${{ github.workflow }}
-            📌 <b>Run:</b> ${{ github.run_id }}
-            📌 <b>Run Number:</b> ${{ github.run_number }}
+ 
             
 
