@@ -20,6 +20,7 @@ jobs:
       - name: Build
         run: CI=false npm run build
   Deploy_MD:
+    needs: Build
     runs-on: ubuntu-latest
     steps:
       - name: SSH deploy MD region
@@ -32,6 +33,7 @@ jobs:
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_MD }}
   Deploy_RO:
+      needs: Deploy_MD
       runs-on: ubuntu-latest
       steps:
       - name: SSH deploy RO region
@@ -43,6 +45,26 @@ jobs:
           private_key: ${{ secrets.SERVER_SSH_KEY }}
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_RO }}
+  SEND_TELEGRAM_NOTIFICATION:
+      needs: Deploy_RO
+      runs-on: ubuntu-latest
+      steps:
+      - name: Send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          format: html
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ✅ <b>[PROD] Doctorchat CLIENTS APP deployed!</b>
+            🥷 <b>User</b>: ${{ github.actor }}
+            📂 <b>Commit:</b> <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">${{ github.event.commits[0].message }}</a>
+            📌 <b>Branch:</b> ${{ github.ref }}
+            📌 <b>Commit:</b> ${{ github.sha }}
+            📌 <b>Repository:</b> ${{ github.repository }}
+            📌 <b>Workflow:</b> ${{ github.workflow }}
+            📌 <b>Run:</b> ${{ github.run_id }}
+            📌 <b>Run Number:</b> ${{ github.run_number }}
  
             
 
