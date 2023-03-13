@@ -21,6 +21,8 @@ jobs:
       - name: Create env configs
         run: |
           echo "${{ secrets.ENV_FILE_DEV }}" > .env
+          echo "${{ secrets.ENV_FILE_DEV }}"
+          echo "${{ secrets.REGION_MD }}"
           echo "${{ secrets.REGION_MD }}" >> .env
       - name: Build
         run: CI=false npm run build
