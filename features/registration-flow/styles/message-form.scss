@@ -114,3 +114,16 @@
     }
   }
 }
+
+
+@media screen and (max-width: 625px) {
+  .message-form__time-selection {
+    flex-direction: column;
+
+    .time-selection {
+      &__time {
+        padding: 40px 54px 0;
+      }
+    }
+  }
+}
