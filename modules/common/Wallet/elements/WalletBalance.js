@@ -34,15 +34,17 @@ const WalletBalance = () => {
     return <WalletBalanceFallback />;
   }
 
+  const {balance, frozen, currency} = walletData.data
+
   return (
     <div className="d-flex align-items-center justify-content-between space-x-2">
       <div>
         <p className="text-sm text-zinc-500 mb-0 fs-6 text-muted">{t("total_balance")}</p>
-        <h3 className="text-2xl">{formatPrice(walletData?.data?.balance)}</h3>
+        <h3 className="text-2xl">{formatPrice(balance, currency)}</h3>
       </div>
       <div>
         <p className="text-sm text-zinc-500 mb-0 fs-6 text-muted">{t("frozen_balance")}</p>
-        <h3 className="text-2xl">{formatPrice(walletData?.data?.frozen)}</h3>
+        <h3 className="text-2xl">{formatPrice(frozen, currency)}</h3>
       </div>
     </div>
   );

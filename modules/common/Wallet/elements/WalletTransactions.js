@@ -38,7 +38,7 @@ const WalletTransactionItem = (props) => {
   const { t } = useTranslation();
   const { formatPrice } = useCurrency();
 
-  const { amount, type, status, created_at } = props;
+  const { amount, type, status, created_at, currency } = props;
 
   return (
     <div className="transaction">
@@ -50,7 +50,7 @@ const WalletTransactionItem = (props) => {
         </div>
       </div>
       <div className="transaction__amount">
-        <span className={cs("transaction__amount-value", type)}>{formatPrice(amount)}</span>
+        <span className={cs("transaction__amount-value", type)}>{formatPrice(amount, currency)}</span>
       </div>
     </div>
   );
@@ -109,6 +109,7 @@ const WalletTransactions = () => {
             category={transaction.category}
             status={transaction.status}
             created_at={transaction.created_at}
+            currency={transaction.currency}
           />
         ))}
       </div>
