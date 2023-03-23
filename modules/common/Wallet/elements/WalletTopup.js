@@ -14,9 +14,11 @@ import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import useCurrency from "@/hooks/useCurrency";
 
 const WalletTopup = () => {
   const { t } = useTranslation();
+  const {globalCurrency} = useCurrency();
 
   const { isTopUpVisible } = useSelector((store) => ({
     isTopUpVisible: store.user.isTopUpVisible,
@@ -56,7 +58,7 @@ const WalletTopup = () => {
         <Popup.Header title={t("transactions.top_up_form")} />
         <Popup.Content>
           <Form methods={form} onFinish={onSubmitHandler}>
-            <Form.Item label={t("sum")} name="amount">
+            <Form.Item label={t("sum")+`(${globalCurrency})`} name="amount">
               <InputNumber />
             </Form.Item>
             <div className="justify-content-end d-flex align-items-center space-x-2">
@@ -70,7 +72,7 @@ const WalletTopup = () => {
               </Button>
 
               <Button size="sm" htmlType="submit">
-                {t("apply")}
+                {t("supply")}
               </Button>
             </div>
           </Form>
