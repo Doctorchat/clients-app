@@ -7,9 +7,9 @@ import CheckIcon from "@/icons/check.svg";
 import ClockIcon from "@/icons/clock.svg";
 import TimesIcon from "@/icons/times.svg";
 import api from "@/services/axios/api";
-import asPrice from "@/utils/asPrice";
 import cs from "@/utils/classNames";
 import date from "@/utils/date";
+import useCurrency from "@/hooks/useCurrency";
 
 const transactionStatusIcon = {
   success: <CheckIcon />,
@@ -36,6 +36,7 @@ const WalletTransactionItemFallback = () => {
 
 const WalletTransactionItem = (props) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   const { amount, type, status, created_at } = props;
 
@@ -49,7 +50,7 @@ const WalletTransactionItem = (props) => {
         </div>
       </div>
       <div className="transaction__amount">
-        <span className={cs("transaction__amount-value", type)}>{asPrice(amount)}</span>
+        <span className={cs("transaction__amount-value", type)}>{formatPrice(amount)}</span>
       </div>
     </div>
   );

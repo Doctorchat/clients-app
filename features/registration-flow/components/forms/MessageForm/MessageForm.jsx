@@ -17,11 +17,10 @@ import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-png.svg";
 import { messageUploadFile } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
-import asPrice from "@/utils/asPrice";
+import useCurrency from "@/hooks/useCurrency";
 
 import { ConfirmationDialog } from "./ConfirmationDialog";
 import { TimeSelection } from "./TimeSelection";
-import {getGlobalCurrency} from "@/store/slices/bootstrapSlice";
 
 const messageSchema = object().shape({
   content: string().min(25).max(750).required(),
@@ -36,7 +35,8 @@ export const MessageForm = () => {
   const { global } = useSelector((store) => ({
     global: store.bootstrap.payload?.global,
   }));
-  const currency = useSelector(getGlobalCurrency);
+  const { formatPrice, globalCurrency } = useCurrency();
+
 
 
   const resolver = useYupValidationResolver(messageSchema);
@@ -148,7 +148,7 @@ export const MessageForm = () => {
           <Form.Item name="uploads" label={t("message_uploads_label")}>
             <Upload
               action={messageUploadFile(1)}
-              description={t("message_uploads_description", {currency})}
+              description={t("message_uploads_description", {currency:globalCurrency})}
               icon={<ImageIcon />}
               accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
               fileList={attachments.list}
@@ -161,7 +161,7 @@ export const MessageForm = () => {
             <div className="message-form__total">
               <span>{t("wizard:total")}:</span>
               <span>
-                <strong>{asPrice(doctorPrice + attachments.price)}</strong>
+                <strong>{formatPrice(doctorPrice + attachments.price)}</strong>
               </span>
             </div>
             <Button htmlType="submit">{t("continue")}</Button>

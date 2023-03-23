@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import {useSelector} from "react-redux";
 
 import Button from "@/components/Button";
 import ArrowRightIcon from "@/icons/arrow-right.svg";
@@ -8,11 +7,12 @@ import ClockIcon from "@/icons/clock.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import VideoIcon from "@/icons/video.svg";
-import {getGlobalCurrency} from "@/store/slices/bootstrapSlice";
+import useCurrency from "@/hooks/useCurrency";
 
 export const DoctorCardSkeleton = () => {
   const { t } = useTranslation();
-  const currency = useSelector(getGlobalCurrency);
+  const { globalCurrency } = useCurrency();
+
 
   return (
     <article className="doctor-card skeleton">
@@ -38,11 +38,11 @@ export const DoctorCardSkeleton = () => {
           <div className="doctor-card__price">
             <span className="doctor-card__price-item">
               <CommentIcon />
-              <span className="doctor-card__price-text">0.00 {currency}</span>
+              <span className="doctor-card__price-text">0.00 {globalCurrency}</span>
             </span>
             <span className="doctor-card__price-item">
               <VideoIcon />
-              <span className="doctor-card__price-text">0.00 {currency}</span>
+              <span className="doctor-card__price-text">0.00 {globalCurrency}</span>
             </span>
           </div>
         </footer>
@@ -53,7 +53,8 @@ export const DoctorCardSkeleton = () => {
 
 export const DoctorCard = ({ doctor, onClickPreview }) => {
   const { t } = useTranslation();
-  const currency = useSelector(getGlobalCurrency);
+  const { globalCurrency } = useCurrency();
+
 
   const {
     avatar,
@@ -97,11 +98,11 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
           <div className="doctor-card__price">
             <span className="doctor-card__price-item">
               <CommentIcon />
-              <span className="doctor-card__price-text">{price_chat} {currency}</span>
+              <span className="doctor-card__price-text">{price_chat} {globalCurrency}</span>
             </span>
             <span className="doctor-card__price-item">
               <VideoIcon />
-              <span className="doctor-card__price-text">{price_meet} {currency}</span>
+              <span className="doctor-card__price-text">{price_meet} {globalCurrency}</span>
             </span>
           </div>
           <Button className="doctor-card__button" size="sm" type="text" onClick={onClickPreview}>

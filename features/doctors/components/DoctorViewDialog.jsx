@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
-import {useSelector} from "react-redux";
 
 import Button, { IconBtn } from "@/components/Button";
 import Popup from "@/components/Popup";
@@ -16,11 +15,12 @@ import TimesIcon from "@/icons/times.svg";
 import VideoIcon from "@/icons/video.svg";
 import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
-import {getGlobalCurrency} from "@/store/slices/bootstrapSlice";
+import useCurrency from "@/hooks/useCurrency";
 
 const DoctorViewDialogSkeleton = () => {
   const { t } = useTranslation();
-  const currency = useSelector(getGlobalCurrency);
+  const { globalCurrency } = useCurrency();
+
 
   return (
     <article className="doctor-view skeleton">
@@ -46,11 +46,11 @@ const DoctorViewDialogSkeleton = () => {
           </span>
           <span className="doctor-view__meta-item">
             <CommentIcon />
-            <span className="doctor-view__meta-text">- {currency}</span>
+            <span className="doctor-view__meta-text">- {globalCurrency}</span>
           </span>
           <span className="doctor-view__meta-item">
             <VideoIcon />
-            <span className="doctor-view__meta-text">- {currency}</span>
+            <span className="doctor-view__meta-text">- {globalCurrency}</span>
           </span>
         </div>
 
@@ -89,7 +89,7 @@ export const DoctorViewDialog = ({
   onVideoTypeClick,
 }) => {
   const { t } = useTranslation();
-  const currency = useSelector(getGlobalCurrency);
+  const { globalCurrency } = useCurrency();
   const { value: isOpen, setFalse: onHideModal } = useBoolean(true);
 
   const [isMessageTypeLoading, setIsMessageTypeLoading] = React.useState(false);
@@ -152,11 +152,11 @@ export const DoctorViewDialog = ({
               </span>
               <span className="doctor-view__meta-item">
                 <CommentIcon />
-                <span className="doctor-view__meta-text">{doctor.price} {currency}</span>
+                <span className="doctor-view__meta-text">{doctor.price} {globalCurrency}</span>
               </span>
               <span className="doctor-view__meta-item">
                 <VideoIcon />
-                <span className="doctor-view__meta-text">{doctor.meet_price} {currency}</span>
+                <span className="doctor-view__meta-text">{doctor.meet_price} {globalCurrency}</span>
               </span>
             </div>
 

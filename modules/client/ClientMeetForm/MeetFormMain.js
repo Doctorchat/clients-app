@@ -17,7 +17,7 @@ import { messageUploadFile } from "@/store/actions";
 import { meetFormSetConfirmation, meetFormUpdateUploads } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import {getGlobalCurrency} from "@/store/slices/bootstrapSlice";
+import useCurrency from "@/hooks/useCurrency";
 
 import MeetFormDateTime from "./MeetFormDateTime";
 
@@ -33,7 +33,7 @@ export default function MeetFormMain() {
     chatUserInfo: store.chatUserInfo,
     global: store.bootstrap.payload?.global,
   }));
-  const currency = useSelector(getGlobalCurrency);
+  const { globalCurrency } = useCurrency();
 
   const [loading, setLoading] = useState(false);
   const [attachments, setAttachments] = useState({ list: [], price: 0, initiated: false });
@@ -125,7 +125,7 @@ export default function MeetFormMain() {
                 <Form.Item name="uploads" label={t("message_uploads_label")}>
                   <Upload
                     action={messageUploadFile(chatId)}
-                    description={t("message_uploads_description", {currency})}
+                    description={t("message_uploads_description", {currency:globalCurrency})}
                     icon={<ImageIcon />}
                     accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
                     fileList={attachments.list}
@@ -140,7 +140,7 @@ export default function MeetFormMain() {
                   <span className="message-price-active">
                     {(userInfo?.meet_price ?? chatUserInfo.data?.meet_price ?? 0) +
                       attachments.price}{" "}
-                    {currency}
+                    {globalCurrency}
                   </span>
                 </div>
                 <Button htmlType="submit" loading={loading}>
