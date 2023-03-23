@@ -17,8 +17,8 @@ import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { meetFormReset, meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
-import asPrice from "@/utils/asPrice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import useCurrency from "@/hooks/useCurrency";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -40,6 +40,8 @@ function MeetFormConfirmation() {
   const [areTermsConfirmed, setAreTermsConfirmed] = useState(false);
   const form = useForm();
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
+
   const dispatch = useDispatch();
 
   const { data: walletData } = useQuery(["wallet"], () => api.wallet.get(), {
@@ -164,19 +166,19 @@ function MeetFormConfirmation() {
                 <th className="dc-description-row-label">
                   {t("message_form_confirmation.basic_price")}
                 </th>
-                <td className="dc-description-row-content">{`${asPrice(+price.doc)}`}</td>
+                <td className="dc-description-row-content">{`${formatPrice(+price.doc)}`}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{`${t(
                   "message_form_confirmation.files"
                 )}(${values.uploads_count})`}</th>
-                <td className="dc-description-row-content">{`+${asPrice(+price.uploads)}`}</td>
+                <td className="dc-description-row-content">{`+${formatPrice(+price.uploads)}`}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">
                   {t("message_form_confirmation.subtotal_price")}
                 </th>
-                <td className="dc-description-row-content">{`${asPrice(+price.subtotal)}`}</td>
+                <td className="dc-description-row-content">{`${formatPrice(+price.subtotal)}`}</td>
               </tr>
             </tbody>
           </table>
@@ -247,7 +249,7 @@ function MeetFormConfirmation() {
                       </span>
                       <span>
                         {t("message_form_confirmation.discount")}:{" "}
-                        <mark className="dc-mark">{asPrice(+promo.sum)}</mark>
+                        <mark className="dc-mark">{formatPrice(+promo.sum)}</mark>
                       </span>
                     </>
                   ) : (
@@ -272,19 +274,19 @@ function MeetFormConfirmation() {
                   {t("message_form_confirmation.total_price")}
                 </th>
                 <td className="dc-description-row-content">
-                  <span>{`${asPrice(+totalPrice)}`}</span>
-                  {promo.code && <del className="ms-2">{`(${asPrice(+price.total)})`}</del>}
+                  <span>{`${formatPrice(+totalPrice)}`}</span>
+                  {promo.code && <del className="ms-2">{`(${formatPrice(+price.total)})`}</del>}
                 </td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("to_pay")}</th>
                 <td className="dc-description-row-content to-pay-row">
-                  {asPrice(+toPayPrice)}
+                  {formatPrice(+toPayPrice)}
                   {walletData?.data?.balance > 0 && (
                     <span>
                       ({t("your_account_will_be_debited")}{" "}
                       <strong>
-                        {asPrice(
+                        {formatPrice(
                           totalPrice > walletData.data.balance
                             ? walletData.data.balance
                             : totalPrice

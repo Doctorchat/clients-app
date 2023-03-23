@@ -20,6 +20,7 @@ import {
 } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import useCurrency from "@/hooks/useCurrency";
 
 export default function MessageFormMain() {
   const {
@@ -33,6 +34,9 @@ export default function MessageFormMain() {
     chatUserInfo: store.chatUserInfo,
     global: store.bootstrap.payload?.global,
   }));
+  const { globalCurrency } = useCurrency();
+
+
   const [loading, setLoading] = useState(false);
   const [attachments, setAttachments] = useState({ list: [], price: 0, initiated: false });
   const [basePrice, setBasePrice] = useState(0);
@@ -116,7 +120,7 @@ export default function MessageFormMain() {
                 <Form.Item name="uploads" label={t("message_uploads_label")}>
                   <Upload
                     action={messageUploadFile(chatId)}
-                    description={t("message_uploads_description")}
+                    description={t("message_uploads_description", {currency:globalCurrency})}
                     icon={<ImageIcon />}
                     accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
                     fileList={attachments.list}
