@@ -49,7 +49,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
         const response = await api.conversation.promo(code);
 
         setPromocode(code);
-        setDiscount(response.data);
+        setDiscount((totalPrice * response.data) / 100);
       } catch (error) {
         dispatch(
           notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
@@ -59,7 +59,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
         form.reset();
       }
     },
-    [dispatch, form]
+    [dispatch, form, totalPrice]
   );
 
   const onConfirmHandler = React.useCallback(async () => {
