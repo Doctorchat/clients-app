@@ -34,6 +34,7 @@ export default function EditProfileSecurity() {
         );
       } finally {
         setLoading(false);
+        form.reset();
       }
     },
     [dispatch]
