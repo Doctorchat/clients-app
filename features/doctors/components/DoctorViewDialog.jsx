@@ -15,9 +15,12 @@ import TimesIcon from "@/icons/times.svg";
 import VideoIcon from "@/icons/video.svg";
 import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
+import useCurrency from "@/hooks/useCurrency";
 
 const DoctorViewDialogSkeleton = () => {
   const { t } = useTranslation();
+  const { globalCurrency } = useCurrency();
+
 
   return (
     <article className="doctor-view skeleton">
@@ -43,11 +46,11 @@ const DoctorViewDialogSkeleton = () => {
           </span>
           <span className="doctor-view__meta-item">
             <CommentIcon />
-            <span className="doctor-view__meta-text">- L</span>
+            <span className="doctor-view__meta-text">- {globalCurrency}</span>
           </span>
           <span className="doctor-view__meta-item">
             <VideoIcon />
-            <span className="doctor-view__meta-text">- L</span>
+            <span className="doctor-view__meta-text">- {globalCurrency}</span>
           </span>
         </div>
 
@@ -86,6 +89,7 @@ export const DoctorViewDialog = ({
   onVideoTypeClick,
 }) => {
   const { t } = useTranslation();
+  const { globalCurrency } = useCurrency();
   const { value: isOpen, setFalse: onHideModal } = useBoolean(true);
 
   const [isMessageTypeLoading, setIsMessageTypeLoading] = React.useState(false);
@@ -148,11 +152,11 @@ export const DoctorViewDialog = ({
               </span>
               <span className="doctor-view__meta-item">
                 <CommentIcon />
-                <span className="doctor-view__meta-text">{doctor.price} L</span>
+                <span className="doctor-view__meta-text">{doctor.price} {globalCurrency}</span>
               </span>
               <span className="doctor-view__meta-item">
                 <VideoIcon />
-                <span className="doctor-view__meta-text">{doctor.meet_price} L</span>
+                <span className="doctor-view__meta-text">{doctor.meet_price} {globalCurrency}</span>
               </span>
             </div>
 

@@ -14,8 +14,8 @@ import Input from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
-import asPrice from "@/utils/asPrice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import useCurrency from "@/hooks/useCurrency";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -27,6 +27,7 @@ const promoInputReplacer = (value) => {
 
 export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -125,13 +126,13 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                   <th className="dc-description-row-label">
                     {t("message_form_confirmation.basic_price")}
                   </th>
-                  <td className="dc-description-row-content">{`${asPrice(data.price)}`}</td>
+                  <td className="dc-description-row-content">{`${formatPrice(data.price)}`}</td>
                 </tr>
                 <tr className="dc-description-row">
                   <th className="dc-description-row-label">{`${t(
                     "message_form_confirmation.files"
                   )}(${data.uploads_count})`}</th>
-                  <td className="dc-description-row-content">{`+${asPrice(
+                  <td className="dc-description-row-content">{`+${formatPrice(
                     data.uploads_price
                   )}`}</td>
                 </tr>
@@ -139,7 +140,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                   <th className="dc-description-row-label">
                     {t("message_form_confirmation.subtotal_price")}
                   </th>
-                  <td className="dc-description-row-content">{`${asPrice(
+                  <td className="dc-description-row-content">{`${formatPrice(
                     data.uploads_price + data.price
                   )}`}</td>
                 </tr>
@@ -211,7 +212,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                         </span>
                         <span className="mt-1 d-block">
                           {t("message_form_confirmation.discount")}:{" "}
-                          <mark className="dc-mark">{asPrice(discount)}</mark>
+                          <mark className="dc-mark">{formatPrice(discount)}</mark>
                         </span>
                       </>
                     ) : (
@@ -255,8 +256,8 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
             />
             <div className="confirmation-terms__to-pay">
               <span>{t("to_pay")}:</span>
-              <span className="ms-1">{`${asPrice(totalPrice - discount)}`}</span>
-              {promocode && <del className="ms-1">{`(${asPrice(totalPrice)})`}</del>}
+              <span className="ms-1">{`${formatPrice(totalPrice - discount)}`}</span>
+              {promocode && <del className="ms-1">{`(${formatPrice(totalPrice)})`}</del>}
             </div>
           </div>
           <div className="confirmation-actions">

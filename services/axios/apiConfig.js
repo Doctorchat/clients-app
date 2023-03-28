@@ -6,7 +6,7 @@ const token = { current: null };
 if (!ISSERVER) token.current = localStorage.getItem("dc_token");
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_API_REGION}`,
   headers: {
     accept: "application/json",
     authorization: token.current ? `Bearer ${token.current}` : "Bearer ",
