@@ -196,7 +196,7 @@
   },
   "dont_know_speciality": "Nu cunoști specialitatea?",
   "consilium": "Consiliu",
-  "login_error": "Date greșite. Vă rugăm să mai încercați o dată.",
+  "bad.credentials": "Date greșite. Vă rugăm să mai încercați o dată.",
   "accept_terms": "Accept",
   "part_of_team": "Fii parte din echipa",
   "send": "Trimite",
