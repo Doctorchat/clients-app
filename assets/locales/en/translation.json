@@ -195,7 +195,7 @@
   },
   "dont_know_speciality": "Don't know the specialty?",
   "consilium": "Council",
-  "login_error": "Wrong data. Please try again.",
+  "bad.credentials": "Wrong data. Please try again.",
   "accept_terms": "I accept",
   "part_of_team": "Be part of the team",
   "send": "Send",
