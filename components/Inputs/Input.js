@@ -1,6 +1,8 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 
+import EyeSlashIcon from "@/icons/eye_slash.svg";
+import EyeVisionIcon from "@/icons/eye_vision.svg";
 import cs from "@/utils/classNames";
 
 const sizeClassName = {
@@ -22,9 +24,11 @@ const Input = forwardRef((props, ref) => {
     placeholder,
     onChange,
     pattern,
+    type,
     ...rest
   } = props;
   const [isActive, setIsActive] = useState(false);
+  const [inputType, setInputType] = useState(type);
   const inputSizeClassName = useRef(sizeClassName[size]);
 
   const activeStatusHandler = () => {
@@ -54,25 +58,43 @@ const Input = forwardRef((props, ref) => {
   return (
     <>
       {label && (
-        <label className={cs("form-control-label", isActive && "is-active")} htmlFor={name}>
+        <label
+          className={cs("form-control-label", isActive && "is-active")}
+          htmlFor={name}
+        >
           {label}
         </label>
       )}
       <div className="dc-input_wrapper">
-        {!!prefix && <span className={cs("dc-input_prefix", !isActive && "hidden")}>{prefix}</span>}
+        {!!prefix && (
+          <span className={cs("dc-input_prefix", !isActive && "hidden")}>
+            {prefix}
+          </span>
+        )}
         <input
           id={name}
           name={name}
           value={value}
           ref={ref}
           placeholder={placeholder}
-          className={cs(className, "dc-input", prefix && "with-prefix", inputSizeClassName.current)}
+          className={cs(
+            className,
+            "dc-input",
+            prefix && "with-prefix",
+            inputSizeClassName.current
+          )}
           disabled={disabled}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
           onInput={onFocusHandler}
           onChange={onChangeHanlder}
+          type={inputType}
           {...rest}
+        />
+        <ShowHidePassword
+          type={type}
+          inputType={inputType}
+          setInputType={setInputType}
         />
       </div>
     </>
@@ -93,6 +115,7 @@ Input.propTypes = {
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
   pattern: PropTypes.func,
+  type: PropTypes.oneOf(["text", "password", "email", "number", "tel", "url"]),
 };
 
 Input.defaultProps = {
@@ -103,3 +126,27 @@ Input.defaultProps = {
 };
 
 export default Input;
+
+// eslint-disable-next-line react/prop-types
+const ShowHidePassword = ({ type, inputType, setInputType }) => {
+  const toggleShowPassword = () => {
+    if (inputType === "password") setInputType("text");
+    else setInputType(type);
+  };
+
+  return type === "password" ? (
+    <span
+      className="icon position-absolute user-select-none p-2 bg-white"
+      style={{ top: 3.5, right: 8 }}
+      onClick={toggleShowPassword}
+    >
+      {inputType === "password" ? (
+        <EyeVisionIcon height={16} />
+      ) : (
+        <EyeSlashIcon height={16} />
+      )}
+    </span>
+  ) : (
+    ""
+  );
+};
