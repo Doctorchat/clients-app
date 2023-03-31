@@ -33,7 +33,7 @@ export default function MeetFormMain() {
     chatUserInfo: store.chatUserInfo,
     global: store.bootstrap.payload?.global,
   }));
-  const { globalCurrency } = useCurrency();
+  const { globalCurrency, formatPrice } = useCurrency();
 
   const [loading, setLoading] = useState(false);
   const [attachments, setAttachments] = useState({ list: [], price: 0, initiated: false });
@@ -48,6 +48,8 @@ export default function MeetFormMain() {
       setAttachments({ ...uploads, initiated: true });
     }
   }, [attachments.initiated, uploads]);
+
+  const description = t("message_uploads_description", {currency:globalCurrency, amount:formatPrice(global.attach)});
 
   const onFormSubmit = useCallback(
     async (values) => {
@@ -125,7 +127,7 @@ export default function MeetFormMain() {
                 <Form.Item name="uploads" label={t("message_uploads_label")}>
                   <Upload
                     action={messageUploadFile(chatId)}
-                    description={t("message_uploads_description", {currency:globalCurrency})}
+                    description={description}
                     icon={<ImageIcon />}
                     accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
                     fileList={attachments.list}
