@@ -119,7 +119,7 @@
   },
   "message_form_placeholder": "Exemplu: În urmă cu 3 zile, am început să am o durere de cap surdă care se resimte și în spatele ochilor. Pe lângă acest simptom, îmi curge nasul și uneori am amețeli, în special seara. Menționez că am început să am aceste simptome după ce m-am întors de la pescuit. Până acum nu a părut că simptomele s-au agravat, însă nici nu s-au ameliorat după ce am luat Paracetamol și Nurofen. Nu am făcut vreo investigație medicală în acest sens și nu am alte boli cronice. De asemenea, sunt fumător.",
   "message_uploads_label": "Adaugă document / imagine",
-  "message_uploads_description": "+15 {{currency}} / imagine, investigație de laborator, imagistică, etc",
+  "message_uploads_description": "+{{amount}} {{currency}} / imagine, investigație de laborator, imagistică, etc",
   "explain_problem": "Explică problema în detalii*",
   "message_form_confirmation": {
     "symmary": "Sumar întrebare",
