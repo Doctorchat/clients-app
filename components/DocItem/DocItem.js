@@ -8,6 +8,7 @@ import LineIcon from "@/icons/line.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import VideoIcon from "@/icons/video.svg";
 import cs from "@/utils/classNames";
+import useCurrency from "@/hooks/useCurrency";
 
 import DcTooltip from "../DcTooltip";
 import Image from "../Image";
@@ -28,6 +29,8 @@ function DocItem(props) {
     },
   } = props;
   const { t } = useTranslation();
+  const { globalCurrency } = useCurrency();
+
 
   return (
     <li className={cs("doc-item", !isAvailable && "unavailable")} role="button" onClick={onClick}>
@@ -64,11 +67,11 @@ function DocItem(props) {
           <div className="doc-price d-flex align-items-center">
             <div className="text d-flex align-items-center">
               <CommentIcon />
-              <span>{text} L</span>
+              <span>{text} {globalCurrency}</span>
             </div>
             <div className="video d-flex align-items-center">
               <VideoIcon />
-              <span>{video} L</span>
+              <span>{video} {globalCurrency}</span>
             </div>
           </div>
         </div>

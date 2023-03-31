@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 
 import api from "@/services/axios/api";
-import asPrice from "@/utils/asPrice";
+import useCurrency from "@/hooks/useCurrency";
 
 const WalletBalanceFallback = React.memo(() => {
   const { t } = useTranslation();
@@ -24,6 +24,7 @@ const WalletBalanceFallback = React.memo(() => {
 
 const WalletBalance = () => {
   const { t } = useTranslation();
+  const { formatPrice } = useCurrency();
 
   const { data: walletData, isLoading } = useQuery(["wallet"], () => api.wallet.get(), {
     keepPreviousData: true,
@@ -33,15 +34,17 @@ const WalletBalance = () => {
     return <WalletBalanceFallback />;
   }
 
+  const {balance, frozen, currency} = walletData.data
+
   return (
     <div className="d-flex align-items-center justify-content-between space-x-2">
       <div>
         <p className="text-sm text-zinc-500 mb-0 fs-6 text-muted">{t("total_balance")}</p>
-        <h3 className="text-2xl">{asPrice(walletData?.data?.balance)}</h3>
+        <h3 className="text-2xl">{formatPrice(balance, currency)}</h3>
       </div>
       <div>
         <p className="text-sm text-zinc-500 mb-0 fs-6 text-muted">{t("frozen_balance")}</p>
-        <h3 className="text-2xl">{asPrice(walletData?.data?.frozen)}</h3>
+        <h3 className="text-2xl">{formatPrice(frozen, currency)}</h3>
       </div>
     </div>
   );
