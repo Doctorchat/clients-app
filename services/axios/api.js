@@ -60,7 +60,7 @@ const api = {
     getPublicReviews: (id) => axiosInstance.get(`/reviews/public/${id}`),
   },
   bootstrap: {
-    categories: () => axiosInstance.get("/specialities"),
+    categories: () => axiosInstance.get("/front-specialities"),
     global: () => axiosInstance.get("/settings/info"),
   },
   smsVerification: {
