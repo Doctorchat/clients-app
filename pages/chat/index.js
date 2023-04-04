@@ -30,7 +30,10 @@ export default function ColumnCenter() {
   useEffect(() => {
     if (chatContent.content?.user_id)
       dispatch(
-        getChatUserInfo({ id: chatContent.content.user_id, isAnonym: chatContent.content.isAnonym })
+        getChatUserInfo({
+          id: chatContent.content.user_id,
+          isAnonym: chatContent.content.isAnonym,
+        })
       );
   }, [dispatch, chatContent.content]);
 

@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 
 import ExternalIcon from "@/icons/external-link.svg";
 import CamIcon from "@/icons/webcam.svg";
@@ -9,7 +10,9 @@ import date from "@/utils/date";
 export default function MessageMeet(props) {
   const { t } = useTranslation();
 
-  const { url, time } = props;
+  const { url, time, status } = props;
+
+  const isLinkDisabled = status === "closed";
 
   return (
     <div className="message-meet">
@@ -23,7 +26,7 @@ export default function MessageMeet(props) {
         </div>
       </div>
       <div className="meet-url">
-        <a href={url} target="_blank" rel="noopener noreferrer">
+        <a href={url} target="_blank" rel="noopener noreferrer" className={clsx({ disabled: isLinkDisabled })}>
           {t("access_meet")} <ExternalIcon />
         </a>
       </div>
@@ -34,4 +37,5 @@ export default function MessageMeet(props) {
 MessageMeet.propTypes = {
   url: PropTypes.string,
   time: PropTypes.string,
+  status: PropTypes.string,
 };

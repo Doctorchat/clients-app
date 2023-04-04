@@ -9,7 +9,7 @@ import { RequestImageMessage } from "@/features/attachments";
 import { IOSMonthDate } from "@/utils/date";
 
 export default function MessagesList(props) {
-  const { chatId, docId, list } = props;
+  const { chatId, docId, list, status } = props;
   const [groupedMessage, setGroupedMessages] = useState({});
   const [listLastMessage, setListLastMessage] = useState(null);
 
@@ -59,6 +59,7 @@ export default function MessagesList(props) {
                 isLastMessage={listLastMessage ? listLastMessage?.id === msg.id : false}
                 chatId={chatId}
                 {...msg}
+                status={status}
               />
             );
           })}
@@ -76,6 +77,7 @@ MessagesList.propTypes = {
   list: PropTypes.array,
   chatId: PropTypes.string,
   docId: PropTypes.number,
+  status: PropTypes.string,
 };
 
 MessagesList.defaultProps = {
