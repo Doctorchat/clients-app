@@ -52,6 +52,7 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
       refetchOnWindowFocus: false,
       enabled: Boolean(doctorId),
       onSuccess: (data) => {
+        if (!data[0]?.start_time) return;
         setSelectedDate(moment(data[0].start_time));
       },
     }
@@ -79,16 +80,20 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
           value={moment(selectedDate)}
           onSelect={onChangeSelectedDate}
           disabledDate={(date) => {
-            return !data?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
+            return !data?.find((slot) =>
+              dayjs(slot.start_time).isSame(date, "day")
+            );
           }}
-          locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
+          locale={
+            antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar
+          }
         />
       </div>
       <div className="time-selection__time">
         {data?.map((slot) => {
           const date = dayjs(slot.start_time);
           const isSelected = selectedSlotId === slot.id;
-          const isDisabled = date.isBefore(moment().add(5, "hours"));
+          const isDisabled = date.isBefore(moment().add(3, "hours"));
 
           return (
             date.isSame(selectedDate, "day") && (
