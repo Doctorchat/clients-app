@@ -14,10 +14,7 @@ import { readChatMessages } from "@/store/actions";
 import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { meetFormToggleVisibility, meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
-import {
-  messageFormToggleVisibility,
-  messageFormUpdateChatId,
-} from "@/store/slices/messageFormSlice";
+import { messageFormToggleVisibility, messageFormUpdateChatId } from "@/store/slices/messageFormSlice";
 import cs from "@/utils/classNames";
 import date from "@/utils/date";
 
@@ -28,8 +25,7 @@ import ChatContentFooter from "./ChatContentFooter";
 const withoutInfo = ["support", "auto", "consilium", "internal"];
 
 export default function ChatContent(props) {
-  const { loading, userInfo, messages, chatId, status, type, paymentUrl, isMeet, isAccepted } =
-    props;
+  const { loading, userInfo, messages, chatId, status, type, paymentUrl, isMeet, isAccepted } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -131,7 +127,7 @@ export default function ChatContent(props) {
         <div className="scrollable scrollable-y conversation-content">
           <Bar />
           <div className="chat-content-inner">
-            <MessagesList chatId={chatId} list={messages} docId={userInfo?.id} />
+            <MessagesList chatId={chatId} list={messages} docId={userInfo?.id} status={status} />
           </div>
         </div>
       </Sidebar.Body>
