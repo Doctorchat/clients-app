@@ -77,28 +77,33 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
           locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
         />
       </div>
-      <div className="time-selection__time">
-        {data?.map((slot) => {
-          const date = dayjs(slot.start_time);
-          const isSelected = selectedSlotId === slot.id;
-          const isDisabled = date.isBefore(moment().add(3, "hours"));
 
-          return (
-            date.isSame(selectedDate, "day") && (
-              <TimeCard
-                key={slot.id}
-                time={date.format("HH:mm")}
-                isSelected={isSelected}
-                isDisabled={isDisabled}
-                onClick={() => {
-                  if (!isDisabled) {
-                    onChangeSelectedSlot(isSelected ? null : slot.id);
-                  }
-                }}
-              />
-            )
-          );
-        })}
+      <div className="d-flex flex-column text-center justify-content-center">
+        <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">Ora Dumneavostra Locala</h5>
+
+        <div className="time-selection__time pt-0">
+          {data?.map((slot) => {
+            const date = dayjs(slot.start_time);
+            const isSelected = selectedSlotId === slot.id;
+            const isDisabled = date.isBefore(moment().add(3, "hours"));
+
+            return (
+              date.isSame(selectedDate, "day") && (
+                <TimeCard
+                  key={slot.id}
+                  time={date.format("HH:mm")}
+                  isSelected={isSelected}
+                  isDisabled={isDisabled}
+                  onClick={() => {
+                    if (!isDisabled) {
+                      onChangeSelectedSlot(isSelected ? null : slot.id);
+                    }
+                  }}
+                />
+              )
+            );
+          })}
+        </div>
       </div>
     </div>
   );
