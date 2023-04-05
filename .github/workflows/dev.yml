@@ -23,7 +23,7 @@ jobs:
           echo "${{ secrets.ENV_FILE_DEV }}" > .env
           echo "${{ secrets.REGION_MD }}" >> .env
       - name: Build
-        run: CI=false npm run build:dev
+        run: CI=false npm run build
       - name: SSH Server Deploy MD
         uses: kostya-ten/ssh-server-deploy@v4
         with:
@@ -49,8 +49,8 @@ jobs:
 #     RO
       - name: Create env configs RO
         run: |
-          echo "${{ secrets.ENV_FILE_DEV }}" > .env
-          echo "${{ secrets.REGION_RO }}" >> .env
+          echo "${{ secrets.ENV_FILE_DEV }}" > .env.development
+          echo "${{ secrets.REGION_RO }}" >> .env.development
       - name: Build RO
         run: CI=false npm run build
       - name: SSH Server Deploy RO
