@@ -39,10 +39,7 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
       <Menu.Item icon={<WalletIcon />} onClick={onTabsConfigChange(leftSideTabs.wallet)}>
         {t("wallet")}
       </Menu.Item>
-      <Menu.Item
-        icon={<InvestigationIcon />}
-        onClick={onTabsConfigChange(leftSideTabs.investigations)}
-      >
+      <Menu.Item icon={<InvestigationIcon />} onClick={onTabsConfigChange(leftSideTabs.investigations)}>
         {t("investigations")}
       </Menu.Item>
       <Menu.Item icon={<HomeIcon />} className="home-item">

@@ -10,11 +10,7 @@ export default function SelectModeInvestigations() {
   } = useSelector((store) => ({ user: store.user.data }));
 
   const InvestigationsRadios = investigations.map((investigation) => (
-    <Radio
-      value={String(investigation.id)}
-      className="investigation-select-radio"
-      key={investigation.id}
-    >
+    <Radio value={String(investigation.id)} className="investigation-select-radio" key={investigation.id}>
       <InvestigationItem {...investigation} />
     </Radio>
   ));

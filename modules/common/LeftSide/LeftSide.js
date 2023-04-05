@@ -23,9 +23,7 @@ const ClientInvestigationsList = dynamic(() =>
 const DocAppointmentsSettings = dynamic(() =>
   import("@/modules/doctor").then((response) => response.DocAppointmentsSettings)
 );
-const DocReviewsSidebar = dynamic(() =>
-  import("@/modules/doctor").then((response) => response.DocReviewsSidebar)
-);
+const DocReviewsSidebar = dynamic(() => import("@/modules/doctor").then((response) => response.DocReviewsSidebar));
 
 export default function LeftSide() {
   const { user } = useSelector((store) => ({

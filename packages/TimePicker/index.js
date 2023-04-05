@@ -78,8 +78,7 @@ const TimePicker = forwardRef((props, ref) => {
     showNow: false,
     popupClassName: "dc-picker-popup",
     disabledHours: () => disabledParts.hours,
-    disabledMinutes: (hour) =>
-      disabledParts.isHourSelected ? disabledParts.minutes?.[hour] || [] : fullHour,
+    disabledMinutes: (hour) => (disabledParts.isHourSelected ? disabledParts.minutes?.[hour] || [] : fullHour),
     disabled,
     ...rest,
   };
@@ -93,13 +92,7 @@ const TimePicker = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         {type === "simple" ? (
-          <TP
-            {...pickerProps}
-            ref={ref}
-            placeholder={t("select")}
-            onSelect={onSelectTime}
-            inputReadOnly
-          />
+          <TP {...pickerProps} ref={ref} placeholder={t("select")} onSelect={onSelectTime} inputReadOnly />
         ) : (
           <TP.RangePicker
             {...pickerProps}

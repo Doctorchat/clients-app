@@ -6,11 +6,6 @@ import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
 
 import Skeleton from "../Skeleton";
 
-
-
-
-
-
 const selectedLng = getActiveLng();
 
 export default function DocInfoAbout(props) {

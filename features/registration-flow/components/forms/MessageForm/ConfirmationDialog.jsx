@@ -12,10 +12,10 @@ import Checkbox from "@/components/Checkbox";
 import Form from "@/components/Form";
 import Input from "@/components/Inputs";
 import Popup from "@/components/Popup";
+import useCurrency from "@/hooks/useCurrency";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -52,9 +52,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
         setPromocode(code);
         setDiscount((totalPrice * response.data) / 100);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setPromoLoading(false);
         form.reset();
@@ -75,9 +73,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
         await router.push(`/chat?id=${response.data.chat_id}`);
       }
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setLoading(false);
     }
@@ -105,44 +101,30 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                   <th colSpan="2">{t("message_form_confirmation.symmary")}</th>
                 </tr>
                 <tr className="dc-description-row">
-                  <th className="dc-description-row-label">
-                    {t("message_form_confirmation.description")}
-                  </th>
+                  <th className="dc-description-row-label">{t("message_form_confirmation.description")}</th>
                   <td className="dc-description-row-content">{data.content}</td>
                 </tr>
                 <tr className="dc-description-row">
                   <th className="dc-description-row-label">{t("terms_conditions")}</th>
                   <td className="dc-description-row-content">
-                    <a
-                      href="https://doctorchat.md/termeni-si-conditii/"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
+                    <a href="https://doctorchat.md/termeni-si-conditii/" target="_blank" rel="noreferrer noopener">
                       {t("terms_conditions")}
                     </a>
                   </td>
                 </tr>
                 <tr className="dc-description-row">
-                  <th className="dc-description-row-label">
-                    {t("message_form_confirmation.basic_price")}
-                  </th>
+                  <th className="dc-description-row-label">{t("message_form_confirmation.basic_price")}</th>
                   <td className="dc-description-row-content">{`${formatPrice(data.price)}`}</td>
                 </tr>
                 <tr className="dc-description-row">
-                  <th className="dc-description-row-label">{`${t(
-                    "message_form_confirmation.files"
-                  )}(${data.uploads_count})`}</th>
-                  <td className="dc-description-row-content">{`+${formatPrice(
-                    data.uploads_price
-                  )}`}</td>
+                  <th className="dc-description-row-label">{`${t("message_form_confirmation.files")}(${
+                    data.uploads_count
+                  })`}</th>
+                  <td className="dc-description-row-content">{`+${formatPrice(data.uploads_price)}`}</td>
                 </tr>
                 <tr className="dc-description-row">
-                  <th className="dc-description-row-label">
-                    {t("message_form_confirmation.subtotal_price")}
-                  </th>
-                  <td className="dc-description-row-content">{`${formatPrice(
-                    data.uploads_price + data.price
-                  )}`}</td>
+                  <th className="dc-description-row-label">{t("message_form_confirmation.subtotal_price")}</th>
+                  <td className="dc-description-row-content">{`${formatPrice(data.uploads_price + data.price)}`}</td>
                 </tr>
               </tbody>
             </table>
@@ -161,21 +143,15 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                   </th>
                 </tr>
                 <tr className="dc-description-row">
-                  <th className="dc-description-row-label">
-                    {t("message_form_confirmation.company")}
-                  </th>
+                  <th className="dc-description-row-label">{t("message_form_confirmation.company")}</th>
                   <td className="dc-description-row-content">WEBMEDCONSULT SRL</td>
                 </tr>
                 <tr className="dc-description-row">
-                  <th className="dc-description-row-label">
-                    {t("message_form_confirmation.product")}
-                  </th>
+                  <th className="dc-description-row-label">{t("message_form_confirmation.product")}</th>
                   <td className="dc-description-row-content">Doctorchat</td>
                 </tr>
                 <tr className="dc-description-row">
-                  <th className="dc-description-row-label">
-                    {t("message_form_confirmation.adress")}
-                  </th>
+                  <th className="dc-description-row-label">{t("message_form_confirmation.adress")}</th>
                   <td className="dc-description-row-content">
                     Bucureşti, sector 6, Splaiul Independenţei nr. 273, corp 3, etaj 3
                   </td>
@@ -207,8 +183,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                     {promocode ? (
                       <>
                         <span className="d-block">
-                          {t("message_form_confirmation.code")}:{" "}
-                          <mark className="dc-mark">{promocode}</mark>
+                          {t("message_form_confirmation.code")}: <mark className="dc-mark">{promocode}</mark>
                         </span>
                         <span className="mt-1 d-block">
                           {t("message_form_confirmation.discount")}:{" "}
@@ -218,11 +193,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                     ) : (
                       <Form methods={form} onFinish={onApplyPromocode} className="promo-code-form">
                         <Form.Item label={t("message_form_confirmation.code")} name="code">
-                          <Input
-                            pattern={promoInputReplacer}
-                            autoComplete="off"
-                            placeholder="WINTER20"
-                          />
+                          <Input pattern={promoInputReplacer} autoComplete="off" placeholder="WINTER20" />
                         </Form.Item>
                         <Button htmlType="submit" loading={promoLoading} disabled={!formCodeValue}>
                           {t("apply")}

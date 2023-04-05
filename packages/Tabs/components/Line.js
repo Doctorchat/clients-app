@@ -25,13 +25,8 @@ export default function Line(props) {
 
   return (
     <div className={cs("tabs-line", className)}>
-      <div
-        className="tabs-line-bar"
-        style={{ width: activeTabItem.width, left: activeTabItem.left }}
-      />
-      <LineContext.Provider
-        value={{ onClick: onTabsItemClick, setBarConfig: setActiveTabItem, activeKey }}
-      >
+      <div className="tabs-line-bar" style={{ width: activeTabItem.width, left: activeTabItem.left }} />
+      <LineContext.Provider value={{ onClick: onTabsItemClick, setBarConfig: setActiveTabItem, activeKey }}>
         {Children.map(children, (child, index) => cloneElement(child, { index }))}
       </LineContext.Provider>
     </div>

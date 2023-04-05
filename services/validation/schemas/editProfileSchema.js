@@ -1,5 +1,5 @@
 import { number } from "yup";
-import { array,object, ref, string } from "yup";
+import { array, object, ref, string } from "yup";
 
 import i18next from "@/services/i18next";
 

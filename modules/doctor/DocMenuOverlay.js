@@ -41,9 +41,7 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
       await api.user.toggleGuardStatus(!user?.isGuard);
       dispatch(updateUserProperty({ prop: "isGuard", value: !user?.isGuard }));
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setGuradStatusUpdating(false);
     }

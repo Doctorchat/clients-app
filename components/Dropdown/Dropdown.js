@@ -79,14 +79,7 @@ export default function Dropdown(props) {
 
 Dropdown.propTypes = {
   className: PropTypes.string,
-  placement: PropTypes.oneOf([
-    "bottomLeft",
-    "bottomCenter",
-    "bottomRight",
-    "topLeft",
-    "topCenter",
-    "topRight",
-  ]),
+  placement: PropTypes.oneOf(["bottomLeft", "bottomCenter", "bottomRight", "topLeft", "topCenter", "topRight"]),
   overlay: PropTypes.element,
   overlayClassName: PropTypes.string,
   visibile: PropTypes.bool,

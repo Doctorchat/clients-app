@@ -8,8 +8,7 @@ import searchObjectsByKeys from "@/utils/searchObjectsByKeys";
 import Input from "../Inputs";
 
 export default function Search(props) {
-  const { searchKeys, placeholder, request, localList, onFocus, onBlur, updateSearchConfig } =
-    props;
+  const { searchKeys, placeholder, request, localList, onFocus, onBlur, updateSearchConfig } = props;
   const [input, setInput] = useState("");
   const search = useRef(null);
 

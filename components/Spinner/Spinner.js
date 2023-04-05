@@ -14,6 +14,6 @@ Spinner.propTypes = {
   className: PropTypes.string,
 };
 
-Spinner.displayName = "Spinner"
+Spinner.displayName = "Spinner";
 
 export default memo(Spinner);

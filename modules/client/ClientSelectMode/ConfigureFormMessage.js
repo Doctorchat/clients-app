@@ -20,8 +20,7 @@ import getApiErrorMessages from "@/utils/getApiErrorMessages";
 import SelectModeInvestigations from "./SelectModeInvestigations";
 
 export default function ConfigureFormMessage() {
-  const { updateTabsConfig, docId, onSelectMode, onCreated, formsBackKey, chatType } =
-    useTabsContext();
+  const { updateTabsConfig, docId, onSelectMode, onCreated, formsBackKey, chatType } = useTabsContext();
   const [loading, setLoading] = useState(false);
   const resolver = useYupValidationResolver(configureFormSchema);
   const form = useForm({ defaultValues: { isAnonym: false }, resolver });
@@ -46,9 +45,7 @@ export default function ConfigureFormMessage() {
 
         onSelectMode("message");
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }

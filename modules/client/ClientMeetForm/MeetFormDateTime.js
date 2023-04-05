@@ -22,11 +22,7 @@ const TimeCard = ({ time, isSelected, isDisabled, onClick }) => {
   return (
     <div
       role="button"
-      className={cs(
-        "time-selection__time-card",
-        isSelected && "selected",
-        isDisabled && "disabled"
-      )}
+      className={cs("time-selection__time-card", isSelected && "selected", isDisabled && "disabled")}
       onClick={onClick}
     >
       {time}
@@ -44,17 +40,13 @@ export default function MeetFormDateTime({ doctorId, onSelectSlot }) {
   const [selectedDate, setSelectedDate] = React.useState(moment());
   const [selectedSlotId, setSelectedSlotId] = React.useState(null);
 
-  const { data } = useQuery(
-    ["slots", doctorId],
-    () => api.user.slots(doctorId).then((res) => res.data),
-    {
-      refetchOnWindowFocus: false,
-      enabled: Boolean(doctorId),
-      onSuccess: (data) => {
-        setSelectedDate(moment(data[0].start_time));
-      },
-    }
-  );
+  const { data } = useQuery(["slots", doctorId], () => api.user.slots(doctorId).then((res) => res.data), {
+    refetchOnWindowFocus: false,
+    enabled: Boolean(doctorId),
+    onSuccess: (data) => {
+      setSelectedDate(moment(data[0].start_time));
+    },
+  });
 
   const onChangeSelectedDate = React.useCallback((date) => {
     setSelectedDate(date);

@@ -2,13 +2,13 @@ import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
+import useCurrency from "@/hooks/useCurrency";
 import ClockIcon from "@/icons/clock.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
 import LineIcon from "@/icons/line.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import VideoIcon from "@/icons/video.svg";
 import cs from "@/utils/classNames";
-import useCurrency from "@/hooks/useCurrency";
 
 import DcTooltip from "../DcTooltip";
 import Image from "../Image";
@@ -31,7 +31,6 @@ function DocItem(props) {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
 
-
   return (
     <li className={cs("doc-item", !isAvailable && "unavailable")} role="button" onClick={onClick}>
       <div className="doc-item-info">
@@ -51,11 +50,7 @@ function DocItem(props) {
                     <ClockIcon />
                   </span>
                   <span className="text">
-                    {responseTime ? (
-                      `${responseTime} ${t("mins")}`
-                    ) : (
-                      <LineIcon className="line-icon" />
-                    )}
+                    {responseTime ? `${responseTime} ${t("mins")}` : <LineIcon className="line-icon" />}
                   </span>
                 </div>
               </div>
@@ -67,11 +62,15 @@ function DocItem(props) {
           <div className="doc-price d-flex align-items-center">
             <div className="text d-flex align-items-center">
               <CommentIcon />
-              <span>{text} {globalCurrency}</span>
+              <span>
+                {text} {globalCurrency}
+              </span>
             </div>
             <div className="video d-flex align-items-center">
               <VideoIcon />
-              <span>{video} {globalCurrency}</span>
+              <span>
+                {video} {globalCurrency}
+              </span>
             </div>
           </div>
         </div>

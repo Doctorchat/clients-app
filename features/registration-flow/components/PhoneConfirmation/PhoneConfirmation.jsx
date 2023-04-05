@@ -123,12 +123,7 @@ export const PhoneConfirmation = () => {
       <div className="form-bottom">
         <Button
           loading={isConfirming}
-          disabled={
-            isRequesting ||
-            !confirmationCode ||
-            confirmationCode.length < 6 ||
-            isPhoneNumberUpdating
-          }
+          disabled={isRequesting || !confirmationCode || confirmationCode.length < 6 || isPhoneNumberUpdating}
           onClick={onConfirmCode}
         >
           {t("continue")}

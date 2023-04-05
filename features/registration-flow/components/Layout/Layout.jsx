@@ -13,13 +13,7 @@ import cs from "@/utils/classNames";
 
 import { Steps } from "../Steps";
 
-export const Layout = ({
-  activeStep,
-  title,
-  backPath = "",
-  disableResponsiveRestriction = false,
-  children,
-}) => {
+export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRestriction = false, children }) => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
@@ -53,10 +47,7 @@ export const Layout = ({
 
   return (
     <div
-      className={cs(
-        "registration-flow__layout doctorchat-v2",
-        disableResponsiveRestriction && "disable-restrictions"
-      )}
+      className={cs("registration-flow__layout doctorchat-v2", disableResponsiveRestriction && "disable-restrictions")}
     >
       <header className="registration-flow__header">
         {backPath ? (
@@ -80,10 +71,7 @@ export const Layout = ({
         {children}
       </main>
       <Button
-        className={cs(
-          "registration-flow__logout registration-flow__gray-btn",
-          isLogoutVisible && "show"
-        )}
+        className={cs("registration-flow__logout registration-flow__gray-btn", isLogoutVisible && "show")}
         type="text"
         size="sm"
         icon={<LogoutIcon />}

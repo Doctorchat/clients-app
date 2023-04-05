@@ -25,11 +25,7 @@ export default function SelectModeOptions(props) {
   return (
     <div className="choose-mode-items d-flex align-item-center justify-content-center">
       {isVideoVisible && (
-        <div
-          className="choose-mode-item mr-1"
-          role="button"
-          onClick={updateTabsConfig(selectModeTabs.configureMeet)}
-        >
+        <div className="choose-mode-item mr-1" role="button" onClick={updateTabsConfig(selectModeTabs.configureMeet)}>
           <div className="mode-item-icon meet">
             <VideoIcon />
           </div>
@@ -37,11 +33,7 @@ export default function SelectModeOptions(props) {
         </div>
       )}
       {isTextVisible && (
-        <div
-          className="choose-mode-item"
-          role="button"
-          onClick={updateTabsConfig(selectModeTabs.configureMessage)}
-        >
+        <div className="choose-mode-item" role="button" onClick={updateTabsConfig(selectModeTabs.configureMessage)}>
           <div className="mode-item-icon">
             <CommentIcon />
           </div>

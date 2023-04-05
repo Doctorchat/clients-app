@@ -58,31 +58,19 @@ const Input = forwardRef((props, ref) => {
   return (
     <>
       {label && (
-        <label
-          className={cs("form-control-label", isActive && "is-active")}
-          htmlFor={name}
-        >
+        <label className={cs("form-control-label", isActive && "is-active")} htmlFor={name}>
           {label}
         </label>
       )}
       <div className="dc-input_wrapper">
-        {!!prefix && (
-          <span className={cs("dc-input_prefix", !isActive && "hidden")}>
-            {prefix}
-          </span>
-        )}
+        {!!prefix && <span className={cs("dc-input_prefix", !isActive && "hidden")}>{prefix}</span>}
         <input
           id={name}
           name={name}
           value={value}
           ref={ref}
           placeholder={placeholder}
-          className={cs(
-            className,
-            "dc-input",
-            prefix && "with-prefix",
-            inputSizeClassName.current
-          )}
+          className={cs(className, "dc-input", prefix && "with-prefix", inputSizeClassName.current)}
           disabled={disabled}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
@@ -91,11 +79,7 @@ const Input = forwardRef((props, ref) => {
           type={inputType}
           {...rest}
         />
-        <ShowHidePassword
-          type={type}
-          inputType={inputType}
-          setInputType={setInputType}
-        />
+        <ShowHidePassword type={type} inputType={inputType} setInputType={setInputType} />
       </div>
     </>
   );
@@ -140,11 +124,7 @@ const ShowHidePassword = ({ type, inputType, setInputType }) => {
       style={{ top: 3.5, right: 8 }}
       onClick={toggleShowPassword}
     >
-      {inputType === "password" ? (
-        <EyeVisionIcon height={16} />
-      ) : (
-        <EyeSlashIcon height={16} />
-      )}
+      {inputType === "password" ? <EyeVisionIcon height={16} /> : <EyeSlashIcon height={16} />}
     </span>
   ) : (
     ""

@@ -44,9 +44,7 @@ export default function DocStartConversation() {
       let filteredList = [...list];
 
       if (filters.category?.label && filters.category.value !== "all") {
-        filteredList = filteredList.filter((item) =>
-          item.category.includes(filters.category?.label)
-        );
+        filteredList = filteredList.filter((item) => item.category.includes(filters.category?.label));
       }
 
       if (filters.online) {
@@ -83,9 +81,7 @@ export default function DocStartConversation() {
 
         history.push(`/chat?id=${response.data.id}`);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       }
     },
     [dispatch, history]

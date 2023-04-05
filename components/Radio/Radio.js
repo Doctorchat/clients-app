@@ -19,7 +19,7 @@ export default function Radio(props) {
     inputRef.current.click();
   };
 
-  const toggleFocus = (s) => () => setIsFocused(s)
+  const toggleFocus = (s) => () => setIsFocused(s);
 
   return (
     <div className={cs("dc-radio-input", className)} role="button" onClick={onInputClick}>

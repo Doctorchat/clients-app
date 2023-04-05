@@ -9,6 +9,7 @@ import { Textarea } from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
 import { meetFormTabs } from "@/context/TabsKeys";
+import useCurrency from "@/hooks/useCurrency";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-img.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -17,7 +18,6 @@ import { messageUploadFile } from "@/store/actions";
 import { meetFormSetConfirmation, meetFormUpdateUploads } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
 
 import MeetFormDateTime from "./MeetFormDateTime";
 
@@ -49,19 +49,18 @@ export default function MeetFormMain() {
     }
   }, [attachments.initiated, uploads]);
 
-  const description = t("message_uploads_description", {currency:globalCurrency, amount:formatPrice(global.attach)});
+  const description = t("message_uploads_description", {
+    currency: globalCurrency,
+    amount: formatPrice(global.attach),
+  });
 
   const onFormSubmit = useCallback(
     async (values) => {
       const data = { ...values };
 
       if (!data.slot_id) {
-        document
-          .querySelector(".message-form__time-selection")
-          .scrollIntoView({ behavior: "smooth" });
-        dispatch(
-          notification({ type: "error", title: "error", descrp: "wizard:please_select_time" })
-        );
+        document.querySelector(".message-form__time-selection").scrollIntoView({ behavior: "smooth" });
+        dispatch(notification({ type: "error", title: "error", descrp: "wizard:please_select_time" }));
         return;
       }
 
@@ -111,15 +110,8 @@ export default function MeetFormMain() {
             <p>{t("message_from_info.line4")}</p>
           </div>
           <div className="message-form-inputs">
-            <Form
-              methods={form}
-              onFinish={onFormSubmit}
-              initialValues={{ content: values.content }}
-            >
-              <MeetFormDateTime
-                doctorId={userInfo?.id}
-                onSelectSlot={(slotId) => form.setValue("slot_id", slotId)}
-              />
+            <Form methods={form} onFinish={onFormSubmit} initialValues={{ content: values.content }}>
+              <MeetFormDateTime doctorId={userInfo?.id} onSelectSlot={(slotId) => form.setValue("slot_id", slotId)} />
               <Form.Item name="content" label={t("explain_problem")}>
                 <Textarea placeholder={t("message_form_placeholder")} />
               </Form.Item>
@@ -140,9 +132,7 @@ export default function MeetFormMain() {
               <div className="message-form-bottom">
                 <div className="message-price">
                   <span className="message-price-active">
-                    {(userInfo?.meet_price ?? chatUserInfo.data?.meet_price ?? 0) +
-                      attachments.price}{" "}
-                    {globalCurrency}
+                    {(userInfo?.meet_price ?? chatUserInfo.data?.meet_price ?? 0) + attachments.price} {globalCurrency}
                   </span>
                 </div>
                 <Button htmlType="submit" loading={loading}>

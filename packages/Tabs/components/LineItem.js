@@ -5,11 +5,6 @@ import cs from "@/utils/classNames";
 
 import useTabsLineContext from "../hooks/useTabsLineContext";
 
-
-
-
-
-
 function LineItem(props) {
   const { title, dataKey, index } = props;
   const [isActive, setIsActive] = useState(false);

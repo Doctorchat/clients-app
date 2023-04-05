@@ -8,11 +8,7 @@ export default function SelectDoctorPage() {
 
 SelectDoctorPage.getLayout = function (page) {
   return (
-    <Layout
-      activeStep="doctor"
-      title={i18next.t("wizard:available_doctors")}
-      disableResponsiveRestriction
-    >
+    <Layout activeStep="doctor" title={i18next.t("wizard:available_doctors")} disableResponsiveRestriction>
       <AuthWrapper>{page}</AuthWrapper>
     </Layout>
   );

@@ -9,12 +9,7 @@ const DcTooltip = ({ children, content, side = "top", align = "center", asChild 
         {children}
       </TooltipPrimitive.Trigger>
       <TooltipPrimitive.Portal className="dc-tooltip__portal">
-        <TooltipPrimitive.Content
-          className="dc-tooltip__content"
-          alignOffset={-5}
-          side={side}
-          align={align}
-        >
+        <TooltipPrimitive.Content className="dc-tooltip__content" alignOffset={-5} side={side} align={align}>
           {content}
           <TooltipPrimitive.Arrow className="dc-tooltip__arrow" width={11} height={5} />
         </TooltipPrimitive.Content>

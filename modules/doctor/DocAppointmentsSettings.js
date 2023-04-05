@@ -83,18 +83,11 @@ export default function DocAppointmentsSettings() {
   return (
     <Sidebar>
       <Sidebar.Header>
-        <BackTitle
-          title={t("video_appointments")}
-          onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")}
-        />
+        <BackTitle title={t("video_appointments")} onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")} />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-appointments-wrapper">
-          <Line
-            activeKey={appointmentsTabsConfig.key}
-            updateTabsConfig={updateAppointmentsTabsConfig}
-            className="px-1"
-          >
+          <Line activeKey={appointmentsTabsConfig.key} updateTabsConfig={updateAppointmentsTabsConfig} className="px-1">
             <Line.Item title={t("settings")} dataKey={appointmentsTabs.settings} />
             <Line.Item title={t("appointments")} dataKey={appointmentsTabs.list} />
             <Line.Item title={t("slots")} dataKey={appointmentsTabs.slots} />
@@ -104,11 +97,7 @@ export default function DocAppointmentsSettings() {
             updateTabsConfig={updateAppointmentsTabsConfig}
             dataAnimation="tabs"
           >
-            <Tabs.Pane
-              dataKey={appointmentsTabs.settings}
-              unmountOnExit={false}
-              withAnimation={!loading}
-            >
+            <Tabs.Pane dataKey={appointmentsTabs.settings} unmountOnExit={false} withAnimation={!loading}>
               <div className="profile-appointments-box mt-3 px-1">
                 <Alert className="mb-4 mt-1" type="info" message={t("appintments_warning")} />
                 <Form

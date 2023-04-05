@@ -117,10 +117,7 @@ export default function UploadFile(props) {
         <div className="upload-list-item-animation-placeholder" ref={animationPlaceholder} />
       </CSSTransition>
       <CSSTransition in={animationStates.file} nodeRef={fileRef} timeout={200} unmountOnExit>
-        <div
-          className={cs("upload-list-item", className, config.error && "has-error")}
-          ref={fileRef}
-        >
+        <div className={cs("upload-list-item", className, config.error && "has-error")} ref={fileRef}>
           <div className="upload-file">
             <div className="upload-file-main">
               <div className="upload-file-preview">
@@ -140,26 +137,15 @@ export default function UploadFile(props) {
                     </div>
                   ) : (
                     <div className="file-caption-info">
-                      <span className={cs("ext", config.error?.type === "ext" && "error")}>
-                        {file.ext}
-                      </span>
+                      <span className={cs("ext", config.error?.type === "ext" && "error")}>{file.ext}</span>
                       <span className={cs("size", config.error?.type === "size" && "error")}>
                         {config.uploading ? config.progress + "%" : formatBytes(file.size)}
                       </span>
                     </div>
                   )}
                 </div>
-                <CSSTransition
-                  nodeRef={progressRef}
-                  timeout={200}
-                  in={config.uploading}
-                  unmountOnExit
-                >
-                  <div
-                    className="file-progress"
-                    ref={progressRef}
-                    style={{ "--progress": config.progress + "%" }}
-                  />
+                <CSSTransition nodeRef={progressRef} timeout={200} in={config.uploading} unmountOnExit>
+                  <div className="file-progress" ref={progressRef} style={{ "--progress": config.progress + "%" }} />
                 </CSSTransition>
               </div>
             </div>

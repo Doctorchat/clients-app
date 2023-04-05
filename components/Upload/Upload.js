@@ -165,13 +165,7 @@ const Upload = forwardRef((props, ref) => {
           ))}
         </UploadContext.Provider>
       </div>
-      <input
-        type="file"
-        id={name}
-        ref={fileInputRef}
-        accept={accept}
-        onChange={onUploadInputChange}
-      />
+      <input type="file" id={name} ref={fileInputRef} accept={accept} onChange={onUploadInputChange} />
     </div>
   );
 });

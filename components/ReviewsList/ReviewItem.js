@@ -7,11 +7,6 @@ import date from "@/utils/date";
 
 import Image from "../Image";
 
-
-
-
-
-
 export default function ReviewItem(props) {
   const {
     data: { created, name, content, avatar, like },

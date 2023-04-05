@@ -3,6 +3,6 @@
  * @param  {...String} classes
  * @returns {String}
  */
- const cs = (...classes) => classes.filter((cls) => !!cls).join(" ");
+const cs = (...classes) => classes.filter((cls) => !!cls).join(" ");
 
- export default cs;
+export default cs;

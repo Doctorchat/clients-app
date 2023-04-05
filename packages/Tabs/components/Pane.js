@@ -6,11 +6,6 @@ import cs from "@/utils/classNames";
 
 import useTabsContext from "../hooks/useTabsContext";
 
-
-
-
-
-
 export default function Pane(props) {
   const { className, id, dataKey, unmountOnExit, withAnimation, children } = props;
   const { key, dir, tabsMouted } = useTabsContext();

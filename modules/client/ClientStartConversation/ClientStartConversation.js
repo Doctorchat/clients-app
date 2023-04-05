@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Popup from "@/components/Popup";
 import { startConversationTabs } from "@/context/TabsKeys";
@@ -32,11 +32,7 @@ export default function ClientStartConversation() {
   return (
     <Popup id="select-doc" visible={isOpen} onVisibleChange={VisibilityHandler}>
       <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig}>
-        <Tabs.Pane
-          withAnimation={allowTabAnimation}
-          dataKey={startConversationTabs.findDoc}
-          unmountOnExit={false}
-        >
+        <Tabs.Pane withAnimation={allowTabAnimation} dataKey={startConversationTabs.findDoc} unmountOnExit={false}>
           <ClientFindDoc />
         </Tabs.Pane>
         <Tabs.Pane dataKey={startConversationTabs.docInfo} withAnimation={allowTabAnimation}>

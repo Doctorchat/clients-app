@@ -5,15 +5,9 @@ import cs from "@/utils/classNames";
 
 import PopupContext from "./PopupContext";
 
-
-
-
-
-
 export default function PopupContent(props) {
   const { className, children } = props;
   const { closePopup } = useContext(PopupContext);
-
 
   const escCloseHandler = useCallback(
     (e) => {

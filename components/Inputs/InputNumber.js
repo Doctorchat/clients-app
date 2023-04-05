@@ -80,11 +80,7 @@ const InputNumber = forwardRef((props, ref) => {
     <>
       {label && (
         <label
-          className={cs(
-            "form-control-label",
-            isActive && "is-active",
-            addonBefore && "input-number-prefix"
-          )}
+          className={cs("form-control-label", isActive && "is-active", addonBefore && "input-number-prefix")}
           htmlFor={name}
         >
           {label}

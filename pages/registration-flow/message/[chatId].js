@@ -8,11 +8,7 @@ export default function MessagePage() {
 
 MessagePage.getLayout = function (page) {
   return (
-    <Layout
-      activeStep="doctor"
-      title={i18next.t("describe_problem")}
-      backPath="/registration-flow/select-doctor"
-    >
+    <Layout activeStep="doctor" title={i18next.t("describe_problem")} backPath="/registration-flow/select-doctor">
       <AuthWrapper>{page}</AuthWrapper>
     </Layout>
   );

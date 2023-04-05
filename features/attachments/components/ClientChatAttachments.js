@@ -37,11 +37,7 @@ const Overlay = React.memo(({ isFree }) => {
   if (!isFree && walletData?.data?.balance < attachPrice) {
     return (
       <div className="px-2">
-        <Alert
-          className="configure-form-alert"
-          type="error"
-          message={t("chat_attach.insufficient_funds")}
-        />
+        <Alert className="configure-form-alert" type="error" message={t("chat_attach.insufficient_funds")} />
         <Button size="sm" className="mt-2" onClick={() => dispatch(toggleTopUpModal(true))}>
           {t("chat_attach.replenish_balance")}
         </Button>

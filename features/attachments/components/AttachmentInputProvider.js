@@ -41,9 +41,7 @@ export const AttachmentInputProvider = (props) => {
   const fileInputRef = React.useRef();
 
   return (
-    <AttachmentInputContext.Provider
-      value={{ temporaryFile, setTemporaryFile, triggerUploadInput }}
-    >
+    <AttachmentInputContext.Provider value={{ temporaryFile, setTemporaryFile, triggerUploadInput }}>
       {children}
       <input
         style={{ display: "none" }}

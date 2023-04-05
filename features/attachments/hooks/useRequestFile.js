@@ -23,9 +23,7 @@ export const useRequestFile = (chatId) => {
 
         return Promise.resolve(response.data);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
         return Promise.reject(error);
       }
     },

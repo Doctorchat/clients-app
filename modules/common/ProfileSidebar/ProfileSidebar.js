@@ -28,10 +28,7 @@ export default function ProfileSidebar() {
   return (
     <Sidebar>
       <Sidebar.Header>
-        <BackTitle
-          title={t('my_profile')}
-          onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")}
-        />
+        <BackTitle title={t("my_profile")} onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")} />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-content-wrapper">

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    loaded: false,
-    payload: {global: {currency: ""}},
+  loaded: false,
+  payload: { global: { currency: "" } },
 };
 
 export const bootstrapSlice = createSlice({
@@ -18,6 +18,5 @@ export const bootstrapSlice = createSlice({
 
 export const { setBootstrapData } = bootstrapSlice.actions;
 export default bootstrapSlice.reducer;
-
 
 export const getGlobalCurrency = (state) => state.bootstrap.payload.global.currency;

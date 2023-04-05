@@ -17,16 +17,8 @@ import SelectModeMenu from "./SelectModeMenu";
 import SelectModeOptions from "./SelectModeOptions";
 
 function ClientSelectMode(props) {
-  const {
-    onSelectMode,
-    docId,
-    activeTab,
-    formsBackKey,
-    onMenuItemSelected,
-    chatType,
-    isTextVisible,
-    isVideoVisible,
-  } = props;
+  const { onSelectMode, docId, activeTab, formsBackKey, onMenuItemSelected, chatType, isTextVisible, isVideoVisible } =
+    props;
   const {
     user: { investigations },
   } = useSelector((store) => ({ user: store.user.data }));
@@ -82,19 +74,12 @@ function ClientSelectMode(props) {
 
   const goToCreatedChat = useCallback((id) => router.push(`/chat?id=${id}`), [router]);
 
-  const openInvestigationForm = useCallback(
-    () => dispatch(investigationFormToggleVisibility(true)),
-    [dispatch]
-  );
+  const openInvestigationForm = useCallback(() => dispatch(investigationFormToggleVisibility(true)), [dispatch]);
 
   if (!investigations?.length)
     return (
       <div className="px-2">
-        <Alert
-          className="configure-form-alert"
-          type="error"
-          message={t("no_investigation_error")}
-        />
+        <Alert className="configure-form-alert" type="error" message={t("no_investigation_error")} />
         <Button size="sm" className="mt-2" onClick={openInvestigationForm}>
           {t("add_investigation")}
         </Button>
