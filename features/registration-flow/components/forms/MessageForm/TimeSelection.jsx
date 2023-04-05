@@ -22,11 +22,7 @@ const TimeCard = ({ time, isSelected, isDisabled, onClick }) => {
   return (
     <div
       role="button"
-      className={cs(
-        "time-selection__time-card",
-        isSelected && "selected",
-        isDisabled && "disabled"
-      )}
+      className={cs("time-selection__time-card", isSelected && "selected", isDisabled && "disabled")}
       onClick={onClick}
     >
       {time}
@@ -45,18 +41,14 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
   const [selectedDate, setSelectedDate] = React.useState(moment());
   const [selectedSlotId, setSelectedSlotId] = React.useState(null);
 
-  const { data } = useQuery(
-    ["slots", doctorId],
-    () => api.user.slots(doctorId).then((res) => res.data),
-    {
-      refetchOnWindowFocus: false,
-      enabled: Boolean(doctorId),
-      onSuccess: (data) => {
-        if (!data[0]?.start_time) return;
-        setSelectedDate(moment(data[0].start_time));
-      },
-    }
-  );
+  const { data } = useQuery(["slots", doctorId], () => api.user.slots(doctorId).then((res) => res.data), {
+    refetchOnWindowFocus: false,
+    enabled: Boolean(doctorId),
+    onSuccess: (data) => {
+      if (!data[0]?.start_time) return;
+      setSelectedDate(moment(data[0].start_time));
+    },
+  });
 
   const onChangeSelectedDate = React.useCallback((date) => {
     setSelectedDate(date);
@@ -80,37 +72,38 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
           value={moment(selectedDate)}
           onSelect={onChangeSelectedDate}
           disabledDate={(date) => {
-            return !data?.find((slot) =>
-              dayjs(slot.start_time).isSame(date, "day")
-            );
+            return !data?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
           }}
-          locale={
-            antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar
-          }
+          locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
         />
       </div>
-      <div className="time-selection__time">
-        {data?.map((slot) => {
-          const date = dayjs(slot.start_time);
-          const isSelected = selectedSlotId === slot.id;
-          const isDisabled = date.isBefore(moment().add(3, "hours"));
 
-          return (
-            date.isSame(selectedDate, "day") && (
-              <TimeCard
-                key={slot.id}
-                time={date.format("HH:mm")}
-                isSelected={isSelected}
-                isDisabled={isDisabled}
-                onClick={() => {
-                  if (!isDisabled) {
-                    onChangeSelectedSlot(isSelected ? null : slot.id);
-                  }
-                }}
-              />
-            )
-          );
-        })}
+      <div className="d-flex flex-column text-center justify-content-center">
+        <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">Ora Dumneavostra Locala</h5>
+
+        <div className="time-selection__time pt-0">
+          {data?.map((slot) => {
+            const date = dayjs(slot.start_time);
+            const isSelected = selectedSlotId === slot.id;
+            const isDisabled = date.isBefore(moment().add(3, "hours"));
+
+            return (
+              date.isSame(selectedDate, "day") && (
+                <TimeCard
+                  key={slot.id}
+                  time={date.format("HH:mm")}
+                  isSelected={isSelected}
+                  isDisabled={isDisabled}
+                  onClick={() => {
+                    if (!isDisabled) {
+                      onChangeSelectedSlot(isSelected ? null : slot.id);
+                    }
+                  }}
+                />
+              )
+            );
+          })}
+        </div>
       </div>
     </div>
   );
