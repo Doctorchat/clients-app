@@ -38,9 +38,7 @@ export default function ChatContentAccept({ chatId }) {
         amount: amount,
       });
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setLoading(false);
     }

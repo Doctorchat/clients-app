@@ -1,4 +1,4 @@
-import { forwardRef,memo } from "react";
+import { forwardRef, memo } from "react";
 import PropTypes from "prop-types";
 
 import WarnIcon from "@/icons/warn-duo.svg";
@@ -10,9 +10,7 @@ const ListWarning = forwardRef(({ extra }, ref) => (
     </div>
     <h3 className="list-warning-title">Atenție</h3>
     <p className="mb-0">Сontul dvs. este în curs de verificare.</p>
-    <p>
-      La finalizarea procesului de verificare, veți primi un e-mail la adresa de e-mail specificată
-    </p>
+    <p>La finalizarea procesului de verificare, veți primi un e-mail la adresa de e-mail specificată</p>
     {extra}
   </div>
 ));

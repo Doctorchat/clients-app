@@ -2,8 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 
-import api from "@/services/axios/api";
 import useCurrency from "@/hooks/useCurrency";
+import api from "@/services/axios/api";
 
 const WalletBalanceFallback = React.memo(() => {
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ const WalletBalance = () => {
     return <WalletBalanceFallback />;
   }
 
-  const {balance, frozen, currency} = walletData.data
+  const { balance, frozen, currency } = walletData.data;
 
   return (
     <div className="d-flex align-items-center justify-content-between space-x-2">

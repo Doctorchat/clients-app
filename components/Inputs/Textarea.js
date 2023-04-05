@@ -94,12 +94,7 @@ const Textarea = forwardRef((props, ref) => {
           name={name}
           value={value}
           ref={textareaRef}
-          className={cs(
-            className,
-            "dc-textarea",
-            textareaSizeClassName.current,
-            maxHeightExceeded && "scroll"
-          )}
+          className={cs(className, "dc-textarea", textareaSizeClassName.current, maxHeightExceeded && "scroll")}
           disabled={disabled}
           placeholder={placeholder}
           onFocus={onFocusHandler}

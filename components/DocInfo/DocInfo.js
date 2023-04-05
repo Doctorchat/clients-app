@@ -70,9 +70,7 @@ export default function DocInfo(props) {
           </h4>
           {doctor.isAvailable ? (
             <>
-              <h6 className="category">
-                {doctor?.category?.map((cat) => cat[`name_${selectedLng}`]).join(", ")}
-              </h6>
+              <h6 className="category">{doctor?.category?.map((cat) => cat[`name_${selectedLng}`]).join(", ")}</h6>
               {loading ? (
                 <Skeleton>
                   <Skeleton.Line className="mb-1" w="93%" h="16px" />
@@ -123,11 +121,7 @@ export default function DocInfo(props) {
         </Line>
         <Tabs config={{ ...tabsConfig }} updateTabsConfig={updateTabsConfig} dataAnimation="tabs">
           <Tabs.Pane dataKey={docInfoTabs.activity} unmountOnExit={false} withAnimation={!loading}>
-            <DocInfoActivity
-              isGuard={doctor?.isGuard}
-              activity={doctor?.activity}
-              loading={loading}
-            />
+            <DocInfoActivity isGuard={doctor?.isGuard} activity={doctor?.activity} loading={loading} />
           </Tabs.Pane>
           <Tabs.Pane dataKey={docInfoTabs.about} withAnimation={!loading}>
             <DocInfoAbout about={doctor?.about} loading={loading} />

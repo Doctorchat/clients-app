@@ -12,8 +12,7 @@ import PopupContext from "./PopupContext";
 import PopupHeader from "./PopupHeader";
 
 export default function Popup(props) {
-  const { id, className, visible, children, onVisibleChange, onBeforeClose, confirmationClose } =
-    props;
+  const { id, className, visible, children, onVisibleChange, onBeforeClose, confirmationClose } = props;
   const [state, setState] = useState(visible);
   const prevState = usePrevious(state);
   const popupBodyRef = useRef();

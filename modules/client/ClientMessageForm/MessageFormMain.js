@@ -9,18 +9,15 @@ import { Textarea } from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
 import { messageFormTabs } from "@/context/TabsKeys";
+import useCurrency from "@/hooks/useCurrency";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-img.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { messageFormSchema } from "@/services/validation";
 import { messageUploadFile } from "@/store/actions";
-import {
-  messageFormSetConfirmation,
-  messageFormUpdateUploads,
-} from "@/store/slices/messageFormSlice";
+import { messageFormSetConfirmation, messageFormUpdateUploads } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
 
 export default function MessageFormMain() {
   const {
@@ -35,7 +32,6 @@ export default function MessageFormMain() {
     global: store.bootstrap.payload?.global,
   }));
   const { globalCurrency, formatPrice } = useCurrency();
-
 
   const [loading, setLoading] = useState(false);
   const [attachments, setAttachments] = useState({ list: [], price: 0, initiated: false });
@@ -62,7 +58,10 @@ export default function MessageFormMain() {
     }
   }, [attachments.initiated, uploads]);
 
-  const description = t("message_uploads_description", {currency:globalCurrency, amount:formatPrice(global.attach)});
+  const description = t("message_uploads_description", {
+    currency: globalCurrency,
+    amount: formatPrice(global.attach),
+  });
 
   const onFormSubmit = useCallback(
     async (values) => {
@@ -77,9 +76,7 @@ export default function MessageFormMain() {
         dispatch(messageFormSetConfirmation(data));
         updateTabsConfig(messageFormTabs.confirm)();
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
@@ -110,11 +107,7 @@ export default function MessageFormMain() {
             <p>{t("message_from_info.line4")}</p>
           </div>
           <div className="message-form-inputs">
-            <Form
-              methods={form}
-              onFinish={onFormSubmit}
-              initialValues={{ content: values.content }}
-            >
+            <Form methods={form} onFinish={onFormSubmit} initialValues={{ content: values.content }}>
               <Form.Item name="content" label={t("explain_problem")}>
                 <Textarea placeholder={t("message_form_placeholder")} />
               </Form.Item>

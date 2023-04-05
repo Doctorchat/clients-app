@@ -59,9 +59,7 @@ export default function DocMultiLangEdit() {
         dispatch(updateUser(response.data));
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
@@ -72,11 +70,7 @@ export default function DocMultiLangEdit() {
   return (
     <div className="edit-profile-section">
       <h4 className="edit-profile-title">{t("about")}</h4>
-      <Line
-        className="edit-profile-line"
-        activeKey={tabsConfig.key}
-        updateTabsConfig={updateTabsConfig}
-      >
+      <Line className="edit-profile-line" activeKey={tabsConfig.key} updateTabsConfig={updateTabsConfig}>
         <Line.Item title="RO" dataKey={tabsKeys.ro} />
         <Line.Item title="РУ" dataKey={tabsKeys.ru} />
         <Line.Item title="EN" dataKey={tabsKeys.en} />

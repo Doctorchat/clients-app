@@ -45,9 +45,7 @@ export default function ClientFindDoc() {
       let filteredList = [...list];
 
       if (filters.category?.label && filters.category.value !== "all") {
-        filteredList = filteredList.filter((item) =>
-          item.category.includes(filters.category?.label)
-        );
+        filteredList = filteredList.filter((item) => item.category.includes(filters.category?.label));
       }
 
       if (filters.online) {

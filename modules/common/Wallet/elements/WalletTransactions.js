@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 
 import EmptyBox from "@/components/EmptyBox";
+import useCurrency from "@/hooks/useCurrency";
 import CheckIcon from "@/icons/check.svg";
 import ClockIcon from "@/icons/clock.svg";
 import TimesIcon from "@/icons/times.svg";
 import api from "@/services/axios/api";
 import cs from "@/utils/classNames";
 import date from "@/utils/date";
-import useCurrency from "@/hooks/useCurrency";
 
 const transactionStatusIcon = {
   success: <CheckIcon />,
@@ -66,13 +66,9 @@ WalletTransactionItem.propTypes = {
 const WalletTransactions = () => {
   const { t } = useTranslation();
 
-  const { data: walletTransactions, isLoading } = useQuery(
-    ["wallet-transactions"],
-    () => api.wallet.transactions(),
-    {
-      keepPreviousData: true,
-    }
-  );
+  const { data: walletTransactions, isLoading } = useQuery(["wallet-transactions"], () => api.wallet.transactions(), {
+    keepPreviousData: true,
+  });
 
   if (isLoading) {
     return (

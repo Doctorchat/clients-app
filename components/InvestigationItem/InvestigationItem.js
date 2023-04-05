@@ -35,11 +35,7 @@ export default function InvestigationItem(props) {
               <IconBtn icon={<EditIcon />} size="sm" onClick={onEditHandler} />
             </DcTooltip>
             {!removeDisabled && (
-              <Confirm
-                onConfirm={onRemoveHandler(props.id)}
-                content={t("remove_investigation_confirmation")}
-                isAsync
-              >
+              <Confirm onConfirm={onRemoveHandler(props.id)} content={t("remove_investigation_confirmation")} isAsync>
                 <DcTooltip content={t("remove")} side="left" align="center">
                   <IconBtn icon={<TrashIcon />} className="remove-action" size="sm" />
                 </DcTooltip>

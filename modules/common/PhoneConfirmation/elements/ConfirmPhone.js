@@ -40,9 +40,7 @@ const ConfirmPhone = React.memo(() => {
         dispatch(updateUserProperty({ prop: "verified", value: true }));
         dispatch(phoneConfirmationToggleVisibility(false));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setIsConfirming(false);
       }
@@ -106,11 +104,7 @@ const ConfirmPhone = React.memo(() => {
           />
 
           <div className="phone-confirmation__footer">
-            <Button
-              type="outline"
-              size="sm"
-              onClick={updateTabsConfig(EnterPhone.displayName, "prev")}
-            >
+            <Button type="outline" size="sm" onClick={updateTabsConfig(EnterPhone.displayName, "prev")}>
               {t("phone_verification.edit_phone")}
             </Button>
             <Button

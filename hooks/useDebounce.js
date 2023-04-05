@@ -1,4 +1,4 @@
-import { useEffect, useMemo,useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 /**
  * Creates a debounced function that delays invoking `func` until after `wait`
@@ -163,9 +163,7 @@ export default function useDebounce(func, wait, options) {
       const timeSinceLastCall = time - lastCallTime.current;
       const timeSinceLastInvoke = time - lastInvokeTime.current;
       const timeWaiting = wait - timeSinceLastCall;
-      const remainingWait = maxing
-        ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke)
-        : timeWaiting;
+      const remainingWait = maxing ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
 
       // Restart the timer
       startTimer(timerExpired, remainingWait);

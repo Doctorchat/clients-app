@@ -81,10 +81,7 @@ export default function EditProflie() {
   return (
     <Sidebar>
       <Sidebar.Header>
-        <BackTitle
-          title={t("edit_profile")}
-          onBack={updateTabsConfig(leftSideTabs.profile, "prev")}
-        />
+        <BackTitle title={t("edit_profile")} onBack={updateTabsConfig(leftSideTabs.profile, "prev")} />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y profile-edit-wrapper">

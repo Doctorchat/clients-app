@@ -52,10 +52,7 @@ function Notification(props) {
     setNotificationTop(calculateNotificationTop(id));
   }, [id, mounted, trigger]);
 
-  const onNotificationDestroyed = useCallback(
-    () => dispatch(notificationRemovedTrigger()),
-    [dispatch]
-  );
+  const onNotificationDestroyed = useCallback(() => dispatch(notificationRemovedTrigger()), [dispatch]);
 
   const destroyAnimation = useCallback(() => {
     dispatch(notificationRemove({ id }));
@@ -103,12 +100,7 @@ function Notification(props) {
             descrp
           )}
         </div>
-        <IconBtn
-          className="notification-destroy"
-          size="sm"
-          icon={<TimesIcon />}
-          onClick={destroyAnimation}
-        />
+        <IconBtn className="notification-destroy" size="sm" icon={<TimesIcon />} onClick={destroyAnimation} />
       </div>
     </CSSTransition>
   );

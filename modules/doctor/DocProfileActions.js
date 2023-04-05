@@ -31,9 +31,7 @@ export default function DocProfileActions() {
       await api.doctor.toggleTextStatus();
       dispatch(updateUserProperty({ prop: "chat", value: !user?.chat }));
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setIsTextStatusUpdating(false);
     }
@@ -45,9 +43,7 @@ export default function DocProfileActions() {
       await api.doctor.toggleVideoStatus();
       dispatch(updateUserProperty({ prop: "video", value: !user?.video }));
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setIsVideoStatusUpdating(false);
     }
@@ -58,11 +54,7 @@ export default function DocProfileActions() {
       <Menu.Item icon={<EditIcon />} onClick={updateTabsConfig(leftSideTabs.editProfile)}>
         {t("edit_profile")}
       </Menu.Item>
-      <Menu.Item
-        className="new-icon-style"
-        icon={<SparklesIcon />}
-        onClick={updateTabsConfig(leftSideTabs.reviews)}
-      >
+      <Menu.Item className="new-icon-style" icon={<SparklesIcon />} onClick={updateTabsConfig(leftSideTabs.reviews)}>
         {t("reviews")}
       </Menu.Item>
       <Menu.Item className="switch new-icon-style" icon={<CommentLinesIcon />}>

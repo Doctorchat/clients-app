@@ -56,12 +56,7 @@ export default function RegistrationPage() {
     return <PhoneConfirmation />;
   }
 
-  return (
-    <RegistrationForm
-      isFormDisabled={isPhoneConfirmationStep}
-      updateStepStatus={updateStepStatus}
-    />
-  );
+  return <RegistrationForm isFormDisabled={isPhoneConfirmationStep} updateStepStatus={updateStepStatus} />;
 }
 
 RegistrationPage.getLayout = function (page) {

@@ -29,9 +29,7 @@ export default function EditProfileSecurity() {
         await api.user.updatePassword(values);
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
         form.reset();
@@ -43,12 +41,7 @@ export default function EditProfileSecurity() {
   return (
     <div className="edit-profile-section">
       <h4 className="edit-profile-title">{t("security")}</h4>
-      <Form
-        methods={form}
-        className="edit-profile-form"
-        onFinish={onFormSubmit}
-        onValuesChange={onValuesChange}
-      >
+      <Form methods={form} className="edit-profile-form" onFinish={onFormSubmit} onValuesChange={onValuesChange}>
         <Form.Item name="current_password" label={t("current_password")}>
           <Input type="password" />
         </Form.Item>

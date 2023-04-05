@@ -8,11 +8,6 @@ import moment from "@/utils/localMoment";
 
 import getMomentDate from "./getMomentDate";
 
-
-
-
-
-
 const DatePicker = forwardRef((props, ref) => {
   const {
     className,
@@ -83,12 +78,7 @@ const DatePicker = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         {type === "simple" ? (
-          <DP
-            {...pickerProps}
-            ref={ref}
-            placeholder={t("select")}
-            disabledDate={disabledDateHandler}
-          />
+          <DP {...pickerProps} ref={ref} placeholder={t("select")} disabledDate={disabledDateHandler} />
         ) : (
           <DP.RangePicker
             {...pickerProps}

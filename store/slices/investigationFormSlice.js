@@ -26,6 +26,5 @@ export const investigationFormSlice = createSlice({
   },
 });
 
-export const { investigationFormToggleVisibility, investigationFormSetEdit } =
-  investigationFormSlice.actions;
+export const { investigationFormToggleVisibility, investigationFormSetEdit } = investigationFormSlice.actions;
 export default investigationFormSlice.reducer;

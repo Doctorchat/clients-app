@@ -18,14 +18,10 @@ const WalletTopupNotification = () => {
         if (response.data.status) {
           dispatch(notification({ title: "success", descrp: "transactions.top_up_success" }));
         } else {
-          dispatch(
-            notification({ type: "error", title: "error", descrp: "transactions.top_up_error" })
-          );
+          dispatch(notification({ type: "error", title: "error", descrp: "transactions.top_up_error" }));
         }
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       }
     },
     [dispatch]

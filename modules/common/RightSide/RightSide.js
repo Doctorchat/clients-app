@@ -31,12 +31,7 @@ export default function RightSide(props) {
   );
 
   return (
-    <CSSTransition
-      in={infoVisible.visible}
-      timeout={infoVisible.animate ? 200 : 0}
-      nodeRef={columnRef}
-      unmountOnExit
-    >
+    <CSSTransition in={infoVisible.visible} timeout={infoVisible.animate ? 200 : 0} nodeRef={columnRef} unmountOnExit>
       <div id="column-right" ref={columnRef}>
         <Sidebar>
           <Sidebar.Header>

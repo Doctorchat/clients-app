@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BackTitle from "@/components/BackTitle";
 import DocInfo from "@/components/DocInfo";
-import { PopupContent,PopupHeader } from "@/components/Popup";
+import { PopupContent, PopupHeader } from "@/components/Popup";
 import { startConversationTabs } from "@/context/TabsKeys";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { getUserInfo } from "@/store/actions";

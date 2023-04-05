@@ -18,8 +18,7 @@ const sizeClassName = {
 };
 
 const IconBtn = forwardRef((props, ref) => {
-  const { className, htmlType, size, onClick, disabled, loading, icon, type, notify, ...rest } =
-    props;
+  const { className, htmlType, size, onClick, disabled, loading, icon, type, notify, ...rest } = props;
   const btnTypeClassName = useRef(typeClassNames[type]);
   const btnSizeClassName = useRef(sizeClassName[size]);
   const btnSpinner = useRef();
@@ -61,11 +60,7 @@ IconBtn.propTypes = {
   onClick: PropTypes.func,
   icon: PropTypes.element,
   notify: PropTypes.bool,
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
 };
 
 IconBtn.defaultProps = {

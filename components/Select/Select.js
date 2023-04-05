@@ -30,19 +30,7 @@ const NoOptionsMessage = (props) => (
 );
 
 const Select = forwardRef((props, ref) => {
-  const {
-    onChange,
-    options,
-    placeholder,
-    multiple,
-    size,
-    value,
-    disabled,
-    label,
-    name,
-    onBlur,
-    ...rest
-  } = props;
+  const { onChange, options, placeholder, multiple, size, value, disabled, label, name, onBlur, ...rest } = props;
   const [isActive, setIsActive] = useState(false);
   const [selectValue, setSelectValue] = useState(value);
 

@@ -47,16 +47,12 @@ export default function MessageBar(props) {
       setStopChatLoading(true);
       await api.conversation.close(chatId);
 
-      dispatch(
-        notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
-      );
+      dispatch(notification({ type: "success", title: "success", descrp: "data_updated_with_success" }));
       history.push("/");
       form.reset();
       return Promise.resolve();
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       return Promise.reject();
     } finally {
       setStopChatLoading(true);
@@ -89,9 +85,7 @@ export default function MessageBar(props) {
         setIsFormEnabled(false);
         form.reset();
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
@@ -144,16 +138,8 @@ export default function MessageBar(props) {
         }
         roles={[userRoles.get("doctor"), userRoles.get("client")]}
       >
-        <Confirm
-          isAsync
-          onConfirm={closeConversationHanlder}
-          content={t("stop_conversation_confirmation")}
-        >
-          <IconBtn
-            className="message-bar-send remove-action"
-            loading={stopChatLoading}
-            icon={<StopIcon />}
-          />
+        <Confirm isAsync onConfirm={closeConversationHanlder} content={t("stop_conversation_confirmation")}>
+          <IconBtn className="message-bar-send remove-action" loading={stopChatLoading} icon={<StopIcon />} />
         </Confirm>
       </AuthRoleWrapper>
     </div>

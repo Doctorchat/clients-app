@@ -35,9 +35,7 @@ export default function ExternalDocList() {
         setVisible(false);
         setDoctor(null);
 
-        dispatch(
-          notification({ type: "error", titile: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", titile: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }

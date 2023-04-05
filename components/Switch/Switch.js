@@ -21,12 +21,7 @@ const Switch = forwardRef((props, ref) => {
 
   return (
     <div className={cs("dc-checkbox_wrapper", inputSizeClassName.current, className)}>
-      <div
-        className={cs("dc-checkbox-toggler", labelAlign)}
-        ref={ref}
-        role="button"
-        onClick={switchHandler}
-      >
+      <div className={cs("dc-checkbox-toggler", labelAlign)} ref={ref} role="button" onClick={switchHandler}>
         <button
           id={name}
           type="button"

@@ -19,10 +19,7 @@ export default function FormItem(props) {
 
   const formControl = useCallback(
     ({ field, fieldState: { invalid, error } }) => (
-      <div
-        className={cs(className, "form-control", invalid && "invalid")}
-        data-animate-label={animateLabel}
-      >
+      <div className={cs(className, "form-control", invalid && "invalid")} data-animate-label={animateLabel}>
         {cloneElement(Children.only(children), { ...field, label, disabled })}
         <FormItemHelp hasError={!!error?.message} help={help} />
         <Error error={error} />

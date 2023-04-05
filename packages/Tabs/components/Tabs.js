@@ -9,16 +9,7 @@ import TabsContext from "../context/TabsContext";
 import Pane from "./Pane";
 
 export default function Tabs(props) {
-  const {
-    config,
-    className,
-    id,
-    updateTabsConfig,
-    children,
-    dataAnimation,
-    styles,
-    contextAdditionalData,
-  } = props;
+  const { config, className, id, updateTabsConfig, children, dataAnimation, styles, contextAdditionalData } = props;
   const prevActiveIndex = usePrevious(config.key);
   const tabsMouted = useRef(false); // Prevent animation on mount
 
@@ -40,12 +31,7 @@ export default function Tabs(props) {
         ...contextAdditionalData,
       }}
     >
-      <div
-        id={id}
-        className={cs("tabs-slider", className)}
-        data-animation={dataAnimation}
-        style={styles}
-      >
+      <div id={id} className={cs("tabs-slider", className)} data-animation={dataAnimation} style={styles}>
         {children}
       </div>
     </TabsContext.Provider>
@@ -61,7 +47,7 @@ Tabs.propTypes = {
   }),
   children: PropTypes.arrayOf(PropTypes.element),
   updateTabsConfig: PropTypes.func,
-  dataAnimation: PropTypes.oneOf(["sidebar", "tabs", 'y-animation']),
+  dataAnimation: PropTypes.oneOf(["sidebar", "tabs", "y-animation"]),
   styles: PropTypes.object,
   contextAdditionalData: PropTypes.object,
 };

@@ -34,22 +34,13 @@ const PhoneConfirmation = memo(() => {
   }, [dispatch, user.verified]);
 
   useEffect(() => {
-    if (
-      !user.verified &&
-      user.created_at &&
-      dayjs(user.created_at).isAfter("2022-09-23T15:04:28.977Z")
-    ) {
+    if (!user.verified && user.created_at && dayjs(user.created_at).isAfter("2022-09-23T15:04:28.977Z")) {
       dispatch(phoneConfirmationToggleVisibility(true));
     }
   }, [dispatch, user.verified, user.created_at]);
 
   return (
-    <Popup
-      id="phone-confirmation"
-      className={tabsConfig.key}
-      visible={isOpen}
-      onBeforeClose={onBeforeClosePopup}
-    >
+    <Popup id="phone-confirmation" className={tabsConfig.key} visible={isOpen} onBeforeClose={onBeforeClosePopup}>
       <Tabs
         config={{ ...tabsConfig }}
         updateTabsConfig={updateTabsConfig}

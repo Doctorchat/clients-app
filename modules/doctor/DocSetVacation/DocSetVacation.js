@@ -31,15 +31,11 @@ export default function DocSetVacation() {
     try {
       await api.user.resetVacation();
       dispatch(updateUserProperty({ prop: "vacation", value: null, as_send: true }));
-      dispatch(
-        notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
-      );
+      dispatch(notification({ type: "success", title: "success", descrp: "data_updated_with_success" }));
       form.reset();
       return Promise.resolve();
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       return Promise.reject();
     }
   }, [dispatch, form]);
@@ -50,14 +46,10 @@ export default function DocSetVacation() {
         setLoading(true);
         await api.user.setVacation(values);
         dispatch(updateUserProperty({ prop: "vacation", value: values.range, as_send: true }));
-        dispatch(
-          notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
-        );
+        dispatch(notification({ type: "success", title: "success", descrp: "data_updated_with_success" }));
         setIsOpen(false);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }

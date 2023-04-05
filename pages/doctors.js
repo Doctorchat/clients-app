@@ -33,14 +33,10 @@ export default function Doctors() {
     isFetching,
     isFetched,
     isError,
-  } = useQuery(
-    ["doctors", i18n.language],
-    () => api.docList.get({ external: true, locale: i18n.language }),
-    {
-      keepPreviousData: true,
-      placeholderData: { data: [] },
-    }
-  );
+  } = useQuery(["doctors", i18n.language], () => api.docList.get({ external: true, locale: i18n.language }), {
+    keepPreviousData: true,
+    placeholderData: { data: [] },
+  });
 
   useEffect(() => {
     if (searchConfig.active) setCurrentList(searchConfig.list);
@@ -51,10 +47,7 @@ export default function Doctors() {
     setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
   };
 
-  const onDocClickHandler = useCallback(
-    (doc) => () => router.push(`/doctors?id=${doc.id}`),
-    [router]
-  );
+  const onDocClickHandler = useCallback((doc) => () => router.push(`/doctors?id=${doc.id}`), [router]);
 
   if (typeof window === "undefined") return null;
 

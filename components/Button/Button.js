@@ -20,21 +20,14 @@ const sizeClassName = {
 };
 
 export default function Button(props) {
-  const { className, htmlType, size, onClick, disabled, loading, icon, type, children, ...rest } =
-    props;
+  const { className, htmlType, size, onClick, disabled, loading, icon, type, children, ...rest } = props;
   const btnTypeClassName = useRef(typeClassNames[type]);
   const btnSizeClassName = useRef(sizeClassName[size]);
   const btnSpinner = useRef();
 
   return (
     <button
-      className={cs(
-        "dc-btn",
-        btnSizeClassName.current,
-        btnTypeClassName.current,
-        className,
-        loading && "is-loading"
-      )}
+      className={cs("dc-btn", btnSizeClassName.current, btnTypeClassName.current, className, loading && "is-loading")}
       type={htmlType}
       disabled={disabled || loading}
       onClick={onClick}
@@ -64,11 +57,7 @@ Button.propTypes = {
   loading: PropTypes.bool,
   onClick: PropTypes.func,
   icon: PropTypes.element,
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-  ]),
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
 };
 
 Button.defaultProps = {

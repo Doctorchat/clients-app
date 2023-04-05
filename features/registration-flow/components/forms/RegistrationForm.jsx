@@ -72,11 +72,7 @@ export const RegistrationForm = ({ isFormDisabled = false, updateStepStatus }) =
       onFinish={onSubmit}
       initialValues={{ phone: "", ...user }}
     >
-      <Form.Item
-        label={`${t("wizard:first_name/last_name")}*`}
-        name="name"
-        disabled={isFormDisabled}
-      >
+      <Form.Item label={`${t("wizard:first_name/last_name")}*`} name="name" disabled={isFormDisabled}>
         <Input />
       </Form.Item>
       <Form.Item label={`${t("email")}*`} name="email" disabled={isFormDisabled}>
@@ -85,11 +81,7 @@ export const RegistrationForm = ({ isFormDisabled = false, updateStepStatus }) =
       <Form.Item label={`${t("password")}*`} name="password" disabled={isFormDisabled}>
         <Input type="password" />
       </Form.Item>
-      <Form.Item
-        label={`${t("repeat_password")}*`}
-        name="password_confirmation"
-        disabled={isFormDisabled}
-      >
+      <Form.Item label={`${t("repeat_password")}*`} name="password_confirmation" disabled={isFormDisabled}>
         <Input type="password" />
       </Form.Item>
       <Form.Item label={`${t("phone")}*`} name="phone" disabled={isFormDisabled}>

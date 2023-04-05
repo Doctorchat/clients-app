@@ -12,13 +12,13 @@ import Input from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { meetFormTabs } from "@/context/TabsKeys";
+import useCurrency from "@/hooks/useCurrency";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { meetFormReset, meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -70,9 +70,7 @@ function MeetFormConfirmation() {
 
         setPromo({ code, sum: price.subtotal - discoutedPrice });
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setPromoLoading(false);
         form.reset();
@@ -110,9 +108,7 @@ function MeetFormConfirmation() {
         dispatch(meetFormReset());
       }
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setLoading(false);
     }
@@ -124,12 +120,7 @@ function MeetFormConfirmation() {
   return (
     <div className="popup-body message-from-confirm">
       <PopupHeader
-        title={
-          <BackTitle
-            title={t("confirmation")}
-            onBack={updateTabsConfig(meetFormTabs.main, "prev")}
-          />
-        }
+        title={<BackTitle title={t("confirmation")} onBack={updateTabsConfig(meetFormTabs.main, "prev")} />}
       />
       <PopupContent>
         <div className="confirmation-section">
@@ -139,45 +130,33 @@ function MeetFormConfirmation() {
                 <th colSpan="2">{t("message_form_confirmation.symmary")}</th>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.description")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.description")}</th>
                 <td className="dc-description-row-content">{values.content}</td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.datetime")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.datetime")}</th>
                 <td className="dc-description-row-content">{`${values.date} ${values.time}`}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label"> {t("terms_conditions")}</th>
                 <td className="dc-description-row-content">
-                  <a
-                    href="https://doctorchat.md/termeni-si-conditii/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
+                  <a href="https://doctorchat.md/termeni-si-conditii/" target="_blank" rel="noreferrer noopener">
                     {t("terms_conditions")}
                   </a>
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.basic_price")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.basic_price")}</th>
                 <td className="dc-description-row-content">{`${formatPrice(+price.doc)}`}</td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">{`${t(
-                  "message_form_confirmation.files"
-                )}(${values.uploads_count})`}</th>
+                <th className="dc-description-row-label">{`${t("message_form_confirmation.files")}(${
+                  values.uploads_count
+                })`}</th>
                 <td className="dc-description-row-content">{`+${formatPrice(+price.uploads)}`}</td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.subtotal_price")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.subtotal_price")}</th>
                 <td className="dc-description-row-content">{`${formatPrice(+price.subtotal)}`}</td>
               </tr>
             </tbody>
@@ -197,22 +176,15 @@ function MeetFormConfirmation() {
                 </th>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.company")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.company")}</th>
                 <td className="dc-description-row-content">WEBMEDCONSULT SRL</td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.product")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.product")}</th>
                 <td className="dc-description-row-content">Doctorchat</td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {" "}
-                  {t("message_form_confirmation.adress")}
-                </th>
+                <th className="dc-description-row-label"> {t("message_form_confirmation.adress")}</th>
                 <td className="dc-description-row-content">
                   Bucureşti, sector 6, Splaiul Independenţei nr. 273, corp 3, etaj 3
                 </td>
@@ -244,8 +216,7 @@ function MeetFormConfirmation() {
                   {promo.code ? (
                     <>
                       <span className="d-block">
-                        {t("message_form_confirmation.code")}:{" "}
-                        <mark className="dc-mark">{promo.code}</mark>
+                        {t("message_form_confirmation.code")}: <mark className="dc-mark">{promo.code}</mark>
                       </span>
                       <span>
                         {t("message_form_confirmation.discount")}:{" "}
@@ -255,12 +226,7 @@ function MeetFormConfirmation() {
                   ) : (
                     <Form methods={form} onFinish={onPromocodeApplied} className="promo-code-form">
                       <Form.Item name="code">
-                        <Input
-                          pattern={promoInputReplacer}
-                          autoComplete="off"
-                          placeholder="WINTER20"
-                          size="sm"
-                        />
+                        <Input pattern={promoInputReplacer} autoComplete="off" placeholder="WINTER20" size="sm" />
                       </Form.Item>
                       <Button htmlType="submit" size="sm" loading={promoLoading}>
                         {t("apply")}
@@ -270,9 +236,7 @@ function MeetFormConfirmation() {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.total_price")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.total_price")}</th>
                 <td className="dc-description-row-content">
                   <span>{`${formatPrice(+totalPrice)}`}</span>
                   {promo.code && <del className="ms-2">{`(${formatPrice(+price.total)})`}</del>}
@@ -286,11 +250,7 @@ function MeetFormConfirmation() {
                     <span>
                       ({t("your_account_will_be_debited")}{" "}
                       <strong>
-                        {formatPrice(
-                          totalPrice > walletData.data.balance
-                            ? walletData.data.balance
-                            : totalPrice
-                        )}
+                        {formatPrice(totalPrice > walletData.data.balance ? walletData.data.balance : totalPrice)}
                       </strong>
                       )
                     </span>

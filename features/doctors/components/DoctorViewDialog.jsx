@@ -6,6 +6,7 @@ import { useBoolean } from "usehooks-ts";
 import Button, { IconBtn } from "@/components/Button";
 import Popup from "@/components/Popup";
 import Skeleton from "@/components/Skeleton";
+import useCurrency from "@/hooks/useCurrency";
 import ClockIcon from "@/icons/clock.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
@@ -15,12 +16,10 @@ import TimesIcon from "@/icons/times.svg";
 import VideoIcon from "@/icons/video.svg";
 import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
-import useCurrency from "@/hooks/useCurrency";
 
 const DoctorViewDialogSkeleton = () => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
-
 
   return (
     <article className="doctor-view skeleton">
@@ -81,13 +80,7 @@ const DoctorViewDialogSkeleton = () => {
   );
 };
 
-export const DoctorViewDialog = ({
-  doctor,
-  isLoading,
-  onClose,
-  onMessageTypeClick,
-  onVideoTypeClick,
-}) => {
+export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClick, onVideoTypeClick }) => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
   const { value: isOpen, setFalse: onHideModal } = useBoolean(true);
@@ -118,11 +111,7 @@ export const DoctorViewDialog = ({
         <DoctorViewDialogSkeleton />
       ) : (
         <article className="doctor-view">
-          <IconBtn
-            className="doctor-view__modal-close"
-            icon={<TimesIcon />}
-            onClick={onVisibleChange}
-          />
+          <IconBtn className="doctor-view__modal-close" icon={<TimesIcon />} onClick={onVisibleChange} />
 
           <div className="doctor-view__avatar">
             <img src={doctor.avatar} alt={doctor.name} />
@@ -145,24 +134,24 @@ export const DoctorViewDialog = ({
               <span className="doctor-view__meta-item filled">
                 <ClockIcon />
                 <span className="doctor-view__meta-text">
-                  {doctor.activity.responseTime
-                    ? `${doctor.activity.responseTime} ${t("mins")}`
-                    : "-"}
+                  {doctor.activity.responseTime ? `${doctor.activity.responseTime} ${t("mins")}` : "-"}
                 </span>
               </span>
               <span className="doctor-view__meta-item">
                 <CommentIcon />
-                <span className="doctor-view__meta-text">{doctor.price} {globalCurrency}</span>
+                <span className="doctor-view__meta-text">
+                  {doctor.price} {globalCurrency}
+                </span>
               </span>
               <span className="doctor-view__meta-item">
                 <VideoIcon />
-                <span className="doctor-view__meta-text">{doctor.meet_price} {globalCurrency}</span>
+                <span className="doctor-view__meta-text">
+                  {doctor.meet_price} {globalCurrency}
+                </span>
               </span>
             </div>
 
-            <p className="doctor-view__description">
-              {getPropByLangOrThrow(doctor.about?.bio, getActiveLng())}
-            </p>
+            <p className="doctor-view__description">{getPropByLangOrThrow(doctor.about?.bio, getActiveLng())}</p>
 
             <div className="doctor-view__activity">
               <div className="doctor-view__activity-item">

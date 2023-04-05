@@ -18,39 +18,19 @@ export const Steps = ({ activeStep }) => {
     <div className="registration-flow__steps">
       <div className="registration-flow__step">
         {t("wizard:account")}
-        <span
-          className={cs(
-            "registration-flow__step-line",
-            activeSteps.includes("account") ? "active" : ""
-          )}
-        />
+        <span className={cs("registration-flow__step-line", activeSteps.includes("account") ? "active" : "")} />
       </div>
       <div className="registration-flow__step">
         {t("wizard:doctor")}
-        <span
-          className={cs(
-            "registration-flow__step-line",
-            activeSteps.includes("doctor") ? "active" : ""
-          )}
-        />
+        <span className={cs("registration-flow__step-line", activeSteps.includes("doctor") ? "active" : "")} />
       </div>
       <div className="registration-flow__step">
         {t("wizard:confirmation")}
-        <span
-          className={cs(
-            "registration-flow__step-line",
-            activeSteps.includes("confirmation") ? "active" : ""
-          )}
-        />
+        <span className={cs("registration-flow__step-line", activeSteps.includes("confirmation") ? "active" : "")} />
       </div>
       <div className="registration-flow__step">
         {t("wizard:consultation")}
-        <span
-          className={cs(
-            "registration-flow__step-line",
-            activeSteps.includes("consultation") ? "active" : ""
-          )}
-        />
+        <span className={cs("registration-flow__step-line", activeSteps.includes("consultation") ? "active" : "")} />
       </div>
     </div>
   );

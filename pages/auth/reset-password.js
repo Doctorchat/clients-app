@@ -51,9 +51,7 @@ export default function ResetPassword() {
         );
         router.push("/auth/login");
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
         setLoading(false);
       }
     },

@@ -43,9 +43,7 @@ const WalletWithdraw = (props) => {
         queryClient.invalidateQueries(["wallet-transactions"]);
         dispatch(notification({ title: "success", descrp: "transactions.withdraw_success" }));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       }
     },
     [dispatch, queryClient]
@@ -59,11 +57,7 @@ const WalletWithdraw = (props) => {
         </Button>
       </div>
       <Portal portalName="modalRoot">
-        <Popup
-          id="withdraw-popup"
-          visible={isWithdrawModalOpen}
-          onVisibleChange={setIsWithdrawModalOpen}
-        >
+        <Popup id="withdraw-popup" visible={isWithdrawModalOpen} onVisibleChange={setIsWithdrawModalOpen}>
           <Popup.Header title={t("transactions.withdraw_form")} />
           <Popup.Content>
             <Form methods={form} onFinish={onSubmitHandler}>
@@ -71,12 +65,7 @@ const WalletWithdraw = (props) => {
                 <InputNumber />
               </Form.Item>
               <div className="justify-content-end d-flex align-items-center space-x-2">
-                <Button
-                  className="me-2"
-                  type="outline"
-                  size="sm"
-                  onClick={() => setIsWithdrawModalOpen(false)}
-                >
+                <Button className="me-2" type="outline" size="sm" onClick={() => setIsWithdrawModalOpen(false)}>
                   {t("cancel")}
                 </Button>
 

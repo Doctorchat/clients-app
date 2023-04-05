@@ -16,10 +16,7 @@ export default function ChatContentFooter(props) {
   const { openMessageFormPopup, status, chatId, paymentUrl, type, isAccepted } = props;
   const { t } = useTranslation();
 
-  const isAcceptedFalse = React.useMemo(
-    () => type !== "support" && !isAccepted,
-    [isAccepted, type]
-  );
+  const isAcceptedFalse = React.useMemo(() => type !== "support" && !isAccepted, [isAccepted, type]);
 
   const isMessageBarVisible = React.useMemo(() => {
     if (status && ["initied", "unpaid", "closed"].includes(status)) return false;

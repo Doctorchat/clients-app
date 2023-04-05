@@ -14,8 +14,7 @@ export default function ClientDocsSearch(props) {
   }));
   const { t } = useTranslation();
 
-  const onFiltersChange = (name) => (value) =>
-    setFilters((prevState) => ({ ...prevState, [name]: value }));
+  const onFiltersChange = (name) => (value) => setFilters((prevState) => ({ ...prevState, [name]: value }));
 
   return (
     <div className="find-doc-search">
@@ -33,11 +32,7 @@ export default function ClientDocsSearch(props) {
           options={[{ label: t("all"), value: "all" }, ...categories]}
           onChange={onFiltersChange("category")}
         />
-        <Switch
-          value={filters.online}
-          label={t("online_doctors")}
-          onChange={onFiltersChange("online")}
-        />
+        <Switch value={filters.online} label={t("online_doctors")} onChange={onFiltersChange("online")} />
       </div>
     </div>
   );

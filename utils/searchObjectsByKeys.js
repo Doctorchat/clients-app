@@ -18,9 +18,7 @@ export default function searchObjectsByKeys(searchKeys, list) {
       return result.trim().toLowerCase();
     };
 
-    Object.keys(item).forEach(
-      (key) => searchKeys.includes(key) && (itemStr += propertyToString(item[key]))
-    );
+    Object.keys(item).forEach((key) => searchKeys.includes(key) && (itemStr += propertyToString(item[key])));
 
     return { id: item.id, str: itemStr };
   });

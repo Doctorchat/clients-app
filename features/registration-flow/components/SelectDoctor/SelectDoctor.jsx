@@ -46,9 +46,9 @@ export const SelectDoctor = () => {
       });
 
       router.push(
-        `/registration-flow/message/${
-          res.data.id
-        }?chatType=${chatType}&messageType=${messageType}&doctorId=${doctorPreviewId ?? "auto"}`
+        `/registration-flow/message/${res.data.id}?chatType=${chatType}&messageType=${messageType}&doctorId=${
+          doctorPreviewId ?? "auto"
+        }`
       );
     },
     [doctorPreviewId, router, user?.investigations]
@@ -95,11 +95,7 @@ export const SelectDoctor = () => {
         </div>
         <DoctorsGrid isLoading={isLoading}>
           {doctors.map((doctor) => (
-            <DoctorCard
-              key={doctor.id}
-              doctor={doctor}
-              onClickPreview={() => setDoctorPreviewId(doctor.id)}
-            />
+            <DoctorCard key={doctor.id} doctor={doctor} onClickPreview={() => setDoctorPreviewId(doctor.id)} />
           ))}
         </DoctorsGrid>
 

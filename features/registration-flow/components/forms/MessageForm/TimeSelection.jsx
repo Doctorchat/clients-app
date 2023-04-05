@@ -22,11 +22,7 @@ const TimeCard = ({ time, isSelected, isDisabled, onClick }) => {
   return (
     <div
       role="button"
-      className={cs(
-        "time-selection__time-card",
-        isSelected && "selected",
-        isDisabled && "disabled"
-      )}
+      className={cs("time-selection__time-card", isSelected && "selected", isDisabled && "disabled")}
       onClick={onClick}
     >
       {time}
@@ -45,18 +41,14 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
   const [selectedDate, setSelectedDate] = React.useState(moment());
   const [selectedSlotId, setSelectedSlotId] = React.useState(null);
 
-  const { data } = useQuery(
-    ["slots", doctorId],
-    () => api.user.slots(doctorId).then((res) => res.data),
-    {
-      refetchOnWindowFocus: false,
-      enabled: Boolean(doctorId),
-      onSuccess: (data) => {
-        if (!data[0]?.start_time) return;
-        setSelectedDate(moment(data[0].start_time));
-      },
-    }
-  );
+  const { data } = useQuery(["slots", doctorId], () => api.user.slots(doctorId).then((res) => res.data), {
+    refetchOnWindowFocus: false,
+    enabled: Boolean(doctorId),
+    onSuccess: (data) => {
+      if (!data[0]?.start_time) return;
+      setSelectedDate(moment(data[0].start_time));
+    },
+  });
 
   const onChangeSelectedDate = React.useCallback((date) => {
     setSelectedDate(date);
@@ -80,13 +72,9 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
           value={moment(selectedDate)}
           onSelect={onChangeSelectedDate}
           disabledDate={(date) => {
-            return !data?.find((slot) =>
-              dayjs(slot.start_time).isSame(date, "day")
-            );
+            return !data?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
           }}
-          locale={
-            antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar
-          }
+          locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
         />
       </div>
       <div className="time-selection__time">

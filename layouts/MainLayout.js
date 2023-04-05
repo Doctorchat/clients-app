@@ -11,12 +11,8 @@ import { DocStartConversation } from "@/modules/doctor";
 const ClientStartConversation = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientStartConversation)
 );
-const ClientMessageForm = dynamic(() =>
-  import("@/modules/client").then((response) => response.ClientMessageForm)
-);
-const ClientMeetForm = dynamic(() =>
-  import("@/modules/client").then((response) => response.ClientMeetForm)
-);
+const ClientMessageForm = dynamic(() => import("@/modules/client").then((response) => response.ClientMessageForm));
+const ClientMeetForm = dynamic(() => import("@/modules/client").then((response) => response.ClientMeetForm));
 const ClientInvestigationForm = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientInvestigationForm)
 );

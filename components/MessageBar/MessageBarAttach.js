@@ -73,9 +73,7 @@ const MessageBarAttach = forwardRef((props, ref) => {
         dispatch(updateConversation(updatedChatItem));
         dispatch(chatContentAddMessage(updatedChatContent));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       }
     },
     [chatId, dispatch, uploadFile]
@@ -101,9 +99,7 @@ const MessageBarAttach = forwardRef((props, ref) => {
         setLoading(true);
         await setUploadToChat(files[0]);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }

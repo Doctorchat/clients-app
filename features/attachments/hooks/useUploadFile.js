@@ -26,9 +26,7 @@ export const useUploadFile = (chatId) => {
       try {
         return await api.conversation.upload(formData, {});
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
         return Promise.reject(error);
       }
     },
@@ -53,9 +51,7 @@ export const useUploadFile = (chatId) => {
 
         return Promise.resolve(response.data);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
         return Promise.reject(error);
       }
     },
@@ -78,9 +74,7 @@ export const useUploadFile = (chatId) => {
 
         return Promise.resolve(response.data);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
         return Promise.reject(error);
       }
     },
