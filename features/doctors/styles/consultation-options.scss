@@ -1,7 +1,7 @@
 
 .consultation-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 
   margin-top: 1.5rem;
@@ -44,12 +44,19 @@
   }
 
   .card-title {
+    display: flex;
     font-size: 1.2rem;
     font-weight: 500;
   }
 
   .doctor-view__button {
     height: 3rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .consultation-options {
+    grid-template-columns: unset;
   }
 }
 
