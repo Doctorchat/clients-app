@@ -5,19 +5,24 @@ import clsx from "clsx";
 
 import CheckIcon from "@/icons/check.svg";
 import Button from "@/components/Button";
+import useCurrency from "@/hooks/useCurrency";
 
 const CHAT = "chat";
 const VIDEO = "video";
 
 // eslint-disable-next-line react/prop-types
 function ConsultationOption({ title, price, selected, onClick }) {
+  const { globalCurrency } = useCurrency();
+
   return (
     <div className={clsx("card", { selected })} onClick={onClick}>
       {selected && <CheckIcon className="checked" />}
       <div className="card-title">{title}</div>
       <div className="card-price">
         <span className="label">Pret:</span>
-        <span className="price">{price} MDL</span>
+        <span className="price">
+          {price} {globalCurrency}
+        </span>
       </div>
     </div>
   );
