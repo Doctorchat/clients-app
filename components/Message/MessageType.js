@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import MessageMeet from "./MessageMeet";
 
 export default function MessageType(props) {
-  const { type, ...rest } = props;
-
-  if (type === "meet") return <MessageMeet {...rest} />;
+  if (props.type === "meet") return <MessageMeet {...props} />;
 
   return null;
 }
@@ -13,6 +11,7 @@ export default function MessageType(props) {
 MessageType.propTypes = {
   type: PropTypes.string,
   componentProps: PropTypes.object,
+  status: PropTypes.string,
 };
 
 MessageType.defaultProps = {
