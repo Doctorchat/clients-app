@@ -10,9 +10,9 @@ import date from "@/utils/date";
 export default function MessageMeet(props) {
   const { t } = useTranslation();
 
-  const { url, time, status } = props;
+  const { url, time } = props.componentProps;
 
-  const isLinkDisabled = status === "closed";
+  const isLinkDisabled = props.status === "closed";
 
   return (
     <div className="message-meet">
@@ -35,7 +35,7 @@ export default function MessageMeet(props) {
 }
 
 MessageMeet.propTypes = {
-  url: PropTypes.string,
-  time: PropTypes.string,
   status: PropTypes.string,
+  componentProps: PropTypes.object,
+  type: PropTypes.string,
 };
