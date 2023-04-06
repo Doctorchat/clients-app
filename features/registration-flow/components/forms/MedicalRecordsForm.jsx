@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import * as yup from "yup";
+import dayjs from "dayjs";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -15,10 +16,11 @@ import api from "@/services/axios/api";
 import i18next from "@/services/i18next";
 import { updateUser } from "@/store/slices/userSlice";
 import isValidSelectOption from "@/utils/isValidSelectOption";
+import DatePickerStyled from "@/packages/DatePickerStyled";
 
 const medicalRecordsSchema = yup.object().shape({
   name: yup.string().required(),
-  age: yup.number().min(0).required(),
+  birth_date: yup.date().required(),
   weight: yup.number().min(0).required(),
   height: yup.number().min(0).required(),
   location: yup.string().required(),
@@ -50,7 +52,7 @@ export const MedicalRecordsForm = () => {
 
   const onSubmit = React.useCallback(
     async (values) => {
-      const data = { ...values };
+      const data = { ...values, birth_date: dayjs(values.birth_date).format("DD.MM.YYYY") };
 
       data.sex = data.sex.value;
 
@@ -68,6 +70,11 @@ export const MedicalRecordsForm = () => {
     },
     [dispatch, setFormApiErrors, router]
   );
+
+  const disabledDate = (current) => {
+    //   cant select date in future
+    return current && current > dayjs().endOf("day");
+  };
 
   return (
     <>
@@ -94,8 +101,8 @@ export const MedicalRecordsForm = () => {
           </Form.Item>
         </div>
         <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-          <Form.Item className="w-100" label={t("age")} name="age">
-            <InputNumber />
+          <Form.Item className="w-100" label={t("age")} name="birth_date">
+            <DatePickerStyled disabledDate={disabledDate} style={{ height: 47 }} />
           </Form.Item>
           <Form.Item className="w-100" label={t("height_cm")} name="height">
             <InputNumber />
