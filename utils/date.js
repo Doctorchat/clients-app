@@ -2,10 +2,6 @@ import i18next from "@/services/i18next";
 
 import getActiveLng from "./getActiveLng";
 
-
-
-
-
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
 
@@ -20,6 +16,8 @@ const formats = {
   month: "MMMM DD",
   year: "DD/MM/YYYY",
   full: "DD.MM.YYYY HH:mm",
+  serverDate: "YYYY-MM-DD",
+  serverFull: "YYYY-MM-DD HH:mm",
 };
 
 /**
@@ -66,9 +64,12 @@ export default function date(date) {
     return dayjsDate.format(formats.month);
   };
 
+  const toServerDate = () => dayjsDate.format(formats.serverDate);
+
   return {
     dynamic,
     monthDate,
+    toServerDate,
     default: dayjsDate.format("MMMM DD, YYYY"),
     time: dayjsDate.format(formats.time),
     full: dayjsDate.format(formats.full),
