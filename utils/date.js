@@ -16,6 +16,8 @@ const formats = {
   month: "MMMM DD",
   year: "DD/MM/YYYY",
   full: "DD.MM.YYYY HH:mm",
+  serverDate: "YYYY-MM-DD",
+  serverFull: "YYYY-MM-DD HH:mm",
 };
 
 /**
@@ -62,9 +64,12 @@ export default function date(date) {
     return dayjsDate.format(formats.month);
   };
 
+  const toServerDate = () => dayjsDate.format(formats.serverDate);
+
   return {
     dynamic,
     monthDate,
+    toServerDate,
     default: dayjsDate.format("MMMM DD, YYYY"),
     time: dayjsDate.format(formats.time),
     full: dayjsDate.format(formats.full),

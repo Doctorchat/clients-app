@@ -1,4 +1,4 @@
-import { mixed, number } from "yup";
+import { date, mixed, number } from "yup";
 import { object, string } from "yup";
 
 import i18next from "@/services/i18next";
@@ -6,7 +6,7 @@ import isValidSelectOption from "@/utils/isValidSelectOption";
 
 const investigationFormSchema = object().shape({
   name: string().required(), //
-  age: number().min(0).required(), //
+  birth_date: date().required(),
   weight: number().min(0).required(), //
   height: number().min(0).required(), //
   location: string().required(), //
