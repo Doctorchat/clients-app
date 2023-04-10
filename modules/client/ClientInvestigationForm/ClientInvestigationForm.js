@@ -77,9 +77,10 @@ export default function ClientInvestigationForm() {
       const data = {
         ...values,
         ...formValues,
-        birth_date: date(data.birth_date).toServerDate(),
-        sex: typeof data.sex === "object" ? data.sex.value : data.sex,
       };
+
+      data.birth_date = date(formValues.birth_date).toServerDate();
+      data.sex = typeof data.sex === "object" ? data.sex.value : data.sex;
 
       const onSuccess = (response) => {
         dispatch(investigationFormToggleVisibility(false));
