@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import { t } from "i18next";
 
 import getSelectLabel from "@/utils/getSelectLabel";
 
@@ -74,7 +75,7 @@ export default function ClientInfo(props) {
                       <Skeleton.Line w="64px" h="18px" />
                     </Skeleton>
                   ) : (
-                    calculateAge(investigation.age) || "-"
+                    <Age birthday={investigation.age} />
                   )}
                 </td>
               </tr>
@@ -164,4 +165,55 @@ ClientInfo.defaultProps = {
   doctor: {
     activity: {},
   },
+};
+
+const Age = ({ birthday }) => {
+  const age = calculateAge(birthday);
+
+  if (!age.years && !age.months && !age.weeks) return "-"; // handle invalid age
+
+  if (age.years > 7) return age.years + " " + t("years"); // handle age over 7 years
+
+  if (age.years < 1) {
+    if (age.months && age.weeks) {
+      return age.months + " " + t("months") + " " + t("and") + " " + age.weeks + " " + t("weeks");
+    } else if (age.months) {
+      return age.months + " " + t("months");
+    } else if (age.weeks) {
+      return age.weeks + " " + t("weeks");
+    } else {
+      return t("lessThanOneWeek"); // handle age less than 1 week
+    }
+  }
+
+  if (age.years === 1) {
+    const monthsString = age.months ? " " + t("and") + " " + age.months + " " + t("months") : "";
+    return age.years + " " + t("year") + monthsString; // handle age 1 year
+  }
+
+  if (age.years < 7) {
+    const monthsString = age.months ? " " + t("and") + " " + age.months + " " + t("months") : "";
+    return age.years + " " + t("years") + monthsString; // handle age between 1 and 7 years
+  }
+
+  // handle any other cases
+  return (
+    "-" +
+    " " +
+    age.years +
+    " " +
+    t("years") +
+    " " +
+    t("and") +
+    " " +
+    age.months +
+    " " +
+    t("months") +
+    " " +
+    t("and") +
+    " " +
+    age.weeks +
+    " " +
+    t("weeks")
+  );
 };
