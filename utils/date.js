@@ -4,11 +4,14 @@ import getActiveLng from "./getActiveLng";
 
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
+const customParseFormat = require("dayjs/plugin/customParseFormat");
 
 require("dayjs/locale/ro");
 require("dayjs/locale/ru");
 require("dayjs/locale/en");
+
 dayjs.extend(relativeTime);
+dayjs.extend(customParseFormat);
 
 export const formats = {
   time: "HH:mm",
@@ -90,4 +93,11 @@ export const IOSMonthDate = (date) => {
   }
 
   return date;
+};
+
+export const calculateAge = (birthday) => {
+  const dayjsBirthday = dayjs(birthday, formats.serverDate, true);
+  const age = dayjs().diff(dayjsBirthday, "year");
+
+  return !isNaN(age) ? age : null;
 };

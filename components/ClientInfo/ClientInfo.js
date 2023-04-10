@@ -6,6 +6,7 @@ import getSelectLabel from "@/utils/getSelectLabel";
 
 import Image from "../Image";
 import Skeleton from "../Skeleton";
+import { calculateAge } from "@/utils/date";
 
 export default function ClientInfo(props) {
   const { client, loading, selectedInvestigation } = props;
@@ -73,7 +74,7 @@ export default function ClientInfo(props) {
                       <Skeleton.Line w="64px" h="18px" />
                     </Skeleton>
                   ) : (
-                    investigation.age
+                    calculateAge(investigation.age) || "-"
                   )}
                 </td>
               </tr>
