@@ -10,7 +10,7 @@ require("dayjs/locale/ru");
 require("dayjs/locale/en");
 dayjs.extend(relativeTime);
 
-const formats = {
+export const formats = {
   time: "HH:mm",
   day: "MMM DD",
   month: "MMMM DD",
