@@ -9,9 +9,10 @@ import cs from "@/utils/classNames";
 import { IconBtn } from "../Button";
 import Confirm from "../Confirm";
 import DcTooltip from "../DcTooltip";
+import { calculateAge } from "@/utils/date";
 
 export default function InvestigationItem(props) {
-  const { name, age, weight, height, withActions, onEdit, onRemove, removeDisabled } = props;
+  const { name, birth_date, weight, height, withActions, onEdit, onRemove, removeDisabled } = props;
   const { t } = useTranslation();
 
   const onEditHandler = useCallback(() => {
@@ -24,6 +25,9 @@ export default function InvestigationItem(props) {
     },
     [onRemove]
   );
+
+  const age = calculateAge(birth_date)?.years;
+  const ageToRender = !isNaN(age) ? age : "-";
 
   return (
     <div className={cs("investigation-item position-relative", !withActions && "no-actions")}>
@@ -46,7 +50,7 @@ export default function InvestigationItem(props) {
       </div>
       <div className="investigation-item-descrp">
         <div className="descrp-item">
-          <span className="value">{age}</span>
+          <span className="value">{ageToRender}</span>
           <span className="label">{t("age")}</span>
         </div>
         <div className="descrp-item">
