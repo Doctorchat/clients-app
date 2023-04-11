@@ -17,6 +17,7 @@ import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
 import useCurrency from "@/hooks/useCurrency";
 import ConsultationOptions from "@/features/doctors/components/ConsultationOptions";
+import DcTooltip from "@/components/DcTooltip";
 
 const DoctorViewDialogSkeleton = () => {
   const { t } = useTranslation();
@@ -179,17 +180,22 @@ const Badges = ({ doctor }) => {
   return (
     <div className="doctor-view__meta">
       {!doctor.isGuard && (
-        <span className="doctor-view__meta-item filled">
-          <ShieldIcon />
-          <span className="doctor-view__meta-text">{t("guard_doctor")}</span>
-        </span>
+        <DcTooltip content={t("")}>
+          <span className="doctor-view__meta-item filled">
+            <ShieldIcon />
+            <span className="doctor-view__meta-text">{t("guard_doctor")}</span>
+          </span>
+        </DcTooltip>
       )}
-      <span className="doctor-view__meta-item filled">
-        <ClockIcon />
-        <span className="doctor-view__meta-text">
-          {doctor.activity.responseTime ? `${doctor.activity.responseTime} ${t("mins")}` : "-"}
+
+      <DcTooltip content={t("")}>
+        <span className="doctor-view__meta-item filled">
+          <ClockIcon />
+          <span className="doctor-view__meta-text">
+            {doctor.activity.responseTime ? `${doctor.activity.responseTime} ${t("mins")}` : "-"}
+          </span>
         </span>
-      </span>
+      </DcTooltip>
     </div>
   );
 };
