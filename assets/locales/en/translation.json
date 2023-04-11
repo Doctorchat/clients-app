@@ -288,5 +288,7 @@
   },
   "slots": "Slots",
   "investigation_form_description": "Fill in the form with the details of the person for whom you want to request a consultation!",
-  "access_meet": "Access meeting"
+  "access_meet": "Access meeting",
+  "guard_doctor_tooltip": "The on-duty doctor responds within a maximum of one hour from receiving the message.",
+  "respond_time_doctor_tooltip": "Response time. Occasionally the duration may be shorter or longer."
 }
