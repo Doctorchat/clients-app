@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,9 @@ import { investigationFormSchema } from "@/services/validation";
 import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
+import DatePickerStyled from "@/packages/DatePickerStyled";
+import { disabledDateInFuture } from "@/packages/DatePickerStyled/utils";
+import date from "@/utils/date";
 
 export default function ClientInvestigationForm() {
   const {
@@ -71,8 +74,12 @@ export default function ClientInvestigationForm() {
 
   const onSubmitHandler = useCallback(
     async (formValues) => {
-      const data = { ...values, ...formValues };
+      const data = {
+        ...values,
+        ...formValues,
+      };
 
+      data.birth_date = date(formValues.birth_date).toServerDate();
       data.sex = typeof data.sex === "object" ? data.sex.value : data.sex;
 
       const onSuccess = (response) => {
@@ -131,8 +138,8 @@ export default function ClientInvestigationForm() {
             </Form.Item>
           </div>
           <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-            <Form.Item className="w-100" label={t("age")} name="age">
-              <InputNumber />
+            <Form.Item className="w-100" label={t("age")} name="birth_date">
+              <DatePickerStyled disabledDate={disabledDateInFuture} style={{ height: 47 }} />
             </Form.Item>
             <Form.Item className="w-100" label={t("height_cm")} name="height">
               <InputNumber />

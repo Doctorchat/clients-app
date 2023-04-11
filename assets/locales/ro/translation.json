@@ -289,5 +289,9 @@
   },
   "slots": "Sloturi",
   "investigation_form_description": "Indicaţi în anchetă datele persoanei pentru care doriţi să solicitaţi o consultaţie!",
-  "access_meet": "Accesează conferința"
+  "access_meet": "Accesează conferința",
+  "years": "ani",
+  "months": "luni",
+  "weeks": "săptămâni",
+  "and": "și"
 }
