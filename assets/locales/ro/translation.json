@@ -34,6 +34,8 @@
   "video_appointment": "Consultație video",
   "video_appointments": "Programări video",
   "guard_doctor": "Medic de gardă",
+  "guard_doctor_tooltip": "Medicul de gardă răspunde în maxim o oră de la primirea mesajului.",
+  "respond_time_doctor_tooltip": "Timp de răspuns. Ocazional durata poate fi mai mică sau mai mare.",
   "vacation": "Concediu",
   "cancel": "Anulează",
   "apply": "Aplică",

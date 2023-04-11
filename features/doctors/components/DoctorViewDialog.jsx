@@ -180,7 +180,7 @@ const Badges = ({ doctor }) => {
   return (
     <div className="doctor-view__meta">
       {!doctor.isGuard && (
-        <DcTooltip content={t("")}>
+        <DcTooltip content={t("guard_doctor_tooltip")}>
           <span className="doctor-view__meta-item filled">
             <ShieldIcon />
             <span className="doctor-view__meta-text">{t("guard_doctor")}</span>
@@ -188,7 +188,7 @@ const Badges = ({ doctor }) => {
         </DcTooltip>
       )}
 
-      <DcTooltip content={t("")}>
+      <DcTooltip content={t("respond_time_doctor_tooltip")}>
         <span className="doctor-view__meta-item filled">
           <ClockIcon />
           <span className="doctor-view__meta-text">
