@@ -6,7 +6,7 @@ const portalContainers = {
 };
 
 export default function Portal({ children, portalName }) {
-  return ReactDOM.createPortal(children, document.querySelector(portalContainers[portalName]));
+  return ReactDOM.createPortal(children, document.querySelector(portalContainers[portalName]) || document.body);
 }
 
 Portal.propTypes = {
