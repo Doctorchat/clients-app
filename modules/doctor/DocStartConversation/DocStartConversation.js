@@ -9,7 +9,6 @@ import List from "@/components/List";
 import Popup from "@/components/Popup";
 import { ClientDocsSearch } from "@/modules/client";
 import api from "@/services/axios/api";
-import { getDocList } from "@/store/actions";
 import { addConversation } from "@/store/slices/conversationListSlice";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 import { notification } from "@/store/slices/notificationsSlice";
@@ -34,10 +33,6 @@ export default function DocStartConversation() {
   });
   const dispatch = useDispatch();
   const history = useRouter();
-
-  React.useEffect(() => {
-    dispatch(getDocList());
-  }, [dispatch]);
 
   const filterList = useCallback(
     (list) => {
