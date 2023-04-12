@@ -92,6 +92,7 @@
   },
   "no_investigation_error": "Для доступа к врачам на платформе Doctorchat вам необходимо добавить хотя бы одну Мед. Карту",
   "add_investigation": "Добавить Мед. Карту",
+  "edit_investigation": "Редактировать Мед. Карту",
   "online_meet": "Видеовстреча",
   "simple_message": "Tекст",
   "want_anonymity": "Скрыть имя",
