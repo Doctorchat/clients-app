@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
+import PropTypes from "prop-types";
 
 import useCurrency from "@/hooks/useCurrency";
 import api from "@/services/axios/api";
@@ -22,7 +23,7 @@ const WalletBalanceFallback = React.memo(() => {
   );
 });
 
-const WalletBalance = () => {
+const WalletBalance = ({ showFrozen }) => {
   const { t } = useTranslation();
   const { formatPrice } = useCurrency();
 
@@ -37,17 +38,27 @@ const WalletBalance = () => {
   const { balance, frozen, currency } = walletData.data;
 
   return (
-    <div className="d-flex align-items-center justify-content-between space-x-2">
+    <div className="wallet-balance d-flex align-items-center justify-content-between space-x-2">
       <div>
         <p className="text-sm text-zinc-500 mb-0 fs-6 text-muted">{t("total_balance")}</p>
         <h3 className="text-2xl">{formatPrice(balance, currency)}</h3>
       </div>
-      <div>
-        <p className="text-sm text-zinc-500 mb-0 fs-6 text-muted">{t("frozen_balance")}</p>
-        <h3 className="text-2xl">{formatPrice(frozen, currency)}</h3>
-      </div>
+      {showFrozen && (
+        <div>
+          <p className="text-sm text-zinc-500 mb-0 fs-6 text-muted">{t("frozen_balance")}</p>
+          <h3 className="text-2xl">{formatPrice(frozen, currency)}</h3>
+        </div>
+      )}
     </div>
   );
+};
+
+WalletBalance.propTypes = {
+  showFrozen: PropTypes.bool,
+};
+
+WalletBalance.defaultProps = {
+  showFrozen: true,
 };
 
 export default WalletBalance;

@@ -9,12 +9,13 @@ import Form from "@/components/Form";
 import { InputNumber } from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import Portal from "@/containers/Portal";
-import useCurrency from "@/hooks/useCurrency";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import useCurrency from "@/hooks/useCurrency";
+import { useMutation } from "@tanstack/react-query";
 
 const WalletTopup = () => {
   const { t } = useTranslation();
@@ -34,10 +35,12 @@ const WalletTopup = () => {
 
   const dispatch = useDispatch();
 
+  const topUp = useMutation(["top-up"], (values) => api.wallet.topup(values));
+
   const onSubmitHandler = useCallback(
     async (values) => {
       try {
-        const response = await api.wallet.topup(values);
+        const response = await topUp.mutateAsync(values);
         window.location.href = response.data.redirect;
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
@@ -45,6 +48,8 @@ const WalletTopup = () => {
     },
     [dispatch]
   );
+
+  const cancelTopUp = () => dispatch(toggleTopUpModal(false));
 
   return (
     <Portal portalName="modalRoot">
@@ -56,11 +61,11 @@ const WalletTopup = () => {
               <InputNumber />
             </Form.Item>
             <div className="justify-content-end d-flex align-items-center space-x-2">
-              <Button className="me-2" type="outline" size="sm" onClick={() => dispatch(toggleTopUpModal(false))}>
-                {t("cancel")}
+              <Button className="me-2" type="outline" size="sm" onClick={cancelTopUp} disabled={topUp.isLoading}>
+                {t("back")}
               </Button>
 
-              <Button size="sm" htmlType="submit">
+              <Button size="sm" htmlType="submit" loading={topUp.isLoading}>
                 {t("supply")}
               </Button>
             </div>

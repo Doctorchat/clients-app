@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 
 import Button from "@/components/Button";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
@@ -10,6 +11,7 @@ import LogoutIcon from "@/icons/logout.svg";
 import { ProfileChangeLang } from "@/modules/common";
 import { logoutUser } from "@/store/actions";
 import cs from "@/utils/classNames";
+import { WalletFastTopUp } from "@/modules/common/Wallet/elements";
 
 import { Steps } from "../Steps";
 
@@ -45,12 +47,14 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
     };
   }, []);
 
+  const showBackButton = !!backPath;
+
   return (
     <div
       className={cs("registration-flow__layout doctorchat-v2", disableResponsiveRestriction && "disable-restrictions")}
     >
-      <header className="registration-flow__header">
-        {backPath ? (
+      <header className={clsx("registration-flow__header", { "layout-full": showBackButton })}>
+        {showBackButton && (
           <Button
             className="registration-flow__back registration-flow__gray-btn"
             type="text"
@@ -60,11 +64,13 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
           >
             {t("back")}
           </Button>
-        ) : (
-          <div />
         )}
+
+        <WalletFastTopUp className={clsx("wallet-top-up", { "ms-md-5": !showBackButton })} />
+
         <Steps activeStep={activeStep} />
-        <ProfileChangeLang className="registration-flow__lang" placement="bottomLeft" />
+
+        <ProfileChangeLang className="registration-flow__lang me-md-5" placement="bottomLeft" />
       </header>
       <main className="registration-flow__content">
         <h1>{title}</h1>
