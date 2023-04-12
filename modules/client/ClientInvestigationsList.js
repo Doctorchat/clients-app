@@ -52,7 +52,7 @@ export default function ClientInvestigationsList() {
       const investigation = user.investigations.find((investigation) => investigation.id === id);
 
       if (investigation) {
-        dispatch(investigationFormSetEdit(investigation));
+        dispatch(investigationFormSetEdit({ ...investigation, title: t("edit_investigation") }));
       }
     },
     [dispatch, user]
