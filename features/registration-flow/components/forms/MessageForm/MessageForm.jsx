@@ -23,7 +23,7 @@ import { ConfirmationDialog } from "./ConfirmationDialog";
 import { TimeSelection } from "./TimeSelection";
 
 const messageSchema = object().shape({
-  content: string().min(25).max(750).required(),
+  content: string().min(25).max(2500).required(),
 });
 
 export const MessageForm = () => {
@@ -38,7 +38,6 @@ export const MessageForm = () => {
   const { formatPrice, globalCurrency } = useCurrency();
 
 
-
   const resolver = useYupValidationResolver(messageSchema);
   const form = useForm({ resolver });
 
@@ -48,6 +47,7 @@ export const MessageForm = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [confirmationData, setConfirmationData] = React.useState(null);
 
+  const description = t("message_uploads_description", {currency:globalCurrency, amount:formatPrice(global.attach)});
   const doctorPrice = React.useMemo(
     () => (messageType === MESSAGE_TYPES.standard ? doctor.price : doctor.meet_price || 0),
     [messageType, doctor.meet_price, doctor.price]
@@ -148,7 +148,7 @@ export const MessageForm = () => {
           <Form.Item name="uploads" label={t("message_uploads_label")}>
             <Upload
               action={messageUploadFile(1)}
-              description={t("message_uploads_description", {currency:globalCurrency})}
+              description={description}
               icon={<ImageIcon />}
               accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
               fileList={attachments.list}

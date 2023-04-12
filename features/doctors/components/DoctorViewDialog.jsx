@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
-import Button, { IconBtn } from "@/components/Button";
+import { IconBtn } from "@/components/Button";
 import Popup from "@/components/Popup";
 import Skeleton from "@/components/Skeleton";
 import ClockIcon from "@/icons/clock.svg";
@@ -16,11 +16,11 @@ import VideoIcon from "@/icons/video.svg";
 import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
 import useCurrency from "@/hooks/useCurrency";
+import ConsultationOptions from "@/features/doctors/components/ConsultationOptions";
 
 const DoctorViewDialogSkeleton = () => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
-
 
   return (
     <article className="doctor-view skeleton">
@@ -81,36 +81,14 @@ const DoctorViewDialogSkeleton = () => {
   );
 };
 
-export const DoctorViewDialog = ({
-  doctor,
-  isLoading,
-  onClose,
-  onMessageTypeClick,
-  onVideoTypeClick,
-}) => {
+export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClick, onVideoTypeClick }) => {
   const { t } = useTranslation();
-  const { globalCurrency } = useCurrency();
   const { value: isOpen, setFalse: onHideModal } = useBoolean(true);
-
-  const [isMessageTypeLoading, setIsMessageTypeLoading] = React.useState(false);
-  const [isVideoTypeLoading, setIsVideoTypeLoading] = React.useState(false);
 
   const onVisibleChange = React.useCallback(() => {
     onClose();
     onHideModal();
   }, [onHideModal, onClose]);
-
-  const onMessageTypeClickHandler = React.useCallback(async () => {
-    setIsMessageTypeLoading(true);
-    await onMessageTypeClick();
-    setIsMessageTypeLoading(false);
-  }, [onMessageTypeClick]);
-
-  const onVideoTypeClickHandler = React.useCallback(async () => {
-    setIsVideoTypeLoading(true);
-    await onVideoTypeClick();
-    setIsVideoTypeLoading(false);
-  }, [onVideoTypeClick]);
 
   return (
     <Popup className="doctor-view__modal" visible={isOpen} onVisibleChange={onVisibleChange}>
@@ -118,11 +96,7 @@ export const DoctorViewDialog = ({
         <DoctorViewDialogSkeleton />
       ) : (
         <article className="doctor-view">
-          <IconBtn
-            className="doctor-view__modal-close"
-            icon={<TimesIcon />}
-            onClick={onVisibleChange}
-          />
+          <IconBtn className="doctor-view__modal-close" icon={<TimesIcon />} onClick={onVisibleChange} />
 
           <div className="doctor-view__avatar">
             <img src={doctor.avatar} alt={doctor.name} />
@@ -135,34 +109,15 @@ export const DoctorViewDialog = ({
               <h3 className="doctor-view__name">{doctor.name}</h3>
             </header>
 
-            <div className="doctor-view__meta">
-              {doctor.isGuard && (
-                <span className="doctor-view__meta-item filled">
-                  <ShieldIcon />
-                  <span className="doctor-view__meta-text">{t("guard_doctor")}</span>
-                </span>
-              )}
-              <span className="doctor-view__meta-item filled">
-                <ClockIcon />
-                <span className="doctor-view__meta-text">
-                  {doctor.activity.responseTime
-                    ? `${doctor.activity.responseTime} ${t("mins")}`
-                    : "-"}
-                </span>
-              </span>
-              <span className="doctor-view__meta-item">
-                <CommentIcon />
-                <span className="doctor-view__meta-text">{doctor.price} {globalCurrency}</span>
-              </span>
-              <span className="doctor-view__meta-item">
-                <VideoIcon />
-                <span className="doctor-view__meta-text">{doctor.meet_price} {globalCurrency}</span>
-              </span>
-            </div>
+            <Badges doctor={doctor} />
 
-            <p className="doctor-view__description">
-              {getPropByLangOrThrow(doctor.about?.bio, getActiveLng())}
-            </p>
+            <ConsultationOptions
+              doctor={doctor}
+              onVideoTypeClick={onVideoTypeClick}
+              onMessageTypeClick={onMessageTypeClick}
+            />
+
+            <p className="doctor-view__description">{getPropByLangOrThrow(doctor.about?.bio, getActiveLng())}</p>
 
             <div className="doctor-view__activity">
               <div className="doctor-view__activity-item">
@@ -180,28 +135,6 @@ export const DoctorViewDialog = ({
                 </p>
               </div>
             </div>
-
-            <footer className="doctor-view__footer">
-              {doctor.chat && (
-                <Button
-                  className="doctor-view__button"
-                  loading={isMessageTypeLoading}
-                  onClick={onMessageTypeClickHandler}
-                >
-                  <span>{t("wizard:chat_consultation")}</span>
-                </Button>
-              )}
-              {doctor.video && (
-                <Button
-                  className="doctor-view__button"
-                  type="outline"
-                  loading={isVideoTypeLoading}
-                  onClick={onVideoTypeClickHandler}
-                >
-                  <span>{t("video_appointment")}</span>
-                </Button>
-              )}
-            </footer>
           </div>
         </article>
       )}
@@ -237,4 +170,26 @@ DoctorViewDialog.propTypes = {
   onClose: PropTypes.func,
   onMessageTypeClick: PropTypes.func,
   onVideoTypeClick: PropTypes.func,
+};
+
+// eslint-disable-next-line react/prop-types
+const Badges = ({ doctor }) => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="doctor-view__meta">
+      {!doctor.isGuard && (
+        <span className="doctor-view__meta-item filled">
+          <ShieldIcon />
+          <span className="doctor-view__meta-text">{t("guard_doctor")}</span>
+        </span>
+      )}
+      <span className="doctor-view__meta-item filled">
+        <ClockIcon />
+        <span className="doctor-view__meta-text">
+          {doctor.activity.responseTime ? `${doctor.activity.responseTime} ${t("mins")}` : "-"}
+        </span>
+      </span>
+    </div>
+  );
 };

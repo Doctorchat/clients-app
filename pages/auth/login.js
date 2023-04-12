@@ -17,6 +17,7 @@ import { loginSchema } from "@/services/validation";
 import { emulateLogin, loginUser } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import useRegion from "@/hooks/useRegion";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);
@@ -35,7 +36,10 @@ export default function Login() {
       const [pathname, search] = redirect.split("?");
       const searchParams = new URLSearchParams(`?${search}`);
 
-      if (pathname.startsWith("/registration-flow") && searchParams.has("doctor_id")) {
+      if (
+        pathname.startsWith("/registration-flow") &&
+        searchParams.has("doctor_id")
+      ) {
         setRegistrationFlowDoctorId(`?${search}`);
       }
     }
@@ -83,6 +87,8 @@ export default function Login() {
     [dispatch, router]
   );
 
+  const region = useRegion();
+
   return (
     <>
       <div className="auth-layout__main-header">
@@ -91,7 +97,9 @@ export default function Login() {
         </div>
         <Link href={"/registration-flow" + registrationFlowDoctorId}>
           <a>
-            <Button className="auth-layout__green-btn">{t("registration")}</Button>
+            <Button className="auth-layout__green-btn">
+              {t("registration")}
+            </Button>
           </a>
         </Link>
       </div>
@@ -105,7 +113,9 @@ export default function Login() {
               {t("password")}
             </label>
             <Link href="/auth/restore">
-              <a className="forgot-password-link link pe-2">{t("forgot_password")}</a>
+              <a className="forgot-password-link link pe-2">
+                {t("forgot_password")}
+              </a>
             </Link>
           </div>
           <Form.Item name="password">
@@ -116,13 +126,16 @@ export default function Login() {
               {t("login")}
             </Button>
             <div className="login-media w-100">
-              <a href="https://api.doctorchat.md/auth/google" className="d-block me-3 w-100">
+              <a
+                href={`https://api.doctorchat.md/${region}/auth/google`}
+                className="d-block me-3 w-100"
+              >
                 <button className="login-media__btn is-google" type="button">
                   <GoogleLogo />
                   {t("wizard:login_with_google")}
                 </button>
               </a>
-              <a href="https://api.doctorchat.md/auth/facebook">
+              <a href={`https://api.doctorchat.md/${region}/auth/facebook`}>
                 <button className="login-media__btn" type="button">
                   <FacebookLogo />
                 </button>

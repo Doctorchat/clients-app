@@ -2,24 +2,25 @@ import i18next from "@/services/i18next";
 
 import getActiveLng from "./getActiveLng";
 
-
-
-
-
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
+const customParseFormat = require("dayjs/plugin/customParseFormat");
 
 require("dayjs/locale/ro");
 require("dayjs/locale/ru");
 require("dayjs/locale/en");
-dayjs.extend(relativeTime);
 
-const formats = {
+dayjs.extend(relativeTime);
+dayjs.extend(customParseFormat);
+
+export const formats = {
   time: "HH:mm",
   day: "MMM DD",
   month: "MMMM DD",
   year: "DD/MM/YYYY",
   full: "DD.MM.YYYY HH:mm",
+  serverDate: "YYYY-MM-DD",
+  serverFull: "YYYY-MM-DD HH:mm",
 };
 
 /**
@@ -66,9 +67,12 @@ export default function date(date) {
     return dayjsDate.format(formats.month);
   };
 
+  const toServerDate = () => dayjsDate.format(formats.serverDate);
+
   return {
     dynamic,
     monthDate,
+    toServerDate,
     default: dayjsDate.format("MMMM DD, YYYY"),
     time: dayjsDate.format(formats.time),
     full: dayjsDate.format(formats.full),
@@ -89,4 +93,13 @@ export const IOSMonthDate = (date) => {
   }
 
   return date;
+};
+
+export const calculateAge = (birthday) => {
+  const dayjsBirthday = dayjs(birthday, formats.serverDate, true);
+  const age = dayjs().diff(dayjsBirthday, "year");
+  const years = dayjs().diff(dayjsBirthday, "year");
+  const months = dayjs().diff(dayjsBirthday, "month") - years * 12;
+  const weeks = dayjs().diff(dayjsBirthday, "week") - years * 52 - months * 4;
+  return { age, years, months, weeks };
 };

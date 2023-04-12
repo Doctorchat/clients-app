@@ -23,7 +23,7 @@ import MessageFile from "./MessageFile";
 import MessageType from "./MessageType";
 
 export default function Message(props) {
-  const { id, content, updated, side, type, meet, seen, files, chatId, isLastMessage } = props;
+  const { id, content, updated, side, type, meet, seen, files, chatId, isLastMessage, status } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
   const editForm = useForm({ defaultValues: { content } });
@@ -40,18 +40,30 @@ export default function Message(props) {
       setEditLoading(true);
 
       try {
-        const response = await api.conversation.editMessage({ content: values.content, id });
+        const response = await api.conversation.editMessage({
+          content: values.content,
+          id,
+        });
 
         dispatch(chatContentUpdateMessage({ content: values.content, id }));
 
         if (isLastMessage) {
-          dispatch(updateConversation({ id: +chatId, description: response.data.content }));
+          dispatch(
+            updateConversation({
+              id: +chatId,
+              description: response.data.content,
+            })
+          );
         }
 
         setIsEditing(false);
       } catch (error) {
         dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
+          notification({
+            type: "error",
+            title: "error",
+            descrp: getApiErrorMessages(error, true),
+          })
         );
       } finally {
         setEditLoading(false);
@@ -107,7 +119,7 @@ export default function Message(props) {
             <span className="inner">{date(updated).time}</span>
           </span>
         </div>
-        <MessageType type={type} componentProps={meet} />
+        <MessageType type={type} componentProps={meet} status={status} />
       </div>
       {MessageFiles}
     </div>

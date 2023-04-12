@@ -1,0 +1,76 @@
+
+.consultation-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  margin-top: 1.5rem;
+
+  .card {
+    position: relative;
+    cursor: pointer;
+
+    border: 3px solid #EAEDF4;
+    padding: 1.6rem 2rem 1.6rem 1.6rem;
+    border-radius: 8px;
+
+    &.selected {
+      border-color: #E81F41;
+      animation: pulse 1s;
+    }
+  }
+
+  .checked {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #E81F41;
+    color: #fff;
+    width: 1.6rem;
+    padding: 0.2rem;
+    border-radius: 0 0 0 8px;
+  }
+
+  .card-price {
+    display: flex;
+    margin-top: .4rem;
+    color: #52565e;
+  }
+
+  .price {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-left: 0.4rem;
+  }
+
+  .card-title {
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .doctor-view__button {
+    height: 3rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .consultation-options {
+    grid-template-columns: unset;
+  }
+}
+
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 31, 65, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(232, 31, 65, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 31, 65, 0);
+  }
+}
