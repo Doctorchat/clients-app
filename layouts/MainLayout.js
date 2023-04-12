@@ -6,7 +6,6 @@ import AuthWrapper from "@/containers/AuthWrapper";
 import Portal from "@/containers/Portal";
 import { userRoles } from "@/context/constants";
 import { LeftSide, PhoneConfirmation } from "@/modules/common";
-import { DocStartConversation } from "@/modules/doctor";
 
 const ClientStartConversation = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientStartConversation)
@@ -33,11 +32,14 @@ export default function MainLayout({ children }) {
         </Portal>
       </AuthRoleWrapper>
 
-      <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
-        <Portal portalName="modalRoot">
-          <DocStartConversation />
-        </Portal>
-      </AuthRoleWrapper>
+      {/**
+       * @deprecated
+       * <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
+       *   <Portal portalName="modalRoot">
+       *     <DocStartConversation />
+       *   </Portal>
+       * </AuthRoleWrapper>
+       */}
 
       <div id="chat-columns">
         <LeftSide />
