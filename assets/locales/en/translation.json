@@ -217,6 +217,7 @@
   "appintments_warning": "Leave the fields blank to indicate that you are not available on the appropriate day",
   "the_email_has_already_been_taken": "The email has already been taken",
   "invalid_phone": "Invalid phone number",
+  "price": "Price",
   "price_meet": "Meeting price",
   "price_message": "Message price",
   "check_email": "Please check email!",

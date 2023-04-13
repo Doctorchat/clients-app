@@ -13,13 +13,14 @@ const VIDEO = "video";
 // eslint-disable-next-line react/prop-types
 function ConsultationOption({ title, price, selected, onClick }) {
   const { globalCurrency } = useCurrency();
+  const { t } = useTranslation();
 
   return (
     <div className={clsx("card", { selected })} onClick={onClick}>
       {selected && <CheckIcon className="checked" />}
       <div className="card-title">{title}</div>
       <div className="card-price">
-        <span className="label">Pret:</span>
+        <span className="label">{t("price")}:</span>
         <span className="price">
           {price} {globalCurrency}
         </span>
