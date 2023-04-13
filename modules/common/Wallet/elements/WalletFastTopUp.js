@@ -16,7 +16,7 @@ const WalletFastTopUp = ({ className }) => {
     <AuthRoleWrapper roles={[userRoles.get("client")]}>
       <div className={clsx("d-flex", className)}>
         <WalletBalance showFrozen={false} />
-        <WalletTopup />
+        <WalletTopup popupClassName="red-brand-colors" />
         <Button
           className="m-3 mb-2 p-0"
           style={{ minWidth: 32, minHeight: 32 }}
