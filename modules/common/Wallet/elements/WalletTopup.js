@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -17,7 +18,7 @@ import getApiErrorMessages from "@/utils/getApiErrorMessages";
 import useCurrency from "@/hooks/useCurrency";
 import { useMutation } from "@tanstack/react-query";
 
-const WalletTopup = () => {
+const WalletTopup = ({ popupClassName }) => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
 
@@ -53,7 +54,12 @@ const WalletTopup = () => {
 
   return (
     <Portal portalName="modalRoot">
-      <Popup id="deposit-popup" visible={isTopUpVisible} onVisibleChange={(v) => dispatch(toggleTopUpModal(v))}>
+      <Popup
+        id="deposit-popup"
+        visible={isTopUpVisible}
+        onVisibleChange={(v) => dispatch(toggleTopUpModal(v))}
+        className={popupClassName}
+      >
         <Popup.Header title={t("transactions.top_up_form")} />
         <Popup.Content>
           <Form methods={form} onFinish={onSubmitHandler}>
@@ -76,4 +82,11 @@ const WalletTopup = () => {
   );
 };
 
+WalletTopup.propTypes = {
+  popupClassName: PropTypes.string,
+};
+
+WalletTopup.defaultProps = {
+  popupClassName: "",
+};
 export default WalletTopup;
