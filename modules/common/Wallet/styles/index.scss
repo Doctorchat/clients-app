@@ -13,6 +13,7 @@
     &:not(:last-of-type) {
       margin-bottom: 8px;
     }
+
     &:nth-child(odd) {
       background-color: var(--bs-gray-100);
     }
@@ -80,6 +81,7 @@
     font-weight: 500;
     padding: 4px 12px;
     border-radius: 30px;
+
     &.top_up,
     &.incoming {
       color: var(--bs-success);
@@ -94,8 +96,12 @@
   }
 }
 
-.red-brand-colors{
+.red-brand-colors {
   --bs-primary: #e81f41;
   --bs-primary-hover: #ca1533;
   --bs-secondary: #92d4d2;
+
+  .popup-body {
+    height: 200px !important;
+  }
 }
