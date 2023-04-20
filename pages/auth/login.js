@@ -119,17 +119,17 @@ export default function Login() {
               {t("login")}
             </Button>
             <div className="login-media w-100">
-              <a href={`https://api.doctorchat.md/${region}/auth/google`} className="d-block me-3 w-100">
+              <a href={`https://api.doctorchat.md/${region}/auth/google`} className="d-block w-100">
                 <button className="login-media__btn is-google" type="button">
                   <GoogleLogo />
                   {t("wizard:login_with_google")}
                 </button>
               </a>
-              <a href={`https://api.doctorchat.md/${region}/auth/facebook`}>
-                <button className="login-media__btn" type="button">
-                  <FacebookLogo />
-                </button>
-              </a>
+              {/*<a href={`https://api.doctorchat.md/${region}/auth/facebook`}>*/}
+              {/*  <button className="login-media__btn" type="button">*/}
+              {/*    <FacebookLogo />*/}
+              {/*  </button>*/}
+              {/*</a>*/}
             </div>
           </div>
         </Form>
