@@ -48,12 +48,15 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
   }, []);
 
   const showBackButton = !!backPath;
+  const showWalletTopUp = activeStep === "doctor";
 
   return (
     <div
       className={cs("registration-flow__layout doctorchat-v2", disableResponsiveRestriction && "disable-restrictions")}
     >
-      <header className={clsx("registration-flow__header", { "layout-full": showBackButton })}>
+      <header
+        className={clsx("registration-flow__header", { "layout-full": showBackButton, "no-wallet": !showWalletTopUp })}
+      >
         {showBackButton && (
           <Button
             className="registration-flow__back registration-flow__gray-btn"
@@ -67,7 +70,7 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
         )}
 
         <WalletFastTopUp
-          isVisible={activeStep === "doctor"}
+          isVisible={showWalletTopUp}
           className={clsx("wallet-top-up", { "ms-md-5": !showBackButton })}
         />
 
