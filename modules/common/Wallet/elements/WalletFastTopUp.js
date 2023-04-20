@@ -9,8 +9,10 @@ import { WalletTopup } from "@/modules/common/Wallet";
 import Button from "@/components/Button";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
 
-const WalletFastTopUp = ({ className }) => {
+const WalletFastTopUp = ({ className, isVisible }) => {
   const dispatch = useDispatch();
+
+  if (!isVisible) return null;
 
   return (
     <AuthRoleWrapper roles={[userRoles.get("client")]}>
@@ -36,8 +38,10 @@ const WalletFastTopUp = ({ className }) => {
 };
 WalletFastTopUp.propTypes = {
   className: PropTypes.string,
+  isVisible: PropTypes.bool,
 };
 WalletFastTopUp.defaultProps = {
   className: "",
+  isVisible: true,
 };
 export default WalletFastTopUp;
