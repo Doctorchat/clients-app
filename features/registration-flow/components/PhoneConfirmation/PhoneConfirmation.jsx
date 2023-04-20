@@ -2,10 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { isValidPhoneNumber } from "react-phone-number-input";
-import PinInput from "react-pin-input";
 import { useDispatch, useSelector } from "react-redux";
-import i18next from "i18next";
+import i18next, { t } from "i18next";
 import { object, string } from "yup";
+import OtpInput from "react-otp-input";
+import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -39,17 +40,6 @@ export const PhoneConfirmation = () => {
 
   const [isPhoneNumberUpdating, setIsPhoneNumberUpdating] = React.useState(false);
 
-  const {
-    confirmationCode,
-    countdown,
-    isConfirming,
-    isRequesting,
-    __resetPinInput,
-    setConfirmationCode,
-    onSendCode,
-    onConfirmCode,
-  } = usePhoneConfirmation();
-
   const onEditPhoneNumber = React.useCallback(
     async ({ phone }) => {
       setIsPhoneNumberUpdating(true);
@@ -57,15 +47,17 @@ export const PhoneConfirmation = () => {
       try {
         await api.smsVerification.changePhone({ phone });
         await dispatch(updateUserProperty({ prop: "phone", value: phone }));
-        onSendCode(true);
+        // onSendCode(true);
       } catch (error) {
         setFormApiErrors(error);
       } finally {
         setIsPhoneNumberUpdating(false);
       }
     },
-    [dispatch, onSendCode, setFormApiErrors]
+    [dispatch, setFormApiErrors]
   );
+
+  const handleEditPhoneNumber = () => setIsPhoneNumberUpdating(true);
 
   return (
     <div className="registration-flow__form">
@@ -77,42 +69,59 @@ export const PhoneConfirmation = () => {
         }}
         onFinish={onEditPhoneNumber}
       >
-        <Form.Item className="mb-0" label={`${t("phone")}*`} name="phone">
+        <Form.Item className="mb-0" label={`${t("phone")}*`} name="phone" disabled={!isPhoneNumberUpdating}>
           <InputPhone />
         </Form.Item>
-        <Button htmlType="submit">{t("wizard:edit")}</Button>
+        {!isPhoneNumberUpdating && <Button onClick={handleEditPhoneNumber}>{t("wizard:edit")}</Button>}
+        {isPhoneNumberUpdating && <Button htmlType="submit">{t("wizard:phone_verification.send_code")}</Button>}
       </Form>
+
+      <PhoneConfirmationInput isPhoneNumberUpdating={isPhoneNumberUpdating} />
+    </div>
+  );
+};
+
+const PhoneConfirmationInput = ({ isPhoneNumberUpdating }) => {
+  const { confirmationCode, setConfirmationCode, countdown, isLoading, sendCode, onConfirmCode } =
+    usePhoneConfirmation();
+
+  const user = useSelector((state) => state.user.data);
+
+  if (isPhoneNumberUpdating) return null;
+
+  const isResetButtonDisabled = !isValidPhoneNumber(user?.phone) || isLoading || countdown > 0;
+  const isContinueButtonDisabled = isLoading || !confirmationCode || confirmationCode.length < 6;
+
+  return (
+    <>
       <div className="phone-confirmation">
         <div className="phone-confirmation__content">
           <header className="phone-confirmation__header">
             <h4 className="mb-0">{t("wizard:phone_verification.confirmation_code")}</h4>
+
             <Button
               className="registration-flow__gray-btn flex-1"
               size="sm"
               type="text"
               icon={countdown ? <span className="mr-1">({countdown})</span> : null}
-              onClick={onSendCode}
-              disabled={!isValidPhoneNumber(user.phone) || isRequesting || isPhoneNumberUpdating}
+              onClick={sendCode}
+              disabled={isResetButtonDisabled}
             >
               {t("wizard:phone_verification.resend_code")}
             </Button>
           </header>
+
           <div className="phone-confirmation__pin d-flex align-items-center justify-content-center">
-            {__resetPinInput ? null : (
-              <PinInput
-                autoSelect
-                length={6}
-                type="numeric"
-                inputMode="number"
-                inputStyle={{
-                  margin: "0",
-                  border: "2px solid var(--bs-gray-300)",
-                }}
-                onChange={setConfirmationCode}
-                onComplete={setConfirmationCode}
-              />
-            )}
+            <OtpInput
+              value={confirmationCode}
+              onChange={setConfirmationCode}
+              numInputs={6}
+              renderInput={(props) => <input {...props} autoComplete="one-time-code" />}
+              inputStyle="phone-confirmation__pin-input"
+              shouldAutoFocus
+            />
           </div>
+
           <footer className="phone-confirmation__footer">
             <p>
               {t("wizard:phone_verification.please_enter_code")} {user?.phone}
@@ -121,14 +130,14 @@ export const PhoneConfirmation = () => {
         </div>
       </div>
       <div className="form-bottom">
-        <Button
-          loading={isConfirming}
-          disabled={isRequesting || !confirmationCode || confirmationCode.length < 6 || isPhoneNumberUpdating}
-          onClick={onConfirmCode}
-        >
+        <Button disabled={isContinueButtonDisabled} onClick={onConfirmCode}>
           {t("continue")}
         </Button>
       </div>
-    </div>
+    </>
   );
+};
+
+PhoneConfirmationInput.propTypes = {
+  isPhoneNumberUpdating: PropTypes.bool,
 };

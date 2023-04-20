@@ -79,7 +79,7 @@ const Input = forwardRef((props, ref) => {
           type={inputType}
           {...rest}
         />
-        <ShowHidePassword type={type} inputType={inputType} setInputType={setInputType} />
+        {!disabled && <ShowHidePassword type={type} inputType={inputType} setInputType={setInputType} />}
       </div>
     </>
   );

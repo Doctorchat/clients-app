@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffectOnce } from "usehooks-ts";
 
 import FullPageLoading from "@/components/FullPageLoading";
-import { Layout, PhoneConfirmation, RegistrationForm } from "@/features/registration-flow";
+import { Layout, RegistrationForm } from "@/features/registration-flow";
 import i18next from "@/services/i18next";
 import { fetchUserByToken, getBootstrapData } from "@/store/actions";
 
@@ -52,11 +52,7 @@ export default function RegistrationPage() {
     return <FullPageLoading />;
   }
 
-  if (isPhoneConfirmationStep) {
-    return <PhoneConfirmation />;
-  }
-
-  return <RegistrationForm isFormDisabled={isPhoneConfirmationStep} updateStepStatus={updateStepStatus} />;
+  return <RegistrationForm isPhoneConfirmationStep={isPhoneConfirmationStep} updateStepStatus={updateStepStatus} />;
 }
 
 RegistrationPage.getLayout = function (page) {

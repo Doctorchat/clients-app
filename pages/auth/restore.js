@@ -1,21 +1,29 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { object, string } from "yup";
+import { isValidPhoneNumber } from "react-phone-number-input";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
-import Input from "@/components/Inputs";
+import { InputPhone } from "@/components/Inputs";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import i18next from "i18next";
 
 const restoreSchema = object().shape({
-  email: string().email().required(),
+  phone: string()
+    .required()
+    .test({
+      name: "phone-validation",
+      message: i18next.t("invalid_phone"),
+      test: (value) => isValidPhoneNumber(value),
+    }),
 });
 
 export default function Login() {
@@ -61,9 +69,9 @@ export default function Login() {
         </Link>
       </div>
       <div className="auth-form">
-        <Form name="login-form" methods={form} onFinish={onLoginSubmit}>
-          <Form.Item label={t("email")} name="email">
-            <Input />
+        <Form name="login-form" methods={form} onFinish={onLoginSubmit} initialValues={{ phone: "" }}>
+          <Form.Item label={t("phone")} name="phone">
+            <InputPhone autoComplete="username" />
           </Form.Item>
           <div className="form-bottom">
             <Button htmlType="submit" loading={loading}>
