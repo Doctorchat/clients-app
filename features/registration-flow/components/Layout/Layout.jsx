@@ -66,7 +66,10 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
           </Button>
         )}
 
-        <WalletFastTopUp className={clsx("wallet-top-up", { "ms-md-5": !showBackButton })} />
+        <WalletFastTopUp
+          isVisible={activeStep === "doctor"}
+          className={clsx("wallet-top-up", { "ms-md-5": !showBackButton })}
+        />
 
         <Steps activeStep={activeStep} />
 
