@@ -21,7 +21,7 @@ import date from "@/utils/date";
 
 export default function ClientInvestigationForm() {
   const {
-    investigationForm: { isOpen, isEditing, values },
+    investigationForm: { isOpen, isEditing, values, title },
   } = useSelector((store) => ({
     investigationForm: store.investigationForm,
   }));
@@ -102,6 +102,8 @@ export default function ClientInvestigationForm() {
     [dispatch, setFormApiErrors, isEditing, values]
   );
 
+  const modalTitle = title ? title : t("add_investigation");
+
   return (
     <Popup
       id="investigation-form"
@@ -112,7 +114,7 @@ export default function ClientInvestigationForm() {
         disabled: !formEdited,
       }}
     >
-      <Popup.Header title={t("add_investigation")} />
+      <Popup.Header title={modalTitle} />
       <Popup.Content>
         <p className="mb-3" style={{ padding: "0px 8px", fontSize: 17 }}>
           *{t("investigation_form_description")}
