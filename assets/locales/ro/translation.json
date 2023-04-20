@@ -220,6 +220,7 @@
   "appintments_warning": "Lăsați câmpurile necompletate pentru a indica că nu sunteți disponibil în ziua corespunzătoare",
   "the_email_has_already_been_taken": "E-mailul a fost deja preluat",
   "invalid_phone": "Număr de telefon invalid",
+  "price": "Preț",
   "price_meet": "Preț conferintă",
   "price_message": "Preț mesaj",
   "check_email": "Vă rugăm să verificați e-mailul!",
@@ -291,5 +292,9 @@
   },
   "slots": "Sloturi",
   "investigation_form_description": "Indicaţi în anchetă datele persoanei pentru care doriţi să solicitaţi o consultaţie!",
-  "access_meet": "Accesează conferința"
+  "access_meet": "Accesează conferința",
+  "years": "ani",
+  "months": "luni",
+  "weeks": "săptămâni",
+  "and": "și"
 }

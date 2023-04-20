@@ -10,16 +10,29 @@ import useCurrency from "@/hooks/useCurrency";
 const CHAT = "chat";
 const VIDEO = "video";
 
+const selectDefaultOption = (isChatAvailable, isVideoAvailable) => {
+  if (isChatAvailable) {
+    return CHAT;
+  }
+
+  if (isVideoAvailable) {
+    return VIDEO;
+  }
+
+  return null;
+};
+
 // eslint-disable-next-line react/prop-types
-function ConsultationOption({ title, price, selected, onClick }) {
+function ConsultationOption({ title, price, selected, onClick, disabled }) {
   const { globalCurrency } = useCurrency();
+  const { t } = useTranslation();
 
   return (
-    <div className={clsx("card", { selected })} onClick={onClick}>
+    <div className={clsx("card", { selected, disabled })} onClick={onClick}>
       {selected && <CheckIcon className="checked" />}
       <div className="card-title">{title}</div>
       <div className="card-price">
-        <span className="label">Pret:</span>
+        <span className="label">{t("price")}:</span>
         <span className="price">
           {price} {globalCurrency}
         </span>
@@ -29,11 +42,11 @@ function ConsultationOption({ title, price, selected, onClick }) {
 }
 
 function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
-  const { price, meet_price } = doctor;
+  const { price, meet_price, video: isVideoAvailable, chat: isChatAvailable } = doctor;
 
   const { t } = useTranslation();
 
-  const [selectedOption, setSelectedOption] = useState(CHAT);
+  const [selectedOption, setSelectedOption] = useState(selectDefaultOption(isChatAvailable, isVideoAvailable));
   const [isButtonLoading, setIsButtonLoading] = React.useState(false);
 
   const handleOptionClick = (index) => () => {
@@ -46,7 +59,7 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
 
     if (selectedOption === CHAT) {
       await onMessageTypeClick();
-    } else {
+    } else if (selectedOption === VIDEO) {
       await onVideoTypeClick();
     }
 
@@ -54,6 +67,7 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
   };
 
   const isSelected = (type) => type === selectedOption;
+  const isDisabled = (type) => (type === CHAT && !isChatAvailable) || (type === VIDEO && !isVideoAvailable);
 
   return (
     <>
@@ -63,6 +77,7 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
           price={price}
           selected={isSelected(CHAT)}
           onClick={handleOptionClick(CHAT)}
+          disabled={isDisabled(CHAT)}
         />
 
         <ConsultationOption
@@ -70,6 +85,7 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
           price={meet_price}
           selected={isSelected(VIDEO)}
           onClick={handleOptionClick(VIDEO)}
+          disabled={isDisabled(VIDEO)}
         />
 
         <Button onClick={handleStartButtonClick} loading={isButtonLoading}>

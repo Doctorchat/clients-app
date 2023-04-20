@@ -217,6 +217,7 @@
   "appintments_warning": "Leave the fields blank to indicate that you are not available on the appropriate day",
   "the_email_has_already_been_taken": "The email has already been taken",
   "invalid_phone": "Invalid phone number",
+  "price": "Price",
   "price_meet": "Meeting price",
   "price_message": "Message price",
   "check_email": "Please check email!",
@@ -289,6 +290,10 @@
   "slots": "Slots",
   "investigation_form_description": "Fill in the form with the details of the person for whom you want to request a consultation!",
   "access_meet": "Access meeting",
+  "years": "years",
+  "months": "months",
+  "weeks": "weeks",
+  "and": "and",
   "guard_doctor_tooltip": "The on-duty doctor responds within a maximum of one hour from receiving the message.",
   "respond_time_doctor_tooltip": "Response time. Occasionally the duration may be shorter or longer."
 }
