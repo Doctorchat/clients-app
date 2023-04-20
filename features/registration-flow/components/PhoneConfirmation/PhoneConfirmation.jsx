@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import i18next, { t } from "i18next";
 import { object, string } from "yup";
 import OtpInput from "react-otp-input";
+import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -81,25 +82,15 @@ export const PhoneConfirmation = () => {
 };
 
 const PhoneConfirmationInput = ({ isPhoneNumberUpdating }) => {
-  const {
-    confirmationCode,
-    setConfirmationCode,
-
-    countdown,
-
-    isConfirming,
-    isRequesting,
-
-    sendCode,
-    onConfirmCode,
-  } = usePhoneConfirmation();
+  const { confirmationCode, setConfirmationCode, countdown, isLoading, sendCode, onConfirmCode } =
+    usePhoneConfirmation();
 
   const user = useSelector((state) => state.user.data);
 
   if (isPhoneNumberUpdating) return null;
 
-  const isResetButtonDisabled = !isValidPhoneNumber(user?.phone) || isRequesting || countdown > 0;
-  const isContinueButtonDisabled = isRequesting || !confirmationCode || confirmationCode.length < 6;
+  const isResetButtonDisabled = !isValidPhoneNumber(user?.phone) || isLoading || countdown > 0;
+  const isContinueButtonDisabled = isLoading || !confirmationCode || confirmationCode.length < 6;
 
   return (
     <>
@@ -139,10 +130,14 @@ const PhoneConfirmationInput = ({ isPhoneNumberUpdating }) => {
         </div>
       </div>
       <div className="form-bottom">
-        <Button loading={isConfirming} disabled={isContinueButtonDisabled} onClick={onConfirmCode}>
+        <Button disabled={isContinueButtonDisabled} onClick={onConfirmCode}>
           {t("continue")}
         </Button>
       </div>
     </>
   );
+};
+
+PhoneConfirmationInput.propTypes = {
+  isPhoneNumberUpdating: PropTypes.bool,
 };

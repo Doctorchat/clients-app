@@ -23,6 +23,10 @@ const usePhoneConfirmation = () => {
   const [isConfirming, setIsConfirming] = React.useState(false);
   const [isRequesting, setIsRequesting] = React.useState(false);
 
+  useEffectOnce(() => {
+    sendCode();
+  });
+
   React.useEffect(() => {
     Countdown.setState(setCountdown).start();
 
@@ -40,7 +44,6 @@ const usePhoneConfirmation = () => {
       const response = await api.smsVerification.sendCode({ phone: user.phone });
 
       setCountdown(response?.data?.expired_in ?? 275);
-
       Countdown.restart();
 
       dispatch(notification({ title: "success", descrp: "phone_verification.code_sent" }));
@@ -57,7 +60,7 @@ const usePhoneConfirmation = () => {
     }
   };
 
-  const onConfirmCode = React.useCallback(async () => {
+  const onConfirmCode = async () => {
     setIsConfirming(true);
 
     try {
@@ -80,7 +83,7 @@ const usePhoneConfirmation = () => {
 
       var UserID = user.id;
 
-      window.dataLayer.push({
+      window.dataLayer?.push({
         event: "user_registered",
         UserID: UserID,
       });
@@ -95,18 +98,15 @@ const usePhoneConfirmation = () => {
     } finally {
       setIsConfirming(false);
     }
-  }, [user?.id, confirmationCode, dispatch, router]);
+  };
 
-  useEffectOnce(() => {
-    sendCode();
-  });
+  const isLoading = isConfirming || isRequesting;
 
   return {
     confirmationCode,
     setConfirmationCode,
     countdown,
-    isConfirming,
-    isRequesting,
+    isLoading,
     sendCode,
     onConfirmCode,
   };

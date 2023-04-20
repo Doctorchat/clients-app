@@ -48,7 +48,7 @@
 
 .phone-confirmation__edit-form {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 24px;
 
   .form-control {
@@ -76,7 +76,7 @@
       }
     }
 
-    .pincode-input-text {
+    &__pin-input {
       width: 40px !important;
     }
   }

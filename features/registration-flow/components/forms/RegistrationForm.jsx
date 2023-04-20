@@ -79,7 +79,7 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
 
         {!isPhoneConfirmationStep && (
           <Form.Item label={`${t("phone")}*`} name="phone" disabled={isPhoneConfirmationStep}>
-            <InputPhone />
+            <InputPhone autoComplete="username" />
           </Form.Item>
         )}
 
