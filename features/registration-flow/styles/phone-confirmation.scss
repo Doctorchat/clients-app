@@ -29,11 +29,16 @@
     }
   }
 
-  .pincode-input-text {
+  &__pin-input {
     width: 59px !important;
     height: 57px !important;
+    margin-right: 10px;
+    border-radius: 6px;
+
     background-color: #fff !important;
+
     border: unset !important;
+    outline: none;
 
     &:focus {
       box-shadow: 0 0 0 0.2rem rgba(#e81f41, 0.2) !important;

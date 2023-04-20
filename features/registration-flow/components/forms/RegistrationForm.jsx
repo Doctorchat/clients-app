@@ -15,9 +15,9 @@ import i18next from "@/services/i18next";
 import { registerUser } from "@/store/actions";
 import cs from "@/utils/classNames";
 import getActiveLng from "@/utils/getActiveLng";
+import { PhoneConfirmation } from "@/features/registration-flow";
 
 const registerSchema = object().shape({
-  email: string().email().required(),
   phone: string()
     .required()
     .test({
@@ -27,12 +27,9 @@ const registerSchema = object().shape({
     }),
   name: string().min(2).required(),
   password: string().min(6).required(),
-  password_confirmation: string()
-    .oneOf([ref("password")], i18next.t("yup_passwords_match"))
-    .required(),
 });
 
-export const RegistrationForm = ({ isFormDisabled = false, updateStepStatus }) => {
+export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepStatus }) => {
   const { t } = useTranslation();
 
   const user = useSelector((state) => state.user.data);
@@ -66,47 +63,40 @@ export const RegistrationForm = ({ isFormDisabled = false, updateStepStatus }) =
   );
 
   return (
-    <Form
-      className={cs("registration-flow__form", isFormDisabled && "pb-0")}
-      methods={form}
-      onFinish={onSubmit}
-      initialValues={{ phone: "", ...user }}
-    >
-      <Form.Item
-        label={`${t("wizard:first_name/last_name")}*`}
-        name="name"
-        disabled={isFormDisabled}
+    <>
+      <Form
+        className={cs("registration-flow__form", isPhoneConfirmationStep && "pb-0")}
+        methods={form}
+        onFinish={onSubmit}
+        initialValues={{ phone: "", ...user, password: isPhoneConfirmationStep ? "password" : "" }}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item label={`${t("email")}*`} name="email" disabled={isFormDisabled}>
-        <Input />
-      </Form.Item>
-      <Form.Item label={`${t("password")}*`} name="password" disabled={isFormDisabled}>
-        <Input type="password" />
-      </Form.Item>
-      <Form.Item
-        label={`${t("repeat_password")}*`}
-        name="password_confirmation"
-        disabled={isFormDisabled}
-      >
-        <Input type="password" />
-      </Form.Item>
-      <Form.Item label={`${t("phone")}*`} name="phone" disabled={isFormDisabled}>
-        <InputPhone />
-      </Form.Item>
-      {!isFormDisabled && (
-        <div className="form-bottom">
-          <Button htmlType="submit" loading={isLoading}>
-            {t("continue")}
-          </Button>
-        </div>
-      )}
-    </Form>
+        <Form.Item label={`${t("wizard:first_name/last_name")}*`} name="name" disabled={isPhoneConfirmationStep}>
+          <Input type="text" autoComplete="name" />
+        </Form.Item>
+        <Form.Item label={`${t("password")}*`} name="password" disabled={isPhoneConfirmationStep}>
+          <Input type="password" autoComplete="new-password" />
+        </Form.Item>
+
+        {!isPhoneConfirmationStep && (
+          <Form.Item label={`${t("phone")}*`} name="phone" disabled={isPhoneConfirmationStep}>
+            <InputPhone />
+          </Form.Item>
+        )}
+
+        {!isPhoneConfirmationStep && (
+          <div className="form-bottom">
+            <Button htmlType="submit" loading={isLoading}>
+              {t("continue")}
+            </Button>
+          </div>
+        )}
+      </Form>
+      {isPhoneConfirmationStep && <PhoneConfirmation />}
+    </>
   );
 };
 
 RegistrationForm.propTypes = {
-  isFormDisabled: PropTypes.bool,
+  isPhoneConfirmationStep: PropTypes.bool,
   updateStepStatus: PropTypes.func,
 };
