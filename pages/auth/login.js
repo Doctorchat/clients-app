@@ -20,7 +20,7 @@ import useRegion from "@/hooks/useRegion";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);
-  const form = useForm({ resolver });
+  const form = useForm({ resolver, defaultValues: { phone: "" } });
   const router = useRouter();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -99,7 +99,7 @@ export default function Login() {
       </div>
       <div className="auth-layout__form">
         <Form name="login-form" methods={form} onFinish={onLoginSubmit}>
-          <Form.Item label={t("email")} name="phone">
+          <Form.Item label={t("phone")} name="phone">
             <InputPhone autoComplete="username" />
           </Form.Item>
           <div className="d-flex align-items-center justify-content-between mb-2">
