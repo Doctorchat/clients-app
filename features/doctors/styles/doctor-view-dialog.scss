@@ -79,6 +79,9 @@
     flex-wrap: wrap;
     margin: -6px;
     margin-top: .35rem;
+    .dc-tooltip__trigger{
+      width: min-content;
+    }
   }
 
   &__meta-item {

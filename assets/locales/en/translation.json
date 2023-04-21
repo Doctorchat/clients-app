@@ -92,6 +92,7 @@
   },
   "no_investigation_error": "To access doctors on the Doctorchat platform, you need to add at least one investigation",
   "add_investigation": "Add an investigation",
+  "edit_investigation": "Edit investigation",
   "online_meet": "Online Meeting",
   "simple_message": "Simple Message",
   "want_anonymity": "Hide my name",
@@ -293,5 +294,7 @@
   "years": "years",
   "months": "months",
   "weeks": "weeks",
-  "and": "and"
+  "and": "and",
+  "guard_doctor_tooltip": "The on-duty doctor responds within a maximum of one hour from receiving the message.",
+  "respond_time_doctor_tooltip": "Response time. Occasionally the duration may be shorter or longer."
 }
