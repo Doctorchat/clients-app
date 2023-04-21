@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { object, ref, string } from "yup";
+import { object, string } from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
+import { PhoneConfirmation } from "@/features/registration-flow";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import { AcceptTermsAndConditions } from "@/modules/common/TermsAndConditions";
 import i18next from "@/services/i18next";
 import { registerUser } from "@/store/actions";
 import cs from "@/utils/classNames";
 import getActiveLng from "@/utils/getActiveLng";
-import { PhoneConfirmation } from "@/features/registration-flow";
 
 const registerSchema = object().shape({
   phone: string()
@@ -41,6 +42,7 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
   const setFormApiErrors = useApiErrorsWithForm(form, dispatch);
 
   const [isLoading, setIsLoading] = React.useState(false);
+  const [areTermsConfirmed, setAreTermsConfirmed] = useState(false);
 
   const onSubmit = React.useCallback(
     async (values) => {
@@ -83,9 +85,15 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
           </Form.Item>
         )}
 
+        <AcceptTermsAndConditions
+          disabled={isPhoneConfirmationStep}
+          value={isPhoneConfirmationStep ? isPhoneConfirmationStep : areTermsConfirmed}
+          setValue={setAreTermsConfirmed}
+        />
+
         {!isPhoneConfirmationStep && (
           <div className="form-bottom">
-            <Button htmlType="submit" loading={isLoading}>
+            <Button htmlType="submit" loading={isLoading} disabled={!areTermsConfirmed}>
               {t("continue")}
             </Button>
           </div>

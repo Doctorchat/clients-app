@@ -246,7 +246,8 @@
     "success": "Numărul de telefon a fost verificat",
     "invalid_code": "Cod incorect",
     "phone_already_used": "Numărul de telefon este deja ocupat",
-    "phone_already_verifed": "Număr de telefon deja verificat"
+    "phone_already_verifed": "Număr de telefon deja verificat",
+    "reset_password": "Link-ul de resetare a parolei a fost trimis pe telefonul mobil."
   },
   "not_registered_yet": "Nu sunteți încă înregistrat?",
   "read_more": "Citește mai mult",
