@@ -38,8 +38,8 @@ export default function Login() {
         setLoading(true);
         await api.user.resetPassword(values);
 
-        dispatch(notification({ title: "success", descrp: "check_email" }));
-        form.reset();
+        dispatch(notification({ title: "success", descrp: "phone_verification.reset_password" }));
+        form.reset({ phone: "" });
       } catch (error) {
         dispatch(
           notification({
