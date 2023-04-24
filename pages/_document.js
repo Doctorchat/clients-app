@@ -21,6 +21,10 @@ class MyDocument extends Document {
             })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_KEY}');`}
             </Script>
           )}
+
+          {process.env.NEXT_PUBLIC_API_REGION === "ro" && (
+            <meta name="facebook-domain-verification" content="gdphpgz7wx4mupk8gwidgzj1x5b70c" />
+          )}
         </Head>
         <body>
           {process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_GTM_KEY && (
