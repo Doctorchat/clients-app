@@ -13,6 +13,7 @@ import List from "@/components/List";
 import Menu from "@/components/Menu";
 import Search from "@/components/Search/Search";
 import SidebarHeader from "@/components/Sidebar/SidebarHeader";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import BarsIcon from "@/icons/bars.svg";
 import HomeIcon from "@/icons/home.svg";
 import { ExternalDocList, ProfileChangeLang } from "@/modules/common";
@@ -59,7 +60,7 @@ export default function Doctors() {
           overlay={
             <Menu>
               <Menu.Item icon={<HomeIcon />} className="home-item">
-                <Link href="https://doctorchat.md/">
+                <Link href={HOME_PAGE_URL}>
                   <a>{t("home_page")}</a>
                 </Link>
               </Menu.Item>

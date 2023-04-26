@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { useDropdownContext } from "@/components/Dropdown";
 import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import HomeIcon from "@/icons/home.svg";
 import InvestigationIcon from "@/icons/investigation.svg";
 import LogoutIcon from "@/icons/logout.svg";
@@ -43,7 +44,7 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
         {t("investigations")}
       </Menu.Item>
       <Menu.Item icon={<HomeIcon />} className="home-item">
-        <Link href="https://doctorchat.md/">
+        <Link href={HOME_PAGE_URL}>
           <a>{t("home_page")}</a>
         </Link>
       </Menu.Item>

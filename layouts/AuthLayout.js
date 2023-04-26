@@ -4,14 +4,13 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useEffectOnce } from "usehooks-ts";
 
-import useRegion from "@/hooks/useRegion";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import { ProfileChangeLang } from "@/modules/common";
 import axiosInstance from "@/services/axios/apiConfig";
 
 export default function AuthLayout({ children }) {
   const user = useSelector((store) => store.user);
   const router = useRouter();
-  const region = useRegion();
   const { t } = useTranslation();
 
   useEffectOnce(() => {
@@ -35,7 +34,7 @@ export default function AuthLayout({ children }) {
           <header className="auth-layout__header">
             <div>
               {t("wizard:welcome_to")}&nbsp;
-              <a href={`https://doctorchat.${region}/`} target="_blank" rel="noopener noreferrer">
+              <a href={HOME_PAGE_URL} target="_blank" rel="noopener noreferrer">
                 Doctorchat
               </a>
             </div>
