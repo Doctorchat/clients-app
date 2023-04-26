@@ -13,11 +13,11 @@ import Switch from "@/components/Switch";
 import Upload from "@/components/Upload";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { getDoctor } from "@/features/doctors/api";
+import useCurrency from "@/hooks/useCurrency";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-png.svg";
 import { messageUploadFile } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
-import useCurrency from "@/hooks/useCurrency";
 
 import { ConfirmationDialog } from "./ConfirmationDialog";
 import { TimeSelection } from "./TimeSelection";
@@ -37,7 +37,6 @@ export const MessageForm = () => {
   }));
   const { formatPrice, globalCurrency } = useCurrency();
 
-
   const resolver = useYupValidationResolver(messageSchema);
   const form = useForm({ resolver });
 
@@ -47,7 +46,10 @@ export const MessageForm = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [confirmationData, setConfirmationData] = React.useState(null);
 
-  const description = t("message_uploads_description", {currency:globalCurrency, amount:formatPrice(global.attach)});
+  const description = t("message_uploads_description", {
+    currency: globalCurrency,
+    amount: formatPrice(global.attach),
+  });
   const doctorPrice = React.useMemo(
     () => (messageType === MESSAGE_TYPES.standard ? doctor.price : doctor.meet_price || 0),
     [messageType, doctor.meet_price, doctor.price]
@@ -58,12 +60,8 @@ export const MessageForm = () => {
       const data = { ...values };
 
       if (!data.slot_id && messageType === MESSAGE_TYPES.meet) {
-        document
-          .querySelector(".message-form__time-selection")
-          .scrollIntoView({ behavior: "smooth" });
-        dispatch(
-          notification({ type: "error", title: "error", descrp: "wizard:please_select_time" })
-        );
+        document.querySelector(".message-form__time-selection").scrollIntoView({ behavior: "smooth" });
+        dispatch(notification({ type: "error", title: "error", descrp: "wizard:please_select_time" }));
         return;
       }
 
@@ -128,10 +126,7 @@ export const MessageForm = () => {
           </div>
 
           {messageType === MESSAGE_TYPES.meet && (
-            <TimeSelection
-              doctorId={doctor?.id}
-              onSelectSlot={(slotId) => form.setValue("slot_id", slotId)}
-            />
+            <TimeSelection doctorId={doctor?.id} onSelectSlot={(slotId) => form.setValue("slot_id", slotId)} />
           )}
 
           <div className="message-textarea__header">
