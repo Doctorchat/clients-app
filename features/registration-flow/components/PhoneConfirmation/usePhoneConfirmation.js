@@ -70,6 +70,12 @@ const usePhoneConfirmation = () => {
         marketing_lang: getActiveLng(),
       });
 
+      if (process.env.NEXT_PUBLIC_API_REGION === "ro") {
+        window.dataLayer.push({
+          event: "create_account",
+        });
+      }
+
       dispatch(
         notification({
           id: "wizard:phone_verification_success",
