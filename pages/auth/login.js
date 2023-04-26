@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
+import ConditionalRender from "@/components/ConditionalRender";
+import { REGION_RO } from "@/components/ConditionalRender/ConditionalRender";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
 import { getUserRedirectPath } from "@/features/registration-flow";
@@ -118,12 +120,14 @@ export default function Login() {
               {t("login")}
             </Button>
             <div className="login-media w-100">
-              <a href={`https://api.doctorchat.md/${region}/auth/google`} className="d-block w-100">
-                <button className="login-media__btn is-google" type="button">
-                  <GoogleLogo />
-                  {t("wizard:login_with_google")}
-                </button>
-              </a>
+              <ConditionalRender hideOnRegion={REGION_RO}>
+                <a href={`https://api.doctorchat.md/${region}/auth/google`} className="d-block w-100">
+                  <button className="login-media__btn is-google" type="button">
+                    <GoogleLogo />
+                    {t("wizard:login_with_google")}
+                  </button>
+                </a>
+              </ConditionalRender>
               {/*<a href={`https://api.doctorchat.md/${region}/auth/facebook`}>*/}
               {/*  <button className="login-media__btn" type="button">*/}
               {/*    <FacebookLogo />*/}
