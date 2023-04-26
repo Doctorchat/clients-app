@@ -14,7 +14,7 @@ import {
   useDoctorPreview,
   useDoctorsInfiniteList,
 } from "@/features/doctors";
-import api from "@/services/axios/api";
+import { startConversation } from "@/features/registration-flow";
 import { categoriesOptionsSelector } from "@/store/selectors";
 
 export const SelectDoctor = () => {
@@ -35,30 +35,26 @@ export const SelectDoctor = () => {
     setDoctorPreviewId,
   } = useDoctorPreview();
 
-  const createChatHandler = React.useCallback(
-    async (chatType = CHAT_TYPES.standard, messageType = MESSAGE_TYPES.standard) => {
-      const res = await api.conversation.create({
-        doctor_id: doctorPreviewId ?? 1,
-        type: chatType,
-        investigation_id: user?.investigations?.[0]?.id,
-        isAnonym: false,
-        isMeet: messageType === MESSAGE_TYPES.meet,
-      });
+  const createChatHandler = async (chatType = CHAT_TYPES.standard, messageType = MESSAGE_TYPES.standard) => {
+    const investigationId = user.investigations?.[0]?.id;
 
-      router.push(
-        `/registration-flow/message/${res.data.id}?chatType=${chatType}&messageType=${messageType}&doctorId=${
-          doctorPreviewId ?? "auto"
-        }`
-      );
-    },
-    [doctorPreviewId, router, user?.investigations]
-  );
+    if (!investigationId) {
+      const query = { ...router.query, chatType, messageType };
+      if (doctorPreviewId) {
+        query.doctorPreviewId = doctorPreviewId;
+      }
+      const pathname = "/user/medical-records";
+      return await router.push({ pathname, query }, undefined, { shallow: true });
+    }
 
-  const onAutoTypeClickHandler = React.useCallback(async () => {
+    await startConversation({ chatType, messageType, doctorPreviewId, investigationId });
+  };
+
+  const onAutoTypeClickHandler = async () => {
     setIsAutoTypeLoading(true);
     await createChatHandler(CHAT_TYPES.auto, MESSAGE_TYPES.standard);
     setIsAutoTypeLoading(false);
-  }, [createChatHandler]);
+  };
 
   return (
     <>
