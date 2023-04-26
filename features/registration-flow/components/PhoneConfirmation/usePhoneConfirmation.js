@@ -79,7 +79,7 @@ const usePhoneConfirmation = () => {
       );
       dispatch(updateUserProperty({ prop: "verified", value: true }));
 
-      await router.replace("/registration-flow/medical-records" + window.location.search);
+      await router.replace("/home" + window.location.search);
 
       var UserID = user.id;
 

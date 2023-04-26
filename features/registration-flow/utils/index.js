@@ -3,7 +3,7 @@ import Router from "next/router";
 import { MESSAGE_TYPES } from "@/context/constants";
 import api from "@/services/axios/api";
 
-const allowedPaths = ["select-doctor", "medical-records", "message", "payment"];
+const allowedPaths = ["select-doctor", "message", "payment"];
 
 export const getUserRedirectPath = (user, pathname = "") => {
   if (user.role === 3) {

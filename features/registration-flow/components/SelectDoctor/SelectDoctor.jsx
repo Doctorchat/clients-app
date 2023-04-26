@@ -39,9 +39,12 @@ export const SelectDoctor = () => {
     const investigationId = user.investigations?.[0]?.id;
 
     if (!investigationId) {
-      const query = { ...router.query, doctorPreviewId: null, chatType, messageType };
-      const pathname = "/registration-flow/medical-records";
-      router.push({ pathname, query }, undefined, { shallow: true });
+      const query = { ...router.query, chatType, messageType };
+      if (doctorPreviewId) {
+        query.doctorPreviewId = doctorPreviewId;
+      }
+      const pathname = "/user/medical-records";
+      return await router.push({ pathname, query }, undefined, { shallow: true });
     }
 
     await startConversation({ chatType, messageType, doctorPreviewId, investigationId });
