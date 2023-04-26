@@ -67,6 +67,12 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
     try {
       const response = await api.conversation.addMessage({ ...data, code: promocode });
 
+      if (process.env.NEXT_PUBLIC_API_REGION === "ro") {
+        window.dataLayer.push({
+          event: "initiate_checkout",
+        });
+      }
+
       if (response.data.redirect) {
         window.location.replace(response.data.redirect);
       } else {
