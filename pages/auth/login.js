@@ -7,10 +7,9 @@ import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
-import Input from "@/components/Inputs";
+import Input, { InputPhone } from "@/components/Inputs";
 import { getUserRedirectPath } from "@/features/registration-flow";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import FacebookLogo from "@/icons/facebook-logo.svg";
 import GoogleLogo from "@/icons/google-logo.svg";
 import AuthLayout from "@/layouts/AuthLayout";
 import { loginSchema } from "@/services/validation";
@@ -21,7 +20,7 @@ import useRegion from "@/hooks/useRegion";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);
-  const form = useForm({ resolver });
+  const form = useForm({ resolver, defaultValues: { phone: "" } });
   const router = useRouter();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -100,8 +99,8 @@ export default function Login() {
       </div>
       <div className="auth-layout__form">
         <Form name="login-form" methods={form} onFinish={onLoginSubmit}>
-          <Form.Item label={t("email")} name="email">
-            <Input />
+          <Form.Item label={t("phone")} name="phone">
+            <InputPhone autoComplete="username" />
           </Form.Item>
           <div className="d-flex align-items-center justify-content-between mb-2">
             <label className="form-control-label mb-0" htmlFor="password">

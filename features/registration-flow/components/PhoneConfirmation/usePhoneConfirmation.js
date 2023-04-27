@@ -19,44 +19,48 @@ const usePhoneConfirmation = () => {
 
   const [confirmationCode, setConfirmationCode] = React.useState("");
   const [countdown, setCountdown] = React.useState(0);
+
   const [isConfirming, setIsConfirming] = React.useState(false);
   const [isRequesting, setIsRequesting] = React.useState(false);
 
-  const [__resetPinInput, setResetPinInput] = React.useState(false);
+  useEffectOnce(() => {
+    sendCode();
+  });
 
-  const onResetPinInput = React.useCallback(() => {
-    setResetPinInput(true);
-    setTimeout(() => {
-      setResetPinInput(false);
-    }, 0);
+  React.useEffect(() => {
+    Countdown.setState(setCountdown).start();
+
+    return () => {
+      Countdown.clear();
+    };
   }, []);
 
-  const onSendCode = React.useCallback(
-    async (ignoreCountdown = false) => {
-      if ((!ignoreCountdown && countdown) || !user?.phone) return;
+  const sendCode = async () => {
+    if (!user?.phone) return;
 
-      setIsRequesting(true);
-      onResetPinInput();
-      try {
-        const response = await api.smsVerification.sendCode({ phone: user.phone });
-        setCountdown(response?.data?.expired_in ?? 275);
-        dispatch(notification({ title: "success", descrp: "phone_verification.code_sent" }));
-      } catch (error) {
-        dispatch(
-          notification({
-            type: "error",
-            title: "error",
-            descrp: getApiErrorMessages(error, true),
-          })
-        );
-      } finally {
-        setIsRequesting(false);
-      }
-    },
-    [countdown, dispatch, user?.phone, onResetPinInput]
-  );
+    setIsRequesting(true);
 
-  const onConfirmCode = React.useCallback(async () => {
+    try {
+      const response = await api.smsVerification.sendCode({ phone: user.phone });
+
+      setCountdown(response?.data?.expired_in ?? 275);
+      Countdown.restart();
+
+      dispatch(notification({ title: "success", descrp: "phone_verification.code_sent" }));
+    } catch (error) {
+      dispatch(
+        notification({
+          type: "error",
+          title: "error",
+          descrp: getApiErrorMessages(error, true),
+        })
+      );
+    } finally {
+      setIsRequesting(false);
+    }
+  };
+
+  const onConfirmCode = async () => {
     setIsConfirming(true);
 
     try {
@@ -85,7 +89,7 @@ const usePhoneConfirmation = () => {
 
       var UserID = user.id;
 
-      window.dataLayer.push({
+      window.dataLayer?.push({
         event: "user_registered",
         UserID: UserID,
       });
@@ -97,30 +101,57 @@ const usePhoneConfirmation = () => {
           descrp: getApiErrorMessages(error, true),
         })
       );
-      onResetPinInput();
     } finally {
       setIsConfirming(false);
     }
-  }, [user?.id, confirmationCode, dispatch, router, onResetPinInput]);
+  };
 
-  React.useEffect(() => {
-    countdown > 0 && setTimeout(() => setCountdown(countdown - 1), 1000);
-  }, [countdown, setCountdown]);
-
-  useEffectOnce(() => {
-    onSendCode();
-  });
+  const isLoading = isConfirming || isRequesting;
 
   return {
     confirmationCode,
-    countdown,
-    isConfirming,
-    isRequesting,
-    __resetPinInput,
     setConfirmationCode,
-    onSendCode,
+    countdown,
+    isLoading,
+    sendCode,
     onConfirmCode,
   };
 };
 
 export default usePhoneConfirmation;
+
+//utils
+
+const Countdown = {
+  instanceRef: null,
+  update: null,
+  setState: function (func) {
+    this.update = func;
+    return this;
+  },
+  start: function () {
+    if (this.instanceRef) return;
+
+    this.instanceRef = setInterval(() => {
+      this.update((prev) => {
+        if (prev === 0) {
+          clearInterval(this.instanceRef);
+          return 0;
+        }
+
+        return prev - 1;
+      });
+      return this;
+    }, 1000);
+
+    return this;
+  },
+  clear: function () {
+    clearInterval(this.instanceRef);
+    this.instanceRef = null;
+    return this;
+  },
+  restart: function () {
+    return this.clear().start();
+  },
+};
