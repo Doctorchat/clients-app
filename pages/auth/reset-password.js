@@ -73,7 +73,7 @@ export default function ResetPassword() {
       <div className="auth-form auth-login-form">
         <Form name="login-form" methods={form} onFinish={onResetSubmit}>
           <Form.Item name="password" label={t("new_password")}>
-            <Input type="password" autoComplete="new-password" />
+            <Input type="password" />
           </Form.Item>
           <div className="form-bottom">
             <Button htmlType="submit" loading={loading}>
