@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
-import Input, { InputPhone } from "@/components/Inputs";
+import Input from "@/components/Inputs";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
@@ -49,7 +49,6 @@ export default function ResetPassword() {
             descrp: "parssword_recovery_success",
           })
         );
-        form.reset({ phone: "" });
         router.push("/auth/login");
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
@@ -72,15 +71,9 @@ export default function ResetPassword() {
         </Link>
       </div>
       <div className="auth-form auth-login-form">
-        <Form name="login-form" methods={form} onFinish={onResetSubmit} initialValues={{ phone: "" }}>
-          <Form.Item label={t("phone")} name="phone">
-            <InputPhone autoComplete="username" />
-          </Form.Item>
+        <Form name="login-form" methods={form} onFinish={onResetSubmit}>
           <Form.Item name="password" label={t("new_password")}>
-            <Input type="password" />
-          </Form.Item>
-          <Form.Item name="password_confirmation" label={t("repeat_password")}>
-            <Input type="password" />
+            <Input type="password" autoComplete="new-password" />
           </Form.Item>
           <div className="form-bottom">
             <Button htmlType="submit" loading={loading}>
