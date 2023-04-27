@@ -43,6 +43,10 @@
   "sign_in": "Sign in",
   "login_with_google": "Login with Google",
   "login_page_card_description": "The largest virtual clinic in Moldova.",
+  "login_page_card_description_ro": {
+    "1": "Your online clinic",
+    "2": "Consult with a doctor from home"
+  },
   "edit": "Edit",
   "text_consultations": "Chat consultations",
   "video_consultations": "Video consultations",
