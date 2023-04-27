@@ -9,6 +9,7 @@ import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
 import { getUserRedirectPath } from "@/features/registration-flow";
+import useRegion from "@/hooks/useRegion";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import GoogleLogo from "@/icons/google-logo.svg";
 import AuthLayout from "@/layouts/AuthLayout";
@@ -16,7 +17,6 @@ import { loginSchema } from "@/services/validation";
 import { emulateLogin, loginUser } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useRegion from "@/hooks/useRegion";
 
 export default function Login() {
   const resolver = useYupValidationResolver(loginSchema);

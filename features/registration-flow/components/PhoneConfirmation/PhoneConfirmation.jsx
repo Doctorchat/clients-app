@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import OtpInput from "react-otp-input";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 import i18next, { t } from "i18next";
-import { object, string } from "yup";
-import OtpInput from "react-otp-input";
 import PropTypes from "prop-types";
+import { object, string } from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
