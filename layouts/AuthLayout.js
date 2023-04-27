@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useEffectOnce } from "usehooks-ts";
 
+import ConditionalRender from "@/components/ConditionalRender";
+import { REGION_MD, REGION_RO } from "@/components/ConditionalRender/ConditionalRender";
 import { ProfileChangeLang } from "@/modules/common";
 import axiosInstance from "@/services/axios/apiConfig";
 
@@ -43,7 +45,14 @@ export default function AuthLayout({ children }) {
         </div>
         <div className="auth-layout__slider">
           <div className="auth-layout__slider-card">
-            <p className="slider-card__descrpiption">{t("wizard:login_page_card_description")}</p>
+            <ConditionalRender hideOnRegion={REGION_RO}>
+              <p className="slider-card__descrpiption">{t("wizard:login_page_card_description")}</p>
+            </ConditionalRender>
+
+            <ConditionalRender hideOnRegion={REGION_MD}>
+              <p className="slider-card__descrpiption">{t("wizard:login_page_card_description_ro.1")}</p>
+              <p className="slider-card__descrpiption">{t("wizard:login_page_card_description_ro.2")}</p>
+            </ConditionalRender>
           </div>
         </div>
       </div>
