@@ -25,10 +25,6 @@ export default function RegistrationPage() {
         return setIsPhoneConfirmationStep(true);
       }
 
-      if (!user?.investigations?.length) {
-        return router.replace("/registration-flow/medical-records" + window.location.search);
-      }
-
       return router.replace("/home");
     },
     [router]
