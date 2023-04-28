@@ -30,7 +30,7 @@ export default function ResetPassword() {
     if (firstRender.current) {
       firstRender.current = false;
     } else {
-      if (!query?.token) {
+      if (!query?.rtoken) {
         router.push("/auth/login");
       }
     }
@@ -40,7 +40,7 @@ export default function ResetPassword() {
     async (values) => {
       try {
         setLoading(true);
-        await api.user.restorePassword({ ...values, token: router.query?.token });
+        await api.user.restorePassword({ ...values, token: router.query?.rtoken });
 
         dispatch(
           notification({
@@ -73,7 +73,7 @@ export default function ResetPassword() {
       <div className="auth-form auth-login-form">
         <Form name="login-form" methods={form} onFinish={onResetSubmit}>
           <Form.Item name="password" label={t("new_password")}>
-            <Input type="password" autoComplete="new-password" />
+            <Input type="password" />
           </Form.Item>
           <div className="form-bottom">
             <Button htmlType="submit" loading={loading}>
