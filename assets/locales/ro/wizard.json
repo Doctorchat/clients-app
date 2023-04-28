@@ -43,6 +43,10 @@
   "sign_in": "Logare",
   "login_with_google": "Logare cu Google",
   "login_page_card_description": "Cea mai mare clinica virtuala din Moldova.",
+  "login_page_card_description_ro": {
+    "1": "Clinica ta online",
+    "2": "Consultă un medic direct de acasă"
+  },
   "edit": "Editeaza",
   "text_consultations": "Consultatii chat",
   "video_consultations": "Consultatii video",
