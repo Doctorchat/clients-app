@@ -14,6 +14,7 @@ import cs from "@/utils/classNames";
 import { WalletFastTopUp } from "@/modules/common/Wallet/elements";
 
 import { Steps } from "../Steps";
+import { Popconfirm } from "antd";
 
 export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRestriction = false, children }) => {
   const { t } = useTranslation();
@@ -82,15 +83,24 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
         <h1>{title}</h1>
         {children}
       </main>
-      <Button
-        className={cs("registration-flow__logout registration-flow__gray-btn", isLogoutVisible && "show")}
-        type="text"
-        size="sm"
-        icon={<LogoutIcon />}
-        onClick={logoutHandler}
+      <Popconfirm
+        title={t("logout_confirmation")}
+        className="registration-flow__logout-popover"
+        onConfirm={logoutHandler}
+        okText={t("yes")}
+        cancelText={t("no")}
+        okButtonProps={{ className: "registration-flow__logout-popover-btn btn-primary" }}
+        cancelButtonProps={{ className: "registration-flow__logout-popover-btn" }}
       >
-        {t("logout")}
-      </Button>
+        <Button
+          className={cs("registration-flow__logout registration-flow__gray-btn", isLogoutVisible && "show")}
+          type="text"
+          size="sm"
+          icon={<LogoutIcon />}
+        >
+          {t("logout")}
+        </Button>
+      </Popconfirm>
     </div>
   );
 };

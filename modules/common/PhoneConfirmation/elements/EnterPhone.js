@@ -10,7 +10,7 @@ import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
 import Form from "@/components/Form";
 import { InputPhone } from "@/components/Inputs";
-import { PopupContent,PopupHeader } from "@/components/Popup";
+import { PopupContent, PopupHeader } from "@/components/Popup";
 import Select from "@/components/Select";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
