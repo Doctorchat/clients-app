@@ -30,7 +30,7 @@ export default function ResetPassword() {
     if (firstRender.current) {
       firstRender.current = false;
     } else {
-      if (!query?.reset_token) {
+      if (!query?.rtoken) {
         router.push("/auth/login");
       }
     }
@@ -40,7 +40,7 @@ export default function ResetPassword() {
     async (values) => {
       try {
         setLoading(true);
-        await api.user.restorePassword({ ...values, reset_token: router.query?.reset_token });
+        await api.user.restorePassword({ ...values, token: router.query?.rtoken });
 
         dispatch(
           notification({
@@ -51,9 +51,7 @@ export default function ResetPassword() {
         );
         router.push("/auth/login");
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
         setLoading(false);
       }
     },
@@ -74,13 +72,7 @@ export default function ResetPassword() {
       </div>
       <div className="auth-form auth-login-form">
         <Form name="login-form" methods={form} onFinish={onResetSubmit}>
-          <Form.Item name="email" label={t("email")}>
-            <Input autoComplete="off" />
-          </Form.Item>
           <Form.Item name="password" label={t("new_password")}>
-            <Input type="password" />
-          </Form.Item>
-          <Form.Item name="password_confirmation" label={t("repeat_password")}>
             <Input type="password" />
           </Form.Item>
           <div className="form-bottom">

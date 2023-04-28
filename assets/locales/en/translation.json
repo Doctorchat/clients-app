@@ -243,7 +243,8 @@
     "success": "Phone number successfully verified",
     "invalid_code": "Incorrect code",
     "phone_already_used": "Phone number is already taken",
-    "phone_already_verifed": "Phone number already verified"
+    "phone_already_verifed": "Phone number already verified",
+    "reset_password": "Reset password link was sent to your mobile phone."
   },
   "not_registered_yet": "Not registered yet?",
   "read_more": "Read more",
