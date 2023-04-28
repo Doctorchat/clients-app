@@ -71,7 +71,7 @@ const usePhoneConfirmation = () => {
       });
 
       if (process.env.NEXT_PUBLIC_API_REGION === "ro") {
-        window.dataLayer.push({
+        window.dataLayer?.push({
           event: "create_account",
         });
       }
@@ -85,7 +85,7 @@ const usePhoneConfirmation = () => {
       );
       dispatch(updateUserProperty({ prop: "verified", value: true }));
 
-      await router.replace("/home" + window.location.search);
+      await router.replace("/registration-flow/select-doctor" + window.location.search);
 
       var UserID = user.id;
 
