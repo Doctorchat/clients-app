@@ -13,6 +13,7 @@ import Form from "@/components/Form";
 import Input from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import useCurrency from "@/hooks/useCurrency";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
@@ -113,7 +114,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                 <tr className="dc-description-row">
                   <th className="dc-description-row-label">{t("terms_conditions")}</th>
                   <td className="dc-description-row-content">
-                    <a href="https://doctorchat.md/termeni-si-conditii/" target="_blank" rel="noreferrer noopener">
+                    <a href={`${HOME_PAGE_URL}termeni-si-conditii/`} target="_blank" rel="noreferrer noopener">
                       {t("terms_conditions")}
                     </a>
                   </td>
@@ -221,7 +222,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                 <>
                   {t("accept_terms")}{" "}
                   <a
-                    href="https://doctorchat.md/termeni-si-conditii/"
+                    href={`${HOME_PAGE_URL}/termeni-si-conditii/`}
                     rel="noreferrer noopener"
                     target="_blank"
                     className="terms"
