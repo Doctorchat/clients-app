@@ -20,6 +20,7 @@ import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import { ConfirmationSection } from "@/modules/client/ClientMeetForm/MeetFormConfirm";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -157,48 +158,9 @@ function MessageFormConfirmation() {
             </tbody>
           </table>
         </div>
-        <div className="confirmation-section">
-          <table>
-            <tbody>
-              <tr className="dc-description-title">
-                <th colSpan="2">
-                  <div className="dc-description-title-trunc">
-                    <span>{t("message_form_confirmation.payment_security")}</span>
-                    <a href="https://mobilpay.com/" target="_blank" rel="noreferrer">
-                      MobilPay
-                    </a>
-                  </div>
-                </th>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("message_form_confirmation.company")}</th>
-                <td className="dc-description-row-content">WEBMEDCONSULT SRL</td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("message_form_confirmation.product")}</th>
-                <td className="dc-description-row-content">Doctorchat</td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("message_form_confirmation.adress")}</th>
-                <td className="dc-description-row-content">
-                  Bucureşti, sector 6, Splaiul Independenţei nr. 273, corp 3, etaj 3
-                </td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("email")}</th>
-                <td className="dc-description-row-content">
-                  <a href="mailto:info@doctorchat.md">info@doctorchat.md</a>
-                </td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("phone")}</th>
-                <td className="dc-description-row-content">
-                  <a href="tel:+373 78 272 887">+373 78 272 887</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+
+        <ConfirmationSection />
+
         <div className="confirmation-section">
           <table>
             <tbody>

@@ -13,6 +13,7 @@ import { PopupContent, PopupHeader } from "@/components/Popup";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { meetFormTabs } from "@/context/TabsKeys";
 import useCurrency from "@/hooks/useCurrency";
+import useRegion from "@/hooks/useRegion";
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
@@ -163,48 +164,7 @@ function MeetFormConfirmation() {
             </tbody>
           </table>
         </div>
-        <div className="confirmation-section">
-          <table>
-            <tbody>
-              <tr className="dc-description-title">
-                <th colSpan="2">
-                  <div className="dc-description-title-trunc">
-                    <span>{t("message_form_confirmation.payment_security")}</span>
-                    <a href="https://mobilpay.com/" target="_blank" rel="noreferrer">
-                      MobilPay
-                    </a>
-                  </div>
-                </th>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("message_form_confirmation.company")}</th>
-                <td className="dc-description-row-content">WEBMEDCONSULT SRL</td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("message_form_confirmation.product")}</th>
-                <td className="dc-description-row-content">Doctorchat</td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label"> {t("message_form_confirmation.adress")}</th>
-                <td className="dc-description-row-content">
-                  Bucureşti, sector 6, Splaiul Independenţei nr. 273, corp 3, etaj 3
-                </td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("email")}</th>
-                <td className="dc-description-row-content">
-                  <a href="mailto:info@doctorchat.md">info@doctorchat.md</a>
-                </td>
-              </tr>
-              <tr className="dc-description-row">
-                <th className="dc-description-row-label">{t("phone")}</th>
-                <td className="dc-description-row-content">
-                  <a href="tel:+373 78 272 887">+373 78 272 887</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <ConfirmationSection />
         <div className="confirmation-section">
           <table>
             <tbody>
@@ -294,3 +254,68 @@ function MeetFormConfirmation() {
 }
 
 export default memo(MeetFormConfirmation);
+
+export const ConfirmationSection = () => {
+  const { t } = useTranslation();
+  const region = useRegion();
+  const content = {
+    md: {
+      payment: "MobilPay",
+      company: "WEBMEDCONSULT SRL",
+      product: "Doctorchat",
+      adress: "Bucureşti, sector 6, Splaiul Independenţei nr. 273, corp 3, etaj 3",
+      phone: `+373 78 272 887`,
+      email: "info@doctorchat.md",
+    },
+    ro: {
+      company: "„WEBMEDCONSULT” OU",
+      product: "Doctorchat",
+      adress: "Oraşul Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
+      phone: "-",
+      email: "infodoctorchat.ro@gmail.com",
+    },
+  };
+  const regionContent = content[region];
+  return (
+    <div className="confirmation-section">
+      <table>
+        <tbody>
+          <tr className="dc-description-title">
+            <th colSpan="2">
+              <div className="dc-description-title-trunc">
+                <span>{t("message_form_confirmation.payment_security")}</span>
+                <a href="https://mobilpay.com/" target="_blank" rel="noreferrer">
+                  {regionContent.payment}
+                </a>
+              </div>
+            </th>
+          </tr>
+          <tr className="dc-description-row">
+            <th className="dc-description-row-label">{t("message_form_confirmation.company")}</th>
+            <td className="dc-description-row-content">{regionContent.company}</td>
+          </tr>
+          <tr className="dc-description-row">
+            <th className="dc-description-row-label">{t("message_form_confirmation.product")}</th>
+            <td className="dc-description-row-content">{regionContent.product}</td>
+          </tr>
+          <tr className="dc-description-row">
+            <th className="dc-description-row-label"> {t("message_form_confirmation.adress")}</th>
+            <td className="dc-description-row-content">{regionContent.adress}</td>
+          </tr>
+          <tr className="dc-description-row">
+            <th className="dc-description-row-label">{t("email")}</th>
+            <td className="dc-description-row-content">
+              <a href={`mailto:${regionContent.email}`}>{regionContent.email}</a>
+            </td>
+          </tr>
+          <tr className="dc-description-row">
+            <th className="dc-description-row-label">{t("phone")}</th>
+            <td className="dc-description-row-content">
+              <a href={`tel:${regionContent.phone}`}>{regionContent.phone}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
