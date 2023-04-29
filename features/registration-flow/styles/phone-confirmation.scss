@@ -57,6 +57,10 @@
   }
 }
 
+.phone-confirmation__edit-button{
+  margin-top: 25px;
+}
+
 @media screen and (max-width: 520px) {
   .phone-confirmation {
     &__header {
@@ -93,5 +97,9 @@
       margin-right: 0;
       margin-bottom: 1rem !important;
     }
+  }
+
+  .phone-confirmation__edit-button {
+    margin-top: 0;
   }
 }
