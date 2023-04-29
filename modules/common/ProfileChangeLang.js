@@ -1,10 +1,12 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import i18next from "i18next";
 import PropTypes from "prop-types";
 
+import { REGION_RO } from "@/components/ConditionalRender/ConditionalRender";
 import Dropdown from "@/components/Dropdown";
 import Menu from "@/components/Menu";
+import useRegion from "@/hooks/useRegion";
 import LangIcon from "@/icons/lang.svg";
 import api from "@/services/axios/api";
 import cs from "@/utils/classNames";
@@ -20,6 +22,18 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
   const user = useSelector((store) => store.user);
   const [changeLngLoading, setChangeLngLoading] = useState();
   const [dropdownForcedClose, setDropdownForcedClose] = useState(null);
+  const [languages, setLanguages] = useState(langs);
+  const region = useRegion();
+
+  useEffect(() => {
+    if (region === REGION_RO && languages.ru) {
+      changeLanguage("ro")();
+      setLanguages((prevState) => {
+        const { ru, ...newState } = prevState;
+        return newState;
+      });
+    }
+  }, [region]);
 
   const changeLanguage = useCallback(
     (lng) => async () => {
@@ -50,13 +64,15 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
       >
         Română
       </Menu.Item>
-      <Menu.Item
-        icon={<span className="lang-icon">RU</span>}
-        loading={changeLngLoading === "ru"}
-        onClick={changeLanguage("ru")}
-      >
-        Русский
-      </Menu.Item>
+      {languages?.ru && (
+        <Menu.Item
+          icon={<span className="lang-icon">RU</span>}
+          loading={changeLngLoading === "ru"}
+          onClick={changeLanguage("ru")}
+        >
+          Русский
+        </Menu.Item>
+      )}
       <Menu.Item
         icon={<span className="lang-icon">EN</span>}
         loading={changeLngLoading === "en"}
@@ -74,7 +90,7 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
       placement={placement}
       forcedClose={dropdownForcedClose}
     >
-      <Menu.Item icon={<LangIcon />}>{langs[getActiveLng()]}</Menu.Item>
+      <Menu.Item icon={<LangIcon />}>{languages[getActiveLng()]}</Menu.Item>
     </Dropdown>
   );
 }
