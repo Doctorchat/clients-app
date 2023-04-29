@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import OtpInput from "react-otp-input";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 import i18next, { t } from "i18next";
-import { object, string } from "yup";
-import OtpInput from "react-otp-input";
 import PropTypes from "prop-types";
+import { object, string } from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -72,8 +72,16 @@ export const PhoneConfirmation = () => {
         <Form.Item className="mb-0" label={`${t("phone")}*`} name="phone" disabled={!isPhoneNumberUpdating}>
           <InputPhone />
         </Form.Item>
-        {!isPhoneNumberUpdating && <Button onClick={handleEditPhoneNumber}>{t("wizard:edit")}</Button>}
-        {isPhoneNumberUpdating && <Button htmlType="submit">{t("wizard:phone_verification.send_code")}</Button>}
+        {!isPhoneNumberUpdating && (
+          <Button className="phone-confirmation__edit-button" onClick={handleEditPhoneNumber}>
+            {t("wizard:edit")}
+          </Button>
+        )}
+        {isPhoneNumberUpdating && (
+          <Button className="phone-confirmation__edit-button" htmlType="submit">
+            {t("wizard:phone_verification.send_code")}
+          </Button>
+        )}
       </Form>
 
       <PhoneConfirmationInput isPhoneNumberUpdating={isPhoneNumberUpdating} />
