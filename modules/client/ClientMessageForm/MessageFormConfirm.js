@@ -12,13 +12,14 @@ import Input from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { messageFormTabs } from "@/context/TabsKeys";
+import useCurrency from "@/hooks/useCurrency";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
 import { ConfirmationSection } from "@/modules/client/ClientMeetForm/MeetFormConfirm";
 
 const promoInputReplacer = (value) => {
@@ -135,7 +136,7 @@ function MessageFormConfirmation() {
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("terms_conditions")}</th>
                 <td className="dc-description-row-content">
-                  <a href="https://doctorchat.md/termeni-si-conditii/" target="_blank" rel="noreferrer noopener">
+                  <a href={`${HOME_PAGE_URL}termeni-si-conditii/`} target="_blank" rel="noreferrer noopener">
                     {t("terms_conditions")}
                   </a>
                 </td>
@@ -224,7 +225,7 @@ function MessageFormConfirmation() {
               <>
                 {t("accept_terms")}{" "}
                 <a
-                  href="https://doctorchat.md/termeni-si-conditii/"
+                  href={`${HOME_PAGE_URL}termeni-si-conditii/`}
                   rel="noreferrer noopener"
                   target="_blank"
                   className="terms"

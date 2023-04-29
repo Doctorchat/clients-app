@@ -12,6 +12,7 @@ import Form from "@/components/Form";
 import { InputPhone } from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import Select from "@/components/Select";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
@@ -121,7 +122,7 @@ const EnterPhone = React.memo(() => {
                 <>
                   {t("accept_terms")}{" "}
                   <a
-                    href="https://doctorchat.md/termeni-si-conditii/"
+                    href={`${HOME_PAGE_URL}termeni-si-conditii/`}
                     rel="noreferrer noopener"
                     target="_blank"
                     className="terms link"

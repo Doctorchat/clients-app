@@ -3,6 +3,7 @@ import { t } from "i18next";
 import PropTypes from "prop-types";
 
 import Checkbox from "@/components/Checkbox";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 
 const AcceptTermsAndConditions = ({ value, setValue, disabled }) => {
   const handleChange = () => setValue((prev) => !prev);
@@ -16,7 +17,7 @@ const AcceptTermsAndConditions = ({ value, setValue, disabled }) => {
           <>
             {t("accept_terms")}{" "}
             <a
-              href="https://doctorchat.md/termeni-si-conditii/"
+              href={`${HOME_PAGE_URL}termeni-si-conditii/`}
               target="_blank"
               rel="noreferrer noopener"
               className="terms"
