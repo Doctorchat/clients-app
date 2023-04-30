@@ -83,7 +83,7 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
         <h1>{title}</h1>
         {children}
       </main>
-      <Popconfirm
+      {isLogoutVisible && <Popconfirm
         title={t("logout_confirmation")}
         className="registration-flow__logout-popover"
         onConfirm={logoutHandler}
@@ -100,7 +100,7 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
         >
           {t("logout")}
         </Button>
-      </Popconfirm>
+      </Popconfirm>}
     </div>
   );
 };
