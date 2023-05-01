@@ -69,34 +69,37 @@ const BirthdayInput = forwardRef((props, ref) => {
             value: i + 1,
             label: i + 1,
           }))}
+          placeholder={t("day")}
           value={state.day}
           onChange={(o) => onFieldChange("day", o.value)}
         />
         <Select
           name="month"
           options={[
-            { value: 0, label: t("month.january") },
-            { value: 1, label: t("month.february") },
-            { value: 2, label: t("month.march") },
-            { value: 3, label: t("month.april") },
-            { value: 4, label: t("month.may") },
-            { value: 5, label: t("month.june") },
-            { value: 6, label: t("month.july") },
-            { value: 7, label: t("month.august") },
-            { value: 8, label: t("month.september") },
-            { value: 9, label: t("month.october") },
-            { value: 10, label: t("month.november") },
-            { value: 11, label: t("month.december") },
+            { value: 0, label: t("month_option.january") },
+            { value: 1, label: t("month_option.february") },
+            { value: 2, label: t("month_option.march") },
+            { value: 3, label: t("month_option.april") },
+            { value: 4, label: t("month_option.may") },
+            { value: 5, label: t("month_option.june") },
+            { value: 6, label: t("month_option.july") },
+            { value: 7, label: t("month_option.august") },
+            { value: 8, label: t("month_option.september") },
+            { value: 9, label: t("month_option.october") },
+            { value: 10, label: t("month_option.november") },
+            { value: 11, label: t("month_option.december") },
           ]}
+          placeholder={t("month")}
           value={state.month}
           onChange={(o) => onFieldChange("month", o.value)}
         />
         <Select
           name="year"
-          options={Array.from({ length: new Date().getFullYear() - 1904 }, (_, i) => ({
-            value: i + 1905,
-            label: i + 1905,
+          options={Array.from({ length: new Date().getFullYear() - 1949 }, (_, i) => ({
+            value: new Date().getFullYear() - i,
+            label: new Date().getFullYear() - i,
           }))}
+          placeholder={t("year")}
           value={state.year}
           onChange={(o) => onFieldChange("year", o.value)}
         />

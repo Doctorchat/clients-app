@@ -305,7 +305,7 @@
   "weeks": "săptămâni",
   "and": "și",
   "birthday": "Zi de naștere",
-  "month": {
+  "month_option": {
     "january": "Ianuarie",
     "february": "Februarie",
     "march": "Martie",
@@ -319,5 +319,8 @@
     "november": "Noiembrie",
     "december": "Decembrie"
   },
+  "day": "Ziua",
+  "month": "Luna",
+  "year": "Anul",
   "invalid_month_day": "Ziua lunii este invalidă"
 }
