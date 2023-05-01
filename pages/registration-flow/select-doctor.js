@@ -33,7 +33,7 @@ const CheckConversations = ({ children }) => {
   const { data: conversations } = useSelector((store) => store.conversationList);
 
   useEffect(() => {
-    if (conversations?.length) return;
+    if (conversations?.length > 1) return;
 
     dispatch(getConversationList());
   }, []);
