@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 import EditIcon from "@/icons/edit.svg";
 import TrashIcon from "@/icons/trash.svg";
 import cs from "@/utils/classNames";
+import { calculateAge } from "@/utils/date";
 
 import { IconBtn } from "../Button";
 import Confirm from "../Confirm";
 import DcTooltip from "../DcTooltip";
-import { calculateAge } from "@/utils/date";
 
 export default function InvestigationItem(props) {
   const { name, birth_date, weight, height, withActions, onEdit, onRemove, removeDisabled } = props;

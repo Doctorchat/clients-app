@@ -4,8 +4,11 @@ import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
 import { IconBtn } from "@/components/Button";
+import DcTooltip from "@/components/DcTooltip";
 import Popup from "@/components/Popup";
 import Skeleton from "@/components/Skeleton";
+import ConsultationOptions from "@/features/doctors/components/ConsultationOptions";
+import useCurrency from "@/hooks/useCurrency";
 import ClockIcon from "@/icons/clock.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
@@ -15,9 +18,6 @@ import TimesIcon from "@/icons/times.svg";
 import VideoIcon from "@/icons/video.svg";
 import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
-import useCurrency from "@/hooks/useCurrency";
-import ConsultationOptions from "@/features/doctors/components/ConsultationOptions";
-import DcTooltip from "@/components/DcTooltip";
 
 const DoctorViewDialogSkeleton = () => {
   const { t } = useTranslation();
