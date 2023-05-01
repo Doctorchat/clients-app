@@ -1,13 +1,16 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch } from "react-redux";
+import i18next from "i18next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { object, string } from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
-import Input from "@/components/Inputs";
+import { InputPhone } from "@/components/Inputs";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
@@ -15,7 +18,13 @@ import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const restoreSchema = object().shape({
-  email: string().email().required(),
+  phone: string()
+    .required()
+    .test({
+      name: "phone-validation",
+      message: i18next.t("invalid_phone"),
+      test: (value) => isValidPhoneNumber(value),
+    }),
 });
 
 export default function Login() {
@@ -23,15 +32,18 @@ export default function Login() {
   const form = useForm({ resolver: useYupValidationResolver(restoreSchema) });
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const router = useRouter();
 
   const onLoginSubmit = useCallback(
     async (values) => {
       try {
         setLoading(true);
-        await api.user.resetPassword(values);
-
-        dispatch(notification({ title: "success", descrp: "check_email" }));
-        form.reset();
+        const res = await api.user.resetPassword(values);
+        dispatch(notification({ title: "success", descrp: "phone_verification.reset_password" }));
+        form.reset({ phone: "" });
+        if (res.status === 200) {
+          router.push("/auth/reset-password");
+        }
       } catch (error) {
         dispatch(
           notification({
@@ -61,9 +73,9 @@ export default function Login() {
         </Link>
       </div>
       <div className="auth-form">
-        <Form name="login-form" methods={form} onFinish={onLoginSubmit}>
-          <Form.Item label={t("email")} name="email">
-            <Input />
+        <Form name="login-form" methods={form} onFinish={onLoginSubmit} initialValues={{ phone: "" }}>
+          <Form.Item label={t("phone")} name="phone">
+            <InputPhone autoComplete="username" />
           </Form.Item>
           <div className="form-bottom">
             <Button htmlType="submit" loading={loading}>

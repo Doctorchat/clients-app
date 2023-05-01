@@ -1,17 +1,17 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import clsx from "clsx";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 
 import Button from "@/components/Button";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import { ProfileChangeLang } from "@/modules/common";
+import { WalletFastTopUp } from "@/modules/common/Wallet/elements";
 import { logoutUser } from "@/store/actions";
 import cs from "@/utils/classNames";
-import { WalletFastTopUp } from "@/modules/common/Wallet/elements";
 
 import { Steps } from "../Steps";
 import { Popconfirm } from "antd";

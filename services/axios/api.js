@@ -26,8 +26,10 @@ const api = {
     resetPassword: (data) => axiosInstance.post("/auth/forgot-password", data),
     emulate: (data) => axiosInstance.post("/auth/emulate", data),
     restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
+    checkRestoreCode: (code) => axiosInstance.post("/auth/validate", { code }),
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
+    updateEmail: (data) => axiosInstance.put("/user/update/email", data),
   },
   doctor: {
     toggleTextStatus: () => axiosInstance.put("/user/card/toggle-chat"),
@@ -44,14 +46,14 @@ const api = {
     close: (id) => axiosInstance.put(`/chat/close/`, { chat_id: id }),
     editMessage: (data) => axiosInstance.put("/chat/message/update/", data),
     feedback: (data) => axiosInstance.post("/reviews/new", data),
-    requestMedia: (chatId, { content }) =>
-      axiosInstance.post(`/chat/request-media/${chatId}`, { content }),
+    requestMedia: (chatId, { content }) => axiosInstance.post(`/chat/request-media/${chatId}`, { content }),
     sendMedia: (chatId, { content, upload_id }) =>
       axiosInstance.post(`/chat/send-media/${chatId}`, { content, upload_id }),
     accept: (chatId) =>
       axiosInstance.post(`/chat/accept`, {
         chat_id: chatId,
       }),
+    destroy: (chatId) => axiosInstance.delete(`/chat/destroy/${chatId}`),
   },
   conversationList: { get: () => axiosInstance.get("/chat/list") },
   docList: {
@@ -60,7 +62,8 @@ const api = {
     getPublicReviews: (id) => axiosInstance.get(`/reviews/public/${id}`),
   },
   bootstrap: {
-    categories: () => axiosInstance.get("/front-specialities"),
+    categoriesForDoctor: () => axiosInstance.get("/front-specialities"),
+    categories: () => axiosInstance.get("/specialities"),
     global: () => axiosInstance.get("/settings/info"),
   },
   smsVerification: {

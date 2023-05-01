@@ -1,7 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import OtpInput from "react-otp-input";
+import PinInput from "react-pin-input";
 import { useDispatch } from "react-redux";
+import { useMutation } from "@tanstack/react-query";
+import { Typography } from "antd";
+import clsx from "clsx";
+import { t } from "i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -14,7 +20,7 @@ import api from "@/services/axios/api";
 import { resetPasswordShcema } from "@/services/validation";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-
+const { Text } = Typography;
 export default function ResetPassword() {
   const resolver = useYupValidationResolver(resetPasswordShcema);
   const [loading, setLoading] = useState(false);
@@ -24,13 +30,16 @@ export default function ResetPassword() {
   const { t } = useTranslation();
   const firstRender = useRef(true);
 
+  const [step, setStep] = React.useState(1);
+  const [otpCode, setOtpCode] = React.useState("");
+
   useEffect(() => {
     const { query } = router;
 
     if (firstRender.current) {
       firstRender.current = false;
     } else {
-      if (!query?.reset_token) {
+      if (!query?.rtoken) {
         router.push("/auth/login");
       }
     }
@@ -40,7 +49,7 @@ export default function ResetPassword() {
     async (values) => {
       try {
         setLoading(true);
-        await api.user.restorePassword({ ...values, reset_token: router.query?.reset_token });
+        await api.user.restorePassword({ ...values, code: otpCode });
 
         dispatch(
           notification({
@@ -51,13 +60,11 @@ export default function ResetPassword() {
         );
         router.push("/auth/login");
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
         setLoading(false);
       }
     },
-    [dispatch, router]
+    [dispatch, otpCode, router]
   );
 
   return (
@@ -67,28 +74,24 @@ export default function ResetPassword() {
           <h3 className="m-0">{t("password_recovery")}</h3>
         </div>
         <Link href="/auth/login">
-          <a>
-            <Button className="auth-layout__green-btn">{t("login")}</Button>
-          </a>
+          <a>{/*<Button className="auth-layout__green-btn">{t("login")}</Button>*/}</a>
         </Link>
       </div>
       <div className="auth-form auth-login-form">
-        <Form name="login-form" methods={form} onFinish={onResetSubmit}>
-          <Form.Item name="email" label={t("email")}>
-            <Input autoComplete="off" />
-          </Form.Item>
-          <Form.Item name="password" label={t("new_password")}>
-            <Input type="password" />
-          </Form.Item>
-          <Form.Item name="password_confirmation" label={t("repeat_password")}>
-            <Input type="password" />
-          </Form.Item>
-          <div className="form-bottom">
-            <Button htmlType="submit" loading={loading}>
-              {t("confirm")}
-            </Button>
-          </div>
-        </Form>
+        <ConfirmPhone isCurrentStep={step === 1} setStep={setStep} setOtpCode={setOtpCode} optCode={otpCode} />
+
+        <div style={{ visibility: clsx({ hidden: step === 1 }), marginTop: "2rem", marginBottom: "2rem" }}>
+          <Form name="login-form" methods={form} onFinish={onResetSubmit}>
+            <Form.Item name="password" label={t("new_password")}>
+              <Input type="password" />
+            </Form.Item>
+            <div className="form-bottom">
+              <Button htmlType="submit" loading={loading}>
+                {t("confirm")}
+              </Button>
+            </div>
+          </Form>
+        </div>
       </div>
     </>
   );
@@ -96,4 +99,59 @@ export default function ResetPassword() {
 
 ResetPassword.getLayout = function (page) {
   return <AuthLayout>{page}</AuthLayout>;
+};
+
+const ConfirmPhone = ({ setStep, isCurrentStep, setOtpCode, optCode }) => {
+  const [isConfirming, setIsConfirming] = useState(false);
+  const dispatch = useDispatch();
+  const { mutate, isLoading } = useMutation((code) => api.user.checkRestoreCode(code), {
+    onSuccess: () => {
+      setStep(2);
+    },
+    onError: (error) => {
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
+    },
+    onSettled: () => {
+      setIsConfirming(false);
+    },
+  });
+
+  const onCodeEntered = (code) => {
+    setIsConfirming(true);
+    mutate(code);
+  };
+
+  const manualCodeConfirm = () => {
+    onCodeEntered(optCode);
+  };
+
+  return (
+    <div className="phone-confirmation">
+      <header className="phone-confirmation__header">
+        <Text>{t("restore_password_confirm_code")}</Text>
+      </header>
+      <OtpInput
+        value={optCode}
+        onChange={setOtpCode}
+        numInputs={6}
+        renderInput={(props) => <input {...props} autoComplete="one-time-code" disabled={!isCurrentStep} />}
+        inputStyle="phone-confirmation__pin-input"
+        shouldAutoFocus
+      />
+      {isLoading && <span>Validating code...</span>}
+
+      {isCurrentStep && (
+        <div className="form-bottom">
+          <Button
+            htmlType="submit"
+            loading={isConfirming}
+            disabled={optCode?.length < 6 || !optCode}
+            onClick={manualCodeConfirm}
+          >
+            {t("confirm")}
+          </Button>
+        </div>
+      )}
+    </div>
+  );
 };

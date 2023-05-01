@@ -12,6 +12,7 @@ import Form from "@/components/Form";
 import { InputPhone } from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import Select from "@/components/Select";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
@@ -21,11 +22,6 @@ import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
 
 import ConfirmPhone from "./ConfirmPhone";
-
-
-
-
-
 
 const langsOptions = [
   { value: "ro", label: "Română" },
@@ -81,8 +77,7 @@ const EnterPhone = React.memo(() => {
 
         if (axios.isAxiosError(error)) {
           if (error.response.status === 400) message = "phone_verification.phone_already_verifed";
-          else if (error.response.status === 422)
-            message = "phone_verification.phone_already_verifed";
+          else if (error.response.status === 422) message = "phone_verification.phone_already_verifed";
         }
 
         dispatch(
@@ -127,7 +122,7 @@ const EnterPhone = React.memo(() => {
                 <>
                   {t("accept_terms")}{" "}
                   <a
-                    href="https://doctorchat.md/termeni-si-conditii/"
+                    href={`${HOME_PAGE_URL}termeni-si-conditii/`}
                     rel="noreferrer noopener"
                     target="_blank"
                     className="terms link"
