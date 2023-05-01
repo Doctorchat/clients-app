@@ -26,8 +26,8 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
   const region = useRegion();
 
   useEffect(() => {
-    if (region === REGION_RO && languages.ru) {
-      changeLanguage("ro")();
+    if (region === REGION_RO && getActiveLng() === "ru") {
+      changeLanguage("ro", true)();
       setLanguages((prevState) => {
         const { ru, ...newState } = prevState;
         return newState;
@@ -36,22 +36,23 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
   }, [region]);
 
   const changeLanguage = useCallback(
-    (lng) => async () => {
-      setChangeLngLoading(lng);
+    (lng, skipReload = false) =>
+      async () => {
+        setChangeLngLoading(lng);
+        if (user.isAuthorized) {
+          await api.user.changeLocale(lng);
+          if (!skipReload) {
+            window.location.reload();
+          }
+        }
+        if (onUpdate) onUpdate(lng);
+        setChangeLngLoading(null);
 
-      if (user.isAuthorized) {
-        await api.user.changeLocale(lng);
-        window.location.reload();
-      }
-      if (onUpdate) onUpdate(lng);
+        localStorage.setItem("i18nextLng", lng);
+        i18next.changeLanguage(lng);
 
-      setChangeLngLoading(null);
-
-      localStorage.setItem("i18nextLng", lng);
-      i18next.changeLanguage(lng);
-
-      setDropdownForcedClose("__forced-close");
-    },
+        setDropdownForcedClose("__forced-close");
+      },
     [onUpdate, user.isAuthorized]
   );
 
