@@ -44,8 +44,7 @@ const api = {
     close: (id) => axiosInstance.put(`/chat/close/`, { chat_id: id }),
     editMessage: (data) => axiosInstance.put("/chat/message/update/", data),
     feedback: (data) => axiosInstance.post("/reviews/new", data),
-    requestMedia: (chatId, { content }) =>
-      axiosInstance.post(`/chat/request-media/${chatId}`, { content }),
+    requestMedia: (chatId, { content }) => axiosInstance.post(`/chat/request-media/${chatId}`, { content }),
     sendMedia: (chatId, { content, upload_id }) =>
       axiosInstance.post(`/chat/send-media/${chatId}`, { content, upload_id }),
     accept: (chatId) =>
@@ -60,7 +59,8 @@ const api = {
     getPublicReviews: (id) => axiosInstance.get(`/reviews/public/${id}`),
   },
   bootstrap: {
-    categories: () => axiosInstance.get("/front-specialities"),
+    categoriesForDoctor: () => axiosInstance.get("/front-specialities"),
+    categories: () => axiosInstance.get("/specialities"),
     global: () => axiosInstance.get("/settings/info"),
   },
   smsVerification: {
