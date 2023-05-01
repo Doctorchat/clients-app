@@ -10,7 +10,7 @@ import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
 import Form from "@/components/Form";
 import { InputPhone } from "@/components/Inputs";
-import { PopupContent,PopupHeader } from "@/components/Popup";
+import { PopupContent, PopupHeader } from "@/components/Popup";
 import Select from "@/components/Select";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -21,11 +21,6 @@ import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
 
 import ConfirmPhone from "./ConfirmPhone";
-
-
-
-
-
 
 const langsOptions = [
   { value: "ro", label: "Română" },
@@ -81,8 +76,7 @@ const EnterPhone = React.memo(() => {
 
         if (axios.isAxiosError(error)) {
           if (error.response.status === 400) message = "phone_verification.phone_already_verifed";
-          else if (error.response.status === 422)
-            message = "phone_verification.phone_already_verifed";
+          else if (error.response.status === 422) message = "phone_verification.phone_already_verifed";
         }
 
         dispatch(

@@ -9,6 +9,7 @@ import LangIcon from "@/icons/lang.svg";
 import api from "@/services/axios/api";
 import cs from "@/utils/classNames";
 import getActiveLng from "@/utils/getActiveLng";
+import ConditionalRender from "@/components/ConditionalRender";
 
 const langs = {
   ro: "Română",
@@ -50,13 +51,15 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
       >
         Română
       </Menu.Item>
-      <Menu.Item
-        icon={<span className="lang-icon">RU</span>}
-        loading={changeLngLoading === "ru"}
-        onClick={changeLanguage("ru")}
-      >
-        Русский
-      </Menu.Item>
+      <ConditionalRender hideOnRegion="ro">
+        <Menu.Item
+          icon={<span className="lang-icon">RU</span>}
+          loading={changeLngLoading === "ru"}
+          onClick={changeLanguage("ru")}
+        >
+          Русский
+        </Menu.Item>
+      </ConditionalRender>
       <Menu.Item
         icon={<span className="lang-icon">EN</span>}
         loading={changeLngLoading === "en"}
