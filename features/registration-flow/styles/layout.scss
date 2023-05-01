@@ -48,6 +48,29 @@
   align-self: center;
 }
 
+.ant-popover>.ant-popover-content>.ant-popover-inner {
+  border-radius: 10px;
+}
+
+.registration-flow__logout-popover-btn{
+  border-radius: 5px;
+  &:hover {
+    border-color: #ca1533;
+    color: #ca1533;
+  }
+}
+
+.registration-flow__logout-popover-btn.btn-primary.ant-btn-primary {
+  background-color: #e81f41;
+  border-color: #e81f41;
+
+  &:hover {
+    background-color: #ca1533;
+    border-color: #ca1533;
+    color: #fff;
+  }
+}
+
 .registration-flow__logout {
   position: fixed;
   bottom: 20px;
@@ -91,8 +114,10 @@
     }
 
     .wallet-top-up {
-      grid-column: 1 / -1; /* span across all columns */
-      grid-row: 2 / 3; /* second row */
+      grid-column: 1 / -1;
+      /* span across all columns */
+      grid-row: 2 / 3;
+      /* second row */
       justify-self: center;
     }
 
@@ -108,7 +133,8 @@
 
     .no-wallet .registration-flow__steps,
     .registration-flow__steps {
-      grid-column: 1 / -1; /* span across all columns */
+      grid-column: 1 / -1;
+      /* span across all columns */
     }
   }
 }
