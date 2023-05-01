@@ -30,19 +30,7 @@ const NoOptionsMessage = (props) => (
 );
 
 const Select = forwardRef((props, ref) => {
-  const {
-    onChange,
-    options,
-    placeholder,
-    multiple,
-    size,
-    value,
-    disabled,
-    label,
-    name,
-    onBlur,
-    ...rest
-  } = props;
+  const { onChange, options, placeholder, multiple, size, value, disabled, label, name, onBlur, ...rest } = props;
   const [isActive, setIsActive] = useState(false);
   const [selectValue, setSelectValue] = useState(value);
 
@@ -108,8 +96,8 @@ const Select = forwardRef((props, ref) => {
 Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string]),
-      label: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })
   ),
   onChange: PropTypes.func,

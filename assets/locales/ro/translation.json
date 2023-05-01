@@ -299,6 +299,25 @@
   "months": "luni",
   "weeks": "săptămâni",
   "and": "și",
+  "birthday": "Zi de naștere",
+  "month_option": {
+    "january": "Ianuarie",
+    "february": "Februarie",
+    "march": "Martie",
+    "april": "Aprilie",
+    "may": "Mai",
+    "june": "Iunie",
+    "july": "Iulie",
+    "august": "August",
+    "september": "Septembrie",
+    "october": "Octombrie",
+    "november": "Noiembrie",
+    "december": "Decembrie"
+  },
+  "day": "Ziua",
+  "month": "Luna",
+  "year": "Anul",
+  "invalid_month_day": "Ziua lunii este invalidă",
   "receive_notifications": "Primiți notificări când vi se trimite un mesaj nou.",
   "save": "Salvați"
 }
