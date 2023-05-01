@@ -2,17 +2,17 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
+import ConditionalRender from "@/components/ConditionalRender";
+import useCurrency from "@/hooks/useCurrency";
 import ArrowRightIcon from "@/icons/arrow-right.svg";
 import ClockIcon from "@/icons/clock.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import VideoIcon from "@/icons/video.svg";
-import useCurrency from "@/hooks/useCurrency";
 
 export const DoctorCardSkeleton = () => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
-
 
   return (
     <article className="doctor-card skeleton">
@@ -55,7 +55,6 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
 
-
   const {
     avatar,
     name,
@@ -65,6 +64,8 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
     isGuard,
     price_chat,
     price_meet,
+    chat,
+    video,
   } = doctor;
 
   return (
@@ -89,21 +90,27 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
           )}
           <span className="doctor-card__meta-item">
             <ClockIcon />
-            <span className="doctor-card__meta-text">
-              {response_time ? `${response_time} ${t("mins")}` : "-"}
-            </span>
+            <span className="doctor-card__meta-text">{response_time ? `${response_time} ${t("mins")}` : "-"}</span>
           </span>
         </div>
         <footer className="doctor-card__footer">
           <div className="doctor-card__price">
-            <span className="doctor-card__price-item">
-              <CommentIcon />
-              <span className="doctor-card__price-text">{price_chat} {globalCurrency}</span>
-            </span>
-            <span className="doctor-card__price-item">
-              <VideoIcon />
-              <span className="doctor-card__price-text">{price_meet} {globalCurrency}</span>
-            </span>
+            <ConditionalRender hide={!chat}>
+              <span className="doctor-card__price-item">
+                <CommentIcon />
+                <span className="doctor-card__price-text">
+                  {price_chat} {globalCurrency}
+                </span>
+              </span>
+            </ConditionalRender>
+            <ConditionalRender hide={!video}>
+              <span className="doctor-card__price-item">
+                <VideoIcon />
+                <span className="doctor-card__price-text">
+                  {price_meet} {globalCurrency}
+                </span>
+              </span>
+            </ConditionalRender>
           </div>
           <Button className="doctor-card__button" size="sm" type="text" onClick={onClickPreview}>
             <span>{t("select")}</span>

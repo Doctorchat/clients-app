@@ -29,6 +29,7 @@ const api = {
     checkRestoreCode: (code) => axiosInstance.post("/auth/validate", { code }),
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
+    updateEmail: (data) => axiosInstance.put("/user/update/email", data),
   },
   doctor: {
     toggleTextStatus: () => axiosInstance.put("/user/card/toggle-chat"),
@@ -52,6 +53,7 @@ const api = {
       axiosInstance.post(`/chat/accept`, {
         chat_id: chatId,
       }),
+    destroy: (chatId) => axiosInstance.delete(`/chat/destroy/${chatId}`),
   },
   conversationList: { get: () => axiosInstance.get("/chat/list") },
   docList: {
@@ -60,7 +62,8 @@ const api = {
     getPublicReviews: (id) => axiosInstance.get(`/reviews/public/${id}`),
   },
   bootstrap: {
-    categories: () => axiosInstance.get("/front-specialities"),
+    categoriesForDoctor: () => axiosInstance.get("/front-specialities"),
+    categories: () => axiosInstance.get("/specialities"),
     global: () => axiosInstance.get("/settings/info"),
   },
   smsVerification: {

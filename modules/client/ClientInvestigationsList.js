@@ -55,7 +55,7 @@ export default function ClientInvestigationsList() {
         dispatch(investigationFormSetEdit({ ...investigation, title: t("edit_investigation") }));
       }
     },
-    [dispatch, user]
+    [dispatch, t, user?.investigations]
   );
 
   return (

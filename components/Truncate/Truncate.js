@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from "react";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 export default function Truncate(props) {
   const { text, length, onReadMore } = props;
-
+  const { t } = useTranslation();
   const readMoreText = t("read_more");
 
   const onReadMoreHandler = useCallback(

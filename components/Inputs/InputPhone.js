@@ -36,7 +36,7 @@ const InputPhone = forwardRef((props, ref) => {
           disabled={disabled}
           onChange={onChangeHanlder}
           international
-          defaultCountry="MD"
+          defaultCountry={(process.env.NEXT_PUBLIC_API_REGION ?? "ro").toUpperCase()}
         />
       </div>
     </>
