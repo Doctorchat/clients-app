@@ -1,10 +1,12 @@
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import Link from "next/link";
-import { object, string } from "yup";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import { useDispatch } from "react-redux";
+import i18next from "i18next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { object, string } from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -14,7 +16,6 @@ import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import i18next from "i18next";
 
 const restoreSchema = object().shape({
   phone: string()
@@ -31,15 +32,18 @@ export default function Login() {
   const form = useForm({ resolver: useYupValidationResolver(restoreSchema) });
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const router = useRouter();
 
   const onLoginSubmit = useCallback(
     async (values) => {
       try {
         setLoading(true);
-        await api.user.resetPassword(values);
-
+        const res = await api.user.resetPassword(values);
         dispatch(notification({ title: "success", descrp: "phone_verification.reset_password" }));
         form.reset({ phone: "" });
+        if (res.status === 200) {
+          router.push("/auth/reset-password");
+        }
       } catch (error) {
         dispatch(
           notification({
