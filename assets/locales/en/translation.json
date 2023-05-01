@@ -302,5 +302,21 @@
   "weeks": "weeks",
   "and": "and",
   "guard_doctor_tooltip": "The on-duty doctor responds within a maximum of one hour from receiving the message.",
-  "respond_time_doctor_tooltip": "Response time. Occasionally the duration may be shorter or longer."
+  "respond_time_doctor_tooltip": "Response time. Occasionally the duration may be shorter or longer.",
+  "birthday": "Birthday",
+  "month": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": " May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "invalid_month_day": "Invalid month or day"
 }
