@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
+import clsx from "clsx";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 
 import ExternalIcon from "@/icons/external-link.svg";
 import CamIcon from "@/icons/webcam.svg";

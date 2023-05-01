@@ -8,7 +8,7 @@ export default function MedicalRecordsPage() {
 
 MedicalRecordsPage.getLayout = function (page) {
   return (
-    <Layout activeStep="account" title={i18next.t("wizard:fill_in_medical_records")}>
+    <Layout activeStep="doctor" title={i18next.t("wizard:fill_in_medical_records")}>
       <AuthWrapper>{page}</AuthWrapper>
     </Layout>
   );

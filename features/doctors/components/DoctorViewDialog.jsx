@@ -1,11 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Tabs } from "antd";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
 
 import { IconBtn } from "@/components/Button";
+import DcTooltip from "@/components/DcTooltip";
 import Popup from "@/components/Popup";
+import ReviewsList from "@/components/ReviewsList";
 import Skeleton from "@/components/Skeleton";
+import ConsultationOptions from "@/features/doctors/components/ConsultationOptions";
+import useCurrency from "@/hooks/useCurrency";
 import ClockIcon from "@/icons/clock.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
@@ -15,9 +20,6 @@ import TimesIcon from "@/icons/times.svg";
 import VideoIcon from "@/icons/video.svg";
 import getActiveLng from "@/utils/getActiveLng";
 import getPropByLangOrThrow from "@/utils/getPropByLangOrThrow";
-import useCurrency from "@/hooks/useCurrency";
-import ConsultationOptions from "@/features/doctors/components/ConsultationOptions";
-import DcTooltip from "@/components/DcTooltip";
 
 const DoctorViewDialogSkeleton = () => {
   const { t } = useTranslation();
@@ -91,6 +93,19 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
     onHideModal();
   }, [onHideModal, onClose]);
 
+  const items = React.useMemo(() => [
+    {
+      key: "1",
+      label: t("general_information"),
+      children: <GeneralInfo doctor={doctor} />,
+    },
+    {
+      key: "2",
+      label: t("reviews") + ` (${doctor?.reviews?.length})`,
+      children: <ReviewsList data={doctor?.reviews} />,
+      disabled: !doctor?.reviews?.length,
+    },
+  ]);
   return (
     <Popup className="doctor-view__modal" visible={isOpen} onVisibleChange={onVisibleChange}>
       {isLoading ? (
@@ -117,25 +132,7 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
               onVideoTypeClick={onVideoTypeClick}
               onMessageTypeClick={onMessageTypeClick}
             />
-
-            <p className="doctor-view__description">{getPropByLangOrThrow(doctor.about?.bio, getActiveLng())}</p>
-
-            <div className="doctor-view__activity">
-              <div className="doctor-view__activity-item">
-                <h4 className="doctor-view__activity-title">{t("work")}:</h4>
-                <p className="doctor-view__activity-description">
-                  <HospitalIcon />
-                  <span>{doctor.activity.workplace}</span>
-                </p>
-              </div>
-              <div className="doctor-view__activity-item">
-                <h4 className="doctor-view__activity-title">{t("education")}:</h4>
-                <p className="doctor-view__activity-description">
-                  <GraduationIcon />
-                  {doctor.activity.education[0]}
-                </p>
-              </div>
-            </div>
+            <Tabs defaultActiveKey="1" items={items} type="card" className="change-tabs-colors" />
           </div>
         </article>
       )}
@@ -197,5 +194,32 @@ const Badges = ({ doctor }) => {
         </span>
       </DcTooltip>
     </div>
+  );
+};
+
+const GeneralInfo = ({ doctor }) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <p className="doctor-view__description">{getPropByLangOrThrow(doctor.about?.bio, getActiveLng())}</p>
+
+      <div className="doctor-view__activity">
+        <div className="doctor-view__activity-item">
+          <h4 className="doctor-view__activity-title">{t("work")}:</h4>
+          <p className="doctor-view__activity-description">
+            <HospitalIcon />
+            <span>{doctor.activity.workplace}</span>
+          </p>
+        </div>
+        <div className="doctor-view__activity-item">
+          <h4 className="doctor-view__activity-title">{t("education")}:</h4>
+          <p className="doctor-view__activity-description">
+            <GraduationIcon />
+            {doctor.activity.education[0]}
+          </p>
+        </div>
+      </div>
+    </>
   );
 };

@@ -14,6 +14,7 @@ import { MESSAGE_TYPES } from "@/context/constants";
 import { meetFormTabs } from "@/context/TabsKeys";
 import useCurrency from "@/hooks/useCurrency";
 import useRegion from "@/hooks/useRegion";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
@@ -141,7 +142,7 @@ function MeetFormConfirmation() {
               <tr className="dc-description-row">
                 <th className="dc-description-row-label"> {t("terms_conditions")}</th>
                 <td className="dc-description-row-content">
-                  <a href="https://doctorchat.md/termeni-si-conditii/" target="_blank" rel="noreferrer noopener">
+                  <a href={`${HOME_PAGE_URL}termeni-si-conditii/`} target="_blank" rel="noreferrer noopener">
                     {t("terms_conditions")}
                   </a>
                 </td>
@@ -228,7 +229,7 @@ function MeetFormConfirmation() {
               <>
                 {t("accept_terms")}{" "}
                 <a
-                  href="https://doctorchat.md/termeni-si-conditii/"
+                  href={`${HOME_PAGE_URL}termeni-si-conditii/`}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="terms"

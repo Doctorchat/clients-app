@@ -8,6 +8,7 @@ import { useDropdownContext } from "@/components/Dropdown";
 import Menu from "@/components/Menu";
 import Switch from "@/components/Switch";
 import { leftSideTabs } from "@/context/TabsKeys";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import HomeIcon from "@/icons/home.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import ShieldIcon from "@/icons/shield.svg";
@@ -41,9 +42,7 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
       await api.user.toggleGuardStatus(!user?.isGuard);
       dispatch(updateUserProperty({ prop: "isGuard", value: !user?.isGuard }));
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setGuradStatusUpdating(false);
     }
@@ -84,7 +83,7 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
       </Menu.Item>
       <DocSetVacation />
       <Menu.Item icon={<HomeIcon />} className="home-item">
-        <Link href="https://doctorchat.md/">
+        <Link href={HOME_PAGE_URL}>
           <a>{t("home_page")}</a>
         </Link>
       </Menu.Item>

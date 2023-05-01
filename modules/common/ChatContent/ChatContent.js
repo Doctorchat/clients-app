@@ -18,8 +18,9 @@ import { messageFormToggleVisibility, messageFormUpdateChatId } from "@/store/sl
 import cs from "@/utils/classNames";
 import date from "@/utils/date";
 
-import { MessagesList } from "..";
+import MessagesList from "../MessagesList";
 
+import ChatContentEmailNotifications from "./ChatContentEmailNotifications";
 import ChatContentFooter from "./ChatContentFooter";
 
 const withoutInfo = ["support", "auto", "consilium", "internal"];
@@ -124,6 +125,7 @@ export default function ChatContent(props) {
         </div>
       </Sidebar.Header>
       <Sidebar.Body className={cs("chat-content", loading && "loading")}>
+        <ChatContentEmailNotifications />
         <div className="scrollable scrollable-y conversation-content">
           <Bar />
           <div className="chat-content-inner">

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 
-import CheckIcon from "@/icons/check.svg";
 import Button from "@/components/Button";
 import useCurrency from "@/hooks/useCurrency";
+import CheckIcon from "@/icons/check.svg";
 
 const CHAT = "chat";
 const VIDEO = "video";

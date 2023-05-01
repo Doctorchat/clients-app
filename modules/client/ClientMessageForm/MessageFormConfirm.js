@@ -12,13 +12,14 @@ import Input from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { messageFormTabs } from "@/context/TabsKeys";
+import useCurrency from "@/hooks/useCurrency";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
 import { ConfirmationSection } from "@/modules/client/ClientMeetForm/MeetFormConfirm";
 
 const promoInputReplacer = (value) => {
@@ -40,7 +41,7 @@ function MessageFormConfirmation() {
   const [promo, setPromo] = useState({ code: "", sum: 0 });
   const [areTermsConfirmed, setAreTermsConfirmed] = useState(false);
   const { t } = useTranslation();
-  const {formatPrice} = useCurrency();
+  const { formatPrice } = useCurrency();
   const form = useForm();
   const dispatch = useDispatch();
 
@@ -70,9 +71,7 @@ function MessageFormConfirmation() {
 
         setPromo({ code, sum: parseFloat(price.subtotal - discoutedPrice).toFixed(2) });
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setPromoLoading(false);
         form.reset();
@@ -109,9 +108,7 @@ function MessageFormConfirmation() {
         dispatch(messageFormReset());
       }
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setLoading(false);
     }
@@ -123,12 +120,7 @@ function MessageFormConfirmation() {
   return (
     <div className="popup-body message-from-confirm">
       <PopupHeader
-        title={
-          <BackTitle
-            title={t("confirmation")}
-            onBack={updateTabsConfig(messageFormTabs.main, "prev")}
-          />
-        }
+        title={<BackTitle title={t("confirmation")} onBack={updateTabsConfig(messageFormTabs.main, "prev")} />}
       />
       <PopupContent>
         <div className="confirmation-section">
@@ -138,39 +130,29 @@ function MessageFormConfirmation() {
                 <th colSpan="2">{t("message_form_confirmation.symmary")}</th>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.description")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.description")}</th>
                 <td className="dc-description-row-content">{values.content}</td>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("terms_conditions")}</th>
                 <td className="dc-description-row-content">
-                  <a
-                    href="https://doctorchat.md/termeni-si-conditii/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
+                  <a href={`${HOME_PAGE_URL}termeni-si-conditii/`} target="_blank" rel="noreferrer noopener">
                     {t("terms_conditions")}
                   </a>
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.basic_price")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.basic_price")}</th>
                 <td className="dc-description-row-content">{`${formatPrice(+price.doc)}`}</td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">{`${t(
-                  "message_form_confirmation.files"
-                )}(${values.uploads_count})`}</th>
+                <th className="dc-description-row-label">{`${t("message_form_confirmation.files")}(${
+                  values.uploads_count
+                })`}</th>
                 <td className="dc-description-row-content">{`+${formatPrice(+price.uploads)}`}</td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.subtotal_price")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.subtotal_price")}</th>
                 <td className="dc-description-row-content">{`${formatPrice(+price.subtotal)}`}</td>
               </tr>
             </tbody>
@@ -191,8 +173,7 @@ function MessageFormConfirmation() {
                   {promo.code ? (
                     <>
                       <span className="d-block">
-                        {t("message_form_confirmation.code")}:{" "}
-                        <mark className="dc-mark">{promo.code}</mark>
+                        {t("message_form_confirmation.code")}: <mark className="dc-mark">{promo.code}</mark>
                       </span>
                       <span>
                         {t("message_form_confirmation.discount")}:{" "}
@@ -202,12 +183,7 @@ function MessageFormConfirmation() {
                   ) : (
                     <Form methods={form} onFinish={onPromocodeApplied} className="promo-code-form">
                       <Form.Item name="code">
-                        <Input
-                          pattern={promoInputReplacer}
-                          autoComplete="off"
-                          placeholder="WINTER20"
-                          size="sm"
-                        />
+                        <Input pattern={promoInputReplacer} autoComplete="off" placeholder="WINTER20" size="sm" />
                       </Form.Item>
                       <Button htmlType="submit" size="sm" loading={promoLoading}>
                         {t("apply")}
@@ -217,9 +193,7 @@ function MessageFormConfirmation() {
                 </td>
               </tr>
               <tr className="dc-description-row">
-                <th className="dc-description-row-label">
-                  {t("message_form_confirmation.total_price")}
-                </th>
+                <th className="dc-description-row-label">{t("message_form_confirmation.total_price")}</th>
                 <td className="dc-description-row-content">
                   <span>{`${formatPrice(totalPrice)}`}</span>
                   {promo.code && <del className="ms-2">{`(${formatPrice(+price.total)})`}</del>}
@@ -233,11 +207,7 @@ function MessageFormConfirmation() {
                     <span>
                       ({t("your_account_will_be_debited")}{" "}
                       <strong>
-                        {formatPrice(
-                          totalPrice > walletData.data.balance
-                            ? walletData.data.balance
-                            : totalPrice
-                        )}
+                        {formatPrice(totalPrice > walletData.data.balance ? walletData.data.balance : totalPrice)}
                       </strong>
                       )
                     </span>
@@ -255,7 +225,7 @@ function MessageFormConfirmation() {
               <>
                 {t("accept_terms")}{" "}
                 <a
-                  href="https://doctorchat.md/termeni-si-conditii/"
+                  href={`${HOME_PAGE_URL}termeni-si-conditii/`}
                   rel="noreferrer noopener"
                   target="_blank"
                   className="terms"
