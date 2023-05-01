@@ -298,5 +298,7 @@
   "years": "ani",
   "months": "luni",
   "weeks": "săptămâni",
-  "and": "și"
+  "and": "și",
+  "receive_notifications": "Primiți notificări când vi se trimite un mesaj nou.",
+  "save": "Salvați"
 }
