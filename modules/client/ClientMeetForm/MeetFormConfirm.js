@@ -277,7 +277,7 @@ export const ConfirmationSection = () => {
       company: "„WEBMEDCONSULT” OU",
       product: "Doctorchat",
       adress: "Oraşul Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
-      phone: "-",
+      phone: "+373 78 272 887",
       email: "infodoctorchat.ro@gmail.com",
     },
   };
