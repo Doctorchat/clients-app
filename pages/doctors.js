@@ -13,6 +13,7 @@ import List from "@/components/List";
 import Menu from "@/components/Menu";
 import Search from "@/components/Search/Search";
 import SidebarHeader from "@/components/Sidebar/SidebarHeader";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import BarsIcon from "@/icons/bars.svg";
 import HomeIcon from "@/icons/home.svg";
 import { ExternalDocList, ProfileChangeLang } from "@/modules/common";
@@ -33,14 +34,10 @@ export default function Doctors() {
     isFetching,
     isFetched,
     isError,
-  } = useQuery(
-    ["doctors", i18n.language],
-    () => api.docList.get({ external: true, locale: i18n.language }),
-    {
-      keepPreviousData: true,
-      placeholderData: { data: [] },
-    }
-  );
+  } = useQuery(["doctors", i18n.language], () => api.docList.get({ external: true, locale: i18n.language }), {
+    keepPreviousData: true,
+    placeholderData: { data: [] },
+  });
 
   useEffect(() => {
     if (searchConfig.active) setCurrentList(searchConfig.list);
@@ -51,10 +48,7 @@ export default function Doctors() {
     setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
   };
 
-  const onDocClickHandler = useCallback(
-    (doc) => () => router.push(`/doctors?id=${doc.id}`),
-    [router]
-  );
+  const onDocClickHandler = useCallback((doc) => () => router.push(`/doctors?id=${doc.id}`), [router]);
 
   if (typeof window === "undefined") return null;
 
@@ -66,7 +60,7 @@ export default function Doctors() {
           overlay={
             <Menu>
               <Menu.Item icon={<HomeIcon />} className="home-item">
-                <Link href="https://doctorchat.md/">
+                <Link href={HOME_PAGE_URL}>
                   <a>{t("home_page")}</a>
                 </Link>
               </Menu.Item>

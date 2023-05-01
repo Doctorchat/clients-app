@@ -1,5 +1,4 @@
-import { number } from "yup";
-import { array,object, ref, string } from "yup";
+import { array, number, object, ref, string } from "yup";
 
 import i18next from "@/services/i18next";
 
@@ -33,6 +32,7 @@ const docMultilangEdit = object().shape({
 
 const clientGeneral = object().shape({
   name: string().required(),
+  email: string().email().required(),
 });
 
 const security = object().shape({

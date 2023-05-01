@@ -29,11 +29,16 @@
     }
   }
 
-  .pincode-input-text {
+  &__pin-input {
     width: 59px !important;
     height: 57px !important;
+    margin-right: 10px;
+    border-radius: 6px;
+
     background-color: #fff !important;
+
     border: unset !important;
+    outline: none;
 
     &:focus {
       box-shadow: 0 0 0 0.2rem rgba(#e81f41, 0.2) !important;
@@ -43,13 +48,17 @@
 
 .phone-confirmation__edit-form {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   margin-bottom: 24px;
 
   .form-control {
     width: 100%;
     margin-right: 1rem;
   }
+}
+
+.phone-confirmation__edit-button{
+  margin-top: 25px;
 }
 
 @media screen and (max-width: 520px) {
@@ -71,7 +80,7 @@
       }
     }
 
-    .pincode-input-text {
+    &__pin-input {
       width: 40px !important;
     }
   }
@@ -88,5 +97,9 @@
       margin-right: 0;
       margin-bottom: 1rem !important;
     }
+  }
+
+  .phone-confirmation__edit-button {
+    margin-top: 0;
   }
 }

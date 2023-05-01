@@ -7,17 +7,16 @@ import * as yup from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
-import Input, { InputNumber, Textarea } from "@/components/Inputs";
+import Input, { BirthdayInput, InputNumber, Textarea } from "@/components/Inputs";
 import Select from "@/components/Select";
+import { startConversation } from "@/features/registration-flow";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import i18next from "@/services/i18next";
 import { updateUser } from "@/store/slices/userSlice";
-import isValidSelectOption from "@/utils/isValidSelectOption";
-import DatePickerStyled from "@/packages/DatePickerStyled";
-import { disabledDateInFuture } from "@/packages/DatePickerStyled/utils";
 import date from "@/utils/date";
+import isValidSelectOption from "@/utils/isValidSelectOption";
 
 const medicalRecordsSchema = yup.object().shape({
   name: yup.string().required(),
@@ -62,7 +61,15 @@ export const MedicalRecordsForm = () => {
 
         const response = await api.user.addInvestigation(data);
         dispatch(updateUser(response.data));
-        await router.replace("/registration-flow/select-doctor" + window.location.search);
+
+        const { doctorPreviewId, chatType, messageType } = router.query;
+        clearParams(router);
+        await startConversation({
+          chatType,
+          messageType,
+          doctorPreviewId,
+          investigationId: response.data.investigations[0].id,
+        });
       } catch (error) {
         setFormApiErrors(error);
       } finally {
@@ -85,7 +92,7 @@ export const MedicalRecordsForm = () => {
         </p>
         <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
           <Form.Item className="w-100" name="name" label={t("name")}>
-            <Input />
+            <Input autoComplete="name" />
           </Form.Item>
           <Form.Item className="w-100 w-50-sm" label={t("investigation_form.sex")} name="sex">
             <Select
@@ -96,10 +103,17 @@ export const MedicalRecordsForm = () => {
             />
           </Form.Item>
         </div>
+
+        <Form.Item label={t("birthday")} name="birth_date">
+          <BirthdayInput
+            onError={(error) => {
+              if (error) form.setError("birth_date", { message: error });
+              else form.clearErrors("birth_date");
+            }}
+          />
+        </Form.Item>
+
         <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-          <Form.Item className="w-100" label={t("age")} name="birth_date">
-            <DatePickerStyled disabledDate={disabledDateInFuture} style={{ height: 47 }} />
-          </Form.Item>
           <Form.Item className="w-100" label={t("height_cm")} name="height">
             <InputNumber />
           </Form.Item>
@@ -108,7 +122,7 @@ export const MedicalRecordsForm = () => {
           </Form.Item>
         </div>
         <Form.Item label={t("investigation_form.location")} name="location">
-          <Input />
+          <Input autoComplete="street-address" />
         </Form.Item>
         <Form.Item label={t("investigation_form.activity")} name="activity">
           <Textarea />
@@ -124,4 +138,19 @@ export const MedicalRecordsForm = () => {
       </Form>
     </>
   );
+};
+
+const clearParams = (router) => {
+  const query = router.query;
+  if (router.isReady) {
+    router.push(
+      {
+        query: {
+          slug: query.slug,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
+  }
 };

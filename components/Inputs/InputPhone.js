@@ -11,7 +11,7 @@ const sizeClassName = {
 };
 
 const InputPhone = forwardRef((props, ref) => {
-  const { className, disabled, size, label, name, value, onChange } = props;
+  const { className, disabled, size, label, name, value, onChange, ...rest } = props;
   const inputSizeClassName = useRef(sizeClassName[size]);
 
   const onChangeHanlder = (value) => {
@@ -27,6 +27,7 @@ const InputPhone = forwardRef((props, ref) => {
       )}
       <div className="dc-input_wrapper">
         <PhoneInput
+          {...rest}
           id={name}
           name={name}
           value={value}
@@ -35,7 +36,7 @@ const InputPhone = forwardRef((props, ref) => {
           disabled={disabled}
           onChange={onChangeHanlder}
           international
-          defaultCountry="MD"
+          defaultCountry={(process.env.NEXT_PUBLIC_API_REGION ?? "ro").toUpperCase()}
         />
       </div>
     </>

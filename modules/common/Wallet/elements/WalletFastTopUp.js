@@ -2,11 +2,11 @@ import { useDispatch } from "react-redux";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 
-import { userRoles } from "@/context/constants";
-import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
-import { WalletBalance } from "@/modules/common/Wallet/elements/index";
-import { WalletTopup } from "@/modules/common/Wallet";
 import Button from "@/components/Button";
+import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
+import { userRoles } from "@/context/constants";
+import { WalletTopup } from "@/modules/common/Wallet";
+import { WalletBalance } from "@/modules/common/Wallet/elements/index";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
 
 const WalletFastTopUp = ({ className, isVisible }) => {
