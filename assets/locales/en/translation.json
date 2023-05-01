@@ -269,7 +269,9 @@
     "withdraw_success": "Withdrawal request successfully sent",
     "withdraw_error": "Error withdrawing funds",
     "top_up_success": "Your balance has been successfully topped up",
-    "top_up_error": "Error filling out the account"
+    "top_up_error": "Error filling out the account",
+    "bonus": "Bonus",
+    "refund": "Refund"
   },
   "to_pay": "To pay",
   "your_account_will_be_debited": "Your account will be debited with",

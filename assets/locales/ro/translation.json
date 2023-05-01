@@ -272,7 +272,9 @@
     "withdraw_success": "Solicitarea de retragere a fost trimisă cu succes",
     "withdraw_error": "Eroare la retragerea fondurilor",
     "top_up_success": "Soldul dvs. a fost suplinit cu succes",
-    "top_up_error": "Eroare la suplinirea contului"
+    "top_up_error": "Eroare la suplinirea contului",
+    "bonus": "Bonus",
+    "refund": "Rambursare"
   },
   "to_pay": "Spre plată",
   "your_account_will_be_debited": "Contul dvs. va fi debitat cu",
