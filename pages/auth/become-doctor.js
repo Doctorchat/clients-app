@@ -35,7 +35,7 @@ export default function BecomeDoctor() {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const response = await api.bootstrap.categories();
+      const response = await api.bootstrap.categoriesForDoctor();
       setCategories(toSelectOpts()(response.data));
     } catch (error) {
       dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
