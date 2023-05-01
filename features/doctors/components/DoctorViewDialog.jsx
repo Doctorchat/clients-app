@@ -96,7 +96,7 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
   const items = React.useMemo(() => [
     {
       key: "1",
-      label: t("general_info"),
+      label: t("general_information"),
       children: <GeneralInfo doctor={doctor} />,
     },
     {
