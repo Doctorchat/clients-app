@@ -12,13 +12,13 @@ import Input from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { meetFormTabs } from "@/context/TabsKeys";
+import useCurrency from "@/hooks/useCurrency";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { meetFormReset, meetFormToggleVisibility } from "@/store/slices/meetFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
 
 const promoInputReplacer = (value) => {
   if (value) {

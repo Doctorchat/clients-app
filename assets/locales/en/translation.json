@@ -316,5 +316,7 @@
   "day": "Day",
   "month": "Month",
   "year": "Year",
-  "invalid_month_day": "Invalid month or day"
+  "invalid_month_day": "Invalid month or day",
+  "receive_notification": "Receive notifications when you receive a new message.",
+  "save": "Save"
 }

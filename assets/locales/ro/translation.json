@@ -317,5 +317,7 @@
   "day": "Ziua",
   "month": "Luna",
   "year": "Anul",
-  "invalid_month_day": "Ziua lunii este invalidă"
+  "invalid_month_day": "Ziua lunii este invalidă",
+  "receive_notifications": "Primiți notificări când vi se trimite un mesaj nou.",
+  "save": "Salvați"
 }
