@@ -1,6 +1,6 @@
-import { object, string } from "yup";
-import i18next from "i18next";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import i18next from "i18next";
+import { object, string } from "yup";
 
 const loginSchema = object().shape({
   phone: string()
