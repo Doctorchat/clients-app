@@ -26,6 +26,7 @@ const api = {
     resetPassword: (data) => axiosInstance.post("/auth/forgot-password", data),
     emulate: (data) => axiosInstance.post("/auth/emulate", data),
     restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
+    checkRestoreCode: (code) => axiosInstance.post("/auth/validate", { code }),
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
     updateEmail: (data) => axiosInstance.put("/user/update/email", data),

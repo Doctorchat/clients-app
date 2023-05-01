@@ -322,5 +322,6 @@
   "invalid_month_day": "Ziua lunii este invalidă",
   "receive_notifications": "Primiți notificări când vi se trimite un mesaj nou.",
   "save": "Salvați",
-  "ora_dvs_locala": "Ora Dumneavostra Locala"
+  "ora_dvs_locala": "Ora Dumneavostra Locala",
+  "restore_password_confirm_code": "Introduceți codul de confirmare primit prin mesaj telefonic"
 }

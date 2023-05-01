@@ -5,6 +5,7 @@ import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch } from "react-redux";
 import i18next from "i18next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { object, string } from "yup";
 
 import Button from "@/components/Button";
@@ -31,15 +32,18 @@ export default function Login() {
   const form = useForm({ resolver: useYupValidationResolver(restoreSchema) });
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const router = useRouter();
 
   const onLoginSubmit = useCallback(
     async (values) => {
       try {
         setLoading(true);
-        await api.user.resetPassword(values);
-
+        const res = await api.user.resetPassword(values);
         dispatch(notification({ title: "success", descrp: "phone_verification.reset_password" }));
         form.reset({ phone: "" });
+        if (res.status === 200) {
+          router.push("/auth/reset-password");
+        }
       } catch (error) {
         dispatch(
           notification({

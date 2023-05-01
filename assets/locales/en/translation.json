@@ -321,5 +321,6 @@
   "invalid_month_day": "Invalid month or day",
   "receive_notification": "Receive notifications when you receive a new message.",
   "save": "Save",
-  "ora_dvs_locala": "Your Local Time"
+  "ora_dvs_locala": "Your Local Time",
+  "restore_password_confirm_code": "Enter the confirmation code received via text message"
 }
