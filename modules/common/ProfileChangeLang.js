@@ -26,12 +26,14 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
   const region = useRegion();
 
   useEffect(() => {
-    if (region === REGION_RO && getActiveLng() === "ru") {
-      changeLanguage("ro", true)();
+    if (region === REGION_RO && languages.ru) {
       setLanguages((prevState) => {
         const { ru, ...newState } = prevState;
         return newState;
       });
+    }
+    if (region === REGION_RO && getActiveLng() === "ru") {
+      changeLanguage("ro", true)();
     }
   }, [region]);
 
