@@ -9,6 +9,7 @@ import { Textarea } from "@/components/Inputs";
 import { PopupContent, PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
 import { messageFormTabs } from "@/context/TabsKeys";
+import useCurrency from "@/hooks/useCurrency";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-img.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -20,7 +21,6 @@ import {
 } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
 
 export default function MessageFormMain() {
   const {

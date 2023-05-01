@@ -1,8 +1,9 @@
-import PropTypes from "prop-types";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { useMutation } from "@tanstack/react-query";
+import PropTypes from "prop-types";
 import * as yup from "yup";
 
 import Button from "@/components/Button";
@@ -10,13 +11,12 @@ import Form from "@/components/Form";
 import { InputNumber } from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import Portal from "@/containers/Portal";
+import useCurrency from "@/hooks/useCurrency";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import useCurrency from "@/hooks/useCurrency";
-import { useMutation } from "@tanstack/react-query";
 
 const WalletTopup = ({ popupClassName }) => {
   const { t } = useTranslation();

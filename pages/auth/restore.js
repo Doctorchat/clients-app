@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch } from "react-redux";
+import i18next from "i18next";
 import Link from "next/link";
 import { object, string } from "yup";
-import { isValidPhoneNumber } from "react-phone-number-input";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -14,7 +15,6 @@ import AuthLayout from "@/layouts/AuthLayout";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import i18next from "i18next";
 
 const restoreSchema = object().shape({
   phone: string()

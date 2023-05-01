@@ -32,6 +32,7 @@ const docMultilangEdit = object().shape({
 
 const clientGeneral = object().shape({
   name: string().required(),
+  email: string().email().required(),
 });
 
 const security = object().shape({
