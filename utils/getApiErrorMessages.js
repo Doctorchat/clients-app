@@ -4,7 +4,7 @@ const getApiErrorMessages = (error, onlyGlobalMessage = false) => {
   if (error) {
     if (error.response) {
       if (translateErrorMessage(error.response.data)) return translateErrorMessage(error.response.data);
-      if (onlyGlobalMessage && error.response?.data?.message) return `backend:${error.response.data.message}`;
+      if (onlyGlobalMessage && error.response?.data?.message) return error.response.data.message;
       if (error.response.data) {
         if (error.response.data.errors) {
           return Object.entries(error.response.data.errors);
@@ -34,5 +34,5 @@ const errorMessageToTranslationKey = (error) => {
 
 const translateErrorMessage = (error) => {
   const errorMessageKey = errorMessageToTranslationKey(error);
-  return i18next.t(errorMessageKey);
+  return i18next.t(`backend:${errorMessageKey}`);
 };
