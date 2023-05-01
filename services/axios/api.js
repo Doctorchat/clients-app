@@ -51,6 +51,7 @@ const api = {
       axiosInstance.post(`/chat/accept`, {
         chat_id: chatId,
       }),
+    destroy: (chatId) => axiosInstance.delete(`/chat/destroy/${chatId}`),
   },
   conversationList: { get: () => axiosInstance.get("/chat/list") },
   docList: {
