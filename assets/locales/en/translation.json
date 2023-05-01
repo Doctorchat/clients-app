@@ -297,5 +297,7 @@
   "weeks": "weeks",
   "and": "and",
   "guard_doctor_tooltip": "The on-duty doctor responds within a maximum of one hour from receiving the message.",
-  "respond_time_doctor_tooltip": "Response time. Occasionally the duration may be shorter or longer."
+  "respond_time_doctor_tooltip": "Response time. Occasionally the duration may be shorter or longer.",
+  "receive_notification": "Receive notifications when you receive a new message.",
+  "save": "Save"
 }

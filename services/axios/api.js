@@ -28,6 +28,7 @@ const api = {
     restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
+    updateEmail: (data) => axiosInstance.put("/user/update/email", data),
   },
   doctor: {
     toggleTextStatus: () => axiosInstance.put("/user/card/toggle-chat"),
