@@ -35,7 +35,7 @@ export const MessageForm = () => {
   const { global } = useSelector((store) => ({
     global: store.bootstrap.payload?.global,
   }));
-  const { formatPrice, globalCurrency } = useCurrency();
+  const { formatPrice } = useCurrency();
 
   const resolver = useYupValidationResolver(messageSchema);
   const form = useForm({ resolver });
@@ -45,9 +45,9 @@ export const MessageForm = () => {
   const [attachments, setAttachments] = React.useState({ list: [], price: 0, initiated: false });
   const [isLoading, setIsLoading] = React.useState(true);
   const [confirmationData, setConfirmationData] = React.useState(null);
+  const [confirmationDialogVisible, setConfirmationDialogVisible] = React.useState(false);
 
   const description = t("message_uploads_description", {
-    currency: globalCurrency,
     amount: formatPrice(global.attach),
   });
   const doctorPrice = React.useMemo(
@@ -74,6 +74,7 @@ export const MessageForm = () => {
       data.uploads = attachments.list.map(({ file_id }) => file_id);
 
       setConfirmationData(data);
+      setConfirmationDialogVisible(true);
     },
     [attachments.list, dispatch, doctorPrice, global?.attach, messageType, router.query.chatId]
   );
@@ -86,6 +87,11 @@ export const MessageForm = () => {
     },
     [global?.attach]
   );
+
+  const onCloseConfirmationDialog = React.useCallback(() => {
+    setConfirmationDialogVisible(false);
+    setTimeout(() => setConfirmationData(null), 300);
+  }, []);
 
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -166,8 +172,8 @@ export const MessageForm = () => {
 
       <ConfirmationDialog
         data={confirmationData}
-        visible={!!confirmationData}
-        onClose={() => setConfirmationData(null)}
+        visible={confirmationDialogVisible}
+        onClosePopup={onCloseConfirmationDialog}
       />
     </>
   );

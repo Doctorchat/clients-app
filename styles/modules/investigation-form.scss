@@ -1,13 +1,14 @@
 #investigation-form {
   .popup-body {
     width: 600px;
-    height: 778px;
+    height: 645px;
     max-height: 100%;
     max-height: -moz-available;
     max-height: -webkit-fill-available;
     max-height: stretch;
   }
-  .dc-input, .react-select-container {
+  .dc-input,
+  .react-select-container {
     max-width: unset;
   }
 }

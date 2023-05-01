@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { Calendar } from "antd";
 import en_US from "antd/lib/locale-provider/en_US";
@@ -40,6 +41,7 @@ TimeCard.propTypes = {
 export const TimeSelection = ({ doctorId, onSelectSlot }) => {
   const [selectedDate, setSelectedDate] = React.useState(moment());
   const [selectedSlotId, setSelectedSlotId] = React.useState(null);
+  const { t } = useTranslation();
 
   const { data } = useQuery(["slots", doctorId], () => api.user.slots(doctorId).then((res) => res.data), {
     refetchOnWindowFocus: false,
@@ -79,7 +81,7 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
       </div>
 
       <div className="d-flex flex-column text-center justify-content-center">
-        <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">Ora Dumneavostra Locala</h5>
+        <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">{t("ora_dvs_locala")}</h5>
 
         <div className="time-selection__time pt-0">
           {data?.map((slot) => {

@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 
-import api from "@/services/axios/api";
 import useCurrency from "@/hooks/useCurrency";
+import api from "@/services/axios/api";
 
 const WalletBalanceFallback = React.memo(() => {
   const { t } = useTranslation();
