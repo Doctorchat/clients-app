@@ -26,6 +26,7 @@ const api = {
     resetPassword: (data) => axiosInstance.post("/auth/forgot-password", data),
     emulate: (data) => axiosInstance.post("/auth/emulate", data),
     restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
+    checkRestoreCode: (code) => axiosInstance.post("/auth/validate", { code }),
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
   },
@@ -44,8 +45,7 @@ const api = {
     close: (id) => axiosInstance.put(`/chat/close/`, { chat_id: id }),
     editMessage: (data) => axiosInstance.put("/chat/message/update/", data),
     feedback: (data) => axiosInstance.post("/reviews/new", data),
-    requestMedia: (chatId, { content }) =>
-      axiosInstance.post(`/chat/request-media/${chatId}`, { content }),
+    requestMedia: (chatId, { content }) => axiosInstance.post(`/chat/request-media/${chatId}`, { content }),
     sendMedia: (chatId, { content, upload_id }) =>
       axiosInstance.post(`/chat/send-media/${chatId}`, { content, upload_id }),
     accept: (chatId) =>

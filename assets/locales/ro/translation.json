@@ -298,5 +298,7 @@
   "years": "ani",
   "months": "luni",
   "weeks": "săptămâni",
-  "and": "și"
+  "and": "și",
+  "the.selected.code.is.invalid.": "Codul nu este valid.",
+  "restore_password_confirm_code": "Introduceți codul de confirmare primit prin mesaj telefonic"
 }
