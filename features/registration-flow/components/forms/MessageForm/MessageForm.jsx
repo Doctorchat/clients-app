@@ -35,7 +35,7 @@ export const MessageForm = () => {
   const { global } = useSelector((store) => ({
     global: store.bootstrap.payload?.global,
   }));
-  const { formatPrice, globalCurrency } = useCurrency();
+  const { formatPrice } = useCurrency();
 
   const resolver = useYupValidationResolver(messageSchema);
   const form = useForm({ resolver });
@@ -47,7 +47,6 @@ export const MessageForm = () => {
   const [confirmationData, setConfirmationData] = React.useState(null);
 
   const description = t("message_uploads_description", {
-    currency: globalCurrency,
     amount: formatPrice(global.attach),
   });
   const doctorPrice = React.useMemo(
