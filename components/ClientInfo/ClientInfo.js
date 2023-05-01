@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 import { t } from "i18next";
+import PropTypes from "prop-types";
 
+import { calculateAge } from "@/utils/date";
 import getSelectLabel from "@/utils/getSelectLabel";
 
 import Image from "../Image";
 import Skeleton from "../Skeleton";
-import { calculateAge } from "@/utils/date";
 
 export default function ClientInfo(props) {
   const { client, loading, selectedInvestigation } = props;
@@ -168,6 +168,7 @@ ClientInfo.defaultProps = {
 };
 
 const Age = ({ birthday }) => {
+  const { t } = useTranslation();
   const age = calculateAge(birthday);
 
   if (!age.years && !age.months && !age.weeks) return "-"; // handle invalid age

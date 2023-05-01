@@ -79,7 +79,8 @@
     flex-wrap: wrap;
     margin: -6px;
     margin-top: .35rem;
-    .dc-tooltip__trigger{
+
+    .dc-tooltip__trigger {
       width: min-content;
     }
   }
@@ -160,6 +161,22 @@
     width: 28px;
     height: 28px;
   }
+}
+
+.ant-tabs-tab-btn, .ant-tabs-tab, .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #dc3545;
+}
+
+.change-tabs-colors {
+  margin-top: 1rem;
+
+  .ant-tabs-tab-disabled {
+    display: none;
+  }
+}
+
+.ant-tabs-nav-wrap {
+  justify-content: center;
 }
 
 @media screen and (max-width: 1024px) {

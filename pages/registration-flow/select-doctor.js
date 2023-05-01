@@ -1,8 +1,9 @@
+import { cloneElement, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import AuthWrapper from "@/containers/AuthWrapper";
 import { Layout, SelectDoctor } from "@/features/registration-flow";
 import i18next from "@/services/i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { cloneElement, useEffect } from "react";
 import { getConversationList } from "@/store/actions";
 
 export default function SelectDoctorPage() {
@@ -32,7 +33,7 @@ const CheckConversations = ({ children }) => {
   const { data: conversations } = useSelector((store) => store.conversationList);
 
   useEffect(() => {
-    if (conversations?.length) return;
+    if (conversations?.length > 1) return;
 
     dispatch(getConversationList());
   }, []);

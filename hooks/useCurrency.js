@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+
 import { getGlobalCurrency } from "@/store/slices/bootstrapSlice";
 
 const priceFormatter =

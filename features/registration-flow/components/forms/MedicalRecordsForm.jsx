@@ -7,13 +7,11 @@ import * as yup from "yup";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
-import Input, { InputNumber, Textarea } from "@/components/Inputs";
+import Input, { BirthdayInput, InputNumber, Textarea } from "@/components/Inputs";
 import Select from "@/components/Select";
 import { startConversation } from "@/features/registration-flow";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import DatePickerStyled from "@/packages/DatePickerStyled";
-import { disabledDateInFuture } from "@/packages/DatePickerStyled/utils";
 import api from "@/services/axios/api";
 import i18next from "@/services/i18next";
 import { updateUser } from "@/store/slices/userSlice";
@@ -105,10 +103,17 @@ export const MedicalRecordsForm = () => {
             />
           </Form.Item>
         </div>
+
+        <Form.Item label={t("birthday")} name="birth_date">
+          <BirthdayInput
+            onError={(error) => {
+              if (error) form.setError("birth_date", { message: error });
+              else form.clearErrors("birth_date");
+            }}
+          />
+        </Form.Item>
+
         <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-          <Form.Item className="w-100" label={t("age")} name="birth_date">
-            <DatePickerStyled disabledDate={disabledDateInFuture} style={{ height: 47 }} />
-          </Form.Item>
           <Form.Item className="w-100" label={t("height_cm")} name="height">
             <InputNumber />
           </Form.Item>

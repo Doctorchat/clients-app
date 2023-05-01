@@ -70,7 +70,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
       const response = await api.conversation.addMessage({ ...data, code: promocode });
 
       if (process.env.NEXT_PUBLIC_API_REGION === "ro") {
-        window.dataLayer.push({
+        window.dataLayer?.push({
           event: "initiate_checkout",
         });
       }
