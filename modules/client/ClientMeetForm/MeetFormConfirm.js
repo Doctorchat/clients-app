@@ -259,7 +259,10 @@ export const ConfirmationSection = () => {
   const region = useRegion();
   const content = {
     md: {
-      payment: "MobilPay",
+      payment: {
+        title: "Stripe",
+        url: "https://stripe.com/",
+      },
       company: "WEBMEDCONSULT SRL",
       product: "Doctorchat",
       adress: "Bucureşti, sector 6, Splaiul Independenţei nr. 273, corp 3, etaj 3",
@@ -267,6 +270,10 @@ export const ConfirmationSection = () => {
       email: "info@doctorchat.md",
     },
     ro: {
+      payment: {
+        title: "Stripe",
+        url: "https://stripe.com/",
+      },
       company: "„WEBMEDCONSULT” OU",
       product: "Doctorchat",
       adress: "Oraşul Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
@@ -283,8 +290,8 @@ export const ConfirmationSection = () => {
             <th colSpan="2">
               <div className="dc-description-title-trunc">
                 <span>{t("message_form_confirmation.payment_security")}</span>
-                <a href="https://mobilpay.com/" target="_blank" rel="noreferrer">
-                  {regionContent.payment}
+                <a href={regionContent.payment.url} target="_blank" rel="noreferrer">
+                  {regionContent.payment.title}
                 </a>
               </div>
             </th>
