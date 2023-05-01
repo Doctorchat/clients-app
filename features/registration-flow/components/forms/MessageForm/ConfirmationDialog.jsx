@@ -14,10 +14,10 @@ import Input from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import useCurrency from "@/hooks/useCurrency";
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
+import { ConfirmationSection } from "@/modules/client/ClientMeetForm/MeetFormConfirm";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import { ConfirmationSection } from "@/modules/client/ClientMeetForm/MeetFormConfirm";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -183,7 +183,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                 <>
                   {t("accept_terms")}{" "}
                   <a
-                    href={`${HOME_PAGE_URL}/termeni-si-conditii/`}
+                    href={`${HOME_PAGE_URL}termeni-si-conditii/`}
                     rel="noreferrer noopener"
                     target="_blank"
                     className="terms"
