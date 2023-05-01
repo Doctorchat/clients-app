@@ -119,7 +119,7 @@
   },
   "message_form_placeholder": "Example: 3 days ago, I started having a dull headache which I also feel behind my eyes. In addition to this, my nose is runny and I sometimes feel dizzy, especially in the evening. I’d like also to mention that I started having these symptoms after I returned from fishing. So far, the symptoms did not appear to get worse, but neither did they improve after I took Paracetamol and Nurofen. I have not done any medical investigation in this regard and I do not have other chronic diseases. Note that I`m also a smoker.",
   "message_uploads_label": "Add document / image",
-  "message_uoloads_description": "+15 {{currency}} image / investigation laboratory, imaging, etc.",
+  "message_uploads_description": "+{{amount}}  image / investigation laboratory, imaging, etc.",
   "explain_problem": "Explain problem in details*",
   "message_form_confirmation": {
     "symmary": "Summary question",
@@ -320,5 +320,6 @@
   "year": "Year",
   "invalid_month_day": "Invalid month or day",
   "receive_notification": "Receive notifications when you receive a new message.",
-  "save": "Save"
+  "save": "Save",
+  "ora_dvs_locala": "Your Local Time"
 }
