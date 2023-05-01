@@ -102,7 +102,11 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
     {
       key: "2",
       label: t("reviews") + ` (${doctor?.reviews?.length})`,
-      children: <ReviewsList data={doctor?.reviews} />,
+      children: (
+        <div className="limit-height">
+          <ReviewsList data={doctor?.reviews} />
+        </div>
+      ),
       disabled: !doctor?.reviews?.length,
     },
   ]);
