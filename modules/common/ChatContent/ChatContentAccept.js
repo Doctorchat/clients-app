@@ -30,7 +30,7 @@ export default function ChatContentAccept({ chatId }) {
       var ChatID = chatContent?.content?.chat_id;
       var amount = chatContent?.content?.amount;
 
-      window.dataLayer.push({
+      window.dataLayer?.push({
         event: "chat_confirmed",
         UserID: UserID,
         DoctorID: DoctorID,

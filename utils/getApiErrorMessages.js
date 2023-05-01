@@ -34,5 +34,5 @@ const errorMessageToTranslationKey = (error) => {
 
 const translateErrorMessage = (error) => {
   const errorMessageKey = errorMessageToTranslationKey(error);
-  return i18next.t(errorMessageKey);
+  return i18next.t(`backend:${errorMessageKey}`);
 };
