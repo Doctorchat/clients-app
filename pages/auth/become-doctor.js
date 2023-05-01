@@ -35,12 +35,10 @@ export default function BecomeDoctor() {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const response = await api.bootstrap.categories();
+      const response = await api.bootstrap.categoriesForDoctor();
       setCategories(toSelectOpts()(response.data));
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     }
   }, [dispatch]);
 
@@ -90,12 +88,7 @@ export default function BecomeDoctor() {
       </div>
       <div className="auth-form mt-5">
         {!categories.length && <Spinner />}
-        <Form
-          name="become-doctor-form"
-          methods={form}
-          onFinish={onBecomeDoctorSubmit}
-          initialValues={{ phone: "" }}
-        >
+        <Form name="become-doctor-form" methods={form} onFinish={onBecomeDoctorSubmit} initialValues={{ phone: "" }}>
           <p className="form-subtitle">Doctorchat</p>
           <h3 className="form-title">
             {t("part_of_team")} <br /> Doctorchat
@@ -109,11 +102,7 @@ export default function BecomeDoctor() {
             </Form.Item>
           </div>
           <div className="d-sm-flex gap-2">
-            <Form.Item
-              className="w-100"
-              name="professionalTitle"
-              label={`${t("professional_title")}*`}
-            >
+            <Form.Item className="w-100" name="professionalTitle" label={`${t("professional_title")}*`}>
               <Input />
             </Form.Item>
             <Form.Item className="w-100" name="specialization_ro" label={`${t("specialization")}*`}>
@@ -137,32 +126,15 @@ export default function BecomeDoctor() {
           <Form.List name="education" className="inputs-list-vertical">
             {({ fields, add, remove }) =>
               fields.map((field, idx) => (
-                <div
-                  className="inputs-list-item d-flex align-items-center"
-                  key={`education-${field.id}`}
-                >
-                  <Form.Item
-                    label={`${t("education")}*`}
-                    className="w-100 me-1"
-                    name={`education.${idx}.value`}
-                  >
+                <div className="inputs-list-item d-flex align-items-center" key={`education-${field.id}`}>
+                  <Form.Item label={`${t("education")}*`} className="w-100 me-1" name={`education.${idx}.value`}>
                     <Input />
                   </Form.Item>
                   {idx === fields.length - 1 && (
-                    <IconBtn
-                      size="sm"
-                      icon={<PlusIcon />}
-                      className="add-action"
-                      onClick={() => add({ name: "" })}
-                    />
+                    <IconBtn size="sm" icon={<PlusIcon />} className="add-action" onClick={() => add({ name: "" })} />
                   )}
                   {fields.length !== 1 && (
-                    <IconBtn
-                      size="sm"
-                      icon={<TrashIcon />}
-                      className="remove-action"
-                      onClick={() => remove(idx)}
-                    />
+                    <IconBtn size="sm" icon={<TrashIcon />} className="remove-action" onClick={() => remove(idx)} />
                   )}
                 </div>
               ))
@@ -175,11 +147,7 @@ export default function BecomeDoctor() {
             <Form.Item className="w-100" label={`${t("password")}*`} name="password">
               <Input type="password" />
             </Form.Item>
-            <Form.Item
-              className="w-100"
-              label={`${t("repeat_password")}*`}
-              name="password_confirmation"
-            >
+            <Form.Item className="w-100" label={`${t("repeat_password")}*`} name="password_confirmation">
               <Input type="password" />
             </Form.Item>
           </div>
