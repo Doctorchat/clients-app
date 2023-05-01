@@ -168,6 +168,7 @@ ClientInfo.defaultProps = {
 };
 
 const Age = ({ birthday }) => {
+  const { t } = useTranslation();
   const age = calculateAge(birthday);
 
   if (!age.years && !age.months && !age.weeks) return "-"; // handle invalid age

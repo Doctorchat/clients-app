@@ -1,12 +1,12 @@
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
-import { t } from "i18next";
 import PropTypes from "prop-types";
 
 import Checkbox from "@/components/Checkbox";
 
 const AcceptTermsAndConditions = ({ value, setValue, disabled }) => {
   const handleChange = () => setValue((prev) => !prev);
-
+  const { t } = useTranslation();
   return (
     <div className={clsx("confirmation-terms", { disabled })}>
       <Checkbox
