@@ -19,7 +19,7 @@ export default function ClientEditProfile() {
   const { user } = useSelector((store) => ({ user: store.user }));
   const resolver = useYupValidationResolver(editProfileSchema.clientGeneral);
   const form = useForm({
-    defaultValues: { name: user.data.name },
+    defaultValues: { name: user.data.name, email: user.data.email },
     resolver,
   });
   const [loading, setLoading] = useState();
@@ -39,9 +39,7 @@ export default function ClientEditProfile() {
         dispatch(updateUser(response.data));
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
@@ -60,6 +58,9 @@ export default function ClientEditProfile() {
           onFinish={onUpdateData}
         >
           <Form.Item name="name" label={t("name")}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="email" label={t("email")}>
             <Input />
           </Form.Item>
           <div className="d-flex justify-content-end">
