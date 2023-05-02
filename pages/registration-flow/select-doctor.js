@@ -13,12 +13,7 @@ export default function SelectDoctorPage() {
 SelectDoctorPage.getLayout = function (page) {
   return (
     <CheckConversations>
-      <Layout
-        activeStep="doctor"
-        title={i18next.t("wizard:available_doctors")}
-        disableResponsiveRestriction
-        backPath={"/home"}
-      >
+      <Layout activeStep="doctor" title={i18next.t("wizard:available_doctors")} disableResponsiveRestriction>
         <AuthWrapper>{page}</AuthWrapper>
       </Layout>
     </CheckConversations>
@@ -32,13 +27,13 @@ const CheckConversations = ({ children }) => {
   const dispatch = useDispatch();
   const { data: conversations } = useSelector((store) => store.conversationList);
 
+  const showBackButton = conversations?.length > 1;
+
   useEffect(() => {
-    if (conversations?.length > 1) return;
+    if (showBackButton) return;
 
     dispatch(getConversationList());
-  }, []);
-
-  const showBackButton = conversations?.length > 0;
+  }, [showBackButton]);
 
   if (showBackButton) {
     return cloneElement(children, { backPath: "/home" });
