@@ -25,6 +25,10 @@ export default function RegistrationPage() {
         return setIsPhoneConfirmationStep(true);
       }
 
+      if (!user?.investigations?.length) {
+        return "";
+      }
+
       return router.replace("/home");
     },
     [router]
