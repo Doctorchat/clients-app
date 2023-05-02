@@ -1,4 +1,5 @@
 {
   "the.phone.has.already.been.taken.": "Номер телефон уже занят.",
-  "code.is.not.valid": "Код недействителен"
+  "code.is.not.valid": "Код недействителен",
+  "the.selected.phone.is.invalid": "Номер телефона недействителен"
 }
