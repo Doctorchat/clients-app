@@ -19,7 +19,7 @@ const BirthdayInput = forwardRef((props, ref) => {
 
   const onChangeHandler = useCallback(
     ({ day, month, year }) => {
-      if (day && month && year) {
+      if (day != null && month != null && year != null) {
         let date = dayjs();
 
         date = date.set("year", year);
