@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
@@ -48,10 +48,13 @@ export default function ConversationsSidebar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const openStartConversation = useCallback(
-    () => dispatch(docListToggleVisibility(true)),
-    [dispatch]
-  );
+  useEffect(() => {
+    if (conversationList.isLoaded && conversationList.data.length < 1) {
+      router.push("/registration-flow/select-doctor");
+    }
+  }, [conversationList.data.length, conversationList.isLoaded, router]);
+
+  const openStartConversation = useCallback(() => dispatch(docListToggleVisibility(true)), [dispatch]);
 
   const updateSearchConfig = (actionType, value) => {
     setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
@@ -91,7 +94,8 @@ export default function ConversationsSidebar() {
                   </ClientStartConversationMenu>
                 </AuthRoleWrapper>
               ),
-            }}>
+            }}
+          >
             <ConversationList conversations={currentList} activeConversation={id} />
           </List>
         </div>
