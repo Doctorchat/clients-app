@@ -25,6 +25,10 @@ export default function RegistrationPage() {
         return setIsPhoneConfirmationStep(true);
       }
 
+      if (user.verified) {
+        router.replace("/registration-flow/select-doctor" + window.location.search);
+      }
+
       if (!user?.investigations?.length) {
         return "";
       }
