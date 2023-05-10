@@ -49,7 +49,7 @@ export default function ConversationsSidebar() {
   }, []);
 
   useEffect(() => {
-    if (conversationList.isLoaded && conversationList.data.length < 1) {
+    if (conversationList.isLoaded && conversationList.data.length < 2) {
       router.push("/registration-flow/select-doctor");
     }
   }, [conversationList.data.length, conversationList.isLoaded, router]);
