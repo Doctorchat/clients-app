@@ -75,7 +75,7 @@ export default function ClientInfo(props) {
                       <Skeleton.Line w="64px" h="18px" />
                     </Skeleton>
                   ) : (
-                    <Age birthday={investigation.age} />
+                    <Age birthday={investigation.birth_date} />
                   )}
                 </td>
               </tr>
