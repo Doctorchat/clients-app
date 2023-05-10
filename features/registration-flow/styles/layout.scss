@@ -48,15 +48,28 @@
   align-self: center;
 }
 
-.ant-popover>.ant-popover-content>.ant-popover-inner {
-  border-radius: 10px;
-}
-
-.registration-flow__logout-popover-btn{
+.registration-flow__logout-popover-btn {
   border-radius: 5px;
+
   &:hover {
     border-color: #ca1533;
     color: #ca1533;
+  }
+}
+
+
+.registration-flow__logout_wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 20;
+
+  .ant-popover > .ant-popover-content > .ant-popover-inner {
+    border-radius: 10px;
+  }
+
+  .ant-popover > .ant-popover-content {
+    min-width: 205px;
   }
 }
 
@@ -72,10 +85,6 @@
 }
 
 .registration-flow__logout {
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 20;
   background-color: #fff;
   transition: all 0.2s;
   opacity: 0;

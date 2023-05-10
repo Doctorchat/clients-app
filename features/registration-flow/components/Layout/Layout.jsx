@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { Popconfirm } from "antd";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
@@ -14,7 +15,6 @@ import { logoutUser } from "@/store/actions";
 import cs from "@/utils/classNames";
 
 import { Steps } from "../Steps";
-import { Popconfirm } from "antd";
 
 export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRestriction = false, children }) => {
   const { t } = useTranslation();
@@ -83,24 +83,29 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
         <h1>{title}</h1>
         {children}
       </main>
-      {isLogoutVisible && <Popconfirm
-        title={t("logout_confirmation")}
-        className="registration-flow__logout-popover"
-        onConfirm={logoutHandler}
-        okText={t("yes")}
-        cancelText={t("no")}
-        okButtonProps={{ className: "registration-flow__logout-popover-btn btn-primary" }}
-        cancelButtonProps={{ className: "registration-flow__logout-popover-btn" }}
-      >
-        <Button
-          className={cs("registration-flow__logout registration-flow__gray-btn", isLogoutVisible && "show")}
-          type="text"
-          size="sm"
-          icon={<LogoutIcon />}
-        >
-          {t("logout")}
-        </Button>
-      </Popconfirm>}
+      {isLogoutVisible && (
+        <div className="registration-flow__logout_wrapper">
+          <Popconfirm
+            title={t("logout_confirmation")}
+            className="registration-flow__logout-popover"
+            onConfirm={logoutHandler}
+            okText={t("yes")}
+            cancelText={t("no")}
+            okButtonProps={{ className: "registration-flow__logout-popover-btn btn-primary" }}
+            cancelButtonProps={{ className: "registration-flow__logout-popover-btn" }}
+            getPopupContainer={(trigger) => trigger.parentElement}
+          >
+            <Button
+              className={cs("registration-flow__logout registration-flow__gray-btn", isLogoutVisible && "show")}
+              type="text"
+              size="sm"
+              icon={<LogoutIcon />}
+            >
+              {t("logout")}
+            </Button>
+          </Popconfirm>
+        </div>
+      )}
     </div>
   );
 };
