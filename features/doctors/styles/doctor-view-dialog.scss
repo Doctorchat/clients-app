@@ -170,6 +170,11 @@
 .change-tabs-colors {
   margin-top: 1rem;
 
+  .limit-height {
+    max-height: 290px;
+    overflow-y: scroll;
+  }
+
   .ant-tabs-tab-disabled {
     display: none;
   }

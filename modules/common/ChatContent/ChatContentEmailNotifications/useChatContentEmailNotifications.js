@@ -42,7 +42,7 @@ export const useChatContentEmailNotifications = () => {
   );
 
   useEffect(() => {
-    if (user.data?.email) {
+    if (!user.data?.email) {
       const now = Date.now();
 
       if (now - lastShownAt > EMAIL_NOTIFICATIONS_INTERVAL) {
