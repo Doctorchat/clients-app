@@ -11,6 +11,10 @@ export const getUserRedirectPath = (user, pathname = "") => {
       return "/registration-flow" + window.location.search;
     }
 
+    if (!user?.investigations?.length) {
+      return "/registration-flow/select-doctor";
+    }
+
     if (pathname.startsWith("/registration-flow") && allowedPaths.every((path) => !pathname.includes(path))) {
       return "/home";
     }
