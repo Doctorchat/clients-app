@@ -25,6 +25,9 @@ export default function ConversationsSidebar() {
     active: false,
     loading: false,
   });
+
+  const user = useSelector((store) => store.user?.data);
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -49,6 +52,8 @@ export default function ConversationsSidebar() {
   }, []);
 
   useEffect(() => {
+    if (user?.role !== userRoles.CLIENT) return;
+
     if (conversationList.isLoaded && conversationList.data.length < 2) {
       router.push("/registration-flow/select-doctor");
     }
