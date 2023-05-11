@@ -25,11 +25,13 @@ export default function AuthWrapper(props) {
 
   useEffectOnce(() => {
     const accessToken = localStorage.getItem("dc_token");
+    const { doctorPreviewId, chatType } = router.query;
+    const isInvestigationFormAllowed = doctorPreviewId || chatType;
 
     if (accessToken) {
       dispatch(fetchUserByToken())
         .then((user) => {
-          const redirect = getUserRedirectPath(user, router.pathname);
+          const redirect = getUserRedirectPath(user, router.pathname, isInvestigationFormAllowed);
 
           if (redirect && redirect !== router.pathname) {
             router.replace(redirect);

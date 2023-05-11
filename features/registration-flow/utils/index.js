@@ -5,13 +5,13 @@ import api from "@/services/axios/api";
 
 const allowedPaths = ["select-doctor", "message", "payment"];
 
-export const getUserRedirectPath = (user, pathname = "") => {
+export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllowed = false) => {
   if (user.role === 3) {
     if (!user?.verified) {
       return "/registration-flow" + window.location.search;
     }
 
-    if (!user?.investigations?.length) {
+    if (!user?.investigations?.length && !isInvestigationFormAllowed) {
       return "/registration-flow/select-doctor";
     }
 
