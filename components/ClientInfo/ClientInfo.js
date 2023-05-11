@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { t } from "i18next";
 import PropTypes from "prop-types";
 
 import { calculateAge } from "@/utils/date";
@@ -75,7 +74,7 @@ export default function ClientInfo(props) {
                       <Skeleton.Line w="64px" h="18px" />
                     </Skeleton>
                   ) : (
-                    <Age birthday={investigation.age} />
+                    <Age birthday={investigation.birth_date} />
                   )}
                 </td>
               </tr>
