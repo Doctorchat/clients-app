@@ -52,10 +52,10 @@ export default function ConversationsSidebar() {
   }, []);
 
   useEffect(() => {
-    if (user?.role !== userRoles.CLIENT) return;
-
-    if (conversationList.isLoaded && conversationList.data.length < 2) {
-      router.push("/registration-flow/select-doctor");
+    if (user?.role === userRoles.CLIENT) {
+      if (conversationList.isLoaded && conversationList.data.length < 2) {
+        router.push("/registration-flow/select-doctor");
+      }
     }
   }, [conversationList.data.length, conversationList.isLoaded, router]);
 
