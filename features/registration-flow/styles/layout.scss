@@ -48,11 +48,43 @@
   align-self: center;
 }
 
-.registration-flow__logout {
+.registration-flow__logout-popover-btn {
+  border-radius: 5px;
+
+  &:hover {
+    border-color: #ca1533;
+    color: #ca1533;
+  }
+}
+
+
+.registration-flow__logout_wrapper {
   position: fixed;
   bottom: 20px;
   right: 30px;
   z-index: 20;
+
+  .ant-popover > .ant-popover-content > .ant-popover-inner {
+    border-radius: 10px;
+  }
+
+  .ant-popover > .ant-popover-content {
+    min-width: 205px;
+  }
+}
+
+.registration-flow__logout-popover-btn.btn-primary.ant-btn-primary {
+  background-color: #e81f41;
+  border-color: #e81f41;
+
+  &:hover {
+    background-color: #ca1533;
+    border-color: #ca1533;
+    color: #fff;
+  }
+}
+
+.registration-flow__logout {
   background-color: #fff;
   transition: all 0.2s;
   opacity: 0;
@@ -91,8 +123,10 @@
     }
 
     .wallet-top-up {
-      grid-column: 1 / -1; /* span across all columns */
-      grid-row: 2 / 3; /* second row */
+      grid-column: 1 / -1;
+      /* span across all columns */
+      grid-row: 2 / 3;
+      /* second row */
       justify-self: center;
     }
 
@@ -108,7 +142,8 @@
 
     .no-wallet .registration-flow__steps,
     .registration-flow__steps {
-      grid-column: 1 / -1; /* span across all columns */
+      grid-column: 1 / -1;
+      /* span across all columns */
     }
   }
 }

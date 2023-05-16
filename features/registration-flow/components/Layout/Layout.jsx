@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { Popconfirm } from "antd";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
@@ -82,15 +83,29 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
         <h1>{title}</h1>
         {children}
       </main>
-      <Button
-        className={cs("registration-flow__logout registration-flow__gray-btn", isLogoutVisible && "show")}
-        type="text"
-        size="sm"
-        icon={<LogoutIcon />}
-        onClick={logoutHandler}
-      >
-        {t("logout")}
-      </Button>
+      {isLogoutVisible && (
+        <div className="registration-flow__logout_wrapper">
+          <Popconfirm
+            title={t("logout_confirmation")}
+            className="registration-flow__logout-popover"
+            onConfirm={logoutHandler}
+            okText={t("yes")}
+            cancelText={t("no")}
+            okButtonProps={{ className: "registration-flow__logout-popover-btn btn-primary" }}
+            cancelButtonProps={{ className: "registration-flow__logout-popover-btn" }}
+            getPopupContainer={(trigger) => trigger.parentElement}
+          >
+            <Button
+              className={cs("registration-flow__logout registration-flow__gray-btn", isLogoutVisible && "show")}
+              type="text"
+              size="sm"
+              icon={<LogoutIcon />}
+            >
+              {t("logout")}
+            </Button>
+          </Popconfirm>
+        </div>
+      )}
     </div>
   );
 };
