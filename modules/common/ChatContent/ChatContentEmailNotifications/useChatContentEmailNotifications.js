@@ -42,14 +42,14 @@ export const useChatContentEmailNotifications = () => {
   );
 
   useEffect(() => {
-    if (user.data && user.data.email === null) {
+    if (user.data?.id && user.data?.email === null) {
       const now = Date.now();
 
       if (now - lastShownAt > EMAIL_NOTIFICATIONS_INTERVAL) {
         setVisible(true);
       }
     }
-  }, [lastShownAt, user.data]);
+  }, [lastShownAt, user.data?.email, user.data?.id]);
 
   return {
     visible,
