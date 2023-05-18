@@ -68,7 +68,7 @@ export default function MessagesList(props) {
     }
 
     return null;
-  }, [chatId, docId, groupedMessage, listLastMessage]);
+  }, [chatId, docId, groupedMessage, listLastMessage, status]);
 
   return Messages;
 }
