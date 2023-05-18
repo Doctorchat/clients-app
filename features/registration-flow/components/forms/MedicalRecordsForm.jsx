@@ -21,8 +21,8 @@ import isValidSelectOption from "@/utils/isValidSelectOption";
 const medicalRecordsSchema = yup.object().shape({
   name: yup.string().required(),
   birth_date: yup.date().required(),
-  weight: yup.number().min(0).required(),
-  height: yup.number().min(0).required(),
+  weight: yup.number().min(1).required(),
+  height: yup.number().min(1).required(),
   location: yup.string().required(),
   activity: yup.string().required(),
   sex: yup
