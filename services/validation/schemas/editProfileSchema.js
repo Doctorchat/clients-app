@@ -9,8 +9,6 @@ const docGeneral = object().shape({
     .min(1)
     .of(object().shape({ value: string().required() })),
   professionalTitle: string().required(),
-  price: number().min(0).required(),
-  meet_price: number().min(0).required(),
   experience: number().min(0).required(),
   workplace: string().required(),
   specialization_ro: string().required(),
