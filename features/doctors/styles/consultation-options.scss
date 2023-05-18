@@ -1,7 +1,6 @@
-
 .consultation-options {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
   gap: 1rem;
 
   margin-top: 1.5rem;
@@ -10,12 +9,12 @@
     position: relative;
     cursor: pointer;
 
-    border: 3px solid #EAEDF4;
+    border: 3px solid #eaedf4;
     padding: 1.6rem 2rem 1.6rem 1.6rem;
     border-radius: 8px;
 
     &.selected {
-      border-color: #E81F41;
+      border-color: #e81f41;
       animation: pulse 1s;
     }
     &.disabled {
@@ -29,7 +28,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: #E81F41;
+    background: #e81f41;
     color: #fff;
     width: 1.6rem;
     padding: 0.2rem;
@@ -38,7 +37,7 @@
 
   .card-price {
     display: flex;
-    margin-top: .4rem;
+    margin-top: 0.4rem;
     color: #52565e;
   }
 
@@ -59,12 +58,38 @@
   }
 }
 
-@media screen and (max-width: 550px) {
-  .consultation-options {
-    grid-template-columns: unset;
+.card-price__discount {
+  display: flex;
+  align-items: center;
+  margin-top: 0.4rem;
+
+  .old-price {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-left: 0.4rem;
+    text-decoration: line-through;
+    color: #52565e;
+    margin-left: 0.4rem;
+  }
+
+  .new-price {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 0.3rem;
+    color: var(--bs-primary);
   }
 }
 
+.card-price__discount-time {
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-size: 14px;
+  text-align: left;
+
+  span {
+    font-weight: 500;
+  }
+}
 
 @keyframes pulse {
   0% {

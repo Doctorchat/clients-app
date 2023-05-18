@@ -50,10 +50,19 @@ export const MessageForm = () => {
   const description = t("message_uploads_description", {
     amount: formatPrice(global.attach),
   });
-  const doctorPrice = React.useMemo(
-    () => (messageType === MESSAGE_TYPES.standard ? doctor.price : doctor.meet_price || 0),
-    [messageType, doctor.meet_price, doctor.price]
-  );
+  const doctorPrice = React.useMemo(() => {
+    let price = doctor.price;
+
+    if (messageType === MESSAGE_TYPES.meet) {
+      price = doctor.meet_price || 0;
+    }
+
+    if (doctor?.available_discount?.discount) {
+      price = price - price * (doctor.available_discount.discount / 100);
+    }
+
+    return price;
+  }, [doctor?.available_discount?.discount, doctor?.meet_price, doctor?.price, messageType]);
 
   const onSubmit = React.useCallback(
     async (values) => {

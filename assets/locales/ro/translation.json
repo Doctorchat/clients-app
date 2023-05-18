@@ -326,5 +326,19 @@
   "receive_notifications": "Primiți notificări când vi se trimite un mesaj nou.",
   "save": "Salvați",
   "ora_dvs_locala": "Ora Dumneavostra Locala",
-  "restore_password_confirm_code": "Introduceți codul de confirmare primit prin mesaj telefonic"
+  "restore_password_confirm_code": "Introduceți codul de confirmare primit prin mesaj telefonic",
+  "repeated_consultations": {
+    "title": "Consultații repetate",
+    "description": "Oferiți reducere la consultații repetate?",
+    "note": "Reducerea se oferă automat la închiderea conversației.",
+    "duration": "Valabilitate (zile)",
+    "discount": "Reducere (%)"
+  },
+  "repeated_consultations_discount": {
+    "days": "zile",
+    "hours": "ore",
+    "minutes": "minute",
+    "seconds": "secunde",
+    "description": "Ofertă limitată: Reducere de <bold>{{discount}}%</bold> disponibilă pentru o perioadă scurtă de timp! Profită acum de prețurile reduse!"
+  }
 }
