@@ -128,7 +128,7 @@
   "message_uploads_description": "+{{amount}}  imagine, investigație de laborator, imagistică, etc",
   "explain_problem": "Explică problema în detalii*",
   "message_form_confirmation": {
-    "symmary": "Sumar întrebare",
+    "summary": "Sumar întrebare",
     "description": "Descriere",
     "basic_price": "Prețul",
     "files": "Fișiere",
@@ -137,7 +137,7 @@
     "payment_security": "Achitare sigură prin",
     "company": "Companie",
     "product": "Produs",
-    "adress": "Adresa",
+    "address": "Adresa",
     "have_promo": "Aveți un promo-code?",
     "confirm": "Confirmă și Achită",
     "code": "Promo-cod",

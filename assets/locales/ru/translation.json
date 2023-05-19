@@ -125,7 +125,7 @@
   "message_uploads_description": "+{{amount}}  изображение исследование лабораторное, рентгенологическое и т. д.",
   "explain_problem": "Опишите проблему в деталях*",
   "message_form_confirmation": {
-    "symmary": "Итоговый вопрос",
+    "summary": "Итоговый вопрос",
     "description": "Описание",
     "basic_price": "Начальная цена",
     "files": "Прикрепленные файлы",
@@ -134,7 +134,7 @@
     "payment_security": "Оплата производится безопасно на",
     "company": "Компания",
     "product": "Продукт",
-    "adress": "Адрес",
+    "address": "Адрес",
     "have_promo": "У вас есть промо-код?",
     "confirm": "Подтвердить и оплатить",
     "code": "Промо-код",
