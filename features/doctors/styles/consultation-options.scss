@@ -10,7 +10,7 @@
     cursor: pointer;
 
     border: 3px solid #eaedf4;
-    padding: 1.6rem 2rem 1.6rem 1.6rem;
+    padding: 12px 24px;
     border-radius: 8px;
 
     &.selected {
@@ -77,17 +77,6 @@
     font-weight: 500;
     margin-left: 0.3rem;
     color: var(--bs-primary);
-  }
-}
-
-.card-price__discount-time {
-  margin-top: 5px;
-  margin-bottom: 0;
-  font-size: 14px;
-  text-align: left;
-
-  span {
-    font-weight: 500;
   }
 }
 

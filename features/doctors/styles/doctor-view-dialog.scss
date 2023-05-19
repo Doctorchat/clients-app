@@ -147,23 +147,21 @@
       margin-right: 15px;
     }
   }
-
-  &__discount {
-    margin-top: 24px;
-    font-size: 18px;
-
-    p {
-      margin-bottom: 0;
-    }
-
-    b {
-      font-weight: 500;
-      color: var(--bs-primary);
-    }
-  }
 }
 
 .doctor-view__discount {
+  margin-top: 24px;
+  font-size: 18px;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  b {
+    font-weight: 500;
+    color: var(--bs-primary);
+  }
+
   .countdown {
     margin-top: 12px;
     display: grid;

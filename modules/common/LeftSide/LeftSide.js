@@ -9,7 +9,6 @@ import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
 import { leftSideTabs } from "@/context/TabsKeys";
 import PlusIcon from "@/icons/plus.svg";
-// import { DocRepeatedConsultations } from "@/modules/doctor";
 import Tabs from "@/packages/Tabs";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 
