@@ -125,7 +125,7 @@
   "message_uploads_description": "+{{amount}}  image / investigation laboratory, imaging, etc.",
   "explain_problem": "Explain problem in details*",
   "message_form_confirmation": {
-    "symmary": "Summary question",
+    "summary": "Summary question",
     "description": "Description",
     "basic_price": "Basic price question",
     "files": "Attached files",
@@ -134,7 +134,7 @@
     "payment_security": "Payment is made securely to",
     "company": "Company",
     "product": "Product",
-    "adress": "Address",
+    "address": "Address",
     "have_promo": "Do you have a promo code?",
     "confirm": "Confirm and Pay",
     "code": "Promo-code",
