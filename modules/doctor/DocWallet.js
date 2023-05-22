@@ -10,6 +10,7 @@ import Form from "@/components/Form";
 import { InputNumber } from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import Portal from "@/containers/Portal";
+import useCurrency from "@/hooks/useCurrency";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
@@ -22,6 +23,7 @@ export default function DocWallet() {
     user: store.user.data,
     transactionsList: store.transactionsList,
   }));
+  const { globalCurrency } = useCurrency();
   const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
   const form = useForm({
     resolver: useYupValidationResolver(
@@ -47,9 +49,7 @@ export default function DocWallet() {
         setIsWithdrawOpen(false);
         return Promise.resolve();
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
         return Promise.reject();
       }
     },
@@ -60,7 +60,9 @@ export default function DocWallet() {
     <>
       <div className="doc-wallet">
         <div className="d-flex justify-content-center align-items-center mb-3">
-          <h3 className="total me-3">{user.private?.balance || "0.00"} L</h3>
+          <h3 className="total me-3">
+            {user.private?.balance || "0.00"} {globalCurrency}
+          </h3>
           <Button
             size="sm"
             onClick={() => setIsWithdrawOpen(true)}
@@ -80,12 +82,7 @@ export default function DocWallet() {
             <p className="m-0" style={{ fontSize: 14, paddingLeft: 4 }}>
               {t("price_meet")}
             </p>
-            <InputNumber
-              readOnly
-              format="decimal"
-              value={user.private?.meet || 0}
-              addonBefore="MDL"
-            />
+            <InputNumber readOnly format="decimal" value={user.private?.meet || 0} addonBefore="MDL" />
           </div>
         </div>
       </div>
@@ -104,19 +101,10 @@ export default function DocWallet() {
                 <InputNumber />
               </Form.Item>
               <div className="d-flex justify-content-end align-items-center">
-                <Button
-                  type="outline"
-                  size="sm"
-                  className="me-2"
-                  onClick={() => setIsWithdrawOpen(false)}
-                >
+                <Button type="outline" size="sm" className="me-2" onClick={() => setIsWithdrawOpen(false)}>
                   {t("cancel")}
                 </Button>
-                <Confirm
-                  content={t("withdraw_confirmation")}
-                  onConfirm={form.handleSubmit(onSubmitHandler)}
-                  isAsync
-                >
+                <Confirm content={t("withdraw_confirmation")} onConfirm={form.handleSubmit(onSubmitHandler)} isAsync>
                   <Button size="sm">{t("apply")}</Button>
                 </Confirm>
               </div>
