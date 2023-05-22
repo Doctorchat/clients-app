@@ -284,7 +284,7 @@
   "request": "Solicitare",
   "chat_attach": {
     "file": "Fişier",
-    "you_will_be_charged": "Contul dvs. va fi debitat cu {{price}} L",
+    "you_will_be_charged": "Contul dvs. va fi debitat cu {{price}} {{currency}}",
     "insufficient_funds": "Nu ai suficiente fonduri. Vă rugăm să supliniți soldul",
     "upload_file": "Incarcă fisier",
     "replenish_balance": "Suplinire sold",

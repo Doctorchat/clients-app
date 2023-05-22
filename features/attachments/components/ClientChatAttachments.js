@@ -8,6 +8,7 @@ import Alert from "@/components/Alert";
 import Button, { IconBtn } from "@/components/Button";
 import Dropdown from "@/components/Dropdown";
 import Menu from "@/components/Menu";
+import useCurrency from "@/hooks/useCurrency";
 import ClipIcon from "@/icons/clip.svg";
 import UploadIcon from "@/icons/upload.svg";
 import api from "@/services/axios/api";
@@ -21,7 +22,7 @@ import { AttachmentInputProvider, useAttachmentInput } from "./AttachmentInputPr
 
 const Overlay = React.memo(({ isFree }) => {
   const { t } = useTranslation();
-
+  const { globalCurrency } = useCurrency();
   const { triggerUploadInput } = useAttachmentInput();
 
   const { attachPrice } = useSelector((store) => ({
@@ -37,11 +38,7 @@ const Overlay = React.memo(({ isFree }) => {
   if (!isFree && walletData?.data?.balance < attachPrice) {
     return (
       <div className="px-2">
-        <Alert
-          className="configure-form-alert"
-          type="error"
-          message={t("chat_attach.insufficient_funds")}
-        />
+        <Alert className="configure-form-alert" type="error" message={t("chat_attach.insufficient_funds")} />
         <Button size="sm" className="mt-2" onClick={() => dispatch(toggleTopUpModal(true))}>
           {t("chat_attach.replenish_balance")}
         </Button>
@@ -56,7 +53,7 @@ const Overlay = React.memo(({ isFree }) => {
       </Menu.Item>
       {!isFree && (
         <span className="text-muted px-2 mt-2 d-block text-sm text-center">
-          {t("chat_attach.you_will_be_charged", { price: attachPrice })}
+          {t("chat_attach.you_will_be_charged", { price: attachPrice, currency: globalCurrency })}
         </span>
       )}
     </Menu>
