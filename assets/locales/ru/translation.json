@@ -283,7 +283,7 @@
   "request": "Запросить",
   "chat_attach": {
     "file": "Файл",
-    "you_will_be_charged": "С вашего счета будет списано {{price}} L",
+    "you_will_be_charged": "С вашего счета будет списано {{price}} {{currency}}",
     "insufficient_funds": "У вас недостаточно средств. Пожалуйста пополните баланс",
     "upload_file": "Загрузить файл",
     "replenish_balance": "Пополнить баланс",

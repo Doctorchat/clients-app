@@ -284,7 +284,7 @@
   "request": "Request",
   "chat_attach": {
     "file": "File",
-    "you_will_be_charged": "Your account will be debited with {{price}} L",
+    "you_will_be_charged": "Your account will be debited with {{price}} {{currency}}",
     "insufficient_funds": "You don't have enough funds. Please replenish the balance",
     "upload_file": "Upload file",
     "replenish_balance": "Top up balance",
