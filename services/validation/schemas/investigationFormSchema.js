@@ -7,8 +7,8 @@ import isValidSelectOption from "@/utils/isValidSelectOption";
 const investigationFormSchema = object().shape({
   name: string().required(), //
   birth_date: date().required(),
-  weight: number().min(0).required(), //
-  height: number().min(0).required(), //
+  weight: number().min(1).required(), //
+  height: number().min(1).required(), //
   location: string().required(), //
   activity: string().required(), //
   sex: mixed()
