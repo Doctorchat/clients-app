@@ -16,12 +16,13 @@ import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
+import moment from "@/utils/localMoment";
 
 export default function DocSetVacation() {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const user = useSelector((store) => store.user.data);
-  const form = useForm({ defaultValues: { range: null } });
+  const form = useForm({ defaultValues: { from: null, to: null } });
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -31,15 +32,11 @@ export default function DocSetVacation() {
     try {
       await api.user.resetVacation();
       dispatch(updateUserProperty({ prop: "vacation", value: null, as_send: true }));
-      dispatch(
-        notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
-      );
+      dispatch(notification({ type: "success", title: "success", descrp: "data_updated_with_success" }));
       form.reset();
       return Promise.resolve();
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       return Promise.reject();
     }
   }, [dispatch, form]);
@@ -48,21 +45,37 @@ export default function DocSetVacation() {
     async (values) => {
       try {
         setLoading(true);
-        await api.user.setVacation(values);
-        dispatch(updateUserProperty({ prop: "vacation", value: values.range, as_send: true }));
-        dispatch(
-          notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
-        );
+
+        const range = [values.from, values.to];
+        await api.user.setVacation({ range });
+
+        dispatch(updateUserProperty({ prop: "vacation", value: range, as_send: true }));
+        dispatch(notification({ type: "success", title: "success", descrp: "data_updated_with_success" }));
         setIsOpen(false);
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
     },
     [dispatch]
+  );
+
+  const from = form.watch("from");
+
+  const isDateDisabled = useCallback(
+    (name, date) => {
+      if (name === "from") {
+        return date.isBefore(moment());
+      }
+
+      if (name === "to" && from) {
+        return date.isBefore(moment(from, "DD.MM.YYYY").add(1, "days"));
+      }
+
+      return false;
+    },
+    [from]
   );
 
   return (
@@ -78,11 +91,19 @@ export default function DocSetVacation() {
               methods={form}
               onFinish={onSubmitHandler}
               initialValues={{
-                range: user?.vacation && user.vacation.length ? user.vacation : null,
+                from: user?.vacation && user.vacation.length ? user.vacation[0] : null,
+                to: user?.vacation && user.vacation.length ? user.vacation[1] : null,
               }}
             >
-              <Form.Item label={t("interval")} name="range">
-                <DatePicker type="range" />
+              <Form.Item label={t("range_picker_placeholder.start")} name="from">
+                <DatePicker skipNativeDisableDate additionalCheckDisabledDay={(d) => isDateDisabled("from", d)} />
+              </Form.Item>
+              <Form.Item label={t("range_picker_placeholder.end")} name="to">
+                <DatePicker
+                  disabled={!from}
+                  skipNativeDisableDate
+                  additionalCheckDisabledDay={(d) => isDateDisabled("to", d)}
+                />
               </Form.Item>
               <div className="d-flex justify-content-between">
                 <Confirm
@@ -95,7 +116,7 @@ export default function DocSetVacation() {
                     {t("cancel")}
                   </Button>
                 </Confirm>
-                <Button htmlType="submit" loading={loading}>
+                <Button className="ms-2" htmlType="submit" loading={loading}>
                   {t("apply")}
                 </Button>
               </div>

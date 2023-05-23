@@ -24,6 +24,7 @@ const DatePicker = forwardRef((props, ref) => {
     onChange,
     onDateUpdated,
     type,
+    skipNativeDisableDate,
     additionalCheckDisabledDay,
     ...rest
   } = props;
@@ -49,8 +50,10 @@ const DatePicker = forwardRef((props, ref) => {
       const today = moment().subtract(1, "days");
       const dateAfter7Days = moment().add(6, "days");
 
-      if (date.isAfter(dateAfter7Days) || date.isBefore(today)) {
-        return true;
+      if (!skipNativeDisableDate) {
+        if (date.isAfter(dateAfter7Days) || date.isBefore(today)) {
+          return true;
+        }
       }
 
       if (additionalCheckDisabledDay) {
@@ -59,7 +62,7 @@ const DatePicker = forwardRef((props, ref) => {
 
       return false;
     },
-    [additionalCheckDisabledDay]
+    [additionalCheckDisabledDay, skipNativeDisableDate]
   );
 
   const pickerProps = {
@@ -111,6 +114,7 @@ DatePicker.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onDateUpdated: PropTypes.func,
+  skipNativeDisableDate: PropTypes.bool,
   additionalCheckDisabledDay: PropTypes.func,
 };
 
