@@ -13,6 +13,7 @@ import { PopupContent, PopupHeader } from "@/components/Popup";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { meetFormTabs } from "@/context/TabsKeys";
 import useCurrency from "@/hooks/useCurrency";
+import useMessageFromValues from "@/hooks/useMessageFromValues";
 import useRegion from "@/hooks/useRegion";
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -43,8 +44,9 @@ function MeetFormConfirmation() {
   const form = useForm();
   const { t } = useTranslation();
   const { formatPrice } = useCurrency();
-
   const dispatch = useDispatch();
+
+  const { resetValues: resetPersistedValues } = useMessageFromValues(chatId);
 
   const { data: walletData } = useQuery(["wallet"], () => api.wallet.get(), {
     keepPreviousData: true,
@@ -109,12 +111,14 @@ function MeetFormConfirmation() {
         dispatch(meetFormToggleVisibility(false));
         dispatch(meetFormReset());
       }
+
+      resetPersistedValues();
     } catch (error) {
       dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setLoading(false);
     }
-  }, [values, chatId, promo.code, uploads, dispatch]);
+  }, [values, chatId, promo.code, uploads.list, dispatch, resetPersistedValues]);
 
   const totalPrice = +price.total - +promo.sum;
   const toPayPrice = Math.max(0, +totalPrice - (+walletData?.data?.balance ?? 0));

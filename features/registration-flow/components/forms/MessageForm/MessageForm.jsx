@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { object, string } from "yup";
 
@@ -14,6 +15,7 @@ import Upload from "@/components/Upload";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { getDoctor } from "@/features/doctors/api";
 import useCurrency from "@/hooks/useCurrency";
+import useMessageFromValues from "@/hooks/useMessageFromValues";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-png.svg";
 import { messageUploadFile } from "@/store/actions";
@@ -40,6 +42,12 @@ export const MessageForm = () => {
   const resolver = useYupValidationResolver(messageSchema);
   const form = useForm({ resolver });
 
+  const {
+    values: persistedValues,
+    setValues: setPersistedValues,
+    resetValues: resetPersistedValues,
+  } = useMessageFromValues(router.query.chatId);
+
   const [doctor, setDoctor] = React.useState(0);
   const [messageType, setMessageType] = React.useState("");
   const [attachments, setAttachments] = React.useState({ list: [], price: 0, initiated: false });
@@ -54,6 +62,22 @@ export const MessageForm = () => {
     () => (messageType === MESSAGE_TYPES.standard ? doctor.price : doctor.meet_price || 0),
     [messageType, doctor.meet_price, doctor.price]
   );
+
+  useEffect(() => {
+    if (!attachments.initiated && global?.attach && persistedValues?.uploads?.list) {
+      let uploadsList = persistedValues?.uploads?.list ?? [];
+
+      uploadsList = uploadsList.filter((item) =>
+        dayjs(item.created_at ?? new Date()).isAfter(dayjs().subtract(1, "day"))
+      );
+
+      setAttachments({
+        list: uploadsList,
+        price: uploadsList.length * global.attach,
+        initiated: true,
+      });
+    }
+  }, [attachments.initiated, global?.attach, persistedValues?.uploads?.list]);
 
   const onSubmit = React.useCallback(
     async (values) => {
@@ -75,8 +99,9 @@ export const MessageForm = () => {
 
       setConfirmationData(data);
       setConfirmationDialogVisible(true);
+      resetPersistedValues();
     },
-    [attachments.list, dispatch, doctorPrice, global?.attach, messageType, router.query.chatId]
+    [attachments.list, dispatch, doctorPrice, global.attach, messageType, resetPersistedValues, router.query.chatId]
   );
 
   const setFileList = React.useCallback(
@@ -84,8 +109,9 @@ export const MessageForm = () => {
       const newAttachments = { list: fileList, price: fileList.length * global.attach };
 
       setAttachments({ ...newAttachments, initiated: true });
+      setPersistedValues({ uploads: newAttachments });
     },
-    [global?.attach]
+    [global?.attach, setPersistedValues]
   );
 
   const onCloseConfirmationDialog = React.useCallback(() => {
@@ -122,7 +148,17 @@ export const MessageForm = () => {
   return (
     <>
       <div className="registration-flow__message-form">
-        <Form className="registration-flow__form" methods={form} onFinish={onSubmit}>
+        <Form
+          className="registration-flow__form"
+          methods={form}
+          onValuesChange={(action) => {
+            if (action.name && action.value) {
+              setPersistedValues({ [action.name]: action.value });
+            }
+          }}
+          onFinish={onSubmit}
+          initialValues={{ content: persistedValues?.content }}
+        >
           <div className="message-form-info">
             <h3>{t("message_from_info.title")}</h3>
             <p>{t("message_from_info.line1")}</p>
