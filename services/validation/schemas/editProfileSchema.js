@@ -4,6 +4,7 @@ import i18next from "@/services/i18next";
 
 const docGeneral = object().shape({
   name: string().required(),
+  email: string().email(),
   category: array().min(1),
   education: array()
     .min(1)
@@ -30,7 +31,7 @@ const docMultilangEdit = object().shape({
 
 const clientGeneral = object().shape({
   name: string().required(),
-  email: string().email().required(),
+  email: string().email(),
 });
 
 const security = object().shape({

@@ -40,6 +40,7 @@ export default function DocEditProfile() {
   const form = useForm({
     defaultValues: {
       name: user.name,
+      email: user.email,
       category: toSelectOpts("id", `name_${selectedLng}`)(user.category),
       professionalTitle: user.about.professionalTitle,
       experience: user.about.experience,
@@ -103,6 +104,9 @@ export default function DocEditProfile() {
           onFinish={onUpdateData}
         >
           <Form.Item name="name" label={t("name")}>
+            <Input />
+          </Form.Item>
+          <Form.Item name="email" label={t("email")}>
             <Input />
           </Form.Item>
           <Form.Item name="category" label={t("speciality")}>
