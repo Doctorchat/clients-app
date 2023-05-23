@@ -129,7 +129,7 @@ function MeetFormConfirmation() {
           <table>
             <tbody>
               <tr className="dc-description-title">
-                <th colSpan="2">{t("message_form_confirmation.symmary")}</th>
+                <th colSpan="2">{t("message_form_confirmation.summary")}</th>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("message_form_confirmation.description")}</th>
@@ -264,10 +264,10 @@ export const ConfirmationSection = () => {
         title: "Stripe",
         url: "https://stripe.com/",
       },
-      company: "WEBMEDCONSULT SRL",
+      company: "„WEBMEDCONSULT” OU",
       product: "Doctorchat",
-      adress: "Bucureşti, sector 6, Splaiul Independenţei nr. 273, corp 3, etaj 3",
-      phone: `+373 78 272 887`,
+      address: "Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
+      phone: "+373 78 272 887",
       email: "info@doctorchat.md",
     },
     ro: {
@@ -277,8 +277,8 @@ export const ConfirmationSection = () => {
       },
       company: "„WEBMEDCONSULT” OU",
       product: "Doctorchat",
-      adress: "Oraşul Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
-      phone: "+373 78 272 887",
+      address: "Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
+      phone: "+40 758 670 067",
       email: "infodoctorchat.ro@gmail.com",
     },
   };
@@ -306,8 +306,8 @@ export const ConfirmationSection = () => {
             <td className="dc-description-row-content">{regionContent.product}</td>
           </tr>
           <tr className="dc-description-row">
-            <th className="dc-description-row-label"> {t("message_form_confirmation.adress")}</th>
-            <td className="dc-description-row-content">{regionContent.adress}</td>
+            <th className="dc-description-row-label"> {t("message_form_confirmation.address")}</th>
+            <td className="dc-description-row-content">{regionContent.address}</td>
           </tr>
           <tr className="dc-description-row">
             <th className="dc-description-row-label">{t("email")}</th>

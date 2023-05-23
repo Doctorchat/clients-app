@@ -127,7 +127,7 @@ function MessageFormConfirmation() {
           <table>
             <tbody>
               <tr className="dc-description-title">
-                <th colSpan="2">{t("message_form_confirmation.symmary")}</th>
+                <th colSpan="2">{t("message_form_confirmation.summary")}</th>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("message_form_confirmation.description")}</th>
