@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { Calendar } from "antd";
 import en_US from "antd/lib/locale-provider/en_US";
@@ -66,48 +66,53 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
   );
 
   return (
-    <div className="message-form__time-selection">
-      <div className="time-selection__date">
-        <Calendar
-          mode="month"
-          fullscreen={false}
-          value={moment(selectedDate)}
-          onSelect={onChangeSelectedDate}
-          disabledDate={(date) => {
-            return !data?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
-          }}
-          locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
-        />
-      </div>
+    <>
+      <div className="message-form__time-selection">
+        <div className="time-selection__date">
+          <Calendar
+            mode="month"
+            fullscreen={false}
+            value={moment(selectedDate)}
+            onSelect={onChangeSelectedDate}
+            disabledDate={(date) => {
+              return !data?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
+            }}
+            locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
+          />
+        </div>
 
-      <div className="d-flex flex-column text-center justify-content-center">
-        <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">{t("ora_dvs_locala")}</h5>
+        <div className="d-flex flex-column text-center justify-content-center">
+          <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">{t("ora_dvs_locala")}</h5>
 
-        <div className="time-selection__time pt-0">
-          {data?.map((slot) => {
-            const date = dayjs(slot.start_time);
-            const isSelected = selectedSlotId === slot.id;
-            const isDisabled = date.isBefore(moment().add(3, "hours"));
+          <div className="time-selection__time pt-0">
+            {data?.map((slot) => {
+              const date = dayjs(slot.start_time);
+              const isSelected = selectedSlotId === slot.id;
+              const isDisabled = date.isBefore(moment().add(3, "hours"));
 
-            return (
-              date.isSame(selectedDate, "day") && (
-                <TimeCard
-                  key={slot.id}
-                  time={date.format("HH:mm")}
-                  isSelected={isSelected}
-                  isDisabled={isDisabled}
-                  onClick={() => {
-                    if (!isDisabled) {
-                      onChangeSelectedSlot(isSelected ? null : slot.id);
-                    }
-                  }}
-                />
-              )
-            );
-          })}
+              return (
+                date.isSame(selectedDate, "day") && (
+                  <TimeCard
+                    key={slot.id}
+                    time={date.format("HH:mm")}
+                    isSelected={isSelected}
+                    isDisabled={isDisabled}
+                    onClick={() => {
+                      if (!isDisabled) {
+                        onChangeSelectedSlot(isSelected ? null : slot.id);
+                      }
+                    }}
+                  />
+                )
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
+      <p className="message-form__time-selection-info alert alert-info">
+        <Trans i18nKey="wizard:time_selection_warning" components={{ bold: <b /> }} />
+      </p>
+    </>
   );
 };
 
