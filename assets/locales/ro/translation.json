@@ -340,5 +340,9 @@
     "minutes": "minute",
     "seconds": "secunde",
     "description": "Ofertă limitată: Reducere de <bold>{{discount}}%</bold> disponibilă pentru o perioadă scurtă de timp! Profită acum de prețurile reduse!"
+  },
+  "remove_account": {
+    "action": "Ștergeți contul",
+    "description": "Ești sigur că vrei să ștergi contul? Toate datele vor fi șterse și nu vor putea fi recuperate."
   }
 }

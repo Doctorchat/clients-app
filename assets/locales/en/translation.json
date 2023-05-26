@@ -339,5 +339,9 @@
     "minutes": "minutes",
     "seconds": "seconds",
     "description": "Limited offer: <bold>{{discount}}%</bold> discount available for a short time! Take advantage of the reduced prices now!"
+  },
+  "remove_account": {
+    "action": "Delete account",
+    "description": "Are you sure you want to delete your account? All data will be deleted and cannot be recovered."
   }
 }
