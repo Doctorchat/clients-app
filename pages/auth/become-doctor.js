@@ -76,14 +76,14 @@ export default function BecomeDoctor() {
         <div className="auth-header-logo">
           <h3 className="m-0">
             <Link href="https://doctorchat.md/">
-              <a>Doctorchat</a>
+              Doctorchat
             </Link>
           </h3>
         </div>
         <Link href="/auth/login">
-          <a>
-            <Button type="outline">{t("login")}</Button>
-          </a>
+
+          <Button type="outline">{t("login")}</Button>
+
         </Link>
       </div>
       <div className="auth-form mt-5">

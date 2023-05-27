@@ -13,11 +13,11 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: "18.x"
       - name: Install dependencies
         run: npm install
 
-#     MD
+      #     MD
       - name: Create env configs
         run: |
           echo "${{ secrets.ENV_FILE_DEV }}" > .env
@@ -46,7 +46,7 @@ jobs:
             Repository: ${{ github.repository }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-#     RO
+      #     RO
       - name: Create env configs RO
         run: |
           echo "${{ secrets.ENV_FILE_DEV }}" > .env
@@ -75,4 +75,3 @@ jobs:
             Repository: ${{ github.repository }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            

@@ -30,9 +30,9 @@ const CheckConversations = ({ children }) => {
   const showBackButton = conversations?.length > 1;
 
   useEffect(() => {
-    if (showBackButton) return;
-
-    dispatch(getConversationList());
+    if (showBackButton) {
+      dispatch(getConversationList());
+    }
   }, [showBackButton]);
 
   if (showBackButton) {

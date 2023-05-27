@@ -45,7 +45,7 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
       </Menu.Item>
       <Menu.Item icon={<HomeIcon />} className="home-item">
         <Link href={HOME_PAGE_URL}>
-          <a>{t("home_page")}</a>
+          {t("home_page")}
         </Link>
       </Menu.Item>
       <ProfileChangeLang />
