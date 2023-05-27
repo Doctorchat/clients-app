@@ -52,5 +52,11 @@
   "video_consultations": "Video consultations",
   "chat_consultation": "Chat consultation",
   "accept": "Accept",
-  "time_selection_warning": "The reservation will be available for <bold>15 minutes</bold>. In case of non-payment - the reservation will be canceled, and you will need to request another consultation."
+  "time_selection_warning": "The reservation will be available for <bold>15 minutes</bold>. In case of non-payment - the reservation will be canceled, and you will need to request another consultation.",
+  "reject": "Reject",
+  "reject_chat": {
+    "title": "Reject consultation",
+    "label": "Reason for rejection",
+    "placeholder": "Enter the reason for rejection..."
+  }
 }
