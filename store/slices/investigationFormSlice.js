@@ -28,8 +28,14 @@ export const investigationFormSlice = createSlice({
         state.title = action.payload.title;
       }
     },
+    investigationFormReset(state) {
+      state.isEditing = false;
+      state.values = {};
+      state.title = null;
+    },
   },
 });
 
-export const { investigationFormToggleVisibility, investigationFormSetEdit } = investigationFormSlice.actions;
+export const { investigationFormToggleVisibility, investigationFormSetEdit, investigationFormReset } =
+  investigationFormSlice.actions;
 export default investigationFormSlice.reducer;
