@@ -16,11 +16,11 @@ export default function AppointmentItem({ chat_id, start_time, completed }) {
       </div>
       <div className="appointment-item__action">
         <Link href={`/chat?id=${chat_id}`}>
-          <a>
-            <Button type="text" size="sm">
-              {completed ? "Rezumat" : "Accesează"}
-            </Button>
-          </a>
+
+          <Button type="text" size="sm">
+            {completed ? "Rezumat" : "Accesează"}
+          </Button>
+
         </Link>
       </div>
     </div>

@@ -13,13 +13,15 @@ export default function Radio(props) {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef();
 
-  useEffect(() => setChecked(value === groupValue), [value, groupValue]);
+  useEffect(() => {
+    setChecked(value === groupValue);
+  }, [value, groupValue]);
 
   const onInputClick = () => {
     inputRef.current.click();
   };
 
-  const toggleFocus = (s) => () => setIsFocused(s)
+  const toggleFocus = (s) => () => setIsFocused(s);
 
   return (
     <div className={cs("dc-radio-input", className)} role="button" onClick={onInputClick}>

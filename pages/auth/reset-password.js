@@ -67,34 +67,32 @@ export default function ResetPassword() {
     [dispatch, otpCode, router]
   );
 
-  return (
-    <>
-      <div className="auth-layout__main-header">
-        <div className="auth-header-logo">
-          <h3 className="m-0">{t("password_recovery")}</h3>
-        </div>
-        <Link href="/auth/login">
-          <a>{/*<Button className="auth-layout__green-btn">{t("login")}</Button>*/}</a>
-        </Link>
+  return <>
+    <div className="auth-layout__main-header">
+      <div className="auth-header-logo">
+        <h3 className="m-0">{t("password_recovery")}</h3>
       </div>
-      <div className="auth-form auth-login-form">
-        <ConfirmPhone isCurrentStep={step === 1} setStep={setStep} setOtpCode={setOtpCode} optCode={otpCode} />
+      <Link href="/auth/login">
+        {/*<Button className="auth-layout__green-btn">{t("login")}</Button>*/}
+      </Link>
+    </div>
+    <div className="auth-form auth-login-form">
+      <ConfirmPhone isCurrentStep={step === 1} setStep={setStep} setOtpCode={setOtpCode} optCode={otpCode} />
 
-        <div style={{ visibility: clsx({ hidden: step === 1 }), marginTop: "2rem", marginBottom: "2rem" }}>
-          <Form name="login-form" methods={form} onFinish={onResetSubmit}>
-            <Form.Item name="password" label={t("new_password")}>
-              <Input type="password" />
-            </Form.Item>
-            <div className="form-bottom">
-              <Button htmlType="submit" loading={loading}>
-                {t("confirm")}
-              </Button>
-            </div>
-          </Form>
-        </div>
+      <div style={{ visibility: clsx({ hidden: step === 1 }), marginTop: "2rem", marginBottom: "2rem" }}>
+        <Form name="login-form" methods={form} onFinish={onResetSubmit}>
+          <Form.Item name="password" label={t("new_password")}>
+            <Input type="password" />
+          </Form.Item>
+          <div className="form-bottom">
+            <Button htmlType="submit" loading={loading}>
+              {t("confirm")}
+            </Button>
+          </div>
+        </Form>
       </div>
-    </>
-  );
+    </div>
+  </>;
 }
 
 ResetPassword.getLayout = function (page) {
