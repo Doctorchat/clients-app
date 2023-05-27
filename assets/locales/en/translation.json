@@ -325,5 +325,9 @@
   "receive_notification": "Receive notifications when you receive a new message.",
   "save": "Save",
   "ora_dvs_locala": "Your Local Time",
-  "restore_password_confirm_code": "Enter the confirmation code received via text message"
+  "restore_password_confirm_code": "Enter the confirmation code received via text message",
+  "remove_account": {
+    "action": "Delete account",
+    "description": "Are you sure you want to delete your account? All data will be deleted and cannot be recovered."
+  }
 }
