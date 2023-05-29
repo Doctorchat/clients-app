@@ -10,5 +10,5 @@ export default function SidebarBody(props) {
 
 SidebarBody.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
 };

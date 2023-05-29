@@ -52,6 +52,7 @@ const Upload = forwardRef((props, ref) => {
         size: files[i].size,
         ext: file_ext[file_ext.length - 1],
         type: files[i].type,
+        created_at: new Date().toISOString(),
         config: {
           error: fileError,
           progress: "0.00",
@@ -165,13 +166,7 @@ const Upload = forwardRef((props, ref) => {
           ))}
         </UploadContext.Provider>
       </div>
-      <input
-        type="file"
-        id={name}
-        ref={fileInputRef}
-        accept={accept}
-        onChange={onUploadInputChange}
-      />
+      <input type="file" id={name} ref={fileInputRef} accept={accept} onChange={onUploadInputChange} />
     </div>
   );
 });

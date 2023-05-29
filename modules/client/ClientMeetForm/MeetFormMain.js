@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -10,6 +11,7 @@ import { PopupContent, PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
 import { meetFormTabs } from "@/context/TabsKeys";
 import useCurrency from "@/hooks/useCurrency";
+import useMessageFromValues from "@/hooks/useMessageFromValues";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-img.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -43,25 +45,36 @@ export default function MeetFormMain() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!attachments.initiated && uploads?.list) {
-      setAttachments({ ...uploads, initiated: true });
-    }
-  }, [attachments.initiated, uploads]);
+  const { values: persistedValues, setValues: setPersistedValues } = useMessageFromValues(chatId);
 
-  const description = t("message_uploads_description", {currency:globalCurrency, amount:formatPrice(global.attach)});
+  useEffect(() => {
+    if (!attachments.initiated && (uploads?.list || persistedValues?.uploads?.list)) {
+      let uploadsList = uploads?.list ?? persistedValues?.uploads?.list ?? [];
+
+      uploadsList = uploadsList.filter((item) =>
+        dayjs(item.created_at ?? new Date()).isAfter(dayjs().subtract(1, "day"))
+      );
+
+      setAttachments({
+        list: uploadsList,
+        price: uploadsList.length * global.attach,
+        initiated: true,
+      });
+    }
+  }, [attachments.initiated, global.attach, persistedValues?.uploads, uploads]);
+
+  const description = t("message_uploads_description", {
+    currency: globalCurrency,
+    amount: formatPrice(global.attach),
+  });
 
   const onFormSubmit = useCallback(
     async (values) => {
       const data = { ...values };
 
       if (!data.slot_id) {
-        document
-          .querySelector(".message-form__time-selection")
-          .scrollIntoView({ behavior: "smooth" });
-        dispatch(
-          notification({ type: "error", title: "error", descrp: "wizard:please_select_time" })
-        );
+        document.querySelector(".message-form__time-selection").scrollIntoView({ behavior: "smooth" });
+        dispatch(notification({ type: "error", title: "error", descrp: "wizard:please_select_time" }));
         return;
       }
 
@@ -72,6 +85,7 @@ export default function MeetFormMain() {
       try {
         setLoading(true);
         dispatch(meetFormSetConfirmation(data));
+        dispatch(meetFormUpdateUploads(persistedValues?.uploads ?? {}));
         updateTabsConfig(meetFormTabs.confirm)();
       } catch (error) {
         dispatch(
@@ -85,7 +99,14 @@ export default function MeetFormMain() {
         setLoading(false);
       }
     },
-    [attachments.list.length, dispatch, global?.attach, updateTabsConfig, userInfo?.meet_price]
+    [
+      attachments.list?.length,
+      dispatch,
+      global.attach,
+      persistedValues?.uploads,
+      updateTabsConfig,
+      userInfo?.meet_price,
+    ]
   );
 
   const setFileList = useCallback(
@@ -93,9 +114,10 @@ export default function MeetFormMain() {
       const newAttachments = { list: fileList, price: fileList.length * global.attach };
 
       setAttachments({ ...newAttachments, initiated: true });
+      setPersistedValues({ uploads: newAttachments });
       dispatch(meetFormUpdateUploads(newAttachments));
     },
-    [dispatch, global?.attach]
+    [global?.attach, dispatch, setPersistedValues]
   );
 
   return (
@@ -113,13 +135,15 @@ export default function MeetFormMain() {
           <div className="message-form-inputs">
             <Form
               methods={form}
+              onValuesChange={(action) => {
+                if (action.name && action.value) {
+                  setPersistedValues({ [action.name]: action.value });
+                }
+              }}
               onFinish={onFormSubmit}
-              initialValues={{ content: values.content }}
+              initialValues={{ content: values.content || persistedValues?.content }}
             >
-              <MeetFormDateTime
-                doctorId={userInfo?.id}
-                onSelectSlot={(slotId) => form.setValue("slot_id", slotId)}
-              />
+              <MeetFormDateTime doctorId={userInfo?.id} onSelectSlot={(slotId) => form.setValue("slot_id", slotId)} />
               <Form.Item name="content" label={t("explain_problem")}>
                 <Textarea placeholder={t("message_form_placeholder")} />
               </Form.Item>
@@ -140,9 +164,7 @@ export default function MeetFormMain() {
               <div className="message-form-bottom">
                 <div className="message-price">
                   <span className="message-price-active">
-                    {(userInfo?.meet_price ?? chatUserInfo.data?.meet_price ?? 0) +
-                      attachments.price}{" "}
-                    {globalCurrency}
+                    {(userInfo?.meet_price ?? chatUserInfo.data?.meet_price ?? 0) + attachments.price} {globalCurrency}
                   </span>
                 </div>
                 <Button htmlType="submit" loading={loading}>
