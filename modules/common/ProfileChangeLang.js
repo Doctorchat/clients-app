@@ -25,18 +25,6 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
   const [languages, setLanguages] = useState(langs);
   const region = useRegion();
 
-  useEffect(() => {
-    if (region === REGION_RO && languages.ru) {
-      setLanguages((prevState) => {
-        const { ru, ...newState } = prevState;
-        return newState;
-      });
-    }
-    if (region === REGION_RO && getActiveLng() === "ru") {
-      changeLanguage("ro", true)();
-    }
-  }, [region]);
-
   const changeLanguage = useCallback(
     (lng, skipReload = false) =>
       async () => {
@@ -57,6 +45,21 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
       },
     [onUpdate, user.isAuthorized]
   );
+
+  useEffect(() => {
+    if (region === REGION_RO && languages.ru) {
+      setLanguages((prevState) => {
+        const newState = { ...prevState };
+
+        delete newState.ru;
+
+        return newState;
+      });
+    }
+    if (region === REGION_RO && getActiveLng() === "ru") {
+      changeLanguage("ro", true)();
+    }
+  }, [changeLanguage, languages?.ru, region]);
 
   const options = (
     <Menu className="lang-items">
