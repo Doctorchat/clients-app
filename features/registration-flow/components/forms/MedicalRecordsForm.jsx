@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import * as yup from "yup";
 
@@ -20,7 +21,10 @@ import isValidSelectOption from "@/utils/isValidSelectOption";
 
 const medicalRecordsSchema = yup.object().shape({
   name: yup.string().required(),
-  birth_date: yup.date().required(),
+  birth_date: yup
+    .date()
+    .max(dayjs().subtract(18, "years").toDate(), i18next.t("wizard:age_restrictions", { age: 18 }))
+    .required(),
   weight: yup.number().min(1).required(),
   height: yup.number().min(1).required(),
   location: yup.string().required(),

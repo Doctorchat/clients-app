@@ -58,5 +58,6 @@
     "title": "Reject consultation",
     "label": "Reason for rejection",
     "placeholder": "Enter the reason for rejection..."
-  }
+  },
+  "age_restrictions": "You must be at least {{age}} years old"
 }

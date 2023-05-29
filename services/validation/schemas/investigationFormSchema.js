@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { date, mixed, number } from "yup";
 import { object, string } from "yup";
 
@@ -6,7 +7,9 @@ import isValidSelectOption from "@/utils/isValidSelectOption";
 
 const investigationFormSchema = object().shape({
   name: string().required(), //
-  birth_date: date().required(),
+  birth_date: date()
+    .max(dayjs().subtract(18, "years").toDate(), i18next.t("wizard:age_restrictions", { age: 18 }))
+    .required(),
   weight: number().min(1).required(), //
   height: number().min(1).required(), //
   location: string().required(), //
