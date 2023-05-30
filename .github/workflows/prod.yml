@@ -23,6 +23,7 @@ jobs:
           echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
           echo "${{ secrets.REGION_MD }}" >> .env
           echo "${{ secrets.GTM_KEY_MD }}" >> .env
+          echo "${{ secrets.API_PATH_MD }}" >> .env
       - name: Build
         run: CI=false npm run build
       - name: SSH Server Deploy MD
@@ -47,13 +48,14 @@ jobs:
             Repository: ${{ github.repository }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-      #     RO and ONLINE
-      - name: Create env configs RO and ONLINE
+      #     RO
+      - name: Create env configs RO
         run: |
           echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
           echo "${{ secrets.REGION_RO }}" >> .env
           echo "${{ secrets.GTM_KEY_RO }}" >> .env
-      - name: Build RO and ONLINE
+          echo "${{ secrets.API_PATH_RO }}" >> .env
+      - name: Build RO
         run: CI=false npm run build
       - name: SSH Server Deploy RO
         uses: kostya-ten/ssh-server-deploy@v4
@@ -64,6 +66,28 @@ jobs:
           private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_RO }}
+      - name: Send notification to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Deployed RO
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}
+
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+      #     ONLINE
+      - name: Create env configs ONLINE
+        run: |
+          echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
+          echo "${{ secrets.REGION_RO }}" >> .env
+          echo "${{ secrets.GTM_KEY_RO }}" >> .env
+          echo "${{ secrets.API_PATH_RO }}" >> .env
+      - name: Build ONLINE
+        run: CI=false npm run build
       - name: SSH Server Deploy ONLINE
         uses: kostya-ten/ssh-server-deploy@v4
         with:
@@ -79,7 +103,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Deployed RO and ONLINE
+            Deployed ONLINE
             ${{ github.actor }} created commit:
             Commit message: ${{ github.event.commits[0].message }}
 

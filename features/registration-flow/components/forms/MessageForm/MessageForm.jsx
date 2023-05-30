@@ -88,6 +88,22 @@ export const MessageForm = () => {
     }
   }, [attachments.initiated, global?.attach, persistedValues?.uploads?.list]);
 
+  useEffect(() => {
+    if (!attachments.initiated && global?.attach && persistedValues?.uploads?.list) {
+      let uploadsList = persistedValues?.uploads?.list ?? [];
+
+      uploadsList = uploadsList.filter((item) =>
+        dayjs(item.created_at ?? new Date()).isAfter(dayjs().subtract(1, "day"))
+      );
+
+      setAttachments({
+        list: uploadsList,
+        price: uploadsList.length * global.attach,
+        initiated: true,
+      });
+    }
+  }, [attachments.initiated, global?.attach, persistedValues?.uploads?.list]);
+
   const onSubmit = React.useCallback(
     async (values) => {
       const data = { ...values };
