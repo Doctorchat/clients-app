@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { MESSAGE_TYPES, userRoles } from "@/context/constants";
+import useMessageFromValues from "@/hooks/useMessageFromValues";
 import LevelIcon from "@/icons/level-up.svg";
 import StopIcon from "@/icons/stop.svg";
 import api from "@/services/axios/api";
@@ -35,28 +36,37 @@ export default function MessageBar(props) {
   const history = useRouter();
   const form = useForm();
 
-  const onFormChange = useCallback(({ name, value }) => {
-    if (name === "content") {
-      if (value && value.length > 0) setIsFormEnabled(true);
-      else setIsFormEnabled(false);
-    }
-  }, []);
+  const {
+    values: persistedValues,
+    setValues: setPersistedValues,
+    resetValues: resetPersistedValues,
+  } = useMessageFromValues(chatId);
+
+  const onFormChange = useCallback(
+    ({ name, value }) => {
+      if (name === "content") {
+        if (value && value.length > 0) setIsFormEnabled(true);
+        else setIsFormEnabled(false);
+      }
+
+      if (name && value) {
+        setPersistedValues({ [name]: value });
+      }
+    },
+    [setPersistedValues]
+  );
 
   const closeConversationHanlder = useCallback(async () => {
     try {
       setStopChatLoading(true);
       await api.conversation.close(chatId);
 
-      dispatch(
-        notification({ type: "success", title: "success", descrp: "data_updated_with_success" })
-      );
+      dispatch(notification({ type: "success", title: "success", descrp: "data_updated_with_success" }));
       history.push("/");
       form.reset();
       return Promise.resolve();
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       return Promise.reject();
     } finally {
       setStopChatLoading(true);
@@ -88,15 +98,14 @@ export default function MessageBar(props) {
         dispatch(chatContentAddMessage(updatedChatContent));
         setIsFormEnabled(false);
         form.reset();
+        resetPersistedValues();
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
     },
-    [chatId, dispatch, form]
+    [chatId, dispatch, form, resetPersistedValues]
   );
 
   return (
@@ -104,7 +113,7 @@ export default function MessageBar(props) {
       <Form
         methods={form}
         className="w-100"
-        initialValues={{ content: defaultValue }}
+        initialValues={{ content: defaultValue ?? persistedValues?.content }}
         onValuesChange={onFormChange}
         onFinish={onFormSubmit}
       >
@@ -144,16 +153,8 @@ export default function MessageBar(props) {
         }
         roles={[userRoles.get("doctor"), userRoles.get("client")]}
       >
-        <Confirm
-          isAsync
-          onConfirm={closeConversationHanlder}
-          content={t("stop_conversation_confirmation")}
-        >
-          <IconBtn
-            className="message-bar-send remove-action"
-            loading={stopChatLoading}
-            icon={<StopIcon />}
-          />
+        <Confirm isAsync onConfirm={closeConversationHanlder} content={t("stop_conversation_confirmation")}>
+          <IconBtn className="message-bar-send remove-action" loading={stopChatLoading} icon={<StopIcon />} />
         </Confirm>
       </AuthRoleWrapper>
     </div>
