@@ -85,7 +85,7 @@ jobs:
           echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
           echo "${{ secrets.REGION_RO }}" >> .env
           echo "${{ secrets.GTM_KEY_RO }}" >> .env
-          echo "${{ secrets.API_PATH_RO }}" >> .env
+          echo "${{ secrets.API_PATH_ONLINE }}" >> .env
       - name: Build ONLINE
         run: CI=false npm run build
       - name: SSH Server Deploy ONLINE
