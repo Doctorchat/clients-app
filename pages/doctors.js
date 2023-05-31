@@ -60,7 +60,7 @@ export default function Doctors() {
           overlay={
             <Menu>
               <Menu.Item icon={<HomeIcon />} className="home-item">
-                <Link href={HOME_PAGE_URL}>
+                <Link href={HOME_PAGE_URL} target="_blank" rel="noreferrer noopener">
                   {t("home_page")}
                 </Link>
               </Menu.Item>
