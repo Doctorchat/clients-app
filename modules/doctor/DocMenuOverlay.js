@@ -11,7 +11,6 @@ import { leftSideTabs } from "@/context/TabsKeys";
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import HomeIcon from "@/icons/home.svg";
 import LogoutIcon from "@/icons/logout.svg";
-import ReceiptPercent from "@/icons/receipt-percent.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import UserIcon from "@/icons/user.svg";
 import VideoIcon from "@/icons/video.svg";
@@ -81,9 +80,6 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
           onChange={updateUserGuardStatus}
           loading={guradStatusUpdating}
         />
-      </Menu.Item>
-      <Menu.Item icon={<ReceiptPercent />} onClick={onTabsConfigChange(leftSideTabs.repeatedConsultations)}>
-        {t("repeated_consultations.title")}
       </Menu.Item>
       <DocSetVacation />
       <Menu.Item icon={<HomeIcon />} className="home-item">
