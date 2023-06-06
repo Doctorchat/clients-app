@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -10,15 +11,13 @@ import { PopupContent, PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
 import { messageFormTabs } from "@/context/TabsKeys";
 import useCurrency from "@/hooks/useCurrency";
+import useMessageFromValues from "@/hooks/useMessageFromValues";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-img.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { messageFormSchema } from "@/services/validation";
 import { messageUploadFile } from "@/store/actions";
-import {
-  messageFormSetConfirmation,
-  messageFormUpdateUploads,
-} from "@/store/slices/messageFormSlice";
+import { messageFormSetConfirmation, messageFormUpdateUploads } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
@@ -36,7 +35,6 @@ export default function MessageFormMain() {
   }));
   const { globalCurrency, formatPrice } = useCurrency();
 
-
   const [loading, setLoading] = useState(false);
   const [attachments, setAttachments] = useState({ list: [], price: 0, initiated: false });
   const [basePrice, setBasePrice] = useState(0);
@@ -45,6 +43,8 @@ export default function MessageFormMain() {
   const form = useForm({ resolver });
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const { values: persistedValues, setValues: setPersistedValues } = useMessageFromValues(chatId);
 
   useEffect(() => {
     if (chatType === "auto") {
@@ -57,12 +57,25 @@ export default function MessageFormMain() {
   }, [chatType, global.auto, global.consilium, userInfo?.price, chatUserInfo.data?.price]);
 
   useEffect(() => {
-    if (!attachments.initiated && uploads?.list) {
-      setAttachments({ ...uploads, initiated: true });
-    }
-  }, [attachments.initiated, uploads]);
+    if (!attachments.initiated && (uploads?.list || persistedValues?.uploads?.list)) {
+      let uploadsList = uploads?.list ?? persistedValues?.uploads?.list ?? [];
 
-  const description = t("message_uploads_description", {currency:globalCurrency, amount:formatPrice(global.attach)});
+      uploadsList = uploadsList.filter((item) =>
+        dayjs(item.created_at ?? new Date()).isAfter(dayjs().subtract(1, "day"))
+      );
+
+      setAttachments({
+        list: uploadsList,
+        price: uploadsList.length * global.attach,
+        initiated: true,
+      });
+    }
+  }, [attachments.initiated, global.attach, persistedValues?.uploads, uploads]);
+
+  const description = t("message_uploads_description", {
+    currency: globalCurrency,
+    amount: formatPrice(global.attach),
+  });
 
   const onFormSubmit = useCallback(
     async (values) => {
@@ -74,17 +87,16 @@ export default function MessageFormMain() {
 
       try {
         setLoading(true);
+        dispatch(messageFormUpdateUploads(persistedValues?.uploads ?? {}));
         dispatch(messageFormSetConfirmation(data));
         updateTabsConfig(messageFormTabs.confirm)();
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
     },
-    [attachments.list.length, basePrice, dispatch, global.attach, updateTabsConfig]
+    [attachments.list?.length, basePrice, dispatch, global.attach, persistedValues?.uploads, updateTabsConfig]
   );
 
   const setFileList = useCallback(
@@ -92,9 +104,10 @@ export default function MessageFormMain() {
       const newAttachments = { list: fileList, price: fileList.length * global.attach };
 
       setAttachments({ ...newAttachments, initiated: true });
+      setPersistedValues({ uploads: newAttachments });
       dispatch(messageFormUpdateUploads(newAttachments));
     },
-    [dispatch, global.attach]
+    [global?.attach, dispatch, setPersistedValues]
   );
 
   return (
@@ -112,8 +125,13 @@ export default function MessageFormMain() {
           <div className="message-form-inputs">
             <Form
               methods={form}
+              onValuesChange={(action) => {
+                if (action.name && action.value) {
+                  setPersistedValues({ [action.name]: action.value });
+                }
+              }}
               onFinish={onFormSubmit}
-              initialValues={{ content: values.content }}
+              initialValues={{ content: values.content || persistedValues?.content }}
             >
               <Form.Item name="content" label={t("explain_problem")}>
                 <Textarea placeholder={t("message_form_placeholder")} />
@@ -134,7 +152,9 @@ export default function MessageFormMain() {
               </div>
               <div className="message-form-bottom">
                 <div className="message-price">
-                  <span className="message-price-active">{basePrice + attachments.price} L</span>
+                  <span className="message-price-active">
+                    {basePrice + attachments.price} {globalCurrency}
+                  </span>
                 </div>
                 <Button htmlType="submit" loading={loading}>
                   {t("continue")}

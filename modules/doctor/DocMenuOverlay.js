@@ -87,8 +87,8 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
       </Menu.Item>
       <DocSetVacation />
       <Menu.Item icon={<HomeIcon />} className="home-item">
-        <Link href={HOME_PAGE_URL}>
-          <a>{t("home_page")}</a>
+        <Link href={HOME_PAGE_URL} target="_blank" rel="noreferrer noopener">
+          {t("home_page")}
         </Link>
       </Menu.Item>
       <ProfileChangeLang />

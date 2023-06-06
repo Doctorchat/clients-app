@@ -13,6 +13,7 @@ import { PopupContent, PopupHeader } from "@/components/Popup";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { meetFormTabs } from "@/context/TabsKeys";
 import useCurrency from "@/hooks/useCurrency";
+import useMessageFromValues from "@/hooks/useMessageFromValues";
 import useRegion from "@/hooks/useRegion";
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -43,8 +44,9 @@ function MeetFormConfirmation() {
   const form = useForm();
   const { t } = useTranslation();
   const { formatPrice } = useCurrency();
-
   const dispatch = useDispatch();
+
+  const { resetValues: resetPersistedValues } = useMessageFromValues(chatId);
 
   const { data: walletData } = useQuery(["wallet"], () => api.wallet.get(), {
     keepPreviousData: true,
@@ -109,12 +111,14 @@ function MeetFormConfirmation() {
         dispatch(meetFormToggleVisibility(false));
         dispatch(meetFormReset());
       }
+
+      resetPersistedValues();
     } catch (error) {
       dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setLoading(false);
     }
-  }, [values, chatId, promo.code, uploads, dispatch]);
+  }, [values, chatId, promo.code, uploads.list, dispatch, resetPersistedValues]);
 
   const totalPrice = +price.total - +promo.sum;
   const toPayPrice = Math.max(0, +totalPrice - (+walletData?.data?.balance ?? 0));
@@ -129,7 +133,7 @@ function MeetFormConfirmation() {
           <table>
             <tbody>
               <tr className="dc-description-title">
-                <th colSpan="2">{t("message_form_confirmation.symmary")}</th>
+                <th colSpan="2">{t("message_form_confirmation.summary")}</th>
               </tr>
               <tr className="dc-description-row">
                 <th className="dc-description-row-label">{t("message_form_confirmation.description")}</th>
@@ -264,10 +268,10 @@ export const ConfirmationSection = () => {
         title: "Stripe",
         url: "https://stripe.com/",
       },
-      company: "WEBMEDCONSULT SRL",
+      company: "„WEBMEDCONSULT” OU",
       product: "Doctorchat",
-      adress: "Bucureşti, sector 6, Splaiul Independenţei nr. 273, corp 3, etaj 3",
-      phone: `+373 78 272 887`,
+      address: "Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
+      phone: "+373 78 272 887",
       email: "info@doctorchat.md",
     },
     ro: {
@@ -277,8 +281,8 @@ export const ConfirmationSection = () => {
       },
       company: "„WEBMEDCONSULT” OU",
       product: "Doctorchat",
-      adress: "Oraşul Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
-      phone: "+373 78 272 887",
+      address: "Harju, Tallin, districtul Kesklinna, Ahtri tn 12, 1015, Estonia",
+      phone: "+40 758 670 067",
       email: "infodoctorchat.ro@gmail.com",
     },
   };
@@ -306,8 +310,8 @@ export const ConfirmationSection = () => {
             <td className="dc-description-row-content">{regionContent.product}</td>
           </tr>
           <tr className="dc-description-row">
-            <th className="dc-description-row-label"> {t("message_form_confirmation.adress")}</th>
-            <td className="dc-description-row-content">{regionContent.adress}</td>
+            <th className="dc-description-row-label"> {t("message_form_confirmation.address")}</th>
+            <td className="dc-description-row-content">{regionContent.address}</td>
           </tr>
           <tr className="dc-description-row">
             <th className="dc-description-row-label">{t("email")}</th>

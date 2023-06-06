@@ -51,5 +51,12 @@
   "text_consultations": "Consultatii chat",
   "video_consultations": "Consultatii video",
   "chat_consultation": "Consultatie chat",
-  "accept": "Accepta"
+  "accept": "Acceptă",
+  "time_selection_warning": "Rezervarea va fi disponibilă <bold>15 minute</bold>. În cazul neachitării - rezervarea va fi anulată și va fi necesar să solicitați o altă consultație.",
+  "reject": "Refuză",
+  "reject_chat": {
+    "title": "Refuză consultația",
+    "label": "Motivul refuzului",
+    "placeholder": "Introdu motivul refuzului..."
+  }
 }

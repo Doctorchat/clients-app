@@ -40,11 +40,10 @@ export default function DocEditProfile() {
   const form = useForm({
     defaultValues: {
       name: user.name,
+      email: user.email,
       category: toSelectOpts("id", `name_${selectedLng}`)(user.category),
       professionalTitle: user.about.professionalTitle,
-      price: user.price,
       experience: user.about.experience,
-      meet_price: user.meet_price,
       workplace: user.activity.workplace,
       education: user.activity.education.map((edc) => ({ value: edc })),
       specialization_ro: user.about?.specialization_ro || "",
@@ -86,9 +85,7 @@ export default function DocEditProfile() {
         dispatch(updateUser(response.data));
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
@@ -109,6 +106,9 @@ export default function DocEditProfile() {
           <Form.Item name="name" label={t("name")}>
             <Input />
           </Form.Item>
+          <Form.Item name="email" label={t("email")}>
+            <Input />
+          </Form.Item>
           <Form.Item name="category" label={t("speciality")}>
             <Select multiple options={categories} />
           </Form.Item>
@@ -124,43 +124,22 @@ export default function DocEditProfile() {
           <Form.List name="education" className="inputs-list-vertical">
             {({ fields, add, remove }) =>
               fields.map((field, idx) => (
-                <div
-                  className="inputs-list-item d-flex align-items-center"
-                  key={`education-${field.id}`}
-                >
-                  <Form.Item
-                    label={t("education")}
-                    className="w-100 me-1"
-                    name={`education.${idx}.value`}
-                  >
+                <div className="inputs-list-item d-flex align-items-center" key={`education-${field.id}`}>
+                  <Form.Item label={t("education")} className="w-100 me-1" name={`education.${idx}.value`}>
                     <Input />
                   </Form.Item>
                   {idx === fields.length - 1 && (
-                    <IconBtn
-                      size="sm"
-                      icon={<PlusIcon />}
-                      className="add-action"
-                      onClick={() => add({ name: "" })}
-                    />
+                    <IconBtn size="sm" icon={<PlusIcon />} className="add-action" onClick={() => add({ name: "" })} />
                   )}
                   {fields.length !== 1 && (
-                    <IconBtn
-                      size="sm"
-                      icon={<TrashIcon />}
-                      className="remove-action"
-                      onClick={() => remove(idx)}
-                    />
+                    <IconBtn size="sm" icon={<TrashIcon />} className="remove-action" onClick={() => remove(idx)} />
                   )}
                 </div>
               ))
             }
           </Form.List>
           <h4 className="edit-profile-title inside">{t("about")}</h4>
-          <Line
-            className="edit-profile-line"
-            activeKey={tabsConfig.key}
-            updateTabsConfig={updateTabsConfig}
-          >
+          <Line className="edit-profile-line" activeKey={tabsConfig.key} updateTabsConfig={updateTabsConfig}>
             <Line.Item title="Ro" dataKey={tabsKeys.ro} />
             <Line.Item title="Ру" dataKey={tabsKeys.ru} />
             <Line.Item title="En" dataKey={tabsKeys.en} />

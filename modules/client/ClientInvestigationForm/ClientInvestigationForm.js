@@ -10,11 +10,9 @@ import Popup from "@/components/Popup";
 import Select from "@/components/Select";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
-import DatePickerStyled from "@/packages/DatePickerStyled";
-import { disabledDateInFuture } from "@/packages/DatePickerStyled/utils";
 import api from "@/services/axios/api";
 import { investigationFormSchema } from "@/services/validation";
-import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
+import { investigationFormReset, investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUser } from "@/store/slices/userSlice";
 import date from "@/utils/date";
@@ -84,9 +82,11 @@ export default function ClientInvestigationForm() {
 
       const onSuccess = (response) => {
         dispatch(investigationFormToggleVisibility(false));
+        dispatch(investigationFormReset());
         dispatch(updateUser(response));
         dispatch(notification({ title: "success", descrp: "data_updated_with_success" }));
         setFormEdited(false);
+        form.reset();
       };
 
       const onError = (error) => {
@@ -99,7 +99,7 @@ export default function ClientInvestigationForm() {
         onAddNewInvestigation(data, { onSuccess, onError });
       }
     },
-    [dispatch, setFormApiErrors, isEditing, values]
+    [dispatch, setFormApiErrors, isEditing, values, form]
   );
 
   const modalTitle = title ? title : t("add_investigation");
@@ -119,59 +119,61 @@ export default function ClientInvestigationForm() {
         <p className="mb-3" style={{ padding: "0px 8px", fontSize: 17 }}>
           *{t("investigation_form_description")}
         </p>
-        <Form
-          methods={form}
-          name="add-investigation"
-          onFinish={onSubmitHandler}
-          onValuesChange={onFormsValuesChanges}
-          initialValues={values}
-        >
-          <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-            <Form.Item className="w-100" name="name" label={t("name")}>
-              <Input />
-            </Form.Item>
-            <Form.Item className="w-50" label={t("investigation_form.sex")} name="sex">
-              <Select
-                options={[
-                  { value: "male", label: t("male") },
-                  { value: "female", label: t("female") },
-                ]}
+        {isOpen && (
+          <Form
+            methods={form}
+            name="add-investigation"
+            onFinish={onSubmitHandler}
+            onValuesChange={onFormsValuesChanges}
+            initialValues={values}
+          >
+            <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
+              <Form.Item className="w-100" name="name" label={t("name")}>
+                <Input />
+              </Form.Item>
+              <Form.Item className="w-50" label={t("investigation_form.sex")} name="sex">
+                <Select
+                  options={[
+                    { value: "male", label: t("male") },
+                    { value: "female", label: t("female") },
+                  ]}
+                />
+              </Form.Item>
+            </div>
+
+            <Form.Item label={t("birthday")} name="birth_date">
+              <BirthdayInput
+                onError={(error) => {
+                  if (error) form.setError("birth_date", { message: error });
+                  else form.clearErrors("birth_date");
+                }}
               />
             </Form.Item>
-          </div>
 
-          <Form.Item label={t("birthday")} name="birth_date">
-            <BirthdayInput
-              onError={(error) => {
-                if (error) form.setError("birth_date", { message: error });
-                else form.clearErrors("birth_date");
-              }}
-            />
-          </Form.Item>
-
-          <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
-            <Form.Item className="w-100" label={t("height_cm")} name="height">
-              <InputNumber />
+            <div className="flex-group d-flex gap-2 flex-sm-nowrap flex-wrap">
+              <Form.Item className="w-100" label={t("height_cm")} name="height">
+                <InputNumber />
+              </Form.Item>
+              <Form.Item className="w-100" label={t("weight_kg")} name="weight">
+                <InputNumber />
+              </Form.Item>
+            </div>
+            <Form.Item label={t("investigation_form.location")} name="location">
+              <Input />
             </Form.Item>
-            <Form.Item className="w-100" label={t("weight_kg")} name="weight">
-              <InputNumber />
+            <Form.Item label={t("investigation_form.activity")} name="activity">
+              <Textarea />
             </Form.Item>
-          </div>
-          <Form.Item label={t("investigation_form.location")} name="location">
-            <Input />
-          </Form.Item>
-          <Form.Item label={t("investigation_form.activity")} name="activity">
-            <Textarea />
-          </Form.Item>
-          <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
-            <Textarea />
-          </Form.Item>
-          <div className="d-flex justify-content-end">
-            <Button htmlType="submit" loading={loading}>
-              {t("apply")}
-            </Button>
-          </div>
-        </Form>
+            <Form.Item label={t("investigation_form.diseases_spec")} name="diseases_spec">
+              <Textarea />
+            </Form.Item>
+            <div className="d-flex justify-content-end">
+              <Button htmlType="submit" loading={loading}>
+                {t("apply")}
+              </Button>
+            </div>
+          </Form>
+        )}
       </Popup.Content>
     </Popup>
   );

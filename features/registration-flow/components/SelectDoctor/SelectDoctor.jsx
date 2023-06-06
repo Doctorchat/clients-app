@@ -95,15 +95,13 @@ export const SelectDoctor = () => {
           ))}
         </DoctorsGrid>
 
-        <div className="select-doctor__pagination">
-          <Button
-            disabled={!pagination.hasNextPage}
-            loading={pagination.isFetchingNextPage}
-            onClick={pagination.fetchNextPage}
-          >
-            {t("wizard:load_more_doctors")}
-          </Button>
-        </div>
+        {pagination.hasNextPage && (
+          <div className="select-doctor__pagination">
+            <Button loading={pagination.isFetchingNextPage} onClick={pagination.fetchNextPage}>
+              {t("wizard:load_more_doctors")}
+            </Button>
+          </div>
+        )}
       </div>
 
       {doctorPreviewId && (
@@ -115,9 +113,6 @@ export const SelectDoctor = () => {
           onVideoTypeClick={() => createChatHandler(CHAT_TYPES.standard, MESSAGE_TYPES.meet)}
         />
       )}
-      {/* <OptionsDialog
-        onAutoTypeClick={() => createChatHandler(CHAT_TYPES.auto, MESSAGE_TYPES.standard)}
-      /> */}
     </>
   );
 };

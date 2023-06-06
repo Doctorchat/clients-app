@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { t } from "i18next";
 import PropTypes from "prop-types";
 
 import { calculateAge } from "@/utils/date";

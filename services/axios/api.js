@@ -31,6 +31,7 @@ const api = {
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
     updateEmail: (data) => axiosInstance.put("/user/update/email", data),
     updateDiscount: (data) => axiosInstance.post("/user/update/discount", data),
+    removeAccount: ({ user_id }) => axiosInstance.post("/user/remove-user", { user_id }),
   },
   doctor: {
     toggleTextStatus: () => axiosInstance.put("/user/card/toggle-chat"),
@@ -53,6 +54,11 @@ const api = {
     accept: (chatId) =>
       axiosInstance.post(`/chat/accept`, {
         chat_id: chatId,
+      }),
+    reject: ({ id, message }) =>
+      axiosInstance.post(`/chat/refuse`, {
+        chat_id: id,
+        message,
       }),
     destroy: (chatId) => axiosInstance.delete(`/chat/destroy/${chatId}`),
   },

@@ -4,13 +4,12 @@ import i18next from "@/services/i18next";
 
 const docGeneral = object().shape({
   name: string().required(),
+  email: string().email(),
   category: array().min(1),
   education: array()
     .min(1)
     .of(object().shape({ value: string().required() })),
   professionalTitle: string().required(),
-  price: number().min(0).required(),
-  meet_price: number().min(0).required(),
   experience: number().min(0).required(),
   workplace: string().required(),
   specialization_ro: string().required(),
@@ -32,7 +31,7 @@ const docMultilangEdit = object().shape({
 
 const clientGeneral = object().shape({
   name: string().required(),
-  email: string().email().required(),
+  email: string().email(),
 });
 
 const security = object().shape({

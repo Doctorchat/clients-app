@@ -125,7 +125,7 @@
   "message_uploads_description": "+{{amount}}  image / investigation laboratory, imaging, etc.",
   "explain_problem": "Explain problem in details*",
   "message_form_confirmation": {
-    "symmary": "Summary question",
+    "summary": "Summary question",
     "description": "Description",
     "basic_price": "Basic price question",
     "files": "Attached files",
@@ -134,7 +134,7 @@
     "payment_security": "Payment is made securely to",
     "company": "Company",
     "product": "Product",
-    "adress": "Address",
+    "address": "Address",
     "have_promo": "Do you have a promo code?",
     "confirm": "Confirm and Pay",
     "code": "Promo-code",
@@ -284,7 +284,7 @@
   "request": "Request",
   "chat_attach": {
     "file": "File",
-    "you_will_be_charged": "Your account will be debited with {{price}} L",
+    "you_will_be_charged": "Your account will be debited with {{price}} {{currency}}",
     "insufficient_funds": "You don't have enough funds. Please replenish the balance",
     "upload_file": "Upload file",
     "replenish_balance": "Top up balance",
@@ -339,5 +339,9 @@
     "minutes": "minutes",
     "seconds": "seconds",
     "description": "Limited offer: <bold>{{discount}}%</bold> discount available for a short time! Take advantage of the reduced prices now!"
+  },
+  "remove_account": {
+    "action": "Delete account",
+    "description": "Are you sure you want to delete your account? All data will be deleted and cannot be recovered."
   }
 }

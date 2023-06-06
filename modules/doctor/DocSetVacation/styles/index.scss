@@ -1,8 +1,22 @@
 #vacation-form {
   .popup-body {
-    height: 195px;
+    height: 260px;
   }
   .popup-content-inner {
     padding-top: 8px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  #vacation-form {
+    .popup-body {
+      height: 260px !important;
+      border-radius: 10px !important;
+      margin: 0 8px;
+    }
+
+    .dc-btn:not(.dc-btn-icon) {
+      min-width: 156px;
+    }
   }
 }

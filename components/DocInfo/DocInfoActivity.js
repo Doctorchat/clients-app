@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 
 import ClockIcon from "@/icons/clock.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
-// import HeartIcon from "@/icons/heart.svg";
 import HospitalIcon from "@/icons/hospital.svg";
-// import LikeIcon from "@/icons/like.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import StarIcon from "@/icons/star.svg";
 
@@ -50,27 +48,6 @@ export default function DocInfoActivity(props) {
               <span className="text">{t("guard_doctor")}</span>
             </div>
           </li>
-          {/* <li className="doc-info-list-item">
-            <div className="content">
-              <span className="icon heart">
-                <HeartIcon />
-              </span>
-              <span className="text">
-                {t("doctor_info_helped.left")} <b>{activity?.helpedUsers || "—"}</b>{" "}
-                {t("doctor_info_helped.right")}
-              </span>
-            </div>
-          </li>
-          <li className="doc-info-list-item">
-            <div className="content">
-              <span className="icon like">
-                <LikeIcon />
-              </span>
-              <span className="text">
-                {t("doctor_info.likes")} <b>{activity?.likes?.like || "—"}</b>
-              </span>
-            </div>
-          </li> */}
           <li className="doc-info-list-item">
             <div className="content">
               <span className="icon star">
@@ -132,7 +109,7 @@ DocInfoActivity.propTypes = {
   activity: PropTypes.shape({
     testimonialsCount: PropTypes.number,
     helpedUsers: PropTypes.number,
-    responseTime: PropTypes.string,
+    responseTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     likes: PropTypes.number,
     education: PropTypes.array,
     workplace: PropTypes.string,

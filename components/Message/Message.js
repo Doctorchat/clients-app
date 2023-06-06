@@ -112,13 +112,15 @@ export default function Message(props) {
             onClick={toggleMessageEditStatus(true)}
           />
         </AuthRoleWrapper>
-        <div className="message-content">
-          {content}
-          <span className="message-time">
-            {date(updated).time}
-            <span className="inner">{date(updated).time}</span>
-          </span>
-        </div>
+        {Boolean(content) && (
+          <div className="message-content">
+            {content}
+            <span className="message-time">
+              {date(updated).time}
+              <span className="inner">{date(updated).time}</span>
+            </span>
+          </div>
+        )}
         <MessageType type={type} componentProps={meet} status={status} />
       </div>
       {MessageFiles}
@@ -132,8 +134,8 @@ Message.propTypes = {
   side: PropTypes.string,
   type: PropTypes.string,
   meet: PropTypes.object,
-  seen: PropTypes.bool,
-  status: PropTypes.oneOf(["edited", "deleted"]),
+  seen: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  status: PropTypes.oneOf(["open", "edited", "deleted"]),
   files: PropTypes.array,
   id: PropTypes.number,
   chatId: PropTypes.string,

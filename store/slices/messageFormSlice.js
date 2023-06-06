@@ -17,7 +17,9 @@ export const messageFormSlice = createSlice({
       state.isOpen = action.payload;
     },
     messageFormUpdateChatId(state, action) {
-      if (+action.payload !== +state.prevChatId) {
+      const currentChatId = action.payload?.id ?? null;
+
+      if (+currentChatId !== +state.prevChatId) {
         state.values = {};
         state.uploads = {};
       }

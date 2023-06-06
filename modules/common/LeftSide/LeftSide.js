@@ -94,11 +94,11 @@ export default function LeftSide() {
       >
         <div className="start-conversation-btn">
           <Link href="/registration-flow/select-doctor">
-            <a>
-              <Button icon={<PlusIcon />} type="primary">
-                {t("start_conversation")}
-              </Button>
-            </a>
+
+            <Button icon={<PlusIcon />} type="primary">
+              {t("start_conversation")}
+            </Button>
+
           </Link>
         </div>
       </AuthRoleWrapper>

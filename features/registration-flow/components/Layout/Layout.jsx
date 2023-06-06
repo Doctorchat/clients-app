@@ -1,12 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { Popconfirm } from "antd";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
+import Confirm from "@/components/Confirm";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import { ProfileChangeLang } from "@/modules/common";
@@ -32,7 +32,7 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
 
   React.useEffect(() => {
     const onScrollToBottom = () => {
-      if (window.innerHeight + window.pageYOffset >= document.body.scrollHeight - 50) {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 50) {
         setIsLogoutVisible(true);
       } else {
         setIsLogoutVisible(false);
@@ -85,16 +85,7 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
       </main>
       {isLogoutVisible && (
         <div className="registration-flow__logout_wrapper">
-          <Popconfirm
-            title={t("logout_confirmation")}
-            className="registration-flow__logout-popover"
-            onConfirm={logoutHandler}
-            okText={t("yes")}
-            cancelText={t("no")}
-            okButtonProps={{ className: "registration-flow__logout-popover-btn btn-primary" }}
-            cancelButtonProps={{ className: "registration-flow__logout-popover-btn" }}
-            getPopupContainer={(trigger) => trigger.parentElement}
-          >
+          <Confirm onConfirm={logoutHandler} content={t("logout_confirmation")} isAsync>
             <Button
               className={cs("registration-flow__logout registration-flow__gray-btn", isLogoutVisible && "show")}
               type="text"
@@ -103,7 +94,7 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
             >
               {t("logout")}
             </Button>
-          </Popconfirm>
+          </Confirm>
         </div>
       )}
     </div>

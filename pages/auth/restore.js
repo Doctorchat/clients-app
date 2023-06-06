@@ -60,32 +60,30 @@ export default function Login() {
     [dispatch, form]
   );
 
-  return (
-    <>
-      <div className="auth-layout__main-header">
-        <div className="auth-header-logo">
-          <h3 className="m-0">{t("auth_reset_title")}</h3>
+  return <>
+    <div className="auth-layout__main-header">
+      <div className="auth-header-logo">
+        <h3 className="m-0">{t("auth_reset_title")}</h3>
+      </div>
+      <Link href="/auth/login">
+
+        <Button className="auth-layout__green-btn">{t("login")}</Button>
+
+      </Link>
+    </div>
+    <div className="auth-form">
+      <Form name="login-form" methods={form} onFinish={onLoginSubmit} initialValues={{ phone: "" }}>
+        <Form.Item label={t("phone")} name="phone">
+          <InputPhone autoComplete="username" />
+        </Form.Item>
+        <div className="form-bottom">
+          <Button htmlType="submit" loading={loading}>
+            {t("reset_password")}
+          </Button>
         </div>
-        <Link href="/auth/login">
-          <a>
-            <Button className="auth-layout__green-btn">{t("login")}</Button>
-          </a>
-        </Link>
-      </div>
-      <div className="auth-form">
-        <Form name="login-form" methods={form} onFinish={onLoginSubmit} initialValues={{ phone: "" }}>
-          <Form.Item label={t("phone")} name="phone">
-            <InputPhone autoComplete="username" />
-          </Form.Item>
-          <div className="form-bottom">
-            <Button htmlType="submit" loading={loading}>
-              {t("reset_password")}
-            </Button>
-          </div>
-        </Form>
-      </div>
-    </>
-  );
+      </Form>
+    </div>
+  </>;
 }
 
 Login.getLayout = function (page) {
