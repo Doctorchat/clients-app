@@ -41,11 +41,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const {
-  setUserAuthorized,
-  setUserUnauthorized,
-  updateUser,
-  updateUserProperty,
-  toggleTopUpModal,
-} = userSlice.actions;
+export const { setUserAuthorized, setUserUnauthorized, updateUser, updateUserProperty, toggleTopUpModal } =
+  userSlice.actions;
 export default userSlice.reducer;
