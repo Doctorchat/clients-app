@@ -13,14 +13,15 @@ import { PopupContent, PopupHeader } from "@/components/Popup";
 import { MESSAGE_TYPES } from "@/context/constants";
 import { messageFormTabs } from "@/context/TabsKeys";
 import useCurrency from "@/hooks/useCurrency";
+import useMessageFromValues from "@/hooks/useMessageFromValues";
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
+import { ConfirmationSection } from "@/modules/client/ClientMeetForm/MeetFormConfirm";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import { messageFormReset, messageFormToggleVisibility } from "@/store/slices/messageFormSlice";
 import { notification } from "@/store/slices/notificationsSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
-import { ConfirmationSection } from "@/modules/client/ClientMeetForm/MeetFormConfirm";
 
 const promoInputReplacer = (value) => {
   if (value) {
@@ -44,6 +45,8 @@ function MessageFormConfirmation() {
   const { formatPrice } = useCurrency();
   const form = useForm();
   const dispatch = useDispatch();
+
+  const { resetValues: resetPersistedValues } = useMessageFromValues(chatId);
 
   const { data: walletData } = useQuery(["wallet"], () => api.wallet.get(), {
     keepPreviousData: true,
@@ -107,12 +110,14 @@ function MessageFormConfirmation() {
         dispatch(messageFormToggleVisibility(false));
         dispatch(messageFormReset());
       }
+
+      resetPersistedValues();
     } catch (error) {
       dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setLoading(false);
     }
-  }, [values, chatId, promo.code, uploads, dispatch]);
+  }, [values, chatId, promo.code, uploads, dispatch, resetPersistedValues]);
 
   const totalPrice = +price.total - +promo.sum;
   const toPayPrice = Math.max(0, totalPrice - (walletData?.data?.balance ?? 0));

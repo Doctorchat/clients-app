@@ -7,6 +7,7 @@ import { REGION_RO } from "@/components/ConditionalRender/ConditionalRender";
 import Dropdown from "@/components/Dropdown";
 import Menu from "@/components/Menu";
 import useRegion from "@/hooks/useRegion";
+import AngleIcon from "@/icons/angle-down.svg";
 import LangIcon from "@/icons/lang.svg";
 import api from "@/services/axios/api";
 import cs from "@/utils/classNames";
@@ -24,18 +25,6 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
   const [dropdownForcedClose, setDropdownForcedClose] = useState(null);
   const [languages, setLanguages] = useState(langs);
   const region = useRegion();
-
-  useEffect(() => {
-    if (region === REGION_RO && languages.ru) {
-      setLanguages((prevState) => {
-        const { ru, ...newState } = prevState;
-        return newState;
-      });
-    }
-    if (region === REGION_RO && getActiveLng() === "ru") {
-      changeLanguage("ro", true)();
-    }
-  }, [region]);
 
   const changeLanguage = useCallback(
     (lng, skipReload = false) =>
@@ -57,6 +46,21 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
       },
     [onUpdate, user.isAuthorized]
   );
+
+  useEffect(() => {
+    if (region === REGION_RO && languages.ru) {
+      setLanguages((prevState) => {
+        const newState = { ...prevState };
+
+        delete newState.ru;
+
+        return newState;
+      });
+    }
+    if (region === REGION_RO && getActiveLng() === "ru") {
+      changeLanguage("ro", true)();
+    }
+  }, [changeLanguage, languages?.ru, region]);
 
   const options = (
     <Menu className="lang-items">
@@ -93,7 +97,12 @@ export default function ProfileChangeLang({ className, onUpdate, placement = "bo
       placement={placement}
       forcedClose={dropdownForcedClose}
     >
-      <Menu.Item icon={<LangIcon />}>{languages[getActiveLng()]}</Menu.Item>
+      <Menu.Item icon={<LangIcon />}>
+        <span className="content">
+          {languages[getActiveLng()]}
+          <AngleIcon />
+        </span>
+      </Menu.Item>
     </Dropdown>
   );
 }

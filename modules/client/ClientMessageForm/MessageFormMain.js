@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
@@ -10,6 +11,7 @@ import { PopupContent, PopupHeader } from "@/components/Popup";
 import Upload from "@/components/Upload";
 import { messageFormTabs } from "@/context/TabsKeys";
 import useCurrency from "@/hooks/useCurrency";
+import useMessageFromValues from "@/hooks/useMessageFromValues";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-img.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
@@ -42,6 +44,8 @@ export default function MessageFormMain() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const { values: persistedValues, setValues: setPersistedValues } = useMessageFromValues(chatId);
+
   useEffect(() => {
     if (chatType === "auto") {
       setBasePrice(global.auto);
@@ -53,10 +57,20 @@ export default function MessageFormMain() {
   }, [chatType, global.auto, global.consilium, userInfo?.price, chatUserInfo.data?.price]);
 
   useEffect(() => {
-    if (!attachments.initiated && uploads?.list) {
-      setAttachments({ ...uploads, initiated: true });
+    if (!attachments.initiated && (uploads?.list || persistedValues?.uploads?.list)) {
+      let uploadsList = uploads?.list ?? persistedValues?.uploads?.list ?? [];
+
+      uploadsList = uploadsList.filter((item) =>
+        dayjs(item.created_at ?? new Date()).isAfter(dayjs().subtract(1, "day"))
+      );
+
+      setAttachments({
+        list: uploadsList,
+        price: uploadsList.length * global.attach,
+        initiated: true,
+      });
     }
-  }, [attachments.initiated, uploads]);
+  }, [attachments.initiated, global.attach, persistedValues?.uploads, uploads]);
 
   const description = t("message_uploads_description", {
     currency: globalCurrency,
@@ -73,6 +87,7 @@ export default function MessageFormMain() {
 
       try {
         setLoading(true);
+        dispatch(messageFormUpdateUploads(persistedValues?.uploads ?? {}));
         dispatch(messageFormSetConfirmation(data));
         updateTabsConfig(messageFormTabs.confirm)();
       } catch (error) {
@@ -81,7 +96,7 @@ export default function MessageFormMain() {
         setLoading(false);
       }
     },
-    [attachments.list.length, basePrice, dispatch, global.attach, updateTabsConfig]
+    [attachments.list?.length, basePrice, dispatch, global.attach, persistedValues?.uploads, updateTabsConfig]
   );
 
   const setFileList = useCallback(
@@ -89,9 +104,10 @@ export default function MessageFormMain() {
       const newAttachments = { list: fileList, price: fileList.length * global.attach };
 
       setAttachments({ ...newAttachments, initiated: true });
+      setPersistedValues({ uploads: newAttachments });
       dispatch(messageFormUpdateUploads(newAttachments));
     },
-    [dispatch, global.attach]
+    [global?.attach, dispatch, setPersistedValues]
   );
 
   return (
@@ -107,7 +123,16 @@ export default function MessageFormMain() {
             <p>{t("message_from_info.line4")}</p>
           </div>
           <div className="message-form-inputs">
-            <Form methods={form} onFinish={onFormSubmit} initialValues={{ content: values.content }}>
+            <Form
+              methods={form}
+              onValuesChange={(action) => {
+                if (action.name && action.value) {
+                  setPersistedValues({ [action.name]: action.value });
+                }
+              }}
+              onFinish={onFormSubmit}
+              initialValues={{ content: values.content || persistedValues?.content }}
+            >
               <Form.Item name="content" label={t("explain_problem")}>
                 <Textarea placeholder={t("message_form_placeholder")} />
               </Form.Item>

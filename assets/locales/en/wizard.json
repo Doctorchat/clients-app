@@ -54,5 +54,11 @@
   "accept": "Accept",
   "time_selection_warning": "The reservation will be available for <bold>15 minutes</bold>. In case of non-payment - the reservation will be canceled, and you will need to request another consultation.",
   "age_restrictions": "You must be at least {{age}} years old",
-  "age_restrictions_confirmation": "Confirm that I am at least {{age}} years old"
+  "age_restrictions_confirmation": "Confirm that I am at least {{age}} years old",
+  "reject": "Reject",
+  "reject_chat": {
+    "title": "Reject consultation",
+    "label": "Reason for rejection",
+    "placeholder": "Enter the reason for rejection..."
+  }
 }
