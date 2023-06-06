@@ -57,7 +57,7 @@ export default function ConversationsSidebar() {
         router.push("/registration-flow/select-doctor");
       }
     }
-  }, [conversationList.data.length, conversationList.isLoaded, router, user?.role]);
+  }, [conversationList.data.length, conversationList.isLoaded, router]);
 
   const openStartConversation = useCallback(() => dispatch(docListToggleVisibility(true)), [dispatch]);
 

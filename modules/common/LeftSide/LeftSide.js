@@ -23,9 +23,8 @@ const ClientInvestigationsList = dynamic(() =>
 const DocAppointmentsSettings = dynamic(() =>
   import("@/modules/doctor").then((response) => response.DocAppointmentsSettings)
 );
-const DocReviewsSidebar = dynamic(() => import("@/modules/doctor").then((response) => response.DocReviewsSidebar));
-const DocRepeatedConsultations = dynamic(() =>
-  import("@/modules/doctor").then((response) => response.DocRepeatedConsultations)
+const DocReviewsSidebar = dynamic(() =>
+  import("@/modules/doctor").then((response) => response.DocReviewsSidebar)
 );
 
 export default function LeftSide() {
@@ -78,9 +77,6 @@ export default function LeftSide() {
             </Tabs.Pane>
             <Tabs.Pane dataKey={leftSideTabs.reviews}>
               <DocReviewsSidebar />
-            </Tabs.Pane>
-            <Tabs.Pane dataKey={leftSideTabs.repeatedConsultations}>
-              <DocRepeatedConsultations />
             </Tabs.Pane>
           </>
         </AuthRoleWrapper>
