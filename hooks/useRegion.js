@@ -3,4 +3,4 @@ export default function useRegion() {
   return region;
 }
 
-export const HOME_PAGE_URL = `https://doctorchat.${process.env.NEXT_PUBLIC_API_REGION}/`;
+export const HOME_PAGE_URL = `https://doctorchat.${process.env.NEXT_PUBLIC_API_PATH}/`;
