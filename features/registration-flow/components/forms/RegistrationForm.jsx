@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
+import clsx from "clsx";
 import PropTypes from "prop-types";
 import { object, string } from "yup";
 
 import Button from "@/components/Button";
+import Checkbox from "@/components/Checkbox";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
 import { PhoneConfirmation } from "@/features/registration-flow";
@@ -43,6 +45,7 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [areTermsConfirmed, setAreTermsConfirmed] = useState(false);
+  const [isAgeConfirmed, setIsAgeConfirmed] = useState(false);
 
   const onSubmit = React.useCallback(
     async (values) => {
@@ -78,13 +81,23 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
         <Form.Item label={`${t("password")}*`} name="password" disabled={isPhoneConfirmationStep}>
           <Input type="password" autoComplete="new-password" />
         </Form.Item>
-
         {!isPhoneConfirmationStep && (
           <Form.Item label={`${t("phone")}*`} name="phone" disabled={isPhoneConfirmationStep}>
             <InputPhone autoComplete="username" />
           </Form.Item>
         )}
 
+        <div
+          className={clsx("confirmation-terms mb-1", {
+            disabled: isPhoneConfirmationStep,
+          })}
+        >
+          <Checkbox
+            label={t("wizard:age_restrictions_confirmation", { age: 18 })}
+            value={isAgeConfirmed}
+            onChange={() => setIsAgeConfirmed(!isAgeConfirmed)}
+          />
+        </div>
         <AcceptTermsAndConditions
           disabled={isPhoneConfirmationStep}
           value={isPhoneConfirmationStep ? isPhoneConfirmationStep : areTermsConfirmed}
@@ -93,7 +106,7 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
 
         {!isPhoneConfirmationStep && (
           <div className="form-bottom">
-            <Button htmlType="submit" loading={isLoading} disabled={!areTermsConfirmed}>
+            <Button htmlType="submit" loading={isLoading} disabled={!areTermsConfirmed || !isAgeConfirmed}>
               {t("continue")}
             </Button>
           </div>
