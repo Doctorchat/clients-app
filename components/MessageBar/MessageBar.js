@@ -119,7 +119,14 @@ export default function MessageBar(props) {
       >
         <div className={cs("message-bar-input")}>
           <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
-            <DoctorChatAttachments chatId={chatId} />
+            <DoctorChatAttachments
+              chatId={chatId}
+              onUpdateMessageBarContent={(content) => {
+                if (content && content.length > 0) {
+                  form.setValue("content", content);
+                }
+              }}
+            />
           </AuthRoleWrapper>
 
           <AuthRoleWrapper roles={[userRoles.get("client")]}>

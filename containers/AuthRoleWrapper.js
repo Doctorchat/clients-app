@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 export default function AuthRoleWrapper(props) {
   const { roles, extraValidation, children } = props;
   const user = useSelector((store) => store.user);
-  
 
   if (roles.includes(user.data.role) && extraValidation) return children;
 

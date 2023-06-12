@@ -42,7 +42,14 @@ export default function Form(props) {
 
   return (
     <FormProvider {...methods}>
-      <form className={className} id={name} onSubmit={handleSubmit(onFinish)}>
+      <form
+        className={className}
+        id={name}
+        onSubmit={(e) => {
+          e.stopPropagation();
+          handleSubmit(onFinish)(e);
+        }}
+      >
         {children}
       </form>
     </FormProvider>

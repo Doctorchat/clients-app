@@ -114,7 +114,7 @@ export const MessageForm = () => {
         return;
       }
 
-      data.chat_id = router.query.chatId;
+      data.chat_id = Number(router.query.chatId);
       data.uploads_count = attachments.list.length;
       data.uploads_price = attachments.list.length * global.attach;
       data.price = doctorPrice;

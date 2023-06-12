@@ -90,6 +90,27 @@ const api = {
         ...data,
       }),
   },
+  messageTemplate: {
+    list: () => axiosInstance.get("/chat/templates").then((res) => res.data),
+    get: (id) => axiosInstance.get(`/chat/templates/${id}`),
+    create: ({ doctor_id, title, content }) =>
+      axiosInstance.post("/chat/templates", {
+        doctor_id,
+        title,
+        content,
+      }),
+    update: ({ id, doctor_id, title, content }) =>
+      axiosInstance.put(`/chat/templates/${id}`, {
+        id,
+        doctor_id,
+        title,
+        content,
+      }),
+    remove: (id, doctor_id) =>
+      axiosInstance.delete(`/chat/templates/${id}`, {
+        data: { id, doctor_id },
+      }),
+  },
 };
 
 export default api;

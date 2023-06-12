@@ -1,6 +1,7 @@
 import DocAppointmentsSettings from "./DocAppointmentsSettings";
 import DocEditProfile from "./DocEditProfile";
 import DocMenuOverlay from "./DocMenuOverlay";
+import DocMessageTemplate from "./DocMessageTemplate";
 import DocProfileActions from "./DocProfileActions";
 import DocRepeatedConsultations from "./DocRepeatedConsultations";
 import DocReviewsSidebar from "./DocReviewsSidebar";
@@ -18,4 +19,5 @@ export {
   DocWallet,
   DocStartConversation,
   DocRepeatedConsultations,
+  DocMessageTemplate,
 };

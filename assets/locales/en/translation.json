@@ -343,5 +343,14 @@
   "remove_account": {
     "action": "Delete account",
     "description": "Are you sure you want to delete your account? All data will be deleted and cannot be recovered."
+  },
+  "title": "Title",
+  "content": "Content",
+  "message_template": {
+    "templates": "Templates",
+    "placeholder": "Enter template text",
+    "edit_template": "Edit template",
+    "add_template": "Add template",
+    "create_template": "Create template"
   }
 }
