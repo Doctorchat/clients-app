@@ -295,7 +295,8 @@
     "request_file_title": "Cerere de fișier suplimentar",
     "request_file_text": "Vă rugăm să furnizați un motiv pentru a solicita un fișier suplimentar",
     "request_file_success": "Solicitarea fișierului a fost trimisă cu succes",
-    "request_to_upload_file": "Solicitare de încărcare a unui fișier suplimentar"
+    "request_to_upload_file": "Solicitare de încărcare a unui fișier suplimentar",
+    "select_template": "Selectați un șablon"
   },
   "slots": "Sloturi",
   "investigation_form_description": "Indicaţi în anchetă datele persoanei pentru care doriţi să solicitaţi o consultaţie!",
@@ -330,5 +331,14 @@
   "remove_account": {
     "action": "Ștergeți contul",
     "description": "Ești sigur că vrei să ștergi contul? Toate datele vor fi șterse și nu vor putea fi recuperate."
+  },
+  "title": "Titlu",
+  "content": "Conținut",
+  "message_template": {
+    "templates": "Șabloane",
+    "placeholder": "Introduceți textul șablonului",
+    "edit_template": "Editați șablonul",
+    "add_template": "Adăugați un șablon",
+    "create_template": "Creați un șablon"
   }
 }

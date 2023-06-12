@@ -41,9 +41,7 @@ export default function ChatFeedback(props) {
 
         dispatch(chatContentUpdateMessage({ id: messageId, content: "submitted" }));
       } catch (error) {
-        dispatch(
-          notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-        );
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(true);
       }
@@ -92,11 +90,7 @@ export default function ChatFeedback(props) {
           <div className="chat-feeback-section w-100">
             <Form methods={form} className="w-100" onFinish={reviewSubmitHanlder}>
               <Form.Item label={`(${t("optional")})`} name="content">
-                <Textarea
-                  className="feedback-textarea"
-                  minHeight={120}
-                  placeholder={t("feedback_form.description")}
-                />
+                <Textarea className="feedback-textarea" minHeight={120} placeholder={t("feedback_form.description")} />
               </Form.Item>
               <div className="d-flex justify-content-end">
                 <Button
