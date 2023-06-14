@@ -12,6 +12,9 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
             rel="stylesheet"
           />
+          {process.env.NEXT_PUBLIC_API_REGION === "ro" && (
+            <meta name="facebook-domain-verification" content="gdphpgz7wx4mupk8gwidgzj1x5b70c" />
+          )}
           {process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_GTM_KEY && (
             <Script id="google-tag" strategy="afterInteractive">
               {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -21,10 +24,11 @@ class MyDocument extends Document {
             })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_KEY}');`}
             </Script>
           )}
-
-          {process.env.NEXT_PUBLIC_API_REGION === "ro" && (
-            <meta name="facebook-domain-verification" content="gdphpgz7wx4mupk8gwidgzj1x5b70c" />
-          )}
+          <Script
+            id="google-recaptcha"
+            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}`}
+            strategy="beforeInteractive"
+          />
         </Head>
         <body>
           {process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_GTM_KEY && (

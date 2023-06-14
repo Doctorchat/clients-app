@@ -13,6 +13,7 @@ import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
 import { PhoneConfirmation } from "@/features/registration-flow";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
+import useGoogleRecaptcha from "@/hooks/useGoogleRecaptcha";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { AcceptTermsAndConditions } from "@/modules/common/TermsAndConditions";
 import i18next from "@/services/i18next";
@@ -42,6 +43,7 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
   const resolver = useYupValidationResolver(registerSchema);
   const form = useForm({ resolver });
   const setFormApiErrors = useApiErrorsWithForm(form, dispatch);
+  const getRecaptchaToken = useGoogleRecaptcha();
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [areTermsConfirmed, setAreTermsConfirmed] = useState(false);
@@ -53,6 +55,7 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
 
       data.role = 3;
       data.locale = getActiveLng();
+      data.re_token = await getRecaptchaToken();
 
       try {
         setIsLoading(true);
@@ -64,7 +67,7 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
         setIsLoading(false);
       }
     },
-    [dispatch, setFormApiErrors, updateStepStatus]
+    [dispatch, getRecaptchaToken, setFormApiErrors, updateStepStatus]
   );
 
   return (
