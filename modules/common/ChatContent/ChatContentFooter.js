@@ -9,11 +9,12 @@ import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
 
 import ChatContentAccept from "./ChatContentAccept";
+import ChatContentPayment from "./ChatContentPayment";
 
 export default function ChatContentFooter(props) {
   const user = useSelector((store) => store.user);
 
-  const { openMessageFormPopup, status, chatId, paymentUrl, type, isAccepted } = props;
+  const { openMessageFormPopup, status, chatId, paymentUrl, price, type, isAccepted } = props;
   const { t } = useTranslation();
 
   const isChatContentAcceptVisible = React.useMemo(() => {
@@ -42,13 +43,7 @@ export default function ChatContentFooter(props) {
       </AuthRoleWrapper>
 
       <AuthRoleWrapper extraValidation={status && status === "unpaid"} roles={[userRoles.get("client")]}>
-        <div className="chat-content-start w-100 d-flex justify-content-center">
-          <a href={paymentUrl}>
-            <Button type="text" className="confirm-cancel-btn">
-              {t("pay")}
-            </Button>
-          </a>
-        </div>
+        <ChatContentPayment paymentUrl={paymentUrl} price={price} />
       </AuthRoleWrapper>
 
       <AuthRoleWrapper extraValidation={isChatContentAcceptVisible} roles={[userRoles.get("doctor")]}>
@@ -66,6 +61,7 @@ ChatContentFooter.propTypes = {
   chatId: PropTypes.string,
   status: PropTypes.string,
   paymentUrl: PropTypes.string,
+  price: PropTypes.number,
   type: PropTypes.string,
   isAccepted: PropTypes.bool,
 };

@@ -13,7 +13,7 @@ import TimesIcon from "@/icons/times.svg";
 
 import { useChatContentEmailNotifications } from "./useChatContentEmailNotifications";
 
-export default function ChatContentEmail() {
+export default function ChatContentEmailNotifications() {
   const { t } = useTranslation();
   const { visible, isSaving, onClose, onEmailChange } = useChatContentEmailNotifications();
 

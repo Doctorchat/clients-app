@@ -26,10 +26,7 @@ const Wallet = () => {
   return (
     <Sidebar>
       <Sidebar.Header>
-        <BackTitle
-          title={t("wallet")}
-          onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")}
-        />
+        <BackTitle title={t("wallet")} onBack={updateTabsConfig(leftSideTabs.conversationList, "prev")} />
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y px-4">
@@ -38,11 +35,7 @@ const Wallet = () => {
 
             <AuthRoleWrapper roles={[userRoles.get("client")]}>
               <div className="d-flex align-items-center justify-content-center mt-3">
-                <Button
-                  className="w-100"
-                  size="sm"
-                  onClick={() => dispatch(toggleTopUpModal(true))}
-                >
+                <Button className="w-100" size="sm" onClick={() => dispatch(toggleTopUpModal(true))}>
                   {t("transactions.top_up")}
                 </Button>
               </div>
