@@ -43,13 +43,6 @@ export default function ChatContentFooter(props) {
       </AuthRoleWrapper>
 
       <AuthRoleWrapper extraValidation={status && status === "unpaid"} roles={[userRoles.get("client")]}>
-        {/* <div className="chat-content-start w-100 d-flex justify-content-center">
-          <a href={paymentUrl}>
-            <Button type="text" className="confirm-cancel-btn">
-              {t("pay")}
-            </Button>
-          </a>
-        </div> */}
         <ChatContentPayment paymentUrl={paymentUrl} price={price} />
       </AuthRoleWrapper>
 
