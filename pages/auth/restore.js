@@ -87,6 +87,17 @@ export default function Login() {
               {t("reset_password")}
             </Button>
           </div>
+          <div className="mt-2">
+            This site is protected by reCAPTCHA and the Google{" "}
+            <Link href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="link">
+              Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="link">
+              Terms of Service
+            </Link>{" "}
+            apply.
+          </div>
         </Form>
       </div>
     </>
