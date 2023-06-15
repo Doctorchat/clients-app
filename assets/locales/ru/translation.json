@@ -328,5 +328,6 @@
   "remove_account": {
     "action": "Удалить аккаунт",
     "description": "Вы уверены, что хотите удалить свой аккаунт? Все данные будут удалены и не могут быть восстановлены."
-  }
+  },
+  "recaptcha_branding": "Этот сайт защищен reCAPTCHA и применяются <navigation href='https://policies.google.com/privacy'>Политика конфиденциальности</navigation> и <navigation href='https://policies.google.com/terms'>Условия использования</navigation> Google."
 }

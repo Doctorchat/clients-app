@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
+import Link from "next/link";
 import PropTypes from "prop-types";
 import { object, string } from "yup";
 
@@ -89,7 +90,6 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
             <InputPhone autoComplete="username" />
           </Form.Item>
         )}
-
         <div
           className={clsx("confirmation-terms mb-1", {
             disabled: isPhoneConfirmationStep,
@@ -101,6 +101,7 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
             onChange={() => setIsAgeConfirmed(!isAgeConfirmed)}
           />
         </div>
+
         <AcceptTermsAndConditions
           disabled={isPhoneConfirmationStep}
           value={isPhoneConfirmationStep ? isPhoneConfirmationStep : areTermsConfirmed}
@@ -114,6 +115,13 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
             </Button>
           </div>
         )}
+
+        <div className="mt-2">
+          <Trans
+            i18nKey="recaptcha_branding"
+            components={[{ navigation: <Link target="_blank" rel="noopener noreferrer" className="link" /> }]}
+          />
+        </div>
       </Form>
       {isPhoneConfirmationStep && <PhoneConfirmation />}
     </>

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch } from "react-redux";
 import i18next from "i18next";
@@ -86,6 +86,12 @@ export default function Login() {
             <Button htmlType="submit" loading={loading}>
               {t("reset_password")}
             </Button>
+          </div>
+          <div className="mt-2">
+            <Trans
+              i18nKey="recaptcha_branding"
+              components={[{ navigation: <Link target="_blank" rel="noopener noreferrer" className="link" /> }]}
+            />
           </div>
         </Form>
       </div>

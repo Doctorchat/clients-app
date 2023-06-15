@@ -330,5 +330,6 @@
   "remove_account": {
     "action": "Ștergeți contul",
     "description": "Ești sigur că vrei să ștergi contul? Toate datele vor fi șterse și nu vor putea fi recuperate."
-  }
+  },
+  "recaptcha_branding": "Acest site este protejat de reCAPTCHA și se aplică <navigation href='https://policies.google.com/privacy'>Politica de confidențialitate</navigation> și <navigation href='https://policies.google.com/terms'>Termenii de utilizare</navigation> Google."
 }

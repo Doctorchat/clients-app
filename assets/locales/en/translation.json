@@ -329,5 +329,6 @@
   "remove_account": {
     "action": "Delete account",
     "description": "Are you sure you want to delete your account? All data will be deleted and cannot be recovered."
-  }
+  },
+  "recaptcha_branding": "This site is protected by reCAPTCHA and the Google <navigation href='https://policies.google.com/privacy'>Privacy Policy</navigation> and <navigation href='https://policies.google.com/terms'> Terms of Service</navigation> apply."
 }
