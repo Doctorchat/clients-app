@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch } from "react-redux";
 import i18next from "i18next";
@@ -88,15 +88,10 @@ export default function Login() {
             </Button>
           </div>
           <div className="mt-2">
-            This site is protected by reCAPTCHA and the Google{" "}
-            <Link href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="link">
-              Privacy Policy
-            </Link>{" "}
-            and{" "}
-            <Link href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="link">
-              Terms of Service
-            </Link>{" "}
-            apply.
+            <Trans
+              i18nKey="recaptcha_branding"
+              components={[{ navigation: <Link target="_blank" rel="noopener noreferrer" className="link" /> }]}
+            />
           </div>
         </Form>
       </div>

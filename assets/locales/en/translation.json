@@ -352,5 +352,6 @@
     "edit_template": "Edit template",
     "add_template": "Add template",
     "create_template": "Create template"
-  }
+  },
+  "recaptcha_branding": "This site is protected by reCAPTCHA and the Google <navigation href='https://policies.google.com/privacy'>Privacy Policy</navigation> and <navigation href='https://policies.google.com/terms'> Terms of Service</navigation> apply."
 }
