@@ -26,7 +26,7 @@ import ChatContentFooter from "./ChatContentFooter";
 const withoutInfo = ["support", "auto", "consilium", "internal"];
 
 export default function ChatContent(props) {
-  const { loading, userInfo, messages, chatId, status, type, paymentUrl, isMeet, isAccepted } = props;
+  const { loading, userInfo, messages, chatId, status, type, paymentUrl, price, isMeet, isAccepted } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -139,6 +139,7 @@ export default function ChatContent(props) {
           status={status}
           chatId={chatId}
           paymentUrl={paymentUrl}
+          price={price}
           type={type}
           isAccepted={isAccepted}
         />
@@ -155,6 +156,7 @@ ChatContent.propTypes = {
   status: PropTypes.string,
   type: PropTypes.string,
   paymentUrl: PropTypes.string,
+  price: PropTypes.number,
   isMeet: PropTypes.bool,
   isAccepted: PropTypes.bool,
 };
