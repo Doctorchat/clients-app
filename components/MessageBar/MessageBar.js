@@ -124,6 +124,7 @@ export default function MessageBar(props) {
               onUpdateMessageBarContent={(content) => {
                 if (content && content.length > 0) {
                   form.setValue("content", content);
+                  setIsFormEnabled(true);
                 }
               }}
             />
