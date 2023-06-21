@@ -60,7 +60,5 @@
     "title": "Refuză consultația",
     "label": "Motivul refuzului",
     "placeholder": "Introdu motivul refuzului..."
-  },
-  "age_restrictions": "Trebuie să aveți cel puțin {{age}} ani",
-  "age_restrictions_confirmation": "Confirm că am cel puțin {{age}} ani"
+  }
 }
