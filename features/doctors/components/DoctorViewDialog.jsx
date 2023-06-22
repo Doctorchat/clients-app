@@ -112,7 +112,7 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
   ]);
   return (
     <Popup className="doctor-view__modal" visible={isOpen} onVisibleChange={onVisibleChange}>
-      {isLoading ? (
+      {isLoading || !doctor ? (
         <DoctorViewDialogSkeleton />
       ) : (
         <article className="doctor-view">

@@ -340,5 +340,6 @@
     "edit_template": "Editați șablonul",
     "add_template": "Adăugați un șablon",
     "create_template": "Creați un șablon"
-  }
+  },
+  "recaptcha_branding": "Acest site este protejat de reCAPTCHA și se aplică <navigation href='https://policies.google.com/privacy'>Politica de confidențialitate</navigation> și <navigation href='https://policies.google.com/terms'>Termenii de utilizare</navigation> Google."
 }

@@ -113,6 +113,7 @@
   .form-control {
     width: 100%;
     margin-bottom: 0;
+    flex: 1;
   }
 
   &__title {
@@ -134,8 +135,8 @@
     justify-content: flex-end;
     font-size: 15px;
     text-align: right;
-    width: 90px;
-    margin-right: 20px;
+    min-width: 90px;
+    margin-right: 16px;
     height: 44px;
   }
 }
