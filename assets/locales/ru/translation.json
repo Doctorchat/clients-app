@@ -291,7 +291,8 @@
     "request_file_title": "Запрос дополнительного файла",
     "request_file_text": "Пожалуйста, укажите причину запроса дополнительного файла",
     "request_file_success": "Запрос на файл успешно отправлен",
-    "request_to_upload_file": "Запрос на загрузку дополнительного файла"
+    "request_to_upload_file": "Запрос на загрузку дополнительного файла",
+    "select_template": "Выберите шаблон"
   },
   "slots": "Слоты",
   "investigation_form_description": "Укажите в анкете данные человека, для которого хотите запросить консультацию!",
@@ -328,6 +329,15 @@
   "remove_account": {
     "action": "Удалить аккаунт",
     "description": "Вы уверены, что хотите удалить свой аккаунт? Все данные будут удалены и не могут быть восстановлены."
+  },
+  "title": "Заголовок",
+  "content": "Содержание",
+  "message_template": {
+    "templates": "Шаблоны",
+    "placeholder": "Введите текст шаблона",
+    "edit_template": "Редактировать шаблон",
+    "add_template": "Добавить шаблон",
+    "create_template": "Создать шаблон"
   },
   "recaptcha_branding": "Этот сайт защищен reCAPTCHA и применяются <navigation href='https://policies.google.com/privacy'>Политика конфиденциальности</navigation> и <navigation href='https://policies.google.com/terms'>Условия использования</navigation> Google."
 }
