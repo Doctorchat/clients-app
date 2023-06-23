@@ -151,8 +151,8 @@
   "invalid_promo": "Acest cod nu este valid",
   "investigation_form": {
     "sex": "Gen",
-    "activity": "Gen de activitate(specificați)",
-    "location": "Locul de trai",
+    "activity": "Unde activați (specificați domeniul)",
+    "location": "Locația",
     "epidemiological": "Datele epidemiologice(dacă ați suportat boli infecțioase)",
     "diseases": "Boli suportate pe toată perioada vieții(specificați dacă este cazul)",
     "diseases_spec": "Boli suportate pe toată perioada vieții - specificați",
