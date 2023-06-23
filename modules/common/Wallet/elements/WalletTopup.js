@@ -18,6 +18,11 @@ import { notification } from "@/store/slices/notificationsSlice";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
+const MINIMUM_AMOUNT = {
+  MDL: 20,
+  EUR: 1,
+};
+
 const WalletTopup = ({ popupClassName }) => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
@@ -29,7 +34,7 @@ const WalletTopup = ({ popupClassName }) => {
   const form = useForm({
     resolver: useYupValidationResolver(
       yup.object().shape({
-        amount: yup.number().min(1).required(),
+        amount: yup.number().min(MINIMUM_AMOUNT[globalCurrency]).required(),
       })
     ),
   });
@@ -47,7 +52,7 @@ const WalletTopup = ({ popupClassName }) => {
         dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       }
     },
-    [dispatch]
+    [dispatch, topUp]
   );
 
   const cancelTopUp = () => dispatch(toggleTopUpModal(false));

@@ -15,6 +15,7 @@
   --bs-primary: #06f;
   --bs-primary-hover: #0058db;
   --bs-danger-hover: #ca2333;
+  --bs-danger-rgb: 202, 35, 51;
   --bs-primary-disabled: #408cff;
   --bs-warning: #ffa800;
   --dc-border-color: #dfe1e5;
@@ -285,6 +286,10 @@ img {
 
 .text-transparent {
   color: transparent;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
 }
 
 @keyframes spin {

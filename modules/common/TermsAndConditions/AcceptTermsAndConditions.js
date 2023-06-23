@@ -8,6 +8,7 @@ import { HOME_PAGE_URL } from "@/hooks/useRegion";
 const AcceptTermsAndConditions = ({ value, setValue, disabled }) => {
   const handleChange = () => setValue((prev) => !prev);
   const { t } = useTranslation();
+
   return (
     <div className={clsx("confirmation-terms", { disabled })}>
       <Checkbox
