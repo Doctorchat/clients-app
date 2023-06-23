@@ -3,6 +3,7 @@ import DocEditProfile from "./DocEditProfile";
 import DocMenuOverlay from "./DocMenuOverlay";
 import DocMessageTemplate from "./DocMessageTemplate";
 import DocProfileActions from "./DocProfileActions";
+import DocRepeatedConsultations from "./DocRepeatedConsultations";
 import DocReviewsSidebar from "./DocReviewsSidebar";
 import DocSetVacation from "./DocSetVacation";
 import DocStartConversation from "./DocStartConversation";
@@ -17,5 +18,6 @@ export {
   DocSetVacation,
   DocWallet,
   DocStartConversation,
+  DocRepeatedConsultations,
   DocMessageTemplate,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Tabs } from "antd";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
@@ -93,23 +93,27 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
     onHideModal();
   }, [onHideModal, onClose]);
 
-  const items = React.useMemo(() => [
-    {
-      key: "1",
-      label: t("general_information"),
-      children: <GeneralInfo doctor={doctor} />,
-    },
-    {
-      key: "2",
-      label: t("reviews") + ` (${doctor?.reviews?.length})`,
-      children: (
-        <div className="limit-height">
-          <ReviewsList data={doctor?.reviews} />
-        </div>
-      ),
-      disabled: !doctor?.reviews?.length,
-    },
-  ]);
+  const items = React.useMemo(
+    () => [
+      {
+        key: "1",
+        label: t("general_information"),
+        children: <GeneralInfo doctor={doctor} />,
+      },
+      {
+        key: "2",
+        label: t("reviews") + ` (${doctor?.reviews?.length})`,
+        children: (
+          <div className="limit-height">
+            <ReviewsList data={doctor?.reviews} />
+          </div>
+        ),
+        disabled: !doctor?.reviews?.length,
+      },
+    ],
+    [doctor, t]
+  );
+
   return (
     <Popup className="doctor-view__modal" visible={isOpen} onVisibleChange={onVisibleChange}>
       {isLoading || !doctor ? (
@@ -130,6 +134,7 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
             </header>
 
             <Badges doctor={doctor} />
+            <Discount doctor={doctor} />
 
             <ConsultationOptions
               doctor={doctor}
@@ -145,36 +150,13 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
 };
 
 DoctorViewDialog.propTypes = {
-  doctor: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    avatar: PropTypes.string,
-    isGuard: PropTypes.bool,
-    price: PropTypes.number,
-    meet_price: PropTypes.number,
-    activity: PropTypes.shape({
-      responseTime: PropTypes.number,
-      workplace: PropTypes.string,
-      education: PropTypes.arrayOf(PropTypes.string),
-    }),
-    about: PropTypes.shape({
-      bio: PropTypes.shape({
-        ro: PropTypes.string,
-        ru: PropTypes.string,
-        en: PropTypes.string,
-      }),
-      experience: PropTypes.number,
-    }),
-    chat: PropTypes.bool,
-    video: PropTypes.bool,
-  }),
+  doctor: PropTypes.object,
   isLoading: PropTypes.bool,
   onClose: PropTypes.func,
   onMessageTypeClick: PropTypes.func,
   onVideoTypeClick: PropTypes.func,
 };
 
-// eslint-disable-next-line react/prop-types
 const Badges = ({ doctor }) => {
   const { t } = useTranslation();
 
@@ -199,6 +181,99 @@ const Badges = ({ doctor }) => {
       </DcTooltip>
     </div>
   );
+};
+
+Badges.propTypes = {
+  doctor: PropTypes.object,
+};
+
+const Discount = ({ doctor }) => {
+  const { t } = useTranslation();
+
+  const [timeLeft, setTimeLeft] = React.useState({
+    d: 0,
+    h: 0,
+    m: 0,
+    s: 0,
+  });
+
+  const timer = React.useRef(null);
+
+  React.useEffect(() => {
+    if (doctor.available_discount && doctor.available_discount.expires_at) {
+      const getTimeLeft = () => {
+        const expiresAt = new Date(doctor.available_discount.expires_at);
+        const now = new Date();
+
+        const days = Math.floor((expiresAt - now) / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((expiresAt - now) / (1000 * 60 * 60)) % 24;
+        const minutes = Math.floor((expiresAt - now) / (1000 * 60)) % 60;
+        const seconds = Math.floor((expiresAt - now) / 1000) % 60;
+
+        if (minutes > 0) {
+          return { d: days, h: hours, m: minutes, s: seconds };
+        }
+
+        return false;
+      };
+
+      setTimeLeft(getTimeLeft());
+
+      timer.current = setInterval(() => {
+        const timeLeft = getTimeLeft();
+
+        if (timeLeft) setTimeLeft(timeLeft);
+        else {
+          setTimeLeft(false);
+          clearInterval(timer.current);
+        }
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timer.current);
+    };
+  }, [doctor.available_discount, t]);
+
+  if (!doctor.available_discount) return null;
+
+  return (
+    <div className="doctor-view__discount">
+      {timeLeft && (
+        <>
+          <p className="doctor-view__discount-text">
+            <Trans
+              i18nKey="repeated_consultations_discount.description"
+              values={{ discount: doctor.available_discount.discount }}
+              components={{ bold: <b /> }}
+            />
+          </p>
+          <div className="countdown">
+            <div className="countdown__item">
+              <span className="countdown__item-number">{timeLeft.d}</span>
+              <span className="countdown__item-text">{t("repeated_consultations_discount.days")}</span>
+            </div>
+            <div className="countdown__item">
+              <span className="countdown__item-number">{timeLeft.h}</span>
+              <span className="countdown__item-text">{t("repeated_consultations_discount.hours")}</span>
+            </div>
+            <div className="countdown__item">
+              <span className="countdown__item-number">{timeLeft.m}</span>
+              <span className="countdown__item-text">{t("repeated_consultations_discount.minutes")}</span>
+            </div>
+            <div className="countdown__item">
+              <span className="countdown__item-number">{timeLeft.s}</span>
+              <span className="countdown__item-text">{t("repeated_consultations_discount.seconds")}</span>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+Discount.propTypes = {
+  doctor: PropTypes.object,
 };
 
 const GeneralInfo = ({ doctor }) => {
@@ -226,4 +301,8 @@ const GeneralInfo = ({ doctor }) => {
       </div>
     </>
   );
+};
+
+GeneralInfo.propTypes = {
+  doctor: PropTypes.object,
 };

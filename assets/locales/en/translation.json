@@ -327,6 +327,20 @@
   "save": "Save",
   "ora_dvs_locala": "Your Local Time",
   "restore_password_confirm_code": "Enter the confirmation code received via text message",
+  "repeated_consultations": {
+    "title": "Repeated consultations",
+    "description": "Do you provide a discount for repeated consultations?",
+    "note": "The discount is provided automatically when the conversation is closed.",
+    "duration": "Validity period (days)",
+    "discount": "Discount (%)"
+  },
+  "repeated_consultations_discount": {
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes",
+    "seconds": "seconds",
+    "description": "Limited offer: <bold>{{discount}}%</bold> discount available for a short time! Take advantage of the reduced prices now!"
+  },
   "remove_account": {
     "action": "Delete account",
     "description": "Are you sure you want to delete your account? All data will be deleted and cannot be recovered."
