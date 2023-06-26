@@ -24,7 +24,7 @@ export default function AuthWrapper(props) {
 
     router.push({
       pathname,
-      query: { redirect: router.pathname + params.toString() },
+      query: { redirect: `${window.location.pathname}?${params.toString()}` },
     });
   }, [router]);
 
