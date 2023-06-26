@@ -17,8 +17,14 @@ export default function AuthWrapper(props) {
   const dispatch = useDispatch();
 
   const redirectToLogin = useCallback(() => {
+    let pathname = "/auth/login";
+
+    if (router.query.unauthorized_redirect) {
+      pathname = router.query.unauthorized_redirect;
+    }
+
     router.push({
-      pathname: "/auth/login",
+      pathname,
       query: { redirect: router.pathname + window.location.search },
     });
   }, [router]);
