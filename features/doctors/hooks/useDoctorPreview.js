@@ -16,6 +16,13 @@ const useDoctorPreview = (defaultDoctorPreviewId) => {
     async () => {
       try {
         const response = await getDoctor(doctorPreviewId);
+
+        if (response && response.vacation.length > 0) {
+          dispatch(notification({ type: "error", title: "error", descrp: "doctor_unavailable" }));
+          setDoctorPreviewId(null);
+          return null;
+        }
+
         return response;
       } catch {
         dispatch(notification({ type: "error", title: "error", descrp: "doctor_unavailable" }));
