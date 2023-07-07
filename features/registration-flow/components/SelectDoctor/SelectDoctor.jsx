@@ -83,11 +83,13 @@ export const SelectDoctor = () => {
               onChange={(e) => filters.setSearch(e.target.value)}
             />
           </div>
-          <div className="select-doctor__filter">
-            <Button loading={isAutoTypeLoading} onClick={onAutoTypeClickHandler}>
-              {t("wizard:select_doctor.automatic.short_title")}
-            </Button>
-          </div>
+          {filters.search?.length === 0 && (
+            <div className="select-doctor__filter">
+              <Button loading={isAutoTypeLoading} onClick={onAutoTypeClickHandler}>
+                {t("wizard:select_doctor.automatic.short_title")}
+              </Button>
+            </div>
+          )}
         </div>
         <DoctorsGrid isLoading={isLoading}>
           {doctors.map((doctor) => (
