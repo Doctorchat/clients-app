@@ -17,7 +17,7 @@ const useDoctorPreview = (defaultDoctorPreviewId) => {
       try {
         const response = await getDoctor(doctorPreviewId);
 
-        if (response && response.vacation.length > 0) {
+        if (response?.vacation?.length && response.vacation.every(Boolean)) {
           dispatch(notification({ type: "error", title: "error", descrp: "doctor_unavailable" }));
           setDoctorPreviewId(null);
           return null;
