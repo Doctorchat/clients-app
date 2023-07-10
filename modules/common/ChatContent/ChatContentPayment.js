@@ -25,10 +25,11 @@ export default function ChatContentPayment({ paymentUrl, price }) {
   const dispatch = useDispatch();
 
   const onPayClick = () => {
+    const currency = globalCurrency?.toLowerCase() === "mdl" ? "MDL" : "EUR";
     const remaining = walletData.data.balance - price;
 
     if (remaining < 0) {
-      if (Math.abs(remaining) < MINIMUM_AMOUNT[globalCurrency]) {
+      if (Math.abs(remaining) < MINIMUM_AMOUNT[currency]) {
         dispatch(toggleTopUpModal(true));
         return;
       }
