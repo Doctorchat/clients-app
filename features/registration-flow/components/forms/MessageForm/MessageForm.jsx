@@ -193,7 +193,7 @@ export const MessageForm = () => {
 
           <Form.Item name="uploads" label={t("message_uploads_label")}>
             <Upload
-              action={messageUploadFile(1)}
+              action={(file, config) => messageUploadFile(Number(router.query.chatId) || 1)(file, config)}
               description={description}
               icon={<ImageIcon />}
               accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
