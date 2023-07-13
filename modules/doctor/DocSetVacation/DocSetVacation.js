@@ -78,6 +78,8 @@ export default function DocSetVacation() {
     [from]
   );
 
+  const hasVacation = user?.vacation && user.vacation.length && user.vacation.every(Boolean);
+
   return (
     <>
       <MenuItem icon={<PalmIcon />} onClick={openSetVacationForm}>
@@ -105,18 +107,20 @@ export default function DocSetVacation() {
                   additionalCheckDisabledDay={(d) => isDateDisabled("to", d)}
                 />
               </Form.Item>
-              <div className="d-flex justify-content-between">
-                <Confirm
-                  content={t("cancel_vacation_confirmation")}
-                  onConfirm={clearVacation}
-                  disabled={!user.vacation || !user?.vacation?.length}
-                  isAsync
-                >
-                  <Button type="outline" disabled={!user.vacation || !user?.vacation?.length}>
-                    {t("cancel")}
-                  </Button>
-                </Confirm>
-                <Button className="ms-2" htmlType="submit" loading={loading}>
+              <div className={`d-flex ${hasVacation ? "justify-content-between" : "justify-content-end"}`}>
+                {hasVacation && (
+                  <Confirm
+                    content={t("cancel_vacation_confirmation")}
+                    onConfirm={clearVacation}
+                    disabled={!user.vacation || !user?.vacation?.length}
+                    isAsync
+                  >
+                    <Button type="outline" disabled={!user.vacation || !user?.vacation?.length}>
+                      {t("cancel_vacation")}
+                    </Button>
+                  </Confirm>
+                )}
+                <Button className={hasVacation ? "ms-2" : ""} htmlType="submit" loading={loading}>
                   {t("apply")}
                 </Button>
               </div>
