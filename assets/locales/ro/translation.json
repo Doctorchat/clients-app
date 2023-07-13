@@ -46,6 +46,7 @@
   "interval": "Interval",
   "set_vacation": "Setează concediu",
   "cancel_vacation_confirmation": "Ești sigur că vrei să anulezi intervalul curent?",
+  "cancel_vacation": "Anulează concediu",
   "confirm": "Confirm",
   "error": "Eroare",
   "default_error_message": "A apărut o eroare",
