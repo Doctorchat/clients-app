@@ -353,5 +353,12 @@
     "add_template": "Добавить шаблон",
     "create_template": "Создать шаблон"
   },
-  "recaptcha_branding": "Этот сайт защищен reCAPTCHA и применяются <navigation href='https://policies.google.com/privacy'>Политика конфиденциальности</navigation> и <navigation href='https://policies.google.com/terms'>Условия использования</navigation> Google."
+  "recaptcha_branding": "Этот сайт защищен reCAPTCHA и применяются <navigation href='https://policies.google.com/privacy'>Политика конфиденциальности</navigation> и <navigation href='https://policies.google.com/terms'>Условия использования</navigation> Google.",
+  "google_calendar": {
+    "authorize": "Авторизовать календарь Google",
+    "authorization": "Авторизация календаря Google",
+    "authorized": "Календарь Google авторизован успешно",
+    "unauthorize": "Де-авторизовать календарь Google",
+    "unauthorized": "Календарь Google де-авторизован успешно"
+  }
 }
