@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import * as yup from "yup";
 
 import Button from "@/components/Button";
 import Confirm from "@/components/Confirm";
@@ -10,6 +11,7 @@ import Form from "@/components/Form";
 import MenuItem from "@/components/Menu/MenuItem";
 import Popup from "@/components/Popup";
 import Portal from "@/containers/Portal";
+import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import PalmIcon from "@/icons/palm.svg";
 import DatePicker from "@/packages/DatePicker";
 import api from "@/services/axios/api";
@@ -18,11 +20,16 @@ import { updateUserProperty } from "@/store/slices/userSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
 import moment from "@/utils/localMoment";
 
+const schema = yup.object().shape({
+  from: yup.string().required(),
+  to: yup.string().required(),
+});
+
 export default function DocSetVacation() {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const user = useSelector((store) => store.user.data);
-  const form = useForm({ defaultValues: { from: null, to: null } });
+  const form = useForm({ defaultValues: { from: null, to: null }, resolver: useYupValidationResolver(schema) });
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -52,13 +59,14 @@ export default function DocSetVacation() {
         dispatch(updateUserProperty({ prop: "vacation", value: range, as_send: true }));
         dispatch(notification({ type: "success", title: "success", descrp: "data_updated_with_success" }));
         setIsOpen(false);
+        form.reset();
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
         setLoading(false);
       }
     },
-    [dispatch]
+    [dispatch, form]
   );
 
   const from = form.watch("from");
@@ -86,9 +94,16 @@ export default function DocSetVacation() {
         {t("vacation")}
       </MenuItem>
       <Portal portalName="modalRoot">
-        <Popup id="vacation-form" visible={isOpen} onVisibleChange={setIsOpen}>
+        <Popup
+          id="vacation-form"
+          visible={isOpen}
+          onVisibleChange={() => {
+            setIsOpen(false);
+            form.reset();
+          }}
+        >
           <Popup.Header title={t("set_vacation")} />
-          <Popup.Content>
+          <div className="p-2">
             <Form
               methods={form}
               onFinish={onSubmitHandler}
@@ -125,7 +140,7 @@ export default function DocSetVacation() {
                 </Button>
               </div>
             </Form>
-          </Popup.Content>
+          </div>
         </Popup>
       </Portal>
     </>
