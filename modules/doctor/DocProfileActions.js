@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Menu from "@/components/Menu";
 import Switch from "@/components/Switch";
 import { leftSideTabs } from "@/context/TabsKeys";
+import CalendarDaysIcon from "@/icons/calendar-days.svg";
 import CommentLinesIcon from "@/icons/comment-lines.svg";
 import EditIcon from "@/icons/edit.svg";
 import SparklesIcon from "@/icons/sparkles.svg";
@@ -24,6 +25,7 @@ export default function DocProfileActions() {
 
   const [isTextStatusUpdating, setIsTextStatusUpdating] = useState(false);
   const [isVideoStatusUpdating, setIsVideoStatusUpdating] = useState(false);
+  const [isGoogleCalendarAuthorizing, setIsGoogleCalendarAuthorizing] = useState(false);
 
   const updateTextStatus = useCallback(async () => {
     try {
@@ -31,9 +33,7 @@ export default function DocProfileActions() {
       await api.doctor.toggleTextStatus();
       dispatch(updateUserProperty({ prop: "chat", value: !user?.chat }));
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setIsTextStatusUpdating(false);
     }
@@ -45,25 +45,49 @@ export default function DocProfileActions() {
       await api.doctor.toggleVideoStatus();
       dispatch(updateUserProperty({ prop: "video", value: !user?.video }));
     } catch (error) {
-      dispatch(
-        notification({ type: "error", title: "Erorare", descrp: getApiErrorMessages(error, true) })
-      );
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
     } finally {
       setIsVideoStatusUpdating(false);
     }
   }, [dispatch, user?.video]);
+
+  const authorizeGoogleCalendar = useCallback(async () => {
+    try {
+      setIsGoogleCalendarAuthorizing(true);
+      await api.auth.google.start();
+    } catch (error) {
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
+      setIsGoogleCalendarAuthorizing(false);
+    }
+  }, [dispatch]);
+
+  const unauthorizeGoogleCalendar = useCallback(async () => {
+    try {
+      setIsGoogleCalendarAuthorizing(true);
+      await api.auth.google.cancel();
+      dispatch(updateUserProperty({ prop: "g-auth", value: false }));
+      dispatch(notification({ type: "success", title: "success", descrp: "google_calendar.unauthorized" }));
+    } catch (error) {
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
+      setIsGoogleCalendarAuthorizing(false);
+    }
+  }, [dispatch]);
 
   return (
     <Menu>
       <Menu.Item icon={<EditIcon />} onClick={updateTabsConfig(leftSideTabs.editProfile)}>
         {t("edit_profile")}
       </Menu.Item>
+      <Menu.Item className="new-icon-style" icon={<SparklesIcon />} onClick={updateTabsConfig(leftSideTabs.reviews)}>
+        {t("reviews")}
+      </Menu.Item>
       <Menu.Item
         className="new-icon-style"
-        icon={<SparklesIcon />}
-        onClick={updateTabsConfig(leftSideTabs.reviews)}
+        icon={<CalendarDaysIcon />}
+        loading={isGoogleCalendarAuthorizing}
+        onClick={user["g-auth"] ? unauthorizeGoogleCalendar : authorizeGoogleCalendar}
       >
-        {t("reviews")}
+        {user["g-auth"] ? t("google_calendar.unauthorize") : t("google_calendar.authorize")}
       </Menu.Item>
       <Menu.Item className="switch new-icon-style" icon={<CommentLinesIcon />}>
         <Switch

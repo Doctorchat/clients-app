@@ -356,5 +356,12 @@
     "add_template": "Adăugați un șablon",
     "create_template": "Creați un șablon"
   },
-  "recaptcha_branding": "Acest site este protejat de reCAPTCHA și se aplică <navigation href='https://policies.google.com/privacy'>Politica de confidențialitate</navigation> și <navigation href='https://policies.google.com/terms'>Termenii de utilizare</navigation> Google."
+  "recaptcha_branding": "Acest site este protejat de reCAPTCHA și se aplică <navigation href='https://policies.google.com/privacy'>Politica de confidențialitate</navigation> și <navigation href='https://policies.google.com/terms'>Termenii de utilizare</navigation> Google.",
+  "google_calendar": {
+    "authorize": "Autorizați calendarul Google",
+    "authorization": "Autorizare Google calendar",
+    "authorized": "Calendarul Google este autorizat cu succes",
+    "unauthorize": "Deautorizați calendarul Google",
+    "unauthorized": "Calendarul Google a fost deautorizat cu succes"
+  }
 }
