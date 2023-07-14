@@ -1,6 +1,13 @@
 import axiosInstance from "./apiConfig";
 
 const api = {
+  auth: {
+    google: {
+      start: () => axiosInstance.get("/authorize/start"),
+      verify: (data) => axiosInstance.post("/authorize/verify", data),
+      cancel: () => axiosInstance.post("/authorize/cancel"),
+    },
+  },
   user: {
     get: () => axiosInstance.get("/user"),
     login: (data) => axiosInstance.post("/auth/login", data),
