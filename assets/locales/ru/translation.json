@@ -40,6 +40,7 @@
   "vacation": "Отпуск",
   "cancel": "Отмена",
   "apply": "Применить",
+  "supply": "Пополнить",
   "interval": "Интервал",
   "set_vacation": "Установить отпуск",
   "cancel_vacation_confirmation": "Вы уверены, что хотите отменить текущий интервал?",
@@ -360,5 +361,9 @@
     "authorized": "Календарь Google авторизован успешно",
     "unauthorize": "Де-авторизовать календарь Google",
     "unauthorized": "Календарь Google де-авторизован успешно"
+  },
+  "top-up": {
+    "minimum_amount": "Минимальная сумма пополнения {{amount}} {{currency}}",
+    "insufficient_funds": "У вас недостаточно средств. Пожалуйста пополните баланс."
   }
 }
