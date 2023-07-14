@@ -363,5 +363,9 @@
     "authorized": "Calendarul Google este autorizat cu succes",
     "unauthorize": "Deautorizați calendarul Google",
     "unauthorized": "Calendarul Google a fost deautorizat cu succes"
+  },
+  "top-up": {
+    "minimum_amount": "Suma minimă de suplinire este {{amount}} {{currency}}",
+    "insufficient_funds": "Nu aveți suficiente fonduri pentru a efectua această acțiune. Vă rugăm să supliniți soldul."
   }
 }

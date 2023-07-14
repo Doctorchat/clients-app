@@ -13,10 +13,12 @@ import Form from "@/components/Form";
 import Input from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import useCurrency from "@/hooks/useCurrency";
+import usePaymentAction from "@/hooks/usePaymentAction";
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import { ConfirmationSection } from "@/modules/client/ClientMeetForm/MeetFormConfirm";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
+import { toggleTopUpModal } from "@/store/slices/userSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const promoInputReplacer = (value) => {
@@ -30,6 +32,7 @@ const promoInputReplacer = (value) => {
 export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
   const { t } = useTranslation();
   const { formatPrice } = useCurrency();
+  const { isReady, isAllowed } = usePaymentAction();
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -64,28 +67,32 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
   );
 
   const onConfirmHandler = React.useCallback(async () => {
-    setLoading(true);
+    if (isAllowed(totalPrice)) {
+      try {
+        setLoading(true);
+        const response = await api.conversation.addMessage({ ...data, code: promocode });
 
-    try {
-      const response = await api.conversation.addMessage({ ...data, code: promocode });
+        if (process.env.NEXT_PUBLIC_API_REGION === "ro") {
+          window.dataLayer?.push({
+            event: "initiate_checkout",
+          });
+        }
 
-      if (process.env.NEXT_PUBLIC_API_REGION === "ro") {
-        window.dataLayer?.push({
-          event: "initiate_checkout",
-        });
+        if (response.data.redirect) {
+          window.location.replace(response.data.redirect);
+        } else {
+          await router.push(`/chat?id=${response.data.chat_id}`);
+        }
+      } catch (error) {
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
+      } finally {
+        setLoading(false);
       }
-
-      if (response.data.redirect) {
-        window.location.replace(response.data.redirect);
-      } else {
-        await router.push(`/chat?id=${response.data.chat_id}`);
-      }
-    } catch (error) {
-      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
-    } finally {
-      setLoading(false);
+    } else {
+      dispatch(notification({ type: "error", title: "error", descrp: "top-up.insufficient_funds" }));
+      dispatch(toggleTopUpModal(true));
     }
-  }, [data, dispatch, promocode, router]);
+  }, [data, dispatch, isAllowed, promocode, router, totalPrice]);
 
   React.useEffect(() => {
     setTotalPrice(data?.price + data?.uploads_price);
@@ -163,7 +170,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                         <Form.Item label={t("message_form_confirmation.code")} name="code">
                           <Input pattern={promoInputReplacer} autoComplete="off" placeholder="WINTER20" />
                         </Form.Item>
-                        <Button htmlType="submit" loading={promoLoading} disabled={!formCodeValue}>
+                        <Button htmlType="submit" loading={promoLoading || isReady === false} disabled={!formCodeValue}>
                           {t("apply")}
                         </Button>
                       </Form>

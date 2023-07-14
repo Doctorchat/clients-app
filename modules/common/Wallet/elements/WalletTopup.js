@@ -66,7 +66,10 @@ const WalletTopup = ({ popupClassName }) => {
         className={popupClassName}
       >
         <Popup.Header title={t("transactions.top_up_form")} />
-        <Popup.Content>
+        <p className="px-3">
+          {t("top-up.minimum_amount", { amount: MINIMUM_AMOUNT[globalCurrency], currency: globalCurrency })}
+        </p>
+        <div className="p-2">
           <Form methods={form} onFinish={onSubmitHandler}>
             <Form.Item label={t("sum") + `(${globalCurrency})`} name="amount">
               <InputNumber />
@@ -81,7 +84,7 @@ const WalletTopup = ({ popupClassName }) => {
               </Button>
             </div>
           </Form>
-        </Popup.Content>
+        </div>
       </Popup>
     </Portal>
   );
