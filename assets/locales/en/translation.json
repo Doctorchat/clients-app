@@ -354,5 +354,12 @@
     "add_template": "Add template",
     "create_template": "Create template"
   },
-  "recaptcha_branding": "This site is protected by reCAPTCHA and the Google <navigation href='https://policies.google.com/privacy'>Privacy Policy</navigation> and <navigation href='https://policies.google.com/terms'> Terms of Service</navigation> apply."
+  "recaptcha_branding": "This site is protected by reCAPTCHA and the Google <navigation href='https://policies.google.com/privacy'>Privacy Policy</navigation> and <navigation href='https://policies.google.com/terms'> Terms of Service</navigation> apply.",
+  "google_calendar": {
+    "authorize": "Authorize Google Calendar",
+    "authorization": "Authorization Google Calendar",
+    "authorized": "Google Calendar is authorized successfully",
+    "unauthorize": "Unauthorize Google Calendar",
+    "unauthorized": "Google Calendar is unauthorized successfully"
+  }
 }
