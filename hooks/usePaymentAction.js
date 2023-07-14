@@ -28,7 +28,7 @@ export default function usePaymentAction() {
 
       return true;
     },
-    [globalCurrency, walletData.data.balance]
+    [globalCurrency, walletData?.data.balance]
   );
 
   return {
