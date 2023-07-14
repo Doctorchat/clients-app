@@ -40,6 +40,7 @@
   "vacation": "Vacation",
   "cancel": "Cancel",
   "apply": "Apply",
+  "supply": "Supply",
   "interval": "Interval",
   "set_vacation": "Set Vacation",
   "cancel_vacation_confirmation": "Are you sure you want to cancel the current interval?",
@@ -361,5 +362,9 @@
     "authorized": "Google Calendar is authorized successfully",
     "unauthorize": "Unauthorize Google Calendar",
     "unauthorized": "Google Calendar is unauthorized successfully"
+  },
+  "top-up": {
+    "minimum_amount": "Minimum top-up amount is {{amount}} {{currency}}",
+    "insufficient_funds": "You don't have enough funds. Please replenish the balance."
   }
 }

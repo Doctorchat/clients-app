@@ -228,6 +228,13 @@ input[type="checkbox"] {
   }
 }
 
+#deposit-popup {
+  .popup-body {
+    height: unset !important;
+    border-radius: 10px !important;
+  }
+}
+
 @media (max-width: 768px) {
   .select-chat {
     display: none !important;
