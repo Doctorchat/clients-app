@@ -1,5 +1,6 @@
 {
   "the.phone.has.already.been.taken.": "Numărul de telefon este deja în uz.",
   "code.is.not.valid": "Codul nu este valid",
-  "the.selected.phone.is.invalid.": "Numarul de telefon este invalid."
+  "the.selected.phone.is.invalid.": "Numarul de telefon este invalid.",
+  "promocode.is.inactive!": "Codul promoțional este inactiv!"
 }

@@ -1,5 +1,6 @@
 {
   "the.phone.has.already.been.taken.": "The phone has already been taken.",
   "code.is.not.valid": "Code is not valid.",
-  "the.selected.phone.is.invalid.": "Phone is invalid."
+  "the.selected.phone.is.invalid.": "Phone is invalid.",
+  "promocode.is.inactive!": "Promocode is inactive!"
 }
