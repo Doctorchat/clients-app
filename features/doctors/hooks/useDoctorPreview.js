@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
 import { notification } from "@/store/slices/notificationsSlice";
 
@@ -18,9 +19,13 @@ const useDoctorPreview = (defaultDoctorPreviewId) => {
         const response = await getDoctor(doctorPreviewId);
 
         if (response?.vacation?.length && response.vacation.every(Boolean)) {
-          dispatch(notification({ type: "error", title: "error", descrp: "doctor_unavailable" }));
-          setDoctorPreviewId(null);
-          return null;
+          const [start, end] = response.vacation.map((date) => dayjs(date, "DD.MM.YYYY").toDate().getTime());
+
+          if (start <= Date.now() && Date.now() <= new Date(end)) {
+            dispatch(notification({ type: "error", title: "error", descrp: "doctor_unavailable" }));
+            setDoctorPreviewId(null);
+            return null;
+          }
         }
 
         return response;
