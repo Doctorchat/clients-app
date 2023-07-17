@@ -76,15 +76,6 @@ export default function DocProfileActions() {
         <Menu.Item
           className="new-icon-style"
           icon={<CalendarDaysIcon />}
-          onClick={user["g-auth"] ? unauthorizeGoogleCalendar : undefined}
-        >
-          {user["g-auth"] ? t("google_calendar.unauthorize") : t("google_calendar.authorize")}
-        </Menu.Item>
-      </Link>
-      <Link href="https://api.doctorchat.md/authorize/start">
-        <Menu.Item
-          className="new-icon-style"
-          icon={<CalendarDaysIcon />}
           loading={isGoogleCalendarAuthorizing}
           onClick={user["g-auth"] ? unauthorizeGoogleCalendar : undefined}
         >
