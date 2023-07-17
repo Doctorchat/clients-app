@@ -10,17 +10,21 @@
   }
 
   .promo-code-form {
-    align-items: flex-end;
+    align-items: stretch;
+    flex-direction: column;
     padding: 15px 0;
-
-    .form-control {
-      width: 100%;
-    }
 
     .form-control-label,
     .form-control-label.is-active {
       color: #000;
       font-weight: 500;
+    }
+
+    .dc-spinner {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
     }
   }
 
