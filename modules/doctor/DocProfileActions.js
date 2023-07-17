@@ -1,12 +1,10 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
 
 import Menu from "@/components/Menu";
 import Switch from "@/components/Switch";
 import { leftSideTabs } from "@/context/TabsKeys";
-import CalendarDaysIcon from "@/icons/calendar-days.svg";
 import CommentLinesIcon from "@/icons/comment-lines.svg";
 import EditIcon from "@/icons/edit.svg";
 import SparklesIcon from "@/icons/sparkles.svg";
@@ -26,7 +24,6 @@ export default function DocProfileActions() {
 
   const [isTextStatusUpdating, setIsTextStatusUpdating] = useState(false);
   const [isVideoStatusUpdating, setIsVideoStatusUpdating] = useState(false);
-  const [isGoogleCalendarAuthorizing, setIsGoogleCalendarAuthorizing] = useState(false);
 
   const updateTextStatus = useCallback(async () => {
     try {
@@ -52,18 +49,6 @@ export default function DocProfileActions() {
     }
   }, [dispatch, user?.video]);
 
-  const unauthorizeGoogleCalendar = useCallback(async () => {
-    try {
-      setIsGoogleCalendarAuthorizing(true);
-      await api.auth.google.cancel();
-      dispatch(updateUserProperty({ prop: "g-auth", value: false }));
-      dispatch(notification({ type: "success", title: "success", descrp: "google_calendar.unauthorized" }));
-    } catch (error) {
-      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
-      setIsGoogleCalendarAuthorizing(false);
-    }
-  }, [dispatch]);
-
   return (
     <Menu>
       <Menu.Item icon={<EditIcon />} onClick={updateTabsConfig(leftSideTabs.editProfile)}>
@@ -72,16 +57,6 @@ export default function DocProfileActions() {
       <Menu.Item className="new-icon-style" icon={<SparklesIcon />} onClick={updateTabsConfig(leftSideTabs.reviews)}>
         {t("reviews")}
       </Menu.Item>
-      <Link href="https://api.doctorchat.md/authorize/start">
-        <Menu.Item
-          className="new-icon-style"
-          icon={<CalendarDaysIcon />}
-          loading={isGoogleCalendarAuthorizing}
-          onClick={user["g-auth"] ? unauthorizeGoogleCalendar : undefined}
-        >
-          {user["g-auth"] ? t("google_calendar.unauthorize") : t("google_calendar.authorize")}
-        </Menu.Item>
-      </Link>
       <Menu.Item className="switch new-icon-style" icon={<CommentLinesIcon />}>
         <Switch
           labelAlign="left"
