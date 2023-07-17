@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 
 import Menu from "@/components/Menu";
 import Switch from "@/components/Switch";
@@ -51,16 +52,6 @@ export default function DocProfileActions() {
     }
   }, [dispatch, user?.video]);
 
-  const authorizeGoogleCalendar = useCallback(async () => {
-    try {
-      setIsGoogleCalendarAuthorizing(true);
-      await api.auth.google.start();
-    } catch (error) {
-      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
-      setIsGoogleCalendarAuthorizing(false);
-    }
-  }, [dispatch]);
-
   const unauthorizeGoogleCalendar = useCallback(async () => {
     try {
       setIsGoogleCalendarAuthorizing(true);
@@ -81,14 +72,16 @@ export default function DocProfileActions() {
       <Menu.Item className="new-icon-style" icon={<SparklesIcon />} onClick={updateTabsConfig(leftSideTabs.reviews)}>
         {t("reviews")}
       </Menu.Item>
-      <Menu.Item
-        className="new-icon-style"
-        icon={<CalendarDaysIcon />}
-        loading={isGoogleCalendarAuthorizing}
-        onClick={user["g-auth"] ? unauthorizeGoogleCalendar : authorizeGoogleCalendar}
-      >
-        {user["g-auth"] ? t("google_calendar.unauthorize") : t("google_calendar.authorize")}
-      </Menu.Item>
+      <Link href="https://api.doctorchat.md/authorize/start">
+        <Menu.Item
+          className="new-icon-style"
+          icon={<CalendarDaysIcon />}
+          loading={isGoogleCalendarAuthorizing}
+          onClick={user["g-auth"] ? unauthorizeGoogleCalendar : undefined}
+        >
+          {user["g-auth"] ? t("google_calendar.unauthorize") : t("google_calendar.authorize")}
+        </Menu.Item>
+      </Link>
       <Menu.Item className="switch new-icon-style" icon={<CommentLinesIcon />}>
         <Switch
           labelAlign="left"
