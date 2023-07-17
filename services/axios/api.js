@@ -3,9 +3,12 @@ import axiosInstance from "./apiConfig";
 const api = {
   auth: {
     google: {
-      start: () => axiosInstance.get("/authorize/start"),
-      verify: (data) => axiosInstance.post("/authorize/verify", data),
-      cancel: () => axiosInstance.post("/authorize/cancel"),
+      verify: (data) => {
+        return axiosInstance({ baseURL: "https://api.doctorchat.md", url: "/authorize/verify", method: "POST", data });
+      },
+      cancel: () => {
+        return axiosInstance({ baseURL: "https://api.doctorchat.md", url: "/authorize/cancel", method: "POST" });
+      },
     },
   },
   user: {
