@@ -69,7 +69,7 @@ export const ConfirmationDialogPromo = ({ totalPrice, promocode, discount, setPr
   return (
     <div className="promo-code-form">
       <label className="form-control-label is-active" htmlFor="code">
-        Промо-код
+        {t("message_form_confirmation.code")}
       </label>
       <div className="position-relative">
         <Input
