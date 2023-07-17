@@ -47,6 +47,14 @@
       }
     }
   }
+
+  &.rounded {
+    border-radius: 10px;
+  }
+
+  &.bordered {
+    border: 1px solid var(--bs-gray-300);
+  }
 }
 
 .menu-item.notify {

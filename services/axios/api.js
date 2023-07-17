@@ -4,10 +4,15 @@ const api = {
   auth: {
     google: {
       verify: (data) => {
-        return axiosInstance({ baseURL: "https://api.doctorchat.md", url: "/authorize/verify", method: "POST", data });
+        return axiosInstance({
+          baseURL: "https://api.doctorchat.md/api",
+          url: "/authorize/verify",
+          method: "POST",
+          data,
+        });
       },
       cancel: () => {
-        return axiosInstance({ baseURL: "https://api.doctorchat.md", url: "/authorize/cancel", method: "POST" });
+        return axiosInstance({ baseURL: "https://api.doctorchat.md/api", url: "/authorize/cancel", method: "POST" });
       },
     },
   },

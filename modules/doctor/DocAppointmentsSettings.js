@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import * as yup from "yup";
 
 import Alert from "@/components/Alert";
@@ -9,16 +10,20 @@ import BackTitle from "@/components/BackTitle";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import { InputNumber } from "@/components/Inputs";
+import Menu from "@/components/Menu";
 import Sidebar from "@/components/Sidebar";
 import { leftSideTabs } from "@/context/TabsKeys";
 import useApiErrorsWithForm from "@/hooks/useApiErrorsWithForm";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
+import CalendarDaysIcon from "@/icons/calendar-days.svg";
+import ExternalLinkIcon from "@/icons/external-link.svg";
 import Tabs, { Line } from "@/packages/Tabs";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import TimePicker from "@/packages/TimePicker";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";
 import { updateUserProperty } from "@/store/slices/userSlice";
+import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 import DocAppointmentsList from "./DocAppointmentsList";
 import DocAppointmentsSlots from "./DocAppointmentsSlots";
@@ -47,7 +52,11 @@ export default function DocAppointmentsSettings() {
   const { updateTabsConfig } = useTabsContext();
   const { t } = useTranslation();
 
+  const user = useSelector((store) => store.user.data);
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
+  const [isGoogleCalendarAuthorizing, setIsGoogleCalendarAuthorizing] = useState(false);
 
   const dispatch = useDispatch();
   const resolver = useYupValidationResolver(schema);
@@ -80,6 +89,30 @@ export default function DocAppointmentsSettings() {
     []
   );
 
+  const unauthorizeGoogleCalendar = useCallback(async () => {
+    try {
+      setIsGoogleCalendarAuthorizing(true);
+      await api.auth.google.cancel();
+      dispatch(updateUserProperty({ prop: "g-auth", value: false }));
+      dispatch(notification({ type: "success", title: "success", descrp: "google_calendar.unauthorized" }));
+    } catch (error) {
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
+    } finally {
+      setIsGoogleCalendarAuthorizing(false);
+    }
+  }, [dispatch]);
+
+  const authorizeGoogleCalendar = useCallback(async () => {
+    try {
+      setIsGoogleCalendarAuthorizing(true);
+      await router.push("https://api.doctorchat.md/authorize/start");
+    } catch (error) {
+      dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
+    } finally {
+      setIsGoogleCalendarAuthorizing(false);
+    }
+  }, [dispatch, router]);
+
   return (
     <Sidebar>
       <Sidebar.Header>
@@ -99,7 +132,24 @@ export default function DocAppointmentsSettings() {
           >
             <Tabs.Pane dataKey={appointmentsTabs.settings} unmountOnExit={false} withAnimation={!loading}>
               <div className="profile-appointments-box mt-3 px-1">
-                <Alert className="mb-4 mt-1" type="info" message={t("appintments_warning")} />
+                <Menu.Item
+                  className="new-icon-style rounded bordered"
+                  icon={<CalendarDaysIcon />}
+                  loading={isGoogleCalendarAuthorizing}
+                  onClick={user["g-auth"] ? unauthorizeGoogleCalendar : authorizeGoogleCalendar}
+                >
+                  <div className="d-flex align-items-center justify-content-between flex-grow-1">
+                    {user["g-auth"] ? t("google_calendar.unauthorize") : t("google_calendar.authorize")}
+                    <ExternalLinkIcon
+                      style={{
+                        color: "var(--bs-gray-600)",
+                        width: "16px",
+                      }}
+                    />
+                  </div>
+                </Menu.Item>
+
+                <Alert className="mb-4 mt-3" type="info" message={t("appintments_warning")} />
                 <Form
                   className="pb-3"
                   methods={form}
