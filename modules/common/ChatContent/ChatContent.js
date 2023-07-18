@@ -131,6 +131,7 @@ export default function ChatContent(props) {
           isAccepted={isAccepted}
           isMeet={isMeet}
           userInfo={userInfo}
+          hasExpiredMessage={messages?.some((msg) => msg.type === "expired")}
         />
       </Sidebar.Footer>
     </Sidebar>
