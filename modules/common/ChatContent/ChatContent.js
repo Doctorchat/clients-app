@@ -13,8 +13,6 @@ import EllipsisIcon from "@/icons/ellipsis-v.svg";
 import { readChatMessages } from "@/store/actions";
 import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
-import { meetFormToggleVisibility, meetFormUpdateChatId } from "@/store/slices/meetFormSlice";
-import { messageFormToggleVisibility, messageFormUpdateChatId } from "@/store/slices/messageFormSlice";
 import cs from "@/utils/classNames";
 import date from "@/utils/date";
 
@@ -62,16 +60,6 @@ export default function ChatContent(props) {
       dispatch(chatContentToggleInfoVisibility({ visible: true, animate: true }));
     }
   }, [dispatch, type]);
-
-  const openMessageFormPopup = useCallback(() => {
-    if (!isMeet) {
-      dispatch(messageFormToggleVisibility(true));
-      dispatch(messageFormUpdateChatId({ id: chatId, type }));
-    } else {
-      dispatch(meetFormToggleVisibility(true));
-      dispatch(meetFormUpdateChatId(chatId));
-    }
-  }, [chatId, dispatch, isMeet, type]);
 
   const onBack = useCallback(() => router.push("/home"), [router]);
 
@@ -135,13 +123,14 @@ export default function ChatContent(props) {
       </Sidebar.Body>
       <Sidebar.Footer className="chat-content-footer">
         <ChatContentFooter
-          openMessageFormPopup={openMessageFormPopup}
           status={status}
           chatId={chatId}
           paymentUrl={paymentUrl}
           price={price}
           type={type}
           isAccepted={isAccepted}
+          isMeet={isMeet}
+          userInfo={userInfo}
         />
       </Sidebar.Footer>
     </Sidebar>

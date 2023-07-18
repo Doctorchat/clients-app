@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
@@ -12,10 +13,20 @@ import ChatContentAccept from "./ChatContentAccept";
 import ChatContentPayment from "./ChatContentPayment";
 
 export default function ChatContentFooter(props) {
+  const router = useRouter();
   const user = useSelector((store) => store.user);
 
-  const { openMessageFormPopup, status, chatId, paymentUrl, price, type, isAccepted } = props;
+  const { status, chatId, paymentUrl, price, type, isAccepted, isMeet, userInfo } = props;
   const { t } = useTranslation();
+
+  const redirectToRegistrationFlow = React.useCallback(() => {
+    const messageType = isMeet ? "meet" : "standard";
+    const url = `/registration-flow/message/${chatId}?chatType=${type}&messageType=${messageType}&doctorId=${
+      userInfo?.id ?? "auto"
+    }`;
+
+    router.push(url);
+  }, [chatId, isMeet, router, type, userInfo?.id]);
 
   const isChatContentAcceptVisible = React.useMemo(() => {
     if (status && ["initied", "unpaid", "closed"].includes(status)) return false;
@@ -36,7 +47,7 @@ export default function ChatContentFooter(props) {
     <>
       <AuthRoleWrapper extraValidation={status && status === "initied"} roles={[userRoles.get("client")]}>
         <div className="chat-content-start w-100 d-flex justify-content-center">
-          <Button type="text" onClick={openMessageFormPopup}>
+          <Button type="text" onClick={redirectToRegistrationFlow}>
             {t("start_conversation")}
           </Button>
         </div>
@@ -56,7 +67,6 @@ export default function ChatContentFooter(props) {
 }
 
 ChatContentFooter.propTypes = {
-  openMessageFormPopup: PropTypes.func,
   isInitiated: PropTypes.bool,
   chatId: PropTypes.string,
   status: PropTypes.string,
@@ -64,6 +74,8 @@ ChatContentFooter.propTypes = {
   price: PropTypes.number,
   type: PropTypes.string,
   isAccepted: PropTypes.bool,
+  isMeet: PropTypes.bool,
+  userInfo: PropTypes.object,
 };
 
 ChatContentFooter.defaultProps = {};
