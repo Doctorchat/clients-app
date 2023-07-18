@@ -332,6 +332,7 @@
     "title": "Consultații repetate",
     "description": "Oferiți reducere la consultații repetate?",
     "note": "Reducerea se oferă automat la închiderea conversației.",
+    "warning": "Procentul reducerii acordate de medic determină suma finală pe care pacientul va trebui să o plătească pentru consultație.",
     "duration": "Valabilitate (zile)",
     "discount": "Reducere (%)"
   },

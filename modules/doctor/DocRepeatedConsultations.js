@@ -86,6 +86,7 @@ export default function DocRepeatedConsultations() {
       <div className="px-4 pt-3">
         <h6>{t("repeated_consultations.description")}</h6>
         <p className="text-muted">{t("repeated_consultations.note")}</p>
+        <p className="text-muted">{t("repeated_consultations.warning")}</p>
         <Form methods={form} onFinish={onSubmit}>
           <Form.Item className="w-50" name="offer_discount">
             <Select
