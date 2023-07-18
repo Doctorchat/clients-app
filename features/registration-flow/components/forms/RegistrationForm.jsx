@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import Link from "next/link";
 import PropTypes from "prop-types";
+import { useEffectOnce } from "usehooks-ts";
 import { object, string } from "yup";
 
 import Button from "@/components/Button";
@@ -52,16 +53,23 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
 
   const onSubmit = React.useCallback(
     async (values) => {
+      const params = new URLSearchParams(window.location.search);
       const data = { ...values };
 
       data.role = 3;
       data.locale = getActiveLng();
       data.re_token = await getRecaptchaToken();
 
+      if (params.has("referrer_id") || localStorage.getItem("referrer_id")) {
+        data.referrer_id = params.get("referrer_id") || localStorage.getItem("referrer_id");
+      }
+
       try {
         setIsLoading(true);
         const response = await dispatch(registerUser(data));
+
         updateStepStatus(response.user);
+        localStorage.removeItem("referrer_id");
       } catch (error) {
         setFormApiErrors(error);
       } finally {
@@ -70,6 +78,14 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
     },
     [dispatch, getRecaptchaToken, setFormApiErrors, updateStepStatus]
   );
+
+  useEffectOnce(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has("referrer_id")) {
+      localStorage.setItem("referrer_id", params.get("referrer_id"));
+    }
+  });
 
   return (
     <>
