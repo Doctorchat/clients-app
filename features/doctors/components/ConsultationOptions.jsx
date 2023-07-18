@@ -12,12 +12,12 @@ const VIDEO = "video";
 const ONE_MINUTE = 60 * 1000;
 
 const selectDefaultOption = (isChatAvailable, isVideoAvailable) => {
-  if (isChatAvailable) {
-    return CHAT;
-  }
-
   if (isVideoAvailable) {
     return VIDEO;
+  }
+
+  if (isChatAvailable) {
+    return CHAT;
   }
 
   return null;
