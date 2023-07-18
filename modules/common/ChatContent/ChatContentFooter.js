@@ -16,17 +16,20 @@ export default function ChatContentFooter(props) {
   const router = useRouter();
   const user = useSelector((store) => store.user);
 
-  const { status, chatId, paymentUrl, price, type, isAccepted, isMeet, userInfo } = props;
+  const { status, chatId, paymentUrl, price, type, isAccepted, isMeet, userInfo, hasExpiredMessage } = props;
   const { t } = useTranslation();
 
-  const redirectToRegistrationFlow = React.useCallback(() => {
-    const messageType = isMeet ? "meet" : "standard";
-    const url = `/registration-flow/message/${chatId}?chatType=${type}&messageType=${messageType}&doctorId=${
-      userInfo?.id ?? "auto"
-    }`;
+  const redirectToRegistrationFlow = React.useCallback(
+    (forcedMeet = false) => {
+      const messageType = forcedMeet ? "meet" : isMeet ? "meet" : "standard";
+      const url = `/registration-flow/message/${chatId}?chatType=${type}&messageType=${messageType}&doctorId=${
+        userInfo?.id ?? "auto"
+      }`;
 
-    router.push(url);
-  }, [chatId, isMeet, router, type, userInfo?.id]);
+      router.push(url);
+    },
+    [chatId, isMeet, router, type, userInfo?.id]
+  );
 
   const isChatContentAcceptVisible = React.useMemo(() => {
     if (status && ["initied", "unpaid", "closed"].includes(status)) return false;
@@ -53,7 +56,18 @@ export default function ChatContentFooter(props) {
         </div>
       </AuthRoleWrapper>
 
-      <AuthRoleWrapper extraValidation={status && status === "unpaid"} roles={[userRoles.get("client")]}>
+      <AuthRoleWrapper extraValidation={hasExpiredMessage} roles={[userRoles.get("client")]}>
+        <div className="chat-content-start w-100 d-flex justify-content-center">
+          <Button type="text" onClick={() => redirectToRegistrationFlow(true)}>
+            {t("repeated_reservation")}
+          </Button>
+        </div>
+      </AuthRoleWrapper>
+
+      <AuthRoleWrapper
+        extraValidation={hasExpiredMessage === false && status && status === "unpaid"}
+        roles={[userRoles.get("client")]}
+      >
         <ChatContentPayment paymentUrl={paymentUrl} price={price} />
       </AuthRoleWrapper>
 
@@ -76,6 +90,7 @@ ChatContentFooter.propTypes = {
   isAccepted: PropTypes.bool,
   isMeet: PropTypes.bool,
   userInfo: PropTypes.object,
+  hasExpiredMessage: PropTypes.bool,
 };
 
 ChatContentFooter.defaultProps = {};

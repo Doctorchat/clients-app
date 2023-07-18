@@ -111,6 +111,7 @@
   "online": "В сети",
   "offline": "Не в сети",
   "start_conversation": "Начать Беседу",
+  "repeated_reservation": "Повторное бронирование",
   "pay": "Оплатить",
   "message_form_title": "Форма отправки сообщения",
   "message_from_info": {
