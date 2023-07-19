@@ -4,10 +4,12 @@ import { getChatContent, readChatMessages } from "../actions";
 
 const initialState = {
   isLoading: false,
+  isLoaded: false,
   infoVisible: { visible: false, animate: true },
   content: {},
   cache: [],
   isError: false,
+  prevChatId: null,
 };
 
 const cacheHandler = (state, payload) => {
@@ -55,11 +57,14 @@ export const chatContentSlice = createSlice({
 
         state.isError = false;
         state.isLoading = true;
+        state.isLoaded = state.prevChatId === action.meta.arg;
         state.content = cachedChat(state.cache, action.meta.arg);
+        state.prevChatId = action.meta.arg;
       })
       .addCase(getChatContent.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
+        state.isLoaded = true;
         state.content = action.payload;
 
         cacheHandler(state, action.payload);
@@ -67,6 +72,7 @@ export const chatContentSlice = createSlice({
       .addCase(getChatContent.rejected, (state) => {
         state.isError = true;
         state.isLoading = false;
+        state.isLoaded = false;
         state.content = {};
       })
       .addCase(readChatMessages.fulfilled, (state) => {
