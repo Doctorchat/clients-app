@@ -14,6 +14,7 @@ import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 
 import ConversationsSidebar from "../ConversationsSidebar";
 import EditProflie from "../EditProfile";
+import Partners from "../Partners";
 import ProfileSidebar from "../ProfileSidebar";
 import Wallet, { WalletTopup, WalletTopupNotification } from "../Wallet";
 
@@ -60,6 +61,9 @@ export default function LeftSide() {
         <Tabs.Pane dataKey={leftSideTabs.wallet}>
           <Wallet />
         </Tabs.Pane>
+        <Tabs.Pane dataKey={leftSideTabs.partners}>
+          <Partners />
+        </Tabs.Pane>
         <Tabs.Pane dataKey={leftSideTabs.editProfile}>
           <EditProflie />
         </Tabs.Pane>
@@ -94,11 +98,9 @@ export default function LeftSide() {
       >
         <div className="start-conversation-btn">
           <Link href="/registration-flow/select-doctor">
-
             <Button icon={<PlusIcon />} type="primary">
               {t("start_conversation")}
             </Button>
-
           </Link>
         </div>
       </AuthRoleWrapper>

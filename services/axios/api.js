@@ -126,6 +126,9 @@ const api = {
         data: { id, doctor_id },
       }),
   },
+  partners: {
+    get: () => axiosInstance.get("/user/partners"),
+  },
 };
 
 export default api;

@@ -61,18 +61,15 @@ WalletTransactionItem.propTypes = {
   type: PropTypes.string,
   status: PropTypes.string,
   created_at: PropTypes.string,
+  currency: PropTypes.string,
 };
 
 const WalletTransactions = () => {
   const { t } = useTranslation();
 
-  const { data: walletTransactions, isLoading } = useQuery(
-    ["wallet-transactions"],
-    () => api.wallet.transactions(),
-    {
-      keepPreviousData: true,
-    }
-  );
+  const { data: walletTransactions, isLoading } = useQuery(["wallet-transactions"], () => api.wallet.transactions(), {
+    keepPreviousData: true,
+  });
 
   if (isLoading) {
     return (

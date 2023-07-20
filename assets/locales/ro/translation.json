@@ -369,5 +369,18 @@
   "top-up": {
     "minimum_amount": "Suma minimă de suplinire este {{amount}} {{currency}}",
     "insufficient_funds": "Nu aveți suficiente fonduri pentru a efectua această acțiune. Vă rugăm să supliniți soldul."
+  },
+  "partners": {
+    "title": "Parteneri",
+    "bonus_balance": "Sold bonus",
+    "active_referrals": "Referali activi",
+    "discount_percent": "Reducere",
+    "copy_referral_link": "Copiază linkul la referal",
+    "copied": "Copiat",
+    "copied_description": "Linkul a fost copiat cu succes",
+    "referrals": "Referali",
+    "transactions": "Tranzacții",
+    "download_qr": "Descarcă QR",
+    "empty": "Lista partenerilor va apărea aici"
   }
 }
