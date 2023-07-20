@@ -61,7 +61,7 @@ const PartnersTransactions = () => {
     );
   }
 
-  const { transactions } = partnersData.data;
+  const { transactions, currency } = partnersData.data;
 
   if (!transactions?.data?.length) {
     return <EmptyBox className="mt-5" content={t("transactions.empty")} />;
@@ -71,7 +71,7 @@ const PartnersTransactions = () => {
     <div className="partners-transactions">
       <div className="partners-transactions__body">
         {transactions.data?.map((transaction) => (
-          <TransactionItem key={transaction.id} {...transaction} />
+          <TransactionItem key={transaction.id} {...transaction} currency={currency} />
         ))}
       </div>
     </div>

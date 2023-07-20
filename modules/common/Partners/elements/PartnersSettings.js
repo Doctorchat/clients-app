@@ -34,7 +34,17 @@ const PartnersSettings = () => {
     <div className="partners-settings d-flex justify-content-between flex-column">
       <div className="partners-settings__qr">
         <img src={partner_qr} alt="qr" />
-        <Button size="sm">{t("partners.download_qr")}</Button>
+        <Button
+          size="sm"
+          onClick={() => {
+            const link = document.createElement("a");
+            link.href = partner_qr;
+            link.download = "qr.png";
+            link.click();
+          }}
+        >
+          {t("partners.download_qr")}
+        </Button>
       </div>
 
       <div className="d-flex align-items-center justify-content-center mt-3">
