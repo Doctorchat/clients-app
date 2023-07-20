@@ -366,5 +366,18 @@
   "top-up": {
     "minimum_amount": "Minimum top-up amount is {{amount}} {{currency}}",
     "insufficient_funds": "You don't have enough funds. Please replenish the balance."
+  },
+  "partners": {
+    "title": "Partners",
+    "bonus_balance": "Bonus balance",
+    "active_referrals": "Active referrals",
+    "discount_percent": "Discount",
+    "copy_referral_link": "Copy referral link",
+    "copied": "Copied",
+    "copied_description": "Link copied successfully",
+    "referrals": "Referrals",
+    "transactions": "Transactions",
+    "download_qr": "Download QR",
+    "empty": "The list of partners will appear here"
   }
 }

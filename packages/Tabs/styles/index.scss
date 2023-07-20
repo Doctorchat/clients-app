@@ -30,6 +30,7 @@
   justify-content: flex-start;
   position: relative;
   border-bottom: 2px solid var(--bs-gray-200);
+  flex: 1;
 }
 
 .tabs-line .tabs-line-item:not(:last-of-type) {

@@ -365,5 +365,18 @@
   "top-up": {
     "minimum_amount": "Минимальная сумма пополнения {{amount}} {{currency}}",
     "insufficient_funds": "У вас недостаточно средств. Пожалуйста пополните баланс."
+  },
+  "partners": {
+    "title": "Партнеры",
+    "bonus_balance": "Бонусный баланс",
+    "active_referrals": "Активные рефералы",
+    "discount_percent": "Скидка",
+    "copy_referral_link": "Скопировать ссылку на реферал",
+    "copied": "Скопировано",
+    "copied_description": "Ссылка успешно скопирована",
+    "referrals": "Рефералы",
+    "transactions": "Транзакции",
+    "download_qr": "Скачать QR",
+    "empty": "Список партнеров появится здесь"
   }
 }
