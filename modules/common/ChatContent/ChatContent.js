@@ -111,7 +111,14 @@ export default function ChatContent(props) {
         </div>
         <div className="header-actions">
           {isMeet && messages?.some((msg) => msg.type === "expired") === false && (
-            <IconBtn className="meet-phone-icon" onClick={onBack} icon={<PhoneIcon />} />
+            <IconBtn
+              className="meet-phone-icon"
+              onClick={() => {
+                const url = messages?.find((msg) => msg.type === "meet")?.meet?.url;
+                if (url) router.push(url);
+              }}
+              icon={<PhoneIcon />}
+            />
           )}
           <IconBtn icon={<EllipsisIcon />} className="open-info" onClick={openChatInfo} />
         </div>
