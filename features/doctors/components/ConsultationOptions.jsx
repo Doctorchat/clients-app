@@ -120,21 +120,21 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
     <>
       <section className="consultation-options">
         <ConsultationOption
-          title={t("wizard:chat_consultation")}
-          price={price}
-          available_discount={doctor.available_discount}
-          selected={isSelected(CHAT)}
-          onClick={handleOptionClick(CHAT)}
-          disabled={isDisabled(CHAT)}
-        />
-
-        <ConsultationOption
           title={t("video_appointment")}
           price={meet_price}
           available_discount={doctor.available_discount}
           selected={isSelected(VIDEO)}
           onClick={handleOptionClick(VIDEO)}
           disabled={isDisabled(VIDEO)}
+        />
+
+        <ConsultationOption
+          title={t("wizard:chat_consultation")}
+          price={price}
+          available_discount={doctor.available_discount}
+          selected={isSelected(CHAT)}
+          onClick={handleOptionClick(CHAT)}
+          disabled={isDisabled(CHAT)}
         />
 
         <Button onClick={handleStartButtonClick} loading={isButtonLoading}>
