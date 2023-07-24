@@ -56,9 +56,9 @@ export default function ChatContentFooter(props) {
         </div>
       </AuthRoleWrapper>
 
-      <AuthRoleWrapper extraValidation={hasExpiredMessage} roles={[userRoles.get("client")]}>
+      <AuthRoleWrapper extraValidation={userInfo?.id && hasExpiredMessage} roles={[userRoles.get("client")]}>
         <div className="chat-content-start w-100 d-flex justify-content-center">
-          <Button type="text" onClick={() => redirectToRegistrationFlow(true)}>
+          <Button type="text" onClick={() => router.push(`/registration-flow/select-doctor?doctor_id=${userInfo?.id}`)}>
             {t("repeated_reservation")}
           </Button>
         </div>
