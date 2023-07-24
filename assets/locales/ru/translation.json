@@ -44,6 +44,7 @@
   "interval": "Интервал",
   "set_vacation": "Установить отпуск",
   "cancel_vacation_confirmation": "Вы уверены, что хотите отменить текущий интервал?",
+  "cancel_vacation": "Отменить отпуск",
   "confirm": "Подтверждаю",
   "error": "Ошибка",
   "default_error_message": "Произошла ошибка",
