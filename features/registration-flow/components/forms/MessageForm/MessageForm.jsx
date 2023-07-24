@@ -20,6 +20,7 @@ import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-png.svg";
 import { messageUploadFile } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
+import cs from "@/utils/classNames";
 
 import { ConfirmationDialog } from "./ConfirmationDialog";
 import { TimeSelection } from "./TimeSelection";
@@ -50,7 +51,7 @@ export const MessageForm = () => {
 
   const [doctor, setDoctor] = React.useState(0);
   const [messageType, setMessageType] = React.useState("");
-  const [attachments, setAttachments] = React.useState({ list: [], price: 0, initiated: false });
+  const [attachments, setAttachments] = React.useState({ list: [], price: 0, discountedPrice: 0, initiated: false });
   const [isLoading, setIsLoading] = React.useState(true);
   const [confirmationData, setConfirmationData] = React.useState(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] = React.useState(false);
@@ -65,12 +66,17 @@ export const MessageForm = () => {
       price = doctor.meet_price || 0;
     }
 
+    return price;
+  }, [doctor.meet_price, doctor.price, messageType]);
+  const discountedDoctorPrice = React.useMemo(() => {
+    let price = doctorPrice;
+
     if (doctor?.available_discount?.discount) {
       price = price - price * (doctor.available_discount.discount / 100);
     }
 
     return price;
-  }, [doctor?.available_discount?.discount, doctor?.meet_price, doctor?.price, messageType]);
+  }, [doctor?.available_discount?.discount, doctorPrice]);
 
   useEffect(() => {
     if (!attachments.initiated && global?.attach && persistedValues?.uploads?.list) {
@@ -101,26 +107,46 @@ export const MessageForm = () => {
       data.chat_id = Number(router.query.chatId);
       data.uploads_count = attachments.list.length;
       data.uploads_price = attachments.list.length * global.attach;
-      data.price = doctorPrice;
+      data.price = discountedDoctorPrice || doctorPrice;
       data.type = MESSAGE_TYPES.standard;
       data.isMeet = messageType === MESSAGE_TYPES.meet;
       data.uploads = attachments.list.map(({ file_id }) => file_id);
+
+      if (doctor?.available_discount?.discount) {
+        const discountedGlobalAttach = global.attach - global.attach * (doctor.available_discount.discount / 100);
+        data.uploads_price = attachments.list.length * discountedGlobalAttach;
+      }
 
       setConfirmationData(data);
       setConfirmationDialogVisible(true);
       resetPersistedValues();
     },
-    [attachments.list, dispatch, doctorPrice, global.attach, messageType, resetPersistedValues, router.query.chatId]
+    [
+      attachments.list,
+      discountedDoctorPrice,
+      dispatch,
+      doctor?.available_discount?.discount,
+      doctorPrice,
+      global.attach,
+      messageType,
+      resetPersistedValues,
+      router.query.chatId,
+    ]
   );
 
   const setFileList = React.useCallback(
     (fileList) => {
       const newAttachments = { list: fileList, price: fileList.length * global.attach };
 
+      if (doctor?.available_discount?.discount) {
+        const discountedGlobalAttach = global.attach - global.attach * (doctor.available_discount.discount / 100);
+        newAttachments.discountedPrice = fileList.length * discountedGlobalAttach;
+      }
+
       setAttachments({ ...newAttachments, initiated: true });
       setPersistedValues({ uploads: newAttachments });
     },
-    [global?.attach, setPersistedValues]
+    [doctor?.available_discount?.discount, global.attach, setPersistedValues]
   );
 
   const onCloseConfirmationDialog = React.useCallback(() => {
@@ -204,10 +230,15 @@ export const MessageForm = () => {
             />
           </Form.Item>
           <div className="form-bottom">
-            <div className="message-form__total">
+            <div className={cs("message-form__total", discountedDoctorPrice !== doctorPrice && "has-discount")}>
               <span>{t("wizard:total")}:</span>
-              <span>
-                <strong>{formatPrice(doctorPrice + attachments.price)}</strong>
+              <span className="d-flex align-items-center">
+                <strong className="actual">{formatPrice(doctorPrice + attachments.price)}</strong>
+                {discountedDoctorPrice !== doctorPrice && (
+                  <strong className="discounted">
+                    {formatPrice(discountedDoctorPrice + attachments.discountedPrice)}
+                  </strong>
+                )}
               </span>
             </div>
             <Button htmlType="submit">{t("continue")}</Button>

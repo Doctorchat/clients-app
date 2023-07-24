@@ -41,6 +41,7 @@ export default function ColumnCenter() {
     <>
       <ChatContent
         loading={chatContent.isLoading}
+        loaded={chatContent.isLoaded}
         userInfo={chatUserInfo.data}
         messages={chatContent.content?.messages || []}
         status={chatContent.content?.status}

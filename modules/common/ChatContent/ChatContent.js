@@ -24,7 +24,7 @@ import ChatContentFooter from "./ChatContentFooter";
 const withoutInfo = ["support", "auto", "consilium", "internal"];
 
 export default function ChatContent(props) {
-  const { loading, userInfo, messages, chatId, status, type, paymentUrl, price, isMeet, isAccepted } = props;
+  const { loading, loaded, userInfo, messages, chatId, status, type, paymentUrl, price, isMeet, isAccepted } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -121,24 +121,27 @@ export default function ChatContent(props) {
           </div>
         </div>
       </Sidebar.Body>
-      <Sidebar.Footer className="chat-content-footer">
-        <ChatContentFooter
-          status={status}
-          chatId={chatId}
-          paymentUrl={paymentUrl}
-          price={price}
-          type={type}
-          isAccepted={isAccepted}
-          isMeet={isMeet}
-          userInfo={userInfo}
-        />
-      </Sidebar.Footer>
+      {loaded && (
+        <Sidebar.Footer className="chat-content-footer">
+          <ChatContentFooter
+            status={status}
+            chatId={chatId}
+            paymentUrl={paymentUrl}
+            price={price}
+            type={type}
+            isAccepted={isAccepted}
+            isMeet={isMeet}
+            userInfo={userInfo}
+          />
+        </Sidebar.Footer>
+      )}
     </Sidebar>
   );
 }
 
 ChatContent.propTypes = {
   loading: PropTypes.bool,
+  loaded: PropTypes.bool,
   userInfo: PropTypes.object,
   messages: PropTypes.array,
   chatId: PropTypes.string,
