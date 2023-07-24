@@ -180,42 +180,43 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
               </tbody>
             </table>
           </div>
-
-          <div className="confirmation-terms mb-4">
-            <Checkbox
-              name="terms"
-              value={areTermsAccepted}
-              onChange={() => onChangeAreTermsccepted(!areTermsAccepted)}
-              label={
-                <>
-                  {t("accept_terms")}{" "}
-                  <a
-                    href={`${HOME_PAGE_URL}termeni-si-conditii/`}
-                    rel="noreferrer noopener"
-                    target="_blank"
-                    className="terms"
-                  >
-                    {t("terms_conditions")}
-                  </a>
-                </>
-              }
-            />
-            <div className="confirmation-terms__to-pay">
-              <span>{t("to_pay")}:</span>
-              <span className="ms-1">{`${formatPrice(totalPrice - discount)}`}</span>
-              {promocode && <del className="ms-1">{`(${formatPrice(totalPrice)})`}</del>}
-            </div>
-          </div>
-          <div className="confirmation-actions">
-            <Button type="outline" onClick={onClosePopup}>
-              {t("back")}
-            </Button>
-            <Button disabled={!areTermsAccepted} loading={loading} onClick={onConfirmHandler}>
-              {t("message_form_confirmation.confirm")}
-            </Button>
-          </div>
         </div>
       )}
+      <div className="confirmation-footer">
+        <div className="confirmation-terms">
+          <Checkbox
+            name="terms"
+            value={areTermsAccepted}
+            onChange={() => onChangeAreTermsccepted(!areTermsAccepted)}
+            label={
+              <>
+                {t("accept_terms")}{" "}
+                <a
+                  href={`${HOME_PAGE_URL}termeni-si-conditii/`}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className="terms"
+                >
+                  {t("terms_conditions")}
+                </a>
+              </>
+            }
+          />
+          <div className="confirmation-terms__to-pay">
+            <span>{t("to_pay")}:</span>
+            <span className="ms-1">{`${formatPrice(totalPrice - discount)}`}</span>
+            {promocode && <del className="ms-1">{`(${formatPrice(totalPrice)})`}</del>}
+          </div>
+        </div>
+        <div className="confirmation-actions">
+          <Button type="outline" onClick={onClosePopup}>
+            {t("back")}
+          </Button>
+          <Button disabled={!areTermsAccepted} loading={loading} onClick={onConfirmHandler}>
+            {t("message_form_confirmation.confirm")}
+          </Button>
+        </div>
+      </div>
     </Popup>
   );
 };
