@@ -104,7 +104,7 @@ export default function Message(props) {
   return (
     <div className={cs("message-container", side)}>
       <div className={cs("message", side, type, !seen && "new")}>
-        <AuthRoleWrapper extraValidation={side === "out"} roles={[userRoles.get("doctor")]}>
+        <AuthRoleWrapper extraValidation={side === "out" && status === "open"} roles={[userRoles.get("doctor")]}>
           <IconBtn
             className="message-edit-icon"
             icon={<EditIcon />}
