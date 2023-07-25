@@ -65,7 +65,7 @@ const PartnersReferrals = () => {
 
   const { referrals } = partnersData.data;
 
-  if (!referrals?.data?.length) {
+  if (!referrals?.length) {
     return <EmptyBox className="mt-5" content={t("partners.empty")} />;
   }
 
