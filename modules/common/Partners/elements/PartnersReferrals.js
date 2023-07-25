@@ -72,7 +72,7 @@ const PartnersReferrals = () => {
   return (
     <div className="partners-referrals">
       <div className="partners-referrals__body">
-        {referrals.data?.map((referral) => (
+        {referrals?.map((referral) => (
           <ReferralItem key={referral.id} {...referral} />
         ))}
       </div>
