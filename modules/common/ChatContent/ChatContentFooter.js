@@ -19,17 +19,14 @@ export default function ChatContentFooter(props) {
   const { status, chatId, paymentUrl, price, type, isAccepted, isMeet, userInfo, hasExpiredMessage } = props;
   const { t } = useTranslation();
 
-  const redirectToRegistrationFlow = React.useCallback(
-    (forcedMeet = false) => {
-      const messageType = forcedMeet ? "meet" : isMeet ? "meet" : "standard";
-      const url = `/registration-flow/message/${chatId}?chatType=${type}&messageType=${messageType}&doctorId=${
-        userInfo?.id ?? "auto"
-      }`;
+  const redirectToRegistrationFlow = React.useCallback(() => {
+    const messageType = isMeet ? "meet" : "standard";
+    const url = `/registration-flow/message/${chatId}?chatType=${type}&messageType=${messageType}&doctorId=${
+      userInfo?.id ?? "auto"
+    }`;
 
-      router.push(url);
-    },
-    [chatId, isMeet, router, type, userInfo?.id]
-  );
+    router.push(url);
+  }, [chatId, isMeet, router, type, userInfo?.id]);
 
   const isChatContentAcceptVisible = React.useMemo(() => {
     if (status && ["initied", "unpaid", "closed"].includes(status)) return false;
