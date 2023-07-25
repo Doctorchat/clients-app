@@ -16,7 +16,7 @@ export default function ChatContentFooter(props) {
   const router = useRouter();
   const user = useSelector((store) => store.user);
 
-  const { status, chatId, paymentUrl, price, type, isAccepted, isMeet, userInfo } = props;
+  const { status, chatId, paymentUrl, price, type, isAccepted, isMeet, userInfo, hasExpiredMessage } = props;
   const { t } = useTranslation();
 
   const redirectToRegistrationFlow = React.useCallback(() => {
@@ -53,7 +53,18 @@ export default function ChatContentFooter(props) {
         </div>
       </AuthRoleWrapper>
 
-      <AuthRoleWrapper extraValidation={status && status === "unpaid"} roles={[userRoles.get("client")]}>
+      <AuthRoleWrapper extraValidation={userInfo?.id && hasExpiredMessage} roles={[userRoles.get("client")]}>
+        <div className="chat-content-start w-100 d-flex justify-content-center">
+          <Button type="text" onClick={() => router.push(`/registration-flow/select-doctor?doctor_id=${userInfo?.id}`)}>
+            {t("repeated_reservation")}
+          </Button>
+        </div>
+      </AuthRoleWrapper>
+
+      <AuthRoleWrapper
+        extraValidation={hasExpiredMessage === false && status && status === "unpaid"}
+        roles={[userRoles.get("client")]}
+      >
         <ChatContentPayment paymentUrl={paymentUrl} price={price} />
       </AuthRoleWrapper>
 
@@ -76,6 +87,7 @@ ChatContentFooter.propTypes = {
   isAccepted: PropTypes.bool,
   isMeet: PropTypes.bool,
   userInfo: PropTypes.object,
+  hasExpiredMessage: PropTypes.bool,
 };
 
 ChatContentFooter.defaultProps = {};
