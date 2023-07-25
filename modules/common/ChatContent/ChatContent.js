@@ -10,6 +10,7 @@ import Sidebar from "@/components/Sidebar";
 import { Bar } from "@/components/Spinner";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
 import EllipsisIcon from "@/icons/ellipsis-v.svg";
+import PhoneIcon from "@/icons/phone.svg";
 import { readChatMessages } from "@/store/actions";
 import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
@@ -109,7 +110,17 @@ export default function ChatContent(props) {
           </div>
         </div>
         <div className="header-actions">
-          <IconBtn icon={<EllipsisIcon />} className="open-info" size="sm" onClick={openChatInfo} />
+          {isMeet && messages?.some((msg) => msg.type === "expired") === false && (
+            <IconBtn
+              className="meet-phone-icon"
+              onClick={() => {
+                const url = messages?.find((msg) => msg.type === "meet")?.meet?.url;
+                if (url) router.push(url);
+              }}
+              icon={<PhoneIcon />}
+            />
+          )}
+          <IconBtn icon={<EllipsisIcon />} className="open-info" onClick={openChatInfo} />
         </div>
       </Sidebar.Header>
       <Sidebar.Body className={cs("chat-content", loading && "loading")}>
