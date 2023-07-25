@@ -46,6 +46,7 @@
   "interval": "Interval",
   "set_vacation": "Setează concediu",
   "cancel_vacation_confirmation": "Ești sigur că vrei să anulezi intervalul curent?",
+  "cancel_vacation": "Anulează concediu",
   "confirm": "Confirm",
   "error": "Eroare",
   "default_error_message": "A apărut o eroare",
@@ -333,6 +334,7 @@
     "title": "Consultații repetate",
     "description": "Oferiți reducere la consultații repetate?",
     "note": "Reducerea se oferă automat la închiderea conversației.",
+    "warning": "Procentul reducerii acordate de medic determină suma finală pe care pacientul va trebui să o plătească pentru consultație.",
     "duration": "Valabilitate (zile)",
     "discount": "Reducere (%)"
   },

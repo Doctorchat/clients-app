@@ -1,5 +1,4 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -9,8 +8,6 @@ import { useBoolean } from "usehooks-ts";
 import BackTitle from "@/components/BackTitle";
 import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
-import Form from "@/components/Form";
-import Input from "@/components/Inputs";
 import Popup from "@/components/Popup";
 import useCurrency from "@/hooks/useCurrency";
 import usePaymentAction from "@/hooks/usePaymentAction";
@@ -21,18 +18,12 @@ import { notification } from "@/store/slices/notificationsSlice";
 import { toggleTopUpModal } from "@/store/slices/userSlice";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
-const promoInputReplacer = (value) => {
-  if (value) {
-    return value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
-  }
-
-  return value;
-};
+import { ConfirmationDialogPromo } from "./ConfirmationDialogPromo";
 
 export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
   const { t } = useTranslation();
   const { formatPrice } = useCurrency();
-  const { isReady, isAllowed } = usePaymentAction();
+  const { isAllowed } = usePaymentAction();
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -40,31 +31,9 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
   const { value: areTermsAccepted, toggle: onChangeAreTermsccepted } = useBoolean(false);
 
   const [loading, setLoading] = React.useState(false);
-  const [promoLoading, setPromoLoading] = React.useState(false);
   const [promocode, setPromocode] = React.useState("");
   const [discount, setDiscount] = React.useState(0);
   const [totalPrice, setTotalPrice] = React.useState(data?.price + data?.uploads_price);
-
-  const form = useForm();
-
-  const onApplyPromocode = React.useCallback(
-    async ({ code }) => {
-      setPromoLoading(true);
-
-      try {
-        const response = await api.conversation.promo(code);
-
-        setPromocode(code);
-        setDiscount((totalPrice * response.data) / 100);
-      } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
-      } finally {
-        setPromoLoading(false);
-        form.reset();
-      }
-    },
-    [dispatch, form, totalPrice]
-  );
 
   const onConfirmHandler = React.useCallback(async () => {
     if (isAllowed(totalPrice)) {
@@ -97,8 +66,6 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
   React.useEffect(() => {
     setTotalPrice(data?.price + data?.uploads_price);
   }, [data?.price, data?.uploads_price]);
-
-  const formCodeValue = form.watch("code");
 
   return (
     <Popup
@@ -155,67 +122,55 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                 </tr>
                 <tr className="dc-description-row">
                   <td className="dc-description-row-content promo-code-row">
-                    {promocode ? (
-                      <>
-                        <span className="d-block">
-                          {t("message_form_confirmation.code")}: <mark className="dc-mark">{promocode}</mark>
-                        </span>
-                        <span className="mt-1 d-block">
-                          {t("message_form_confirmation.discount")}:{" "}
-                          <mark className="dc-mark">{formatPrice(discount)}</mark>
-                        </span>
-                      </>
-                    ) : (
-                      <Form methods={form} onFinish={onApplyPromocode} className="promo-code-form">
-                        <Form.Item label={t("message_form_confirmation.code")} name="code">
-                          <Input pattern={promoInputReplacer} autoComplete="off" placeholder="WINTER20" />
-                        </Form.Item>
-                        <Button htmlType="submit" loading={promoLoading || isReady === false} disabled={!formCodeValue}>
-                          {t("apply")}
-                        </Button>
-                      </Form>
-                    )}
+                    <ConfirmationDialogPromo
+                      discount={discount}
+                      promocode={promocode}
+                      setDiscount={setDiscount}
+                      setPromocode={setPromocode}
+                      totalPrice={totalPrice}
+                    />
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-          <div className="confirmation-terms mb-4">
-            <Checkbox
-              name="terms"
-              value={areTermsAccepted}
-              onChange={() => onChangeAreTermsccepted(!areTermsAccepted)}
-              label={
-                <>
-                  {t("accept_terms")}{" "}
-                  <a
-                    href={`${HOME_PAGE_URL}termeni-si-conditii/`}
-                    rel="noreferrer noopener"
-                    target="_blank"
-                    className="terms"
-                  >
-                    {t("terms_conditions")}
-                  </a>
-                </>
-              }
-            />
-            <div className="confirmation-terms__to-pay">
-              <span>{t("to_pay")}:</span>
-              <span className="ms-1">{`${formatPrice(totalPrice - discount)}`}</span>
-              {promocode && <del className="ms-1">{`(${formatPrice(totalPrice)})`}</del>}
-            </div>
-          </div>
-          <div className="confirmation-actions">
-            <Button type="outline" onClick={onClosePopup}>
-              {t("back")}
-            </Button>
-            <Button disabled={!areTermsAccepted} loading={loading} onClick={onConfirmHandler}>
-              {t("message_form_confirmation.confirm")}
-            </Button>
-          </div>
         </div>
       )}
+      <div className="confirmation-footer">
+        <div className="confirmation-terms">
+          <Checkbox
+            name="terms"
+            value={areTermsAccepted}
+            onChange={() => onChangeAreTermsccepted(!areTermsAccepted)}
+            label={
+              <>
+                {t("accept_terms")}{" "}
+                <a
+                  href={`${HOME_PAGE_URL}termeni-si-conditii/`}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className="terms"
+                >
+                  {t("terms_conditions")}
+                </a>
+              </>
+            }
+          />
+          <div className="confirmation-terms__to-pay">
+            <span>{t("to_pay")}:</span>
+            <span className="ms-1">{`${formatPrice(totalPrice - discount)}`}</span>
+            {promocode && <del className="ms-1">{`(${formatPrice(totalPrice)})`}</del>}
+          </div>
+        </div>
+        <div className="confirmation-actions">
+          <Button type="outline" onClick={onClosePopup}>
+            {t("back")}
+          </Button>
+          <Button disabled={!areTermsAccepted} loading={loading} onClick={onConfirmHandler}>
+            {t("message_form_confirmation.confirm")}
+          </Button>
+        </div>
+      </div>
     </Popup>
   );
 };
