@@ -25,6 +25,10 @@ export default function RegistrationPage() {
         return setIsPhoneConfirmationStep(true);
       }
 
+      if (user?.company_id !== null && user?.is_verified_by_company === false) {
+        return router.replace("/registration-flow/company-verification");
+      }
+
       if (user.verified) {
         router.replace("/registration-flow/select-doctor" + window.location.search);
       }

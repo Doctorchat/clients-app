@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import PropTypes from "prop-types";
 
@@ -66,13 +67,11 @@ WalletTransactionItem.propTypes = {
 const WalletTransactions = () => {
   const { t } = useTranslation();
 
-  const { data: walletTransactions, isLoading } = useQuery(
-    ["wallet-transactions"],
-    () => api.wallet.transactions(),
-    {
-      keepPreviousData: true,
-    }
-  );
+  const user = useSelector((store) => store.user.data);
+
+  const { data: walletTransactions, isLoading } = useQuery(["wallet-transactions"], () => api.wallet.transactions(), {
+    keepPreviousData: true,
+  });
 
   if (isLoading) {
     return (
@@ -96,7 +95,7 @@ const WalletTransactions = () => {
   }
 
   return (
-    <div className="wallet-transactions">
+    <div className={cs("wallet-transactions", user?.company_id && "mt-0")}>
       <div className="wallet-transactions__header">
         <h3 className="wallet-transactions__title">{t("transactions.history")}</h3>
       </div>

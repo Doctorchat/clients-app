@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
@@ -55,6 +56,8 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
 
+  const user = useSelector((state) => state.user.data);
+
   const {
     avatar,
     name,
@@ -94,24 +97,26 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
           </span>
         </div>
         <footer className="doctor-card__footer">
-          <div className="doctor-card__price">
-            <ConditionalRender hide={!chat}>
-              <span className="doctor-card__price-item">
-                <CommentIcon />
-                <span className="doctor-card__price-text">
-                  {price_chat} {globalCurrency}
+          {!user?.company_id && (
+            <div className="doctor-card__price">
+              <ConditionalRender hide={!chat}>
+                <span className="doctor-card__price-item">
+                  <CommentIcon />
+                  <span className="doctor-card__price-text">
+                    {price_chat} {globalCurrency}
+                  </span>
                 </span>
-              </span>
-            </ConditionalRender>
-            <ConditionalRender hide={!video}>
-              <span className="doctor-card__price-item">
-                <VideoIcon />
-                <span className="doctor-card__price-text">
-                  {price_meet} {globalCurrency}
+              </ConditionalRender>
+              <ConditionalRender hide={!video}>
+                <span className="doctor-card__price-item">
+                  <VideoIcon />
+                  <span className="doctor-card__price-text">
+                    {price_meet} {globalCurrency}
+                  </span>
                 </span>
-              </span>
-            </ConditionalRender>
-          </div>
+              </ConditionalRender>
+            </div>
+          )}
           <Button className="doctor-card__button" size="sm" type="text" onClick={onClickPreview}>
             <span>{t("select")}</span>
             <ArrowRightIcon />
@@ -132,6 +137,8 @@ DoctorCard.propTypes = {
     isGuard: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
     price_chat: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     price_meet: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    chat: PropTypes.bool,
+    video: PropTypes.bool,
   }),
   onClickPreview: PropTypes.func,
 };

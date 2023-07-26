@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 
@@ -26,6 +27,8 @@ const selectDefaultOption = (isChatAvailable, isVideoAvailable) => {
 function ConsultationOption({ title, price, available_discount, selected, onClick, disabled }) {
   const { globalCurrency } = useCurrency();
   const { t } = useTranslation();
+
+  const user = useSelector((state) => state.user.data);
 
   const [isDiscountActive, setIsDiscountActive] = useState(false);
 
@@ -56,24 +59,28 @@ function ConsultationOption({ title, price, available_discount, selected, onClic
       {selected && <CheckIcon className="checked" />}
       <div className="card-title">{title}</div>
 
-      {isDiscountActive === false && (
-        <div className="card-price">
-          <span className="label">{t("price")}:</span>
-          <span className="price">
-            {price} {globalCurrency}
-          </span>
-        </div>
-      )}
-      {available_discount && isDiscountActive === true && (
-        <div className="card-price__discount">
-          <span className="label">{t("price")}:</span>
-          <span className="old-price">
-            {price} {globalCurrency}
-          </span>
-          <span className="new-price">
-            {price - price * (available_discount.discount / 100)} {globalCurrency}
-          </span>
-        </div>
+      {!user?.company_id && (
+        <>
+          {isDiscountActive === false && (
+            <div className="card-price">
+              <span className="label">{t("price")}:</span>
+              <span className="price">
+                {price} {globalCurrency}
+              </span>
+            </div>
+          )}
+          {available_discount && isDiscountActive === true && (
+            <div className="card-price__discount">
+              <span className="label">{t("price")}:</span>
+              <span className="old-price">
+                {price} {globalCurrency}
+              </span>
+              <span className="new-price">
+                {price - price * (available_discount.discount / 100)} {globalCurrency}
+              </span>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

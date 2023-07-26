@@ -60,7 +60,9 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
       data.locale = getActiveLng();
       data.re_token = await getRecaptchaToken();
 
-      if (params.has("referrer_id") || localStorage.getItem("referrer_id")) {
+      if (params.has("company_id") || localStorage.getItem("company_id")) {
+        data.company_id = params.get("company_id") || localStorage.getItem("company_id");
+      } else if (params.has("referrer_id") || localStorage.getItem("referrer_id")) {
         data.referrer_id = params.get("referrer_id") || localStorage.getItem("referrer_id");
       }
 
@@ -84,6 +86,10 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
 
     if (params.has("referrer_id")) {
       localStorage.setItem("referrer_id", params.get("referrer_id"));
+    }
+
+    if (params.has("company_id")) {
+      localStorage.setItem("company_id", params.get("company_id"));
     }
   });
 

@@ -60,5 +60,9 @@
     "title": "Reject consultation",
     "label": "Reason for rejection",
     "placeholder": "Enter the reason for rejection..."
+  },
+  "company_verification_request": {
+    "title": "Your account needs validation",
+    "description": "To access the platform, your profile needs to be validated by {{name}}. To expedite the validation process, please contact company representatives at"
   }
 }

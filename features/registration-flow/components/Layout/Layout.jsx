@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
@@ -21,6 +21,8 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
 
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const user = useSelector((state) => state.user.data);
 
   const [isLogoutVisible, setIsLogoutVisible] = React.useState(false);
 
@@ -70,10 +72,21 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
           </Button>
         )}
 
-        <WalletFastTopUp
-          isVisible={showWalletTopUp}
-          className={clsx("wallet-top-up", { "ms-md-5": !showBackButton })}
-        />
+        <div
+          style={{
+            ...(user?.company_id
+              ? {
+                  visibility: "hidden",
+                  pointerEvents: "none",
+                }
+              : {}),
+          }}
+        >
+          <WalletFastTopUp
+            isVisible={showWalletTopUp}
+            className={clsx("wallet-top-up", { "ms-md-5": !showBackButton })}
+          />
+        </div>
 
         <Steps activeStep={activeStep} />
 

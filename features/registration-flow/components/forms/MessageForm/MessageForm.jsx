@@ -38,6 +38,7 @@ export const MessageForm = () => {
   const { global } = useSelector((store) => ({
     global: store.bootstrap.payload?.global,
   }));
+  const user = useSelector((state) => state.user.data);
   const { formatPrice } = useCurrency();
 
   const resolver = useYupValidationResolver(messageSchema);
@@ -220,7 +221,7 @@ export const MessageForm = () => {
           <Form.Item name="uploads" label={t("message_uploads_label")}>
             <Upload
               action={messageUploadFile(1)}
-              description={description}
+              description={user?.company_id ? undefined : description}
               icon={<ImageIcon />}
               accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
               fileList={attachments.list}
@@ -230,17 +231,19 @@ export const MessageForm = () => {
             />
           </Form.Item>
           <div className="form-bottom">
-            <div className={cs("message-form__total", discountedDoctorPrice !== doctorPrice && "has-discount")}>
-              <span>{t("wizard:total")}:</span>
-              <span className="d-flex align-items-center">
-                <strong className="actual">{formatPrice(doctorPrice + attachments.price)}</strong>
-                {discountedDoctorPrice !== doctorPrice && (
-                  <strong className="discounted">
-                    {formatPrice(discountedDoctorPrice + attachments.discountedPrice)}
-                  </strong>
-                )}
-              </span>
-            </div>
+            {!user?.company_id && (
+              <div className={cs("message-form__total", discountedDoctorPrice !== doctorPrice && "has-discount")}>
+                <span>{t("wizard:total")}:</span>
+                <span className="d-flex align-items-center">
+                  <strong className="actual">{formatPrice(doctorPrice + attachments.price)}</strong>
+                  {discountedDoctorPrice !== doctorPrice && (
+                    <strong className="discounted">
+                      {formatPrice(discountedDoctorPrice + attachments.discountedPrice)}
+                    </strong>
+                  )}
+                </span>
+              </div>
+            )}
             <Button htmlType="submit">{t("continue")}</Button>
           </div>
         </Form>
