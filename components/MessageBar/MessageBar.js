@@ -28,6 +28,7 @@ export default function MessageBar(props) {
   const { chatContent } = useSelector((store) => ({
     chatContent: store.chatContent,
   }));
+  const user = useSelector((store) => store.user.data);
   const [isFormEnabled, setIsFormEnabled] = useState(defaultValue && defaultValue.length > 3);
   const [loading, setLoading] = useState(false);
   const [stopChatLoading, setStopChatLoading] = useState(false);
@@ -131,7 +132,7 @@ export default function MessageBar(props) {
           </AuthRoleWrapper>
 
           <AuthRoleWrapper roles={[userRoles.get("client")]}>
-            <ClientChatAttachments isFree={type === "support"} chatId={chatId} />
+            <ClientChatAttachments isFree={type === "support" || Boolean(user?.company_id)} chatId={chatId} />
           </AuthRoleWrapper>
 
           <Form.Item name="content" className="mb-0">

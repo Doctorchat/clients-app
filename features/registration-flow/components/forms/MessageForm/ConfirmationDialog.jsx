@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
@@ -27,6 +27,8 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
 
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const user = useSelector((state) => state.user.data);
 
   const { value: areTermsAccepted, toggle: onChangeAreTermsccepted } = useBoolean(false);
 
@@ -94,46 +96,56 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
                     </a>
                   </td>
                 </tr>
-                <tr className="dc-description-row">
-                  <th className="dc-description-row-label">{t("message_form_confirmation.basic_price")}</th>
-                  <td className="dc-description-row-content">{`${formatPrice(data.price)}`}</td>
-                </tr>
-                <tr className="dc-description-row">
-                  <th className="dc-description-row-label">{`${t("message_form_confirmation.files")}(${
-                    data.uploads_count
-                  })`}</th>
-                  <td className="dc-description-row-content">{`+${formatPrice(data.uploads_price)}`}</td>
-                </tr>
-                <tr className="dc-description-row">
-                  <th className="dc-description-row-label">{t("message_form_confirmation.subtotal_price")}</th>
-                  <td className="dc-description-row-content">{`${formatPrice(data.uploads_price + data.price)}`}</td>
-                </tr>
+                {!user?.company_id && (
+                  <>
+                    <tr className="dc-description-row">
+                      <th className="dc-description-row-label">{t("message_form_confirmation.basic_price")}</th>
+                      <td className="dc-description-row-content">{`${formatPrice(data.price)}`}</td>
+                    </tr>
+                    <tr className="dc-description-row">
+                      <th className="dc-description-row-label">{`${t("message_form_confirmation.files")}(${
+                        data.uploads_count
+                      })`}</th>
+                      <td className="dc-description-row-content">{`+${formatPrice(data.uploads_price)}`}</td>
+                    </tr>
+                    <tr className="dc-description-row">
+                      <th className="dc-description-row-label">{t("message_form_confirmation.subtotal_price")}</th>
+                      <td className="dc-description-row-content">{`${formatPrice(
+                        data.uploads_price + data.price
+                      )}`}</td>
+                    </tr>
+                  </>
+                )}
               </tbody>
             </table>
           </div>
 
-          <ConfirmationSection />
+          {!user?.company_id && (
+            <>
+              <ConfirmationSection />
 
-          <div className="confirmation-section">
-            <table>
-              <tbody>
-                <tr className="dc-description-title">
-                  <th colSpan="2">{t("message_form_confirmation.have_promo")}</th>
-                </tr>
-                <tr className="dc-description-row">
-                  <td className="dc-description-row-content promo-code-row">
-                    <ConfirmationDialogPromo
-                      discount={discount}
-                      promocode={promocode}
-                      setDiscount={setDiscount}
-                      setPromocode={setPromocode}
-                      totalPrice={totalPrice}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              <div className="confirmation-section">
+                <table>
+                  <tbody>
+                    <tr className="dc-description-title">
+                      <th colSpan="2">{t("message_form_confirmation.have_promo")}</th>
+                    </tr>
+                    <tr className="dc-description-row">
+                      <td className="dc-description-row-content promo-code-row">
+                        <ConfirmationDialogPromo
+                          discount={discount}
+                          promocode={promocode}
+                          setDiscount={setDiscount}
+                          setPromocode={setPromocode}
+                          totalPrice={totalPrice}
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
         </div>
       )}
       <div className="confirmation-footer">
@@ -156,18 +168,20 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
               </>
             }
           />
-          <div className="confirmation-terms__to-pay">
-            <span>{t("to_pay")}:</span>
-            <span className="ms-1">{`${formatPrice(totalPrice - discount)}`}</span>
-            {promocode && <del className="ms-1">{`(${formatPrice(totalPrice)})`}</del>}
-          </div>
+          {!user?.company_id && (
+            <div className="confirmation-terms__to-pay">
+              <span>{t("to_pay")}:</span>
+              <span className="ms-1">{`${formatPrice(totalPrice - discount)}`}</span>
+              {promocode && <del className="ms-1">{`(${formatPrice(totalPrice)})`}</del>}
+            </div>
+          )}
         </div>
         <div className="confirmation-actions">
           <Button type="outline" onClick={onClosePopup}>
             {t("back")}
           </Button>
           <Button disabled={!areTermsAccepted} loading={loading} onClick={onConfirmHandler}>
-            {t("message_form_confirmation.confirm")}
+            {user?.company_id ? t("continue") : t("message_form_confirmation.confirm")}
           </Button>
         </div>
       </div>

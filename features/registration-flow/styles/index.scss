@@ -20,6 +20,14 @@
   padding-bottom: 5vh;
 }
 
+.company-verification-description {
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .registration-flow__form {
     padding: 0 20px 5vh;

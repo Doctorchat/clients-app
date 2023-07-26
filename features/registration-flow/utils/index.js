@@ -11,6 +11,10 @@ export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllo
       return "/registration-flow" + window.location.search;
     }
 
+    if (user?.company_id !== null && user?.is_verified_by_company === false) {
+      return "/registration-flow/company-verification";
+    }
+
     if (!user?.investigations?.length && !isInvestigationFormAllowed) {
       return "/registration-flow/select-doctor";
     }
