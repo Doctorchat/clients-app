@@ -10,7 +10,7 @@ export const CompanyVerification = () => {
   return (
     <p className="company-verification-description">
       {t("wizard:company_verification_request.description", { name: user?.company?.name })}{" "}
-      <Link href="tel:+37367507846" className="link">
+      <Link href={`tel:+${user?.company?.contact_number}`} className="link">
         {user?.company?.contact_number}
       </Link>
       .
