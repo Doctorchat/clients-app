@@ -8,16 +8,21 @@ import api from "@/services/axios/api";
 import date from "@/utils/date";
 
 const ReferralItem = (props) => {
+  const { t } = useTranslation();
+
   const { name, email, phone, created_at } = props;
 
   return (
     <div className="partners-referral">
       <div className="partners-referral__info">
         <h4 className="partners-referral__name">{name}</h4>
-        <p className="partners-referral__email">{email}</p>
-        <p className="partners-referral__phone">{phone}</p>
+        <div className="partners-referral__meta">
+          <p className="partners-referral__date">{date(created_at).default}</p>
+          <p className="partners-referral__phone">{phone}</p>
+          <p className="partners-referral__email">{email}</p>
+        </div>
       </div>
-      <p className="partners-referral__date">{date(created_at).dynamic()}</p>
+      <p className="partners-referral__status">{t("active")}</p>
     </div>
   );
 };
@@ -34,10 +39,13 @@ const ReferralItemSkeleton = () => {
     <div className="partners-referral">
       <div className="partners-referral__info">
         <h4 className="partners-referral__name skeleton-loading rounded text-transparent">John Doe</h4>
-        <p className="partners-referral__email skeleton-loading rounded text-transparent">johndoe@email.com</p>
-        <p className="partners-referral__phone skeleton-loading rounded text-transparent">+00000000000</p>
+        <div className="partners-referral__meta">
+          <p className="partners-referral__date skeleton-loading rounded text-transparent">July 22, 2023</p>
+          <p className="partners-referral__phone skeleton-loading rounded text-transparent">000</p>
+          <p className="partners-referral__email skeleton-loading rounded text-transparent">john</p>
+        </div>
       </div>
-      <p className="partners-referral__date skeleton-loading rounded text-transparent">00.00.0000</p>
+      <p className="partners-referral__status skeleton-loading rounded text-transparent">active</p>
     </div>
   );
 };
