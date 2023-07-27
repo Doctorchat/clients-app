@@ -62,6 +62,7 @@ WalletTransactionItem.propTypes = {
   type: PropTypes.string,
   status: PropTypes.string,
   created_at: PropTypes.string,
+  currency: PropTypes.string,
 };
 
 const WalletTransactions = () => {

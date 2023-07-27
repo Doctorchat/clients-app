@@ -12,6 +12,7 @@ import HomeIcon from "@/icons/home.svg";
 import InvestigationIcon from "@/icons/investigation.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import UserIcon from "@/icons/user.svg";
+import UsersIcon from "@/icons/users.svg";
 import WalletIcon from "@/icons/wallet.svg";
 import { logoutUser } from "@/store/actions";
 
@@ -42,6 +43,9 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
       </Menu.Item>
       <Menu.Item icon={<InvestigationIcon />} onClick={onTabsConfigChange(leftSideTabs.investigations)}>
         {t("investigations")}
+      </Menu.Item>
+      <Menu.Item icon={<UsersIcon />} onClick={onTabsConfigChange(leftSideTabs.partners)}>
+        {t("partners.title")}
       </Menu.Item>
       <Menu.Item icon={<HomeIcon />} className="home-item">
         <Link href={HOME_PAGE_URL} target="_blank" rel="noreferrer noopener">
