@@ -79,8 +79,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 6px;
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+
+    p:not(:first-of-type) {
+      margin-left: 6px;
+
+      &::before {
+        content: "•";
+        margin-right: 6px;
+      }
+    }
+  }
 
   &__name {
     font-size: 16px;
@@ -89,22 +104,32 @@
   }
 
   &__email {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--bs-gray-700);
     margin-bottom: 0;
-    margin-top: 2px;
+    margin-top: 0;
   }
 
   &__phone {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--bs-gray-700);
     margin-bottom: 0;
-    margin-top: 2px;
+    margin-top: 0px;
   }
 
   &__date {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--bs-gray-700);
+    margin-bottom: 0;
+  }
+
+  &__status {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 2px 12px;
+    border-radius: 30px;
+    color: var(--bs-success);
+    background-color: rgba(var(--bs-success-rgb), 0.1);
     margin-bottom: 0;
   }
 }
