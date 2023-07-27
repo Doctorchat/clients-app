@@ -369,9 +369,10 @@
   },
   "partners": {
     "title": "Parteneri",
+    "description": "Invită prieteni și câștigă {{percent}}% din fiecare plată a lor. Banii pot fi utilizați pentru a achita serviciile noastre.",
     "bonus_balance": "Sold bonus",
     "active_referrals": "Referali activi",
-    "discount_percent": "Reducere",
+    "discount_percent": "Venit",
     "copy_referral_link": "Copiază linkul la referal",
     "copied": "Copiat",
     "copied_description": "Linkul a fost copiat cu succes",
