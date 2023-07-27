@@ -372,9 +372,10 @@
   },
   "partners": {
     "title": "Partners",
+    "description": "Invite friends and get {{percent}}% of each of their payments. Money can be used to pay for our services.",
     "bonus_balance": "Bonus balance",
     "active_referrals": "Active referrals",
-    "discount_percent": "Discount",
+    "discount_percent": "Income",
     "copy_referral_link": "Copy referral link",
     "copied": "Copied",
     "copied_description": "Link copied successfully",
