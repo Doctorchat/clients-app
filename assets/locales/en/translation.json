@@ -372,7 +372,7 @@
   },
   "partners": {
     "title": "Partners",
-    "description": "Invite friends and get {{percent}}% of each of their payments. Money can be used to pay for our services.",
+    "description": "Invite friends and get {{percent}}% of each of their payments.",
     "bonus_balance": "Bonus balance",
     "active_referrals": "Active referrals",
     "discount_percent": "Income",

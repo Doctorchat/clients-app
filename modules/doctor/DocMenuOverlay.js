@@ -14,6 +14,7 @@ import LogoutIcon from "@/icons/logout.svg";
 import ReceiptPercent from "@/icons/receipt-percent.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import UserIcon from "@/icons/user.svg";
+import UsersIcon from "@/icons/users.svg";
 import VideoIcon from "@/icons/video.svg";
 import WalletIcon from "@/icons/wallet.svg";
 import api from "@/services/axios/api";
@@ -84,6 +85,9 @@ export default function DocMenuOverlay({ updateTabsConfig }) {
       </Menu.Item>
       <Menu.Item icon={<ReceiptPercent />} onClick={onTabsConfigChange(leftSideTabs.repeatedConsultations)}>
         {t("repeated_consultations.title")}
+      </Menu.Item>
+      <Menu.Item icon={<UsersIcon />} onClick={onTabsConfigChange(leftSideTabs.partners)}>
+        {t("partners.title")}
       </Menu.Item>
       <DocSetVacation />
       <Menu.Item icon={<HomeIcon />} className="home-item">
