@@ -372,7 +372,7 @@
   },
   "partners": {
     "title": "Parteneri",
-    "description": "Invită prieteni și câștigă {{percent}}% din fiecare plată a lor. Banii pot fi utilizați pentru a achita serviciile noastre.",
+    "description": "Invită prieteni și câștigă {{percent}}% din fiecare plată a lor.",
     "bonus_balance": "Sold bonus",
     "active_referrals": "Referali activi",
     "discount_percent": "Venit",
