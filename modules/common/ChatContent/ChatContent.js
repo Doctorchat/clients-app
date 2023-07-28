@@ -104,7 +104,7 @@ export default function ChatContent(props) {
             <h4 className="dialog-title mb-0">
               <span className="user-title">
                 <span className="user-title__name">{userInfo.name}</span>
-                {Boolean(userInfo?.company_id) && <span className="user-title__badge dc-badge">Corporativ</span>}
+                {Boolean(userInfo?.company_id) && <span className="user-title__badge dc-badge">{t("corporate")}</span>}
               </span>
             </h4>
             <p className="dialog-subtitle mb-0">
