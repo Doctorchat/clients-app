@@ -39,7 +39,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
 
   const onConfirmHandler = React.useCallback(async () => {
     const canSendMessage = () => {
-      if (!user?.company_id) return true;
+      if (user?.company_id) return true;
       return isAllowed(totalPrice);
     };
 
