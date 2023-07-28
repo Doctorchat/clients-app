@@ -7,6 +7,10 @@
     padding: 0;
     background-color: transparent;
   }
+  .header-info {
+    flex: 1;
+    overflow: hidden;
+  }
   .header-actions {
     display: flex;
     align-items: center;

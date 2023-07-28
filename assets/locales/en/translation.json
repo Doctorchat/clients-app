@@ -384,5 +384,6 @@
     "download_qr": "Download QR",
     "empty": "The list of partners will appear here"
   },
-  "active": "Active"
+  "active": "Active",
+  "corporate": "Corporate"
 }

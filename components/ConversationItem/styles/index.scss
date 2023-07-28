@@ -45,12 +45,29 @@
   position: relative;
 }
 
-.user-last-message,
-.user-title {
+.user-last-message {
   flex-grow: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.user-title {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-right: 4px;
+
+  &__name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__badge {
+    white-space: nowrap;
+    line-height: 1 !important;
+  }
 }
 
 .dialog-bubble {
