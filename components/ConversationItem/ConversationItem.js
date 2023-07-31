@@ -37,7 +37,7 @@ const ticketStatuses = {
 
 function ConversationItem(props) {
   const {
-    conversation: { description, isOnline, name, updated, unread, avatar, status, type },
+    conversation: { description, isOnline, name, updated, unread, avatar, status, type, company_id },
     isSelected,
     onClick,
   } = props;
@@ -51,8 +51,9 @@ function ConversationItem(props) {
       <div className="user-caption">
         <h4 className="dialog-title">
           <span className="user-title">
-            {name}
+            <span className="user-title__name">{name}</span>
             {type === "internal" && <span className="dc-badge">Intern</span>}
+            {Boolean(company_id) && <span className="user-title__badge dc-badge">{t("corporate")}</span>}
           </span>
           <span className="dialog-title-details">
             <span className="message-time ellipsis">{date(updated).dynamic()}</span>
@@ -81,6 +82,7 @@ ConversationItem.propTypes = {
     status: PropTypes.any,
     unread: PropTypes.number,
     type: PropTypes.string,
+    company_id: PropTypes.number,
   }),
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,

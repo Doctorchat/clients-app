@@ -38,7 +38,12 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
   const [totalPrice, setTotalPrice] = React.useState(data?.price + data?.uploads_price);
 
   const onConfirmHandler = React.useCallback(async () => {
-    if (isAllowed(totalPrice)) {
+    const canSendMessage = () => {
+      if (user?.company_id) return true;
+      return isAllowed(totalPrice);
+    };
+
+    if (canSendMessage()) {
       try {
         setLoading(true);
         const response = await api.conversation.addMessage({ ...data, code: promocode });
@@ -63,7 +68,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
       dispatch(notification({ type: "error", title: "error", descrp: "top-up.insufficient_funds" }));
       dispatch(toggleTopUpModal(true));
     }
-  }, [data, dispatch, isAllowed, promocode, router, totalPrice]);
+  }, [data, dispatch, isAllowed, promocode, router, totalPrice, user?.company_id]);
 
   React.useEffect(() => {
     setTotalPrice(data?.price + data?.uploads_price);
