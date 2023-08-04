@@ -51,7 +51,7 @@ const PartnersBalance = () => {
 
         <div>
           <p className="text-sm text-zinc-500 mb-0 fs-6 text-muted">{t("partners.active_referrals")}</p>
-          <h3 className="text-2xl">{referrals?.total ?? 0}</h3>
+          <h3 className="text-2xl">{referrals?.length ?? 0}</h3>
         </div>
 
         <div>
