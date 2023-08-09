@@ -70,6 +70,11 @@ export const RegistrationForm = ({ isPhoneConfirmationStep = false, updateStepSt
         setIsLoading(true);
         const response = await dispatch(registerUser(data));
 
+        window.dataLayer?.push({
+          event: "user_registered",
+          UserID: response.user.id,
+        });
+
         updateStepStatus(response.user);
         localStorage.removeItem("referrer_id");
       } catch (error) {
