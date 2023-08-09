@@ -36,7 +36,7 @@ export const SelectDoctor = () => {
   } = useDoctorPreview();
 
   const createChatHandler = async (chatType = CHAT_TYPES.standard, messageType = MESSAGE_TYPES.standard) => {
-    const investigationId = user.investigations?.[0]?.id;
+    const investigationId = user?.investigations?.[0]?.id;
 
     if (!investigationId) {
       const query = { ...router.query, chatType, messageType };
@@ -47,7 +47,7 @@ export const SelectDoctor = () => {
       return await router.push({ pathname, query }, undefined, { shallow: true });
     }
 
-    await startConversation({ chatType, messageType, doctorPreviewId, investigationId });
+    await startConversation({ userId: user?.id, chatType, messageType, doctorPreviewId, investigationId });
   };
 
   const onAutoTypeClickHandler = async () => {

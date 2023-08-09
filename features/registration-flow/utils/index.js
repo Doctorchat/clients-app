@@ -33,7 +33,7 @@ export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllo
   return null;
 };
 
-export const startConversation = async ({ doctorPreviewId, chatType, investigationId, messageType }) => {
+export const startConversation = async ({ userId, doctorPreviewId, chatType, investigationId, messageType }) => {
   const res = await api.conversation.create({
     doctor_id: doctorPreviewId ?? 1,
     type: chatType,
@@ -41,6 +41,13 @@ export const startConversation = async ({ doctorPreviewId, chatType, investigati
     isAnonym: false,
     isMeet: messageType === MESSAGE_TYPES.meet,
   });
+
+  if (userId) {
+    window.dataLayer?.push({
+      event: "doc_selected",
+      UserID: userId,
+    });
+  }
 
   await Router.push(
     `/registration-flow/message/${res.data.id}?chatType=${chatType}&messageType=${messageType}&doctorId=${

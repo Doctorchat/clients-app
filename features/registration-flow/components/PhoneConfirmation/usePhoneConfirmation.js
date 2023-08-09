@@ -86,13 +86,6 @@ const usePhoneConfirmation = () => {
       dispatch(updateUserProperty({ prop: "verified", value: true }));
 
       await router.replace("/registration-flow/select-doctor" + window.location.search);
-
-      var UserID = user.id;
-
-      window.dataLayer?.push({
-        event: "user_registered",
-        UserID: UserID,
-      });
     } catch (error) {
       dispatch(
         notification({

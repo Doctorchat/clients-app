@@ -118,6 +118,11 @@ export const MessageForm = () => {
         data.uploads_price = attachments.list.length * discountedGlobalAttach;
       }
 
+      window.dataLayer?.push({
+        event: "date_selected",
+        UserID: user?.id,
+      });
+
       setConfirmationData(data);
       setConfirmationDialogVisible(true);
       resetPersistedValues();
@@ -132,6 +137,7 @@ export const MessageForm = () => {
       messageType,
       resetPersistedValues,
       router.query.chatId,
+      user?.id,
     ]
   );
 
