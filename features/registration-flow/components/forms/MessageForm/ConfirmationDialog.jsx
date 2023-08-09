@@ -54,6 +54,11 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
           });
         }
 
+        window.dataLayer?.push({
+          event: "info_verified",
+          UserID: user?.id,
+        });
+
         if (response.data.redirect) {
           window.location.replace(response.data.redirect);
         } else {
@@ -68,7 +73,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
       dispatch(notification({ type: "error", title: "error", descrp: "top-up.insufficient_funds" }));
       dispatch(toggleTopUpModal(true));
     }
-  }, [data, dispatch, isAllowed, promocode, router, totalPrice, user?.company_id]);
+  }, [data, dispatch, isAllowed, promocode, router, totalPrice, user?.company_id, user?.id]);
 
   React.useEffect(() => {
     setTotalPrice(data?.price + data?.uploads_price);
