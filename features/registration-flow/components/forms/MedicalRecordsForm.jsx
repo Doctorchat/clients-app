@@ -65,6 +65,7 @@ export const MedicalRecordsForm = () => {
         const { doctorPreviewId, chatType, messageType } = router.query;
         clearParams(router);
         await startConversation({
+          userId: user?.id,
           chatType,
           messageType,
           doctorPreviewId,
@@ -76,7 +77,7 @@ export const MedicalRecordsForm = () => {
         setIsLoading(false);
       }
     },
-    [dispatch, setFormApiErrors, router]
+    [dispatch, router, user?.id, setFormApiErrors]
   );
 
   return (
