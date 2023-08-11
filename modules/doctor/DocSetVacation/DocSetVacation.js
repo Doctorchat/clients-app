@@ -86,7 +86,7 @@ export default function DocSetVacation() {
     [from]
   );
 
-  const hasVacation = user?.vacation && user.vacation.length && user.vacation.every(Boolean);
+  const hasVacation = Boolean(user?.vacation && user.vacation.length && user.vacation.every(Boolean));
 
   return (
     <>
