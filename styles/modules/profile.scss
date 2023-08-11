@@ -54,6 +54,10 @@
 
 .profile-appointments-wrapper {
   padding: 0 10px;
+
+  .tabs-pane.first-pane:not(.active) {
+    opacity: 0;
+  }
 }
 
 .profile-edit-avatar-action {
