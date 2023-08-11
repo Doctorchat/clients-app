@@ -42,9 +42,7 @@ export default function DocAppointmentsSlots() {
             </div>
           ))}
           {areSlotsLoading && <Spinner className="mt-3" />}
-          {!areSlotsLoading && !slots?.data?.length && (
-            <EmptyBox className="mt-3" content={false} />
-          )}
+          {!areSlotsLoading && !slots?.data?.length && <EmptyBox className="mt-3" content={false} />}
         </div>
       </div>
     </div>
