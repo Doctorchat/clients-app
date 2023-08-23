@@ -64,5 +64,6 @@
   "company_verification_request": {
     "title": "Your account needs validation",
     "description": "To access the platform, your profile needs to be validated by {{name}}. To expedite the validation process, please contact company representatives at"
-  }
+  },
+  "force_logout": "You have been redirected"
 }
