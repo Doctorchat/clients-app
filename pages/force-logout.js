@@ -1,10 +1,11 @@
 import { logoutUser } from '@/store/actions';
-import { useRouter } from 'next/router'
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useEffect } from 'react';
+import Spinner from '@/components/Spinner';
  
 export default function ForceLogout() {
-  const router = useRouter()
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,7 +13,7 @@ export default function ForceLogout() {
   }, [])
 
   return <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-     <p style={{ fontWeight: '700px', fontSize: '42px' }}>You have been logged out...</p>
+     <p style={{ fontWeight: '700px', fontSize: '42px' }}>{t("wizard:force_logout")}&nbsp; <Spinner /></p>
   </div>
 }
 
