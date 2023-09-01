@@ -64,5 +64,6 @@
   "company_verification_request": {
     "title": "Contul dumneavoastră necesită validare",
     "description": "Pentru a accesa platforma, profilul dumneavoastră trebuie validat de către {{name}}. Pentru a urgenta procesul de validare, vă rugăm să contactați reprezentanții companiei la numărul"
-  }
+  },
+  "force_logout": "Ai fost redirecționat"
 }
