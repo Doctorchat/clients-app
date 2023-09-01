@@ -73,6 +73,25 @@
   }
 }
 
+.promo-code-form__apply-button {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  right: 7px;
+  font-size: 14px;
+  padding: 6px 10px;
+  min-width: unset;
+  min-height: auto;
+  transition: 0.3s opacity ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .message-confirmation__modal {
     .popup-body {
