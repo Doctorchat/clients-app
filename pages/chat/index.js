@@ -50,6 +50,7 @@ export default function ColumnCenter() {
         price={chatContent.content?.price}
         isMeet={chatContent.content?.isMeet}
         isAccepted={chatContent.content?.isAccepted}
+        freeFilesAvailable={chatContent.content?.freeFilesAvailable}
         chatId={id}
       />
       <RightSide

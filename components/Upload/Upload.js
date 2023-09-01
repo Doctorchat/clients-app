@@ -22,6 +22,8 @@ const Upload = forwardRef((props, ref) => {
     action,
     fileList,
     setFileList,
+    descriptionFree,
+    filesAvailable
   } = props;
   const [originalFileList, setOriginalFileList] = useState([]);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -34,7 +36,7 @@ const Upload = forwardRef((props, ref) => {
     }
   };
 
-  const uploadPreparation = (files) => {
+  const uploadPreparation = (files) => {    
     const newFileList = [...fileList];
     const newOriginalFileList = [...originalFileList];
 
@@ -149,7 +151,8 @@ const Upload = forwardRef((props, ref) => {
           />
           <i className="upload-icon">{icon}</i>
           {label && <label className="upload-label">{label}</label>}
-          {description && <span className="upload-descrp">{description}</span>}
+          {descriptionFree && filesAvailable > 0 && <span className="upload-descrp">{descriptionFree}</span>}        
+          {description && <span className="upload-descrp">{description}</span>}     
         </div>
       )}
 
@@ -185,6 +188,8 @@ Upload.propTypes = {
   target: PropTypes.element,
   fileList: PropTypes.array,
   setFileList: PropTypes.func,
+  descriptionFree: PropTypes.string,
+  filesAvailable: PropTypes.number
 };
 
 Upload.defaultProps = {
