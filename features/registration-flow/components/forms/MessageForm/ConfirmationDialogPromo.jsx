@@ -1,12 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { useDebounce } from "usehooks-ts";
 
+import Button from "@/components/Button";
 import Input from "@/components/Inputs";
 import Spinner from "@/components/Spinner";
 import useCurrency from "@/hooks/useCurrency";
 import api from "@/services/axios/api";
+import cs from "@/utils/classNames";
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 const promoInputReplacer = (value) => {
@@ -25,33 +26,22 @@ export const ConfirmationDialogPromo = ({ totalPrice, promocode, discount, setPr
   const [internalValue, setInternalValue] = React.useState("");
   const [internalError, setInternalError] = React.useState(null);
 
-  const debouncedInternalValue = useDebounce(internalValue, 500);
+  const onApplyPromocode = React.useCallback(async () => {
+    try {
+      setLoading(true);
+      setInternalError(null);
 
-  const onApplyPromocode = React.useCallback(
-    async (code) => {
-      try {
-        setLoading(true);
-        setInternalError(null);
+      const response = await api.conversation.promo(internalValue);
 
-        const response = await api.conversation.promo(code);
-
-        setPromocode(code);
-        setDiscount((totalPrice * response.data) / 100);
-      } catch (error) {
-        setInternalError(getApiErrorMessages(error, true));
-        setInternalValue("");
-      } finally {
-        setLoading(false);
-      }
-    },
-    [setDiscount, setPromocode, totalPrice]
-  );
-
-  React.useEffect(() => {
-    if (debouncedInternalValue && debouncedInternalValue.length > 3) {
-      onApplyPromocode(debouncedInternalValue);
+      setPromocode(internalValue);
+      setDiscount((totalPrice * response.data) / 100);
+    } catch (error) {
+      setInternalError(getApiErrorMessages(error, true));
+      setInternalValue("");
+    } finally {
+      setLoading(false);
     }
-  }, [debouncedInternalValue, onApplyPromocode]);
+  }, [internalValue, setDiscount, setPromocode, totalPrice]);
 
   if (promocode) {
     return (
@@ -78,8 +68,16 @@ export const ConfirmationDialogPromo = ({ totalPrice, promocode, discount, setPr
           placeholder="WINTER20"
           value={internalValue}
           onChange={(e) => setInternalValue(promoInputReplacer(e.target.value))}
+          onBlur={() => {
+            if (internalValue.length > 3) onApplyPromocode();
+          }}
         />
         {loading && <Spinner />}
+        {loading === false && (
+          <Button className={cs("promo-code-form__apply-button", internalValue.length > 3 && "visible")}>
+            {t("apply")}
+          </Button>
+        )}
       </div>
       {internalError && <span className="form-item-error">{internalError}</span>}
     </div>

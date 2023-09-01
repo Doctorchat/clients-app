@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import PropTypes from "prop-types";
 
@@ -20,9 +20,10 @@ import { ProfileChangeLang } from "../common";
 
 export default function ClientMenuOverlay({ updateTabsConfig }) {
   const { closeDropdown } = useDropdownContext();
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
+  const user = useSelector((store) => store.user.data);
+  const dispatch = useDispatch();
   const logoutHandler = () => dispatch(logoutUser());
 
   const onTabsConfigChange = useCallback(
@@ -38,9 +39,11 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
       <Menu.Item icon={<UserIcon />} onClick={onTabsConfigChange(leftSideTabs.profile)}>
         {t("my_profile")}
       </Menu.Item>
-      <Menu.Item icon={<WalletIcon />} onClick={onTabsConfigChange(leftSideTabs.wallet)}>
-        {t("wallet")}
-      </Menu.Item>
+      {!user?.company_id && (
+        <Menu.Item icon={<WalletIcon />} onClick={onTabsConfigChange(leftSideTabs.wallet)}>
+          {t("wallet")}
+        </Menu.Item>
+      )}
       <Menu.Item icon={<InvestigationIcon />} onClick={onTabsConfigChange(leftSideTabs.investigations)}>
         {t("investigations")}
       </Menu.Item>
