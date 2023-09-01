@@ -24,7 +24,7 @@ import Confirm from "../Confirm";
 import Form from "../Form";
 
 export default function MessageBar(props) {
-  const { defaultValue, disabled, chatId, status, type } = props;
+  const { defaultValue, disabled, chatId, status, type, freeFilesAvailable } = props;
   const { chatContent } = useSelector((store) => ({
     chatContent: store.chatContent,
   }));
@@ -132,7 +132,7 @@ export default function MessageBar(props) {
           </AuthRoleWrapper>
 
           <AuthRoleWrapper roles={[userRoles.get("client")]}>
-            <ClientChatAttachments isFree={type === "support" || Boolean(user?.company_id)} chatId={chatId} />
+            <ClientChatAttachments isFree={type === "support" || Boolean(user?.company_id)} chatId={chatId} freeFilesAvailable={freeFilesAvailable}/>
           </AuthRoleWrapper>
 
           <Form.Item name="content" className="mb-0">
@@ -176,6 +176,7 @@ MessageBar.propTypes = {
   chatId: PropTypes.string,
   status: PropTypes.string,
   type: PropTypes.string,
+  freeFilesAvailable: PropTypes.number
 };
 
 MessageBar.defaultValue = {

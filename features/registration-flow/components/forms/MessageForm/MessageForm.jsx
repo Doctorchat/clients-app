@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,7 @@ import useCurrency from "@/hooks/useCurrency";
 import useMessageFromValues from "@/hooks/useMessageFromValues";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import ImageIcon from "@/icons/file-png.svg";
+import api from "@/services/axios/api";
 import { messageUploadFile } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
 import cs from "@/utils/classNames";
@@ -56,9 +57,14 @@ export const MessageForm = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [confirmationData, setConfirmationData] = React.useState(null);
   const [confirmationDialogVisible, setConfirmationDialogVisible] = React.useState(false);
+  const [filesAvailable, setFilesAvailable] = React.useState(0);
 
   const description = t("message_uploads_description", {
     amount: formatPrice(global.attach),
+  });
+
+  const descriptionFree = t("message_uploads_description_free", {
+    freeImages: filesAvailable,
   });
   const doctorPrice = React.useMemo(() => {
     let price = doctor.price;
@@ -79,9 +85,22 @@ export const MessageForm = () => {
     return price;
   }, [doctor?.available_discount?.discount, doctorPrice]);
 
-  useEffect(() => {
+  React.useEffect(() => {
+    const getFilesAvailable = async () => {
+      try {
+        const response = await api.conversation.single(Number(router.query.chatId));
+        setFilesAvailable(response.data.freeFilesAvailable);
+      } catch (error) {
+        console.error("A apărut o eroare la apelul API:", error);
+      }
+    };
+    getFilesAvailable();
+  }, []);
+
+  React.useEffect(() => {
     if (!attachments.initiated && global?.attach && persistedValues?.uploads?.list) {
       let uploadsList = persistedValues?.uploads?.list ?? [];
+      let priceFiles = persistedValues?.uploads?.price ?? 0;
 
       uploadsList = uploadsList.filter((item) =>
         dayjs(item.created_at ?? new Date()).isAfter(dayjs().subtract(1, "day"))
@@ -89,11 +108,11 @@ export const MessageForm = () => {
 
       setAttachments({
         list: uploadsList,
-        price: uploadsList.length * global.attach,
+        price: priceFiles,
         initiated: true,
       });
     }
-  }, [attachments.initiated, global?.attach, persistedValues?.uploads?.list]);
+  }, [attachments.initiated, global?.attach, persistedValues?.uploads?.list, persistedValues?.uploads?.price]);
 
   const onSubmit = React.useCallback(
     async (values) => {
@@ -107,7 +126,8 @@ export const MessageForm = () => {
 
       data.chat_id = Number(router.query.chatId);
       data.uploads_count = attachments.list.length;
-      data.uploads_price = attachments.list.length * global.attach;
+      data.uploads_price =
+        attachments.list.length > filesAvailable ? (attachments.list.length - filesAvailable) * global.attach : 0;
       data.price = discountedDoctorPrice || doctorPrice;
       data.type = MESSAGE_TYPES.standard;
       data.isMeet = messageType === MESSAGE_TYPES.meet;
@@ -115,7 +135,10 @@ export const MessageForm = () => {
 
       if (doctor?.available_discount?.discount) {
         const discountedGlobalAttach = global.attach - global.attach * (doctor.available_discount.discount / 100);
-        data.uploads_price = attachments.list.length * discountedGlobalAttach;
+        data.uploads_price =
+          attachments.list.length > filesAvailable
+            ? (attachments.list.length - filesAvailable) * discountedGlobalAttach
+            : 0;
       }
 
       window.dataLayer?.push({
@@ -138,12 +161,14 @@ export const MessageForm = () => {
       resetPersistedValues,
       router.query.chatId,
       user?.id,
+      filesAvailable,
     ]
   );
 
   const setFileList = React.useCallback(
     (fileList) => {
-      const newAttachments = { list: fileList, price: fileList.length * global.attach };
+      const newAttachments = { list: fileList };
+      newAttachments.price = fileList.length > filesAvailable ? (fileList.length - filesAvailable) * global.attach : 0;
 
       if (doctor?.available_discount?.discount) {
         const discountedGlobalAttach = global.attach - global.attach * (doctor.available_discount.discount / 100);
@@ -153,7 +178,7 @@ export const MessageForm = () => {
       setAttachments({ ...newAttachments, initiated: true });
       setPersistedValues({ uploads: newAttachments });
     },
-    [doctor?.available_discount?.discount, global.attach, setPersistedValues]
+    [doctor?.available_discount?.discount, global.attach, setPersistedValues, filesAvailable]
   );
 
   const onCloseConfirmationDialog = React.useCallback(() => {
@@ -226,9 +251,11 @@ export const MessageForm = () => {
 
           <Form.Item name="uploads" label={t("message_uploads_label")}>
             <Upload
+              filesAvailable={filesAvailable}
               action={messageUploadFile(1)}
               description={user?.company_id ? undefined : description}
               icon={<ImageIcon />}
+              descriptionFree={user?.company_id ? undefined : descriptionFree}
               accept=".png,.jpeg,.jpg,.bmp,.doc,.docx,.pdf,.xlsx,.xls"
               fileList={attachments.list}
               setFileList={setFileList}

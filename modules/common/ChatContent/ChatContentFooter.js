@@ -16,7 +16,7 @@ export default function ChatContentFooter(props) {
   const router = useRouter();
   const user = useSelector((store) => store.user);
 
-  const { status, chatId, paymentUrl, price, type, isAccepted, isMeet, userInfo, hasExpiredMessage } = props;
+  const { status, chatId, paymentUrl, price, type, isAccepted, isMeet, userInfo, hasExpiredMessage, freeFilesAvailable } = props;
   const { t } = useTranslation();
 
   const redirectToRegistrationFlow = React.useCallback(() => {
@@ -72,7 +72,7 @@ export default function ChatContentFooter(props) {
         <ChatContentAccept chatId={chatId} />
       </AuthRoleWrapper>
 
-      {isMessageBarVisible && <MessageBar chatId={chatId} status={status} type={type} />}
+      {isMessageBarVisible && <MessageBar chatId={chatId} status={status} type={type} freeFilesAvailable={freeFilesAvailable} />}
     </>
   );
 }
@@ -88,6 +88,7 @@ ChatContentFooter.propTypes = {
   isMeet: PropTypes.bool,
   userInfo: PropTypes.object,
   hasExpiredMessage: PropTypes.bool,
+  freeFilesAvailable: PropTypes.number
 };
 
 ChatContentFooter.defaultProps = {};
