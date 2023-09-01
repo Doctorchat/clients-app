@@ -130,7 +130,12 @@ export default function DocAppointmentsSettings() {
             updateTabsConfig={updateAppointmentsTabsConfig}
             dataAnimation="tabs"
           >
-            <Tabs.Pane dataKey={appointmentsTabs.settings} unmountOnExit={false} withAnimation={!loading}>
+            <Tabs.Pane
+              className={`first-pane ${appointmentsTabsConfig.key === appointmentsTabs.settings ? "active" : ""}`}
+              dataKey={appointmentsTabs.settings}
+              unmountOnExit={false}
+              withAnimation={!loading}
+            >
               <div className="profile-appointments-box mt-3 px-1">
                 <Menu.Item
                   className="new-icon-style rounded bordered"

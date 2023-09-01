@@ -20,10 +20,11 @@ import { prepareFileForConfirmationModal } from "../utils";
 import { AttachmentConfirmationPopup } from "./AttachmentConfirmationPopup";
 import { AttachmentInputProvider, useAttachmentInput } from "./AttachmentInputProvider";
 
-const Overlay = React.memo(({ isFree }) => {
+const Overlay = React.memo(({ isFree, freeFilesAvailable }) => {
   const { t } = useTranslation();
   const { globalCurrency } = useCurrency();
   const { triggerUploadInput } = useAttachmentInput();
+  const isFreeFilesAvailable = freeFilesAvailable === 0;
 
   const { attachPrice } = useSelector((store) => ({
     attachPrice: store.bootstrap.payload?.global?.attach,
@@ -35,7 +36,7 @@ const Overlay = React.memo(({ isFree }) => {
 
   const dispatch = useDispatch();
 
-  if (!isFree && walletData?.data?.balance < attachPrice) {
+  if (!isFree && walletData?.data?.balance < attachPrice && isFreeFilesAvailable) {
     return (
       <div className="px-2">
         <Alert className="configure-form-alert" type="error" message={t("chat_attach.insufficient_funds")} />
@@ -51,7 +52,7 @@ const Overlay = React.memo(({ isFree }) => {
       <Menu.Item icon={<UploadIcon />} onClick={triggerUploadInput}>
         {t("chat_attach.upload_file")}
       </Menu.Item>
-      {!isFree && (
+      {!isFree && isFreeFilesAvailable && (
         <span className="text-muted px-2 mt-2 d-block text-sm text-center">
           {t("chat_attach.you_will_be_charged", { price: attachPrice, currency: globalCurrency })}
         </span>
@@ -61,7 +62,7 @@ const Overlay = React.memo(({ isFree }) => {
 });
 
 const ClientChatAttachmentsRoot = (props) => {
-  const { isFree = false, chatId } = props;
+  const { isFree = false, chatId, freeFilesAvailable } = props;
 
   const { temporaryFile, setTemporaryFile } = useAttachmentInput();
   const { uploadFreeFile, uploadPaidFile } = useUploadFile(chatId);
@@ -102,7 +103,7 @@ const ClientChatAttachmentsRoot = (props) => {
     <>
       <Dropdown
         className="chat-attachments-dropdown message-bar-attach"
-        overlay={<Overlay isFree={isFree} />}
+        overlay={<Overlay isFree={isFree} freeFilesAvailable={freeFilesAvailable}/>}
         placement="topRight"
       >
         <IconBtn icon={<ClipIcon />} size="sm" />
@@ -117,10 +118,10 @@ const ClientChatAttachmentsRoot = (props) => {
   );
 };
 
-export const ClientChatAttachments = ({ isFree, chatId }) => {
+export const ClientChatAttachments = ({ isFree, chatId, freeFilesAvailable }) => {
   return (
     <AttachmentInputProvider>
-      <ClientChatAttachmentsRoot isFree={isFree} chatId={chatId} />
+      <ClientChatAttachmentsRoot isFree={isFree} chatId={chatId} freeFilesAvailable={freeFilesAvailable}/>
     </AttachmentInputProvider>
   );
 };
@@ -128,13 +129,16 @@ export const ClientChatAttachments = ({ isFree, chatId }) => {
 ClientChatAttachments.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   isFree: PropTypes.bool,
+  freeFilesAvailable: PropTypes.number
 };
 
 ClientChatAttachmentsRoot.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   isFree: PropTypes.bool,
+  freeFilesAvailable: PropTypes.number
 };
 
 Overlay.propTypes = {
   isFree: PropTypes.bool,
+  freeFilesAvailable: PropTypes.number
 };
