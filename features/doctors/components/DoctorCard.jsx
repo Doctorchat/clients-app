@@ -99,19 +99,19 @@ export const DoctorCard = ({ doctor, onClickPreview }) => {
         <footer className="doctor-card__footer">
           {!user?.company_id && (
             <div className="doctor-card__price">
-              <ConditionalRender hide={!chat}>
-                <span className="doctor-card__price-item">
-                  <CommentIcon />
-                  <span className="doctor-card__price-text">
-                    {price_chat} {globalCurrency}
-                  </span>
-                </span>
-              </ConditionalRender>
               <ConditionalRender hide={!video}>
                 <span className="doctor-card__price-item">
                   <VideoIcon />
                   <span className="doctor-card__price-text">
                     {price_meet} {globalCurrency}
+                  </span>
+                </span>
+              </ConditionalRender>
+              <ConditionalRender hide={!chat}>
+                <span className="doctor-card__price-item">
+                  <CommentIcon />
+                  <span className="doctor-card__price-text">
+                    {price_chat} {globalCurrency}
                   </span>
                 </span>
               </ConditionalRender>
