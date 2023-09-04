@@ -24,7 +24,7 @@ import ChatContentFooter from "./ChatContentFooter";
 const withoutInfo = ["support", "auto", "consilium", "internal"];
 
 export default function ChatContent(props) {
-  const { loading, loaded, userInfo, messages, chatId, status, type, paymentUrl, price, isMeet, isAccepted } = props;
+  const { loading, loaded, userInfo, messages, chatId, status, type, paymentUrl, price, isMeet, isAccepted, freeFilesAvailable } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -138,6 +138,7 @@ export default function ChatContent(props) {
             isMeet={isMeet}
             userInfo={userInfo}
             hasExpiredMessage={messages?.some((msg) => msg.type === "expired")}
+            freeFilesAvailable={freeFilesAvailable}
           />
         </Sidebar.Footer>
       )}
@@ -157,4 +158,5 @@ ChatContent.propTypes = {
   price: PropTypes.number,
   isMeet: PropTypes.bool,
   isAccepted: PropTypes.bool,
+  freeFilesAvailable: PropTypes.number
 };

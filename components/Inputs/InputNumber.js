@@ -53,7 +53,7 @@ const InputNumber = forwardRef((props, ref) => {
   const onInputChange = (event) => {
     const value = event.target.value;
 
-    onChange(value || undefined);
+    onChange(value || "");
 
     if (value) {
       switch (format) {
@@ -80,11 +80,7 @@ const InputNumber = forwardRef((props, ref) => {
     <>
       {label && (
         <label
-          className={cs(
-            "form-control-label",
-            isActive && "is-active",
-            addonBefore && "input-number-prefix"
-          )}
+          className={cs("form-control-label", isActive && "is-active", addonBefore && "input-number-prefix")}
           htmlFor={name}
         >
           {label}
