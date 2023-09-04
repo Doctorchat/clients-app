@@ -15,7 +15,6 @@ import { readChatMessages } from "@/store/actions";
 import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import cs from "@/utils/classNames";
-import date from "@/utils/date";
 
 import MessagesList from "../MessagesList";
 
@@ -80,17 +79,9 @@ export default function ChatContent(props) {
     }
   }, [chatId, dispatch, messages]);
 
-  const HeaderInfo = useMemo(() => {
-    if (userInfo?.isOnline) {
-      return <span className="online">{t("online")}</span>;
-    }
-
-    if (userInfo?.last_seen) {
-      return date(userInfo.last_seen).relative;
-    }
-
-    return t("offline");
-  }, [t, userInfo?.isOnline, userInfo.last_seen]);
+  const HeaderInfo = useMemo(() => {   
+    return userInfo?.isOnline ? <span className="online">{t("online")}</span> : "";
+  }, [t, userInfo?.isOnline])
 
   return (
     <Sidebar id="column-center">
