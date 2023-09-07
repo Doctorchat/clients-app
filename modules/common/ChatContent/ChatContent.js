@@ -15,7 +15,6 @@ import { readChatMessages } from "@/store/actions";
 import { chatContentToggleInfoVisibility } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
 import cs from "@/utils/classNames";
-import date from "@/utils/date";
 
 import MessagesList from "../MessagesList";
 
@@ -25,7 +24,7 @@ import ChatContentFooter from "./ChatContentFooter";
 const withoutInfo = ["support", "auto", "consilium", "internal"];
 
 export default function ChatContent(props) {
-  const { loading, loaded, userInfo, messages, chatId, status, type, paymentUrl, price, isMeet, isAccepted } = props;
+  const { loading, loaded, userInfo, messages, chatId, status, type, paymentUrl, price, isMeet, isAccepted, freeFilesAvailable } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -80,17 +79,9 @@ export default function ChatContent(props) {
     }
   }, [chatId, dispatch, messages]);
 
-  const HeaderInfo = useMemo(() => {
-    if (userInfo?.isOnline) {
-      return <span className="online">{t("online")}</span>;
-    }
-
-    if (userInfo?.last_seen) {
-      return date(userInfo.last_seen).relative;
-    }
-
-    return t("offline");
-  }, [t, userInfo?.isOnline, userInfo.last_seen]);
+  const HeaderInfo = useMemo(() => {   
+    return userInfo?.isOnline ? <span className="online">{t("online")}</span> : "";
+  }, [t, userInfo?.isOnline])
 
   return (
     <Sidebar id="column-center">
@@ -147,6 +138,7 @@ export default function ChatContent(props) {
             isMeet={isMeet}
             userInfo={userInfo}
             hasExpiredMessage={messages?.some((msg) => msg.type === "expired")}
+            freeFilesAvailable={freeFilesAvailable}
           />
         </Sidebar.Footer>
       )}
@@ -166,4 +158,5 @@ ChatContent.propTypes = {
   price: PropTypes.number,
   isMeet: PropTypes.bool,
   isAccepted: PropTypes.bool,
+  freeFilesAvailable: PropTypes.number
 };
