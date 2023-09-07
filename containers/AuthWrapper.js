@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { useEffectOnce } from "usehooks-ts";
 
 import FullPageLoading from "@/components/FullPageLoading";
+import {fetchToken} from "@/features/notification-firebase";
 import { getUserRedirectPath } from "@/features/registration-flow";
 import { fetchUserByToken, getBootstrapData } from "@/store/actions";
 
@@ -36,6 +37,7 @@ export default function AuthWrapper(props) {
     if (accessToken) {
       dispatch(fetchUserByToken())
         .then((user) => {
+         fetchToken(user)
           const redirect = getUserRedirectPath(user, router.pathname, isInvestigationFormAllowed);
 
           if (redirect && redirect !== router.pathname) {

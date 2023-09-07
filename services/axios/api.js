@@ -20,6 +20,7 @@ const api = {
     get: () => axiosInstance.get("/user"),
     login: (data) => axiosInstance.post("/auth/login", data),
     logout: () => axiosInstance.post("/auth/logout"),
+    updateFCMToken:(token) =>axiosInstance.patch("/fcm-token", token),
     updateAvatar: (file) => axiosInstance.post("/user/update-avatar/", file),
     addInvestigation: (data) => axiosInstance.post("/user/investigations", data),
     updateInvestigation: (data) => axiosInstance.put(`/user/investigations/${data.id}`, data),
