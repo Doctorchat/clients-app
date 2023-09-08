@@ -16,6 +16,7 @@ import getActiveLng from "@/utils/getActiveLng";
 
 import "@/services/i18next";
 
+import { registerServiceWorker } from '../public/serviceWorker';
 import { store } from "../store";
 
 // Styles
@@ -58,6 +59,7 @@ export default function App({ Component, pageProps }) {
     </LocaleWrapper>
   );
 }
+ registerServiceWorker()
 
 App.propTypes = {
   Component: PropTypes.func,
