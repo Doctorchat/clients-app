@@ -1,8 +1,7 @@
-import { useState } from "react";
-import firebase from 'firebase/app';
-import { getMessaging, getToken, onMessage  } from "firebase/messaging";
+import { getToken, onMessage  } from "firebase/messaging";
+import { isSupported } from "firebase/messaging";
 
-import 'firebase/messaging';
+import messaging from "../../pages/firebase";
 
 import {
   FIREBASE_PERMISSION,
@@ -11,6 +10,10 @@ import {
 } from "./api/config";
 import { apiUpdateFCMToken } from "./api";
 
+
+
+
+console.log(isSupported, "....................isSupported")
 
 const tokenOptionsFirebase = {
   vapidKey: FIREBASE_VAPID_KEY,
@@ -25,23 +28,10 @@ const requestPermissionNotification = (getTokenFirebase, permission, messaging) 
       localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify(permission));
       localStorage.removeItem(FIREBASE_TOKEN_KEY);
     });
-
-          // Funcția pentru tratarea notificărilor primite
-    const handleNotification = ({ data: { body, title } }) => {
-      // Afiseaza notificarea sau implementeaza logica de gestionare a notificarilor
-      new Notification(title, { body });
-    };
-
-    // Atașează funcția de tratare a notificărilor la evenimentul onMessage
-    
-    console.log(messaging)
-    messaging?.onMessage(handleNotification);
-  }
-  
+  } 
 };
-
-export const fetchToken = async (user,firebaseApp) => {
-  const messaging = getMessaging(firebaseApp); 
+ 
+export const fetchToken = async (user=null) => {   
   try {
     const getTokenFirebaseStorage = localStorage.getItem(FIREBASE_TOKEN_KEY);
     const permission = localStorage.getItem(FIREBASE_PERMISSION);
@@ -49,6 +39,7 @@ export const fetchToken = async (user,firebaseApp) => {
       const getTokenFirebase = await getToken(messaging, tokenOptionsFirebase);
       localStorage.setItem(FIREBASE_TOKEN_KEY, JSON.stringify(getTokenFirebase));
     }
+    console.log(user, "user")
     if (user) {
       if (!getTokenFirebaseStorage) {
         const getTokenFirebase = await getToken(messaging, tokenOptionsFirebase);
@@ -62,3 +53,12 @@ export const fetchToken = async (user,firebaseApp) => {
     console.log("An error occurred while retrieving token. ", err);
   }
 };
+// fetchToken()
+
+export const onMessageListener = () =>
+  new Promise((resolve) => {  
+    //  const messaging = firebase.messaging();
+    onMessage(messaging, (payload) => {
+      resolve(payload);
+    });
+});
