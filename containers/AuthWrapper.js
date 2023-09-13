@@ -1,16 +1,12 @@
-import { useCallback, useEffect,useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useEffectOnce } from "usehooks-ts";
 
 import FullPageLoading from "@/components/FullPageLoading";
-import {fetchToken} from "@/features/notification-firebase";
-import firebaseApp from '@/features/notification-firebase/firebase'
 import { getUserRedirectPath } from "@/features/registration-flow";
 import { fetchUserByToken, getBootstrapData } from "@/store/actions";
-
-import 'firebase/messaging';
 
 export default function AuthWrapper(props) {
   const { children } = props;
@@ -40,7 +36,6 @@ export default function AuthWrapper(props) {
     if (accessToken) {
       dispatch(fetchUserByToken())
         .then((user) => {
-         fetchToken(user,firebaseApp)
          
           const redirect = getUserRedirectPath(user, router.pathname, isInvestigationFormAllowed);
 

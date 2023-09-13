@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
-import {fetchToken} from '@/features/notification-firebase';
 import { getUserRedirectPath } from "@/features/registration-flow";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
@@ -42,7 +41,6 @@ export default function Login() {
 
   useEffect(() => {
     const { query } = router;
-    fetchToken(null);
     if (query?.hash && query?.id) {
       dispatch(emulateLogin(query));
     }
