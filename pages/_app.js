@@ -14,6 +14,8 @@ import NotificationsWrapper from "@/containers/NotificationsWrapper";
 import MainLayout from "@/layouts/MainLayout";
 import getActiveLng from "@/utils/getActiveLng";
 
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import "@/services/i18next";
 
 import { store } from "../store";

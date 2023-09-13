@@ -36,6 +36,7 @@ export default function AuthWrapper(props) {
     if (accessToken) {
       dispatch(fetchUserByToken())
         .then((user) => {
+         
           const redirect = getUserRedirectPath(user, router.pathname, isInvestigationFormAllowed);
 
           if (redirect && redirect !== router.pathname) {

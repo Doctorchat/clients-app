@@ -41,7 +41,6 @@ export default function Login() {
 
   useEffect(() => {
     const { query } = router;
-
     if (query?.hash && query?.id) {
       dispatch(emulateLogin(query));
     }
