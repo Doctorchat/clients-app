@@ -34,27 +34,6 @@ const antLocales = {
 
 export default function App({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient());
-   const { fcmToken,notificationPermissionStatus } = useFcmToken();
-  // Use the token as needed
-  fcmToken && console.log('FCM token:', fcmToken);
-  console.log(notificationPermissionStatus, "notificationPermissionStatus")
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      const messaging = getMessaging(firebaseApp);
-      console.log(messaging)
-      const unsubscribe = onMessage(messaging, (payload) => {
-        
-        console.log('Foreground push notification received:', payload);
-        // Handle the received push notification while the app is in the foreground
-        // You can display a notification or update the UI based on the payload
-      });
-         console.log(unsubscribe, "unsubscribe")
-      return () => {
-        unsubscribe(); // Unsubscribe from the onMessage event
-      };
-    }
-  }, []);
 
   const getLayout =
     Component.getLayout ||

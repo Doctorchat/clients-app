@@ -1,5 +1,4 @@
 import { getToken, onMessage  } from "firebase/messaging";
-import { isSupported } from "firebase/messaging";
 
 import messaging from "../../pages/firebase";
 
@@ -9,11 +8,6 @@ import {
   FIREBASE_VAPID_KEY,
 } from "./api/config";
 import { apiUpdateFCMToken } from "./api";
-
-
-
-
-console.log(isSupported, "....................isSupported")
 
 const tokenOptionsFirebase = {
   vapidKey: FIREBASE_VAPID_KEY,
