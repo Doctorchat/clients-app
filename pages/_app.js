@@ -1,4 +1,4 @@
-import React,  {  useEffect }  from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -6,15 +6,12 @@ import ConfigProvider from "antd/lib/config-provider";
 import en_US from "antd/lib/locale-provider/en_US";
 import ro_RO from "antd/lib/locale-provider/ro_RO";
 import ru_RU from "antd/lib/locale-provider/ru_RU";
-import { getMessaging, onMessage } from 'firebase/messaging';
 import Head from "next/head";
 import PropTypes from "prop-types";
 
 import LocaleWrapper from "@/containers/LocaleWrapper";
 import NotificationsWrapper from "@/containers/NotificationsWrapper";
-import useFcmToken from '@/hooks/useFcmToken'
 import MainLayout from "@/layouts/MainLayout";
-import firebaseApp from '@/utils/firebase/firebase';
 import getActiveLng from "@/utils/getActiveLng";
 
 import "@/services/i18next";

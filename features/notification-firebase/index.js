@@ -1,58 +1,60 @@
-import { getToken, onMessage  } from "firebase/messaging";
+import { getMessaging, getToken } from "firebase/messaging";
 
-import messaging from "../../pages/firebase";
+import { firebaseApp } from "@/features/notification-firebase/api/config";
 
-import {
-  FIREBASE_PERMISSION,
-  FIREBASE_TOKEN_KEY,
-  FIREBASE_VAPID_KEY,
-} from "./api/config";
+import {FIREBASE_PERMISSION, FIREBASE_TOKEN_KEY,FIREBASE_VAPID_KEY } from './api/config';
 import { apiUpdateFCMToken } from "./api";
 
-const tokenOptionsFirebase = {
-  vapidKey: FIREBASE_VAPID_KEY,
-};
-
-const requestPermissionNotification = (getTokenFirebase, permission, messaging) => {
-  if ("Notification" in window) {
-
-    Notification.requestPermission().then(async (permission) => {
-       console.log(permission, "permission")
-      permission === "granted" && (await apiUpdateFCMToken(getTokenFirebase))
-      localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify(permission));
-      localStorage.removeItem(FIREBASE_TOKEN_KEY);
-    });
-  } 
-};
- 
-export const fetchToken = async (user=null) => {   
-  try {
-    const getTokenFirebaseStorage = localStorage.getItem(FIREBASE_TOKEN_KEY);
-    const permission = localStorage.getItem(FIREBASE_PERMISSION);
-    if (!getTokenFirebaseStorage && !user && !permission) {
-      const getTokenFirebase = await getToken(messaging, tokenOptionsFirebase);
-      localStorage.setItem(FIREBASE_TOKEN_KEY, JSON.stringify(getTokenFirebase));
-    }
-    console.log(user, "user")
-    if (user) {
-      if (!getTokenFirebaseStorage) {
-        const getTokenFirebase = await getToken(messaging, tokenOptionsFirebase);
-        requestPermissionNotification(getTokenFirebase, permission,messaging);
-      } else {
-        requestPermissionNotification(getTokenFirebaseStorage, permission,messaging);
+export const fetchToken = async (user = null) => {
+  if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+    try {
+      const getTokenFirebaseStorage = localStorage.getItem(FIREBASE_TOKEN_KEY);
+      const permissionStorage = localStorage.getItem(FIREBASE_PERMISSION);
+      if (permissionStorage || (!user && getTokenFirebaseStorage)) {
+        return;
       }
+      if (user) {
+        if (!getTokenFirebaseStorage) {
+          setTokenStorage().then(async (notifPermission) => {
+            if (notifPermission) {
+              await apiUpdateFCMToken(getTokenFirebaseStorage);
+              localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify("true"));
+              localStorage.removeItem(FIREBASE_TOKEN_KEY);
+            } else {
+              console.log("Notificarile nu sunt active");
+            }
+          });
+        } else if (getTokenFirebaseStorage) {
+          await apiUpdateFCMToken(getTokenFirebaseStorage);
+          localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify("true"));
+          localStorage.removeItem(FIREBASE_TOKEN_KEY);
+        }
+      } else if (!user) {
+        if (!getTokenFirebaseStorage) {
+          setTokenStorage();
+          return;
+        }
+      }
+    } catch (err) {
+      console.log("An error occurred while retrieving token. ", err);
     }
-            
-  } catch (err) {
-    console.log("An error occurred while retrieving token. ", err);
   }
 };
-// fetchToken()
-
-export const onMessageListener = () =>
-  new Promise((resolve) => {  
-    //  const messaging = firebase.messaging();
-    onMessage(messaging, (payload) => {
-      resolve(payload);
+const setTokenStorage = async () => {
+  const messaging = getMessaging(firebaseApp);
+  const permission = await Notification.requestPermission();
+  if (permission === "granted") {
+    const currentToken = await getToken(messaging, {
+      vapidKey: FIREBASE_VAPID_KEY,
     });
-});
+    if (currentToken) {
+      localStorage.setItem(FIREBASE_TOKEN_KEY, JSON.stringify(currentToken));
+      console.log(FIREBASE_TOKEN_KEY, currentToken);
+      return true
+    } else {
+      console.log("No registration token available. Request permission to generate one.");
+    }
+  } else {
+    return false;
+  }
+};

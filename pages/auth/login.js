@@ -2,22 +2,21 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { getMessaging, onMessage } from 'firebase/messaging';
+import { getMessaging, onMessage } from "firebase/messaging";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
-// import {fetchToken} from '@/features/notification-firebase';
+import { fetchToken } from "@/features/notification-firebase";
+import { firebaseApp } from "@/features/notification-firebase/api/config";
 import { getUserRedirectPath } from "@/features/registration-flow";
-import useFcmToken from '@/hooks/useFcmToken'
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
 import { loginSchema } from "@/services/validation";
 import { emulateLogin, loginUser } from "@/store/actions";
 import { notification } from "@/store/slices/notificationsSlice";
-import firebaseApp from '@/utils/firebase/firebase';
 import getApiErrorMessages from "@/utils/getApiErrorMessages";
 
 export default function Login() {
@@ -42,30 +41,26 @@ export default function Login() {
       }
     }
   }, [router]);
-  const { fcmToken,notificationPermissionStatus } = useFcmToken();
-    fcmToken && console.log('FCM token:', fcmToken);
-  console.log(notificationPermissionStatus, "notificationPermissionStatus")
-   useEffect(() => {
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
-      console.log(messaging)
+      console.log(messaging);
       const unsubscribe = onMessage(messaging, (payload) => {
-        
-        console.log('Foreground push notification received:', payload);
+        console.log("Foreground push notification received:", payload);
         // Handle the received push notification while the app is in the foreground
         // You can display a notification or update the UI based on the payload
       });
-         console.log(unsubscribe, "unsubscribe")
+      console.log(unsubscribe, "unsubscribe");
       return () => {
         unsubscribe(); // Unsubscribe from the onMessage event
       };
     }
   }, []);
 
-
   useEffect(() => {
     const { query } = router;
-    // fetchToken(null);
+    fetchToken(null);
 
     if (query?.hash && query?.id) {
       dispatch(emulateLogin(query));
