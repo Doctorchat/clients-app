@@ -11,8 +11,6 @@ import { firebaseApp } from "@/features/notification-firebase/api/config";
 import { getUserRedirectPath } from "@/features/registration-flow";
 import { fetchUserByToken, getBootstrapData } from "@/store/actions";
 
-import 'firebase/messaging';
-
 export default function AuthWrapper(props) {
   const { children } = props;
 
