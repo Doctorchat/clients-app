@@ -2,7 +2,7 @@ import { getMessaging, getToken } from "firebase/messaging";
 
 import { firebaseApp } from "@/features/notification-firebase/api/config";
 
-import {FIREBASE_PERMISSION, FIREBASE_TOKEN_KEY,FIREBASE_VAPID_KEY } from './api/config';
+import { FIREBASE_PERMISSION, FIREBASE_TOKEN_KEY, FIREBASE_VAPID_KEY } from "./api/config";
 import { apiUpdateFCMToken } from "./api";
 
 export const fetchToken = async (user = null) => {
@@ -21,7 +21,7 @@ export const fetchToken = async (user = null) => {
               localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify("true"));
               localStorage.removeItem(FIREBASE_TOKEN_KEY);
             } else {
-              console.log("Notificarile nu sunt active");
+              console.log("Notifications are not active");
             }
           });
         } else if (getTokenFirebaseStorage) {
@@ -49,8 +49,7 @@ const setTokenStorage = async () => {
     });
     if (currentToken) {
       localStorage.setItem(FIREBASE_TOKEN_KEY, JSON.stringify(currentToken));
-      console.log(FIREBASE_TOKEN_KEY, currentToken);
-      return true
+      return true;
     } else {
       console.log("No registration token available. Request permission to generate one.");
     }

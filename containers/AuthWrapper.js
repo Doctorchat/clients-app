@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { useEffectOnce } from "usehooks-ts";
 
 import FullPageLoading from "@/components/FullPageLoading";
-import {fetchToken} from '@/features/notification-firebase';
+import { fetchToken } from "@/features/notification-firebase";
 import { firebaseApp } from "@/features/notification-firebase/api/config";
 import { getUserRedirectPath } from "@/features/registration-flow";
 import { fetchUserByToken, getBootstrapData } from "@/store/actions";
@@ -30,35 +30,32 @@ export default function AuthWrapper(props) {
       query: { redirect: `${window.location.pathname}?${params.toString()}` },
     });
   }, [router]);
-     useEffect(() => {
-       if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-         const messaging = getMessaging(firebaseApp);
-         console.log(messaging);
-         const unsubscribe = onMessage(messaging, (payload) => {
-           console.log("Foreground push notification received:", payload);
-           // Handle the received push notification while the app is in the foreground
-           // You can display a notification or update the UI based on the payload
-         });
-         console.log(unsubscribe, "unsubscribe");
-         return () => {
-           unsubscribe(); // Unsubscribe from the onMessage event
-         };
-       }
-     }, []);
-      
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+      const messaging = getMessaging(firebaseApp);
+      const unsubscribe = onMessage(messaging, (payload) => {
+        console.log("Foreground push notification received:", payload);
+      });
+      return () => {
+        unsubscribe(); // Unsubscribe from the onMessage event
+      };
+    }
+  }, []);
+
   useEffectOnce(() => {
     const accessToken = localStorage.getItem("dc_token");
     const { doctorPreviewId, chatType } = router.query;
     const isInvestigationFormAllowed = doctorPreviewId || chatType;
 
-    if (accessToken) {    
+    if (accessToken) {
       dispatch(fetchUserByToken())
         .then((user) => {
-          fetchToken(user);        
+          fetchToken(user);
           const redirect = getUserRedirectPath(user, router.pathname, isInvestigationFormAllowed);
           if (redirect && redirect !== router.pathname) {
             router.replace(redirect);
-          }    
+          }
         })
         .catch(() => redirectToLogin())
         .finally(() => {
