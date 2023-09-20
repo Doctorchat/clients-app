@@ -191,7 +191,6 @@ input[type="checkbox"] {
   justify-content: flex-start;
   flex-direction: column;
   height: 100%;
-  background-image: url(../assets/images/chat-content.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 100% 50%;
@@ -271,5 +270,21 @@ input[type="checkbox"] {
   100% {
     left: 107%;
     right: -8%;
+  }
+}
+
+@media (max-width: 480px) {
+  .external-docs-layout {
+      background-image: url(../assets/images/chat-content.jpg) , linear-gradient(#d7eeea, #d7eeea);
+  }
+}
+@media  (min-width: 481px) and (max-width: 1024px) {
+  .external-docs-layout {
+      background-image: url(../assets/images/chat-content.jpg) , linear-gradient(#d7eeea, #d7eeea);
+  }
+}
+@media  (min-width: 1025px) {
+  .external-docs-layout {
+      background-image: url(../assets/images/chat-content.jpg) , linear-gradient(#d7eeea, #d7eeea);
   }
 }
