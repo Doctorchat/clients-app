@@ -33,6 +33,7 @@ export default function ColumnCenter() {
         getChatUserInfo({
           id: chatContent.content.user_id,
           isAnonym: chatContent.content.isAnonym,
+          showToCorporativeClients: true
         })
       );
   }, [dispatch, chatContent.content]);
