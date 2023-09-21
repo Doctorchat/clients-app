@@ -31,7 +31,7 @@ const api = {
     updatePassword: (data) => axiosInstance.post("/user/change-password/", data),
     toggleGuardStatus: (isGuard) => axiosInstance.post("/user/card/guard", { isGuard }),
     card: (id, isAnonym, showToCorporativeClients) =>
-      axiosInstance.get(`/user/card/${id}?is_anonym=${isAnonym}?showToCorporativeClients=${showToCorporativeClients}`),
+      axiosInstance.get(`/user/card/${id}?is_anonym=${isAnonym}&showToCorporativeClients=${showToCorporativeClients}`),
     transactions: () => axiosInstance.get("/user/transactions"),
     setVacation: (data) => axiosInstance.post("/user/card/vacation", data),
     resetVacation: () => axiosInstance.put("/user/card/vacation"),
