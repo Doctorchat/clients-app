@@ -123,7 +123,7 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
           <IconBtn className="doctor-view__modal-close" icon={<TimesIcon />} onClick={onVisibleChange} />
 
           <div className="doctor-view__avatar">
-            <img src={doctor.avatar} alt={doctor.name} />
+            <img src={doctor.avatar_full ?? doctor.avatar} alt={doctor.name} />
           </div>
           <div className="doctor-view__caption">
             <header className="doctor-view__header">
