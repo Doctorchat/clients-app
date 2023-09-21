@@ -2,12 +2,15 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { getMessaging, onMessage } from "firebase/messaging";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Input, { InputPhone } from "@/components/Inputs";
+import { fetchToken } from "@/features/notification-firebase";
+import { firebaseApp } from "@/features/notification-firebase/api/config";
 import { getUserRedirectPath } from "@/features/registration-flow";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import AuthLayout from "@/layouts/AuthLayout";
@@ -40,7 +43,21 @@ export default function Login() {
   }, [router]);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+      const messaging = getMessaging(firebaseApp);
+      const unsubscribe = onMessage(messaging, (payload) => {
+        console.log("Foreground push notification received:", payload);
+      });
+      return () => {
+        unsubscribe(); // Unsubscribe from the onMessage event
+      };
+    }
+  }, []);
+
+  useEffect(() => {
     const { query } = router;
+    fetchToken(null);
+
     if (query?.hash && query?.id) {
       dispatch(emulateLogin(query));
     }
