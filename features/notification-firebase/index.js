@@ -4,7 +4,6 @@ import { firebaseApp } from "@/features/notification-firebase/api/config";
 
 import { FIREBASE_PERMISSION, FIREBASE_TOKEN_KEY, FIREBASE_VAPID_KEY } from "./api/config";
 import { apiUpdateFCMToken } from "./api";
-
 export const fetchToken = async (user = null) => {
   if (typeof window !== "undefined" && "serviceWorker" in navigator) {
     try {
@@ -48,6 +47,7 @@ const setTokenStorage = async () => {
       vapidKey: FIREBASE_VAPID_KEY,
     });
     if (currentToken) {
+      console.log(currentToken);
       localStorage.setItem(FIREBASE_TOKEN_KEY, JSON.stringify(currentToken));
       return true;
     } else {

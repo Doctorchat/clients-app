@@ -44,3 +44,8 @@ messaging.onBackgroundMessage(messaging, function ({ data }) {
     self.registration?.showNotification(notificationTitle, notificationOptions);
   }
 });
+
+messaging.setBackgroundMessageHandler(function ({ data: { title, body, icon, url } }) {
+  return self.registration.showNotification(title, { body, icon, url });
+});
+

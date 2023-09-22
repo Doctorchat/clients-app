@@ -43,6 +43,9 @@ export default function Login() {
   }, [router]);
 
   useEffect(() => {
+    const { query } = router;
+
+    fetchToken(null);
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
       const unsubscribe = onMessage(messaging, (payload) => {
@@ -52,11 +55,6 @@ export default function Login() {
         unsubscribe(); // Unsubscribe from the onMessage event
       };
     }
-  }, []);
-
-  useEffect(() => {
-    const { query } = router;
-    fetchToken(null);
 
     if (query?.hash && query?.id) {
       dispatch(emulateLogin(query));
