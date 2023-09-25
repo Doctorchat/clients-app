@@ -49,9 +49,9 @@ export default function Login() {
 
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
-      const unsubscribe = onMessage(messaging, ({ data: { body, title } }) => {
-        new Notification(title, { body });
-        console.log("Foreground push notification received:", body);
+      const unsubscribe = onMessage(messaging, ({ data: { title, body, icon, url, clickAction } }) => {
+        new Notification(title, { title, body, icon, url, clickAction });
+        console.log("Foreground push notification received:", title, body, icon, url, clickAction);
       });
 
       return () => {
