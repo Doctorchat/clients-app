@@ -31,34 +31,25 @@ const messaging = firebase.messaging();
 //   self.registration?.showNotification(notificationTitle, notificationOptions);
 // });
 
-messaging.onBackgroundMessage(({ data }) => {
-  console.log("[firebase-messaging-sw.js] Received background message ", data);
-  // Customize notification here
-  const notificationTitle = "Background Message Title";
-  const notificationOptions = {
-    body: "Background Message body.",
-    icon: "/firebase-logo.png",
-  };
+messaging.onBackgroundMessage(({ data: { title, body, icon, url, clickAction } }) => {
+  console.log("[firebase-messaging-sw.js] Received background message ", title, body, icon, url, clickAction);
 
-  self.registration.showNotification(notificationTitle, notificationOptions);
+  self.registration.showNotification(title, { body, icon, url, clickAction });
 });
-messaging.setBackgroundMessageHandler(function ({ data: { title, body, icon, url } }) {
-  return self.registration.showNotification(title, { body, icon, url });
+messaging.setBackgroundMessageHandler(function ({ data: { title, body, icon, url, clickAction } }) {
+  return self.registration.showNotification(title, { body, icon, url, clickAction });
 });
 
-// messaging.onBackgroundMessage(messaging, function ({ data }) {
-//   console.log("Received background message ", data);
-//   if (data && data.title) {
-//     console.log("Received background message ", data);
-//     const notificationTitle = data.title;
-//     const notificationOptions = {
-//       body: data.body,
-//     };
+// Service worker event listener
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close(); // Close the notification
 
-//     self.registration?.showNotification(notificationTitle, notificationOptions);
-//   }
-// });
+  // Get notification data (assuming it's in the data field)
+  const notificationData = event.notification.data;
 
-// messaging.setBackgroundMessageHandler(function ({ data: { title, body, icon, url } }) {
-//   return self.registration.showNotification(title, { body, icon, url });
-// });
+  if (notificationData && notificationData.clickAction) {
+    console.log(" Open the specified URL in a new tab");
+    // Open the specified URL in a new tab
+    // event.waitUntil(clients.openWindow(notificationData.clickAction));
+  }
+});
