@@ -8,25 +8,26 @@ export const fetchToken = async (user = null) => {
   if (typeof window !== "undefined" && "serviceWorker" in navigator) {
     try {
       const getTokenFirebaseStorage = localStorage.getItem(FIREBASE_TOKEN_KEY);
-      const permissionStorage = localStorage.getItem(FIREBASE_PERMISSION);
-      if (permissionStorage || (!user && getTokenFirebaseStorage)) {
+      // const permissionStorage = localStorage.getItem(FIREBASE_PERMISSION);
+      if (!user && getTokenFirebaseStorage) {
         return;
       }
+    
       if (user) {
         if (!getTokenFirebaseStorage) {
           setTokenStorage().then(async (token) => {
             if (token) {
               await apiUpdateFCMToken(token);
-              localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify("true"));
-              localStorage.removeItem(FIREBASE_TOKEN_KEY);
+              // localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify("true"));
+              // localStorage.removeItem(FIREBASE_TOKEN_KEY);
             } else {
               console.log("Notifications are not active");
             }
           });
         } else if (getTokenFirebaseStorage) {
           await apiUpdateFCMToken(getTokenFirebaseStorage);
-          localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify("true"));
-          localStorage.removeItem(FIREBASE_TOKEN_KEY);
+          // localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify("true"));
+          // localStorage.removeItem(FIREBASE_TOKEN_KEY);
         }
       } else if (!user) {
         if (!getTokenFirebaseStorage) {
