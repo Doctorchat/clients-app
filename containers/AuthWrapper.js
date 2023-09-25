@@ -34,7 +34,7 @@ export default function AuthWrapper(props) {
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
-      const unsubscribe = messaging.onMessage(function ({ data: { body, title } }) {
+      const unsubscribe = onMessage(messaging, ({ data: { body, title } }) => {
         new Notification(title, { body });
         console.log("Foreground push notification received:", body);
       });
