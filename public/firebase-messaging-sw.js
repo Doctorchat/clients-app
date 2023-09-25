@@ -31,8 +31,8 @@ const messaging = firebase.messaging();
 //   self.registration?.showNotification(notificationTitle, notificationOptions);
 // });
 
-messaging.onBackgroundMessage((payload) => {
-  console.log("[firebase-messaging-sw.js] Received background message ", payload);
+messaging.onBackgroundMessage(({ data }) => {
+  console.log("[firebase-messaging-sw.js] Received background message ", data);
   // Customize notification here
   const notificationTitle = "Background Message Title";
   const notificationOptions = {
@@ -41,6 +41,9 @@ messaging.onBackgroundMessage((payload) => {
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
+});
+messaging.setBackgroundMessageHandler(function ({ data: { title, body, icon, url } }) {
+  return self.registration.showNotification(title, { body, icon, url });
 });
 
 // messaging.onBackgroundMessage(messaging, function ({ data }) {
