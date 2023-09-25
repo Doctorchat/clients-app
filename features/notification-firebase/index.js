@@ -14,9 +14,9 @@ export const fetchToken = async (user = null) => {
       }
       if (user) {
         if (!getTokenFirebaseStorage) {
-          setTokenStorage().then(async (notifPermission) => {
-            if (notifPermission) {
-              await apiUpdateFCMToken(getTokenFirebaseStorage);
+          setTokenStorage().then(async (token) => {
+            if (token) {
+              await apiUpdateFCMToken(token);
               localStorage.setItem(FIREBASE_PERMISSION, JSON.stringify("true"));
               localStorage.removeItem(FIREBASE_TOKEN_KEY);
             } else {
@@ -49,7 +49,7 @@ const setTokenStorage = async () => {
     if (currentToken) {
       console.log(currentToken);
       localStorage.setItem(FIREBASE_TOKEN_KEY, JSON.stringify(currentToken));
-      return true;
+      return currentToken;
     } else {
       console.log("No registration token available. Request permission to generate one.");
     }
