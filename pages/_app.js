@@ -14,12 +14,12 @@ import NotificationsWrapper from "@/containers/NotificationsWrapper";
 import MainLayout from "@/layouts/MainLayout";
 import getActiveLng from "@/utils/getActiveLng";
 
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import "@/services/i18next";
-import 'firebase/messaging';
+import "firebase/messaging";
 
-import { registerServiceWorker } from "../public/serviceWorker";
+import registerServiceWorker from "../public/serviceWorker";
 import { store } from "../store";
 
 // Styles
@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }) {
     ));
 
   return (
-    <LocaleWrapper>    
+    <LocaleWrapper>
       <QueryClientProvider client={queryClient}>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
