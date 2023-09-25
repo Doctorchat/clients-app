@@ -1,4 +1,4 @@
-export const registerServiceWorker = () => {
+const registerServiceWorker = () => {
   if (typeof window !== "undefined" && "serviceWorker" in navigator) {
     window.addEventListener("load", () => {
       navigator.serviceWorker
@@ -12,3 +12,4 @@ export const registerServiceWorker = () => {
     });
   }
 };
+export default registerServiceWorker;
