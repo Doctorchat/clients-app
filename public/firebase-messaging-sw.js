@@ -34,14 +34,19 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage(({ data: { title, body } }) => {
   console.log("[firebase-messaging-sw.js] Received background message ", title, body);
 
+  const bodyData = JSON.parse(body);
+  const { content } = bodyData;
+
   self.registration.showNotification(title, {
-    body,
+    body: content,
     icon: "./images/companyIcon.png",
   });
 });
 messaging.setBackgroundMessageHandler(function ({ data: { title, body } }) {
+  const bodyData = JSON.parse(body);
+  const { content } = bodyData;
   return self.registration.showNotification(title, {
-    body,
+    body: content,
     icon: "./images/companyIcon.png",
   });
 });
@@ -52,7 +57,7 @@ self.addEventListener("notificationclick", (event) => {
 
   // Get notification data (assuming it's in the data field)
   const notificationData = event.notification.data;
- console.log(" Open the specified URL in a new tab");
+  console.log(" Open the specified URL in a new tab");
   if (notificationData && notificationData.clickAction) {
     console.log(" Open the specified URL in a new tab");
     // Open the specified URL in a new tab
