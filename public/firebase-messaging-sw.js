@@ -25,12 +25,13 @@ messaging.onBackgroundMessage((payload) => {
 
   const { title, body } = payload.data;
   const parsedBody = JSON.parse(body); // Parse the JSON string
-console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
+  console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
   // Check if 'content' exists in the parsed object
   if (parsedBody && parsedBody.content) {
     self.registration.showNotification(title, {
       body: parsedBody.content,
       icon: "./images/companyIcon.png",
+      badge: parsedBody.chat_id,
     });
   } else {
     // Handle the case where 'content' is missing or invalid in the parsed JSON
@@ -40,17 +41,17 @@ console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
 messaging.setBackgroundMessageHandler(function (payload) {
   const { title, body } = payload.data;
   const parsedBody = JSON.parse(body);
-console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
+  console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
   if (parsedBody && parsedBody.content) {
     return self.registration.showNotification(title, {
       body: parsedBody.content,
       icon: "./images/companyIcon.png",
+      badge: parsedBody.chat_id,
     });
   } else {
     console.error("Invalid or missing 'content' in payload data:", payload);
   }
 });
-
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
