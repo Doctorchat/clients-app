@@ -41,8 +41,9 @@ export default function AuthWrapper(props) {
         const { title, body, click_action, icon } = payload.data;
 
         // Create a new notification
-        console.log(router)
         const { id, pathname } = router.query;
+        console.log(router, pathname !== "/chat");
+      
         if(pathname !== '/chat'){
           const notification = new Notification(title, { body });
           // Set the notification icon if provided
