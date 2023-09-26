@@ -32,8 +32,10 @@ export default function AuthWrapper(props) {
       query: { redirect: `${window.location.pathname}?${params.toString()}` },
     });
   }, [router]);
-  console.log(router);
+  const { id } = router;
+  console.log(router, id);
   useEffect(() => {
+    console.log(id, "id din router");
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
       const unsubscribe = onMessage(messaging, (payload) => {
@@ -42,16 +44,14 @@ export default function AuthWrapper(props) {
         // Extract data from the payload
         const { title, body } = payload.data;
         const bodyData = JSON.parse(body);
-        const { content, chat_id } = bodyData;
         // Create a new notification
-        const { id } = router;
-        console.log(id, "id din router");
-        console.log(chat_id, "chat_id din api");
-        console.log(content, "content din api");
+
+        console.log(bodyData.chat_id, "chat_id din api");
+        console.log(bodyData.content, "content din api");
         //id !== cel care vine din back
-        if (id !== chat_id) {
+        if (parseInt(id) !== parseInt(bodyData.chat_id)) {
           const notification = new Notification(title, {
-            body: content,
+            body: bodyData.content,
             icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
           });
           // notification.onclick = "https://app.doctorchat.md/chat?id=25472";

@@ -31,22 +31,22 @@ const messaging = firebase.messaging();
 //   self.registration?.showNotification(notificationTitle, notificationOptions);
 // });
 
-messaging.onBackgroundMessage(({ data: { title, body } }) => {
+messaging.onBackgroundMessage((payload) => {
   console.log("[firebase-messaging-sw.js] Received background message ", title, body);
-
+  const { title, body } = payload.data;
   const bodyData = JSON.parse(body);
-  const { content } = bodyData;
 
   self.registration.showNotification(title, {
-    body: content,
+    body: bodyData.content,
     icon: "./images/companyIcon.png",
   });
 });
-messaging.setBackgroundMessageHandler(function ({ data: { title, body } }) {
+messaging.setBackgroundMessageHandler(function (payload) {
+  const { title, body } = payload.data;
   const bodyData = JSON.parse(body);
-  const { content } = bodyData;
+
   return self.registration.showNotification(title, {
-    body: content,
+    body: bodyData.content,
     icon: "./images/companyIcon.png",
   });
 });
