@@ -20,7 +20,7 @@ const api = {
     get: () => axiosInstance.get("/user"),
     login: (data) => axiosInstance.post("/auth/login", data),
     logout: () => axiosInstance.post("/auth/logout"),
-    updateFCMToken:(token) =>axiosInstance.patch("/fcm-token", token),
+    updateFCMToken: (token) => axiosInstance.patch("/fcm-token", token),
     updateAvatar: (file) => axiosInstance.post("/user/update-avatar/", file),
     addInvestigation: (data) => axiosInstance.post("/user/investigations", data),
     updateInvestigation: (data) => axiosInstance.put(`/user/investigations/${data.id}`, data),
@@ -30,7 +30,8 @@ const api = {
     disponibility: (data) => axiosInstance.post("/user/card/disponibility", data),
     updatePassword: (data) => axiosInstance.post("/user/change-password/", data),
     toggleGuardStatus: (isGuard) => axiosInstance.post("/user/card/guard", { isGuard }),
-    card: (id, isAnonym) => axiosInstance.get(`/user/card/${id}?is_anonym=${isAnonym}`),
+    card: (id, isAnonym, showToCorporativeClients) =>
+      axiosInstance.get(`/user/card/${id}?is_anonym=${isAnonym}&showToCorporativeClients=${showToCorporativeClients}`),
     transactions: () => axiosInstance.get("/user/transactions"),
     setVacation: (data) => axiosInstance.post("/user/card/vacation", data),
     resetVacation: () => axiosInstance.put("/user/card/vacation"),

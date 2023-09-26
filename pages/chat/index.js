@@ -6,10 +6,12 @@ import { ChatContent, RightSide } from "@/modules/common";
 import { getChatContent, getChatUserInfo } from "@/store/actions";
 
 export default function ColumnCenter() {
-  const { chatUserInfo, chatContent } = useSelector((store) => ({
+  const { chatUserInfo, chatContent, user } = useSelector((store) => ({
     chatUserInfo: store.chatUserInfo,
     chatContent: store.chatContent,
+    user: store.user
   }));
+
   const dispatch = useDispatch();
   const router = useRouter();
   const { id } = router.query;
@@ -26,16 +28,18 @@ export default function ColumnCenter() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-
+  
   useEffect(() => {
-    if (chatContent.content?.user_id)
+    if(chatContent.content.user_id){
       dispatch(
         getChatUserInfo({
           id: chatContent.content.user_id,
           isAnonym: chatContent.content.isAnonym,
+          showToCorporativeClients: !!user.data.company_id,
         })
       );
-  }, [dispatch, chatContent.content]);
+    }
+  }, [dispatch, chatContent.content, user.data]);
 
   return (
     <>
