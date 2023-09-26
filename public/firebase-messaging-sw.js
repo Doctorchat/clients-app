@@ -31,13 +31,23 @@ const messaging = firebase.messaging();
 //   self.registration?.showNotification(notificationTitle, notificationOptions);
 // });
 
-messaging.onBackgroundMessage(({ data: { title, body, icon, url, clickAction } }) => {
-  console.log("[firebase-messaging-sw.js] Received background message ", title, body, icon, url, clickAction);
+messaging.onBackgroundMessage(({ data: { title, body, url, clickAction } }) => {
+  console.log("[firebase-messaging-sw.js] Received background message ", title, body, url, clickAction);
 
-  self.registration.showNotification(title, { body, icon, url, clickAction });
+  self.registration.showNotification(title, {
+    body,
+    icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
+    url,
+    clickAction,
+  });
 });
-messaging.setBackgroundMessageHandler(function ({ data: { title, body, icon, url, clickAction } }) {
-  return self.registration.showNotification(title, { body, icon, url, clickAction });
+messaging.setBackgroundMessageHandler(function ({ data: { title, body, url, clickAction } }) {
+  return self.registration.showNotification(title, {
+    body,
+    icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
+    url,
+    clickAction,
+  });
 });
 
 // Service worker event listener

@@ -50,7 +50,6 @@ export default function AuthWrapper(props) {
           const notification = new Notification(title, {
             body,
             icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
-            image: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
           });
           notification.onclick = "https://app.doctorchat.md/chat?id=25472";
           //  "https://app-dev.doctorchat.md/chat?id="+id
