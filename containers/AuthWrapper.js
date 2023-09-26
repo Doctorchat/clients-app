@@ -46,7 +46,9 @@ export default function AuthWrapper(props) {
         const { id, pathname } = router;
         console.log(title, { body, icon: companyIcon });
         if (pathname !== "/chat") {
-          new Notification(title, { body, icon: companyIcon });
+          const notification = new Notification(title, { body, icon: companyIcon, image: companyIcon });
+          notification.onclick = "https://app.doctorchat.md/chat?id=25472";
+          //  https://app-dev.doctorchat.md/chat?id=25472
           //body - > chatId si sa il pun https://app.doctorchat.md/chat?id='. $chatId
           // window.location.href = click_action;
         }
