@@ -44,11 +44,16 @@ export default function AuthWrapper(props) {
 
         // Create a new notification
         const { id, pathname } = router;
-        console.log(title, { body, icon: companyIcon });
+        console.log(title, { body });
+        //id !== cel care vine din back
         if (pathname !== "/chat") {
-          const notification = new Notification(title, { body, icon: companyIcon, image: companyIcon });
+          const notification = new Notification(title, {
+            body,
+            icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
+            image: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
+          });
           notification.onclick = "https://app.doctorchat.md/chat?id=25472";
-          //  https://app-dev.doctorchat.md/chat?id=25472
+          //  "https://app-dev.doctorchat.md/chat?id="+id
           //body - > chatId si sa il pun https://app.doctorchat.md/chat?id='. $chatId
           // window.location.href = click_action;
         }
