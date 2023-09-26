@@ -31,7 +31,7 @@ messaging.onBackgroundMessage((payload) => {
     self.registration.showNotification(title, {
       body: parsedBody.content,
       icon: "./images/companyIcon.png",
-      badge: parsedBody.chat_id,
+      badge2: parsedBody.chat_id,
     });
   } else {
     // Handle the case where 'content' is missing or invalid in the parsed JSON
@@ -46,7 +46,7 @@ messaging.setBackgroundMessageHandler(function (payload) {
     return self.registration.showNotification(title, {
       body: parsedBody.content,
       icon: "./images/companyIcon.png",
-      badge: parsedBody.chat_id,
+      badge2: parsedBody.chat_id,
     });
   } else {
     console.error("Invalid or missing 'content' in payload data:", payload);
