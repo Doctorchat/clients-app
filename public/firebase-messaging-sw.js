@@ -32,35 +32,90 @@ const messaging = firebase.messaging();
 // });
 
 messaging.onBackgroundMessage((payload) => {
-  console.log("[firebase-messaging-sw.js] Received background message ", title, body);
-  const { title, body } = payload.data;
-  const { content } = JSON.parse(body);
+  console.log("[firebase-messaging-sw.js] Received background message ", payload);
 
-  self.registration.showNotification(title, {
-    body: content,
-    icon: "./images/companyIcon.png",
-  });
+  const { title, body } = payload.data;
+  const parsedBody = JSON.parse(body); // Parse the JSON string
+
+  // Check if 'content' exists in the parsed object
+  if (parsedBody && parsedBody.content) {
+    self.registration.showNotification(title, {
+      body: parsedBody.content,
+      icon: "./images/companyIcon.png",
+    });
+  } else {
+    // Handle the case where 'content' is missing or invalid in the parsed JSON
+    console.error("Invalid or missing 'content' in payload data:", payload);
+  }
 });
 messaging.setBackgroundMessageHandler(function (payload) {
   const { title, body } = payload.data;
-  const { content } = JSON.parse(body);
+  const parsedBody = JSON.parse(body);
 
-  return self.registration.showNotification(title, {
-    body: content,
-    icon: "./images/companyIcon.png",
-  });
+  if (parsedBody && parsedBody.content) {
+    return self.registration.showNotification(title, {
+      body: parsedBody.content,
+      icon: "./images/companyIcon.png",
+    });
+  } else {
+    console.error("Invalid or missing 'content' in payload data:", payload);
+  }
 });
 
-// Service worker event listener
+// self.addEventListener("notificationclick", (event) => {
+//   event.notification.close();
+
+//   // Get notification data (assuming it's in the data field)
+//   const notificationData = event.notification.data;
+//   console.log(
+//     "Open the specified URL in a new tab",
+//     event,
+//     notificationData,
+//     notificationData && notificationData.clickAction,
+//     notificationData.clickAction
+//   );
+
+//   if (notificationData && notificationData.clickAction) {
+//     // Open the specified URL in a new tab
+//     event.waitUntil(
+//       // eslint-disable-next-line no-undef
+//       clients.openWindow(notificationData.clickAction).then(() => {
+//         // Do something after the new tab is opened, if needed
+//         console.log("New tab opened with URL:", notificationData.clickAction);
+//       })
+//     );
+//   }
+// });
+
 self.addEventListener("notificationclick", (event) => {
-  event.notification.close(); // Close the notification
+  event.notification.close();
 
   // Get notification data (assuming it's in the data field)
   const notificationData = event.notification.data;
-  console.log(" Open the specified URL in a new tab",event, notificationData);
-  if (notificationData && notificationData.clickAction) {
-    console.log(" Open the specified URL in a new tab");
-    // Open the specified URL in a new tab
-    // event.waitUntil(clients.openWindow(notificationData.clickAction));
+  console.log("Open the specified URL in a new tab", notificationData.body);
+
+  if (notificationData && notificationData.body) {
+    try {
+      const bodyData = JSON.parse(notificationData.body);
+      const chatId = bodyData.chat_id;
+
+      if (chatId) {
+        const url = "https://app-dev.doctorchat.md/chat?id=" + chatId;
+        // Open the specified URL in a new tab
+        event.waitUntil(
+          // eslint-disable-next-line no-undef
+          clients.openWindow(url).then(() => {
+            // Do something after the new tab is opened, if needed
+            console.log("New tab opened with URL:", url);
+          })
+        );
+      } else {
+        console.error("chat_id is missing in the notification data:", notificationData);
+      }
+    } catch (error) {
+      console.error("Error parsing JSON from body:", error);
+    }
+  } else {
+    console.error("body is missing in the notification data:", notificationData);
   }
 });

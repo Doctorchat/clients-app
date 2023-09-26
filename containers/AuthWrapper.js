@@ -34,7 +34,7 @@ export default function AuthWrapper(props) {
   }, [router]);
 
   useEffect(() => {
-    const { id } = router;
+    const { id } = router.query;
     console.log(router, id);
     console.log(id, "id din router");
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
@@ -42,28 +42,21 @@ export default function AuthWrapper(props) {
       const unsubscribe = onMessage(messaging, (payload) => {
         console.log("Message received:", payload);
 
-        // Extract data from the payload
         const { title, body } = payload.data;
         const bodyData = JSON.parse(body);
-        // Create a new notification
 
         console.log(bodyData.chat_id, "chat_id din api");
         console.log(bodyData.content, "content din api");
-        //id !== cel care vine din back
-        if (parseInt(id) !== parseInt(bodyData.chat_id)) {
+
+        if (!id || parseInt(id) !== parseInt(bodyData.chat_id)) {
           const notification = new Notification(title, {
             body: bodyData.content,
             icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
           });
-          // notification.onclick = "https://app.doctorchat.md/chat?id=25472";
 
           notification.onclick = () => {
             window.location.href = "https://app-dev.doctorchat.md/chat?id=" + (bodyData.chat_id ?? id);
-            console.log("Notification clicked");
           };
-          //  "https://app-dev.doctorchat.md/chat?id="+id
-          //body - > chatId si sa il pun https://app.doctorchat.md/chat?id='. $chatId
-          // window.location.href = click_action;
         }
       });
 
