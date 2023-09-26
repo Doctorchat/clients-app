@@ -30,7 +30,7 @@ export default function AuthWrapper(props) {
       query: { redirect: `${window.location.pathname}?${params.toString()}` },
     });
   }, [router]);
-
+  console.log(router);
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
@@ -41,17 +41,20 @@ export default function AuthWrapper(props) {
         const { title, body, click_action, icon } = payload.data;
 
         // Create a new notification
-        const notification = new Notification(title, { body });
+        console.log(router)
+        const { id, pathname } = router.query;
+        if(pathname !== '/chat'){
+          const notification = new Notification(title, { body });
+          // Set the notification icon if provided
+          if (icon) {
+            notification.icon = icon;
+          }
 
-        // Set the notification icon if provided
-        if (icon) {
-          notification.icon = icon;
-        }
-
-        // Handle the click_action URL, if provided
-        if (click_action) {
-          window.location.href = click_action;
-        }
+          // Handle the click_action URL, if provided
+          if (click_action) {
+            window.location.href = click_action;
+          }
+        }       
       });
 
       return () => {
