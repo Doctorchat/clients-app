@@ -11,6 +11,8 @@ import { firebaseApp } from "@/features/notification-firebase/api/config";
 import { getUserRedirectPath } from "@/features/registration-flow";
 import { fetchUserByToken, getBootstrapData } from "@/store/actions";
 
+import companyIcon from "../public/images/companyIcon.png";
+
 export default function AuthWrapper(props) {
   const { children } = props;
 
@@ -38,22 +40,17 @@ export default function AuthWrapper(props) {
         console.log("Message received:", payload);
 
         // Extract data from the payload
-        const { title, body, click_action, icon } = payload.data;
+        const { title, body } = payload.data;
 
         // Create a new notification
         const { id, pathname } = router;
-        console.log(router, pathname !== "/chat");
+        console.log(title, { body, icon: companyIcon });
         if (pathname !== "/chat") {
-          const notification = new Notification(title, { body });
-          // Set the notification icon if provided
-          if (icon) {
-            notification.icon = icon;
-          }
-
-          // Handle the click_action URL, if provided
-          if (click_action) {
-            window.location.href = click_action;
-          }
+          const notification = new Notification(title, { body, icon: companyIcon, image: companyIcon });
+          notification.onclick = "https://app.doctorchat.md/chat?id=25472";
+          //  https://app-dev.doctorchat.md/chat?id=25472
+          //body - > chatId si sa il pun https://app.doctorchat.md/chat?id='. $chatId
+          // window.location.href = click_action;
         }
       });
 

@@ -50,23 +50,7 @@ export default function Login() {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
       const unsubscribe = onMessage(messaging, (payload) => {
-        console.log("Message received:", payload);
-
-        // Extract data from the payload
-        const { title, body, click_action, icon } = payload.data;
-
-        // Create a new notification
-        const notification = new Notification(title, { body });
-
-        // Set the notification icon if provided
-        if (icon) {
-          notification.icon = icon;
-        }
-
-        // Handle the click_action URL, if provided
-        if (click_action) {
-          window.location.href = click_action;
-        }
+        console.log("Message received on page Login:", payload);
       });
 
       return () => {
