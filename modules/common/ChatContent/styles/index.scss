@@ -1,5 +1,4 @@
 #column-center {
-  background-image: url(../../../../assets/images/chat-content.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 100% 50%;
@@ -184,5 +183,20 @@
     border-radius: 16px;
     margin: 0 5px;
     height: unset !important;
+  }
+}
+@media (max-width: 480px) {
+  #column-center {
+    background-image: url(../../../../assets/images/chat-content.jpg) , linear-gradient(#d7eeea, #d7eeea);
+  }
+}
+@media  (min-width: 481px) and (max-width: 1024px) {
+  #column-center {
+    background-image: url(../../../../assets/images/chat-content.jpg), linear-gradient(#d7eeea, #d7eeea);
+  }
+}
+@media  (min-width: 1025px) {
+  #column-center {
+    background-image: url(../../../../assets/images/chat-content.jpg), linear-gradient(#d7eeea, #d7eeea);
   }
 }
