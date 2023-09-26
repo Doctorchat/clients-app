@@ -35,12 +35,13 @@ export default function AuthWrapper(props) {
 
   useEffect(() => {
     const { id } = router.query;
-    console.log(router, id);
-    console.log(id, "id din router");
+
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
       const unsubscribe = onMessage(messaging, (payload) => {
         console.log("Message received:", payload);
+        console.log(router, id);
+        console.log(id, "id din router");
 
         const { title, body } = payload.data;
         const bodyData = JSON.parse(body);
@@ -64,7 +65,7 @@ export default function AuthWrapper(props) {
         unsubscribe(); // Unsubscribe from the onMessage event
       };
     }
-  }, []);
+  }, [router, router.query]);
 
   useEffectOnce(() => {
     const accessToken = localStorage.getItem("dc_token");
