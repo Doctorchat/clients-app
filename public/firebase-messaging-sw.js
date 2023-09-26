@@ -57,7 +57,7 @@ self.addEventListener("notificationclick", (event) => {
 
   // Get notification data (assuming it's in the data field)
   const notificationData = event.notification.data;
-  console.log(" Open the specified URL in a new tab");
+  console.log(" Open the specified URL in a new tab",event, notificationData);
   if (notificationData && notificationData.clickAction) {
     console.log(" Open the specified URL in a new tab");
     // Open the specified URL in a new tab
