@@ -46,16 +46,20 @@ export default function AuthWrapper(props) {
         const { id, pathname } = router;
         console.log(title, { body });
         //id !== cel care vine din back
-        if (pathname !== "/chat") {
+        // if (pathname !== "/chat") {
           const notification = new Notification(title, {
             body,
             icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
           });
-          notification.onclick = "https://app.doctorchat.md/chat?id=25472";
+          // notification.onclick = "https://app.doctorchat.md/chat?id=25472";
+
+          notification.onclick = () => {
+            console.log("Notification clicked");
+          };
           //  "https://app-dev.doctorchat.md/chat?id="+id
           //body - > chatId si sa il pun https://app.doctorchat.md/chat?id='. $chatId
           // window.location.href = click_action;
-        }
+        // }
       });
 
       return () => {
