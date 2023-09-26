@@ -31,22 +31,18 @@ const messaging = firebase.messaging();
 //   self.registration?.showNotification(notificationTitle, notificationOptions);
 // });
 
-messaging.onBackgroundMessage(({ data: { title, body, url, clickAction } }) => {
-  console.log("[firebase-messaging-sw.js] Received background message ", title, body, url, clickAction);
+messaging.onBackgroundMessage(({ data: { title, body } }) => {
+  console.log("[firebase-messaging-sw.js] Received background message ", title, body);
 
   self.registration.showNotification(title, {
     body,
-    icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
-    url,
-    clickAction,
+    icon: "./images/companyIcon.png",
   });
 });
-messaging.setBackgroundMessageHandler(function ({ data: { title, body, url, clickAction } }) {
+messaging.setBackgroundMessageHandler(function ({ data: { title, body } }) {
   return self.registration.showNotification(title, {
     body,
-    icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
-    url,
-    clickAction,
+    icon: "./images/companyIcon.png",
   });
 });
 
@@ -56,7 +52,7 @@ self.addEventListener("notificationclick", (event) => {
 
   // Get notification data (assuming it's in the data field)
   const notificationData = event.notification.data;
-
+ console.log(" Open the specified URL in a new tab");
   if (notificationData && notificationData.clickAction) {
     console.log(" Open the specified URL in a new tab");
     // Open the specified URL in a new tab
