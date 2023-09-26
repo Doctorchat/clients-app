@@ -34,8 +34,8 @@ export default function AuthWrapper(props) {
   }, [router]);
 
   useEffect(() => {
-      const { id } = router;
-      console.log(router, id);
+    const { id } = router;
+    console.log(router, id);
     console.log(id, "id din router");
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
@@ -58,7 +58,7 @@ export default function AuthWrapper(props) {
           // notification.onclick = "https://app.doctorchat.md/chat?id=25472";
 
           notification.onclick = () => {
-            window.location.href = "https://app-dev.doctorchat.md/chat?id=" + id;
+            window.location.href = "https://app-dev.doctorchat.md/chat?id=" + (bodyData.chat_id ?? id);
             console.log("Notification clicked");
           };
           //  "https://app-dev.doctorchat.md/chat?id="+id
