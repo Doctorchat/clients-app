@@ -58,15 +58,13 @@ self.addEventListener("notificationclick", (event) => {
 
   // Get notification data (assuming it's in the data field)
   const notificationData = event.notification.data;
-  console.log("Open the specified URL in a new tab", notificationData, event.notification);
+  const notificatioBody = event.notification.body;
+  console.log("Open the specified URL in a new tab", notificationData, notificatioBody);
 
-  if (notificationData && notificationData.body) {
+  if (notificatioBody) {
     try {
-      const bodyData = JSON.parse(notificationData.body);
-      const chatId = bodyData.chat_id;
-
-      if (chatId) {
-        const url = "https://app-dev.doctorchat.md/chat?id=" + chatId;
+      if (notificationData) {
+        const url = "https://app-dev.doctorchat.md/chat?id=" + notificationData;
         // Open the specified URL in a new tab
         event.waitUntil(
           // eslint-disable-next-line no-undef
@@ -82,6 +80,6 @@ self.addEventListener("notificationclick", (event) => {
       console.error("Error parsing JSON from body:", error);
     }
   } else {
-    console.error("body is missing in the notification data:", notificationData);
+    console.error("body is missing in the notification data:", event.notification);
   }
 });
