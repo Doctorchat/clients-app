@@ -11,8 +11,6 @@ import { firebaseApp } from "@/features/notification-firebase/api/config";
 import { getUserRedirectPath } from "@/features/registration-flow";
 import { fetchUserByToken, getBootstrapData } from "@/store/actions";
 
-import companyIcon from "../public/images/companyIcon.png";
-
 export default function AuthWrapper(props) {
   const { children } = props;
 
@@ -38,17 +36,9 @@ export default function AuthWrapper(props) {
 
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
-      const unsubscribe = onMessage(messaging, (payload) => {
-        console.log("Message received:", payload);
-        console.log(router, id);
-        console.log(id, "id din router");
-
+      const unsubscribe = onMessage(messaging, (payload) => {     
         const { title, body } = payload.data;
-        const bodyData = JSON.parse(body);
-
-        console.log(bodyData.chat_id, "chat_id din api");
-        console.log(bodyData.content, "content din api");
-
+        const bodyData = JSON.parse(body);     
         if (!id || parseInt(id) !== parseInt(bodyData.chat_id)) {
           const notification = new Notification(title, {
             body: bodyData.content,
@@ -62,7 +52,7 @@ export default function AuthWrapper(props) {
       });
 
       return () => {
-        unsubscribe(); // Unsubscribe from the onMessage event
+        unsubscribe();
       };
     }
   }, [router, router.query]);

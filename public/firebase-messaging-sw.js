@@ -21,12 +21,8 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
-  console.log("[firebase-messaging-sw.js] Received background message ", payload);
-
   const { title, body } = payload.data;
   const parsedBody = JSON.parse(body); // Parse the JSON string
-  console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
-  // Check if 'content' exists in the parsed object
   if (parsedBody && parsedBody.content) {
     self.registration.showNotification(title, {
       body: parsedBody.content,
@@ -34,14 +30,12 @@ messaging.onBackgroundMessage((payload) => {
       data: parseInt(parsedBody.chat_id),
     });
   } else {
-    // Handle the case where 'content' is missing or invalid in the parsed JSON
     console.error("Invalid or missing 'content' in payload data:", payload);
   }
 });
 messaging.setBackgroundMessageHandler(function (payload) {
   const { title, body } = payload.data;
   const parsedBody = JSON.parse(body);
-  console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
   if (parsedBody && parsedBody.content) {
     return self.registration.showNotification(title, {
       body: parsedBody.content,
@@ -55,17 +49,13 @@ messaging.setBackgroundMessageHandler(function (payload) {
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-
-  // Get notification data (assuming it's in the data field)
   const notificationData = event.notification.data;
   const notificatioBody = event.notification.body;
-  console.log("Open the specified URL in a new tab", notificationData, notificatioBody);
 
   if (notificatioBody) {
     try {
       if (notificationData) {
         const url = "https://app-dev.doctorchat.md/chat?id=" + notificationData;
-        // Open the specified URL in a new tab
         event.waitUntil(
           // eslint-disable-next-line no-undef
           clients.openWindow(url).then(() => {
