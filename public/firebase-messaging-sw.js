@@ -20,23 +20,12 @@ firebase.initializeApp(firebaseConfig);
 // eslint-disable-next-line no-undef
 const messaging = firebase.messaging();
 
-// messaging.onBackgroundMessage(function (payload) {
-//   console.log("Received background message ", payload);
-
-//   const notificationTitle = payload.notification.title;
-//   const notificationOptions = {
-//     body: payload.notification.body,
-//   };
-
-//   self.registration?.showNotification(notificationTitle, notificationOptions);
-// });
-
 messaging.onBackgroundMessage((payload) => {
   console.log("[firebase-messaging-sw.js] Received background message ", payload);
 
   const { title, body } = payload.data;
   const parsedBody = JSON.parse(body); // Parse the JSON string
-
+console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
   // Check if 'content' exists in the parsed object
   if (parsedBody && parsedBody.content) {
     self.registration.showNotification(title, {
@@ -51,7 +40,7 @@ messaging.onBackgroundMessage((payload) => {
 messaging.setBackgroundMessageHandler(function (payload) {
   const { title, body } = payload.data;
   const parsedBody = JSON.parse(body);
-
+console.log(parsedBody, parsedBody.content, parsedBody && parsedBody.content);
   if (parsedBody && parsedBody.content) {
     return self.registration.showNotification(title, {
       body: parsedBody.content,
@@ -62,37 +51,13 @@ messaging.setBackgroundMessageHandler(function (payload) {
   }
 });
 
-// self.addEventListener("notificationclick", (event) => {
-//   event.notification.close();
-
-//   // Get notification data (assuming it's in the data field)
-//   const notificationData = event.notification.data;
-//   console.log(
-//     "Open the specified URL in a new tab",
-//     event,
-//     notificationData,
-//     notificationData && notificationData.clickAction,
-//     notificationData.clickAction
-//   );
-
-//   if (notificationData && notificationData.clickAction) {
-//     // Open the specified URL in a new tab
-//     event.waitUntil(
-//       // eslint-disable-next-line no-undef
-//       clients.openWindow(notificationData.clickAction).then(() => {
-//         // Do something after the new tab is opened, if needed
-//         console.log("New tab opened with URL:", notificationData.clickAction);
-//       })
-//     );
-//   }
-// });
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
   // Get notification data (assuming it's in the data field)
   const notificationData = event.notification.data;
-  console.log("Open the specified URL in a new tab", notificationData.body);
+  console.log("Open the specified URL in a new tab", notificationData, event.notification);
 
   if (notificationData && notificationData.body) {
     try {
