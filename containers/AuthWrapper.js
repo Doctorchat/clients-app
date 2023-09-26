@@ -32,9 +32,10 @@ export default function AuthWrapper(props) {
       query: { redirect: `${window.location.pathname}?${params.toString()}` },
     });
   }, [router]);
-  const { id } = router;
-  console.log(router, id);
+
   useEffect(() => {
+      const { id } = router;
+      console.log(router, id);
     console.log(id, "id din router");
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
