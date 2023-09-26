@@ -34,19 +34,19 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
   console.log("[firebase-messaging-sw.js] Received background message ", title, body);
   const { title, body } = payload.data;
-  const bodyData = JSON.parse(body);
+  const { content } = JSON.parse(body);
 
   self.registration.showNotification(title, {
-    body: bodyData.content,
+    body: content,
     icon: "./images/companyIcon.png",
   });
 });
 messaging.setBackgroundMessageHandler(function (payload) {
   const { title, body } = payload.data;
-  const bodyData = JSON.parse(body);
+  const { content } = JSON.parse(body);
 
   return self.registration.showNotification(title, {
-    body: bodyData.content,
+    body: content,
     icon: "./images/companyIcon.png",
   });
 });
