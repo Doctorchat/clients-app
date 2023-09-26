@@ -55,7 +55,7 @@ self.addEventListener("notificationclick", (event) => {
   if (notificatioBody) {
     try {
       if (notificationData) {
-        const url = "https://app-dev.doctorchat.md/chat?id=" + notificationData;
+        const url = this.location.origin + "/chat?id=" + notificationData;
         event.waitUntil(
           // eslint-disable-next-line no-undef
           clients.openWindow(url).then(() => {

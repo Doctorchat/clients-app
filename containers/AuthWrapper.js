@@ -36,17 +36,18 @@ export default function AuthWrapper(props) {
 
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       const messaging = getMessaging(firebaseApp);
-      const unsubscribe = onMessage(messaging, (payload) => {     
+      const unsubscribe = onMessage(messaging, (payload) => {
         const { title, body } = payload.data;
-        const bodyData = JSON.parse(body);     
+        const bodyData = JSON.parse(body);
         if (!id || parseInt(id) !== parseInt(bodyData.chat_id)) {
           const notification = new Notification(title, {
             body: bodyData.content,
             icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
           });
+          const url = window.location.origin + "/chat?id=" + (bodyData.chat_id ?? id);
 
           notification.onclick = () => {
-            window.location.href = "https://app-dev.doctorchat.md/chat?id=" + (bodyData.chat_id ?? id);
+            window.open(url);
           };
         }
       });
