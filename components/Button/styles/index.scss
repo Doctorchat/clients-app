@@ -34,13 +34,19 @@
       visibility: visible;
     }
   }
-  &:active {
+   &:active {
     .dc-btn-content {
       transform: scale(0.96);
     }
   }
 }
 
+.analyses{
+    background-color: #00539f !important;
+    span {
+      color:  #fdb813 !important;
+    }
+}
 .dc-btn-content {
   display: flex;
   align-items: center;

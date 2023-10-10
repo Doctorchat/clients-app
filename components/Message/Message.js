@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
-import BelOnIcon from "@/icons/bel-on.svg";
 import EditIcon from "@/icons/edit.svg";
+import SinevoIcon from "@/icons/synevo-square.svg";
 import api from "@/services/axios/api";
 import { chatContentUpdateMessage } from "@/store/slices/chatContentSlice";
 import { updateConversation } from "@/store/slices/conversationListSlice";
@@ -24,7 +24,8 @@ import MessageFile from "./MessageFile";
 import MessageType from "./MessageType";
 
 export default function Message(props) {
-  const { id, content, updated, side, type, meet, seen, files, chatId, isLastMessage, status, recommendations, url } = props;
+  const { id, content, updated, side, type, meet, seen, files, chatId, isLastMessage, status, recommendations, url } =
+    props;
   const [isEditing, setIsEditing] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
   const editForm = useForm({ defaultValues: { content } });
@@ -136,16 +137,16 @@ export default function Message(props) {
             ))}
           </div>
           <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
-           <span className="message-time">
-          {date(updated).time}
-          <span className="inner">{date(updated).time}</span>
-        </span>
-        </AuthRoleWrapper>
+            <span className="message-time">
+              {date(updated).time}
+              <span className="inner">{date(updated).time}</span>
+            </span>
+          </AuthRoleWrapper>
           <AuthRoleWrapper roles={[userRoles.get("client")]}>
             <div className="request-image__actions">
-              <Button onClick={()=>window.open(url, '_blank')}>
+              <Button className="analyses" onClick={() => window.open(url, "_blank")} >
                 <div className="request-image__size">
-                  <BelOnIcon />
+                  <SinevoIcon />
                   <span> {t("chat_attach.request_to_schedule")} </span>
                 </div>
               </Button>
