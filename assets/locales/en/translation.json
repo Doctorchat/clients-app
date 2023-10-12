@@ -217,7 +217,12 @@
     "warn_title": "Your account is being verified.",
     "warn_subtitle": "Upon completion of the verification process, you will receive an email at the specified email address."
   },
+  "investigation_template": {
+    "title": "Complete the questionnaire",
+    "description": "Answer the questions below"
+  },
   "optional": "Optional",
+  "required": "Required",
   "fixing": "Fixing",
   "appointments": "Appointments",
   "settings": "Settings",
