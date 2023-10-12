@@ -47,7 +47,7 @@ export default function MessagesList(props) {
             <span className="group-date-text">{IOSMonthDate(group)}</span>
           </div>
           {groupedMessage[group].map((msg) => {
-            if (msg.type === "questions") {            
+            if (msg.type === "investigation") {            
               return  <SurveyCustom key={msg.id} chatId={chatId} docId={docId} {...msg} />
             }
             if (msg.type === "feedback") {
