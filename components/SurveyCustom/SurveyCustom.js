@@ -93,7 +93,7 @@ export default function SurveyCustom(props) {
           <div className="chat-feeback-section w-100">
             <Form methods={form} className="w-100" onFinish={reviewSubmitHanlder}>
               {questions.map(({ question, id }) => (
-                <Form.Item label={question} name={id + ""}>
+                <Form.Item label={question} key={id} name={id + ""}>
                   <Textarea className="feedback-textarea" minHeight={60} placeholder={t("feedback_form.description")} />
                 </Form.Item>
               ))}
