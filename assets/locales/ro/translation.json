@@ -219,7 +219,12 @@
     "warn_title": "Contul dvs. este în curs de verificare.",
     "warn_subtitle": "La finalizarea procesului de verificare, veți primi un e-mail la adresa de e-mail specificată."
   },
+  "investigation_template": {
+    "title": "Completează chestionarul",
+    "description": "Răspunde la întrebările de mai jos"
+  },
   "optional": "Opțional",
+  "required": "Obligatoriu",
   "fixing": "Fixăm",
   "appointments": "Programări",
   "settings": "Setări",
