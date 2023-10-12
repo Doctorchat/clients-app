@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
-
 import api from "@/services/axios/api";
 import { chatContentUpdateMessage } from "@/store/slices/chatContentSlice";
 import { notification } from "@/store/slices/notificationsSlice";
@@ -30,21 +29,21 @@ export default function SurveyCustom(props) {
       }));
       console.log(parsedValues);
 
-    //   setLoading(true);
+      //   setLoading(true);
 
-    //   try {
-        // await api.conversation.sendInvestigation(chatId, { content: parsedValues });
+      //   try {
+      // await api.conversation.sendInvestigation(chatId, { content: parsedValues });
 
-    //     dispatch(chatContentUpdateMessage({ id: messageId, content: "submitted" }));
-    //   } catch (error) {
-    //     dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
-    //   } finally {
-    //     setLoading(true);
-    //   }
+      //     dispatch(chatContentUpdateMessage({ id: messageId, content: "submitted" }));
+      //   } catch (error) {
+      //     dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
+      //   } finally {
+      //     setLoading(true);
+      //   }
     },
     [chatId]
   );
-    const questions = [
+  const questions = [
     {
       id: 1,
       doctor_id: 352,
@@ -93,19 +92,14 @@ export default function SurveyCustom(props) {
         <div className="chat-feedback-review">
           <div className="chat-feeback-section w-100">
             <Form methods={form} className="w-100" onFinish={reviewSubmitHanlder}>
-              {questions.map(({ question, id })=>
-               (<Form.Item label={question} name={id+""}>
-                <Textarea className="feedback-textarea" minHeight={60} placeholder={t("feedback_form.description")} />
-              </Form.Item>)
-              )}
+              {questions.map(({ question, id }) => (
+                <Form.Item label={question} name={id + ""}>
+                  <Textarea className="feedback-textarea" minHeight={60} placeholder={t("feedback_form.description")} />
+                </Form.Item>
+              ))}
 
               <div className="d-flex justify-content-end">
-                <Button
-                  type="primary"
-                  className="w-100"
-                  htmlType="submit"
-                  loading={loading}
-                >
+                <Button type="primary" className="w-100" htmlType="submit" loading={loading}>
                   {t("send")}
                 </Button>
               </div>
