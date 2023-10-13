@@ -21,6 +21,7 @@ import Form from "../Form";
 import { Textarea } from "../Inputs";
 
 import MessageFile from "./MessageFile";
+import MessageSurvey from "./MessageSurvey";
 import MessageType from "./MessageType";
 
 export default function Message(props) {
@@ -114,7 +115,7 @@ export default function Message(props) {
             onClick={toggleMessageEditStatus(true)}
           />
         </AuthRoleWrapper>
-        {Boolean(content) && (
+        {Boolean(content) && type !== "answer" && (
           <div className="message-content">
             {content}
             <span className="message-time">
@@ -125,6 +126,7 @@ export default function Message(props) {
         )}
 
         <MessageType type={type} componentProps={meet} status={status} />
+        <MessageSurvey type={type} content={content} status={status} />
       </div>
       {!!recommendations && (
         <div className="request-image message">
