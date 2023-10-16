@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -35,7 +35,7 @@ export default function SurveyCustom(props) {
         const data = { message_id: id, content: parsedValues };
         await api.conversation.sendInvestigation(data);
 
-            // dispatch(chatContentUpdateMessage({ id: messageId, content: "submitted" }));
+        // dispatch(chatContentUpdateMessage({ id: messageId, content: "submitted" }));
       } catch (error) {
         dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
       } finally {
@@ -56,15 +56,19 @@ export default function SurveyCustom(props) {
           <div className="chat-feeback-section w-100">
             <Form methods={form} className="w-100" onFinish={addingAnswersHandler}>
               {investigation?.length &&
-                investigation?.map(({ question, id }) => (
-                  <Form.Item label={question} key={id} name={id + ""}>
+                investigation?.map(({ question, id }) => {
+                  const labelWidth = question.length; 
+                  const heightLabel = labelWidth > 43 ? Math.round(((15 * (labelWidth / 43))/2)) : 0;
+                 return  <Form.Item label={question} className={`form-survey label-${id}`} key={id} name={id + ""} style={{marginTop: heightLabel ? (heightLabel+5) : 0}}>
                     <Textarea
                       className="feedback-textarea"
-                      minHeight={60}
+                      height={heightLabel  ? (heightLabel+60):60}
+                      minHeight={heightLabel  ? (heightLabel+60):60}
                       placeholder={t("feedback_form.description")}
+                      style={{paddingTop:heightLabel?heightLabel : 8}}
                     />
                   </Form.Item>
-                ))}
+})}
 
               <div className="d-flex justify-content-end">
                 <Button type="primary" className="w-100" htmlType="submit" loading={loading}>

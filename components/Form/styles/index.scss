@@ -43,6 +43,40 @@
     }
   }
 }
+.form-survey {
+  .form-control-label.is-active {
+    top: 0;
+    padding: 0 2px;
+    font-weight: 500;
+    transform: translate(12px, -50%) scale(0.85);
+    color: var(--bs-primary);
+    max-width: 100%;
+    white-space: normal; 
+    overflow: visible; 
+  }
+  .form-control-label {
+    display: inline-block;
+    position: absolute;
+    top: 16px;
+    left: 0;
+    transform: translateX(12px);
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    margin-bottom: 0;
+    background-color: #fff;
+    z-index: 2;
+    transition: top 0.2s, padding 0.2s, font-weight 0s 0.1s, transform 0.2s;
+    transform-origin: left center;
+    color: #9e9e9e;
+    pointer-events: none;
+    max-width: 93%;
+    font-size: 15px;
+    text-overflow: clip; 
+    white-space: normal; 
+    overflow: visible; 
+  }
+}
 
 .form-control-label {
   display: inline-block;
