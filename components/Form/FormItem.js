@@ -8,7 +8,7 @@ import Error from "./ErrorItem";
 import FormItemHelp from "./FormItemHelp";
 
 export default function FormItem(props) {
-  const { name, label, className, children, disabled, help } = props;
+  const { name, label, className, children, disabled, help, style} = props;
   const { control } = useFormContext();
   const [animateLabel, setAnimateLabel] = useState(false);
 
@@ -22,6 +22,7 @@ export default function FormItem(props) {
       <div
         className={cs(className, "form-control", invalid && "invalid")}
         data-animate-label={animateLabel}
+        style={style}
       >
         {cloneElement(Children.only(children), { ...field, label, disabled })}
         <FormItemHelp hasError={!!error?.message} help={help} />
