@@ -48,6 +48,7 @@ export default function Login() {
     fetchToken(null);
 
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+      
       const messaging = getMessaging(firebaseApp);
       const unsubscribe = onMessage(messaging, (payload) => {
         console.log("Message received on page Login:", payload);

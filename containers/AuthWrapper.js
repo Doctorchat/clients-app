@@ -35,6 +35,7 @@ export default function AuthWrapper(props) {
     const { id } = router.query;
 
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+      
       const messaging = getMessaging(firebaseApp);
       const unsubscribe = onMessage(messaging, (payload) => {
         const { title, body } = payload.data;

@@ -9,6 +9,7 @@ export const FIREBASE_APP_ID = "1:373860489948:web:138a8c02fb772e3ba87219";
 export const FIREBASE_TOKEN_KEY = "firebase:token";
 export const FIREBASE_PERMISSION = "notification:firebase";
 
+
 import { initializeApp } from 'firebase/app';
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,

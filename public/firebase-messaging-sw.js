@@ -30,6 +30,7 @@ messaging.onBackgroundMessage((payload) => {
       data: parseInt(parsedBody.chat_id),
     });
   } else {
+    
     console.error("Invalid or missing 'content' in payload data:", payload);
   }
 });
