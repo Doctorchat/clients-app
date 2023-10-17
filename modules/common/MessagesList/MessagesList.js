@@ -8,6 +8,7 @@ import Message from "@/components/Message";
 import SurveyCustom from "@/components/SurveyCustom";
 import { RequestImageMessage } from "@/features/attachments";
 import { IOSMonthDate } from "@/utils/date";
+import MessageSurvey from "@/components/Message/MessageSurvey";
 
 export default function MessagesList(props) {
   const { chatId, docId, list, status } = props;
@@ -49,6 +50,9 @@ export default function MessagesList(props) {
           {groupedMessage[group].map((msg) => {
             if (msg.type === "investigation") {            
               return  <SurveyCustom key={msg.id} chatId={chatId} docId={docId} {...msg} />
+            }
+            if (msg.type === "answer") {            
+              return   <MessageSurvey key={msg.id} type={msg.type} content={msg.content} />
             }
             if (msg.type === "feedback") {
             return <ChatFeedback key={msg.id} chatId={chatId} docId={docId} {...msg} />;
