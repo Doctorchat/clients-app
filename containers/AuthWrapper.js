@@ -1,10 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { getMessaging, onMessage } from "firebase/messaging";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useEffectOnce } from "usehooks-ts";
 
 import FullPageLoading from "@/components/FullPageLoading";
+import { fetchToken } from "@/features/notification-firebase";
+import { firebaseApp } from "@/features/notification-firebase/api/config";
 import { getUserRedirectPath } from "@/features/registration-flow";
 import { fetchUserByToken, getBootstrapData } from "@/store/actions";
 
@@ -28,6 +31,34 @@ export default function AuthWrapper(props) {
     });
   }, [router]);
 
+  useEffect(() => {
+    const { id } = router.query;
+
+    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+      
+      const messaging = getMessaging(firebaseApp);
+      const unsubscribe = onMessage(messaging, (payload) => {
+        const { title, body } = payload.data;
+        const bodyData = JSON.parse(body);
+        if (!id || parseInt(id) !== parseInt(bodyData.chat_id)) {
+          const notification = new Notification(title, {
+            body: bodyData.content,
+            icon: "https://doctorchat.md/wp-content/themes/doctorchat/favicon/apple-touch-icon.png",
+          });
+          const url = window.location.origin + "/chat?id=" + (bodyData.chat_id ?? id);
+
+          notification.onclick = () => {
+            window.open(url);
+          };
+        }
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, [router, router.query]);
+
   useEffectOnce(() => {
     const accessToken = localStorage.getItem("dc_token");
     const { doctorPreviewId, chatType } = router.query;
@@ -36,7 +67,7 @@ export default function AuthWrapper(props) {
     if (accessToken) {
       dispatch(fetchUserByToken())
         .then((user) => {
-         
+         fetchToken(user);
           const redirect = getUserRedirectPath(user, router.pathname, isInvestigationFormAllowed);
 
           if (redirect && redirect !== router.pathname) {

@@ -14,6 +14,7 @@ export const fetchToken = async (user = null) => {
       }
     
       if (user) {
+        
         if (!getTokenFirebaseStorage) {
           setTokenStorage().then(async (token) => {
             if (token) {
