@@ -7,7 +7,7 @@ export default function MessageSurvey(props) {
   const contentMessage = props.content && JSON.parse(props.content);
 
   return (
-    <div className="message-survey">
+    <div className="message-survey message">
       <Timeline>
         {contentMessage.map((item, index) => (
           <Timeline.Item style={{ fontSize: "16px", paddingBottom: 0 }} dot={<CommentOutlined />} key={index}>
