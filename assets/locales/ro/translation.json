@@ -337,6 +337,7 @@
   "receive_notifications": "Primiți notificări când vi se trimite un mesaj nou.",
   "save": "Salvați",
   "ora_dvs_locala": "Ora Dumneavostra Locala",
+  "hour_info_locale": "Mai jos este indicată ora locală după fusul orar în ţara în care vă aflaţi (Ex: Italia)",
   "restore_password_confirm_code": "Introduceți codul de confirmare primit prin mesaj telefonic",
   "repeated_consultations": {
     "title": "Consultații repetate",
