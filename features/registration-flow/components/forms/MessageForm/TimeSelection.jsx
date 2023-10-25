@@ -83,7 +83,7 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
 
         <div className="d-flex flex-column text-center justify-content-center">
           <div className="message-info-hour">
-            <h7 className="message-info-hour-locale">Mai jos este indicată ora locală după fusul orar în ţara în care vă aflaţi (Ex: Italia)</h7>
+            <h7 className="message-info-hour-locale">{t("hour_info_locale")}</h7>
           </div>
           <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">{t("ora_dvs_locala")}</h5>
 
