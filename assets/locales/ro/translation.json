@@ -394,5 +394,7 @@
     "empty": "Lista partenerilor va apărea aici"
   },
   "active": "Activ",
-  "corporate": "Corporativ"
+  "corporate": "Corporativ",
+  "survey_filled":"Chestionarul completat",
+  "answers_receive":"Răspunsurile oferite"
 }
