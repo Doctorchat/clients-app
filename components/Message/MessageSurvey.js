@@ -4,9 +4,9 @@ import { Timeline } from "antd";
 import PropTypes from "prop-types";
 
 export default function MessageSurvey(props) {
+  const { t } = useTranslation();
   if (props.type !== "answer") return null;
   const contentMessage = props.content && JSON.parse(props.content);
-  const { t } = useTranslation();
   return (
     <div className="message-survey message">
      <div className="message-title">  
