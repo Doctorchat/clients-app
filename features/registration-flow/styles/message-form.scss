@@ -120,6 +120,17 @@
     }
   }
 }
+.message-info-hour {
+  padding: 20px;
+  .message-info-hour-locale {
+    display: flex; 
+    padding: 8px;
+    border: 1px solid #eab308;
+    border-radius: 4px;
+    color: #713f12;
+    background-color: #fefce8;  
+  }
+}
 
 @media screen and (max-width: 768px) {
   .registration-flow__message-form {
