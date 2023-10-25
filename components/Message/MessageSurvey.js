@@ -1,7 +1,7 @@
+import { useTranslation } from "react-i18next";
 import { CommentOutlined } from "@ant-design/icons";
 import { Timeline } from "antd";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 
 export default function MessageSurvey(props) {
   if (props.type !== "answer") return null;
