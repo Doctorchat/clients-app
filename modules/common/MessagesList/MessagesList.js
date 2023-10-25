@@ -3,7 +3,6 @@ import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import ChatFeedback from "@/components/ChatFeedback";
-
 import Message from "@/components/Message";
 import SurveyCustom from "@/components/SurveyCustom";
 import { RequestImageMessage } from "@/features/attachments";
@@ -48,7 +47,7 @@ export default function MessagesList(props) {
             <span className="group-date-text">{IOSMonthDate(group)}</span>
           </div>
           {groupedMessage[group].map((msg) => {
-            if (msg.type === "investigation" && msg.investigation.length) {            
+            if (msg.type === "investigation" && msg?.investigation.length) {            
               return  <SurveyCustom key={msg.id} chatId={chatId} docId={docId} {...msg} />
             }
             if (msg.type === "answer") {            

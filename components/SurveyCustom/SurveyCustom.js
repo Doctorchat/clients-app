@@ -85,7 +85,6 @@ export default function SurveyCustom(props) {
 
 SurveyCustom.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  docId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  messageId: PropTypes.number,
-  status: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+investigation:  PropTypes.array
 };
