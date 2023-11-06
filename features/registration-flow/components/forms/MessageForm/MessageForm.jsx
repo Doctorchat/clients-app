@@ -27,7 +27,7 @@ import { ConfirmationDialog } from "./ConfirmationDialog";
 import { TimeSelection } from "./TimeSelection";
 
 const messageSchema = object().shape({
-  content: string().min(25).max(2500).required(),
+  content: string().min(25).max(3000).required(),
 });
 
 export const MessageForm = () => {
