@@ -332,6 +332,7 @@
   "receive_notification": "Receive notifications when you receive a new message.",
   "save": "Save",
   "ora_dvs_locala": "Your Local Time",
+  "hour_info_locale":"Below is the local time according to the time zone in the country you are in (Ex: Italy)",
   "restore_password_confirm_code": "Enter the confirmation code received via text message",
   "repeated_consultations": {
     "title": "Repeated consultations",
@@ -388,5 +389,8 @@
     "empty": "The list of partners will appear here"
   },
   "active": "Active",
-  "corporate": "Corporate"
+  "corporate": "Corporate",
+  "new_website": "New Platform",
+  "new_website_doctors": "Click here to switch to the new platform for doctors",
+  "new_website_description":"We are pleased to announce that we are working on a new platform. While we continue to develop this new platform, we assure you that the old system will remain available and functional. We are excited about the opportunity to provide you with an updated platform and we're grateful for your continued trust and support. We'll keep you posted on development progress and welcome your feedback as we move forward."
 }

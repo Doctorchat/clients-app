@@ -82,6 +82,9 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
         </div>
 
         <div className="d-flex flex-column text-center justify-content-center">
+          <div className="message-info-hour">
+            <h7 className="message-info-hour-locale">{t("hour_info_locale")}</h7>
+          </div>
           <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">{t("ora_dvs_locala")}</h5>
 
           <div className="time-selection__time pt-0">

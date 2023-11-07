@@ -14,8 +14,8 @@ import NotificationsWrapper from "@/containers/NotificationsWrapper";
 import MainLayout from "@/layouts/MainLayout";
 import getActiveLng from "@/utils/getActiveLng";
 
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import "@/services/i18next";
 
 import { store } from "../store";
@@ -31,6 +31,7 @@ const antLocales = {
 
 export default function App({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient());
+
 
   const getLayout =
     Component.getLayout ||

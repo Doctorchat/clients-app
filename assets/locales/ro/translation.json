@@ -332,6 +332,7 @@
   "receive_notifications": "Primiți notificări când vi se trimite un mesaj nou.",
   "save": "Salvați",
   "ora_dvs_locala": "Ora Dumneavostra Locala",
+  "hour_info_locale": "Mai jos este indicată ora locală după fusul orar în ţara în care vă aflaţi (Ex: Italia)",
   "restore_password_confirm_code": "Introduceți codul de confirmare primit prin mesaj telefonic",
   "repeated_consultations": {
     "title": "Consultații repetate",
@@ -388,5 +389,8 @@
     "empty": "Lista partenerilor va apărea aici"
   },
   "active": "Activ",
-  "corporate": "Corporativ"
+  "corporate": "Corporativ",
+  "new_website": "Nouă platforma",
+  "new_website_doctors":"Apăsați aici pentru a trece la nouă platforma pentru doctori",
+  "new_website_description":"Ne bucurăm să vă anunțăm că lucrăm la crearea unei noi platforme. În timp ce continuăm să dezvoltăm această nouă platformă, vă asigurăm că vechiul sistem va rămâne disponibil și funcțional. Suntem entuziasmați de oportunitatea de a vă oferi o platformă actualizată și suntem recunoscători pentru încrederea și sprijinul dvs. continuu. Vă vom ține la curent cu progresul dezvoltării și suntem bucuroși să primim feedbackul dvs. pe măsură ce ne îndreptăm spre viitor."
 }
