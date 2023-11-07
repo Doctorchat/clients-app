@@ -330,6 +330,7 @@
   "receive_notification": "Receive notifications when you receive a new message.",
   "save": "Save",
   "ora_dvs_locala": "Your Local Time",
+  "hour_info_locale":"Below is the local time according to the time zone in the country you are in (Ex: Italy)",
   "restore_password_confirm_code": "Enter the confirmation code received via text message",
   "repeated_consultations": {
     "title": "Repeated consultations",
