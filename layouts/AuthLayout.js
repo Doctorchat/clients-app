@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useEffectOnce } from "usehooks-ts";
 
-import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import ConditionalRender from "@/components/ConditionalRender";
 import { REGION_MD, REGION_RO } from "@/components/ConditionalRender/ConditionalRender";
+import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import { ProfileChangeLang } from "@/modules/common";
 import axiosInstance from "@/services/axios/apiConfig";
 
@@ -14,6 +14,7 @@ export default function AuthLayout({ children }) {
   const user = useSelector((store) => store.user);
   const router = useRouter();
   const { t } = useTranslation();
+  
 
   useEffectOnce(() => {
     const { query } = router;
