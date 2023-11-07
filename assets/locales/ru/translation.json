@@ -296,6 +296,8 @@
     "request_file_text": "Пожалуйста, укажите причину запроса дополнительного файла",
     "request_file_success": "Запрос на файл успешно отправлен",
     "request_to_upload_file": "Запрос на загрузку дополнительного файла",
+    "request_to_recomandation": "Рекомендуемые анализы:",
+    "request_to_schedule": "Запишитесь на анализы",
     "select_template": "Выберите шаблон"
   },
   "slots": "Слоты",
