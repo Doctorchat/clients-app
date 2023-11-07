@@ -235,12 +235,14 @@ input[type="checkbox"] {
 }
 #redirect {
    .popup-body {
-     height: 600px;
+    height: 600px;
     width: 800px;
     border-radius: 10px !important;
     background-color: #e2f5fa;
+   
   }
 }
+
 .bg-redirect-site{
    background-image: url(../assets/images/image2-53.png);
     background-size: cover;
@@ -252,6 +254,16 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 768px) {
+  #redirect {   
+    .popup-body {
+      p {
+        padding-inline: 15px;
+      }
+      .bg-redirect-site{
+        height: 40%;
+      }
+    }
+  }
   .select-chat {
     display: none !important;
   }
