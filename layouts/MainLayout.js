@@ -48,7 +48,7 @@ export default function MainLayout({ children }) {
                 {"   "}  {t("new_website_description")}                
               </p>
               <div  className="d-flex justify-content-center">
-                <Button  className="w-auto" onClick={()=>  window.open("https://chat.doctorchat.md", '_blank')}>
+                <Button  className="w-auto" onClick={()=>  window.open("https://chat.doctorchat.md", '_blank', 'noopener')}>
                   <ArrowRightIcon />{"   "} {t("new_website_doctors")}
                 </Button>
               </div>
