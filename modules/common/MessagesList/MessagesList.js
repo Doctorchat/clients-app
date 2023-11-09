@@ -2,16 +2,18 @@ import { useEffect } from "react";
 import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
-
 import ChatFeedback from "@/components/ChatFeedback";
 import Message from "@/components/Message";
+import SurveyCustom from "@/components/SurveyCustom";
 import { RequestImageMessage } from "@/features/attachments";
 import { IOSMonthDate } from "@/utils/date";
+import MessageSurvey from "@/components/Message/MessageSurvey";
 
 export default function MessagesList(props) {
   const { chatId, docId, list, status } = props;
   const [groupedMessage, setGroupedMessages] = useState({});
   const [listLastMessage, setListLastMessage] = useState(null);
+
 
   useEffect(() => {
     const groupMessageHandler = () => {
@@ -45,8 +47,14 @@ export default function MessagesList(props) {
             <span className="group-date-text">{IOSMonthDate(group)}</span>
           </div>
           {groupedMessage[group].map((msg) => {
+            if (msg.type === "investigation" && msg?.investigation.length) {            
+              return  <SurveyCustom key={msg.id} chatId={chatId} docId={docId} {...msg} />
+            }
+            if (msg.type === "answer") {            
+              return   <MessageSurvey key={msg.id} type={msg.type} content={msg.content} />
+            }
             if (msg.type === "feedback") {
-              return <ChatFeedback key={msg.id} chatId={chatId} docId={docId} {...msg} />;
+            return <ChatFeedback key={msg.id} chatId={chatId} docId={docId} {...msg} />;
             }
 
             if (msg.type === "request-media") {

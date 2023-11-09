@@ -66,6 +66,7 @@ const api = {
     editMessage: (data) => axiosInstance.put("/chat/message/update/", data),
     feedback: (data) => axiosInstance.post("/reviews/new", data),
     requestMedia: (chatId, { content }) => axiosInstance.post(`/chat/request-media/${chatId}`, { content }),
+    sendInvestigation: (data) => axiosInstance.post(`/chat/message-investigation/update`, data),
     sendMedia: (chatId, { content, upload_id }) =>
       axiosInstance.post(`/chat/send-media/${chatId}`, { content, upload_id }),
     accept: (chatId) =>
