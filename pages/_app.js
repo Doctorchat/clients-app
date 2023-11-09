@@ -34,6 +34,7 @@ const antLocales = {
 export default function App({ Component, pageProps }) {
   const [queryClient] = React.useState(() => new QueryClient());
 
+
   const getLayout =
     Component.getLayout ||
     ((page) => (

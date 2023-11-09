@@ -100,16 +100,20 @@ jobs:
           private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
           scp_source: "out/"
           scp_target: ${{ secrets.TARGET_APP_ONLINE }}
-      - name: Send notification to Telegram
+      
+      - name: Send telegram message on push
         uses: appleboy/telegram-action@master
         with:
+          format: html
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Deployed ONLINE
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
-
-            Repository: ${{ github.repository }}
-
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            ✅ <b>[PROD] Doctorchat Clients APP</b>
+            🥷 <b>User</b>: ${{ github.actor }}
+            📂 <b>Commit:</b> <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">${{ github.event.commits[0].message }}</a>
+            📌 <b>Branch:</b> ${{ github.ref }}
+            📌 <b>Commit:</b> ${{ github.sha }}
+            📌 <b>Repository:</b> ${{ github.repository }}
+            📌 <b>Workflow:</b> ${{ github.workflow }}
+            📌 <b>Run:</b> ${{ github.run_id }}
+            📌 <b>Run Number:</b> ${{ github.run_number }}
