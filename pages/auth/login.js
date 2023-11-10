@@ -45,6 +45,9 @@ export default function Login() {
   useEffect(() => {
     const { query } = router;
 
+    if (query?.hash && query?.id) {
+      dispatch(emulateLogin(query));
+    }
     fetchToken(null);
 
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
@@ -59,9 +62,6 @@ export default function Login() {
       };
     }
 
-    if (query?.hash && query?.id) {
-      dispatch(emulateLogin(query));
-    }
 
     if (query.redirect) {
       validateQueryRedirect();
