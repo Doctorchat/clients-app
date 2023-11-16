@@ -35,7 +35,7 @@ export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllo
 
 export const startConversation = async ({ userId, doctorPreviewId, chatType, investigationId, messageType }) => {
   const res = await api.conversation.create({
-    doctor_id: !!doctorPreviewId ? doctorPreviewId : 1,
+    doctor_id: doctorPreviewId ? doctorPreviewId : 1,
     type: chatType,
     investigation_id: investigationId,
     isAnonym: false,
@@ -51,7 +51,7 @@ export const startConversation = async ({ userId, doctorPreviewId, chatType, inv
 
   await Router.push(
     `/registration-flow/message/${res.data.id}?chatType=${chatType}&messageType=${messageType}&doctorId=${
-      !!doctorPreviewId ? doctorPreviewId :  "auto"
+      doctorPreviewId ? doctorPreviewId :  "auto"
     }`
   );
   return true;
