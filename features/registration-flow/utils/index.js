@@ -51,7 +51,7 @@ export const startConversation = async ({ userId, doctorPreviewId, chatType, inv
 
   await Router.push(
     `/registration-flow/message/${res.data.id}?chatType=${chatType}&messageType=${messageType}&doctorId=${
-      doctorPreviewId ?? "auto"
+      !!doctorPreviewId ? doctorPreviewId :  "auto"
     }`
   );
   return true;
