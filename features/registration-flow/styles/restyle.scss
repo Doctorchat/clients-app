@@ -64,6 +64,28 @@
     }
   }
 
+  .dc-btn.registration-flow__primary {
+    color: var(--bs-primary);
+
+    &:hover,
+    &:focus {
+         background-color: rgba(232, 31, 65, 0.1);
+    }
+
+    .btn-icon svg{
+      width: 24px;
+      height: 24px;
+    }
+    
+    .dc-btn-content{
+      display: inline;
+    }
+  }
+
+  .registration-flow__wallet__home{
+    display: flex;
+  }
+
   .dc-btn-outline {
     &:hover {
       background-color: rgba(#e81f41, 0.1);
