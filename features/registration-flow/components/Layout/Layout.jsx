@@ -74,15 +74,16 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
         )}
         <div className="registration-flow__wallet__home">
           {Object.keys(user).length 
-            ? <Button
+            ? <div className="registration-home"><Button
               className="registration-flow__primary"
               type="text"
               size="md"
               icon={<Home/> }
               onClick={()=>router.push("/home")}
               >
-                Home
+                {t("home")}
               </Button> 
+              </div>
             : null
           }
           <div
