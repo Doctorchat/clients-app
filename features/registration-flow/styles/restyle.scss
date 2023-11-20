@@ -64,6 +64,42 @@
     }
   }
 
+  .dc-btn.registration-flow__primary {
+    color: var(--bs-primary);
+    min-width: 50px;
+    padding: 4px 4px;
+    display: flex; 
+    width: initial; 
+
+    &:hover,
+    &:focus {
+         background-color: rgba(232, 31, 65, 0.1);
+    }
+
+    .btn-icon {
+      margin-right: 0px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    
+    .dc-btn-content{
+      display: inline;
+    }
+  }
+
+  .registration-home{
+    display: flex;
+    width: 120px;
+  }
+
+  .registration-flow__wallet__home{
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .dc-btn-outline {
     &:hover {
       background-color: rgba(#e81f41, 0.1);
@@ -155,6 +191,29 @@
 
     .ant-picker-calendar-date-value {
       line-height: 1;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dc-btn.registration-flow__primary {
+    p.text{
+      display: none;
+    }
+    .btn-icon svg {   
+      width: 39px !important;
+      height: 39px !important;
+      transform: scale(1.5);
+      padding: 7px;
+    }
+  }
+  .registration-home{
+    width: inherit !important;
+    align-items: center;
+  }
+  .registration-flow__lang{
+    span.content{
+      display: none !important;
     }
   }
 }
