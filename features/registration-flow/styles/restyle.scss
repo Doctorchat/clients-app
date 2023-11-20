@@ -66,15 +66,23 @@
 
   .dc-btn.registration-flow__primary {
     color: var(--bs-primary);
+    min-width: 50px;
+    padding: 4px 4px;
+    display: flex; 
+    width: initial; 
 
     &:hover,
     &:focus {
          background-color: rgba(232, 31, 65, 0.1);
     }
 
-    .btn-icon svg{
-      width: 24px;
-      height: 24px;
+    .btn-icon {
+      margin-right: 0px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
     }
     
     .dc-btn-content{
@@ -82,8 +90,14 @@
     }
   }
 
+  .registration-home{
+    display: flex;
+    width: 120px;
+  }
+
   .registration-flow__wallet__home{
     display: flex;
+    justify-content: flex-end;
   }
 
   .dc-btn-outline {
