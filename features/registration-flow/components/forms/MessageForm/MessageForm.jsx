@@ -26,15 +26,18 @@ import cs from "@/utils/classNames";
 import { ConfirmationDialog } from "./ConfirmationDialog";
 import { TimeSelection } from "./TimeSelection";
 
-const messageSchema = object().shape({
-  content: string().min(25).max(3000).required(),
-});
-
 export const MessageForm = () => {
-  const { t } = useTranslation();
-
+  const { t } = useTranslation();  
   const dispatch = useDispatch();
   const router = useRouter();
+   const messageSchema = object().shape({
+  content: string()
+    .required()
+    .test("noSpaces", t("chats_valiation", {min:25, max:3000}), (value) => {
+      const charCountWithoutSpaces = value.replace(/\s/g, "").length;
+      return charCountWithoutSpaces >= 25 && charCountWithoutSpaces <= 3000;
+    }),
+});
 
   const { global } = useSelector((store) => ({
     global: store.bootstrap.payload?.global,
@@ -219,9 +222,9 @@ export const MessageForm = () => {
           className="registration-flow__form"
           methods={form}
           onValuesChange={(action) => {
-            if (action.name && action.value) {
+            if (action.name ) {
               setPersistedValues({ [action.name]: action.value });
-            }
+            } 
           }}
           onFinish={onSubmit}
           initialValues={{ content: persistedValues?.content }}
@@ -248,7 +251,7 @@ export const MessageForm = () => {
           <Form.Item name="content">
             <Textarea placeholder={t("message_form_placeholder")} />
           </Form.Item>
-
+          <p className="textarea-counter">{persistedValues?.content.replace(/\s/g, "").length ?? "0"}/3000</p>
           <Form.Item name="uploads" label={t("message_uploads_label")}>
             <Upload
               filesAvailable={filesAvailable}

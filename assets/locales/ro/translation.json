@@ -400,5 +400,6 @@
   "answers_receive":"Răspunsurile oferite",
   "new_website": "Nouă platforma",
   "new_website_doctors":"Apăsați aici pentru a trece la nouă platforma pentru doctori",
-  "new_website_description":"Ne bucurăm să vă anunțăm că lucrăm la crearea unei noi platforme. În timp ce continuăm să dezvoltăm această nouă platformă, vă asigurăm că vechiul sistem va rămâne disponibil și funcțional. Suntem entuziasmați de oportunitatea de a vă oferi o platformă actualizată și suntem recunoscători pentru încrederea și sprijinul dvs. continuu. Vă vom ține la curent cu progresul dezvoltării și suntem bucuroși să primim feedbackul dvs. pe măsură ce ne îndreptăm spre viitor."
+  "new_website_description":"Ne bucurăm să vă anunțăm că lucrăm la crearea unei noi platforme. În timp ce continuăm să dezvoltăm această nouă platformă, vă asigurăm că vechiul sistem va rămâne disponibil și funcțional. Suntem entuziasmați de oportunitatea de a vă oferi o platformă actualizată și suntem recunoscători pentru încrederea și sprijinul dvs. continuu. Vă vom ține la curent cu progresul dezvoltării și suntem bucuroși să primim feedbackul dvs. pe măsură ce ne îndreptăm spre viitor.",
+  "chats_valiation":"Numărul de caractere trebuie să fie de la {{min}} la {{max}}"
 }
