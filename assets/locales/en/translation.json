@@ -400,5 +400,6 @@
   "answers_receive":"Answers provided",
   "new_website": "New Platform",
   "new_website_doctors": "Click here to switch to the new platform for doctors",
-  "new_website_description":"We are pleased to announce that we are working on a new platform. While we continue to develop this new platform, we assure you that the old system will remain available and functional. We are excited about the opportunity to provide you with an updated platform and we're grateful for your continued trust and support. We'll keep you posted on development progress and welcome your feedback as we move forward."
+  "new_website_description":"We are pleased to announce that we are working on a new platform. While we continue to develop this new platform, we assure you that the old system will remain available and functional. We are excited about the opportunity to provide you with an updated platform and we're grateful for your continued trust and support. We'll keep you posted on development progress and welcome your feedback as we move forward.",
+  "chats_valiation":"The number of characters must be from {{min}} to {{max}}"
 }

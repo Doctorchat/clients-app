@@ -35,6 +35,22 @@
       margin-bottom: 0;
     }
   }
+  
+  .textarea-counter{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--bs-gray-600);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+
+  .form-control {
+    margin-bottom: 0px
+  }
 
   .form-bottom {
     align-items: stretch;
