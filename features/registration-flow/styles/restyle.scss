@@ -194,3 +194,26 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .dc-btn.registration-flow__primary {
+    p.text{
+      display: none;
+    }
+    .btn-icon svg {   
+      width: 39px !important;
+      height: 39px !important;
+      transform: scale(1.5);
+      padding: 7px;
+    }
+  }
+  .registration-home{
+    width: inherit !important;
+    align-items: center;
+  }
+  .registration-flow__lang{
+    span.content{
+      display: none !important;
+    }
+  }
+}

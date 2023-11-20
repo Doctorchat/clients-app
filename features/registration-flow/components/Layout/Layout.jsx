@@ -81,7 +81,7 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
               icon={<Home/> }
               onClick={()=>router.push("/home")}
               >
-                {t("home")}
+                <p className="text">{t("home")}</p>
               </Button> 
               </div>
             : null
