@@ -21,10 +21,8 @@ export default function ChatContentFooter(props) {
 
   const redirectToRegistrationFlow = React.useCallback(() => {
     const messageType = isMeet ? "meet" : "standard";
-    const url = `/registration-flow/message/${chatId}?chatType=${type}&messageType=${messageType}&doctorId=${
-      userInfo?.id ?? "auto"
-    }`;
-
+    const id = (!userInfo?.id || userInfo?.id  && userInfo?.id === 1) ? "auto": userInfo?.id;
+    const url = `/registration-flow/message/${chatId}?chatType=${type}&messageType=${messageType}&doctorId=${id}`;
     router.push(url);
   }, [chatId, isMeet, router, type, userInfo?.id]);
 
