@@ -3,5 +3,6 @@
   "code.is.not.valid": "Код недействителен",
   "the.selected.phone.is.invalid.": "Номер телефона недействителен",
   "promocode.is.inactive!": "Промокод неактивен!",
-  "entered.password.is.invalid": "Введенный пароль недействителен"
+  "entered.password.is.invalid": "Введенный пароль недействителен",
+  "regional.inconsistencies": "Региональные несоответствия"
 }

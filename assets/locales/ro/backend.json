@@ -3,5 +3,6 @@
   "code.is.not.valid": "Codul nu este valid",
   "the.selected.phone.is.invalid.": "Numarul de telefon este invalid.",
   "promocode.is.inactive!": "Codul promoțional este inactiv!",
-  "entered.password.is.invalid": "Parola introdusă este nevalidă"
+  "entered.password.is.invalid": "Parola introdusă este nevalidă",
+  "regional.inconsistencies": "Inconsecințe regionale"
 }
