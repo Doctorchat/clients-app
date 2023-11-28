@@ -103,7 +103,7 @@ const isMobile = window.innerWidth <= 768;
       },  
       {
         key: "2",
-        label:isMobile ? t("doctor"): t("info_doctor"),
+        label: isMobile ? t("doctor"): t("info_doctor"),
         children: <GeneralInfo doctor={doctor} />,
       },
       {
