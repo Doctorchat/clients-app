@@ -3,7 +3,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { Tabs } from "antd";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
-
 import { IconBtn } from "@/components/Button";
 import DcTooltip from "@/components/DcTooltip";
 import Popup from "@/components/Popup";
@@ -14,6 +13,7 @@ import useCurrency from "@/hooks/useCurrency";
 import ClockIcon from "@/icons/clock.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
+import ChatIcon from "@/icons/chat.svg";
 import HospitalIcon from "@/icons/hospital.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import TimesIcon from "@/icons/times.svg";
@@ -97,11 +97,15 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
     () => [
       {
         key: "1",
-        label: t("general_information"),
+        label: t("name_consultation_tab"),
+        children: <StepsConsultation />,
+      },  {
+        key: "2",
+        label: t("info_doctor"),
         children: <GeneralInfo doctor={doctor} />,
       },
       {
-        key: "2",
+        key: "3",
         label: t("reviews") + ` (${doctor?.reviews?.length})`,
         children: (
           <div className="limit-height">
@@ -275,6 +279,35 @@ const Discount = ({ doctor }) => {
 Discount.propTypes = {
   doctor: PropTypes.object,
 };
+const StepsConsultation = () => {
+  const { t } = useTranslation();
+ 
+
+  return (
+    <>
+      <p className="doctor-view__description">{t("descriptions_consultation")}</p>
+
+      <div className="doctor-view__activity">
+        <div className="doctor-view__activity-item">
+          <h4 className="doctor-view__activity-title">{t("info_video")}:</h4>
+          <p className="doctor-view__activity-description">
+              <VideoIcon />
+            <span>{t("card_video_consultation")}</span>
+          </p>
+        </div>
+        <div className="doctor-view__activity-item">
+          <h4 className="doctor-view__activity-title">{t("info_chat")}:</h4>
+          <p className="doctor-view__activity-description">
+            <ChatIcon />
+            <span>{t("card_chat_consultation")}</span>
+          </p>
+        </div>
+      </div>
+    </>
+  );
+};
+
+StepsConsultation.propTypes = {};
 
 const GeneralInfo = ({ doctor }) => {
   const { t } = useTranslation();

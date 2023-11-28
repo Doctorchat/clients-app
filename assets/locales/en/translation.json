@@ -51,6 +51,13 @@
   "success": "Success",
   "data_updated_with_success": "Data was successfully updated",
   "general_information": "General Information",
+  "info_doctor": "Information about the doctor",
+  "name_consultation_tab": "Consultation",
+  "descriptions_consultation":"Choose between a chat or video consultation. Describe the problem, attach investigations/photos as appropriate and make the payment by bank card regardless of the country you are in. After confirming the payment, the doctor will receive the consultation request",
+  "card_video_consultation":"The conversation takes place in writing, for at least 24 hours, confidentially, from your office",
+  "card_chat_consultation":"After payment, you will receive a link Access the conference, which you access at the date and time reserved by you. After the end of the call, you will additionally have the opportunity to formulate, in writing, concrete questions within 24 for hours",
+  "info_chat": "Chat consultation",
+  "info_video": "Video consultation",
   "security": "Security",
   "edit": "Save",
   "current_password": "Current Password",
@@ -195,6 +202,7 @@
     "6": "Others"
   },
   "select": "Select",
+  "selected_consultation": "Request the consultation",
   "male": "Male",
   "female": "Female",
   "range_picker_placeholder": {
