@@ -3,6 +3,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { Tabs } from "antd";
 import PropTypes from "prop-types";
 import { useBoolean } from "usehooks-ts";
+
 import { IconBtn } from "@/components/Button";
 import DcTooltip from "@/components/DcTooltip";
 import Popup from "@/components/Popup";
@@ -10,10 +11,10 @@ import ReviewsList from "@/components/ReviewsList";
 import Skeleton from "@/components/Skeleton";
 import ConsultationOptions from "@/features/doctors/components/ConsultationOptions";
 import useCurrency from "@/hooks/useCurrency";
+import ChatIcon from "@/icons/chat.svg";
 import ClockIcon from "@/icons/clock.svg";
 import CommentIcon from "@/icons/comment-lines.svg";
 import GraduationIcon from "@/icons/graduation-cap.svg";
-import ChatIcon from "@/icons/chat.svg";
 import HospitalIcon from "@/icons/hospital.svg";
 import ShieldIcon from "@/icons/shield.svg";
 import TimesIcon from "@/icons/times.svg";
@@ -87,7 +88,7 @@ const DoctorViewDialogSkeleton = () => {
 export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClick, onVideoTypeClick }) => {
   const { t } = useTranslation();
   const { value: isOpen, setFalse: onHideModal } = useBoolean(true);
-
+const isMobile = window.innerWidth <= 768;
   const onVisibleChange = React.useCallback(() => {
     onClose();
     onHideModal();
@@ -99,9 +100,10 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
         key: "1",
         label: t("name_consultation_tab"),
         children: <StepsConsultation />,
-      },  {
+      },  
+      {
         key: "2",
-        label: t("info_doctor"),
+        label: isMobile ? t("doctor"): t("info_doctor"),
         children: <GeneralInfo doctor={doctor} />,
       },
       {
@@ -117,6 +119,7 @@ export const DoctorViewDialog = ({ doctor, isLoading, onClose, onMessageTypeClic
     ],
     [doctor, t]
   );
+  
 
   return (
     <Popup className="doctor-view__modal" visible={isOpen} onVisibleChange={onVisibleChange}>
