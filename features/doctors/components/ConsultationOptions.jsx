@@ -145,8 +145,9 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
         />
 
         <Button onClick={handleStartButtonClick} loading={isButtonLoading}>
-          {t("select")}
+          {t("selected_consultation")}
         </Button>
+        
       </section>
     </>
   );
