@@ -1,25 +1,23 @@
+import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
 import PropTypes from "prop-types";
 
+import Button from "@/components/Button";
 import Popup from "@/components/Popup";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import AuthWrapper from "@/containers/AuthWrapper";
 import Portal from "@/containers/Portal";
 import { userRoles } from "@/context/constants";
 import useRegion from "@/hooks/useRegion";
-import { LeftSide, PhoneConfirmation } from "@/modules/common";
-import Button from "@/components/Button";
 import ArrowRightIcon from "@/icons/arrow-right.svg";
-import { useTranslation } from "react-i18next";
+import { LeftSide, PhoneConfirmation } from "@/modules/common";
 
 const ClientStartConversation = dynamic(() =>
   import("@/modules/client").then((response) => response.ClientStartConversation)
 );
 const ClientMessageForm = dynamic(() => import("@/modules/client").then((response) => response.ClientMessageForm));
 const ClientMeetForm = dynamic(() => import("@/modules/client").then((response) => response.ClientMeetForm));
-const ClientInvestigationForm = dynamic(() =>
-  import("@/modules/client").then((response) => response.ClientInvestigationForm)
-);
+
 
 export default function MainLayout({ children }) {
   const region = useRegion();
@@ -35,7 +33,6 @@ export default function MainLayout({ children }) {
           <ClientStartConversation />
           <ClientMessageForm />
           <ClientMeetForm />
-          <ClientInvestigationForm />
         </Portal>
       </AuthRoleWrapper>
 

@@ -9,7 +9,6 @@ import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import HomeIcon from "@/icons/home.svg";
-import InvestigationIcon from "@/icons/investigation.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import UserIcon from "@/icons/user.svg";
 import UsersIcon from "@/icons/users.svg";
@@ -44,9 +43,6 @@ export default function ClientMenuOverlay({ updateTabsConfig }) {
           {t("wallet")}
         </Menu.Item>
       )}
-      <Menu.Item icon={<InvestigationIcon />} onClick={onTabsConfigChange(leftSideTabs.investigations)}>
-        {t("investigations")}
-      </Menu.Item>
       <Menu.Item icon={<UsersIcon />} onClick={onTabsConfigChange(leftSideTabs.partners)}>
         {t("partners.title")}
       </Menu.Item>

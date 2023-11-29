@@ -61,8 +61,8 @@ export default function AuthWrapper(props) {
 
   useEffectOnce(() => {
     const accessToken = localStorage.getItem("dc_token");
-    const { doctorPreviewId, chatType } = router.query;
-    const isInvestigationFormAllowed = doctorPreviewId || chatType;
+    const { chatType, doctorId,id} = router.query;
+    const isInvestigationFormAllowed = doctorId || id || chatType;
 
     if (accessToken) {
       dispatch(fetchUserByToken())

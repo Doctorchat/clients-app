@@ -6,7 +6,6 @@ export const leftSideTabs = {
   editProfile: "user-edit-profile",
   appointments: "doc-appointments-settings",
   reviews: "doc-reviews-list",
-  investigations: "user-investigations-list",
   bonuses: "user-bonuses-list",
   transactions: "user-transactions-list",
   repeatedConsultations: "doc-repeated-consultations",
