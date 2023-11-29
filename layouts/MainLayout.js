@@ -36,24 +36,23 @@ export default function MainLayout({ children }) {
         </Portal>
       </AuthRoleWrapper>
 
-      {region === "md" && (
-        <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
-          <Popup id="redirect" visible={true}>
-            <Popup.Header title={t("new_website")} />
-            <Popup.Content>
-              <p className="mb-0" style={{ textIndent: '1.5em' }}>
-                {"   "}  {t("new_website_description")}                
-              </p>
-              <div  className="d-flex justify-content-center">
-                <Button  className="w-auto" onClick={()=>  window.open("https://chat.doctorchat.md", '_blank', 'noopener')}>
-                  <ArrowRightIcon />{"   "} {t("new_website_doctors")}
-                </Button>
-              </div>
-              <div className="justify-content-end d-flex align-items-center h-full w-full  bg-redirect-site" />
-            </Popup.Content>
-          </Popup>
-        </AuthRoleWrapper>
-      )}
+      <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
+        <Popup id="redirect" visible={true}>
+          <Popup.Header title={t("new_website")} />
+          <Popup.Content>
+            <p className="mb-0" style={{ textIndent: '1.5em' }}>
+              {"   "}  {t("new_website_description")}                
+            </p>
+            <div  className="d-flex justify-content-center">
+              <Button  className="w-auto" onClick={()=>  window.open("https://chat.doctorchat.md", '_blank', 'noopener')}>
+                <ArrowRightIcon />{"   "} {t("new_website_doctors")}
+              </Button>
+            </div>
+            <div className="justify-content-end d-flex align-items-center h-full w-full  bg-redirect-site" />
+          </Popup.Content>
+        </Popup>
+      </AuthRoleWrapper>
+     
       <div id="chat-columns">
         <LeftSide />
         {children}
