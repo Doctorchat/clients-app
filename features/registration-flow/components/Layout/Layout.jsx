@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 
 import Button from "@/components/Button";
 import Confirm from "@/components/Confirm";
+import Home from "@/icons/home-icon.svg";
 import ArrowLeftIcon from "@/icons/arrow-left.svg";
 import LogoutIcon from "@/icons/logout.svg";
 import { ProfileChangeLang } from "@/modules/common";
@@ -71,21 +72,35 @@ export const Layout = ({ activeStep, title, backPath = "", disableResponsiveRest
             {t("back")}
           </Button>
         )}
-
-        <div
-          style={{
-            ...(user?.company_id
-              ? {
-                  visibility: "hidden",
-                  pointerEvents: "none",
-                }
-              : {}),
-          }}
-        >
-          <WalletFastTopUp
-            isVisible={showWalletTopUp}
-            className={clsx("wallet-top-up", { "ms-md-5": !showBackButton })}
-          />
+        <div className="registration-flow__wallet__home">
+          {Object.keys(user).length 
+            ? <div className="registration-home"><Button
+              className="registration-flow__primary"
+              type="text"
+              size="md"
+              icon={<Home/> }
+              onClick={()=>router.push("/home")}
+              >
+                <p className="text">{t("home")}</p>
+              </Button> 
+              </div>
+            : null
+          }
+          <div
+            style={{
+              ...(user?.company_id
+                ? {
+                    visibility: "hidden",
+                    pointerEvents: "none",
+                  }
+                : {}),
+            }}
+          >
+            <WalletFastTopUp
+              isVisible={showWalletTopUp}
+              className={clsx("wallet-top-up", { "ms-md-5": !showBackButton })}
+            />
+          </div>
         </div>
 
         <Steps activeStep={activeStep} />

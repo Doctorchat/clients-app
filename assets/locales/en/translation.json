@@ -51,6 +51,13 @@
   "success": "Success",
   "data_updated_with_success": "Data was successfully updated",
   "general_information": "General Information",
+  "info_doctor": "Information about the doctor",
+  "name_consultation_tab": "Consultation",
+  "descriptions_consultation":"Choose between a chat or video consultation. Describe the problem, attach investigations/photos as appropriate and make the payment by bank card regardless of the country you are in. After confirming the payment, the doctor will receive the consultation request",
+  "card_chat_consultation":"The conversation takes place in writing, for at least 24 hours, confidentially, from your office",
+  "card_video_consultation":"After payment, you will be in a chat with the doctor. There, you will see a link to a video meeting with the doctor, which you will need to attend at the appointed date and time. After completing the video consultation, you will additionally have the opportunity to write to the doctor in a chat with questions that interest you and clarify your questions within 24 hours",
+  "info_chat": "Chat consultation",
+  "info_video": "Video consultation",
   "security": "Security",
   "edit": "Save",
   "current_password": "Current Password",
@@ -149,6 +156,7 @@
   "confirmation": "Confrimation",
   "new": "New",
   "information": "Information",
+  "doctor": "Doctor",
   "invalid_promo": "This code is invalid",
   "investigation_form": {
     "sex": "Sex",
@@ -195,6 +203,7 @@
     "6": "Others"
   },
   "select": "Select",
+  "selected_consultation": "Request the consultation",
   "male": "Male",
   "female": "Female",
   "range_picker_placeholder": {
@@ -235,6 +244,7 @@
   "price_message": "Message price",
   "check_email": "Please check email!",
   "home_page": "Home Page",
+  "home": "My cabinet",
   "mins": "min.",
   "sum": "Amount",
   "login_with": "Login with",
@@ -399,5 +409,6 @@
   "answers_receive":"Answers provided",
   "new_website": "New Platform",
   "new_website_doctors": "Click here to switch to the new platform for doctors",
-  "new_website_description":"We are pleased to announce that we are working on a new platform. While we continue to develop this new platform, we assure you that the old system will remain available and functional. We are excited about the opportunity to provide you with an updated platform and we're grateful for your continued trust and support. We'll keep you posted on development progress and welcome your feedback as we move forward."
+  "new_website_description":"We are pleased to announce that we are working on a new platform. While we continue to develop this new platform, we assure you that the old system will remain available and functional. We are excited about the opportunity to provide you with an updated platform and we're grateful for your continued trust and support. We'll keep you posted on development progress and welcome your feedback as we move forward.",
+  "chats_valiation":"The number of characters must be from {{min}} to {{max}}"
 }

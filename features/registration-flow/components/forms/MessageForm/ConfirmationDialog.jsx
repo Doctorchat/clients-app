@@ -44,8 +44,10 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
     };
 
     if (canSendMessage()) {
+      onChangeAreTermsccepted(true)
+      setLoading(true);
       try {
-        setLoading(true);
+        
         const response = await api.conversation.addMessage({ ...data, code: promocode });
 
         if (process.env.NEXT_PUBLIC_API_REGION === "ro") {
@@ -65,7 +67,7 @@ export const ConfirmationDialog = ({ data, visible, onClosePopup }) => {
           await router.push(`/chat?id=${response.data.chat_id}`);
         }
       } catch (error) {
-        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));
+        dispatch(notification({ type: "error", title: "error", descrp: getApiErrorMessages(error, true) }));       
       } finally {
         setLoading(false);
       }

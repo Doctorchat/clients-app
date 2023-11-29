@@ -3,7 +3,7 @@ import Router from "next/router";
 import { MESSAGE_TYPES } from "@/context/constants";
 import api from "@/services/axios/api";
 
-const allowedPaths = ["select-doctor", "message", "payment"];
+const allowedPaths = ["/registration-flow/select-doctor", "message", "payment", "/home"];
 
 export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllowed = false) => {
   if (user.role === 3) {
@@ -13,14 +13,14 @@ export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllo
 
     if (user?.company_id !== null && user?.is_verified_by_company === false) {
       return "/registration-flow/company-verification";
+    }  
+    
+    if (allowedPaths.includes(pathname) && !user?.investigations?.length && !isInvestigationFormAllowed) {
+      return pathname;
     }
-
+    
     if (!user?.investigations?.length && !isInvestigationFormAllowed) {
       return "/registration-flow/select-doctor";
-    }
-
-    if (pathname.startsWith("/registration-flow") && allowedPaths.every((path) => !pathname.includes(path))) {
-      return "/home";
     }
   }
 
@@ -35,7 +35,7 @@ export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllo
 
 export const startConversation = async ({ userId, doctorPreviewId, chatType, investigationId, messageType }) => {
   const res = await api.conversation.create({
-    doctor_id: doctorPreviewId ?? 1,
+    doctor_id: doctorPreviewId || 1,
     type: chatType,
     investigation_id: investigationId,
     isAnonym: false,
@@ -51,7 +51,7 @@ export const startConversation = async ({ userId, doctorPreviewId, chatType, inv
 
   await Router.push(
     `/registration-flow/message/${res.data.id}?chatType=${chatType}&messageType=${messageType}&doctorId=${
-      doctorPreviewId ?? "auto"
+      doctorPreviewId || "auto"
     }`
   );
   return true;

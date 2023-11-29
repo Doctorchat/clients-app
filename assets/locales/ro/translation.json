@@ -53,6 +53,14 @@
   "success": "Succes",
   "data_updated_with_success": "Date au fost actualizate cu succes",
   "general_information": "Informație Generală",
+  "info_doctor": "Informații despre doctor",
+  "doctor": "Doctor",
+  "name_consultation_tab": "Consultație",
+  "descriptions_consultation":"Alegeți între o consultație prin chat sau video. Descrieţi problema, atașați investigații/fotografii după caz și efectuați plata cu cardul bancar indiferent de ţara în care vă aflaţi. După confirmarea plății, medicul va primi solicitarea de consultație",
+  "card_chat_consultation":"Consultarea are loc sub formă de scris. După plată, veți fi dus imediat la acest chat. Chat-ul este activ cel puțin 24 de ore, ceea ce înseamnă că în acest timp poți primi răspunsuri la întrebările tale de la medic. După expirarea celor 24 de ore active, veți avea la dispoziție încă +24 de ore pentru întrebări de clarificare",
+  "card_video_consultation":"După plată, veți fi într-o conversație cu medicul. Acolo, veți vedea un link către o întâlnire video cu medicul, la care va trebui să participați la data și ora stabilite. După finalizarea consultării video, veți avea în plus posibilitatea de a scrie medicului într-un chat cu întrebări care vă interesează și de a vă clarifica întrebările în termen de 24 de ore",
+  "info_chat": "Consultație chat",
+  "info_video": "Consultație video",
   "security": "Securitate",
   "edit": "Salvează",
   "current_password": "Parola Curentă",
@@ -197,6 +205,7 @@
     "6": "Altele"
   },
   "select": "Selectează",
+  "selected_consultation": "Solicită consultaţia",
   "male": "Masculin",
   "female": "Feminin",
   "range_picker_placeholder": {
@@ -237,6 +246,7 @@
   "price_message": "Preț mesaj",
   "check_email": "Vă rugăm să verificați e-mailul!",
   "home_page": "Pagina Principală",
+  "home": "Cabinetul meu",
   "mins": "min.",
   "sum": "Suma",
   "login_with": "Loghează-te cu",
@@ -399,5 +409,6 @@
   "answers_receive":"Răspunsurile oferite",
   "new_website": "Nouă platforma",
   "new_website_doctors":"Apăsați aici pentru a trece la nouă platforma pentru doctori",
-  "new_website_description":"Ne bucurăm să vă anunțăm că lucrăm la crearea unei noi platforme. În timp ce continuăm să dezvoltăm această nouă platformă, vă asigurăm că vechiul sistem va rămâne disponibil și funcțional. Suntem entuziasmați de oportunitatea de a vă oferi o platformă actualizată și suntem recunoscători pentru încrederea și sprijinul dvs. continuu. Vă vom ține la curent cu progresul dezvoltării și suntem bucuroși să primim feedbackul dvs. pe măsură ce ne îndreptăm spre viitor."
+  "new_website_description":"Ne bucurăm să vă anunțăm că lucrăm la crearea unei noi platforme. În timp ce continuăm să dezvoltăm această nouă platformă, vă asigurăm că vechiul sistem va rămâne disponibil și funcțional. Suntem entuziasmați de oportunitatea de a vă oferi o platformă actualizată și suntem recunoscători pentru încrederea și sprijinul dvs. continuu. Vă vom ține la curent cu progresul dezvoltării și suntem bucuroși să primim feedbackul dvs. pe măsură ce ne îndreptăm spre viitor.",
+  "chats_valiation":"Numărul de caractere trebuie să fie de la {{min}} la {{max}}"
 }
