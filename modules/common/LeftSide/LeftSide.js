@@ -64,10 +64,8 @@ export default function LeftSide() {
         <Tabs.Pane dataKey={leftSideTabs.editProfile}>
           <EditProflie />
         </Tabs.Pane>
-        <AuthRoleWrapper roles={[userRoles.get("client")]}>
-          <>
-            <WalletTopup />
-          </>
+        <AuthRoleWrapper roles={[userRoles.get("client")]}>          
+          <WalletTopup />          
         </AuthRoleWrapper>
         <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
           <>
