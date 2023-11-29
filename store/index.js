@@ -12,7 +12,6 @@ export const store = configureStore({
     notifications: slices.notificationsSlice,
     docReviews: slices.docReviewsSlice,
     bootstrap: slices.bootstrapSlice,
-    investigationForm: slices.investigationFormSlice,
     transactionsList: slices.transactionsListSlice,
     meetForm: slices.meetFormSlice,
     chatContent: slices.chatContentSlice,

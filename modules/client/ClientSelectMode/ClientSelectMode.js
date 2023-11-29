@@ -1,15 +1,10 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
-import Alert from "@/components/Alert";
-import Button from "@/components/Button";
 import { CHAT_TYPES } from "@/context/constants";
 import { selectModeTabs } from "@/context/TabsKeys";
 import Tabs from "@/packages/Tabs";
-import { investigationFormToggleVisibility } from "@/store/slices/investigationFormSlice";
 
 import ConfigureFormMeet from "./ConfigureFormMeet";
 import ConfigureFormMessage from "./ConfigureFormMessage";
@@ -27,17 +22,13 @@ function ClientSelectMode(props) {
     isTextVisible,
     isVideoVisible,
   } = props;
-  const {
-    user: { investigations },
-  } = useSelector((store) => ({ user: store.user.data }));
+
   const [tabsConfig, setTabsConfig] = useState({
     key: activeTab || selectModeTabs.choose,
     dir: "next",
   });
   const [tabsHeight, setTabsHeight] = useState(68);
-  const dispatch = useDispatch();
   const router = useRouter();
-  const { t } = useTranslation();
 
   const getActiveTabSelector = (key) => {
     if (key === selectModeTabs.configureMessage) {
@@ -81,25 +72,6 @@ function ClientSelectMode(props) {
   );
 
   const goToCreatedChat = useCallback((id) => router.push(`/chat?id=${id}`), [router]);
-
-  const openInvestigationForm = useCallback(
-    () => dispatch(investigationFormToggleVisibility(true)),
-    [dispatch]
-  );
-
-  if (!investigations?.length)
-    return (
-      <div className="px-2">
-        <Alert
-          className="configure-form-alert"
-          type="error"
-          message={t("no_investigation_error")}
-        />
-        <Button size="sm" className="mt-2" onClick={openInvestigationForm}>
-          {t("add_investigation")}
-        </Button>
-      </div>
-    );
 
   return (
     <Tabs
