@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
 import Input from "@/components/Inputs";
@@ -23,8 +22,6 @@ export const SelectDoctor = () => {
   const user = useSelector((state) => state.user?.data);
   const categories = useSelector((state) => categoriesOptionsSelector(state));
 
-  const router = useRouter();
-
   const [isAutoTypeLoading, setIsAutoTypeLoading] = React.useState(false);
 
   const { doctors, isLoading, filters, pagination } = useDoctorsInfiniteList();
@@ -36,17 +33,7 @@ export const SelectDoctor = () => {
   } = useDoctorPreview();
 
   const createChatHandler = async (chatType = CHAT_TYPES.standard, messageType = MESSAGE_TYPES.standard) => {
-    const investigationId = user?.investigations?.[0]?.id;
-
-    if (!investigationId) {
-      const query = { ...router.query, chatType, messageType };
-      if (doctorPreviewId) {
-        query.doctorPreviewId = doctorPreviewId;
-      }
-      const pathname = "/user/medical-records";
-      return await router.push({ pathname, query }, undefined, { shallow: true });
-    }
-
+    const investigationId = user?.investigations?.[0]?.id ?? null
     await startConversation({ userId: user?.id, chatType, messageType, doctorPreviewId, investigationId });
   };
 

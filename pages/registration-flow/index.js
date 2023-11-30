@@ -33,10 +33,6 @@ export default function RegistrationPage() {
         router.replace("/registration-flow/select-doctor" + window.location.search);
       }
 
-      if (!user?.investigations?.length) {
-        return "";
-      }
-
       return router.replace("/home");
     },
     [router]

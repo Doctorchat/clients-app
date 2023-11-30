@@ -18,9 +18,6 @@ import Partners from "../Partners";
 import ProfileSidebar from "../ProfileSidebar";
 import Wallet, { WalletTopup, WalletTopupNotification } from "../Wallet";
 
-const ClientInvestigationsList = dynamic(() =>
-  import("@/modules/client").then((response) => response.ClientInvestigationsList)
-);
 const DocAppointmentsSettings = dynamic(() =>
   import("@/modules/doctor").then((response) => response.DocAppointmentsSettings)
 );
@@ -67,13 +64,8 @@ export default function LeftSide() {
         <Tabs.Pane dataKey={leftSideTabs.editProfile}>
           <EditProflie />
         </Tabs.Pane>
-        <AuthRoleWrapper roles={[userRoles.get("client")]}>
-          <>
-            <Tabs.Pane dataKey={leftSideTabs.investigations}>
-              <ClientInvestigationsList />
-            </Tabs.Pane>
-            <WalletTopup />
-          </>
+        <AuthRoleWrapper roles={[userRoles.get("client")]}>          
+          <WalletTopup />          
         </AuthRoleWrapper>
         <AuthRoleWrapper roles={[userRoles.get("doctor")]}>
           <>

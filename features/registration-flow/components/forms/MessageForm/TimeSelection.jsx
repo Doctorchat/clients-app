@@ -91,7 +91,7 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
             {data?.map((slot) => {
               const date = dayjs(slot.start_time);
               const isSelected = selectedSlotId === slot.id;
-              const isDisabled = date.isBefore(moment().add(3, "hours"));
+              const isDisabled = date.isBefore(moment().add(1, "hours"));
 
               return (
                 date.isSame(selectedDate, "day") && (
