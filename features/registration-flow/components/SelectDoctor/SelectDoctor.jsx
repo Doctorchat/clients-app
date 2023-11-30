@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
 
 import Button from "@/components/Button";
 import Input from "@/components/Inputs";
@@ -22,8 +21,6 @@ export const SelectDoctor = () => {
 
   const user = useSelector((state) => state.user?.data);
   const categories = useSelector((state) => categoriesOptionsSelector(state));
-
-  const router = useRouter();
 
   const [isAutoTypeLoading, setIsAutoTypeLoading] = React.useState(false);
 
