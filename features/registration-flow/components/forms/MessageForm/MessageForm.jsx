@@ -251,7 +251,7 @@ export const MessageForm = () => {
           <Form.Item name="content">
             <Textarea placeholder={t("message_form_placeholder")} />
           </Form.Item>
-          <p className="textarea-counter">{persistedValues?.content.replace(/\s/g, "").length ?? "0"}/3000</p>
+          <p className="textarea-counter">{persistedValues?.content ? persistedValues?.content.replace(/\s/g, "").length : "0"}/3000</p>
           <Form.Item name="uploads" label={t("message_uploads_label")}>
             <Upload
               filesAvailable={filesAvailable}
