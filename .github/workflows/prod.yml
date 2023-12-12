@@ -86,7 +86,7 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
           echo "${{ secrets.REGION_RO }}" >> .env
-          echo "${{ secrets.GTM_KEY_RO }}" >> .env
+          echo "${{ secrets.GTM_KEY_ONLINE }}" >> .env
           echo "${{ secrets.API_PATH_ONLINE }}" >> .env
           echo "${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}" >> .env
       - name: Build ONLINE
