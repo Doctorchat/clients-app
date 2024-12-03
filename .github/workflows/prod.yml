@@ -17,7 +17,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      #     MD
       - name: Create env configs
         run: |
           echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
@@ -30,12 +29,11 @@ jobs:
       - name: SSH Server Deploy MD
         uses: kostya-ten/ssh-server-deploy@v4
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.SSH_PASS }}
-          private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          scp_source: "out/"
-          scp_target: ${{ secrets.TARGET_APP_MD }}
+          host: '31.172.77.196'
+          username: 'doctorchat-app'
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          scp_source: "."
+          scp_target: /htdocs/app.doctorchat.md/
       - name: Send notification to Telegram
         uses: appleboy/telegram-action@master
         with:
@@ -49,71 +47,4 @@ jobs:
             Repository: ${{ github.repository }}
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-      #     RO
-      - name: Create env configs RO
-        run: |
-          echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
-          echo "${{ secrets.REGION_RO }}" >> .env
-          echo "${{ secrets.GTM_KEY_RO }}" >> .env
-          echo "${{ secrets.API_PATH_RO }}" >> .env
-          echo "${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}" >> .env
-      - name: Build RO
-        run: CI=false npm run build
-      - name: SSH Server Deploy RO
-        uses: kostya-ten/ssh-server-deploy@v4
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.SSH_PASS }}
-          private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          scp_source: "out/"
-          scp_target: ${{ secrets.TARGET_APP_RO }}
-      - name: Send notification to Telegram
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            Deployed RO
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
-
-            Repository: ${{ github.repository }}
-
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-      #     ONLINE
-      - name: Create env configs ONLINE
-        run: |
-          echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
-          echo "${{ secrets.REGION_RO }}" >> .env
-          echo "${{ secrets.GTM_KEY_ONLINE }}" >> .env
-          echo "${{ secrets.API_PATH_ONLINE }}" >> .env
-          echo "${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}" >> .env
-      - name: Build ONLINE
-        run: CI=false npm run build
-      - name: SSH Server Deploy ONLINE
-        uses: kostya-ten/ssh-server-deploy@v4
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.SSH_PASS }}
-          private_key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          scp_source: "out/"
-          scp_target: ${{ secrets.TARGET_APP_ONLINE }}
-      
-      - name: Send telegram message on push
-        uses: appleboy/telegram-action@master
-        with:
-          format: html
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ✅ <b>[PROD] Doctorchat Clients APP</b>
-            🥷 <b>User</b>: ${{ github.actor }}
-            📂 <b>Commit:</b> <a href="https://github.com/${{ github.repository }}/commit/${{github.sha}}">${{ github.event.commits[0].message }}</a>
-            📌 <b>Branch:</b> ${{ github.ref }}
-            📌 <b>Commit:</b> ${{ github.sha }}
-            📌 <b>Repository:</b> ${{ github.repository }}
-            📌 <b>Workflow:</b> ${{ github.workflow }}
-            📌 <b>Run:</b> ${{ github.run_id }}
-            📌 <b>Run Number:</b> ${{ github.run_number }}
+            
