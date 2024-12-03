@@ -33,4 +33,4 @@ jobs:
           username: 'doctorchat-app'
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
           scp_source: "/out"
-          scp_target: "/htdocs/app.doctorchat.md/"
+          scp_target: "~/htdocs/app.doctorchat.md/"
