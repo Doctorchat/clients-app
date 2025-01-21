@@ -10,6 +10,7 @@ import CheckIcon from "@/icons/check.svg";
 
 const CHAT = "chat";
 const VIDEO = "video";
+const PHYSICAL = "physical";
 const ONE_MINUTE = 60 * 1000;
 
 const selectDefaultOption = (isChatAvailable, isVideoAvailable) => {
@@ -24,7 +25,7 @@ const selectDefaultOption = (isChatAvailable, isVideoAvailable) => {
   return null;
 };
 
-function ConsultationOption({ title, price, available_discount, selected, onClick, disabled }) {
+function ConsultationOption({ title, price, available_discount, selected, onClick, disabled, info }) {
   const { globalCurrency } = useCurrency();
   const { t } = useTranslation();
 
@@ -54,12 +55,14 @@ function ConsultationOption({ title, price, available_discount, selected, onClic
     };
   }, [available_discount]);
 
+  console.log("[ConsultationOption]: price", price);
+
   return (
     <div className={clsx("card", { selected, disabled })} onClick={onClick}>
       {selected && <CheckIcon className="checked" />}
       <div className="card-title">{title}</div>
 
-      {!user?.company_id && (
+      {price && !user?.company_id && (
         <>
           {isDiscountActive === false && (
             <div className="card-price">
@@ -82,6 +85,8 @@ function ConsultationOption({ title, price, available_discount, selected, onClic
           )}
         </>
       )}
+
+      {info && <div className="text-left text-sm text-gray-500">{info}</div>}
     </div>
   );
 }
@@ -123,31 +128,42 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
   const isSelected = (type) => type === selectedOption;
   const isDisabled = (type) => (type === CHAT && !isChatAvailable) || (type === VIDEO && !isVideoAvailable);
 
+  console.log("[ConsultationOptions] doctor", doctor);
   return (
     <>
-      <section className="consultation-options">
-        <ConsultationOption
-          title={t("video_appointment")}
-          price={meet_price}
-          available_discount={doctor.available_discount}
-          selected={isSelected(VIDEO)}
-          onClick={handleOptionClick(VIDEO)}
-          disabled={isDisabled(VIDEO)}
-        />
+      <section className="consultation-options space-y-3">
+        <div className="grid grid-cols-2 gap-3">
+          <ConsultationOption
+            title={t("video_appointment")}
+            price={meet_price}
+            available_discount={doctor.available_discount}
+            selected={isSelected(VIDEO)}
+            onClick={handleOptionClick(VIDEO)}
+            disabled={isDisabled(VIDEO)}
+          />
+
+          <ConsultationOption
+            title={t("wizard:chat_consultation")}
+            price={price}
+            available_discount={doctor.available_discount}
+            selected={isSelected(CHAT)}
+            onClick={handleOptionClick(CHAT)}
+            disabled={isDisabled(CHAT)}
+          />
+        </div>
 
         <ConsultationOption
-          title={t("wizard:chat_consultation")}
-          price={price}
-          available_discount={doctor.available_discount}
-          selected={isSelected(CHAT)}
-          onClick={handleOptionClick(CHAT)}
-          disabled={isDisabled(CHAT)}
+          title={t("medical_centre:physical_appointment")}
+          info={t("medical_centre:price_varies_by_centre")}
+          selected={isSelected(PHYSICAL)}
+          onClick={handleOptionClick(PHYSICAL)}
+          disabled={isDisabled(PHYSICAL)}
         />
 
         <Button onClick={handleStartButtonClick} loading={isButtonLoading}>
           {t("selected_consultation")}
         </Button>
-        
+
       </section>
     </>
   );

@@ -48,7 +48,7 @@
     "@babel/plugin-transform-runtime": "^7.22.15",
     "@svgr/webpack": "^8.0.1",
     "@types/core-js": "^2.5.6",
-    "autoprefixer": "^10.4.14",
+    "autoprefixer": "^10.4.20",
     "babel-plugin-transform-runtime": "^6.23.0",
     "eslint": "8.41.0",
     "eslint-config-next": "^13.4.4",
@@ -56,8 +56,9 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "nth-check": ">=2.1.1",
-    "postcss": "^8.4.23",
-    "prettier": "^2.8.8"
+    "postcss": "^8.5.1",
+    "prettier": "^2.8.8",
+    "tailwindcss": "^3.4.17"
   },
   "volta": {
     "node": "18.16.0",
