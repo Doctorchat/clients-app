@@ -3,7 +3,7 @@ import Router from "next/router";
 import { MESSAGE_TYPES } from "@/context/constants";
 import api from "@/services/axios/api";
 
-const allowedPaths = ["/registration-flow/select-doctor", "message", "payment", "/home", "/chat"];
+const allowedPaths = ["/registration-flow/select-doctor", "message", "payment", "/home", "/chat", "/registration-flow/medical-centre"];
 
 export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllowed = false) => {
   if (user.role === 3) {

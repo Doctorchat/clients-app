@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
@@ -101,6 +102,7 @@ ConsultationOption.propTypes = {
 };
 
 function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
+  const { push } = useRouter();
   const { price, meet_price, video: isVideoAvailable, chat: isChatAvailable } = doctor;
 
   const { t } = useTranslation();
@@ -118,8 +120,14 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
 
     if (selectedOption === CHAT) {
       await onMessageTypeClick();
-    } else if (selectedOption === VIDEO) {
+    }
+
+    if (selectedOption === VIDEO) {
       await onVideoTypeClick();
+    }
+
+    if (selectedOption === PHYSICAL) {
+      await push(`/registration-flow/medical-centre?doctor=${doctorId?.id}`, {scroll: true})
     }
 
     setIsButtonLoading(false);
