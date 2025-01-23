@@ -43,6 +43,7 @@ const api = {
     checkRestoreCode: (code) => axiosInstance.post("/auth/validate", { code }),
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
+    bookSlot: (data) => axiosInstance.post(`/book-slot`, data),
     updateEmail: (data) => axiosInstance.put("/user/update/email", data),
     updateDiscount: (data) => axiosInstance.post("/user/update/discount", data),
     removeAccount: ({ user_id }) => axiosInstance.post("/user/remove-user", { user_id }),

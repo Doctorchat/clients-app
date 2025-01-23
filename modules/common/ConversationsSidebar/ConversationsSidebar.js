@@ -14,6 +14,7 @@ import { userRoles } from "@/context/constants";
 import { ClientStartConversationMenu } from "@/modules/client";
 import { getConversationList } from "@/store/actions";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
+import Link from "next/link";
 
 export default function ConversationsSidebar() {
   const { conversationList } = useSelector((store) => ({
@@ -72,6 +73,16 @@ export default function ConversationsSidebar() {
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y conversation-list-parts">
+          <div className="m-2">
+            <Link
+              href="/physical"
+              className="flex flex-col bg-dc-primary text-white p-2 rounded-xl border-left border-dc-teal"
+            >
+              <span>Programări fizice</span>
+              <span>peste 2 zile</span>
+            </Link>
+          </div>
+
           <List
             loaded={conversationList.isLoaded}
             loadingConfig={{

@@ -127,14 +127,17 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
     }
 
     if (selectedOption === PHYSICAL) {
-      await push(`/registration-flow/medical-centre?doctor=${doctorId?.id}`, {scroll: true})
+      await push(`/registration-flow/medical-centre?doctorId=${doctor?.id}`, { scroll: true });
     }
 
     setIsButtonLoading(false);
   };
 
   const isSelected = (type) => type === selectedOption;
-  const isDisabled = (type) => (type === CHAT && !isChatAvailable) || (type === VIDEO && !isVideoAvailable);
+  const isDisabled = (type) =>
+    (type === CHAT && !isChatAvailable) ||
+    (type === VIDEO && !isVideoAvailable) ||
+    (type === PHYSICAL && !doctor?.slots?.length);
 
   console.log("[ConsultationOptions] doctor", doctor);
   return (
@@ -171,7 +174,6 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
         <Button onClick={handleStartButtonClick} loading={isButtonLoading}>
           {t("selected_consultation")}
         </Button>
-
       </section>
     </>
   );
