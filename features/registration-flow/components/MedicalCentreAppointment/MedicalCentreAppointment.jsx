@@ -72,31 +72,34 @@ const MedicalCentreAppointment = () => {
 
   return (
     <>
-      <div className="max-w-xl mx-auto px-4">
+      <div className="tw-max-w-xl tw-mx-auto tw-px-4">
         {isLoading ? (
-          <div className="max-w-max mx-auto">
+          <div className="tw-max-w-max tw-mx-auto">
             <Spin spinning />
           </div>
         ) : (
-          <div className="space-y-7">
-            <div className="border rounded-xl overflow-hidden">
-              <Calendar
-                mode="month"
-                fullscreen={false}
-                headerRender={() => null}
-                disabledDate={(date) => {
-                  return !doctor?.slots?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
-                }}
-                value={moment(selectedDate)}
-                onSelect={onChangeSelectedDate}
-                locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
-              />
+          <div className="tw-space-y-7">
+            <div className="tw-space-y-2">
+              <div className="tw-font-medium">{t("Selectati ora")}</div>
+              <div className="tw-border tw-rounded-xl tw-overflow-hidden">
+                <Calendar
+                  mode="month"
+                  fullscreen={false}
+                  headerRender={() => null}
+                  disabledDate={(date) => {
+                    return !doctor?.slots?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
+                  }}
+                  value={moment(selectedDate)}
+                  onSelect={onChangeSelectedDate}
+                  locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
+                />
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <div className="font-medium">{t("Selectati ora")}</div>
+            <div className="tw-space-y-2">
+              <div className="tw-font-medium">{t("Selectati ora")}</div>
 
-              <div className="flex flex-wrap gap-2.5">
+              <div className="tw-flex tw-flex-wrap tw-gap-2.5">
                 {doctor?.slots?.map((slot) => {
                   const date = dayjs(slot.start_time);
                   const isSelected = selectedSlot?.id === slot.id;
@@ -109,11 +112,11 @@ const MedicalCentreAppointment = () => {
                         type="button"
                         disabled={isDisabled}
                         className={cn(
-                          "bg-gray-200 px-2 py-1 rounded-full text-sm font-medium max-w-max",
-                          "hover:text-dc-primary hover:ring-1 ring-dc-primary hover:disabled:text-gray-300 transition",
+                          "tw-bg-gray-200 tw-px-2 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium tw-max-w-max",
+                          "hover:tw-text-primary hover:tw-ring-1 tw-ring-primary hover:tw-disabled:tw-text-gray-300 tw-transition",
                           {
-                            "bg-gray-100 text-gray-300 cursor-not-allowed": isDisabled,
-                            "bg-dc-primary text-white": isSelected,
+                            "tw-bg-gray-100 tw-text-gray-300 tw-cursor-not-allowed": isDisabled,
+                            "tw-bg-primary tw-text-white": isSelected,
                           }
                         )}
                         onClick={() => {
@@ -131,9 +134,9 @@ const MedicalCentreAppointment = () => {
             </div>
 
             {selectedSlot && (
-              <div className="space-y-2">
-                <div className="font-medium">{t("Informatie despre centrul medical")}</div>
-                <div className="flex items-center gap-2.5">
+              <div className="tw-space-y-2">
+                <div className="tw-font-medium">{t("Informatie despre centrul medical")}</div>
+                <div className="tw-flex tw-items-center tw-gap-2.5">
                   <Avatar
                     size={72}
                     src={
@@ -142,21 +145,21 @@ const MedicalCentreAppointment = () => {
                         alt="Logo"
                       />
                     }
-                    className="flex-none"
+                    className="tw-flex-none"
                   />
                   <div>
-                    <div className="font-medium">{selectedSlot?.medical_centre?.name}</div>
-                    <div className="opacity-70 text-sm">
+                    <div className="tw-font-medium">{selectedSlot?.medical_centre?.name}</div>
+                    <div className="tw-opacity-70 tw-text-sm">
                       {selectedSlot?.medical_centre?.address}, {selectedSlot?.medical_centre?.city}
                     </div>
-                    <div className="font-medium text-sm">{selectedSlot?.medical_centre?.phone}</div>
+                    <div className="tw-font-medium tw-text-sm">{selectedSlot?.medical_centre?.phone}</div>
                   </div>
                 </div>
               </div>
             )}
 
-            <div className="space-y-2">
-              <div className="font-medium">{t("Selectati ora")}</div>
+            <div className="tw-space-y-2">
+              <div className="tw-font-medium">{t("Selectati ora")}</div>
 
               <Form
                 methods={form}

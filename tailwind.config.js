@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  prefix: "tw-",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,10 +13,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        dc: {
-          primary: "#e81f41",
-          teal: "#b8f4f3",
-        },
+        primary: "#e81f41",
+        teal: "#b8f4f3",
       },
     },
   },

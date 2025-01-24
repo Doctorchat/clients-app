@@ -139,11 +139,10 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
     (type === VIDEO && !isVideoAvailable) ||
     (type === PHYSICAL && !doctor?.slots?.length);
 
-  console.log("[ConsultationOptions] doctor", doctor);
   return (
     <>
-      <section className="consultation-options space-y-3">
-        <div className="grid grid-cols-2 gap-3">
+      <section className="consultation-options tw-space-y-3">
+        <div className="tw-grid tw-grid-cols-2 tw-gap-3">
           <ConsultationOption
             title={t("video_appointment")}
             price={meet_price}

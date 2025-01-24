@@ -23,7 +23,7 @@
   height: 100%;
 }
 
-#column-center {
+#column-center, #physical-appointment-container {
   flex: 5;
 }
 
@@ -84,7 +84,7 @@
     max-width: unset;
   }
 
-  #column-center {
+  #column-center, #physical-appointment-container {
     position: absolute;
     z-index: 760;
   }
