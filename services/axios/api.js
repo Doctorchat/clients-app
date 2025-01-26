@@ -1,5 +1,7 @@
 import axiosInstance from "./apiConfig";
 
+const baseUrlWithoutRegion = process.env.NEXT_PUBLIC_API_URL;
+
 const api = {
   auth: {
     google: {
@@ -42,8 +44,15 @@ const api = {
     restorePassword: (data) => axiosInstance.post("/auth/reset-password", data),
     checkRestoreCode: (code) => axiosInstance.post("/auth/validate", { code }),
     slots: (doctorId) => axiosInstance.get(`/doctors/slots/${doctorId}`),
+    myPhysicalConsultation: () =>
+      axiosInstance.get(`/my-physical-consultations`, {
+        baseURL: baseUrlWithoutRegion,
+      }),
     removeSlot: (slotId) => axiosInstance.delete(`/user/card/reservations/${slotId}`),
-    bookSlot: (data) => axiosInstance.post(`/book-slot`, data),
+    bookSlot: (data) =>
+      axiosInstance.post(`/book-slot`, data, {
+        baseURL: baseUrlWithoutRegion,
+      }),
     updateEmail: (data) => axiosInstance.put("/user/update/email", data),
     updateDiscount: (data) => axiosInstance.post("/user/update/discount", data),
     removeAccount: ({ user_id }) => axiosInstance.post("/user/remove-user", { user_id }),

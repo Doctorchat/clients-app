@@ -16,6 +16,9 @@ module.exports = {
         primary: "#e81f41",
         teal: "#b8f4f3",
       },
+      screens: {
+        xs: "360px",
+      },
     },
   },
   plugins: [],

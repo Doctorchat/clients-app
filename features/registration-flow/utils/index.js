@@ -3,7 +3,15 @@ import Router from "next/router";
 import { MESSAGE_TYPES } from "@/context/constants";
 import api from "@/services/axios/api";
 
-const allowedPaths = ["/registration-flow/select-doctor", "message", "payment", "/home", "/chat", "/registration-flow/medical-centre"];
+const allowedPaths = [
+  "/registration-flow/select-doctor",
+  "message",
+  "payment",
+  "/home",
+  "/chat",
+  "/physical",
+  "/registration-flow/medical-centre",
+];
 
 export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllowed = false) => {
   if (user.role === 3) {
@@ -12,10 +20,10 @@ export const getUserRedirectPath = (user, pathname = "", isInvestigationFormAllo
     }
     if (user?.company_id !== null && user?.is_verified_by_company === false) {
       return "/registration-flow/company-verification";
-    }  
+    }
     if (allowedPaths.includes(pathname)) {
       return pathname;
-    }    
+    }
     if (!isInvestigationFormAllowed) {
       return "/registration-flow/select-doctor";
     }

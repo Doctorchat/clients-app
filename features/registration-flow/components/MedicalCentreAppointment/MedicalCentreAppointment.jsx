@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { Avatar, Calendar, Spin } from "antd";
+import { Avatar, Calendar, notification, Spin } from "antd";
 import dayjs from "dayjs";
 import moment from "moment/moment";
 import { useSearchParams } from "next/navigation";
@@ -17,17 +18,19 @@ import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { antLocales } from "@/utils/antLocales";
 import { cn } from "@/utils/cn";
 import getActiveLng from "@/utils/getActiveLng";
+import api from "@/services/axios/api";
 
 const userSchema = object().shape({
-  email: string().required(),
-  phone: string().required(),
-  name: string().required(),
+  email: string().required().min(5).max(50).email(),
+  phone: string().required().min(9).max(50),
+  name: string().required().min(2).max(50),
 });
 
 const MedicalCentreAppointment = () => {
   const { t } = useTranslation();
   const searchParams = useSearchParams();
   const [spinning, setSpinning] = useState(false);
+  const { push } = useRouter();
 
   const [selectedDate, setSelectedDate] = useState(moment());
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -42,16 +45,27 @@ const MedicalCentreAppointment = () => {
 
   const onSubmit = async (data) => {
     const body = {
-      doctor_id: doctorId,
-      medical_centre_id: selectedSlot?.medical_centre?.id,
       physical_slot_id: selectedSlot?.id,
       ...data,
     };
 
     setSpinning(true);
-    console.log("onSubmit body", body);
 
-    // await api.user.bookSlot(body);
+    await api.user
+      .bookSlot(body)
+      .then(() => {
+        notification.success({
+          message: t("Date au fost trimise cu succes"),
+          description: "Va directionam pe pagina cu toate programarile fizice",
+        });
+        push("/physical");
+      })
+      .catch((err) => {
+        notification.error({ message: t("default_error_message") });
+      })
+      .finally(() => {
+        setSpinning(false);
+      });
   };
 
   const onChangeSelectedDate = useCallback((date) => {
@@ -80,7 +94,7 @@ const MedicalCentreAppointment = () => {
         ) : (
           <div className="tw-space-y-7">
             <div className="tw-space-y-2">
-              <div className="tw-font-medium">{t("Selectati ora")}</div>
+              <div className="tw-font-medium">{t("Selectati data")}</div>
               <div className="tw-border tw-rounded-xl tw-overflow-hidden">
                 <Calendar
                   mode="month"
@@ -116,7 +130,7 @@ const MedicalCentreAppointment = () => {
                           "hover:tw-text-primary hover:tw-ring-1 tw-ring-primary hover:tw-disabled:tw-text-gray-300 tw-transition",
                           {
                             "tw-bg-gray-100 tw-text-gray-300 tw-cursor-not-allowed": isDisabled,
-                            "tw-bg-primary tw-text-white": isSelected,
+                            "tw-bg-primary tw-text-white hover:tw-text-white": isSelected,
                           }
                         )}
                         onClick={() => {
@@ -159,7 +173,7 @@ const MedicalCentreAppointment = () => {
             )}
 
             <div className="tw-space-y-2">
-              <div className="tw-font-medium">{t("Selectati ora")}</div>
+              <div className="tw-font-medium">{t("Datele personale")}</div>
 
               <Form
                 methods={form}
@@ -176,9 +190,11 @@ const MedicalCentreAppointment = () => {
                   <Input placeholder={t("translation:email")} />
                 </Form.Item>
 
-                <Button htmlType="submit" loading={spinning}>
-                  OK
-                </Button>
+                <div className="tw-max-w-max tw-mx-auto">
+                  <Button htmlType="submit" loading={spinning}>
+                    Trimite datele
+                  </Button>
+                </div>
               </Form>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -18,6 +18,9 @@ import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import { CalendarCheck } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/services/axios/api";
+import { formatDateWithYearOption, getClosestDate } from "@/utils/formatDate";
 
 export default function ConversationsSidebar() {
   const { conversationList } = useSelector((store) => ({
@@ -70,7 +73,20 @@ export default function ConversationsSidebar() {
     setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
   };
 
-  const isPhysicalPathname = pathname === "/physical";
+  const isPhysicalPathname = useMemo(() => pathname === "/physical", [pathname]);
+
+  const { data: consultations } = useQuery(["my-physical-consultations"], () =>
+    api.user.myPhysicalConsultation().then((res) => res.data?.data)
+  );
+
+  const filteredConsultations = useMemo(
+    () => consultations?.filter((item) => item?.status !== 3 || item?.status !== 4),
+    [consultations]
+  );
+
+  const haveConsultations = useMemo(() => Boolean(filteredConsultations?.length), [filteredConsultations]);
+
+  console.log("filteredConsultations", filteredConsultations);
 
   return (
     <Sidebar>
@@ -99,25 +115,30 @@ export default function ConversationsSidebar() {
                   <span>Programări fizice</span>
                 </span>
 
-                <span
-                  className={cn("tw-flex tw-gap-2 tw-items-center tw-opacity-80 tw-text-sm", {
-                    "tw-text-white": isPhysicalPathname,
-                  })}
-                >
-                  Următoarea vizită: 26 ianuarie, 14:00
-                </span>
+                {haveConsultations && (
+                  <span
+                    className={cn("tw-flex tw-gap-2 tw-items-center tw-opacity-80 tw-text-sm", {
+                      "tw-text-white": isPhysicalPathname,
+                    })}
+                  >
+                    Următoarea vizită:{" "}
+                    {formatDateWithYearOption(getClosestDate(filteredConsultations?.map((item) => item?.start_time)))}
+                  </span>
+                )}
               </span>
 
-              <span
-                className={cn(
-                  "tw-bg-primary tw-py-0.5 tw-px-1.5 tw-rounded-full tw-text-xs tw-font-semibold tw-text-white",
-                  {
-                    "tw-bg-white tw-text-primary": isPhysicalPathname,
-                  }
-                )}
-              >
-                38
-              </span>
+              {haveConsultations && (
+                <span
+                  className={cn(
+                    "tw-bg-primary tw-py-0.5 tw-px-1.5 tw-rounded-full tw-text-xs tw-font-semibold tw-text-white",
+                    {
+                      "tw-bg-white tw-text-primary": isPhysicalPathname,
+                    }
+                  )}
+                >
+                  {filteredConsultations?.length}
+                </span>
+              )}
             </Link>
           </div>
 
