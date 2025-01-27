@@ -55,12 +55,13 @@ const MedicalCentreAppointment = () => {
       .bookSlot(body)
       .then(() => {
         notification.success({
-          message: t("Date au fost trimise cu succes"),
-          description: "Va directionam pe pagina cu toate programarile fizice",
+          message: t("medical_centre:message_sent_successfully"),
+          description: t("medical_centre:redirect_to_physical_appointments"),
+          duration: 300,
         });
         push("/physical");
       })
-      .catch((err) => {
+      .catch(() => {
         notification.error({ message: t("default_error_message") });
       })
       .finally(() => {
@@ -94,7 +95,7 @@ const MedicalCentreAppointment = () => {
         ) : (
           <div className="tw-space-y-7">
             <div className="tw-space-y-2">
-              <div className="tw-font-medium">{t("Selectati data")}</div>
+              <div className="tw-font-medium">{t("medical_centre:select_date")}</div>
               <div className="tw-border tw-rounded-xl tw-overflow-hidden">
                 <Calendar
                   mode="month"
@@ -111,7 +112,7 @@ const MedicalCentreAppointment = () => {
             </div>
 
             <div className="tw-space-y-2">
-              <div className="tw-font-medium">{t("Selectati ora")}</div>
+              <div className="tw-font-medium">{t("medical_centre:select_time")}</div>
 
               <div className="tw-flex tw-flex-wrap tw-gap-2.5">
                 {doctor?.slots?.map((slot) => {
@@ -173,7 +174,7 @@ const MedicalCentreAppointment = () => {
             )}
 
             <div className="tw-space-y-2">
-              <div className="tw-font-medium">{t("Datele personale")}</div>
+              <div className="tw-font-medium">{t("medical_centre:personal_data")}</div>
 
               <Form
                 methods={form}
@@ -192,7 +193,7 @@ const MedicalCentreAppointment = () => {
 
                 <div className="tw-max-w-max tw-mx-auto">
                   <Button htmlType="submit" loading={spinning}>
-                    Trimite datele
+                    {t("send")}
                   </Button>
                 </div>
               </Form>

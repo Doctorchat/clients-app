@@ -56,8 +56,6 @@ function ConsultationOption({ title, price, available_discount, selected, onClic
     };
   }, [available_discount]);
 
-  console.log("[ConsultationOption]: price", price);
-
   return (
     <div className={clsx("card", { selected, disabled })} onClick={onClick}>
       {selected && <CheckIcon className="checked" />}

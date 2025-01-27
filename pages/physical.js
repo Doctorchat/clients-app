@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
 import { ArrowLeft, EyeIcon } from "lucide-react";
 import { Avatar, Button, Popover } from "antd";
@@ -8,30 +8,33 @@ import api from "@/services/axios/api";
 import { Badge } from "antd";
 import { formatDateWithYearOption } from "@/utils/formatDate";
 
-const CONSULTATION_STATUS = {
-  0: {
-    label: "Rezervat",
-    badgeColor: "pink",
-  },
-  1: {
-    label: "Confirmat",
-    badgeColor: "green",
-  },
-  2: {
-    label: "Anulat",
-    badgeColor: "red",
-  },
-  3: {
-    label: "Finalizat",
-    badgeColor: "blue",
-  },
-};
-
 function PhysicalAppointmentsPage() {
   const { t } = useTranslation();
 
   const { data: consultations } = useQuery(["my-physical-consultations"], () =>
     api.user.myPhysicalConsultation().then((res) => res.data?.data)
+  );
+
+  const CONSULTATION_STATUS = useMemo(
+    () => ({
+      0: {
+        label: t("status_booked"),
+        badgeColor: "gold",
+      },
+      1: {
+        label: t("status_confirmed"),
+        badgeColor: "green",
+      },
+      2: {
+        label: t("status_canceled"),
+        badgeColor: "red",
+      },
+      3: {
+        label: t("status_completed"),
+        badgeColor: "blue",
+      },
+    }),
+    [t]
   );
 
   return (
@@ -77,13 +80,14 @@ function PhysicalAppointmentsPage() {
                   <div className="xs:tw-flex tw-items-center tw-justify-between tw-border-t mt-3 pt-3">
                     <div>
                       <div className="tw-text-gray-500">
-                        Data:{" "}
+                        {t("message_form_confirmation.datetime")}:{" "}
                         <span className="tw-text-gray-700 tw-font-medium">
                           {formatDateWithYearOption(consultation?.start_time)}
                         </span>
                       </div>
                       <div className="tw-text-gray-500">
-                        Medic: <span className="tw-text-gray-700 tw-font-medium">{consultation?.doctor?.name}</span>
+                        {t("doctor")}:{" "}
+                        <span className="tw-text-gray-700 tw-font-medium">{consultation?.doctor?.name}</span>
                       </div>
                     </div>
 
@@ -91,20 +95,22 @@ function PhysicalAppointmentsPage() {
                       content={
                         <div>
                           <div className="tw-text-gray-500">
-                            Nume: <span className="tw-text-gray-700 tw-font-medium">{consultation?.user?.name}</span>
+                            {t("name")}:{" "}
+                            <span className="tw-text-gray-700 tw-font-medium">{consultation?.user?.name}</span>
                           </div>
                           <div className="tw-text-gray-500">
-                            Telefon:{" "}
+                            {t("phone")}:{" "}
                             <span className="tw-text-gray-700 tw-font-medium">{consultation?.user?.phone}</span>
                           </div>
                           <div className="tw-text-gray-500">
-                            Email: <span className="tw-text-gray-700 tw-font-medium">{consultation?.user?.email}</span>
+                            {t("email")}:{" "}
+                            <span className="tw-text-gray-700 tw-font-medium">{consultation?.user?.email}</span>
                           </div>
                         </div>
                       }
                       trigger="click"
                     >
-                      <Button>Detalii pacient</Button>
+                      <Button>{t("other_details")}</Button>
                     </Popover>
                   </div>
                 </div>

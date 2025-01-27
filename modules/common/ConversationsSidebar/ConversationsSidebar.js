@@ -80,13 +80,11 @@ export default function ConversationsSidebar() {
   );
 
   const filteredConsultations = useMemo(
-    () => consultations?.filter((item) => item?.status !== 3 || item?.status !== 4),
+    () => consultations?.filter((item) => item?.status !== 2 && item?.status !== 3),
     [consultations]
   );
 
   const haveConsultations = useMemo(() => Boolean(filteredConsultations?.length), [filteredConsultations]);
-
-  console.log("filteredConsultations", filteredConsultations);
 
   return (
     <Sidebar>
@@ -112,7 +110,7 @@ export default function ConversationsSidebar() {
                   })}
                 >
                   <CalendarCheck size={20} strokeWidth={2.5} />
-                  <span>Programări fizice</span>
+                  <span>{t("medical_centre:physical_appointments")}</span>
                 </span>
 
                 {haveConsultations && (
@@ -121,7 +119,7 @@ export default function ConversationsSidebar() {
                       "tw-text-white": isPhysicalPathname,
                     })}
                   >
-                    Următoarea vizită:{" "}
+                    {t("next_visit")}:{" "}
                     {formatDateWithYearOption(getClosestDate(filteredConsultations?.map((item) => item?.start_time)))}
                   </span>
                 )}

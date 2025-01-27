@@ -5,7 +5,6 @@ import { Layout, MedicalCentreAppointment } from "@/features/registration-flow";
 import i18next from "@/services/i18next";
 
 export default function MedicalCentreAppointmentPage(props) {
-  console.log(props);
   return <MedicalCentreAppointment />;
 }
 
