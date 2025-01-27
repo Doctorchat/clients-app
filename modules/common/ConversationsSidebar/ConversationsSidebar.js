@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 import Button from "@/components/Button";
 import { ConversationItemSkeleton } from "@/components/ConversationItem";
@@ -14,6 +15,12 @@ import { userRoles } from "@/context/constants";
 import { ClientStartConversationMenu } from "@/modules/client";
 import { getConversationList } from "@/store/actions";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
+import Link from "next/link";
+import { cn } from "@/utils/cn";
+import { CalendarCheck } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import api from "@/services/axios/api";
+import { formatDateWithYearOption, getClosestDate } from "@/utils/formatDate";
 
 export default function ConversationsSidebar() {
   const { conversationList } = useSelector((store) => ({
@@ -30,6 +37,7 @@ export default function ConversationsSidebar() {
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const pathname = usePathname();
   const router = useRouter();
   const { id } = router.query;
 
@@ -65,6 +73,19 @@ export default function ConversationsSidebar() {
     setSearchConfig((prev) => ({ ...prev, [actionType]: value }));
   };
 
+  const isPhysicalPathname = useMemo(() => pathname === "/physical", [pathname]);
+
+  const { data: consultations } = useQuery(["my-physical-consultations"], () =>
+    api.user.myPhysicalConsultation().then((res) => res.data?.data)
+  );
+
+  const filteredConsultations = useMemo(
+    () => consultations?.filter((item) => item?.status !== 2 && item?.status !== 3),
+    [consultations]
+  );
+
+  const haveConsultations = useMemo(() => Boolean(filteredConsultations?.length), [filteredConsultations]);
+
   return (
     <Sidebar>
       <Sidebar.Header>
@@ -72,6 +93,53 @@ export default function ConversationsSidebar() {
       </Sidebar.Header>
       <Sidebar.Body>
         <div className="scrollable scrollable-y conversation-list-parts">
+          <div className="tw-m-2">
+            <Link
+              href="/physical"
+              className={cn(
+                "tw-flex tw-gap-5 tw-items-center tw-justify-between tw-px-3 tw-py-2 tw-rounded-xl",
+                "tw-bg-primary/5 tw-border tw-border-primary",
+                "hover:tw-bg-primary/10 tw-transition",
+                { "tw-bg-primary tw-text-white tw-pointer-events-none tw-cursor-not-allowed": isPhysicalPathname }
+              )}
+            >
+              <span className="tw-w-full">
+                <span
+                  className={cn("tw-flex tw-gap-2 tw-items-center tw-font-semibold tw-text-primary", {
+                    "tw-text-white": isPhysicalPathname,
+                  })}
+                >
+                  <CalendarCheck size={20} strokeWidth={2.5} />
+                  <span>{t("medical_centre:physical_appointments")}</span>
+                </span>
+
+                {haveConsultations && (
+                  <span
+                    className={cn("tw-flex tw-gap-2 tw-items-center tw-opacity-80 tw-text-sm", {
+                      "tw-text-white": isPhysicalPathname,
+                    })}
+                  >
+                    {t("next_visit")}:{" "}
+                    {formatDateWithYearOption(getClosestDate(filteredConsultations?.map((item) => item?.start_time)))}
+                  </span>
+                )}
+              </span>
+
+              {haveConsultations && (
+                <span
+                  className={cn(
+                    "tw-bg-primary tw-py-0.5 tw-px-1.5 tw-rounded-full tw-text-xs tw-font-semibold tw-text-white",
+                    {
+                      "tw-bg-white tw-text-primary": isPhysicalPathname,
+                    }
+                  )}
+                >
+                  {filteredConsultations?.length}
+                </span>
+              )}
+            </Link>
+          </div>
+
           <List
             loaded={conversationList.isLoaded}
             loadingConfig={{

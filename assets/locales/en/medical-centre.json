@@ -1,0 +1,10 @@
+{
+  "message_sent_successfully": "The data has been successfully submitted",
+  "redirect_to_physical_appointments": "We are redirecting you to the page with all physical appointments",
+  "select_time": "Select time",
+  "select_date": "Select date",
+  "personal_data": "Personal data",
+  "physical_appointment": "Physical appointment",
+  "physical_appointments": "Physical appointments",
+  "price_varies_by_centre": "The price depends on each medical center."
+}

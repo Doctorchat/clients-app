@@ -9,12 +9,11 @@ export const fetchToken = async (user = null) => {
     try {
       const getTokenFirebaseStorage = localStorage.getItem(FIREBASE_TOKEN_KEY);
       const permissionStorage = localStorage.getItem(FIREBASE_PERMISSION);
-      if (permissionStorage || !user && getTokenFirebaseStorage) {
+      if (permissionStorage || (!user && getTokenFirebaseStorage)) {
         return;
       }
-    
+
       if (user) {
-        
         if (!getTokenFirebaseStorage) {
           setTokenStorage().then(async (token) => {
             if (token) {
@@ -49,7 +48,6 @@ const setTokenStorage = async () => {
       vapidKey: FIREBASE_VAPID_KEY,
     });
     if (currentToken) {
-      console.log(currentToken);
       localStorage.setItem(FIREBASE_TOKEN_KEY, JSON.stringify(currentToken));
       return currentToken;
     } else {

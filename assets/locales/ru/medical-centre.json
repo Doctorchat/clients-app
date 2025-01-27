@@ -1,0 +1,10 @@
+{
+  "message_sent_successfully": "Данные были успешно отправлены",
+  "redirect_to_physical_appointments": "Мы перенаправляем вас на страницу со всеми физическими записями",
+  "select_time": "Выберите время",
+  "select_date": "Выберите дату",
+  "personal_data": "Личные данные",
+  "physical_appointment": "Физический приём",
+  "physical_appointments": "Физические записи",
+  "price_varies_by_centre": "Цена зависит от каждого медицинского центра."
+}

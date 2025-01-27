@@ -78,6 +78,7 @@ export const SelectDoctor = () => {
             </div>
           )}
         </div>
+
         <DoctorsGrid isLoading={isLoading}>
           {doctors.map((doctor) => (
             <DoctorCard key={doctor.id} doctor={doctor} onClickPreview={() => setDoctorPreviewId(doctor.id)} />
