@@ -116,7 +116,8 @@ const MedicalCentreAppointment = () => {
 
               <div className="tw-flex tw-flex-wrap tw-gap-2.5">
                 {doctor?.slots?.map((slot) => {
-                  const date = dayjs(slot.start_time);
+                  const date = moment.utc(slot.start_time);
+
                   const isSelected = selectedSlot?.id === slot.id;
                   const isDisabled = date.isBefore(moment().add(1, "hour"));
 
