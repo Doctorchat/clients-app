@@ -6,5 +6,8 @@
   "personal_data": "Datele personale",
   "physical_appointment": "Programare fizică",
   "physical_appointments": "Programări fizice",
-  "price_varies_by_centre": "Prețul depinde de fiecare centru medical."
+  "price_varies_by_centre": "Prețul depinde de fiecare centru medical.",
+  "select_medical_centre": "Selectați centrul medical",
+  "no_available_time": "Nu există oră disponibilă pentru ziua selectată.",
+  "schedule_new_visit": "Programează o vizită nouă"
 }

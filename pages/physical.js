@@ -1,12 +1,13 @@
 import React, { useMemo } from "react";
 import Link from "next/link";
-import { ArrowLeft, EyeIcon } from "lucide-react";
-import { Avatar, Button, Popover } from "antd";
+import { ArrowLeft } from "lucide-react";
+import { Avatar, Popover, Badge, Button } from "antd";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/services/axios/api";
-import { Badge } from "antd";
 import { formatDateWithYearOption } from "@/utils/formatDate";
+import PlusIcon from "@/icons/plus.svg";
+import MyButton from "@/components/Button";
 
 function PhysicalAppointmentsPage() {
   const { t } = useTranslation();
@@ -48,6 +49,14 @@ function PhysicalAppointmentsPage() {
         </div>
 
         <div className="tw-p-5">
+          <div className="tw-mb-5 tw-flex tw-justify-end">
+            <Link href="/registration-flow/select-doctor">
+              <MyButton icon={<PlusIcon />} type="primary">
+                {t("medical_centre:schedule_new_visit")}
+              </MyButton>
+            </Link>
+          </div>
+
           <div className="tw-grid xl:tw-grid-cols-2 tw-gap-6">
             {consultations?.map((consultation) => (
               <Badge.Ribbon

@@ -135,7 +135,7 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
   const isDisabled = (type) =>
     (type === CHAT && !isChatAvailable) ||
     (type === VIDEO && !isVideoAvailable) ||
-    (type === PHYSICAL && !doctor?.slots?.length);
+    (type === PHYSICAL && !Object.keys(doctor?.slots)?.length);
 
   return (
     <>
