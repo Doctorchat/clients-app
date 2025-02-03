@@ -6,5 +6,8 @@
   "personal_data": "Personal data",
   "physical_appointment": "Physical appointment",
   "physical_appointments": "Physical appointments",
-  "price_varies_by_centre": "The price depends on each medical center."
+  "price_varies_by_centre": "The price depends on each medical center.",
+  "select_medical_centre": "Select the medical center",
+  "no_available_time": "No available time for the selected day.",
+  "schedule_new_visit": "Schedule a new visit"
 }

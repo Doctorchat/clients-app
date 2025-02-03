@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { Avatar, Calendar, notification, Spin } from "antd";
+import { Alert, Avatar, Calendar, notification, Spin } from "antd";
 import dayjs from "dayjs";
 import moment from "moment/moment";
 import { useSearchParams } from "next/navigation";
@@ -34,11 +34,16 @@ const MedicalCentreAppointment = () => {
 
   const [selectedDate, setSelectedDate] = useState(moment());
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedMedicalCentre, setSelectedMedicalCentre] = useState(null);
 
   const user = useSelector((store) => store.user.data);
   const doctorId = useMemo(() => searchParams.get("doctorId"), []);
 
   const { data: doctor, isLoading } = useDoctorPreview(doctorId);
+
+  const slotsByMedicalCentre = useMemo(() => {
+    return doctor?.slots[selectedMedicalCentre?.id];
+  }, [doctor?.slots, selectedMedicalCentre]);
 
   const resolver = useYupValidationResolver(userSchema);
   const form = useForm({ resolver });
@@ -57,7 +62,7 @@ const MedicalCentreAppointment = () => {
         notification.success({
           message: t("medical_centre:message_sent_successfully"),
           description: t("medical_centre:redirect_to_physical_appointments"),
-          duration: 300,
+          duration: 2,
         });
         push("/physical");
       })
@@ -79,11 +84,15 @@ const MedicalCentreAppointment = () => {
   }, []);
 
   useEffect(() => {
-    if (doctor?.slots) {
-      if (!doctor?.slots[0]?.start_time) return;
-      setSelectedDate(moment(doctor?.slots[0].start_time));
+    const firstStartTime = doctor?.slots?.[selectedMedicalCentre?.id]?.[0]?.start_time;
+    if (firstStartTime) {
+      setSelectedDate(moment(firstStartTime));
     }
-  }, [doctor]);
+
+    if (selectedMedicalCentre) {
+      setSelectedSlot(null);
+    }
+  }, [doctor, selectedMedicalCentre]);
 
   return (
     <>
@@ -95,110 +104,140 @@ const MedicalCentreAppointment = () => {
         ) : (
           <div className="tw-space-y-7">
             <div className="tw-space-y-2">
-              <div className="tw-font-medium">{t("medical_centre:select_date")}</div>
-              <div className="tw-border tw-rounded-xl tw-overflow-hidden">
-                <Calendar
-                  mode="month"
-                  fullscreen={false}
-                  headerRender={() => null}
-                  disabledDate={(date) => {
-                    return !doctor?.slots?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
-                  }}
-                  value={moment(selectedDate)}
-                  onSelect={onChangeSelectedDate}
-                  locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
-                />
-              </div>
-            </div>
-
-            <div className="tw-space-y-2">
-              <div className="tw-font-medium">{t("medical_centre:select_time")}</div>
-
-              <div className="tw-flex tw-flex-wrap tw-gap-2.5">
-                {doctor?.slots?.map((slot) => {
-                  const date = moment.utc(slot.start_time);
-
-                  const isSelected = selectedSlot?.id === slot.id;
-                  const isDisabled = date.isBefore(moment().add(1, "hour"));
-
+              <div className="tw-font-medium">{t("medical_centre:select_medical_centre")}</div>
+              <div className="tw-grid tw-gap-5">
+                {doctor?.slots_medical_centres?.map((medicalCentre) => {
+                  const isSelected = selectedMedicalCentre?.id === medicalCentre?.id;
                   return (
-                    date.isSame(selectedDate, "day") && (
-                      <button
-                        key={slot?.id}
-                        type="button"
-                        disabled={isDisabled}
+                    <button
+                      className={cn(
+                        "tw-group tw-relative tw-flex tw-text-left tw-p-2 tw-gap-2.5 tw-rounded-xl tw-bg-white tw-border tw-ring-1 tw-ring-transparent tw-transition",
+                        "hover:tw-border-teal hover:tw-ring-teal hover:tw-shadow-2xl hover:tw-shadow-black/5",
+                        isSelected && "tw-ring-primary tw-border-primary hover:tw-border-primary hover:tw-ring-primary"
+                      )}
+                      key={medicalCentre?.id}
+                      type="button"
+                      onClick={() => setSelectedMedicalCentre(medicalCentre)}
+                    >
+                      <Avatar
+                        size={72}
+                        src={
+                          <img src={medicalCentre?.logo?.url || "/images/default-logo-medical-centre.jpg"} alt="Logo" />
+                        }
+                        className="tw-flex-none tw-rounded-lg"
+                        shape="square"
+                      />
+                      <div className="tw-h-full tw-flex tw-flex-col">
+                        <div className="tw-font-medium">{medicalCentre?.name}</div>
+                        <div className="tw-opacity-70 tw-text-sm">
+                          {medicalCentre?.address}, {medicalCentre?.city}
+                        </div>
+                        <div className="tw-font-medium tw-text-sm mt-auto">{medicalCentre?.phone}</div>
+                      </div>
+
+                      <div
                         className={cn(
-                          "tw-bg-gray-200 tw-px-2 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium tw-max-w-max",
-                          "hover:tw-text-primary hover:tw-ring-1 tw-ring-primary hover:tw-disabled:tw-text-gray-300 tw-transition",
-                          {
-                            "tw-bg-gray-100 tw-text-gray-300 tw-cursor-not-allowed": isDisabled,
-                            "tw-bg-primary tw-text-white hover:tw-text-white": isSelected,
-                          }
+                          "tw-absolute tw-right-3 tw-top-3 tw-size-3 tw-rounded-full tw-bg-gray-100",
+                          "group-hover:tw-bg-teal",
+                          isSelected && "tw-bg-primary group-hover:tw-bg-primary"
                         )}
-                        onClick={() => {
-                          if (!isDisabled) {
-                            onChangeSelectedSlot(isSelected ? null : slot);
-                          }
-                        }}
-                      >
-                        {date.format("HH:mm")}
-                      </button>
-                    )
+                      />
+                    </button>
                   );
                 })}
               </div>
             </div>
 
-            {selectedSlot && (
-              <div className="tw-space-y-2">
-                <div className="tw-font-medium">{t("Informatie despre centrul medical")}</div>
-                <div className="tw-flex tw-items-center tw-gap-2.5">
-                  <Avatar
-                    size={72}
-                    src={
-                      <img
-                        src={selectedSlot?.medical_centre?.logo?.url || "/images/default-logo-medical-centre.jpg"}
-                        alt="Logo"
-                      />
-                    }
-                    className="tw-flex-none"
-                  />
-                  <div>
-                    <div className="tw-font-medium">{selectedSlot?.medical_centre?.name}</div>
-                    <div className="tw-opacity-70 tw-text-sm">
-                      {selectedSlot?.medical_centre?.address}, {selectedSlot?.medical_centre?.city}
-                    </div>
-                    <div className="tw-font-medium tw-text-sm">{selectedSlot?.medical_centre?.phone}</div>
+            {selectedMedicalCentre && (
+              <>
+                <div className="tw-space-y-2">
+                  <div className="tw-font-medium">{t("medical_centre:select_date")}</div>
+                  <div className="tw-border tw-rounded-xl tw-overflow-hidden">
+                    <Calendar
+                      mode="month"
+                      fullscreen={false}
+                      headerRender={() => null}
+                      disabledDate={(date) => {
+                        return !slotsByMedicalCentre?.find((slot) => dayjs(slot.start_time).isSame(date, "day"));
+                      }}
+                      value={moment(selectedDate)}
+                      onSelect={onChangeSelectedDate}
+                      locale={antLocales[getActiveLng()]?.Calendar ?? antLocales.ro.Calendar}
+                    />
                   </div>
                 </div>
-              </div>
-            )}
 
-            <div className="tw-space-y-2">
-              <div className="tw-font-medium">{t("medical_centre:personal_data")}</div>
+                <div className="tw-space-y-2">
+                  <div className="tw-font-medium">{t("medical_centre:select_time")}</div>
 
-              <Form
-                methods={form}
-                onFinish={onSubmit}
-                initialValues={{ name: user?.name ?? "", phone: user?.phone ?? "", email: user?.email ?? "" }}
-              >
-                <Form.Item name="name">
-                  <Input placeholder={t("wizard:first_name/last_name")} />
-                </Form.Item>
-                <Form.Item name="phone">
-                  <InputPhone placeholder={t("translation:phone")} />
-                </Form.Item>
-                <Form.Item name="email">
-                  <Input placeholder={t("translation:email")} />
-                </Form.Item>
+                  <div className="tw-flex tw-flex-wrap tw-gap-2.5">
+                    {slotsByMedicalCentre?.filter((slot) => moment.utc(slot.start_time).isSame(selectedDate, "day"))
+                      .length === 0 ? (
+                      <Alert message={t("medical_centre:no_available_time")} banner type="warning" />
+                    ) : (
+                      slotsByMedicalCentre?.map((slot) => {
+                        const date = moment.utc(slot.start_time);
+                        const isSelected = selectedSlot?.id === slot.id;
+                        const isDisabled = date.isBefore(moment().add(1, "hour")) || slot?.status !== "available";
+                        const isSame = date.isSame(selectedDate, "day");
 
-                <div className="tw-max-w-max tw-mx-auto">
-                  <Button htmlType="submit" loading={spinning}>
-                    {t("send")}
-                  </Button>
+                        if (!isSame) return null;
+
+                        return (
+                          <button
+                            key={slot?.id}
+                            type="button"
+                            disabled={isDisabled}
+                            className={cn(
+                              "tw-bg-gray-200 tw-px-2 tw-py-1 tw-rounded-full tw-text-sm tw-font-medium tw-max-w-max",
+                              "hover:tw-text-primary hover:tw-ring-1 tw-ring-primary hover:tw-disabled:tw-text-gray-300 tw-transition",
+                              {
+                                "tw-bg-gray-100 tw-text-gray-300 tw-cursor-not-allowed hover:tw-text-gray-300 hover:tw-ring-0":
+                                  isDisabled,
+                                "tw-bg-primary tw-text-white hover:tw-text-white": isSelected,
+                              }
+                            )}
+                            onClick={() => {
+                              if (!isDisabled) {
+                                onChangeSelectedSlot(isSelected ? null : slot);
+                              }
+                            }}
+                          >
+                            {date.format("HH:mm")}
+                          </button>
+                        );
+                      })
+                    )}
+                  </div>
                 </div>
-              </Form>
-            </div>
+
+                <div className="tw-space-y-2">
+                  <div className="tw-font-medium">{t("medical_centre:personal_data")}</div>
+
+                  <Form
+                    methods={form}
+                    onFinish={onSubmit}
+                    initialValues={{ name: user?.name ?? "", phone: user?.phone ?? "", email: user?.email ?? "" }}
+                  >
+                    <Form.Item name="name">
+                      <Input placeholder={t("wizard:first_name/last_name")} />
+                    </Form.Item>
+                    <Form.Item name="phone">
+                      <InputPhone placeholder={t("translation:phone")} />
+                    </Form.Item>
+                    <Form.Item name="email">
+                      <Input placeholder={t("translation:email")} />
+                    </Form.Item>
+
+                    <div className="tw-max-w-max tw-mx-auto">
+                      <Button htmlType="submit" loading={spinning} disabled={!selectedSlot}>
+                        {t("send")}
+                      </Button>
+                    </div>
+                  </Form>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>

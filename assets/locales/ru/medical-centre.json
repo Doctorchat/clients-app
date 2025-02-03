@@ -6,5 +6,8 @@
   "personal_data": "Личные данные",
   "physical_appointment": "Физический приём",
   "physical_appointments": "Физические записи",
-  "price_varies_by_centre": "Цена зависит от каждого медицинского центра."
+  "price_varies_by_centre": "Цена зависит от каждого медицинского центра.",
+  "select_medical_centre": "Выберите медицинский центр",
+  "no_available_time": "Нет доступного времени для выбранного дня.",
+  "schedule_new_visit": "Записаться на новый визит"
 }
