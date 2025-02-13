@@ -2,9 +2,6 @@ import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { Calendar } from "antd";
-import en_US from "antd/lib/locale-provider/en_US";
-import ro_RO from "antd/lib/locale-provider/ro_RO";
-import ru_RU from "antd/lib/locale-provider/ru_RU";
 import dayjs from "dayjs";
 import moment from "moment";
 import PropTypes from "prop-types";
@@ -12,12 +9,7 @@ import PropTypes from "prop-types";
 import api from "@/services/axios/api";
 import cs from "@/utils/classNames";
 import getActiveLng from "@/utils/getActiveLng";
-
-const antLocales = {
-  ro: ro_RO,
-  ru: ru_RU,
-  en: en_US,
-};
+import { antLocales } from "@/utils/antLocales";
 
 const TimeCard = ({ time, isSelected, isDisabled, onClick }) => {
   return (
@@ -83,7 +75,7 @@ export const TimeSelection = ({ doctorId, onSelectSlot }) => {
 
         <div className="d-flex flex-column text-center justify-content-center">
           <div className="message-info-hour">
-            <h7 className="message-info-hour-locale">{t("hour_info_locale")}</h7>
+            <div className="message-info-hour-locale">{t("hour_info_locale")}</div>
           </div>
           <h5 className="mb-2 mt-2 mb-sm-4 mt-sm-0">{t("ora_dvs_locala")}</h5>
 

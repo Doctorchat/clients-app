@@ -21,7 +21,7 @@ const ClientMeetForm = dynamic(() => import("@/modules/client").then((response) 
 export default function MainLayout({ children }) {
   const region = useRegion();
   const { t } = useTranslation();
-  
+
   return (
     <AuthWrapper>
       <Portal portalName="modalRoot">
@@ -46,7 +46,9 @@ export default function MainLayout({ children }) {
             <div className="d-flex justify-content-center">
               <Button
                 className="w-auto"
-                onClick={() => window.open(`https://chat.doctorchat.${region==='online'?'ro':region}`, "_blank", "noopener")}
+                onClick={() =>
+                  window.open(`https://chat.doctorchat.${region === "online" ? "ro" : region}`, "_blank", "noopener")
+                }
               >
                 <ArrowRightIcon />
                 {t("new_website_doctors")}

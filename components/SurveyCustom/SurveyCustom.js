@@ -27,7 +27,6 @@ export default function SurveyCustom(props) {
         id: parseInt(id),
         content: content,
       }));
-      // console.log(props);
 
       setLoading(true);
 
@@ -57,18 +56,26 @@ export default function SurveyCustom(props) {
             <Form methods={form} className="w-100" onFinish={addingAnswersHandler}>
               {investigation?.length &&
                 investigation?.map(({ question, id }) => {
-                  const labelWidth = question.length; 
-                  const heightLabel = labelWidth > 43 ? Math.round(((15 * (labelWidth / 43))/2)) : 0;
-                 return  <Form.Item label={question} className={`form-survey label-${id}`} key={id} name={id + ""} style={{marginTop: heightLabel ? (heightLabel+5) : 0}}>
-                    <Textarea
-                      className="feedback-textarea"
-                      height={heightLabel  ? (heightLabel+60):60}
-                      minHeight={heightLabel  ? (heightLabel+60):60}
-                      placeholder={t("feedback_form.description")}
-                      style={{paddingTop:heightLabel?heightLabel : 8}}
-                    />
-                  </Form.Item>
-})}
+                  const labelWidth = question.length;
+                  const heightLabel = labelWidth > 43 ? Math.round((15 * (labelWidth / 43)) / 2) : 0;
+                  return (
+                    <Form.Item
+                      label={question}
+                      className={`form-survey label-${id}`}
+                      key={id}
+                      name={id + ""}
+                      style={{ marginTop: heightLabel ? heightLabel + 5 : 0 }}
+                    >
+                      <Textarea
+                        className="feedback-textarea"
+                        height={heightLabel ? heightLabel + 60 : 60}
+                        minHeight={heightLabel ? heightLabel + 60 : 60}
+                        placeholder={t("feedback_form.description")}
+                        style={{ paddingTop: heightLabel ? heightLabel : 8 }}
+                      />
+                    </Form.Item>
+                  );
+                })}
 
               <div className="d-flex justify-content-end">
                 <Button type="primary" className="w-100" htmlType="submit" loading={loading}>
@@ -86,5 +93,5 @@ export default function SurveyCustom(props) {
 SurveyCustom.propTypes = {
   chatId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-investigation:  PropTypes.array
+  investigation: PropTypes.array,
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
@@ -10,6 +11,7 @@ import CheckIcon from "@/icons/check.svg";
 
 const CHAT = "chat";
 const VIDEO = "video";
+const PHYSICAL = "physical";
 const ONE_MINUTE = 60 * 1000;
 
 const selectDefaultOption = (isChatAvailable, isVideoAvailable) => {
@@ -24,7 +26,7 @@ const selectDefaultOption = (isChatAvailable, isVideoAvailable) => {
   return null;
 };
 
-function ConsultationOption({ title, price, available_discount, selected, onClick, disabled }) {
+function ConsultationOption({ title, price, available_discount, selected, onClick, disabled, info }) {
   const { globalCurrency } = useCurrency();
   const { t } = useTranslation();
 
@@ -59,7 +61,7 @@ function ConsultationOption({ title, price, available_discount, selected, onClic
       {selected && <CheckIcon className="checked" />}
       <div className="card-title">{title}</div>
 
-      {!user?.company_id && (
+      {price && !user?.company_id && (
         <>
           {isDiscountActive === false && (
             <div className="card-price">
@@ -82,6 +84,8 @@ function ConsultationOption({ title, price, available_discount, selected, onClic
           )}
         </>
       )}
+
+      {info && <div className="text-left text-sm text-gray-500">{info}</div>}
     </div>
   );
 }
@@ -96,6 +100,7 @@ ConsultationOption.propTypes = {
 };
 
 function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
+  const { push } = useRouter();
   const { price, meet_price, video: isVideoAvailable, chat: isChatAvailable } = doctor;
 
   const { t } = useTranslation();
@@ -113,41 +118,59 @@ function ConsultationOptions({ doctor, onMessageTypeClick, onVideoTypeClick }) {
 
     if (selectedOption === CHAT) {
       await onMessageTypeClick();
-    } else if (selectedOption === VIDEO) {
+    }
+
+    if (selectedOption === VIDEO) {
       await onVideoTypeClick();
+    }
+
+    if (selectedOption === PHYSICAL) {
+      await push(`/registration-flow/medical-centre?doctorId=${doctor?.id}`, { scroll: true });
     }
 
     setIsButtonLoading(false);
   };
 
   const isSelected = (type) => type === selectedOption;
-  const isDisabled = (type) => (type === CHAT && !isChatAvailable) || (type === VIDEO && !isVideoAvailable);
+  const isDisabled = (type) =>
+    (type === CHAT && !isChatAvailable) ||
+    (type === VIDEO && !isVideoAvailable) ||
+    (type === PHYSICAL && !Object.keys(doctor?.slots)?.length);
 
   return (
     <>
-      <section className="consultation-options">
-        <ConsultationOption
-          title={t("video_appointment")}
-          price={meet_price}
-          available_discount={doctor.available_discount}
-          selected={isSelected(VIDEO)}
-          onClick={handleOptionClick(VIDEO)}
-          disabled={isDisabled(VIDEO)}
-        />
+      <section className="consultation-options tw-space-y-3">
+        <div className="tw-grid tw-grid-cols-2 tw-gap-3">
+          <ConsultationOption
+            title={t("video_appointment")}
+            price={meet_price}
+            available_discount={doctor.available_discount}
+            selected={isSelected(VIDEO)}
+            onClick={handleOptionClick(VIDEO)}
+            disabled={isDisabled(VIDEO)}
+          />
+
+          <ConsultationOption
+            title={t("wizard:chat_consultation")}
+            price={price}
+            available_discount={doctor.available_discount}
+            selected={isSelected(CHAT)}
+            onClick={handleOptionClick(CHAT)}
+            disabled={isDisabled(CHAT)}
+          />
+        </div>
 
         <ConsultationOption
-          title={t("wizard:chat_consultation")}
-          price={price}
-          available_discount={doctor.available_discount}
-          selected={isSelected(CHAT)}
-          onClick={handleOptionClick(CHAT)}
-          disabled={isDisabled(CHAT)}
+          title={t("medical_centre:physical_appointment")}
+          info={t("medical_centre:price_varies_by_centre")}
+          selected={isSelected(PHYSICAL)}
+          onClick={handleOptionClick(PHYSICAL)}
+          disabled={isDisabled(PHYSICAL)}
         />
 
         <Button onClick={handleStartButtonClick} loading={isButtonLoading}>
           {t("selected_consultation")}
         </Button>
-        
       </section>
     </>
   );
