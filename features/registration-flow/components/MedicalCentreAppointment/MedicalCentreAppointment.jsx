@@ -209,6 +209,10 @@ const MedicalCentreAppointment = () => {
                       })
                     )}
                   </div>
+
+                  {selectedSlot && (
+                    <Alert message={t("medical_centre:provisional_date_notice")} type="warning" className="rounded" />
+                  )}
                 </div>
 
                 <div className="tw-space-y-2">

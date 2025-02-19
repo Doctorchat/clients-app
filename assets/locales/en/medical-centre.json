@@ -9,5 +9,6 @@
   "price_varies_by_centre": "The price depends on each medical center.",
   "select_medical_centre": "Select the medical center",
   "no_available_time": "No available time for the selected day.",
-  "schedule_new_visit": "Schedule a new visit"
+  "schedule_new_visit": "Schedule a new visit",
+  "provisional_date_notice": "Please note that the selected date and time are provisional. Our reception team will contact you soon to confirm the appointment. Kindly fill in your details below."
 }
