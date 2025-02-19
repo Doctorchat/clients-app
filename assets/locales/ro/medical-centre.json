@@ -9,5 +9,6 @@
   "price_varies_by_centre": "Prețul depinde de fiecare centru medical.",
   "select_medical_centre": "Selectați centrul medical",
   "no_available_time": "Nu există oră disponibilă pentru ziua selectată.",
-  "schedule_new_visit": "Programează o vizită nouă"
+  "schedule_new_visit": "Programează o vizită nouă",
+  "provisional_date_notice": "Vă informăm că datele selectate sunt provizorii. Echipa de recepție Vă va contacta în curând pentru a confirma data și ora vizitei. Vă rugăm să completați datele Dumneavoastră mai jos."
 }
