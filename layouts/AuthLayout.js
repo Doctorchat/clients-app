@@ -9,6 +9,7 @@ import { REGION_MD, REGION_RO } from "@/components/ConditionalRender/Conditional
 import { HOME_PAGE_URL } from "@/hooks/useRegion";
 import { ProfileChangeLang } from "@/modules/common";
 import axiosInstance from "@/services/axios/apiConfig";
+import Link from "next/link";
 
 export default function AuthLayout({ children }) {
   const user = useSelector((store) => store.user);
@@ -30,6 +31,8 @@ export default function AuthLayout({ children }) {
     }
   });
 
+  const isAndroidDevies = navigator.userAgent.match(/Android/i);
+
   return (
     <div className="auth-layout doctorchat-v2">
       <div className="auth-layout__sections">
@@ -43,7 +46,17 @@ export default function AuthLayout({ children }) {
             </div>
             <ProfileChangeLang />
           </header>
-          <main className="auth-layout__main">{children}</main>
+
+          <main className="auth-layout__main">
+            {children}
+            {isAndroidDevies && 
+              (<div className="tw-flex tw-justify-center">
+                <Link className="tw-w-[160px] mt-4" href="intent://open#Intent;scheme=doctorchat;package=md.doctorchat;end;" rel="noreferrer noopener">
+                  <img className="tw-rounded-lg tw-shadow-md" src="/images/google-play-btn.png" alt="Google Play" />
+                </Link>
+              </div>)
+            }
+          </main>
         </div>
         <div className="auth-layout__slider">
           <div className="auth-layout__slider-card">
