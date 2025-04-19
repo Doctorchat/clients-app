@@ -1,189 +1,211 @@
-/* TipOfTheDay styles v1.1 - Cache buster */
+/* TipOfTheDay styles v1.2 - Simplified for production */
 .tip-of-the-day-content {
   padding: 8px;
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .tip-of-the-day-content {
     padding: 16px;
   }
+}
 
-  .tip-list {
-    .tip-item {
-      margin-bottom: 16px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #e6e6e6;
-      transition: all 0.3s ease;
-      cursor: pointer;
+.tip-of-the-day-content .tip-list .tip-item {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
 
-      &:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-    }
-  }
+.tip-of-the-day-content .tip-list .tip-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-  /* Force image aspect ratio at container level */
+/* Force image aspect ratio at container level */
+.tip-image-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
   .tip-image-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 16px;
-
-    /* Mobile-first padding */
-    padding: 10px;
-    
-    @media (min-width: 768px) {
-      padding: 0;
-    }
-
-    img {
-      max-width: 100%;
-      max-height: 250px;
-      object-fit: contain;
-      border-radius: 6px;
-      width: 100%;
-      
-      @media (min-width: 768px) {
-        max-height: 350px;
-      }
-    }
+    padding: 0;
   }
+}
 
-  .tip-detail {
-    .tip-content {
-      h1, h2, h3, h4, h5, h6 {
-        margin-top: 1em;
-        margin-bottom: 0.5em;
-        font-weight: 600;
-        font-size: 1.25rem;
-        
-        @media (min-width: 768px) {
-          font-size: 1.5rem;
-        }
-      }
+.tip-image-container img {
+  max-width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 6px;
+  width: 100%;
+}
 
-      p {
-        margin-bottom: 1em;
-        font-size: 0.95rem;
-        line-height: 1.5;
-        
-        @media (min-width: 768px) {
-          font-size: 1rem;
-          line-height: 1.6;
-        }
-      }
+@media (min-width: 768px) {
+  .tip-image-container img {
+    max-height: 350px;
+  }
+}
 
-      ul, ol {
-        margin-left: 1.5em;
-        margin-bottom: 1em;
-        
-        @media (min-width: 768px) {
-          margin-left: 2em;
-        }
-      }
+.tip-of-the-day-content .tip-detail .tip-content h1,
+.tip-of-the-day-content .tip-detail .tip-content h2,
+.tip-of-the-day-content .tip-detail .tip-content h3,
+.tip-of-the-day-content .tip-detail .tip-content h4,
+.tip-of-the-day-content .tip-detail .tip-content h5,
+.tip-of-the-day-content .tip-detail .tip-content h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
 
-      img {
-        max-width: 100%;
-        height: auto;
-        margin: 1em 0;
-        border-radius: 8px;
-      }
+@media (min-width: 768px) {
+  .tip-of-the-day-content .tip-detail .tip-content h1,
+  .tip-of-the-day-content .tip-detail .tip-content h2,
+  .tip-of-the-day-content .tip-detail .tip-content h3,
+  .tip-of-the-day-content .tip-detail .tip-content h4,
+  .tip-of-the-day-content .tip-detail .tip-content h5,
+  .tip-of-the-day-content .tip-detail .tip-content h6 {
+    font-size: 1.5rem;
+  }
+}
 
-      a {
-        color: var(--primary-color);
-        text-decoration: none;
+.tip-of-the-day-content .tip-detail .tip-content p {
+  margin-bottom: 1em;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-    
-    /* Author card styles */
-    .tip-author-card {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      background-color: #f8f8f8;
-      padding: 8px;
-      border-radius: 8px;
-      
-      @media (min-width: 768px) {
-        gap: 12px;
-        padding: 12px;
-        margin-bottom: 24px;
-      }
-      
-      .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        border: 2px solid #e0f2ed;
-        
-        @media (min-width: 768px) {
-          width: 56px;
-          height: 56px;
-        }
-      }
-      
-      .info {
-        .name {
-          font-weight: 500;
-          color: #222;
-          font-size: 0.9rem;
-          
-          @media (min-width: 768px) {
-            font-size: 1rem;
-          }
-        }
-        
-        .date {
-          font-size: 0.75rem;
-          color: #059669;
-          
-          @media (min-width: 768px) {
-            font-size: 0.875rem;
-          }
-        }
-      }
-    }
-    
-    // CTA Button Animation and Hover Effects
-    .btn-consult-pulse {
-      position: relative;
-      transition: transform 0.3s ease;
-      
-      &:hover {
-        transform: scale(1.05);
-      }
-      
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: inherit;
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-        animation: pulse 2s infinite;
-      }
-    }
+@media (min-width: 768px) {
+  .tip-of-the-day-content .tip-detail .tip-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
 
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-      }
-    }
+.tip-of-the-day-content .tip-detail .tip-content ul,
+.tip-of-the-day-content .tip-detail .tip-content ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+@media (min-width: 768px) {
+  .tip-of-the-day-content .tip-detail .tip-content ul,
+  .tip-of-the-day-content .tip-detail .tip-content ol {
+    margin-left: 2em;
+  }
+}
+
+.tip-of-the-day-content .tip-detail .tip-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  border-radius: 8px;
+}
+
+.tip-of-the-day-content .tip-detail .tip-content a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.tip-of-the-day-content .tip-detail .tip-content a:hover {
+  text-decoration: underline;
+}
+
+/* Author card styles */
+.tip-author-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  background-color: #f8f8f8;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .tip-author-card {
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 24px;
+  }
+}
+
+.tip-author-card .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #e0f2ed;
+}
+
+@media (min-width: 768px) {
+  .tip-author-card .avatar {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.tip-author-card .info .name {
+  font-weight: 500;
+  color: #222;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .tip-author-card .info .name {
+    font-size: 1rem;
+  }
+}
+
+.tip-author-card .info .date {
+  font-size: 0.75rem;
+  color: #059669;
+}
+
+@media (min-width: 768px) {
+  .tip-author-card .info .date {
+    font-size: 0.875rem;
+  }
+}
+
+/* CTA Button Animation and Hover Effects */
+.btn-consult-pulse {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.btn-consult-pulse:hover {
+  transform: scale(1.05);
+}
+
+.btn-consult-pulse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
   }
 }
