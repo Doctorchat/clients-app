@@ -27,12 +27,11 @@ export default function TipList({ tips, loading, onSelectTip, onLoadMore, hasMor
           onClick={() => onSelectTip(tip.id)}
         >
           {tip.image && (
-            <div className="tw-overflow-hidden tw-flex tw-justify-center tw-items-center tw-p-3 md:tw-p-0">
+            <div className="tip-image-container" style={{ marginBottom: 0 }}>
               <img
-                src={tip.image}
+                src={`${tip.image}?v=1.1`} /* Cache buster */
                 alt={tip.title}
-                className="tw-max-w-full tw-rounded-lg"
-                style={{ maxHeight: '180px', objectFit: 'contain', width: '100%' }}
+                style={{ maxHeight: '180px' }}
               />
             </div>
           )}

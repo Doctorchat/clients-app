@@ -41,26 +41,24 @@ export default function TipDetail({ tip, loading }) {
   return (
     <div className="tip-detail tw-p-3 md:tw-p-4">
       {tip.image && (
-        <div className="tw-mb-4 md:tw-mb-6 tw-overflow-hidden tw-rounded-lg tw-flex tw-justify-center tw-items-center tw-p-2 md:tw-p-0">
+        <div className="tip-image-container">
           <img
-            src={tip.image}
+            src={`${tip.image}?v=1.1`} /* Cache buster */
             alt={tip.title}
-            className="tw-max-w-full tw-rounded-lg"
-            style={{ maxHeight: '250px', objectFit: 'contain', width: '100%' }}
           />
         </div>
       )}
       
       {hasDoctor && (
-        <div className="tw-flex tw-items-center tw-gap-2 md:tw-gap-3 tw-mb-4 md:tw-mb-6 tw-bg-gray-50 tw-p-2 md:tw-p-3 tw-rounded-lg">
+        <div className="tip-author-card">
           <Image
-            src={tip.created_by.avatar}
+            src={`${tip.created_by.avatar}?v=1.1`} /* Cache buster */
             alt={tip.created_by.name}
-            className="tw-w-10 tw-h-10 md:tw-w-14 md:tw-h-14 tw-rounded-full tw-border-2 tw-border-emerald-100"
+            className="avatar"
           />
-          <div>
-            <div className="tw-font-medium tw-text-gray-900 tw-text-sm md:tw-text-base">{tip.created_by.name}</div>
-            <div className="tw-text-xs md:tw-text-sm tw-text-emerald-600">{formatDateWithYearOption(tip.created_at)}</div>
+          <div className="info">
+            <div className="name">{tip.created_by.name}</div>
+            <div className="date">{formatDateWithYearOption(tip.created_at)}</div>
           </div>
         </div>
       )}
