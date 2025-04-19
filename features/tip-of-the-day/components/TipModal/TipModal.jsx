@@ -132,27 +132,28 @@ export default function TipModal({ visible, onClose, tipId }) {
         <div className="tw-overflow-y-auto tw-flex-1">
           <div className="tip-detail">
             {tip.image && (
-              <div className="tip-image-container" style={{ marginBottom: 0 }}>
+              <div style={{ padding: '8px', display: 'flex', justifyContent: 'center', marginBottom: 0 }}>
                 <img
-                  src={`${tip.image}?v=1.1`} /* Cache buster */
+                  src={`${tip.image}?v=1.2`} /* Cache buster */
                   alt={tip.title}
+                  style={{ maxHeight: '250px', maxWidth: '100%', objectFit: 'contain', borderRadius: '6px' }}
                 />
               </div>
             )}
             
             <div className="tw-p-3 md:tw-p-6">
               {/* Author info card with subtle background */}
-              <div className="tip-author-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', backgroundColor: '#f8f8f8', padding: '10px', borderRadius: '8px', marginBottom: '16px' }}>
                 {tip.created_by && (
                   <>
                     <Image
-                      src={`${tip.created_by.avatar}?v=1.1`} /* Cache buster */
+                      src={`${tip.created_by.avatar}?v=1.2`} /* Cache buster */
                       alt={tip.created_by.name}
-                      className="avatar"
+                      className="tw-w-10 tw-h-10 md:tw-w-14 md:tw-h-14 tw-rounded-full tw-border-2 tw-border-emerald-100"
                     />
-                    <div className="info">
-                      <div className="name">{tip.created_by.name}</div>
-                      <div className="date">{formatDateWithYearOption(tip.created_at)}</div>
+                    <div>
+                      <div style={{ fontWeight: 500, fontSize: '0.9rem' }}>{tip.created_by.name}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#059669' }}>{formatDateWithYearOption(tip.created_at)}</div>
                     </div>
                   </>
                 )}
