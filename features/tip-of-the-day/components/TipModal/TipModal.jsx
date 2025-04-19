@@ -132,11 +132,12 @@ export default function TipModal({ visible, onClose, tipId }) {
         <div className="tw-overflow-y-auto tw-flex-1">
           <div className="tip-detail">
             {tip.image && (
-              <div className="tw-relative tw-w-full tw-h-56">
-                <Image
+              <div className="tw-w-full tw-flex tw-justify-center tw-items-center tw-p-4">
+                <img
                   src={tip.image}
                   alt={tip.title}
-                  className="tw-w-full tw-h-full tw-object-cover"
+                  className="tw-max-w-full tw-rounded-lg"
+                  style={{ maxHeight: '350px', objectFit: 'contain' }}
                 />
               </div>
             )}

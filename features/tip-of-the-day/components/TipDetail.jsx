@@ -41,11 +41,12 @@ export default function TipDetail({ tip, loading }) {
   return (
     <div className="tip-detail tw-p-4">
       {tip.image && (
-        <div className="tw-mb-6 tw-overflow-hidden tw-rounded-lg">
-          <Image
+        <div className="tw-mb-6 tw-overflow-hidden tw-rounded-lg tw-flex tw-justify-center tw-items-center">
+          <img
             src={tip.image}
             alt={tip.title}
-            className="tw-w-full tw-h-auto"
+            className="tw-max-w-full"
+            style={{ maxHeight: '400px', objectFit: 'contain' }}
           />
         </div>
       )}
