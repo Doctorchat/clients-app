@@ -44,10 +44,10 @@ export default function TipList({ tips, loading, onSelectTip, onLoadMore, hasMor
               <div className="tw-flex tw-items-center tw-gap-2">
                 {tip.created_by && (
                   <>
-                    <Image
-                      src={tip.created_by.avatar}
+                    <img
+                      src={`${tip.created_by.avatar}?v=1.4`}
                       alt={tip.created_by.name}
-                      className="tw-w-8 tw-h-8 tw-rounded-full tw-border tw-border-emerald-100"
+                      style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1px solid #e0f2ed', objectFit: 'cover' }}
                     />
                     <span className="tw-font-medium tw-text-gray-700">{tip.created_by.name}</span>
                   </>

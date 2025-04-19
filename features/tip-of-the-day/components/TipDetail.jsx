@@ -52,13 +52,11 @@ export default function TipDetail({ tip, loading }) {
       
       {hasDoctor && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', backgroundColor: '#f8f8f8', padding: '10px', borderRadius: '8px', marginBottom: '16px' }}>
-          <div style={{ width: '36px', height: '36px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid #e0f2ed' }}>
-            <img
-              src={`${tip.created_by.avatar}?v=1.3`} /* New cache buster */
-              alt={tip.created_by.name}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
+          <img
+            src={`${tip.created_by.avatar}?v=1.4`} /* New cache buster */
+            alt={tip.created_by.name}
+            style={{ width: '36px', height: '36px', borderRadius: '50%', border: '2px solid #e0f2ed', objectFit: 'cover', flexShrink: 0 }}
+          />
           <div>
             <div style={{ fontWeight: 500, fontSize: '0.875rem' }}>{tip.created_by.name}</div>
             <div style={{ fontSize: '0.75rem', color: '#059669' }}>{formatDateWithYearOption(tip.created_at)}</div>
