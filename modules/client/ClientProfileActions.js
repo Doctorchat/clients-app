@@ -8,6 +8,7 @@ import Menu from "@/components/Menu";
 import { leftSideTabs } from "@/context/TabsKeys";
 import EditIcon from "@/icons/edit.svg";
 import TrashIcon from "@/icons/trash.svg";
+import GraduationCapIcon from "@/icons/graduation-cap.svg";
 import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import api from "@/services/axios/api";
 import { notification } from "@/store/slices/notificationsSlice";

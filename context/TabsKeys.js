@@ -9,6 +9,7 @@ export const leftSideTabs = {
   bonuses: "user-bonuses-list",
   transactions: "user-transactions-list",
   repeatedConsultations: "doc-repeated-consultations",
+  tipOfTheDay: "user-tip-of-the-day",
 };
 
 export const startConversationTabs = {

@@ -11,6 +11,7 @@ import { leftSideTabs } from "@/context/TabsKeys";
 import PlusIcon from "@/icons/plus.svg";
 import Tabs from "@/packages/Tabs";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
+import { TipOfTheDay } from "@/features/tip-of-the-day";
 
 import ConversationsSidebar from "../ConversationsSidebar";
 import EditProflie from "../EditProfile";
@@ -63,6 +64,9 @@ export default function LeftSide() {
         </Tabs.Pane>
         <Tabs.Pane dataKey={leftSideTabs.editProfile}>
           <EditProflie />
+        </Tabs.Pane>
+        <Tabs.Pane dataKey={leftSideTabs.tipOfTheDay}>
+          <TipOfTheDay />
         </Tabs.Pane>
         <AuthRoleWrapper roles={[userRoles.get("client")]}>          
           <WalletTopup />          

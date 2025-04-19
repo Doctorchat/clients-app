@@ -12,6 +12,8 @@ import List from "@/components/List";
 import Sidebar from "@/components/Sidebar";
 import AuthRoleWrapper from "@/containers/AuthRoleWrapper";
 import { userRoles } from "@/context/constants";
+import { leftSideTabs } from "@/context/TabsKeys";
+import useTabsContext from "@/packages/Tabs/hooks/useTabsContext";
 import { ClientStartConversationMenu } from "@/modules/client";
 import { getConversationList } from "@/store/actions";
 import { docListToggleVisibility } from "@/store/slices/docSelectListSlice";
@@ -21,6 +23,7 @@ import { CalendarCheck } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import api from "@/services/axios/api";
 import { formatDateWithYearOption, getClosestDate } from "@/utils/formatDate";
+import GraduationCapIcon from "@/icons/graduation-cap.svg";
 
 export default function ConversationsSidebar() {
   const { conversationList } = useSelector((store) => ({
@@ -32,7 +35,6 @@ export default function ConversationsSidebar() {
     active: false,
     loading: false,
   });
-
   const user = useSelector((store) => store.user?.data);
 
   const { t } = useTranslation();
@@ -40,6 +42,7 @@ export default function ConversationsSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { id } = router.query;
+  const { updateTabsConfig } = useTabsContext();
 
   useEffect(() => {
     if (searchConfig.active) setCurrentList(searchConfig.list);
@@ -79,6 +82,8 @@ export default function ConversationsSidebar() {
     api.user.myPhysicalConsultation().then((res) => res.data?.data)
   );
 
+  // We don't need to fetch the tips count anymore since we're not displaying it
+
   const filteredConsultations = useMemo(
     () => consultations?.filter((item) => item?.status !== 2 && item?.status !== 3),
     [consultations]
@@ -88,11 +93,11 @@ export default function ConversationsSidebar() {
 
   return (
     <Sidebar>
-      <Sidebar.Header>
-        <ConversationListHeader localList={currentList} updateSearchConfig={updateSearchConfig} />
-      </Sidebar.Header>
-      <Sidebar.Body>
-        <div className="scrollable scrollable-y conversation-list-parts">
+        <Sidebar.Header>
+          <ConversationListHeader localList={currentList} updateSearchConfig={updateSearchConfig} />
+        </Sidebar.Header>
+        <Sidebar.Body>
+          <div className="scrollable scrollable-y conversation-list-parts">
           <div className="tw-m-2">
             <Link
               href="/physical"
@@ -138,6 +143,24 @@ export default function ConversationsSidebar() {
                 </span>
               )}
             </Link>
+          </div>
+          
+          <div className="tw-m-2 tw-mt-1">
+            <div
+              className={cn(
+                "tw-flex tw-gap-5 tw-items-center tw-justify-between tw-px-3 tw-py-2 tw-rounded-xl tw-cursor-pointer",
+                "tw-bg-emerald-50 tw-border tw-border-emerald-400",
+                "hover:tw-bg-emerald-100 tw-transition"
+              )}
+              onClick={updateTabsConfig(leftSideTabs.tipOfTheDay)}
+            >
+              <span className="tw-w-full">
+                <span className="tw-flex tw-gap-2 tw-items-center tw-font-semibold tw-text-emerald-600">
+                  <GraduationCapIcon width={20} height={20} className="tw-fill-emerald-600" />
+                  <span>{t("tip_of_the_day")}</span>
+                </span>
+              </span>
+            </div>
           </div>
 
           <List

@@ -416,5 +416,12 @@
   "status_canceled": "Canceled",
   "status_confirmed": "Confirmed",
   "status_completed": "Completed",
-  "status_booked": "Booked"
+  "status_booked": "Booked",
+  "tip_of_the_day": "Tip of the Day",
+  "load_more": "Load More",
+  "tip": "Tip",
+  "of": "of",
+  "close": "Close",
+  "loading": "Loading...",
+  "consult_with_doctor": "Consult with this doctor"
 }

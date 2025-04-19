@@ -416,5 +416,12 @@
   "status_canceled": "Anulat",
   "status_confirmed": "Confirmat",
   "status_completed": "Finalizat",
-  "status_booked": "Rezervat"
+  "status_booked": "Rezervat",
+  "tip_of_the_day": "Sfatul zilei",
+  "load_more": "Încarcă mai mult",
+  "tip": "Sfat",
+  "of": "din",
+  "close": "Închide",
+  "loading": "Se încarcă...",
+  "consult_with_doctor": "Consultă acest doctor"
 }
