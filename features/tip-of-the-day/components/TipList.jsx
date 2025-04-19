@@ -19,7 +19,7 @@ export default function TipList({ tips, loading, onSelectTip, onLoadMore, hasMor
   }
 
   return (
-    <div className="tip-list tw-p-4">
+    <div className="tip-list tw-p-2 md:tw-p-4">
       {tips.map((tip) => (
         <div 
           key={tip.id} 
@@ -27,16 +27,16 @@ export default function TipList({ tips, loading, onSelectTip, onLoadMore, hasMor
           onClick={() => onSelectTip(tip.id)}
         >
           {tip.image && (
-            <div className="tw-overflow-hidden tw-flex tw-justify-center tw-items-center">
+            <div className="tw-overflow-hidden tw-flex tw-justify-center tw-items-center tw-p-3 md:tw-p-0">
               <img
                 src={tip.image}
                 alt={tip.title}
-                className="tw-max-w-full"
-                style={{ maxHeight: '200px', objectFit: 'contain', width: '100%' }}
+                className="tw-max-w-full tw-rounded-lg"
+                style={{ maxHeight: '180px', objectFit: 'contain', width: '100%' }}
               />
             </div>
           )}
-          <div className="tw-p-5">
+          <div className="tw-p-3 md:tw-p-5">
             <h3 className="tw-font-bold tw-text-lg tw-text-gray-800 tw-mb-3 tw-leading-tight">
               {tip.title}
             </h3>

@@ -132,29 +132,29 @@ export default function TipModal({ visible, onClose, tipId }) {
         <div className="tw-overflow-y-auto tw-flex-1">
           <div className="tip-detail">
             {tip.image && (
-              <div className="tw-w-full tw-flex tw-justify-center tw-items-center tw-p-4">
+              <div className="tw-w-full tw-flex tw-justify-center tw-items-center tw-p-2 md:tw-p-4">
                 <img
                   src={tip.image}
                   alt={tip.title}
                   className="tw-max-w-full tw-rounded-lg"
-                  style={{ maxHeight: '350px', objectFit: 'contain' }}
+                  style={{ maxHeight: '250px', objectFit: 'contain', width: '100%' }}
                 />
               </div>
             )}
             
-            <div className="tw-p-6">
+            <div className="tw-p-3 md:tw-p-6">
               {/* Author info card with subtle background */}
-              <div className="tw-flex tw-items-center tw-gap-3 tw-mb-6 tw-bg-gray-50 tw-p-3 tw-rounded-lg">
+              <div className="tw-flex tw-items-center tw-gap-2 md:tw-gap-3 tw-mb-4 md:tw-mb-6 tw-bg-gray-50 tw-p-2 md:tw-p-3 tw-rounded-lg">
                 {tip.created_by && (
                   <>
                     <Image
                       src={tip.created_by.avatar}
                       alt={tip.created_by.name}
-                      className="tw-w-14 tw-h-14 tw-rounded-full tw-border-2 tw-border-emerald-100"
+                      className="tw-w-10 tw-h-10 md:tw-w-14 md:tw-h-14 tw-rounded-full tw-border-2 tw-border-emerald-100"
                     />
                     <div>
-                      <div className="tw-font-medium tw-text-gray-900">{tip.created_by.name}</div>
-                      <div className="tw-text-sm tw-text-emerald-600">
+                      <div className="tw-font-medium tw-text-gray-900 tw-text-sm md:tw-text-base">{tip.created_by.name}</div>
+                      <div className="tw-text-xs md:tw-text-sm tw-text-emerald-600">
                         {formatDateWithYearOption(tip.created_at)}
                       </div>
                     </div>
