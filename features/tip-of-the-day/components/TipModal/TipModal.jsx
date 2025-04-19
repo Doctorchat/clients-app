@@ -132,11 +132,11 @@ export default function TipModal({ visible, onClose, tipId }) {
         <div className="tw-overflow-y-auto tw-flex-1">
           <div className="tip-detail">
             {tip.image && (
-              <div style={{ padding: '8px', display: 'flex', justifyContent: 'center', marginBottom: 0 }}>
+              <div style={{ margin: '0 auto', width: '100%', maxWidth: '460px', textAlign: 'center', padding: '10px 8px' }}>
                 <img
-                  src={`${tip.image}?v=1.2`} /* Cache buster */
+                  src={`${tip.image}?v=1.3`} /* New cache buster */
                   alt={tip.title}
-                  style={{ maxHeight: '250px', maxWidth: '100%', objectFit: 'contain', borderRadius: '6px' }}
+                  style={{ maxHeight: '180px', maxWidth: '100%', objectFit: 'contain', borderRadius: '6px' }}
                 />
               </div>
             )}
@@ -146,13 +146,15 @@ export default function TipModal({ visible, onClose, tipId }) {
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', backgroundColor: '#f8f8f8', padding: '10px', borderRadius: '8px', marginBottom: '16px' }}>
                 {tip.created_by && (
                   <>
-                    <Image
-                      src={`${tip.created_by.avatar}?v=1.2`} /* Cache buster */
-                      alt={tip.created_by.name}
-                      className="tw-w-10 tw-h-10 md:tw-w-14 md:tw-h-14 tw-rounded-full tw-border-2 tw-border-emerald-100"
-                    />
+                    <div style={{ width: '36px', height: '36px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0, border: '2px solid #e0f2ed' }}>
+                      <img
+                        src={`${tip.created_by.avatar}?v=1.3`} /* New cache buster */
+                        alt={tip.created_by.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
                     <div>
-                      <div style={{ fontWeight: 500, fontSize: '0.9rem' }}>{tip.created_by.name}</div>
+                      <div style={{ fontWeight: 500, fontSize: '0.875rem' }}>{tip.created_by.name}</div>
                       <div style={{ fontSize: '0.75rem', color: '#059669' }}>{formatDateWithYearOption(tip.created_at)}</div>
                     </div>
                   </>

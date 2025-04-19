@@ -27,11 +27,11 @@ export default function TipList({ tips, loading, onSelectTip, onLoadMore, hasMor
           onClick={() => onSelectTip(tip.id)}
         >
           {tip.image && (
-            <div style={{ padding: '8px', display: 'flex', justifyContent: 'center', marginBottom: 0 }}>
+            <div style={{ margin: '0 auto', width: '100%', maxWidth: '400px', textAlign: 'center', padding: '10px 8px' }}>
               <img
-                src={`${tip.image}?v=1.2`} /* Cache buster */
+                src={`${tip.image}?v=1.3`} /* New cache buster */
                 alt={tip.title}
-                style={{ maxHeight: '180px', maxWidth: '100%', objectFit: 'contain', borderRadius: '6px' }}
+                style={{ maxHeight: '140px', maxWidth: '100%', objectFit: 'contain', borderRadius: '6px' }}
               />
             </div>
           )}
