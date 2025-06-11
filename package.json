@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 8080",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start -p 8002",
     "lint": "next lint"
   },
@@ -40,6 +40,7 @@
     "react-textarea-autosize": "^8.4.1",
     "react-transition-group": "^4.4.5",
     "sass": "^1.62.1",
+    "sharp": "^0.34.2",
     "tailwind-merge": "^2.6.0",
     "usehooks-ts": "^2.9.1",
     "watchpack": "^2.4.0",

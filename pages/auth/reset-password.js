@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import OtpInput from "react-otp-input";
-import PinInput from "react-pin-input";
+// import PinInput from "react-pin-input";
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import { Typography } from "antd";

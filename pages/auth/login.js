@@ -54,7 +54,7 @@ export default function Login() {
       
       const messaging = getMessaging(firebaseApp);
       const unsubscribe = onMessage(messaging, (payload) => {
-        console.log("Message received on page Login:", payload);
+        // console.log("Message received on page Login:", payload);
       });
 
       return () => {

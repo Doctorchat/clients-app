@@ -26,4 +26,9 @@ module.exports = {
     return config;
   },
   reactStrictMode: true,
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  }
 };

@@ -1,4 +1,4 @@
-name: Doctochat Prod CI/CD
+name: Doctorchat Prod CI/CD
 
 on:
   push:
@@ -6,31 +6,77 @@ on:
       - main
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.cache-key.outputs.key }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Generate cache key
+        id: cache-key
+        run: echo "key=node-modules-${{ hashFiles('package-lock.json') }}" >> $GITHUB_OUTPUT
+      
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ steps.cache-key.outputs.key }}
+      
+      - name: Setup Node.js
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/setup-node@v4
         with:
           node-version: "18.x"
+          cache: 'npm'
+      
       - name: Install dependencies
-        run: npm install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
 
+  build_and_deploy:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        region: [md, ro]
+        include:
+          - region: md
+            username: doctorchat-app
+            target_path: /home/doctorchat-app/htdocs/app.doctorchat.md/
+          - region: ro
+            username: doctorchat-app-ro
+            target_path: /home/doctorchat-app-ro/htdocs/app.doctorchat.ro/
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+      
+      - name: Restore dependencies cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ needs.setup.outputs.cache-key }}
+      
       - name: Create env configs
         run: |
           echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
-          echo "${{ secrets.REGION_MD }}" >> .env
-          echo "${{ secrets.GTM_KEY_MD }}" >> .env
-          echo "${{ secrets.API_PATH_MD }}" >> .env
+          echo "${{ secrets[format('REGION_{0}', matrix.region)] }}" >> .env
+          echo "${{ secrets[format('GTM_KEY_{0}', matrix.region)] }}" >> .env
+          echo "${{ secrets[format('API_PATH_{0}', matrix.region)] }}" >> .env
           echo "${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}" >> .env
+      
       - name: Build
         run: CI=false npm run build
-      - name: SSH Server Deploy MD
+      
+      - name: Deploy to ${{ matrix.region }}
         uses: kostya-ten/ssh-server-deploy@v4
         with:
           host: '31.172.77.196'
-          username: 'doctorchat-app'
+          username: ${{ matrix.username }}
           password: ${{ secrets.APP_PASSWORD }}
           scp_source: "out"
-          scp_target: "/home/doctorchat-app/htdocs/app.doctorchat.md/"
+          scp_target: ${{ matrix.target_path }}
